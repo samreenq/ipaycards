@@ -1,0 +1,15 @@
+/vendor/
+/.idea/
+/storage/logs/
+/storage/framework/views/
+/storage/framework/cache/
+/storage/framework/sessions/
+.env
+/node_modules
+.htaccess
+/public/.htaccess
+
+/public/files/
+/public/import/
+/public/system/
+/config.php
