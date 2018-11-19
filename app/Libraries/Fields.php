@@ -114,7 +114,7 @@ class Fields
 					$SYSAttribute = new SYSAttribute();	
 					$record = $SYSAttribute
 					->where("attribute_code", "=",$field->name)
-					->whereIn("data_type_id", array("6","9","12","23"))
+					->whereIn("data_type_id", array("6","9","12","19","23","21","22"))
 					->whereNull("deleted_at")
 					->first();
 					
@@ -353,11 +353,11 @@ class Fields
 					 $recored = $SYSAttribute
 						->where("attribute_code", "=","$field->name")
 						->where(function ($query) {
-							$query->whereIn("data_type_id",array("6","9","12","23"));
+							$query->whereIn("data_type_id",array("6","9","12","19","23","21","22"));
         				})
 						->whereNull("deleted_at")
 						->first();
-                   // echo "<pre>"; print_r($recored); exit;
+                  //echo "<pre>"; print_r($field); exit;
 					if($recored){
 						$SYSAttributeOption = new SYSAttributeOption();
 						$options = $SYSAttributeOption
@@ -484,6 +484,10 @@ class Fields
 		if($is_update){
             $listfield = $this->_updateEntityAttributes($listfield,$data);
         }
+        else{
+            $listfield = $this->_addEntityAttributes($listfield,$data);
+        }
+
 
 		$select2_class = "select2-field";
 		$_value = $return = $field_class = '';
@@ -1552,6 +1556,32 @@ class Fields
                     $field->linked_attribute_id = 234;
 
                 }
+            }
+        }
+        return $field;
+    }
+
+    /**
+     * Customize the field
+     * @param $field
+     * @param $data
+     * @return mixed
+     */
+    private function _addEntityAttributes($field,$data)
+    {
+        if(isset($data->identifier)){
+
+           //echo "<pre>"; print_r($field); exit;
+            if($data->identifier == 'inventory'){
+
+                    if($field->attribute_code == 'product_code'){
+                        $field->data_type_identifier = 'textarea';
+                        $field->data_type_id = 2;
+                        $field->php_data_type = 'string';
+                        $field->data_type = 'string';
+                    }
+
+
             }
         }
         return $field;

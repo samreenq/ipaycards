@@ -251,9 +251,9 @@
 
         if($("#is_parent:checked").val() == 1){
             $(".parent_id_field").hide();
-            $(".is_featured_field").hide();
+         //   $(".is_featured_field").hide();
             $(".category_type_field").show();
-            $(".featured_type_field").hide();
+           $(".featured_type_field").hide();
 
      /*       $('.gallery-wrap').show();
             $('.top-wrap').removeClass('col-md-12');
