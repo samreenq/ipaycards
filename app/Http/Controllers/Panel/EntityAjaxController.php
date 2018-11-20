@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Api\System\EntityController;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Custom\BrandFlat;
 use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
 use App\Http\Models\SYSAttribute;
@@ -1009,5 +1010,36 @@ Class EntityAjaxController extends EntityBackController
         return array('error' =>1,'data'=> [],'message' => 'No Data');
     }
 
+    public function getCategoryBrands(Request $request)
+    {
+        if(isset($request->category_id)){
+
+            $brand_flat = new BrandFlat();
+            $brands = $brand_flat->getByCategoryID($request->category_id);
+
+            if($brands){
+                return array('error' =>0,'data'=> $brands,'message' => 'success');
+            }
+        }
+
+
+        return array('error' =>1,'data'=> [],'message' => 'No Data');
+    }
+
+    public function getProductByBrand(Request $request)
+    {
+        if(isset($request->brand_id)){
+
+            $flat_table_model = new SYSTableFlat('product');
+            $where_condition = ' brand_id = '.$request->brand_id;
+            $data = $flat_table_model->getDataByWhere($where_condition);
+            if($data){
+                return array('error' =>0,'data'=> $data,'message' => 'success');
+            }
+        }
+
+
+        return array('error' =>1,'data'=> [],'message' => 'No Data');
+    }
 
 }

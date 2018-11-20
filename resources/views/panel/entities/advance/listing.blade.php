@@ -655,6 +655,81 @@ console.log(extra_params);
 
         });
         <?php } ?>
+
+
+        <?php if(in_array($entity_data->identifier, array('product','inventory','promotion_discount'))){ ?>
+
+        //get product list respective to product type
+        $( document ).on( "change", "#category_id", function() {
+
+            var id = $(this).val();
+            console.log(id);
+            if(id != ""){
+                $('#brand_id').empty();
+
+                $.ajax({
+                    url: "<?php echo url('getCategoryBrands'); ?>",
+                    dataType: "json",
+                    data: {"category_id": $(this).val()},
+                    beforeSend: function () {
+                    }
+                }).done(function (data) {
+                    //   console.log( data.data);
+                    var products = data.data;
+                    if(products.length >0){
+                        $('#brand_id').append("<option value=''>-- Select Brand --</option>");
+
+                        $.each(products,function(k,v){
+                            // console.log(v.entity_id);
+                            $('#brand_id').append("<option value='"+v.entity_id+"'>"+v.title+"</option>");
+                            // $('.blah').val(key); // if you want it to be automatically selected
+                            $('#brand_id').trigger("chosen:updated");
+                        })
+
+                    }
+
+                });
+            }
+        });
+
+        <?php } ?>
+
+        <?php if(in_array($entity_data->identifier, array('inventory','promotion_discount'))){ ?>
+
+        $( document ).on( "change", "#brand_id", function() {
+
+            var id = $(this).val();
+            console.log(id);
+            if(id != ""){
+                $('#product_id').empty();
+
+                $.ajax({
+                    url: "<?php echo url('getProductByBrand'); ?>",
+                    dataType: "json",
+                    data: {"brand_id": $(this).val()},
+                    beforeSend: function () {
+                    }
+                }).done(function (data) {
+                    //   console.log( data.data);
+                    var products = data.data;
+                    if(products.length >0){
+                        $('#brand_id').append("<option value=''>-- Select Product --</option>");
+
+                        $.each(products,function(k,v){
+                            // console.log(v.entity_id);
+                            $('#product_id').append("<option value='"+v.entity_id+"'>"+v.title+"</option>");
+                            // $('.blah').val(key); // if you want it to be automatically selected
+                            $('#product_id').trigger("chosen:updated");
+                        })
+
+                    }
+
+                });
+            }
+        });
+
+		 <?php } ?>
+
     });
 </script>
 

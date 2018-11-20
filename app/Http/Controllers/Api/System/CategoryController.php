@@ -141,7 +141,7 @@ class CategoryController extends Controller
             $entity["created_at"] = date("Y-m-d H:i:s");
 
             $entity_id = $this->_entity_model->put($entity);
-            $this->_entity_model->addParentList($entity_id);
+          // $this->_entity_model->addParentList($entity_id);
 
 
             // response data
@@ -313,7 +313,7 @@ class CategoryController extends Controller
 
 
             $entity_id = $this->_entity_model->set($entity[$this->_entity_pk], $entity);
-            $this->_entity_model->addParentList($entity_id);
+           // $this->_entity_model->addParentList($entity_id);
 
             //if parent category is marked as inactive update sub categories as inactive
             if($entity["parent_id"] == 0 && !empty($entity["status"])){
