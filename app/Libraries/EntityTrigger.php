@@ -1090,6 +1090,61 @@ Class EntityTrigger
         }
     }
 
+    /**
+     * @param $request
+     * @return array|bool
+     */
+    public function productBeforePostTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $return = $this->_setRetailPrice($request);
 
+        if (isset($return)) {
+            return $return;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * @param $request
+     * @return array|bool
+     */
+    public function productBeforeSaveTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $return = $this->_setRetailPrice($request);
+
+        if (isset($return)) {
+            return $return;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Set Retail Price by adding margin
+     * @param $request
+     * @return array|bool
+     */
+    private function _setRetailPrice($request)
+    {
+        $return = false;
+        $general_setting_lib = new GeneralSetting();
+        $setting = $general_setting_lib->getSetting();
+
+        if(isset($setting->selling_price_margin) && !empty($request->buying_price)){
+
+            if(!empty($setting->selling_price_margin)){
+
+                $margin = $request->buying_price*($setting->selling_price_margin/100);
+                $return = ['price' => $request->buying_price + $margin];
+            }
+            else{
+                $return = ['price' => $request->buying_price];
+            }
+        }
+        return $return;
+    }
 
 }
