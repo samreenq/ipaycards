@@ -1234,7 +1234,7 @@ Class Entity extends Base
         // extra implementation to supportive fields or tables.
         $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_add_trigger');
         if (method_exists($obj, "$func"))
-            $obj->$func($request);
+            $obj->$func($request,$entity_id);
 
         if (isset($this->_eTypeData->depend_entity_type) && !empty($this->_eTypeData->depend_entity_type))
             $this->_postDependentEntity($request, $depend_entity, $this->_eTypeData);

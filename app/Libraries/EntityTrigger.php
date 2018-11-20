@@ -944,7 +944,7 @@ Class EntityTrigger
      * @param $request
      * @throws \Exception
      */
-    public function orderHistoryAddTrigger($request)
+    public function orderHistoryAddTrigger($request,$entity_id = false)
     {
         $request = is_array($request) ? (object)$request : $request;
         //Update Order status / Driver
@@ -1145,6 +1145,65 @@ Class EntityTrigger
             }
         }
         return $return;
+    }
+
+    /**
+     * @param $request
+     * @return array|bool
+     */
+    public function inventoryBeforePostTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+
+        if(isset($request->product_code) && !empty($request->product_code)){
+
+            $product_code_arr = preg_split("/\r\n|\n|\r/", $request->product_code);
+            $return = ['product_code' => implode(',',$product_code_arr)];
+        }
+
+        if (isset($return)) {
+            return $return;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * @param $request
+     * @param bool $entity_id
+     */
+    public function inventoryAddTrigger($request,$entity_id = false)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+
+        if(isset($request->product_code)){
+
+            $entity_lib = new Entity();
+
+            $product_codes = explode(',',$request->product_code);
+
+            if(count($product_codes) > 0){
+
+                foreach($product_codes as $key => $product_code){
+
+                    if($key == 0){
+                        $params = array(
+                            'entity_type_id' => 73,
+                            'entity_id' => $entity_id,
+                            'product_code' => $product_code
+                        );
+
+                        $response = $entity_lib->apiUpdate($params);
+
+                    }else{
+                        $request->product_code = $product_code;
+                        $params = is_object($request) ? (array)$request : $request;
+                        $response = $entity_lib->apiPost($params);
+                    }
+
+                } // end of foreach loop
+            }
+        }
     }
 
 }
