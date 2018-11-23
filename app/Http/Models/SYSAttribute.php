@@ -25,7 +25,7 @@ class SYSAttribute extends Base
         $this->hidden = array();
 
         // set fields
-        $this->__fields = array($this->primaryKey,  'entity_type_id', 'attribute_code','linked_entity_type_id', 'data_type_id','show_in_search','show_in_list', 'backend_table','backend_table_option','backend_table_value', 'frontend_input', 'frontend_label', 'frontend_class','use_entity_type','linked_attribute_id', 'is_required', 'is_user_defined', 'default_value', 'is_unique',  'created_at', 'updated_at', 'deleted_at');
+        $this->__fields = array($this->primaryKey,  'entity_type_id', 'attribute_code','linked_entity_type_id', 'data_type_id','show_in_search','show_in_list', 'backend_table','backend_table_option','backend_table_value','backend_table_where', 'frontend_input', 'frontend_label', 'frontend_class','use_entity_type','linked_attribute_id', 'is_required', 'is_user_defined', 'default_value', 'is_unique',  'created_at', 'updated_at', 'deleted_at');
     }
 
 	public function getEntityTypeByName($attribute_code){

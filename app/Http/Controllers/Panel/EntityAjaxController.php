@@ -1010,6 +1010,10 @@ Class EntityAjaxController extends EntityBackController
         return array('error' =>1,'data'=> [],'message' => 'No Data');
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function getCategoryBrands(Request $request)
     {
         if(isset($request->category_id)){
@@ -1026,6 +1030,10 @@ Class EntityAjaxController extends EntityBackController
         return array('error' =>1,'data'=> [],'message' => 'No Data');
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function getProductByBrand(Request $request)
     {
         if(isset($request->brand_id)){

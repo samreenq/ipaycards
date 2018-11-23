@@ -38,7 +38,7 @@ class ApiMethodField extends Base {
                                                 sao.`attribute_option_id`, ':', sao.`value`                                             )
                                         ) AS `attribute_options` , `model` ,sea.`view_at`, sea.`sort_order`,  sea.`is_read_only`,  sea.`frontend_label` AS entity_attr_frontend_label,
                                          sa.`use_entity_type` AS use_entity_type ,sa.`linked_entity_type_id` AS linked_entity_type_id, sa.`linked_attribute_id` AS linked_attribute_id,
-                                         sa.`backend_table_option` AS backend_table_option, sa.`backend_table_value` AS backend_table_value, sea.`default_value` AS entity_attr_default_value,
+                                         sa.backend_table_where,sa.`backend_table_option` AS backend_table_option, sa.`backend_table_value` AS backend_table_value, sea.`default_value` AS entity_attr_default_value,
                                          sea.`show_in_list` AS entity_attr_show_in_list, sea.`is_required` AS entity_attr_is_required,sa.data_type_id,sdf.php_data_type as data_type
                                          FROM (((((`sys_entity_attribute` `sea`
                                        LEFT JOIN `sys_attribute` `sa`
@@ -60,7 +60,7 @@ class ApiMethodField extends Base {
         $query .= " GROUP BY `sa`.`attribute_id` ORDER BY `sea`.`$sort_by`";
 		// fetch
 		$data = \DB::select($query);
- 
+       // echo "<pre>"; print_r($data); exit;
 		// return
 		return $data;
 	}

@@ -24,8 +24,8 @@ Class BrandFlat extends Base
      */
     public function getByCategoryID($category_id)
     {
-        $query = "SELECT b.* FROM brand_flat
-                  WHERE b.category_id = (SELECT parent_id FROM sys_category where category_id = $category_id
+        $query = "SELECT b.* FROM brand_flat b
+                  WHERE b.brand_category_id = (SELECT parent_id FROM sys_category where category_id = $category_id)
                   ORDER BY b.entity_id DESC";
 
         $row = \DB::select($query);

@@ -1058,11 +1058,23 @@ class Fields
                             if ($listfield->backend_table == "sys_category") {
 
                                 $query_get_parent = 0;
+                                $backend_where = 'WHERE 1=1 ';
+
+                                if($listfield->backend_table_where != ""){
+
+                                    if($listfield->backend_table_where == "is_parent=1"){
+                                        $query_get_parent = 1;
+                                    }
+                                    $backend_where .= ' AND '.$listfield->backend_table_where;
+                                }
+
+                                $backend_where .= " AND deleted_at IS NULL AND `level` = 1  AND `status` = 1";
+
+
 
                                 //if no query is exist for category thn get all child categories
-                                if ($query_get_parent == 0) {
-                                    $result = \DB::select("SELECT category_id From $listfield->backend_table where deleted_at IS NULL AND `level` = 1  AND `status` = 1");
-                                }
+                                    $result = \DB::select("SELECT category_id From $listfield->backend_table $backend_where");
+
 
                                 $categories = (count($result)) ? $result : FALSE;
 
