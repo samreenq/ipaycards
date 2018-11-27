@@ -1990,12 +1990,11 @@ class EntityBackController extends EntityController
             }
             elseif( $this->_entity_controller->identifier == 'order'){
 
-                $pickup_date = $paginated_id->attributes->pickup_date;
 
                 if(in_array($paginated_id->attributes->order_status->detail->attributes->keyword,array('pending','confirmed','assigned'))){
                     return true;
                 }
-                else if($paginated_id->attributes->order_status->detail->attributes->keyword == 'accepted' && (strtotime($pickup_date) < strtotime(date('Y-m-d')))){
+                else if($paginated_id->attributes->order_status->detail->attributes->keyword == 'accepted'){
                     return true;
                 }
                 else{

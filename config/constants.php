@@ -169,7 +169,7 @@ return [
 
     'GOOGLE_API_DISTANCE' => 'https://maps.googleapis.com/maps/api/distancematrix/json',
     'AMOUNT_KG_TO_POUND' => 2.2046,
-    'ORDER_SERIES' => 'RH',
+    'ORDER_SERIES' => 'iPC',
     'DEFAULT_ESTIMATED_MIN' => 5,
     'ADD_MIN_IN_AUTO_DECLINE' => 1,
     'CITY_TEST' => 1,

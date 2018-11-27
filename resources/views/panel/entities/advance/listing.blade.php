@@ -659,13 +659,14 @@ console.log(extra_params);
 
         <?php if(in_array($entity_data->identifier, array('product','inventory','promotion_discount'))){ ?>
 
+        $('#brand_id').empty();
+
         //get product list respective to product type
         $( document ).on( "change", "#category_id", function() {
 
             var id = $(this).val();
-            console.log(id);
+            $('#brand_id').empty();
             if(id != ""){
-                $('#brand_id').empty();
 
                 $.ajax({
                     url: "<?php echo url('getCategoryBrands'); ?>",
@@ -696,12 +697,13 @@ console.log(extra_params);
 
         <?php if(in_array($entity_data->identifier, array('inventory','promotion_discount'))){ ?>
 
-        $( document ).on( "change", "#brand_id", function() {
+        $('#product_id').empty();
 
+        $( document ).on( "change", "#brand_id", function() {
+            $('#product_id').empty();
             var id = $(this).val();
             console.log(id);
             if(id != ""){
-                $('#product_id').empty();
 
                 $.ajax({
                     url: "<?php echo url('getProductByBrand'); ?>",
@@ -713,7 +715,7 @@ console.log(extra_params);
                     //   console.log( data.data);
                     var products = data.data;
                     if(products.length >0){
-                        $('#brand_id').append("<option value=''>-- Select Product --</option>");
+                        $('#product_id').append("<option value=''>-- Select Product --</option>");
 
                         $.each(products,function(k,v){
                             // console.log(v.entity_id);

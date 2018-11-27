@@ -139,4 +139,65 @@ Class OrderController extends Controller
         }
 
     }
+
+    public function processOrder(Request $request)
+    {
+        $current_date = date('Y-m-d');
+
+        $order_status_lib = new OrderStatus();
+        $order_statuses = $order_status_lib->getIdByKeywords();
+        $status_id = $order_statuses["pending"];
+
+        $order_flat = new SYSTableFlat('order');
+        $where = ' created_date >= "'.trim($current_date).'" AND order_status IN ('.$status_id.')';
+        $orders =  $order_flat->getDataByWhere($where);
+
+        echo '<h3>Orders to assign</h3>';
+        echo "<pre>"; print_r($orders);
+
+        if($orders){
+            if(count($orders) > 0){
+
+                foreach($orders as $order){
+
+                    //Check In Stock or Out of stock
+                    $order_flat = new OrderFlat();
+                    $vendor_stock_count = $order_flat->checkInStockOrder($order->order_id);
+
+                    $order_flat = new SYSTableFlat('order_item');
+                    $where = ' order_id = '.$order->order_id;
+                    $order_items =  $order_flat->getDataByWhere($where);
+
+                    //in stock Order
+                    if($vendor_stock_count == 0){
+
+                        //Get Inventory of Item
+
+
+
+                        //Send Email
+
+                    }else{
+
+                        //Vendor Stock Order
+
+                        //Send Email
+
+                    }
+
+
+
+
+                }
+
+
+            }
+        }
+
+    }
+
+
+
+
+
 }

@@ -41,29 +41,3 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-theme top mb25">
-            <div class="panel-body p20 pb10">
-                <table width="100%" class="orderPrevDetail">
-                    <tr>
-                        <td>Pickup Location</td>
-                        <td><b>{!! isset($update->order_pickup[0]->attributes->address) ? $update->order_pickup[0]->attributes->address : 'No Address' !!}</b></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-theme  top mb25">
-            <div class="panel-body p20 pb10">
-                <table width="100%" class="orderPrevDetail">
-                    <tr>
-                        <td>Drop Off Location</td>
-                        <td><b>{!! isset($update->order_dropoff[0]->attributes->address) ? $update->order_dropoff[0]->attributes->address : 'No Address' !!}</b></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>

@@ -133,7 +133,7 @@ Class EntityTrigger
     public function orderBeforePostTrigger($request)
     {
         $request = is_array($request) ? (object)$request : $request;
-
+        //echo "<pre>"; print_r($request); exit;
         $order_helper = new OrderHelper();
 
         if (isset($request->order_status)) {
@@ -154,53 +154,6 @@ Class EntityTrigger
             }
         }
 
-        if(isset($request->truck_selected_id)){
-
-            $order_item_flat = new SYSTableFlat('truck_selected');
-            $where_condition = ' entity_id = '.$request->truck_selected_id.' AND is_ordered = 0';
-            $rows = $order_item_flat->getDataByWhere($where_condition);
-
-            if(isset($rows[0])){
-
-                $selected_truck = $rows[0];
-
-                $this->_tempData['selected_truck'] = $truck_detail = json_decode($selected_truck->truck_detail);
-                //echo "<pre>"; print_r($truck_detail); exit;
-               // echo "<pre>"; print_r($selected_truck); exit;
-                $return['truck_id'] = $truck_detail->entity_id;
-                $return['min_estimated_charges'] = $truck_detail->est_min_charges;
-                $return['max_estimated_charges'] = $truck_detail->est_max_charges;
-                $return['estimated_distance'] = isset($truck_detail->total_distance) ? "$truck_detail->total_distance" : '';
-                $return['estimated_minutes'] = "$truck_detail->total_minutes";
-
-                $loading_price = '';
-                if(!empty($selected_truck->loader_detail)){
-                    $this->_tempData['selected_loader'] = $loader_detail = json_decode($selected_truck->loader_detail);
-
-                    $return['professional_id'] = $loader_detail->entity_id;
-                    $return['number_of_labour'] = $loader_detail->number_of_labour;
-
-                   $loading_price = $loader_detail->price;
-                }
-
-                $return['loading_price'] = $loading_price;
-                $return['base_fee'] = $truck_detail->base_fee;
-                $return['charge_per_minute'] = $truck_detail->charge_per_minute;
-                $return['truck_class'] = $truck_detail->truck_class_id->detail->truck_class->value;
-                $return['pre_grand_total'] = $loading_price + $truck_detail->est_max_charges;
-
-            }
-
-        }
-
-        //set the estimated delivery date
-        if((isset($request->pickup_date) && !empty($request->pickup_date))
-            && (isset($request->pickup_time) & !empty($request->pickup_time))){
-
-            $order_helper = new OrderHelper();
-            $return['estimated_delivery_date'] = $order_helper->estDeliveryData($request->pickup_date,$request->pickup_time);
-            $return['delivery_date'] = $return['estimated_delivery_date'];
-        }
 
       // echo "<pre>"; print_r($return); exit;
         if (isset($return)) {
@@ -218,6 +171,7 @@ Class EntityTrigger
     public function orderBeforeSaveTrigger($request)
     {
         $request = is_array($request) ? (object)$request : $request;
+
         $post_param = (array)$request;
         $order_helper = new OrderHelper();
 
@@ -237,13 +191,6 @@ Class EntityTrigger
             }
         }
 
-        //set the estimated delivery date
-        if((isset($request->pickup_date) && !empty($request->pickup_date))
-            && (isset($request->pickup_time) & !empty($request->pickup_time))){
-
-            $order_helper = new OrderHelper();
-            $return['estimated_delivery_date'] = $order_helper->estDeliveryData($request->pickup_date,$request->pickup_time);
-        }
 
         if (isset($request->entity_id)) {
 
@@ -251,7 +198,6 @@ Class EntityTrigger
             if(isset($request->order_number) && empty($request->order_number)){
                 $return['order_number'] = config('constants.ORDER_SERIES').$request->entity_id;
             }
-
 
                 //Save Previous Order in temp
                 $pos_arr = [];
@@ -374,7 +320,7 @@ Class EntityTrigger
     {
         $request = is_array($request) ? (object)$request : $request;
         $entity_lib = new Entity();
-
+        //echo "<pre>"; print_r($request); exit;
         //Update Order Number
         $order_series = config('constants.ORDER_SERIES').$entity_id;
         $params = [];
@@ -382,59 +328,24 @@ Class EntityTrigger
         $params['entity_id'] = $entity_id;
         $params['order_number'] = "$order_series";
 
-        //Conversion of Pickup GMT to CST
-        $order_flat = new SYSTableFlat('order');
-        $order_raw = $order_flat->getDataByWhere(' entity_id = '.$entity_id,array('pickup_date','pickup_time'));
+        $subtotal = 0;
+        if(isset($request->depend_entity) && count($request->depend_entity) > 0){
 
-        if(isset($order_raw[0])){
+            foreach($request->depend_entity as $depend_entity){
 
-            $pickup_date = $order_raw[0]->pickup_date.' '.$order_raw[0]->pickup_time;
-            $pickup_date_obj = Carbon::createFromFormat('Y-m-d H:i:s', $pickup_date, APP_TIMEZONE);
-            $pickup_date_cst =  $pickup_date_obj->setTimezone('EST');
-            $params['pickup_date_cst'] = $pickup_date_cst;
+                if( $depend_entity['discount_price'] > 0){
+                    $subtotal += $depend_entity['discount_price']*$depend_entity['quantity'];
+                }else{
+                    $subtotal += $depend_entity['price']*$depend_entity['quantity'];
+                }
+
+            }
         }
 
-
-       // echo "<pre>"; print_r($params);
+        $grand_total = $subtotal;
+        $params['subtotal'] = "$subtotal";
+        $params['grand_total'] = "$grand_total";
         $response = $entity_lib->apiUpdate($params);
-
-        //Save Truck Information
-        if(isset($this->_tempData['selected_truck'])){
-
-            $selected_truck = $this->_tempData['selected_truck'];
-            $post_arr = [];
-            $post_arr['entity_type_id'] = 65;
-            $post_arr['truck_id'] = $selected_truck->entity_id;
-            $post_arr['title'] = $selected_truck->title;
-            $post_arr['order_id'] = $entity_id;
-            $post_arr['base_fee'] = $selected_truck->base_fee;
-            $post_arr['charge_per_minute'] = $selected_truck->charge_per_minute;
-            $post_arr['volume'] = $selected_truck->volume;
-           // $post_arr['vehicle_code'] = $selected_truck->vehicle_code;
-            $post_arr['min_weight'] = $selected_truck->min_weight;
-            $post_arr['max_weight'] = $selected_truck->max_weight;
-            $post_arr['truck_class_id'] = $selected_truck->truck_class_id->id;
-
-            $response = $entity_lib->doPost($post_arr);  unset($post_arr);
-
-
-        }
-
-        //Save pickup Location
-        $pickup = is_string($request->pickup) && json_decode($request->pickup) != NULL ? json_decode($request->pickup) :$request->pickup;
-        $dropoff = is_string($request->dropoff) && json_decode($request->dropoff) != NULL ? json_decode($request->dropoff) :$request->dropoff;
-
-        if(isset($pickup)){
-            $post_arr = $this->_getOrderCity(66,$entity_id,$request->customer_id,$pickup);
-            $entity_lib->doPost($post_arr);
-            unset($post_arr);
-        }
-
-        //Save Drop off Location
-        if(isset($dropoff)){
-            $post_arr = $this->_getOrderCity(67,$entity_id,$request->customer_id,$dropoff);
-            $entity_lib->doPost($post_arr);  unset($post_arr);
-        }
 
         //Save Order History
         $post_arr = [];
@@ -443,104 +354,6 @@ Class EntityTrigger
         $post_arr['order_status'] = $request->order_status;
         $entity_lib->doPost($post_arr);  unset($post_arr);
 
-        //Update truck selection Temp
-        if(isset($request->truck_selected_id) && !empty($request->truck_selected_id)){
-            $post_arr = [];
-            $post_arr['entity_type_id'] = 62;
-            $post_arr['entity_id'] = $request->truck_selected_id;
-            $post_arr['is_ordered'] = 1;
-
-            if(!isset($request->professional_id) || (isset($request->professional_id) && empty($request->professional_id))){
-                $post_arr['loader_detail'] = "";
-            }
-
-            $res = $entity_lib->doUpdate($post_arr);  unset($post_arr);
-        }
-
-
-
-    }
-
-    /**
-     * @param $entity_type_id
-     * @param $order_id
-     * @param $customer_id
-     * @param $address
-     * @return array
-     * @throws \Exception
-     */
-    private function _getOrderCity($entity_type_id,$order_id,$customer_id,$address)
-    {
-       // $address = json_decode($address);
-        $address = is_array($address) ? (object)$address : $address;
-
-        $post_arr = [];
-        $post_arr['entity_type_id'] = $entity_type_id;
-        $post_arr['order_id'] = $order_id;
-        $post_arr['customer_id'] = $customer_id;
-        $post_arr['address'] = $address->address;
-        $post_arr['latitude'] = $address->latitude;
-        $post_arr['longitude'] = $address->longitude;
-        $post_arr['city'] = $address->city_id;
-
-        //Get City Information
-        $city_arr = array(
-            'entity_type_id' => 'city',
-            'entity_id' => $address->city_id
-        );
-
-        $city_information = $this->_entityLib->doGet($city_arr);
-        $city_information = json_decode(json_encode($city_information));
-
-        //Save city more information
-        if(isset($city_information->attributes)){
-
-            $city_info = $city_information->attributes;
-            $post_arr['city_name'] = $city_info->title;
-
-            if(isset( $city_info->city_id)){
-                $post_arr['city_code'] = $city_info->city_id->code;
-                $post_arr['city_lat'] = $city_info->city_id->latitude;
-                $post_arr['city_long'] = $city_info->city_id->longitude;
-            }
-
-            if(isset( $city_info->state_id)){
-                $post_arr['state_name'] = $city_info->state_id->name;
-                $post_arr['state_code'] = $city_info->state_id->code;
-            }
-        }
-
-      // echo "<pre>"; print_r($post_arr);
-        return $post_arr;
-    }
-
-    /**
-     * @param $request
-     * @param $depend_entity_request
-     * @param $depend_entity_response
-     */
-    public function orderItemAddTrigger($request,$depend_entity_request = false,$depend_entity_response = false)
-    {
-        $request = is_array($request) ? (object)$request : $request;
-
-        if($depend_entity_request && $depend_entity_response){
-
-            $depend_entity_request = is_array($depend_entity_request) ? (object)$depend_entity_request : $depend_entity_request;
-            $depend_entity_response = is_array($depend_entity_response) ? (object)$depend_entity_response : $depend_entity_response;
-
-            $pl_attachment_model = new PLAttachment();
-            if(isset($depend_entity_response->entity->entity_id)){
-
-                if(isset($depend_entity_request->item_images) && !empty($depend_entity_request->item_images)){
-                    $pl_attachment_model->updateAttachmentByEntity($depend_entity_request->item_images,$depend_entity_response->entity->entity_id);
-                }
-
-                if(isset($depend_entity_request->item_receipt) && !empty($depend_entity_request->item_receipt)){
-                    $pl_attachment_model->updateAttachmentByEntity($depend_entity_request->item_receipt,$depend_entity_response->entity->entity_id);
-
-                }
-            }
-        }
 
 
     }
@@ -557,36 +370,15 @@ Class EntityTrigger
 
         if($depend_entity_raw){
 
-            $return['is_extra_item'] = (isset($depend_entity_raw->is_extra_item) && $depend_entity_raw->is_extra_item != '') ? $depend_entity_raw->is_extra_item : 0;
-            $return['is_expensive'] = (isset($depend_entity_raw->is_expensive) && $depend_entity_raw->is_expensive != '') ? $depend_entity_raw->is_expensive : 0;
-
-            if($depend_entity_raw->item_id == "" && $depend_entity_raw->item_name != ""){
-                //get other item id and update its count
-                $item_lib = new ItemLib();
-                $return['item_id'] =  $item_lib->getOtherItemByTitle($depend_entity_raw->item_name);
-                //return ['item_id' => $other_item_id];
-            }
-
-            if($depend_entity_raw->item_id > 0 && $depend_entity_raw->item_name == '')
-                $return['item_name'] = ItemLib::getItemName($depend_entity_raw->item_id);
-
+            if($depend_entity_raw->product_id > 0 && $depend_entity_raw->product_name == '')
+                $return['product_name'] = ItemLib::getItemName($depend_entity_raw->product_id);
 
         }
         else{
 
-            if($request->item_id == "" && $request->item_name != ""){
-                //get other item id and update its count
-                $item_lib = new ItemLib();
-                $return['item_id'] =  $item_lib->getOtherItemByTitle($request->item_name);
-                //return ['item_id' => $other_item_id];
-            }
-
-            if(isset($request->item_id)){
-                $return['is_extra_item'] = (isset($request->is_extra_item) && $request->is_extra_item != '') ? $request->is_extra_item : 0;
-                $return['is_expensive'] = (isset($request->is_expensive) && $request->is_expensive != '') ? $request->is_expensive : 0;
-
-                if($request->item_id > 0 && $request->item_name == '')
-                    $return['item_name'] = ItemLib::getItemName($request->item_id);
+            if(isset($request->product_id)){
+                if($request->product_id > 0 && $request->product_name == '')
+                    $return['product_name'] = ItemLib::getItemName($request->product_id);
             }
 
            // echo "<pre>"; print_r($return); exit;
@@ -729,16 +521,8 @@ Class EntityTrigger
     {
         $request  = is_array($request) ? (object)$request : $request;
 
-        if(isset($request->is_extra_item)){
-            $return['is_extra_item'] = ($request->is_extra_item != '') ? $request->is_extra_item : 0;
-        }
-
-        if(isset($request->is_expensive)){
-            $return['is_expensive'] = ($request->is_expensive != '') ? $request->is_expensive : 0;
-        }
-
-        if($request->item_id > 0 && $request->item_name == '')
-            $return['item_name'] = ItemLib::getItemName($request->item_id);
+        if($request->product_id > 0 && $request->product_name == '')
+            $return['product_name'] = ItemLib::getItemName($request->product_id);
 
         return isset($return) ? $return : array();
     }
@@ -944,7 +728,7 @@ Class EntityTrigger
      * @param $request
      * @throws \Exception
      */
-    public function orderHistoryAddTrigger($request,$entity_id = false)
+    public function _orderHistoryAddTrigger($request,$entity_id = false)
     {
         $request = is_array($request) ? (object)$request : $request;
         //Update Order status / Driver
@@ -981,13 +765,6 @@ Class EntityTrigger
             if(isset($status_data->keyword))
             $return['status_keyword'] = $status_data->keyword;
 
-        }
-
-        if((isset($request->driver_id) && !empty($request->driver_id)) &&
-            (!isset($request->vehicle_id) || empty($request->vehicle_id))){
-            $flat_model = new SYSTableFlat('vehicle');
-            $vehicle = $flat_model->getColumnByWhere(' driver_id = '.$request->driver_id,'entity_id');
-            $return['vehicle_id'] = $vehicle->entity_id;
         }
 
         if (isset($return)) {
@@ -1030,7 +807,7 @@ Class EntityTrigger
      * @param $request
      * @return mixed
      */
-    public function orderHistoryVerifyTrigger($request)
+    public function _orderHistoryVerifyTrigger($request)
     {
         $request = is_array($request) ? (object)$request : $request;
         $response['error'] = 0;

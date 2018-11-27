@@ -102,11 +102,9 @@ if($update){
                                     <div class="panel panel-theme top mb25">
                                         <div class="panel-body p20 pb10" >
                                             <div class="row">
-                                                <div class="col-md-7">
-                                                    <div id="map" class="map_canvas" style="width:100%; height:730px;border:0"></div>
-                                                    {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.0339928370745!2d69.31817291507974!3d41.32987417926943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef4ec32242aa1%3A0x1d7ab8fa6515bea9!2sSayram+Blind+Alley%2C+Tashkent%2C+Uzbekistan!5e0!3m2!1sen!2s!4v1535459950308" width="100%" height="730px" frameborder="0" style="border:0" allowfullscreen></iframe>--}}
+                                                <div class="col-md-6">
                                                 </div>
-                                                <div class="col-md-5" id="orderTotal">
+                                                <div class="col-md-6" id="orderTotal">
                                                     @include(config('panel.DIR').'entities/'.$form_template_dir.'/order_total')
                                                 </div>
                                             </div>
