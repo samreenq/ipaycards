@@ -520,9 +520,12 @@ Class EntityTrigger
     public function orderItemBeforeSaveTrigger($request)
     {
         $request  = is_array($request) ? (object)$request : $request;
+       // echo "<pre>"; print_r($request); exit;
+        if(isset($request->product_id)){
+            if($request->product_id > 0 && $request->product_name == '')
+                $return['product_name'] = ItemLib::getItemName($request->product_id);
+        }
 
-        if($request->product_id > 0 && $request->product_name == '')
-            $return['product_name'] = ItemLib::getItemName($request->product_id);
 
         return isset($return) ? $return : array();
     }
@@ -981,6 +984,71 @@ Class EntityTrigger
                 } // end of foreach loop
             }
         }
+    }
+
+    /**
+     * @param $request
+     * @param $depend_entity_request
+     * @param $depend_entity_response
+     */
+    public function orderItemAddTrigger($request,$depend_entity_request = false,$depend_entity_response = false)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+
+        if($depend_entity_request && $depend_entity_response){
+
+            $depend_entity_request = is_array($depend_entity_request) ? (object)$depend_entity_request : $depend_entity_request;
+            $depend_entity_response = is_array($depend_entity_response) ? (object)$depend_entity_response : $depend_entity_response;
+          //  echo "<pre>"; print_r($depend_entity_request);
+            if(isset($depend_entity_response->entity->entity_id)){
+
+                if(isset($depend_entity_request->product_id) && !empty($depend_entity_request->product_id)){
+
+                    $entity_lib = new Entity();
+
+                    //Get inventory
+                    $flat_table = new SYSTableFlat('inventory');
+                    $data = $flat_table->getDataByWhere(' product_id = '.$depend_entity_request->product_id. ' AND availability = "available"');
+                  // echo "<pre>"; print_r($data);
+                    if($data && isset($data[0])){
+
+
+                        //Update Order Item
+                        $params = array(
+                            'entity_type_id' => 16,
+                            'entity_id' => $depend_entity_response->entity->entity_id,
+                            'inventory_id' => $data[0]->entity_id,
+                            'order_from' => 'in_stock'
+                        );
+
+
+                      $item_response =   $entity_lib->apiUpdate($params);
+                        //echo "<pre>"; print_r($item_response); exit;
+                        //Update Inventory Status
+                        $params = array(
+                            'entity_type_id' => 73,
+                            'entity_id' => $data[0]->entity_id,
+                            'availability' => 'reserved',
+                        );
+
+                        $entity_lib->apiUpdate($params);
+                    }
+                    else{
+                        //Update Order Item
+                        $params = array(
+                            'entity_type_id' => 16,
+                            'entity_id' => $depend_entity_response->entity->entity_id,
+                            'order_from' => 'vendor_stock'
+                        );
+
+                        $entity_lib->apiUpdate($params);
+                    }
+                }
+
+            }
+        }
+
+
     }
 
 }

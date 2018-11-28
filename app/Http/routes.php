@@ -128,6 +128,7 @@ Route::any('update_data', $data_cron_dir . 'DataScriptController@updateDate');
 Route::any('clearSystemEntity', $data_cron_dir . 'DataScriptController@clearSystemEntity');
 Route::any('assign_order', $cron_dir . 'OrderController@assignOrder');
 Route::any('auto_decline', $cron_dir . 'OrderController@autoDecline');
+Route::any('order_process', $cron_dir . 'OrderController@processOrder');
 
 //Rite Hauler Routes
 Route::get('getCityByState', $general_panel_dir . 'EntityAjaxController@getCityByState');
