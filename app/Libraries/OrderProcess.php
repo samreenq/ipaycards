@@ -444,36 +444,6 @@ Class OrderProcess
         }
 
 
-       // echo "<pre>"; print_r($request);
-
-        if(trim($request->status_keyword) == 'reached'){
-            //Update Order
-            $flat_table = new FlatTable();
-            $order_raw = $flat_table->getOrderReachedInfo($request->order_id);
-            $reached_date = date('Y-m-d H:i:s');
-            $order_params = $this->_setFinalCharges($order_raw,$reached_date);
-            $post_arr = array_merge($post_arr,$order_params);
-          //  echo "<pre>"; print_r($post_arr); exit;
-        }
-
-        //if driver cancelled order then base fee will be charged
-        if($request->status_keyword == 'driver_cancelled'){
-
-            $order_model = new SYSTableFlat('order');
-            $order_raw = $order_model->getDataByWhere(' entity_id = '.$request->order_id);
-
-            if($order_raw[0]->payment_method_type == 'stripe'){
-
-                $grand_total = $order_raw[0]->base_fee;
-                $stripeFee = self::calcStripeFee($grand_total);
-                //$stripeFee = CustomHelper::roundOffPrice($stripeFee,2);
-                $total =  CustomHelper::roundOffPrice($grand_total+$stripeFee,2);
-                $post_arr['grand_total'] = "$total";
-
-
-            }
-        }
-       // echo "<pre>"; print_r($post_arr); exit;
         if($request->status_keyword == 'completed'){
             $post_arr['delivery_date'] = date('Y-m-d H:i:s');
 
@@ -491,9 +461,7 @@ Class OrderProcess
         }
 
             //update order
-      //  echo "<pre>";  print_r($post_arr);
         $response = $entity_lib->apiUpdate($post_arr);
-        // echo "<pre>";  print_r($response); exit;
         return json_decode(json_encode($response));
 
     }

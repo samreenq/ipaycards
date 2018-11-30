@@ -731,7 +731,7 @@ Class EntityTrigger
      * @param $request
      * @throws \Exception
      */
-    public function _orderHistoryAddTrigger($request,$entity_id = false)
+    public function orderHistoryAddTrigger($request,$entity_id = false)
     {
         $request = is_array($request) ? (object)$request : $request;
         //Update Order status / Driver
