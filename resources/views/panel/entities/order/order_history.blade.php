@@ -48,8 +48,6 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Status</th>
-                                                    <th>Driver</th>
-                                                    <th>Vehicle</th>
                                                     <th>Comments</th>
                                                     <th>Created At</th>
                                                 </tr>
@@ -60,9 +58,7 @@
                                                 <tr>
                                                     <td>{{ ($key + 1) }}</td>
                                                     <td>{{ $order_history->order_status->value }}</td>
-                                                    <td>{{ count($order_history->driver_id) ? $order_history->driver_id->value : '' }}</td>
-                                                    <td>{{ count($order_history->vehicle_id) ? $order_history->vehicle_id->value : '' }}</td>
-                                                    <td>{{ isset($order_history->comment) ? $order_history->comment : '' }}</td>
+                                                   <td>{{ isset($order_history->comment) ? $order_history->comment : '' }}</td>
                                                     <td>{{ date('d-m-Y h:i A',strtotime($order_history->created_at)) }}</td>
                                                 </tr>
                                                 @endforeach
@@ -112,9 +108,6 @@
                 $(".order-update-btn").removeAttr("disabled");
                 //}
 
-                if(data.data.vehicle_id != ""){
-                    driverVehicleInfo(data.data.vehicle_id);
-                }
             }
         });
 

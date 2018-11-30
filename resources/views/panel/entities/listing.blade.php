@@ -241,9 +241,6 @@
                     	$(".order-update-btn").removeAttr("disabled");
 					//}
 
-                    if(data.data.vehicle_id != ""){
-                        driverVehicleInfo(data.data.vehicle_id);
-                    }
                 }
             });
 

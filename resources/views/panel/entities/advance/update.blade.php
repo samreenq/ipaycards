@@ -137,6 +137,9 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
                     </div>
                 </div>
 
+                @if($uri_method == 'view' && $entity_data->identifier == 'order')
+                    @include(config('panel.DIR').'entities.advance.list')
+                @endif
                 </div>
             </section>
 
@@ -144,13 +147,94 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
     <!-- Begin: Page Footer -->
     @include(config('panel.DIR') . 'footer_bottom')
 </section>
-
+<!-- Detailed View Popup -->
+<!-- End: Content-Wrapper -->
+<!-- Required Plugin CSS -->
+<link rel="stylesheet" type="text/css" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/datepicker/css/bootstrap-datetimepicker.css' ) !!}">
+<link rel="stylesheet" type="text/css" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/daterange/daterangepicker.css' ) !!}">
+<!-- Page Plugins via CDN -->
+<script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/moment/moment.min.js' ) !!}"></script>
+<!-- Datatables -->
+<script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/datatables/media/js/datatables.min.js' ) !!}"></script>
+<!-- ckeditor -->
+<script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/ckeditor/ckeditor.js' ) !!}"></script>
+<!-- Page Plugins -->
 <script type="text/javascript" src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/holder/holder.min.js' ) !!}"></script>
+<!-- Page Plugins -->
+<script type="text/javascript" src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/magnific/jquery.magnific-popup.js' ) !!}"></script>
 
 
 <!-- End: Page Footer -->
 <script type="text/javascript">
     $(function () {
+
+        @if($uri_method == 'view' && $entity_data->identifier == 'order')
+        // data grid generation
+        $('#mydatatable').DataTable().destroy();
+        var dg = $("#mydatatable").DataTable({
+            processing: true,
+            serverSide: true,
+            //paging: false,
+            searching: false,
+            "aaSorting": [],
+            "oLanguage":{
+                "sProcessing": loaderHtml(),
+            },
+            //bStateSave: true, // save datatable state(pagination, sort, etc) in cookie.
+
+            ajax: {
+                url: "{!! URL::to($panel_path.'entities/order/ajaxListing') !!}?_token=<?php echo csrf_token(); ?>&entity_type_id=<?=$entity_data->entity_type_id?>&customer_id=6875", // ajax source
+                type: "POST",
+                data : function(d) {
+                    /*for (var attrname in dg_ajax_params) {
+                        d[attrname] = dg_ajax_params[attrname];
+                    }*/
+
+
+                    d.search_columns = dg_ajax_params;
+                    if ("checked_ids" in d.search_columns) d.checked_ids = d.search_columns['checked_ids']; delete d.search_columns['checked_ids'];
+                    if ("select_action" in d.search_columns) d.select_action = d.search_columns['select_action']; delete d.search_columns['select_action'];
+
+                },
+                /*"success" : function(data){
+                    //do stuff here
+                    console.log(data.recordsTotal);
+                }*/
+            },
+            drawCallback: function (settings) {
+                //check if records are greater than zero then show export button
+                if($('.export_entity').length >0){
+                    var record_count = this.fnSettings().fnRecordsTotal();
+                    if(record_count>0) $('.export_entity').removeClass('hide'); else $('.export_entity').addClass('hide');
+                    console.log(record_count);
+                }
+
+
+            },
+            pageLength: 10, // default record count per page
+            columnDefs : [<?php
+                $index = 0;
+                foreach ($columns as $index_key => $column_field) { ?>
+            {
+                data: "<?= $index_key ?>",
+                orderable: false,
+                targets: <?= $index ?>
+            },
+                <?php $index++;
+                } ?>
+            ],
+            "createdRow": function ( row, data, index ) {
+                $('td:last', row).addClass('hv-btns');
+            },
+        });
+
+        // add search to datatable
+        dgSearch(dg);
+        // add select actions to datatable
+        dgSelectActions(dg);
+
+        @endif
+
 		$('#entity_type_id').val("<?php echo $entity_data->entity_type_id;?>");
         // default form submit/validate
         $('form[name="data_form"]').submit(function (e) {

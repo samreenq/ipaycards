@@ -785,7 +785,6 @@ Class EntityAjaxController extends EntityBackController
     public function getOrderStatus(Request $request)
     {
         $warning_message = '';
-        $drivers = array();
         $entity_lib = new Entity();
         $post_arr = [];
         $post_arr['entity_type_id'] = 15;
@@ -796,54 +795,12 @@ Class EntityAjaxController extends EntityBackController
         $flat_model = new SYSTableFlat('order_statuses');
         $order_statuses =  $flat_model->getDataByWhere();
 
-        /*$flat_model = new SYSTableFlat('driver');
-        $drivers =  $flat_model->getDataByWhere();*/
-       // echo "<pre>"; print_r($order); exit;
-
-        $order_status_lib = new OrderStatus();
-        $order_status_ids = $order_status_lib->getIdByKeywords();
-
-        if(in_array($order->attributes->order_status->id,array($order_status_ids['confirmed'],$order_status_ids['declined'])))
-        {
-
-          $order_raw = new \StdClass();
-            $order_raw->entity_id = $order->entity_id;
-            $order_raw->truck_id = $order->attributes->truck_id->id;
-            $order_raw->pickup_date = $order->attributes->pickup_date;
-            $order_raw->pickup_time = $order->attributes->pickup_time;
-            $order_raw->estimated_delivery_date = $order->attributes->estimated_delivery_date;
-
-            $driver_lib = new Driver();
-            $drivers = $driver_lib->availableDrivers($order_raw);
-
-            if(count($drivers) == 0){
-                // $flat_model = new FlatTable();
-                // $drivers = $flat_model->getDrivers($order->attributes->truck_id->id);
-                $warning_message = trans('system.no_vehicle_available');
-            }
-
-        }
-
-        if(in_array(trim($order->attributes->order_status->id),
-            array($order_status_ids['assigned'],
-            $order_status_ids['accepted'],
-                $order_status_ids['reached'],
-                $order_status_ids['arrived'],
-                $order_status_ids['on_the_way'],
-                $order_status_ids['completed'],
-                $order_status_ids['driver_cancelled']))){
-            $flat_model = new FlatTable();
-            $drivers = $flat_model->getDrivers($order->attributes->truck_id->id);
-        }
-
-
       // echo "<pre>"; print_r($drivers); exit;
         $view_file = $this->_assignData["dir"] ."ajax/order-status";
 
         $data['html'] =  view($view_file,['data'=> array(
             'order' => $order,
             'status_list'=>$order_statuses,
-            'driver_list'=>$drivers,
             'warning' => $warning_message)])->render();
 
         $data['vehicle_id'] = isset($order->attributes->vehicle_id->id) ?  $order->attributes->vehicle_id->id : "";

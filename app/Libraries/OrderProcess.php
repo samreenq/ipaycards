@@ -438,74 +438,13 @@ Class OrderProcess
         $post_arr['entity_id'] = $request->order_id;
         $post_arr['order_status'] = $request->order_status;
 
-        if(isset($request->driver_id)){
-            $post_arr['driver_id'] = $request->driver_id;
-        }
-
-        if(isset($request->vehicle_id)){
-            $post_arr['vehicle_id'] = $request->vehicle_id;
-        }
 
         if(isset($request->comment)){
             $post_arr['comment'] = $request->comment;
         }
 
-        if(isset($request->delivery_date)){
-            $post_arr['delivery_date'] = $request->delivery_date;
-        }
 
-        if(trim($request->status_keyword) == 'assigned'){
-
-            $flat_table = new SYSTableFlat('vehicle');
-           $vehicle_data = $flat_table->getDataByWhere(' driver_id = '.$request->driver_id);
-
-           if(isset($vehicle_data[0])){
-
-               $post_arr['vehicle_id'] = $vehicle_data[0]->entity_id;
-
-               //Update truck info of order
-
-           }
-
-        }
        // echo "<pre>"; print_r($request);
-        if(trim($request->status_keyword) == 'accepted'){
-
-            //Save order driver location
-            $flat_table = new SYSTableFlat('order_driver_location');
-            $driver_order_location = $flat_table->getColumnByWhere(" order_id = $request->order_id","*");
-
-
-            if($driver_order_location){
-                $arr = [];
-                $arr['entity_type_id'] = 69;
-                $arr['entity_id'] = $driver_order_location->entity_id;
-                $arr['order_id'] = $request->order_id;
-                $arr['driver_id'] = $request->driver_id;
-                $arr_response = $entity_lib->apiUpdate($arr);
-
-            }else{
-                $arr = [];
-                $arr['entity_type_id'] = 69;
-                $arr['order_id'] = $request->order_id;
-                $arr['driver_id'] = $request->driver_id;
-                $arr_response = $entity_lib->apiPost($arr);
-            }
-
-           // echo "<pre>"; print_r($arr_response); exit;
-        }
-
-        if(trim($request->status_keyword) == 'accepted' || trim($request->status_keyword) == 'declined'){
-
-            if(isset($request->entity_history_id)){
-                \DB::table('sys_entity_history')
-                    ->where('entity_history_id',$request->entity_history_id)
-                    ->update([
-                        'is_read' => 1
-                    ]);
-            }
-        }
-
 
         if(trim($request->status_keyword) == 'reached'){
             //Update Order

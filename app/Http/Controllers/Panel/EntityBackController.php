@@ -175,6 +175,10 @@ class EntityBackController extends EntityController
            $this->_assignData['columns']['image'] = 'Image';
         }
 
+        $array = explode('/',$request->url());
+        end($array);
+        $this->_assignData["uri_method"] =  prev($array);
+
         //check if request from notification then update is read
         $entity_notification = new EntityNotification();
         $entity_notification->updateNotificationRead($request->all());
@@ -899,6 +903,18 @@ class EntityBackController extends EntityController
         $hook_data['records'] = $data['records'];
         $hook_data['update'] = isset($this->_assignData["update"]) ? $this->_assignData["update"] : false;
         $this->_assignData = CustomHelper::hookData($this->_extHook, __FUNCTION__, $request, $hook_data);
+
+       // $request->entity_type_id =15;
+        if($this->_assignData["uri_method"] == 'view' && $this->_entity_controller->identifier == 'customer'){
+
+            $entity_type_model = new SYSEntityType();
+            $this->_entity_controller = $entity_type_model ->where("identifier", "=",'order')
+                ->whereNull("deleted_at")
+                ->first();
+
+         //   echo "<pre>"; print_r($request->all()); exit;
+            $this->listing($request);
+        }
 
         $view = View::make($view_file, $this->_assignData);
         return $view;

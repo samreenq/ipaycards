@@ -18,9 +18,9 @@ if(in_array($status_keyword,array('confirmed','declined'))){
     $is_disabled = '';
 }
 
-$pending_arr = array('pending','confirmed','cancelled');
-$confirmed_arr = array('pending');
-$primary_statuses = array('pending','confirmed');
+$pending_arr = array('pending','payment_received','cancelled');
+$confirmed_arr = array('pending','cancelled');
+$primary_statuses = array('pending','payment_received');
 
 ?>
 
@@ -56,7 +56,7 @@ $primary_statuses = array('pending','confirmed');
                                 continue;
                         }
 
-                        else if($status_keyword == 'confirmed' && in_array($status->keyword,$confirmed_arr)){
+                        else if($status_keyword == 'payment_received' && in_array($status->keyword,$confirmed_arr)){
                                 continue;
                         }
 
@@ -70,38 +70,9 @@ $primary_statuses = array('pending','confirmed');
 
         </select><i class="arrow"></i></label>
 </div>
-        <input type="hidden" name="driver_id" id="driver_id" value="{!! $driver_id !!}" />
-    <?php
-    if($data['driver_list'] && count($data['driver_list']) > 0){ ?>
-
-<div class="section mb10 col-md-6 driver_field {!! $is_hide !!}">
-    <label title="" class="field-label cus-lbl  field-label cus-lbl" data-toggle="tooltip">Vehicle *</label>
-    <label class=" field select ">
-        <select class=" field_dropdown2 form-control" id="vehicle_id" name="vehicle_id" {!! $is_disabled !!}>
-            <option value="">-- Select Vehicle --</option>
 
 
-            <?php  foreach($data['driver_list'] as $driver){
-            $select = "";
-                if(trim($vehicle_id) == trim($driver->entity_id)){
-                    $select = 'selected="selected"';
-                }
-
-            ?>
-            <option <?php echo $select; ?> value="{!! $driver->entity_id !!}">{!! $driver->title !!}</option>
-            <?php  }   ?>
-        </select><i class="arrow"></i></label>
-</div>
-<?php  } else{ ?>
-        <div class="section mb10 col-md-4 driver_field {!! $is_hide !!}">
-            <label title="" class="field-label cus-lbl  field-label cus-lbl" data-toggle="tooltip">Vehicle *</label>
-            <label class=" field select ">
-                <select class=" field_dropdown2 form-control" id="vehicle_id" name="vehicle_id" {!! $is_disabled !!}>
-                    <option value="">-- Select Vehicle --</option>
-                </select><i class="arrow"></i></label>
-        </div>
- <?php   } ?>
-    <div class="section mb10 col-md-12 description_field ">
+    <div class="section mb10 col-md-6 description_field ">
         <label title="" class="field-label cus-lbl  field-label cus-lbl">Comments</label>
         <label class=" field"><textarea placeholder="" class="gui-textarea" name="comment" id="comment"></textarea>
         </label>
