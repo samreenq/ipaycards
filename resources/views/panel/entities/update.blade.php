@@ -105,7 +105,7 @@ $fields = new $fields();
                 @if(isset($entity_data->show_gallery) && $entity_data->show_gallery == 1)
 
         var baseUrl = "";
-        var token = "{{ Session::getToken() }}";
+        var token = "{{ csrf_token() }}";
         Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone("div#dropzoneFileUpload", {
 

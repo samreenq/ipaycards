@@ -6,7 +6,7 @@
  */
 set_time_limit(0);
 // App constants
-define('APP_NAME', 'iPayCards'); // app name
+define('APP_NAME', 'Cubix Commerce'); // app name
 // HTTP Protocol
 define('HTTP_TYPE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://');
 
@@ -14,7 +14,7 @@ define('HTTP_TYPE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'h
 if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'ipaycards/'); // preceding path to app dir
+    define('ADD_PATH', 'cubix_commerce/'); // preceding path to app dir
     //  for saving cookies
     define('APP_DOMAIN', preg_match('/Chrome\/|MSIE/', @$_SERVER["HTTP_USER_AGENT"]) ? '' : $_SERVER['HTTP_HOST']); // chrome/IE cookie fix on local host
 
@@ -24,21 +24,37 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('MASTER_DB_PASS', '');
     define('MASTER_DB_NAME', 'ipaycards_db');
     define('MASTER_DB_PREFIX', '');
+
+
+// mail server configuration
+    define('MAIL_DRIVER', 'mail'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
+    define('MAIL_HOST', '');
+    define('MAIL_PORT', NULL);
+    define('MAIL_USERNAME', "");
+    define('MAIL_PASSWORD', "");
+
 } else {
+
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'staging/ipaycards/'); // preceding path to app dir
+    define('ADD_PATH', 'staging/cubix_commerce/'); // preceding path to app dir
     define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
     // db details
-    define('MASTER_DB_HOST', 'cubixsource.com');
-    define('MASTER_DB_USER', 'ipaycards_us');
-    define('MASTER_DB_PASS', 'ipaycards123');
-    define('MASTER_DB_NAME', 'ipaycards_db');
+    define('MASTER_DB_HOST', 'localhost');
+    define('MASTER_DB_USER', 'cc_us');
+    define('MASTER_DB_PASS', 'C^iz1t36');
+    define('MASTER_DB_NAME', 'cc_db');
     define('MASTER_DB_PREFIX', '');
+
+    define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
+    define('MAIL_HOST', 'smtp.gmail.com');
+    define('MAIL_PORT', 465);
+    define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
+    define('MAIL_PASSWORD', "smtp@123");
 }
 // Slave Database Constants
 define('SLAVE_DB_HOST', MASTER_DB_HOST);
-define('MYSQL_PORT', 3306);
+define('MYSQL_PORT', 3308);
 
 // Cache constants
 define('CACHE_ON', FALSE); // bool : TRUE = on | FALSE = off
@@ -103,23 +119,6 @@ define('TIME_FORMAT_ADMIN', 'g:i A');
 // other constants
 ini_set('session.use_trans_sid', 1);
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
-
-
-// mail server configuration
-define('MAIL_DRIVER', 'mail'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
-define('MAIL_HOST', '');
-define('MAIL_PORT', NULL);
-define('MAIL_USERNAME', "");
-define('MAIL_PASSWORD', "");
-
-/*define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
-define('MAIL_HOST', 'smtp.gmail.com');
-define('MAIL_PORT', 465);
-define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
-define('MAIL_PASSWORD', "smtp@123");*/
-
-
-
 
 // html5 webkit support for IE
 header('X-UA-Compatible: IE=edge,chrome=1');

@@ -361,14 +361,13 @@ class EntityAuthController extends Controller
                // print_r($exist_department); exit;
             }
 
-
+            $entity_lib = new Entity();
             //After auth validation check entity attributes validation, if ok then proceed
             $exModel = $this->_targetEntityModel;
-
             $entityAttributeModel = $this->_modelPath . "SYSEntityAttribute";
             $entityAttributeModel = new $entityAttributeModel;
             $listOfAttributeToBeValidate = $entityAttributeModel->getEntityAttributeValidationList($request->entity_type_id, '');
-            $response_validator = $this->_postValidator($request->all(), $listOfAttributeToBeValidate);
+            $response_validator = $entity_lib->postValidator($request->all(), $listOfAttributeToBeValidate);
             if ($response_validator) {
                 return $this->_apiData;
             }
@@ -486,7 +485,7 @@ class EntityAuthController extends Controller
 
            // $apiCurl = new ApiCurl();
            // $ret = CustomHelper::internalCall($request, \URL::to(DIR_API) . '/system/entities', 'POST', $request->all());
-           $entity_lib = new Entity();
+
             $ret = $entity_lib->apiPost($request->all());
             $ret = json_decode(json_encode($ret));
 

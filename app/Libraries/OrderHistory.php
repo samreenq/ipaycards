@@ -40,13 +40,6 @@ Class OrderHistory
         $post_arr['order_id'] = $request->order_id;
         $post_arr['order_status'] = $request->order_status;
 
-        if(isset($request->driver_id)){
-            $post_arr['driver_id'] = $request->driver_id;
-        }
-
-        if(isset($request->vehicle_id)){
-            $post_arr['vehicle_id'] = $request->vehicle_id;
-        }
 
         if(isset($request->comment)){
             $post_arr['comment'] = $request->comment;

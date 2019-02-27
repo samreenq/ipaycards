@@ -126,7 +126,7 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
                                         <button type="submit" class="btn ladda-button btn-theme btn-wide mt10" data-style="zoom-in"> <span class="ladda-label">Update</span> </button>
                                         @include(config('panel.DIR').'entities.loader')
                                     @else
-                                        @if(count($modulePermission) && $modulePermission->update_permission == 1 )
+                                        @if(isset($modulePermission) && $modulePermission->update_permission == 1 )
                                         <a href="../update/{{ $update->entity_id }}" type="submit" class="btn ladda-button btn-theme btn-wide mt10" data-style="zoom-in"> <span class="ladda-label">Edit Record</span> </a>
                                        @endif
                                     @endif
@@ -285,7 +285,7 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
    @if(isset($entity_data->show_gallery) && $entity_data->show_gallery == 1)
 
         var baseUrl = "";
-        var token = "{{ Session::getToken() }}";
+        var token = "{{ csrf_token() }}";
         Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone("div#dropzoneFileUpload", {
 

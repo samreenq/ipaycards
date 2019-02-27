@@ -37,7 +37,7 @@ Class CustomHelper
                     return config("panel.DIR") . $panel . '/';
                 }
             } else {
-                $panel = \Route::current()->getParameter('department');
+                $panel = \Route::current()->parameter('department');
             }
         }
 

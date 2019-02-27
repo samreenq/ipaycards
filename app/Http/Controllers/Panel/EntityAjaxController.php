@@ -818,7 +818,7 @@ Class EntityAjaxController extends EntityBackController
 
         $return['error'] = 0;
         try {
-            if (isset($request->order_id) && (isset($request->order_status) || isset($request->driver_id))) {
+            if (isset($request->order_id)) {
 
                $params->is_admin_update = 1;
               //  echo "<pre>"; print_r($params); exit;

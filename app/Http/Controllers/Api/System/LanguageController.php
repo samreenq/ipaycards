@@ -111,9 +111,10 @@ class LanguageController extends Controller
             // success response
                 $this->_apiData['response'] = "success";
 
-
                 // init output data array
                 $this->_apiData['data'] = $data = array();
+
+                $pl_attachment_model = new PLAttachment();
 
                 // init entity
                 $entity = array();
@@ -128,7 +129,10 @@ class LanguageController extends Controller
 
                 //Create Language File
                 $language_lib->createFile($validate_file['data'],$request->identifier);
+                $pl_attachment_model->updateAttachmentByEntityID($entity_id, array($request->file), 0,'file');
+
                  $language_lib->createValidationFile($validation_file['data'],$request->identifier);
+                $pl_attachment_model->updateAttachmentByEntityID($entity_id, array($request->validation_file), 0,'validation_file');
 
                 // response data
                 $data[$this->_object_identifier] = $this->_entity_model->getData($entity_id);
@@ -297,10 +301,14 @@ class LanguageController extends Controller
             //Create Language File
             if($update_language_file){
                 $language_lib->createFile($validate_file['data'],$request->identifier);
+                $pl_attachment->updateAttachmentByEntityID($entity[ $this->_entity_pk ], array($request->file), 0,'file');
+
             }
 
             if($update_validation_file){
                 $language_lib->createValidationFile($validation_file['data'],$request->identifier);
+                $pl_attachment->updateAttachmentByEntityID($entity[ $this->_entity_pk ], array($request->validation_file), 0,'validation_file');
+
             }
 
             // response data

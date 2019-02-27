@@ -205,7 +205,7 @@ if(\Session::has(ADMIN_SESS_KEY.'_POST_DATA')){
     function loadFileUpload(divID,k,gallery)
     {
         var baseUrl = "";
-        var token = "{{ Session::getToken() }}";
+        var token = "{{ csrf_token() }}";
         Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone("div#dropzoneFileUpload_"+k, {
 

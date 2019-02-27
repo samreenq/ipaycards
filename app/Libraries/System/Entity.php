@@ -540,16 +540,18 @@ Class Entity extends Base
      */
     private function _postValidator($request_params)
     {
+        $request_arr = (array)$request_params;
         $request_params = is_array($request_params) ? (object)$request_params : $request_params;
 
         $listOfAttributeToBeValidate = $this->_entityAttributeModel->getEntityAttributeValidationList($request_params->entity_type_id, '');
-
+       // echo "<pre>"; print_r( $listOfAttributeToBeValidate);
         $is_error = FALSE;
         $rules = [
             'entity_type_id' => 'required|integer|exists:' . $this->_eTypeModel->table . "," . $this->_eTypeModel->primaryKey];
 
         $attributes_error = 1;
         $error_messages = array();
+
         if (isset($listOfAttributeToBeValidate[0])) {
             foreach ($listOfAttributeToBeValidate as $result) {
 
@@ -561,12 +563,17 @@ Class Entity extends Base
                         $result->validation = $result->js_validation_tags;
                 }
 
-                if (isset($request_params->{$result->attribute_code})) {
+                if (array_key_exists($result->attribute_code,$request_arr)) {
                     if ($result->php_data_type != 'comma_separated') {
-                            $rules[ $result->attribute_code ] = $result->validation;
+                            $rules[$result->attribute_code] = $result->validation;
                     } else {
                         $temp = explode('|in', $result->validation);
-                            $rules[ $result->attribute_code ] = $temp[0];
+                            $rules[$result->attribute_code] = $temp[0];
+                    }
+
+                    $search = 'required';
+                    if(!preg_match("/{$search}/i",$rules[$result->attribute_code])){
+                        $rules[$result->attribute_code] .= '|nullable';
                     }
 
                     //if service call from backend then update error Messages b/c error mesages are displaying attribute code
@@ -575,22 +582,20 @@ Class Entity extends Base
                         $error_message = $this->_attributeErrorMessages($result,$rules);
                         $error_messages =  array_merge($error_messages,$error_message);
                     }
-
                 }
 
             }
-
             $attributes_error = 0;
         }
-      // echo "<pre>"; print_r( $rules);
-      // echo "<pre>"; print_r( $error_messages);
+
 
         if(!isset($request_params->mobile_json) || $request_params->mobile_json == 0)
             $validator = Validator::make((array)$request_params, $rules,$error_messages);
         else
             $validator = Validator::make((array)$request_params, $rules);
 
-
+      // echo "<pre>"; print_r( $rules);
+        //echo "<pre>"; print_r($request_params);
         // validate
         if ($validator->fails()) {
             throw new \Exception($validator->errors()->first());
@@ -601,7 +606,7 @@ Class Entity extends Base
             //$this->_apiData['message'] = "No attributes defined";
             $is_error = TRUE;
         }
-
+     // echo "<pre>"; var_dump($validator->fails()); exit;
         return $is_error;
     }
 
@@ -719,6 +724,7 @@ Class Entity extends Base
             $listOfAttributeToBeValidate = $this->_entityAttributeModel->getEntityAttributeValidationList($request->entity_type_id, '');
             $listOfAttributeToBeInserted = $this->_entityAttributeModel->getEntityAttributeFields($request->entity_type_id);
             $response_validator = $this->_postValidator($request_params, $listOfAttributeToBeValidate);
+
 
             $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_verify_trigger');
             if (method_exists($obj, "$func")) {

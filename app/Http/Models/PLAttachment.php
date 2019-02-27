@@ -33,8 +33,12 @@ class PLAttachment extends Base {
      * @return Query
      */
 
-    public function updateAttachmentByEntityID($entity_id,$attachments=array(),$featured=0,$attribute_code='gallery_items') {
-		
+    public function updateAttachmentByEntityID($entity_id,$attachments=array(),$featured=0,$attribute_code= false) {
+
+        if(!$attribute_code || empty($attribute_code)){
+            $attribute_code = 'gallery_items';
+        }
+
 		if(count($attachments)>0 && $entity_id!=0) {
 			$this
 			->where("entity_id","=",$entity_id)
@@ -43,6 +47,7 @@ class PLAttachment extends Base {
 			foreach($attachments as $attachment){
 					$data = array();
 					$data['entity_id'] = $entity_id;
+                    $data['attribute_code'] = $attribute_code;
 					$data['is_active'] = '1';
 					if($featured==$attachment){
 						 $data['is_featured'] = 1;

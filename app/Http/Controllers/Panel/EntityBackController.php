@@ -165,10 +165,10 @@ class EntityBackController extends EntityController
     {
         $this->_assignData['module'] = $this->_object_identifier . "/" . $this->_entity_controller->identifier;
         $this->_assignData['module_identifier'] = $this->_entity_controller->title;
-
+       // echo "<pre>"; print_r($this->_entity_controller); exit;
         $this->_assignData['columns']['ids'] = '<div class="checkbox-t"><input type="checkbox" id="check_all" name="check_all" /><label for="check_all"></label></div>';
 
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
 
         if($this->_entity_controller->show_gallery  == 1) {
 
@@ -255,7 +255,7 @@ class EntityBackController extends EntityController
         else{
             $this->_assignData['columns']['created_at'] = 'Created On';
         }
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
 
         $this->_assignData['entity_data']->identifier = $this->_entity_controller->identifier;
         $checkPermission = \DB::table('sys_entity_type')->select('add_permission', 'delete_permission', 'update_permission', 'view_permission','import_permission','export_permission')->where('entity_type_id', $this->_assignData['entity_data']->entity_type_id)->first();
@@ -654,7 +654,7 @@ class EntityBackController extends EntityController
         }
 
 
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
         $this->_assignData["entity_data"]->identifier = $this->_entity_controller->identifier;
 
         $view_file = $this->_assignData["dir"] . __FUNCTION__;
@@ -704,6 +704,8 @@ class EntityBackController extends EntityController
                 $_POST[$key] = $sm_values;
             }
         }
+
+       // echo "<pre>"; print_r($request->all()); exit;
         //if user management is called then call to auth create
         if($this->_entity_controller->allow_auth == 1 && $this->_entity_controller->allow_backend_auth == 1){
             //send extra parameters with request
@@ -746,7 +748,9 @@ class EntityBackController extends EntityController
      */
     public function update(Request $request)
     {
-        $checkPermission = \DB::table('sys_entity_type')->select('add_permission', 'delete_permission', 'update_permission', 'view_permission')->where('entity_type_id', $this->_entity_controller['attributes']['entity_type_id'])->first();
+        $entity_controller_data = $this->_entity_controller->getAttributes();
+        $entity_type_id = $entity_controller_data['entity_type_id'];
+        $checkPermission = \DB::table('sys_entity_type')->select('add_permission', 'delete_permission', 'update_permission', 'view_permission')->where('entity_type_id', $entity_type_id)->first();
         
         $this->_assignData['modulePermission'] = $checkPermission;
 
@@ -787,23 +791,8 @@ class EntityBackController extends EntityController
         }
 
         $getData['entity_id'] = $this->_segment_id;
-        $getData['entity_type_id'] = $this->_entity_controller['attributes']['entity_type_id'];
+        $getData['entity_type_id'] = $entity_type_id;
 
-        if($this->_entity_controller->identifier == "order"){
-            $hook[] = 'order_pickup';
-            $hook[] = 'order_dropoff';
-            if($this->_assignData["uri_method"] == 'view'){
-
-                $flatTable = new FlatTable;
-                $getDriverTrackingLocation = $flatTable->getDriverLocation($getData['entity_id']);
-                $location = array();
-
-                if(count($getDriverTrackingLocation)){
-                    $location = $getDriverTrackingLocation->driver_location;
-                }
-                $this->_assignData["location"] = $location;
-            }
-        }
 
         //Get depend entity type data
         $depend_entity = false;
@@ -831,7 +820,6 @@ class EntityBackController extends EntityController
         $data = (object)$this->_pLib->apiList($getData);
         $entity_data = json_decode(json_encode($data));
 
-   //  echo "<pre>"; print_r($entity_data); exit;
         if ($entity_data) {
             $this->_assignData["update"] = $entity_data->data->entity_listing[0];
             $this->_assignData["update"]->identifier = $this->_entity_controller->identifier;
@@ -876,7 +864,7 @@ class EntityBackController extends EntityController
         $this->_assignData['records'] = $data['records'];
 
 
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
         $view_file = $this->_assignData["dir"] . __FUNCTION__;
         $this->_assignData['form_template_dir'] = "template/";
         if($this->_entity_controller->identifier == "order"){
@@ -1013,7 +1001,8 @@ class EntityBackController extends EntityController
         $entity_notification->updateNotificationRead($request->all());
 
         $getData['entity_id'] = $this->_segment_id;
-        $getData['entity_type_id'] = $this->_entity_controller['attributes']['entity_type_id'];
+        $entity_controller_data = $this->_entity_controller->getAttributes();
+        $getData['entity_type_id'] = $entity_controller_data['entity_type_id'];
 
         //Get columns labels of entity those have to list on view page
         if (!empty($attribute_fields)) {
@@ -1070,7 +1059,7 @@ class EntityBackController extends EntityController
 
         $this->_assignData['records'] = $data['records'];*/
 
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
 
         $view_file = $this->_assignData["dir"] . __FUNCTION__;
 
@@ -1145,8 +1134,11 @@ class EntityBackController extends EntityController
             foreach ($request->checked_ids as $checked_id) {
                 $id = $this->_attribute_pk;
                 $postData[$id] = $checked_id;
-                $data = $this->__internalCall($request,\URL::to(DIR_API) . '/system/' . $this->_object_identifier . '/delete', 'POST', $postData,false);
-
+                $delete_entity['entity_type_id'] = $this->_entity_controller->entity_type_id;
+                $delete_entity[$id] = $checked_id;
+              // $data = $this->__internalCall($request,\URL::to(DIR_API) . '/system/' . $this->_object_identifier . '/delete', 'POST', $postData,false);
+               $data = $this->_pLib->apiDelete($delete_entity);
+              //  echo "<pre>"; print_r($data); exit;
             }
         }
     }
@@ -1871,7 +1863,7 @@ class EntityBackController extends EntityController
         $this->_assignData["route_action"] = strtolower(__FUNCTION__);
 
        // echo "<pre>";  print_r($request->all()); exit;
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = (object)$this->_entity_controller->getAttributes();
 
         if (isset($request->do_post)) {
             if (isset($request->download_template)) {

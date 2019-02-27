@@ -95,7 +95,7 @@ class SYSEntityAuth extends Base
             \Session::put($this->_entity_session_identifier . 'redirect_url', \URL::current());
             $redirect_url = \URL::current();
             // send to login
-            $redirect_url = \URL::to(CustomHelper::getPanelPath(\Route::current()->getParameter('department')) . 'login');
+            $redirect_url = \URL::to(CustomHelper::getPanelPath(\Route::current()->parameter('department')) . 'login');
             // save session
             \Session::save();
             header("location:" . $redirect_url);
@@ -2063,7 +2063,7 @@ class SYSEntityAuth extends Base
      */
     function checkRequestedDepartment($request)
     {
-        $requested_department = \Route::current()->getParameter('department');
+        $requested_department = \Route::current()->parameter('department');
         $session_department = Session::get($this->_entity_session_identifier . "department");
 
         if($requested_department && $session_department){

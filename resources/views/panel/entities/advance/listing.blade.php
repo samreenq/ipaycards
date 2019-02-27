@@ -262,7 +262,7 @@ console.log(extra_params);
 
 
 		var baseUrl = "";
-		var token = "{{ Session::getToken() }}";
+		var token = "{{ csrf_token() }}";
 		Dropzone.autoDiscover = false;
 		var myDropzone = new Dropzone("div#dropzoneFileUpload", {
 			url: baseUrl + "{!! URL::to('/api/system/attachment/save') !!}",

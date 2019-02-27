@@ -180,7 +180,7 @@
             Common.jsonValidation('<?=Request::url()?>', this,'',"category");
         });
         var baseUrl = "";
-        var token = "{{ Session::getToken() }}";
+        var token = "{{ csrf_token() }}";
         Dropzone.autoDiscover = false;
         var myDropzone = new Dropzone("div#dropzoneFileUpload", {
 

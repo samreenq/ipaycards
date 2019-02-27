@@ -121,7 +121,7 @@ if($update){
                                     @include(config('panel.DIR').'entities.loader')
                                 </div>
                             @else
-                                    @if(count($modulePermission) && $modulePermission->update_permission == 1 )
+                                    @if(isset($modulePermission) && $modulePermission->update_permission == 1 )
                                 <div class="pull-right">
                                     <a href="../update/{{ $update->entity_id  }}" class="btn ladda-button btn-theme btn-wide mt10 cancel-btn" data-style="zoom-in"> <span class="ladda-label">Edit Order</span> </a>
                                 </div>

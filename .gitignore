@@ -1,15 +1,17 @@
-/vendor/
-/.idea/
-/storage/logs/
-/storage/framework/views/
-/storage/framework/cache/
-/storage/framework/sessions/
-.env
 /node_modules
-.htaccess
-/public/.htaccess
+/public/hot
+/storage/*.key
+.env
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
 
+/.idea/
+.env
+resources.rar
 /public/files/
 /public/import/
 /public/system/
-/config.php
+/composer.lock

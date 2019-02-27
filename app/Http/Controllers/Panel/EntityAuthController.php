@@ -553,7 +553,7 @@ class EntityAuthController extends EntityController
         //$request->merge(array_map('strip_tags', $request->all())); // - pass may have special chars
         $request->merge(array_map('trim', $request->all()));
 
-        $department = \Route::current()->getParameter('department');
+        $department = \Route::current()->parameter('department');
 
         // verify this department exist and login user belongs to that department.
         // save department name in session with its entity_type_id
