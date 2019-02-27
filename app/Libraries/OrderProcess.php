@@ -461,9 +461,7 @@ Class OrderProcess
         }
 
             //update order
-       // echo "<pre>";  print_r($post_arr);
         $response = $entity_lib->apiUpdate($post_arr);
-      // echo "<pre>";  print_r($response); exit;
         return json_decode(json_encode($response));
 
     }
