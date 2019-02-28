@@ -126,12 +126,12 @@ Class CouponLib
                     }
                 }
                 //check order amount
-                if ($data->order_amount < $coupon->minimum_order) {
+               /* if ($data->order_amount < $coupon->minimum_order) {
                     $return['error'] = 1;
                     $return['message'] = trans('system.coupon_minimum_order', ['min_order' => $coupon->minimum_order]);
 
                     return $return;
-                }
+                }*/
 
                 $entity_helper = new EntityHelper();
                 $request_params['entity_type_id'] = "coupon";

@@ -145,6 +145,171 @@ Route::get('order_calendar_content', $general_panel_dir . 'EntityAjaxController@
 //Share url
 Route::get('share/{slug}/{id}','OrderController@shareView');
 
+/////////////Website Routes///////////////////////////
+
+Route::group(['middleware' => ['web']], function () {
+Route::get('/webpay/bridge', "Web\PaymentController@bridgepage")->name('bridgepage');
+Route::post('/webpay/response', "Web\PaymentController@webpayResponse")->name('webpay_response');
+Route::get('/process', "Web\PaymentController@processPaymentData")->name('process_payment');
+
+
+//Route::group(['middleware' => ['fb.auth']], function () {
+
+
+Route::get('/aboutBusiness', "Web\AboutBusinessController@aboutBusiness")->name('aboutBusiness');
+Route::post('/forgotPassword', "Web\AuthenticationController@forgotPassword")->name('forgotPassword');
+Route::get('/signin', "Web\AuthenticationController@signin")->name('signin');
+Route::get('/signin_step1', "Web\AuthenticationController@signin_step1")->name('signin_step1');
+Route::get('/signout', "Web\AuthenticationController@signout")->name('signout');
+Route::post('/signup', "Web\AuthenticationController@signup")->name('signup');
+Route::post('/verification', "Web\AuthenticationController@phoneVerfication")->name('phoneVerification');
+Route::post('/resend', "Web\AuthenticationController@resendCode")->name('resendCode');
+Route::get('/send', "Web\AuthenticationController@sendCode")->name('sendCode');
+Route::get('/social/verification', "Web\AuthenticationController@socialPhoneVerfication")->name('socialPhoneVerfication');
+
+Route::get('/fsignup', "Web\AuthenticationController@facebookSignup")->name('fsignup');
+Route::get('/fbSignout', "Web\AuthenticationController@facebookSignOut")->name('fbSignout');
+Route::post('/validateSignUp', "Web\AuthenticationController@validateBasicAuth")->name('validateSignUp');
+
+
+
+Route::get('/guest/deal', "Web\ChefController@getGuestChefDeals")->name('guest_chef_deals_list');
+Route::get('/top/deal', "Web\ChefController@getTopChefDeals")->name('top_chef_deals_list');
+Route::get('/chef/list', "Web\ChefController@getGuestChefDeals")->name('recipe_list');
+Route::get('/chef', "Web\ChefController@getRecipeByChef")->name('chef');
+Route::get('/recipe/list', "Web\ChefController@getAllRecipes")->name('recipe_list');
+Route::get('/recipe_detail', "Web\ChefController@getRecipeByCode")->name('recipe_detail');
+Route::get('/review/save', "Web\ChefController@saveReview")->name('review');
+
+Route::get('/cron', "Web\CronController@cron")->name('cron1');
+
+Route::get('/frequentAskedQuestions', "Web\FaqController@frequentAskedQuestions")->name('frequentAskedQuestions');
+Route::get('/termAndCondition', "Web\FaqController@termAndCondition")->name('termAndCondition');
+
+Route::get('/saveorder', "Web\OrderController@saveOrder")->name('saveorder');
+Route::post('/confirmation', "Web\OrderController@confirmation")->name('confirmation');
+
+Route::get('/cart/add', "Web\ProductController@addToCart")->name('add_to_cart');
+Route::get('/wishlist/add', "Web\ProductController@addToWishlist")->name('add_to_wishlist');
+Route::get('/wishlist/delete', "Web\ProductController@DeleteToWishlist")->name('delete_to_wishlist');
+Route::get('/cart/show', "Web\ProductController@showCart")->name('show_cart');
+Route::get('/total_price', "Web\ProductController@totalPrice")->name('total_price');
+Route::get('/order/save', "Web\ProductController@saveOrder")->name('save_order');
+Route::get('/product/list', "Web\ProductController@getAllProducts")->name('product_list');
+Route::get('/todaytoday/essentials', "Web\ProductController@todayTodayEssentials")->name('essentials');
+Route::get('/todaytoday/news/Seasons', "Web\ProductController@newsAndPeakSeasons")->name('newsAndPeakSeasons');
+Route::get('/product/title', "Web\ProductController@getAllProductsByTitle")->name('product_title');
+Route::get('/product_detail', "Web\ProductController@getProductByCode")->name('product_detail');
+Route::get('/product_categories', "Web\ProductController@getAllProduct")->name('product_categories');
+Route::get('/popular/categories', "Web\ProductController@popularCategories")->name('popularCategories');
+Route::get('/menus', "Web\ProductController@menus")->name('menus');
+Route::get('/categories', "Web\ProductController@categories")->name('categories');
+Route::get('/product', "Web\ProductController@getAllProduct")->name('product');
+Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts")->name('product_promotion');
+Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
+
+Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
+Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
+
+Route::get('/testimonial', "Web\TestimonialController@getTestimonial")->name('testimonial');
+
+Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDiscount")->name('promotionAndDiscount');
+
+Route::get('dashboard', function () {
+    return View::make('web/dashboard');
+});
+/*
+Route::get('/', function () {
+    return View::make('web/main');
+})->name('main');
+*/
+Route::get('/', "Web\AuthenticationController@main")->name('main');
+
+
+/* Route::get('/logout', function () {
+     return View::make('web/logout');
+ })->name('logout');*/
+
+Route::get('/logout', "Web\AuthenticationController@signout")->name('logout');
+
+Route::get('/mobileapp', "Web\FaqController@mobileapp")->name('mobileapp');
+/*   Route::get('/mobileapp', function () {
+       return View::make('web/mobileapp');
+   })->name('mobileapp');*/
+
+/*  Route::get('/faq', function () {
+      return View::make('web/faq');
+  })->name('faq');*/
+
+//Route::get('/faq', "Web\FaqController@index")->name('faq');
+
+/*    Route::get('/term_and_condition', function () {
+        return View::make('web/term_and_condition');
+    })->name('term_and_condition');*/
+
+
+//});
+
+
+Route::post('/facebookLogin', "Web\AuthenticationController@facebookLogin")->name('facebookLogin');
+Route::get('/faq', "Web\FaqController@index")->name('faq');
+Route::get('/cms/{slug}', "Web\FaqController@cms")->name('cms');
+});
+Route::group(['middleware' => ['web.auth']], function () {
+
+
+    Route::get('/address_book', "Web\AccountController@getAddressBook")->name('address_book');
+    Route::get('/getOrderDetail', "Web\AccountController@getOrderDetail")->name('get_order_detail');
+    Route::get('/getOrderReview', "Web\AccountController@getOrderReview")->name('get_order_review_detail');
+    Route::get('/order_history', "Web\AccountController@orderHistory")->name('order_history');
+    /*    Route::get('/order_history', function () {
+            return View::make('web/order_history');
+        })->name('order_history');*/
+
+    Route::get('/order_history_list', "Web\AccountController@getOrderHistory")->name('order_history_list');
+
+
+    Route::get('/your_account', "Web\AccountController@getAccountDetail")->name('account_detail');
+    Route::get('/account/update', "Web\AccountController@changeAccountDetail")->name('change_your_account_detail');
+    Route::get('/account/change', "Web\AccountController@changeAccountPassword")->name('change_your_account_password');
+    Route::get('/account/payment_method', "Web\AccountController@changePaymentMethodType")->name('change_your_account_payment_method');
+    Route::get('/payment', "Web\AccountController@getPaymentDetail")->name('payment');
+    Route::post('/address/save', "Web\AccountController@saveAddress")->name('save_address');
+
+
+    Route::get('/refer', "Web\ReferAFriendController@referAFriend")->name('refer_a_friend');
+
+
+    Route::get('/checkout1', "Web\CheckOutController@checkout1")->name('checkout1');
+    Route::get('/checkout2', "Web\CheckOutController@checkout2")->name('checkout2');
+
+
+
+    Route::get('/discount', "Web\CheckOutController@discountCalculation")->name('discount');
+    Route::get('/checkout', "Web\CheckOutController@checkout")->name('checkout');
+    Route::get('/time', "Web\CheckOutController@getAllTimeSlots")->name('delivery_slot');
+    Route::get('/checkout3/{id}', "Web\CheckOutController@checkoutCart");
+    Route::get('/checkout4', "Web\CheckOutController@checkoutOrder")->name('checkout4');
+
+    /*    Route::get('/checkout3', function () {
+            return View::make('web/checkout3');
+        })->name('checkout3');
+        Route::get('/checkout4', function () {
+            return View::make('web/checkout4');
+        })->name('checkout4');*/
+
+
+    Route::get('/wallet', "Web\WalletController@ShowWallet")->name('customer_wallet');//customer_transactions
+
+    Route::get('/wallet_list', "Web\WalletController@getAllCustomerTransactions")->name('customer_wallet_list');//customer_transactions
+
+    Route::post('/updateCart', "Web\CheckOutController@updateCart")->name('updateCart');
+
+
+});
+
+///
+
 // - thumbnail
 Route::get('/thumb/{path}/{size}/{name}/{thumb}', function ($path = NULL, $size = NULL, $name = NULL, $thumb = null) {
     if (!is_null($path) && !is_null($size) && !is_null($name)) {
@@ -237,3 +402,4 @@ if ($files) {
 }
 
 //Route::any('entities/other_item/updateOtherItem', $ctrl_dir . 'EntityBackController@updateOtherItemStatus');
+

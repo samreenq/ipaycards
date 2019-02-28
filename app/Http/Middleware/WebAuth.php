@@ -17,8 +17,7 @@ class WebAuth
      */
     public function handle($request, Closure $next)
     {
-		
-        
+
         if (Session::has('users') || isset($_SESSION['fbUserProfile'])) 
 		{
 			return $next($request);

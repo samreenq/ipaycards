@@ -1,0 +1,857 @@
+
+
+@extends("web.templates.template2")
+
+	@section("head")
+		 @include("web/includes/head")
+	@endsection
+
+
+	@section("navbar")
+		@parent
+		@include("web/includes/navbar")
+	@endsection
+
+
+	@section("cartbar")
+		@parent
+		
+		@include("web/includes/cartbar")
+	@endsection
+		
+		
+	
+	@section("checkout2")
+
+		<?php
+
+
+
+		?>
+			
+		<section class="checkout-step-2 lightgreybg">
+			<div class="container">
+				<div class="checkout-header">
+					<ul class="checkout-steps">
+						<li class="active"><a ><span>1</span> Review your Order</a></li>
+						<li class="active"><a ><span>2</span> Delivery Info</a></li>
+						<li><a ><span>3</span> Order Confirm</a></li>
+					</ul>
+				</div>
+				<div class="row clearfix recipeFixed">
+					<div class="col-md-12 col-lg-8 deliveryInfoWrap ">
+						<div class="addressBook whitebg">
+							<!--
+								<div class="address-Header clearfix">
+									<a href="#"><h4 class="pull-left collapsed" role="button" data-toggle="collapse" href="#addressBook" aria-expanded="false" aria-controls="collapseExample">Address Book</h4></a>
+								</div>
+							-->
+							<div class="delivery-Header d-flex align-items-baseline mb15">
+								<h4 class="mr-auto align-items-start">Address Book</h4>
+								<p class="align-items-end">Required*</p>
+							</div>
+								
+							<div id="addressBook">
+								<div class="addressBookForm">
+									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
+									<div class="previousAddress">
+										<div class="oldAddressScroll">
+										<?php 
+												$c=1;
+												if(!empty($address))
+												{
+													foreach($address as $attributes)
+													{
+														if(isset($attributes['street'])) 
+														{
+										?>
+															<div class="radio">
+																<input class="old_address"  type="radio"  name="shipping_address" id="radio<?php echo $c; ?>" value="<?php echo $attributes['entity_id']; ?>"  checked="">
+																<label for="radio<?php echo $c; ?>">
+																	<?php echo $attributes['street']; ?>
+																</label>
+															</div>
+										<?php 
+															$c++;
+														}
+													}
+												}
+										?>
+										</div>
+										<div class="radio">
+												<input class="new_address"   type="radio" name="shipping_address" id="radio<?php echo $c;?>" value="0">
+												<label for="radio<?php echo $c;?>">
+													 Add New Address
+												</label>
+										</div>
+														
+														
+									</div>
+									<div class="addAddressWrap">
+											<input type="button" name="" role="button" data-toggle="collapse" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto address_book_next" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+									</div>
+									<!--
+											<div class="addAddressWrap">
+												<form class="clearfix"> 
+													<h4>Add Address</h4>
+													<div class="fluid-label">
+														<textarea placeholder="Street Address*"></textarea>
+														<label>Street Address*</label>
+													</div>
+													<input type="submit" name="" value="Save" class="d-flex ml-auto"/>
+												</form>
+											</div>
+									-->
+								</div>
+							</div>
+						</div>
+			
+						<div class="deliveryInfo whitebg">
+							<div class="address-Header clearfix">
+								<h4 class="pull-left collapsed"   role="button" href="#deliveryAddress" aria-expanded="false" aria-controls="collapseExample">Delivery Address</h4>
+							</div>
+							<div id="deliveryAddress">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+								<form>
+								
+									<div class="row">
+										<div class="col-md-12 cuspad">
+											
+											  <div id="error_shipping_verification" class="alert alert-danger help-block text-left animated fadeInDown hide" style="display: none" ></div>
+
+										</div>
+										<div class="col-md-6 cuspad">
+											<div class="fluid-label">
+											  <input required="required" name="checkout_first_name"  id="checkout_first_name"  type="text" placeholder="First Name*" />
+											  <label>First Name*</label>
+											</div>
+										</div>
+										<div class="col-md-6 cuspad">
+											<div class="fluid-label">
+											  <input  required="required" name="checkout_last_name" id="checkout_last_name"   type="text" placeholder="Last Name*" />
+											  <label>Last Name*</label>
+											</div>
+										</div>
+										<div class="col-md-6 cuspad">
+											<div class="fluid-label">
+											  <input required="required" name="checkout_email" id="checkout_email" type="email" placeholder="Email*" />
+											  <label>Email*</label>
+											</div>
+										</div>
+										<div class="col-md-6 cuspad">
+											<div class="fluid-label">
+											  <input  required="required" id="checkout_phone" name="checkout_phone" type="text" placeholder="Phone* (For delivery reminders)" />
+											  <label>Phone* (For delivery reminders)</label>
+											</div>
+										</div>
+										
+										<div class="col-md-12 cuspad">
+											<div class="map_canvas" style="width: 100%; height: 400px; margin: 10px 20px 10px 0; " ></div>
+											<input class="map_textbox" id="geocomplete" type="text" placeholder="Type in an address" value="Nigeria" />
+											<input class="map_search" id="find" type="button" value="Find" />
+											<input id="latitude" name="latitude" type="hidden" >
+											<input id="longitude" name="longitude" type="hidden" >
+											<input class="map_reset" id="reset" type="button" style="display:none;" value="Reset Marker" />
+											<div class="map_text" style="margin-top:-55%">Drag the map to your exact location</div>
+										</div>
+										<br /><br />
+										<div class="col-md-12 cuspad">
+											<div class="fluid-label">
+											  <textarea required="required" id="street" name="formatted_address" placeholder="Street Address* e.g: 19, Ilupeju street isheri oshun, Lagos"></textarea>
+											  <label>Street Address*</label>
+											</div>
+										</div>
+										<!--
+										<div class="col-md-12 cuspad">
+											<div class="clearfix billingCheckbox">
+												<div class="checkbox">
+													  <label class="checkbox-bootstrap">                                        
+														  <input name="same" required="required" type="checkbox">             
+														  <span class="checkbox-placeholder"></span>           
+														  <p>Use this address for my billing information.</p>
+													  </label>
+												 </div>
+											</div>
+										</div>
+										-->
+									
+										<div class="col-md-12 addAddressWrap">
+												<input  class="shipping_verification" type="button" name="" role="button" data-toggle="collapse" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+										</div>
+										
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						<div class="deliveryInfo deliveryInstructions whitebg">
+							<div class="address-Header clearfix">
+								<h4 class="pull-left collapsed"   role="button" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample">Delivery Instructions</h4>
+							</div>
+							<div id="deliveryInstructions" class="collapse">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
+								
+								<form>
+									<div class="row">
+										
+										<div class="col-md-12 cuspad">
+											<div class="fluid-label">
+											  <textarea id="order_notes" name="order_notes" required="required" placeholder="Add Note*"></textarea>
+											  <label>Add Note*</label>
+											</div>
+										</div>
+										<div class="col-md-12 addAddressWrap">
+												<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+										</div>
+										
+									</div>
+								</form>
+							</div>
+						</div>
+						 
+						<div class="paymentInfo whitebg">
+							<div class="payment-Header clearfix">
+								<h4 class="pull-left collapsed" role="button"  aria-expanded="false" aria-controls="collapseExample">Payment Info</h4>
+							</div>
+							
+							
+
+							<div class="collapse" id="paymentinfo">
+								<div class="paymentInfoForm">
+									<div class="payment-method">
+										
+										
+										<div class="big-radio webpay cryptoCurrencyWrap noselect">
+											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
+											<input type="radio" name="payment_method" id="crypto-currency" value="webpay" >
+											<label for="crypto-currency">
+												Webpay 
+											</label>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+										
+										
+										<div class="big-radio wallet cryptoCurrencyWrap noselect">
+											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
+											<input type="radio" name="payment_method" id="credit-card" value="wallet" >
+											<label for="credit-card">
+												Wallet
+											</label>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+										
+										
+										<div class="big-radio cash CashDeliveryWrap noselect">
+											<img src="<?php echo url('/').'/public/web/img/volet-logo.svg'?>" alt="bitcoin-logo" width="35"/>
+											<input type="radio" name="payment_method" id="cash-on-delivery" value="cod">
+											<label for="cash-on-delivery">
+												Cash On Delivery
+											</label>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							
+							
+							
+						</div>
+					</div>
+					<div class="col-md-12 col-lg-4">
+						<div id="sidebarCheckout">
+							<div class="whitebg checkOrderWrap sidebar__inner">
+								<h4>Summary</h4>
+								
+								<p>Organic Oroblanco Grapefruits are the off season citrus great for juicing.</p>
+								<form role="form">
+									<div class="fluid-label">
+									   <span class="icon-tt-cupon-icon"></span>
+									   <input id="coupon_code" type="text" placeholder="Coupon Code" />
+									   <label>Coupon Code</label>
+									</div>
+									<input style="cursor:pointer;" type="button" name="" value="Apply" class="calculateDiscount coupon-btn"/>
+								</form>
+								<div class="discount" ></div>
+								<div class="checkOrderTotal">
+									<table width="100%"> 
+									
+									
+										<tr>
+											<td class="summaryTitle">Order price</td>
+											<td class="summaryPrice subtotal">{!! $currency !!} 0.00</td>
+										</tr>
+										<tr class="borderB"><td colspan="2"><div></div></td></tr>
+										<tr>
+											<td class="summaryTitle">Coupons Discount</td>
+											<td class="summaryPrice discount_amount">{!! $currency !!} 0.00</td>
+										</tr>
+										
+										<tr>
+											<td class="summaryTitle">Delivery Charges</td>
+											<td class="summaryPrice delivery_charge">{!! $currency !!} 0.00</td>
+										</tr>
+										<tr>
+											<td class="summaryTitle">Wallet Amount</td>
+											<td class="summaryPrice customer_wallet">{!! $currency !!} 0.00</td>
+										</tr>
+										<tr>
+											<td class="summaryTitle">Loyalty Points</td>
+											<td class="summaryPrice calculated_loyalty_points">0.00 Points</td>
+										</tr>
+										
+										
+									<!--
+										<tr>
+											<td class="summaryTitle">Delivery Charges</td>
+											<td class="summaryPrice">$ 5.00</td>
+										</tr>
+										<tr>
+											<td class="summaryTitle">Tax</td>
+											<td class="summaryPrice">$ 5.00</td>
+										</tr>
+									
+									-->
+										<tr class="borderB"><td colspan="2"><div></div></td></tr>
+										<tr>
+											<td class="summaryTitle">Order Total</td>
+											<td class="paid_amount totalPrice">{!! $currency !!}</td>
+										</tr>
+										<tr>
+											<td colspan="2"  align="center"></td>
+										</tr>
+									</table>
+									<div class="checkFooter text-center">
+									<?php
+										/*$txn_ref			=	"74547408aaa".date("Y-m-d H:i:s");
+										$product_id			=	"1076"	;
+										$pay_item_id		=	"101";
+										$amount				=	"20000";
+										$currency			=	"566";
+										$site_redirect_url	=	"http://localhost/web/todaytoday/checkout2";
+										$cust_id			=	"000001";
+										$site_name			=	"todaytoday";
+										$cust_name			=	"zeeshan";
+										$mackey 			=	"D3D1D05AFE42AD50818167EAC73C109168A0F108F32645C8B59E897FA930DA44F9230910DAC9E20641823799A107A02068F7BC0F4CC41D2952E249552255710F";
+										$data = $txn_ref.$product_id.$pay_item_id.$amount.$site_redirect_url.$mackey; 
+										$hash 				=	hash('sha512', $data );*/
+									?>
+									<form id="myform" name="myform" method="post" action="">
+										<input id="entity_id" 			name="entity_id" type="hidden" value="" />
+										<input id="txn_ref" 			name="txn_ref" type="hidden" value="" />
+										<input id="product_id" 			name="product_id" type="hidden" value="" />
+										<input id="pay_item_id" 		name="pay_item_id" type="hidden" value="" />
+										<input id="amount" 				name="amount" type="hidden" value="" />
+										<input id="currency" 			name="currency" type="hidden" value="" />
+										<input id="site_redirect_url" 	name="site_redirect_url" type="hidden" value=""/>
+										<input id="cust_id" 			name="cust_id" type="hidden" value=""/>
+										<input id="site_name" 			name="site_name" type="hidden" value=""/>
+										<input id="cust_name" 			name="cust_name" type="hidden" value="" />
+										<input id="hash" 				name="hash" type="hidden" value="" />
+										<input id="checkout_mobile" 	name="checkout_mobile" type="hidden" value="{!! (isset($login_customer->auth->mobile_no)) ? $login_customer->auth->mobile_no: '' !!}" />
+										<input id="auth_platform_type" name="auth_platform_type" type="hidden" value="{!! (isset($login_customer->auth->platform_type)) ? $login_customer->auth->platform_type: '' !!}" />
+										{{ csrf_field() }}
+
+
+										<button  type="button" class="add-to-cart"  style="width: 100%;border: none;margin: 20px 0 15px ;background-color:#8080808f;" >Process Order</button>
+									</form>
+
+										<?php  if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type == 'facebook' && $login_customer->auth->mobile_no == ''){ ?>
+
+										<div class="row checkout_mobile_number">
+											<div class="fluid-label col-md-12 cuspad" fluid-label="">
+												<input type="text" placeholder="Contact Number*" id="checkout_mobile_number" name="checkout_mobile_number" style="top: 0px;" value="{!! $login_customer->auth->mobile_no !!}">
+												<label >Contact Number*</label>
+											</div>
+										</div>
+										<?php } ?>
+										<div class="error-message"></div>
+										<p class="text-center"><span class="icon-tt-lock-icon"></span> Secure SSL Checkout</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				</div>
+			</div>
+		</section>
+
+
+	@endsection
+	
+	
+		
+	@section("signin")
+		@include("web/includes/models/signin")
+	@endsection
+
+	@section("signup")
+			
+		@include("web/includes/models/signup")
+	@endsection
+
+	@section("about_us")
+		@include("web/includes/models/about_us")
+	@endsection
+
+	
+	@section("refer_friend")
+		@include("web/includes/models/refer_friend")
+	@endsection
+	
+	
+	@section("phone_verification")
+		
+		@include("web/includes/models/phone_verification")
+	@endsection
+
+	@section("social_phone_verification")
+		
+		@include("web/includes/models/social_phone_verification")
+	@endsection
+	
+	@section("change_password")
+
+		@include("web/includes/models/change_password")
+	@endsection
+	
+	
+	
+	@section("forget_password")
+		@include("web/includes/models/forget_password")
+	@endsection
+	
+	
+	
+	@section("editYourDetailmodal")
+	
+		@include("web/includes/models/editYourDetailmodal")
+	@endsection
+	
+	@section("footer")
+		@parent
+		
+		@include("web/includes/footer")
+	@endsection
+
+
+	@section("foot")
+		@include("web/includes/foot")
+		<?php
+        $setting_model = new \App\Http\Models\Setting();
+        $google_key = $setting_model->getBy('key','google_api_key');
+
+        $google_api_key = (isset($google_key->value)) ? $google_key->value : "";
+				?>
+		
+		<script src="<?php echo url('/').'/public/web/js/enscroll.min.js'?>"></script>
+		<script src="<?php echo url('/').'/public/web/js/select2.min.js'?>"></script>
+		<script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js';?>"></script>
+		<script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key={!! $google_api_key !!}&amp;libraries=places"></script>
+		<script src="<?php echo url('/').'/public/web/js/jquery.geocomplete.js'; ?>"></script>
+    
+    <script>
+	
+		<?php 
+			if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
+			{
+		?>
+				load_wishlist("{{ route('add_to_wishlist') }}");
+			
+		<?php 
+			}
+		?>
+		
+				load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
+				show_cart("{{ route('show_cart') }}","{{ route('total_price') }}");
+				total("{{ route('total_price') }}");			
+				add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
+				checkout("{{ route('checkout') }}","{{ route('checkout2') }}");
+				discount("{{ route('discount') }}","{{ route('total_price') }}");
+				
+				signin("{{ route('signin') }}");
+				//signup("{{ route('signup') }}");
+				referAFriend("{{ route('refer_a_friend') }}");
+				aboutBusiness("{{ route('aboutBusiness') }}")	;
+			
+				if(typeof(localStorage.coupon_code)!="undefined")
+				{
+					
+					localStorage["coupon_code"] =" ";
+					localStorage.setItem("coupon_code", " ");
+				}
+				
+  
+      $(function(){
+		  
+		  
+		$(".old_address").click(function(){
+				$("#deliveryAddress").hide();
+			});
+
+		$(".new_address").click(function(){
+				$("#deliveryAddress").show();
+		});
+				  
+		 $(".address_book_next").click(function(){
+			$(".deliveryInstructions").toggleClass("activeArrow");
+		});
+
+		$("input.process_order").click(function(){
+			$(".paymentInfo").toggleClass("activeArrow");
+		});
+				
+		  
+		  $('.add-to-cart').on('click',function(){
+
+		      if($('#myform').attr('action') == '' || $('#myform').attr('action') == undefined){
+                //  $('.add-to-cart').attr('disabled','disabled');
+                  $('.error-message').html('');
+                  $('.error-message').append('<div class="alert alert-danger">Please select all information to process order.</div>');
+			  }
+			  else{
+
+		          if($('#checkout_mobile_number').length > 0){
+
+                      if($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() == ''){
+
+                          //$('.add-to-cart').attr('disabled','disabled');
+                          $('.error-message').html('');
+                          $('.error-message').append('<div class="alert alert-danger">The contact number is required to process order.</div>');
+                          return false;
+                      }
+
+                      if($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() != ''){
+                          $('#checkout_mobile').val($('#checkout_mobile_number').val());
+                      }
+
+                  }
+
+
+						  console.log($('input[name="payment_method"]:checked').val());
+						  if($('input[name="payment_method"]:checked').val() != 'webpay'){
+
+                              $('.add-to-cart').attr('disabled','disabled');
+                              $.ajax ({
+                                  url: "{{ route('confirmation') }}",
+                                  type: 'post',
+                                  data:  $('#myform').serialize(),
+                                  dataType: 'json',
+                                  success: function(data)
+                                  {
+                                      if(data.error == 0){
+                                          localStorage.removeItem('products');
+                                         window.location = site_url+'/checkout3/'+data.data.order_id;
+                                      }
+                                      else{
+                                          $('.add-to-cart').removeAttr('disabled');
+                                          $('.error-message').html('');
+                                          $('.error-message').append('<div class="alert alert-danger">'+data.message+'</div>');
+                                          return false;
+                                      }
+                                  }
+
+                              });
+
+
+						  }else{
+							  $('.add-to-cart').removeAttr('disabled');
+							  $('.alert-danger').remove();
+							  localStorage.removeItem('products');
+							  $('#myform').submit();
+						  }
+
+
+
+			  	}
+		  });
+		  
+		  
+		  
+		  
+		  
+		  
+        $("#geocomplete").geocomplete({
+          map: ".map_canvas",
+          details: "form ",
+          markerOptions: {
+            draggable: true
+          }
+        });
+        
+        $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+          $("input[name=latitude]").val(latLng.lat());
+          $("input[name=longitude]").val(latLng.lng());
+          $("#reset").show();
+        });
+		
+		$("#geocomplete").bind("geocode:result", function(event, result){
+		  $("input[name=latitude]").val(result.geometry.location.lat());
+          $("input[name=longitude]").val(result.geometry.location.lng());
+        });
+		
+   
+        
+        $("#reset").click(function(){
+          $("#geocomplete").geocomplete("resetMarker");
+          $("#reset").hide();
+          return false;
+        });
+        
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        }).click();
+		
+		
+		var myButtonClasses = document.getElementById("deliveryAddress").classList;
+		
+		setTimeout(function(){myButtonClasses.add("collapse");},2000);
+		
+      });
+
+
+	
+		/*
+				initMap();
+				
+					function initMap() 
+					{
+								var input = document.getElementById('street');
+								//var autocomplete = new google.maps.places.Autocomplete(input); 
+								var autocomplete = new google.maps.places.Autocomplete(input);
+								// After the user selects the address
+						google.maps.event.addListener(autocomplete, 'place_changed', function() 
+						{
+								var place = autocomplete.getPlace();
+								$('input[id=longitude]').val(place.geometry.location.lng());
+								$('input[id=latitude]').val(place.geometry.location.lat());
+								
+								console.log(place.geometry.location.lng()); 
+								
+						});
+					}
+		
+		*/
+				 $(document).ready(function(){
+					
+					$("input[type='radio']").click(function(){
+						var payment_method = $("input[name='payment_method']:checked").val();
+						
+						
+						if(payment_method=="webpay")
+							$('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
+						
+						if(payment_method=="wallet")
+							$('#myform').attr('action', "confirmation");
+						
+						if(payment_method=="cod")
+							$('#myform').attr('action', "confirmation");
+						
+						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
+						$('.add-to-cart').css('background-color','#4fbe9e');
+					});
+        
+					});
+				load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
+				show_cart("{{ route('show_cart') }}","{{ route('total_price') }}");
+				total("{{ route('total_price') }}");			
+				add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
+				process_order("{{ route('saveorder') }}");
+				
+				signin("{{ route('signin') }}");
+				//signup("{{ route('signup') }}");
+		
+				// Auto Adjust Height
+				$(window).on('load', function() {
+					function resize(selector, footer) {
+						var totalheight = $(window).height();
+						if(footer){
+							var lessheight = $('.cart-tabs .cartTabHeader').height() + $('.tab-content .cartTabFooter').height();
+							var docheight = totalheight - lessheight;
+						}else{
+							var lessheight = parseInt($('.cart-tabs .cartTabHeader').height());
+							var docheight = totalheight - lessheight - parseInt(25);
+						}			
+									
+						$('.tab-content ' + selector).css("height", docheight);		
+						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+					}
+					
+					$(document).ready(function() {
+						resize('.basketList',true); //basketList
+						resize('.wishList',false); //wishList
+					});
+					
+					$(window).resize(function() {
+						resize('.basketList',true); //basketList
+						resize('.wishList',false); //wishList
+					});
+						
+				});
+
+				// Modal Script
+				$('#myModal').on('shown.bs.modal', function () {
+					$('#myInput').focus()
+				});
+				
+				// Add Cart Btn Animation
+				$('.addtocart').click(function(){
+					$(this).hide();
+					var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
+				});
+
+				// All Small Script
+				$(document).ready(function () {
+					//Select2
+					$(".js-example-basic-single").select2({
+						minimumResultsForSearch: Infinity
+					});
+					
+					//Sider Bar Fixed on Scroll
+					$('#sidebar').stickySidebar({
+						topSpacing: 20,
+						containerSelector: '.container',
+						innerWrapperSelector: '.sidebar__inner'
+					});
+					
+					// Sticky sidebar Checkout
+					$('#sidebarCheckout').stickySidebar({
+						topSpacing: 20,
+						containerSelector: '.recipeFixed',
+						innerWrapperSelector: '.sidebar__inner'
+					});
+				 
+					// Field Style
+					$(".fluid-label").focusout(function(){
+						$(".focused").removeClass("focused");	
+					});
+					$('.fluid-label').fluidLabel({
+						focusClass: 'focused'
+					});
+					
+					//Navigation Menu Slider
+					$('#cartList, #cartList2').on('click',function(e){
+						e.preventDefault();
+						$('body').toggleClass('nav-expanded');
+					});
+					$('#nav-close').on('click',function(e){
+						e.preventDefault();
+						$('body').removeClass('nav-expanded');
+					});
+					$('.basketList').enscroll({
+						showOnHover: true,
+						verticalTrackClass: 'track3',
+						verticalHandleClass: 'handle3'
+					});
+					$('.wishList').enscroll({
+						showOnHover: true,
+						verticalTrackClass: 'track3',
+						verticalHandleClass: 'handle3'
+					});
+					
+					//Header Slider
+					$('.headerSlider').bxSlider({
+						mode: 'fade',
+						speed: 1000,
+						captions: true,
+						pager: false,
+						controls: false,
+						auto: true
+					});
+					
+					// Wizard Form
+					
+					
+				});
+				
+				//Inc Dec Button----------------
+				$(".incr-btn").on("click", function (e) {
+					var $button = $(this);
+					var oldValue = $button.parent().find('.quantity').val();
+					$button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
+					if ($button.data('action') == "increase") {
+						var newVal = parseFloat(oldValue) + 1;
+					} else {
+						// Don't allow decrementing below 1
+						if (oldValue > 1) {
+							var newVal = parseFloat(oldValue) - 1;
+						} else {
+							newVal = 1;
+							$button.addClass('inactive');
+						}
+					}
+					$button.parent().find('.quantity').val(newVal);
+					e.preventDefault();
+				});
+				
+				// Nav Greedy First
+				var $nav = $('.greedy-nav');
+				var $btn = $('.greedy-nav button');
+				var $vlinks = $('.greedy-nav .visible-links');
+				var $hlinks = $('.greedy-nav .hidden-links');
+				var breaks = [];
+				function updateNav() {			  
+				  var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
+				  // The visible list is overflowing the nav
+				  if($vlinks.width() > availableSpace) {
+					// Record the width of the list
+					breaks.push($vlinks.width());
+					// Move item to the hidden list
+					$vlinks.children().last().prependTo($hlinks);
+					// Show the dropdown btn
+					if($btn.hasClass('hidden')) {
+					  $btn.removeClass('hidden');
+					}
+				  // The visible list is not overflowing
+				  } else {
+					// There is space for another item in the nav
+					if(availableSpace > breaks[breaks.length-1]) {
+					  // Move the item to the visible list
+					  $hlinks.children().first().appendTo($vlinks);
+					  breaks.pop();
+					}
+					// Hide the dropdown btn if hidden list is empty
+					if(breaks.length < 1) {
+					  $btn.addClass('hidden');
+					  $hlinks.addClass('hidden');
+					}
+				  }
+				  // Keep counter updated
+				  $btn.attr("count", breaks.length);
+				  // Recur if the visible list is still overflowing the nav
+				  if($vlinks.width() > availableSpace) {
+					setTimeout(updateNav,1); //updateNav();
+				  }
+				}
+
+				// Window listeners
+				$(window).resize(function() {
+					setTimeout(updateNav,1); //updateNav();
+				});
+				$btn.on('click', function() {
+				  $hlinks.toggleClass('hidden');
+				});
+				setTimeout(updateNav,1); //updateNav();
+				
+				
+				// Nav Greedy Close When Other is Open
+				$( "body" ).click(function(e) {
+					if(!$(e.target).parent().hasClass("greedy-nav")){
+						$(".greedy-nav .hidden-links").addClass("hidden");
+					}
+					if(!$(e.target).parent().hasClass("greedy-nav-second")){
+						$(".greedy-nav-second .hidden-links").addClass("hidden");
+					}
+				});
+				
+	
+	
+
+				
+		</script>
+
+	@endsection
+
+
