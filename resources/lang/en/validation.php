@@ -146,4 +146,30 @@ return [
 
     'attributes' => [],
 
+    /*
+ |--------------------------------------------------------------------------
+ | Custom Validation Language Lines
+ |--------------------------------------------------------------------------
+ |
+ | The following language lines contain the default error messages used by
+ | the validator class. Some of these rules have multiple versions such
+ | as the size rules. Feel free to tweak each of these messages here.
+ |
+ */
+    "phone" => "The :attribute number can only be entered as number 0-9 and may have dash, plus and braces",
+    "mobile" => "The :attribute number can only be entered as number 0-9 and may have dash and plus sign.",
+    "csv" => "The :attribute can only be entered as comma separated list",
+    "month_year" => "The :attribute can only be entered as month year value like Jan-2015",
+    "float" => "The :attribute is not valid.",
+    "decimal" => "The :attribute is not valid.",
+    "alpha_num_custom" => "The :attribute is not valid.",
+    "alpha_num_special" => "The :attribute is not valid.",
+    "alpha_custom" => "The :attribute can only be entered as characters and may have space and dash.",
+    'price' => 'The :attribute is not valid.',
+    'decimal_point' => "The :attribute is allowed to 4 decimal points",
+
+    'dimensions' => 'Please use the correct file dimension of min :min_width x :min_height',
+    'title_limit' => 'The :attribute can be allowed to '.config("constants.TITLE_LIMIT").' characters long',
+    'description_limit' => 'The :attribute can be allowed to '.config("constants.TITLE_LIMIT").' characters long',
+
 ];
