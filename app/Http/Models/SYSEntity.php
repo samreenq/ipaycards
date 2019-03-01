@@ -1184,6 +1184,7 @@ class SYSEntity extends Base
            $where_condition = EntityHelper::getStatusConditionByEntityType($entity_type_identifier,$where_condition);
 
             $result =  $order_item_flat->getDataByWhere($where_condition,array('entity_id',"$attr_code as `value`"));
+           // echo "<pre>"; print_r($result); exit;
         }
         //$result = DB::select("CALL get_entities_listing($entity_type_id, '$attr_code');");
         return isset($result) ? $result : false;

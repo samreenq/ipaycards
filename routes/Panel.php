@@ -162,3 +162,4 @@ Route::any('driver/stats', $ctrl_dir . 'EntityAjaxController@getOrderStats');
 Route::any('available_vehicles', $ctrl_dir . 'EntityAjaxController@getAvailableVehicles');
 Route::any('getCategoryBrands', $ctrl_dir . 'EntityAjaxController@getCategoryBrands');
 Route::any('getProductByBrand', $ctrl_dir . 'EntityAjaxController@getProductByBrand');
+Route::any('getBrandCategories', $ctrl_dir . 'EntityAjaxController@getBrandCategories');

@@ -609,32 +609,31 @@ console.log(extra_params);
 
         <?php if(in_array($entity_data->identifier, array('product','inventory','promotion_discount'))){ ?>
 
-        $('#brand_id').empty();
 
         //get product list respective to product type
-        $( document ).on( "change", "#category_id", function() {
+        $( document ).on( "change", "#brand_id", function() {
 
             var id = $(this).val();
-            $('#brand_id').empty();
+            $('#category_id').empty();
             if(id != ""){
 
                 $.ajax({
-                    url: "<?php echo url('getCategoryBrands'); ?>",
+                    url: "<?php echo url('getBrandCategories'); ?>",
                     dataType: "json",
-                    data: {"category_id": $(this).val()},
+                    data: {"brand_id": $(this).val()},
                     beforeSend: function () {
                     }
                 }).done(function (data) {
                     //   console.log( data.data);
                     var products = data.data;
                     if(products.length >0){
-                        $('#brand_id').append("<option value=''>-- Select Brand --</option>");
+                        $('#category_id').append("<option value=''>-- Select Category --</option>");
 
                         $.each(products,function(k,v){
                             // console.log(v.entity_id);
-                            $('#brand_id').append("<option value='"+v.entity_id+"'>"+v.title+"</option>");
+                            $('#category_id').append("<option value='"+v.entity_id+"'>"+v.title+"</option>");
                             // $('.blah').val(key); // if you want it to be automatically selected
-                            $('#brand_id').trigger("chosen:updated");
+                            $('#category_id').trigger("chosen:updated");
                         })
 
                     }
