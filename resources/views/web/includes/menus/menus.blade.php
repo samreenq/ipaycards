@@ -2,7 +2,7 @@
 
 	foreach ( $menus as $row ) 
 	{
-		if($row['parent_id']==0 && $row['product_count'] > 0)
+		if($row['parent_id']==0)
 		{
 			
 ?>

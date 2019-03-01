@@ -1061,7 +1061,7 @@ class ProductController extends WebController
 
 		$response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false));
 		$json 	  = json_decode($response,true);
-       // echo "<pre>"; print_r( $json);exit;
+      // echo "<pre>"; print_r( $json);exit;
 
         $data['menus'] = $json["data"]["category_listing"];
 		$data['category_id']= isset($_REQUEST['category_id']) ?  $_REQUEST['category_id'] : null ;
