@@ -32,7 +32,7 @@
 				<div class="row">
 					<div class="col-md-12 m-md-auto col-lg-9 m-lg-auto d-md-flex align-items-center">
 						<div class="col-sm-12 col-md-7 col-lg-7">
-							<h2>The easiest way to shop on CubixCommerce.</h2>
+							<h2>The easiest way to shop on {!! APP_NAME !!}.</h2>
 							<div class="toolbar-small-search">
 								<input class="search-bar"  name="search" placeholder="Mobile Number" type="search" value="">
 								<button class="search-btn" name="button" type="submit"><span class="icon-tt-right-arrow"></span></button>

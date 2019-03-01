@@ -6,7 +6,7 @@
  */
 set_time_limit(0);
 // App constants
-define('APP_NAME', 'Cubix Commerce'); // app name
+define('APP_NAME', 'iPayCards'); // app name
 // HTTP Protocol
 define('HTTP_TYPE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://');
 

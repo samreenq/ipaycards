@@ -12,7 +12,7 @@
 		<div class="footer-top">
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-4">
-					<h4 class="light-heading">#CubixCommerce</h4>
+					<h4 class="light-heading">#{!! APP_NAME !!}</h4>
 					<p>A product built to provide, an end to end e-commerce solution, sighting the needs of online marketplace requirements. We want to empower each and every shop owner to have their own presence online.</p>
 					<ul class="social-media">
 						<li><a href="{!! $general_setting_raw->facebook_url !!}"><span class="icon-tt-facebook-icon"></span></a></li>
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>&copy; Copyright 2018 CubixCommerce. All rights reserved.</p>
+			<p>&copy; Copyright 2018 {!! APP_NAME !!}. All rights reserved.</p>
 		</div>
 	</div>
 </footer>

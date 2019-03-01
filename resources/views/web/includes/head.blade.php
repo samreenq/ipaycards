@@ -6,7 +6,7 @@
 				 <meta name="author" content="">
 				 <link rel="icon" href="<?php echo url('/').'/public/web/img/favicon.ico';?>">
 
-				 <title>CubixCommerce</title>
+				 <title>{!! APP_NAME !!}</title>
 
 				 <!-- Bootstrap core CSS -->
 					<link href="<?php echo url('/').'/public/web/css/bootstrap.min.css'; ?>" rel="stylesheet">
