@@ -12,9 +12,10 @@ define('HTTP_TYPE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'h
 
 // Master Database Constants
 if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
+
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'cubix_commerce/'); // preceding path to app dir
+    define('ADD_PATH', 'ipay-cards/'); // preceding path to app dir
     //  for saving cookies
     define('APP_DOMAIN', preg_match('/Chrome\/|MSIE/', @$_SERVER["HTTP_USER_AGENT"]) ? '' : $_SERVER['HTTP_HOST']); // chrome/IE cookie fix on local host
 
@@ -37,7 +38,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'staging/cubix_commerce/'); // preceding path to app dir
+    define('ADD_PATH', 'staging/ipay-cards/'); // preceding path to app dir
     define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
     // db details
     define('MASTER_DB_HOST', 'localhost');
@@ -54,7 +55,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 }
 // Slave Database Constants
 define('SLAVE_DB_HOST', MASTER_DB_HOST);
-define('MYSQL_PORT', 3308);
+define('MYSQL_PORT', 3306);
 
 // Cache constants
 define('CACHE_ON', FALSE); // bool : TRUE = on | FALSE = off
