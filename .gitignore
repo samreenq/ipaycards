@@ -19,4 +19,4 @@ resources.rar
 /public/import/
 /public/system/
 /composer.lock
-/vendor/
+/vendor/*
