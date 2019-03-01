@@ -1,6 +1,6 @@
 <?php
     /* Theme Color */
-    $themeColor = "#ff825d";
+    $themeColor = "#139cb4";
     $pushColor = "#ffffff";
     $darkColor = "#ffffff";
     $lightColor = "#000000";
