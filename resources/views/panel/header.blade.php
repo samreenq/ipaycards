@@ -37,7 +37,7 @@ $google_api_key = (isset($google_key->value)) ? $google_key->value : "";
         <!-- Marterial CSS -->
         <link rel="stylesheet" type="text/css" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/fonts/material-design-icons/css/material-design-iconic-font.min.css' ) !!}"/><!--[if lt IE 9]> -->
         <!-- Favicon -->
-        <link rel="shortcut icon" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/img/favicon.ico?v=0.0' ) !!}" type="image/x-icon" />
+        <link rel="shortcut icon" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/img/favicon.png?v=0.0' ) !!}" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/img/apple-touch-icon.png' ) !!}">
         <link rel="apple-touch-icon" sizes="72x72" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/img/apple-touch-icon-72x72.png' ) !!}">
         <link rel="apple-touch-icon" sizes="114x114" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'assets/img/apple-touch-icon-114x114.png' ) !!}">
