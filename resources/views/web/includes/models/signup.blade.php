@@ -29,7 +29,7 @@
 				<div class="row setup-content" id="step-1">
 					<div class="col-md-12">
 					    <h3>Account</h3>
-					    <p class="small-brief">Sign up to CubixCommerce with your favourite social media account or using your email ID. </p>
+					    <p class="small-brief">Sign up to {!! APP_NAME !!} with your favourite social media account or using your email ID. </p>
 						<div class="fbBtnWrap">
 							<?php
 									if(Session::has('message1'))

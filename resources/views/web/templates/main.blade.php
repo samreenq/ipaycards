@@ -123,7 +123,7 @@
 						<div class="d-flex container">	
 							<a class="navbar-brand logo" href="#">
 								<!-- <img src="<?php // echo url('/').'/public/web/img/logo.png';?>" width="172"/> -->
-								<h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">CubixCommerce</h4>
+								<h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">{!! APP_NAME !!}</h4>
 							</a>
 							<div class="greedy-nav-second">
 								<button type="button" class="pull-right">More</button> 
