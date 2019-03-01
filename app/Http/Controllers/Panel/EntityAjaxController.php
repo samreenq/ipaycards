@@ -1007,4 +1007,34 @@ Class EntityAjaxController extends EntityBackController
         return array('error' =>1,'data'=> [],'message' => 'No Data');
     }
 
+    public function getBrandCategories(Request $request)
+    {
+        if(isset($request->brand_id)){
+
+            $params['entity_type_id'] = 'brand';
+            $params['entity_id'] = $request->brand_id;
+            $params['mobile_json'] = 1;
+
+            $entity_lib = new Entity();
+            $records =  $entity_lib->apiGet($params);
+            $records = json_decode(json_encode($records));
+
+           // echo "<pre>"; print_r($records); exit;
+            if(isset($records->data->brand->brand_category_id)){
+
+                foreach($records->data->brand->brand_category_id as $category){
+                    $data[] = array(
+                        'entity_id' => $category->category_id,
+                        'title' => $category->title,
+                    );
+                }
+
+                return array('error' =>0,'data'=> $data,'message' => 'success');
+            }
+        }
+
+
+        return array('error' =>1,'data'=> [],'message' => 'No Data');
+    }
+
 }

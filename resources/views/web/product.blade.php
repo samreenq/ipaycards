@@ -22,6 +22,7 @@
 	@endsection
 
 	@section('header')
+
 			<!-- Header -->	
 		<?php 
 				if(isset($_REQUEST['category_id']))
@@ -42,6 +43,7 @@
 		?>
 		
 	<header id="inner-header">
+		<div class="flyout-overlay for_banneroverlay"></div>
 		<div class="container pageNavWrap">
 			<div class="greedy-nav page-nav">
 				<button type="button" class="pull-right">More</button> 

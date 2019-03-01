@@ -3,6 +3,8 @@ use App\Http\Models\SYSAttribute;
 use App\Http\Models\SYSAttributeOption;
 use App\Http\Models\ApiMethodField;
 use App\Http\Models\SYSCategory;
+use App\Http\Models\SYSEntity;
+use App\Http\Models\SYSEntityType;
 use App\Libraries\ApiCurl;
 
 /**
@@ -469,7 +471,7 @@ class Fields
 	 * @return string
 	 */
 	public function randerEntityFields($listfield,$data=NULL,$entity_type_id=0,$is_update = false,$el_attr=array()) {
-		//echo "<pre>"; print_r( $listfield); exit;
+		//echo "<pre>"; print_r( $listfield);
 		//echo 'is_read_only'.$listfield->is_read_only;
 		$div_class = (isset($el_attr['div_class']))?$el_attr['div_class']:"col-md-6";
 		$lbla_class = (isset($el_attr['lbla_class']))?$el_attr['lbla_class']:"field-label cus-lbl";
@@ -683,8 +685,8 @@ class Fields
 				$return .='<option value="">-- Select '.$field_title.' --</option>';
 
 				/*Get entity listing for entity type dropdown*/
-				$ex2Model = $this->modalPath . "SYSEntity";
-				$ex2Model = new $ex2Model;
+				//$ex2Model = $this->modalPath . "SYSEntity";
+				$ex2Model = new SYSEntity();
 				$options = $ex2Model->getEntitiesListing($listfield->attribute_entity_type_id,$listfield->linked_attribute_id,$where_condition);
 
 				if($options){
