@@ -5,7 +5,7 @@
 
 				  <a class="navbar-brand" href="{{! route('main') }}">
                      {{-- <h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">CubixCommerce</h4>--}}
-					  <img class="logoIcon" src="<?php echo url('/').'/public/web/img/logo.png'; ?>" style="height:50px;width:100px" />
+					  <img class="logoIcon" src="<?php echo url('/').'/public/web/img/logo.png'; ?>" />
 					 <!-- <img class="logoWoIcon" src="<?php //echo url('/').'/public/web/img/logo-text.png'; ?>" width="140"/> -->
 				  </a>
 				  <div class="search-with-cart">		  

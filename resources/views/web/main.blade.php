@@ -18,7 +18,7 @@
 @include(config('panel.DIR').'flash_message')
 @section('header')
     <header id="header">
-        <div class="flyout-overlay"></div>
+        <div class="flyout-overlay for_banneroverlay"></div>
         <div class="fly-nav-inner">
             <div class="container">
                 <button class="dropdown-toggle" data-toggle="dropdown">More <span
@@ -221,16 +221,7 @@
                    class="align-items-end viewMore">See More</a>
             </div>
             <div class="row todayTodayEssentials">
-                <div style="
-												position: absolute;
-												top: 50%;
-												left: 50%;
-												margin-top: -50px;
-												margin-left: -50px;
-												width: 100px;
-												height: 100px;
-											"
-                     id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
+                <div class="load_spinner" id="LoadingtodayTodayEssentialsImage" align="center">
                     <div class="floatingCirclesG">
 							<div class="f_circleG frotateG_01"></div>
 							<div class="f_circleG frotateG_02"></div>
