@@ -902,6 +902,70 @@ Class EntityTrigger
         return FALSE;
     }
 
+
+    /**
+     * Product Add Trigger
+     * @param Request $request
+     */
+    public function _productAddTrigger($request, $response_post = FALSE)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        if (isset($request->category_id)) {
+                //Get category parent ids
+                $category_ids = explode(',', $request->category_id);
+
+                $category_helper = new CategoryHelper();
+                $category_helper->adjustProductCategoryParentCount($category_ids);
+
+        }
+
+    }
+
+    /**
+     * Product Update Trigger
+     * @param Request $request
+     */
+    public function _productUpdateTrigger($request,$depend_entity)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+
+            if (isset($request->category_id)) {
+
+                $category_ids = explode(',', $request->category_id);
+                $category_helper = new CategoryHelper();
+
+                //First decrement category count
+                if (isset($this->_entityData)) {
+                    $entity_data = (object)$this->_entityData;
+
+                    if (isset($entity_data->attributes['category_id'])) {
+
+                        $previous_category_ids = [];
+
+                        if (isset($entity_data->attributes['category_id'][0])) {
+                            foreach ($entity_data->attributes['category_id'] as $category) {
+                                if (isset($category->category_id))
+                                    $previous_category_ids[] = $category->category_id;
+                            }
+                        }
+
+                        if (count($previous_category_ids) > 0)
+                            $category_helper->adjustProductCategoryParentCount($previous_category_ids, '-');
+                    }
+                }
+
+                // print_r($previous_category_ids);
+
+                //Now increment the category count for product
+                if (count($category_ids) > 0) {
+                    $category_helper->adjustProductCategoryParentCount($category_ids);
+                }
+            }
+            //  print_r($category_ids);
+
+
+    }
+
     /**
      * Set Retail Price by adding margin
      * @param $request

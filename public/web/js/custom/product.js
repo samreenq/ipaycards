@@ -1017,6 +1017,7 @@
 				$("#LoadingImageProducts").show();
 				$("#LoadingImageSearchProducts").show();
 
+				console.log(Request_url);
 				$.ajax ({
 							
 							url: Request_url,

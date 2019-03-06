@@ -22,7 +22,6 @@
 	@endsection
 
 	@section('header')
-
 			<!-- Header -->	
 		<?php 
 				if(isset($_REQUEST['category_id']))
@@ -43,7 +42,6 @@
 		?>
 		
 	<header id="inner-header">
-		<div class="flyout-overlay for_banneroverlay"></div>
 		<div class="container pageNavWrap">
 			<div class="greedy-nav page-nav">
 				<button type="button" class="pull-right">More</button> 
@@ -880,7 +878,7 @@
 		
 		aboutBusiness("{{ route('aboutBusiness') }}")	;
 		referAFriend("{{ route('refer_a_friend') }}");
-		topChefDeal("{{ route('top_chef_deals_list') }}");
+		//topChefDeal("{{ route('top_chef_deals_list') }}");
 				
 				/*
 				$(document).ready(function() {
@@ -896,7 +894,7 @@
 					if ( (scrollPosition/scrollHeight)*100 >= 60  && (scrollPosition/scrollHeight)*100 >= 70) {
 						// when scroll to bottom of the page
 						
-						
+
 						<?php 
 						if( isset($_REQUEST['category_id']) ) 
 						{
@@ -907,11 +905,11 @@
 						}
 				?>
 					}
-					
-	
+
+
 				});
 				});
-				
+
 				*/
 				// Auto Adjust Height
 				$(window).on('load', function() {

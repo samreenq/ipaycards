@@ -68,9 +68,9 @@ class ProductController extends WebController
 		
 	}
 	
-	public function getAllProducts(Request $request) 
+	public function getAllProducts(Request $request)
 	{
-		
+
 		$validator 	= 	Validator::make(
 							$request->all(),
 							[
@@ -93,27 +93,27 @@ class ProductController extends WebController
 			
 			$data = [
 								'entity_type_id'	=>	'product',
-								'product_type'		=>	1,
+								//'product_type'		=>	1,
 								'category_id'		=>	$request->input('category_id'),
-								'category_form'		=>	$request->input('category_form'),
-								'searchable_tags'	=>	$request->input('searchable_tags'),	
+							//	'category_form'		=>	$request->input('category_form'),
+							//	'searchable_tags'	=>	$request->input('searchable_tags'),
 								'range_fields'		=>	'price',
                                 'status'            => 1,
-                                'availability' => 1,
+                               // 'availability' => 1,
 								'offset'			=>	$request->input('offset'),
 								'limit'				=>	$limit,
                                 'order_by'          => 'entity_id',
                                 'sorting'           => 'DESC'
 							];
 		
-			if(	$request->has('low_price') && $request->has('high_price') )			
-				$data['price'] = $request->input('low_price').','.$request->input('high_price');	
+			/*if(	($request->has('low_price') && $request->has('high_price')) && ($request->low_price > 0 &&  $request->high_price > 0))
+				$data['price'] = $request->input('low_price').','.$request->input('high_price');
 			else 
-				$data['price'] = 0; 
+				$data['price'] = 0; */
 				
 			//print_r($data);
 			$json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($data)),true);
-
+          //  echo "<pre>"; print_r($json); exit;
 		//	print_r($json); exit;
 			$data['products'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();

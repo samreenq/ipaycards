@@ -608,13 +608,14 @@ console.log(extra_params);
 
 
         <?php if(in_array($entity_data->identifier, array('product','inventory','promotion_discount'))){ ?>
-
+        $("#category_id").val('');
 
         //get product list respective to product type
         $( document ).on( "change", "#brand_id", function() {
 
             var id = $(this).val();
-            $('#category_id').empty();
+           // $('#category_id').empty();
+            $("#category_id").val('');
             if(id != ""){
 
                 $.ajax({

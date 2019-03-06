@@ -440,7 +440,7 @@ class SYSEntity extends Base
             if ($queryNotWhere != '') $query = "$query AND ($queryWhere) ";
             if ($queryWhereCondition != '') $query = "$query  $queryWhereCondition ";
 
-           //echo $query; exit;
+         //  echo $query;
             if(!$returnQuery){
                 $attrs = \DB::select($query);
                 //  $attrs = $this->cacheQuery($query, 1);            //$attrs = \DB::select($query);
@@ -623,8 +623,9 @@ class SYSEntity extends Base
         $in_detail = \Request::input('_in_detail', 1);
 
         $totalRecords = 0;
-
-        if($params['entityTypeData']->use_flat_table == '1') {
+       // echo "<pre>"; print_r($request);
+        //echo "<pre>"; print_r($params['entityTypeData']);
+        if($params['entityTypeData']->use_flat_table == 1) {
 
             //if custom query to get records
             if (isset($request->query)) {
@@ -641,6 +642,7 @@ class SYSEntity extends Base
                     }
                 }
 
+              //  echo $query; exit;
                 $raw_records = \DB::select($query);
                 //echo "<pre>"; print_r($raw_records); exit;
 
