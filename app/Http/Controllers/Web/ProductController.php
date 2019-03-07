@@ -636,10 +636,11 @@ class ProductController extends WebController
             $general_setting_lib = new GeneralSetting();
             $general_setting = $general_setting_lib->getSetting();
 
-			$loyalty_points = $general_setting->loyalty_points;
-			$loyalty_amount = $general_setting->loyalty_amount;
-			$delivery_minimum_order = $general_setting->minimum_order;
-			$delivery_charge  = $general_setting->delivery_charge;
+			//$loyalty_points = $general_setting->loyalty_points;
+			//$loyalty_amount = $general_setting->loyalty_amount;
+			//$delivery_minimum_order = $general_setting->minimum_order;
+			//$delivery_charge  = $general_setting->delivery_charge;
+            $delivery_charge = 0;
 			
 			
 			
@@ -657,30 +658,27 @@ class ProductController extends WebController
 			/*--------------------------------- Loyalty point calculation ------------------------------------*/
 			
 
-			if($subtotal_with_discount>=$loyalty_amount)
+			/*if($subtotal_with_discount>=$loyalty_amount)
 			{
 				$calculated_loyalty_points = ( $subtotal_with_discount / $loyalty_amount ) * $loyalty_points; 
 				$calculated_loyalty_points	= round($calculated_loyalty_points,2) ;
 			}
 			else
-			{
+			{*/
 				$calculated_loyalty_points  = 0; 
-			}
-		
+			//}
 
 			
-			
-			
-			if(  $subtotal_with_discount >= $delivery_minimum_order ) 
+			/*if(  $subtotal_with_discount >= $delivery_minimum_order )
 			{
 				$grand_total = round(($subtotal_with_discount+$delivery_charge),2);
 			}
 			else 
-			{
+			{*/
 				$delivery_charge = 0; 
 				$grand_total= round($subtotal_with_discount,2); 
 				
-			}
+		//	}
 			
 			
 			
