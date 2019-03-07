@@ -127,12 +127,12 @@
 							<div class="col-md-12 col-lg-6 pl-lg-0">
 								<div class="productWholeDetail whitebg">
 										<?php 
-												if($product['attributes']['category_form']['option'])
-												{
+												//if($product['attributes']['category_form']['option'])
+												//{
 										?>
-													<a href="#" class="perishable"><?php  echo $product['attributes']['category_form']['option']; ?></a>
+													{{--<a href="#" class="perishable">--}}<?php  //echo $product['attributes']['category_form']['option']; ?>{{--</a>--}}
 										<?php 
-												}
+											//	}
 										?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
 										<h3>$ <?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?> <?php if(isset($product["attributes"]['weight']) && isset($product["attributes"]['item_unit']['value']) && $product["attributes"]['item_unit']['option']) echo '/ ('.$product["attributes"]['weight'].' '.$product["attributes"]['item_unit']['option'].')'; ?></h3>

@@ -1,9 +1,8 @@
 	
 	
 	<!-- Today Today Essentials -->
-	<?php 
-	
-			if(isset($essentials[0]))
+	<?php
+			if(count($essentials)>0)
 				foreach ($essentials as $attributes) 
 				{
    					 $price = $attributes["attributes"]['price'];
@@ -46,10 +45,7 @@
 								<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
 								<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
 								<input type="hidden" class="price" value="<?php echo $price; ?>" />
-								<input type="hidden" class="weight" value="<?php if(isset($attributes["attributes"]['weight'])) echo $attributes["attributes"]['weight']; ?>" />
-								<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
-								<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
-								
+
 						
 							{{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
 							<img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
@@ -61,9 +57,6 @@
 										<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
 										<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
 										<input type="hidden" class="price" value="<?php echo $price; ?>" />
-										<input type="hidden" class="weight" value="<?php if(isset($attributes["attributes"]['weight'])) echo $attributes["attributes"]['weight']; ?>" />
-										<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
-										<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
 										<input class="quantity" type="hidden" name="product_quantity" value="1"/>
 											
 									<button class="addtocart">
@@ -79,9 +72,6 @@
 											<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
 											<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
 											<input type="hidden" class="price" value="<?php echo $price; ?>" />
-											<input type="hidden" class="weight" value="<?php if(isset($attributes["attributes"]['weight'])) echo $attributes["attributes"]['weight']; ?>" />
-											<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
-											<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
 											<input class="quantity" type="number" name="product_quantity" value="1" readonly/>
 											
 											<a class="incr-btn incr-btn5 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
@@ -95,9 +85,7 @@
 									</a>
 								</h4>
 								<div class="product-footer clearfix">
-									<span class="count"><?php echo $attributes['attributes']['weight'].' '.$attributes['attributes']['item_unit']['option']; ?></span>
-									<!--<p class="prise">$ <?php echo $price; ?></p>-->
-									
+
 								<?php 
 								
 										if(isset($attributes["attributes"]['product_promotion_id'])) 

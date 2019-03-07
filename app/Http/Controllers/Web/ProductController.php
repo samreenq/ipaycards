@@ -1116,7 +1116,7 @@ class ProductController extends WebController
 			    "entity_type_id"=> 'product',
                 "featured_type"=>$request->input('featured_type'),
                 'status' => 1,
-                'availability' => 1,
+               // 'availability' => 1,
                 'limit'=>4
             );
 			$data['product_detail_url'] = $request->input('product_detail_url');
