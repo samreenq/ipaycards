@@ -113,7 +113,7 @@ class ProductController extends WebController
 				
 			//print_r($data);
 			$json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($data)),true);
-          //  echo "<pre>"; print_r($json); exit;
+        //   echo "<pre>"; print_r($json); exit;
 		//	print_r($json); exit;
 			$data['products'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
@@ -236,7 +236,7 @@ class ProductController extends WebController
                 //'category_form'			=>		'1'							  	,
                 //'perishable'			=>		$request->input('perishable'),
                 'status'                => 1,
-                'availability'          => 1,
+              //  'availability'          => 1,
                 'offset'				=>		$request->input('offset')	,
                 'limit'					=>		$limit,
                 'order_by'          => 'entity_id',
@@ -321,7 +321,7 @@ class ProductController extends WebController
                 'entity_type_id'=>14,
                 'title'=>$request->input('title'),
                 'status'                => 1,
-                'availability'          => 1,
+              //  'availability'          => 1,
                 'offset'				=>		$request->input('offset')	,
                'limit'					=>		$limit,
                 'order_by'          => 'entity_id',
@@ -490,7 +490,9 @@ class ProductController extends WebController
 					),
 					true
 				);
-				
+
+    //    echo "<pre>"; print_r($json2); exit;
+
 		$post_param = $request->all();
 		$request->request->remove('category_id');
 		$post_param = $request->all();
@@ -508,16 +510,16 @@ class ProductController extends WebController
 					),
 					true
 				);
-				
+      //  echo "<pre>"; print_r($json3);
 		$data['categories'] = isset($json1['data']['category_listing']) ? $json1['data']['category_listing'] : null;
 		$data['category_id'] = isset($json2['data']['product_tags'][0]['category_id']) ?  $json2['data']['product_tags'][0]['category_id'] : null;
-		$data['categories_all'] = isset($json3['data']['category_listing']) ? $json3['data']['category_listing'] : null;
+		$data['categories_all'] = isset($json3['data']['category_listing_listing']) ? $json3['data']['category_listing_listing'] : null;
 		$data['price'] = isset($json2['data']['product_tags'][0]['price']) ?  $json2['data']['product_tags'][0]['price'] : 0;
 		$data['searchable_tags'] = isset($json2['data']['product_tags'][0]['searchable_tags']) ?  $json2['data']['product_tags'][0]['searchable_tags'] : null;
-		$data['product_form'] = isset($json2['data']['product_tags'][0]['product_form']) ?  $json2['data']['product_tags'][0]['product_form'] : null;
+		//$data['product_form'] = isset($json2['data']['product_tags'][0]['product_form']) ?  $json2['data']['product_tags'][0]['product_form'] : null;
 
 
-
+ //echo "<pre>"; print_r($data); exit;
 		return View::make('web/product',$data);
        
     }
@@ -1072,7 +1074,8 @@ class ProductController extends WebController
 		$response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',['limit'=>1000],false));
 		$json 	  = json_decode($response,true);
 		$data['categories'] = $json["data"]["category_listing"];
-		$data['category_id']= $category_id; 
+		$data['category_id']= $category_id;
+       // echo "<pre>"; print_r($data); exit;
 		return View::make('web/includes/menus/categories',$data)->__toString();
 	}
 

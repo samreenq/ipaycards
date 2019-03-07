@@ -129,43 +129,43 @@
 										<div class="prod-left-bar col-md-12 col-lg-3 affix">
 											<div id="sidebar">
 												<div class="sidebar__inner">
-											
-												<?php 
 
-												
-										
-												
-												
-												
-												
+												<?php
+
+
+
+
+
+
+
 													if(isset($_REQUEST['category_id']))
 													{
-														foreach ( $categories as $tmp ) 
+														foreach ( $categories as $tmp )
 														{
-															if($_REQUEST['category_id']==$tmp['category_id']) 
+															if($_REQUEST['category_id']==$tmp['category_id'])
 															{
-																
-																	if($tmp['is_parent']==1) 
+
+																	if($tmp['is_parent']==1)
 																	{
 												?>
 																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp['category_id']}}" ><?php if(isset($tmp['title'])) echo $tmp['title']; if(isset($tmp['product_count'])) echo '('.$tmp['product_count'].')'; ?></a></h4></div>
-												<?php 
+												<?php
 																	}
-																	else 
+																	else
 																	{
-																		foreach ( $categories_all as $tmp1 ) 
+																		foreach ( $categories_all as $tmp1 )
 																		{
-																		
+
 																			if($tmp1['category_id']==$tmp['parent_id'])
 																			{
-																				
+
 												?>
 																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])) echo $tmp1['title']; if(isset($tmp1['product_count'])) echo '('.$tmp1['product_count'].')'; ?></a></h4></div>
-												<?php 
+												<?php
 																			}
 																		}
 																	}
-																
+
 															}
 														}
 													}
@@ -227,22 +227,7 @@
 													<input id="category_id" name="category_id" type="hidden" value="" />
 													<input id="product_form" name="product_form" type="hidden" value="" />
 													
-													
-													<div class="productSideFilter">
-														  <h4>Product Form</h4>
-														  <ul>
-															<?php 
-																	if(isset($product_form))
-																		foreach($product_form as $product_form_attributes)
-																		{
-															?>	
-																			<li><a class="product_form search_filter" data-id="<?php echo $product_form_attributes['value'];?>" data-attr="product_form"><?php echo $product_form_attributes['option'];?></a></li>
-															<?php	
-																		}
-															
-															?>
-														  </ul>
-													</div>
+
 													<div class="productSideFilter">
 														  <h4>Searchable tags</h4>
 														  <ul>
@@ -641,7 +626,7 @@
 							}
 							else
 							{
-								//alert('initial');	
+								alert(category_id);
 								product_list1("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,offset,limit);
 							}
 				
@@ -798,10 +783,11 @@
 				?>
 							category_id = $('#category_id').val();
 							searchable_tags	 = $('#searchable_tags').val();
-							if($('#product_form').val().includes(","))
+                            product_form=' ';
+							/*if($('#product_form').val().includes(","))
 								product_form=' ';
 							else 
-								product_form = $('#product_form').val();
+								product_form = $('#product_form').val();*/
 							
 							low_price = $('#low_price').val();
 							high_price = $('#high_price').val();
