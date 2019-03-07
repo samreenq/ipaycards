@@ -111,6 +111,24 @@ class EntityBack
         }
 
 
+        if ($entity_data->identifier == "product") {
+            $base_data['product_type']  = $request->product_type;
+            $base_data['form_heading'] = ProductHelper::getProductTypeLabel($request->product_type);
+
+        }
+
+
+        //if entity type is product tags, recipe tags and bundle then get the max price
+        if (in_array($entity_data->identifier,array('product_tags'))) {
+
+            $identifier_arr = explode($entity_data->identifier,'_');
+
+            if(isset($identifier_arr[0]) && !empty($identifier_arr[0])){
+                $product_helper_obj = new ProductHelper();
+                $base_data['max_price'] = $product_helper_obj->getMaxPriceByProductType($identifier_arr[0]);
+            }
+        }
+
         if ($entity_data->identifier == "custom_notification") {
             $conf = new ConfigCollection();
             $placeholders = $conf->getNotifyPlaceHolder();
@@ -207,7 +225,16 @@ class EntityBack
             }
             // }
 
+            //if entity type is product tags, recipe tags and bundle then get the max price
+            if (in_array($entity_data->identifier,array('product_tags'))) {
 
+                $identifier_arr = explode('_',$entity_data->identifier);
+
+                if(isset($identifier_arr[0]) && !empty($identifier_arr[0])){
+                    $product_helper_obj = new ProductHelper();
+                    $base_data['max_price'] = $product_helper_obj->getMaxPriceByProductType($identifier_arr[0]);
+                }
+            }
             //condition on entity data
             if(isset($base_data['update'])){
 

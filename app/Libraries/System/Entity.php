@@ -1946,7 +1946,7 @@ Class Entity extends Base
 
                     if (isset($request->entity_id) && $listing_trigger) {
                         if (isset($listing_trigger['key']) && isset($listing_trigger['data'])) {
-                            if(count($listing_trigger['data'])>0)
+                            if(isset($listing_trigger['data']))
                             $response['data'][0]->{$listing_trigger['key']} = $listing_trigger['data'];
                         }
                     }

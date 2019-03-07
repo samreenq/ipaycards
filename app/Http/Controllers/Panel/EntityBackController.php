@@ -717,7 +717,7 @@ class EntityBackController extends EntityController
             $ret = (object)$this->_pLib->apiPost($request->all());
            // $ret =  $this->__internalCall($request,\URL::to(DIR_API) . '/system/' . $this->_object_identifier, 'POST', $request->all());
         }
-
+      //  echo "<pre>"; print_r($ret); exit;
          $this->_addCustomRedirect($request);
 
         if ((isset($ret->error) && $ret->error == "1") || (isset($ret->response) && $ret->response == "error")) {
@@ -1757,10 +1757,10 @@ class EntityBackController extends EntityController
         $search_columns['entity_type_id'] = $this->_entity_controller->entity_type_id;
 
        // $data = $this->__internalCall($request,\URL::to(DIR_API) . '/system/' . $this->_object_identifier . '/listing', 'GET', $search_columns,false);
-
+       // echo "<pre>"; print_r($search_columns);
         $data = (object)$this->_pLib->apiList($search_columns);
         $data = json_decode(json_encode($data));
-
+        //echo "<pre>"; print_r($data); exit;
         if (isset($data->data->page->total_records) && $data->data->page->total_records > 0) {
             $records = $data->data->{$this->_object_identifier_list . '_listing'};
 

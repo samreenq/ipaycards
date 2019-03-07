@@ -52,7 +52,7 @@ Class ProductHelper
     {
         $value = $this->getProductTypeByIdentifier($identifier);
         $flat_table_model = new FlatTable();
-        return $flat_table_model->getMaxPrice("product_type",$value);
+        return $flat_table_model->getMaxPrice();
 
     }
 
