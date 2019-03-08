@@ -106,7 +106,7 @@
 								</div>
 								<div class="big-radio CreditCardWrap">
 									<img src="<?php echo url('/').'/public/web/img/all-card-icon.svg'?>" alt="bitcoin-logo" width="156"/>
-									<input type="radio" class="payment_method_type" name="payment_method_type" id="credit-card" value="webpay" <?php if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="webpay") echo "checked"; ?> />
+									<input type="radio" class="payment_method_type" name="payment_method_type" id="credit-card" value="stripe" <?php if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="stripe") echo "checked"; ?> />
 									<label for="credit-card">Stripe Integration</label>
 									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										
