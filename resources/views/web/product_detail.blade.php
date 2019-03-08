@@ -371,7 +371,7 @@
 		
 			signin("{{ route('signin') }}");
 			//signup("{{ route('signup') }}");
-			topChefDeal("{{ route('top_chef_deals_list') }}");
+			//topChefDeal("{{ route('top_chef_deals_list') }}");
 			referAFriend("{{ route('refer_a_friend') }}");
 			aboutBusiness("{{ route('aboutBusiness') }}")	;
 			

@@ -41,7 +41,7 @@
 									<li class="li-active"><a href="{{ route('account_detail') }}">Your Account</a></li>
 									<li class="li-active active"><a href="{{ route('payment') }}">Payment</a></li>
 									<li class="li-active"><a href="{{ route('order_history') }}">Order History</a></li>
-									<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>
+									{{--<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 									<li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
 									<li class="li-active"><a href="{{ route('logout') }}">Logout</a></li>
 								</ul>
@@ -58,7 +58,7 @@
 								<li class="li-active"><a href="{{ route('account_detail') }}">Your Account</a></li>
 								<li class="li-active active"><a href="{{ route('payment') }}">Payment</a></li>
 								<li class="li-active"><a href="{{ route('order_history') }}">Order History</a></li>
-								<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>
+								{{--<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 								<li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
 								<?php
 							
@@ -107,21 +107,21 @@
 								<div class="big-radio CreditCardWrap">
 									<img src="<?php echo url('/').'/public/web/img/all-card-icon.svg'?>" alt="bitcoin-logo" width="156"/>
 									<input type="radio" class="payment_method_type" name="payment_method_type" id="credit-card" value="webpay" <?php if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="webpay") echo "checked"; ?> />
-									<label for="credit-card">Webpay Integration</label>
+									<label for="credit-card">Stripe Integration</label>
 									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										
 								</div>
 								
-								<div class="big-radio cryptoCurrencyWrap noselect">
-									<img src="<?php echo url('/').'/public/web/img/bitcoin-logo.svg'?>" alt="bitcoin-logo" width="78"/>
-									<input type="radio" class="payment_method_type" name="payment_method_type" id="crypto-currency" value="bitcoin" <?php if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="bitcoin") echo "checked"; ?> >
+								<!--<div class="big-radio cryptoCurrencyWrap noselect">
+									<img src="<?php // echo url('/').'/public/web/img/bitcoin-logo.svg'?>" alt="bitcoin-logo" width="78"/>
+									<input type="radio" class="payment_method_type" name="payment_method_type" id="crypto-currency" value="bitcoin" <?php // if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="bitcoin") echo "checked"; ?> >
 									<label for="crypto-currency">
 										Crypto Currency
 									</label>
 									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-								</div>
+								</div>-->
 							</div>
-							<br /><br />
+							{{--<br /><br />--}}
 							<div class="addCardWrap addCardLabel-pl-0">
 									
 								<div class="col-md-12 d-sm-flex">

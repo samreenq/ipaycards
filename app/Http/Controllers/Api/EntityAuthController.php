@@ -1364,7 +1364,7 @@ class EntityAuthController extends Controller
             // init models
             // init models
             //$this->__models['predefined_model'] = new Predefined;
-
+            $this->_apiData['error'] = 0;
             // success response
             $this->_apiData['response'] = trans($this->_langIdentifier.'.success');
 

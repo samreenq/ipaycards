@@ -22,15 +22,6 @@ foreach ( $products  as $productItemsList )
 								<tr>
 										<td class="addItemRecipe">{{ $productItemsList['title'] }}</td>
 										<td class="addItemWeight" align="right">
-										
-													
-												<?php  
-													
-													if(isset( $productItemsList["weight"])  && isset( $productItemsList["unit_option"]))
-														if(!empty( $productItemsList["weight"])  && !empty( $productItemsList["unit_option"]))
-														echo '('.$productItemsList["weight"].' '.$productItemsList["unit_option"].')';
-													
-												?>	
 										</td>
 										<td>
 											<a href="#" >
