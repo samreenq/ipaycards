@@ -106,10 +106,10 @@ class ProductController extends WebController
                                 'sorting'           => 'DESC'
 							];
 		
-			/*if(	($request->has('low_price') && $request->has('high_price')) && ($request->low_price > 0 &&  $request->high_price > 0))
-				$data['price'] = $request->input('low_price').','.$request->input('high_price');
-			else 
-				$data['price'] = 0; */
+			if(	($request->has('low_price') && $request->has('high_price')) && ($request->low_price > 0 &&  $request->high_price > 0)) {
+                $data['price'] = $request->input('low_price') . ',' . $request->input('high_price');
+            }
+
 				
 			//print_r($data);
 			$json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($data)),true);
@@ -518,8 +518,11 @@ class ProductController extends WebController
 		$data['searchable_tags'] = isset($json2['data']['product_tags'][0]['searchable_tags']) ?  $json2['data']['product_tags'][0]['searchable_tags'] : null;
 		//$data['product_form'] = isset($json2['data']['product_tags'][0]['product_form']) ?  $json2['data']['product_tags'][0]['product_form'] : null;
 
+        if($data['price'] > 0){
+            $data['price'] = round($data['price']);
+        }
 
- //echo "<pre>"; print_r($data); exit;
+        //echo "<pre>"; print_r($data); exit;
 		return View::make('web/product',$data);
        
     }
