@@ -1222,6 +1222,33 @@ Class OrderHelper
         return $order_info;
     }
 
+    /**
+     * Get Order statuses for display on web
+     * @return mixed
+     */
+
+    public function getOrderDisplayStatus()
+    {
+        $order_statuses = $this->_orderStatusModel->getAll();
+
+        $display_status = array();
+
+        if($order_statuses){
+
+            foreach($order_statuses as $order_status){
+
+                if($order_status->keyword == 'lead') continue;
+                if(!in_array(trim($order_status->display_title),$display_status)){
+                    $display_status[] = $order_status->display_title;
+                }
+            }
+        }
+
+        return $display_status;
+    }
+
+
+
 
 
 }

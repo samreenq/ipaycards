@@ -87,7 +87,6 @@
 										</div>
 									</div>
 								</div>
-								<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" class="perishable">Perishable</a>
 								<h4>
 									<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" >
 										<?php echo $attributes['attributes']['title'];?>
@@ -97,9 +96,7 @@
 									<span class="count"><?php if(isset($attributes['attributes']['weight'])) echo $attributes['attributes']['weight'].' '.$attributes['attributes']['item_unit']['option']; ?></span>
 									<!--<p class="prise">$ <?php echo $price; ?></p>-->
 									
-									
-									
-									
+
 								<?php 
 								
 										if(isset($attributes["attributes"]['product_promotion_id'])) 

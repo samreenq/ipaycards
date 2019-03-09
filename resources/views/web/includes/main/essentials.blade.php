@@ -78,7 +78,7 @@
 										</div>
 									</div>
 								</div>
-								<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" class="perishable">Perishable</a>
+								{{--<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" class="perishable">Perishable</a>--}}
 								<h4>	
 									<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" >
 										<?php echo $attributes['attributes']['title'];?>
