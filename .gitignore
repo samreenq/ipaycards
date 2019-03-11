@@ -20,3 +20,5 @@ resources.rar
 /public/system/
 /composer.lock
 vendor/
+
+/storage/logs/*
