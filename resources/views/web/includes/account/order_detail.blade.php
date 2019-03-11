@@ -104,7 +104,7 @@
 
 									<!--<tr>
 											<td class="summaryTitle">Loyalty Points</td>
-											<td class="summaryPrice"><?php if(isset($order_detail['loyalty_points'])) echo $order_detail['loyalty_points']; ?> Points</td>
+											<td class="summaryPrice"><?php //if(isset($order_detail['loyalty_points'])) echo $order_detail['loyalty_points']; ?> Points</td>
 									</tr>-->
 									<tr class="borderB">
 											<td colspan="2">
