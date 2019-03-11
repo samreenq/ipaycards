@@ -802,3 +802,11 @@ body .orderStatsWrap .titleColorWhite {
     background-color: #efefef;
 
 }
+
+/*AS CSS*/
+.sidebar-widget a {
+    display: block;
+    width: 100px;
+    margin: 0;
+}
+/*End AS CSS*/
