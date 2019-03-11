@@ -548,12 +548,12 @@ class ProductController extends WebController
 
                     $product_flat = new SYSTableFlat('product');
                     $where_condition = 'entity_id = '.$cart_product['entity_id'];
-                    $product_raw = $product_flat->getDataByWhere($where_condition,array('status','availability'));
-
+                    $product_raw = $product_flat->getDataByWhere($where_condition,array('status'));
+                   // echo "<pre>"; print_r($product_raw); exit;
                     if($product_raw && isset($product_raw[0])){
 
                         $product = $product_raw[0];
-                        if($product->status == 1 && $product->availability == 1){
+                        if($product->status == 1){
 
                             $available_products[] = $cart_product;
                         }

@@ -37,23 +37,23 @@ class OrderController extends WebController {
 	public function saveOrder(Request $request)
 	{ //echo '<pre>'; print_r($request->all()); exit;
 		$order_helper = new OrderHelper();
-		$rules  =   [	
-						'shipping_address'=>'required_without:checkout_first_name,checkout_last_name'	,
-						'day'=>'required'	
-					];
-		$validator = Validator::make($request->all(),$rules);
-		if($validator->fails())
-		{
-			return array(
-			    'error' => 1,
-                'message' => $validator->errors()->first()
-            );
-		}
-		else
-		{
+		/*$rules  =   [
+            'shipping_address'=>'required_without:checkout_first_name,checkout_last_name'	,
+            'day'=>'required'
+        ];
+            $validator = Validator::make($request->all(),$rules);
+            if($validator->fails())
+            {
+                return array(
+                    'error' => 1,
+                    'message' => $validator->errors()->first()
+                );
+            }
+            else
+            {*/
 			
 			
-			$first_name					=	$request->input('checkout_first_name') ;
+			/*$first_name					=	$request->input('checkout_first_name') ;
 			$last_name					=	$request->input('checkout_last_name') ;
 			$phone						=	$request->input('checkout_phone') ;
 			$email						=	$request->input('checkout_email') ;
@@ -61,22 +61,22 @@ class OrderController extends WebController {
 			$latitude					=	$request->input('latitude') ;
 			$longitude					=	$request->input('longitude') ;
 			$same						=	$request->input('same') ;
-			$shipping_address			=	$request->input('shipping_address') ;
+			$shipping_address			=	$request->input('shipping_address') ;*/
 			$order_notes				= 	$request->input('order_notes'); 
 			$products 					=   $request->input('data'); 
-			$day 						=   $request->input('day');
-			$time 						=   $request->input('time');
+			/*$day 						=   $request->input('day');
+			$time 						=   $request->input('time');*/
 			$coupon_code				=	$request->input('coupon_code');
 			$token 						= 	$request->session()->token();
 
 			//print_r($request->all()); exit;
 
-            $delivery_slot_item_flat = new SYSTableFlat('delivery_slot_item');
+           /* $delivery_slot_item_flat = new SYSTableFlat('delivery_slot_item');
              $where_condition = 'entity_id = '.$time;
-            $delivery_slot_raw = $delivery_slot_item_flat->getDataByWhere($where_condition,array('start_time','end_time'));
+            $delivery_slot_raw = $delivery_slot_item_flat->getDataByWhere($where_condition,array('start_time','end_time'));*/
             //echo "<pre>"; print_r( $delivery_slot_raw);exit;
 
-            if($delivery_slot_raw && isset($delivery_slot_raw[0])){
+         /*   if($delivery_slot_raw && isset($delivery_slot_raw[0])){
 
                 $delivery_slot_item = $delivery_slot_raw[0];
                 $delivery_slot_start_time = $delivery_slot_item->start_time;
@@ -87,16 +87,16 @@ class OrderController extends WebController {
                     'error' => 1,
                     'message' => 'The delivery slot is required, Go back to select delivery slot'
                 );
-            }
+            }*/
 
 
             $general_setting_lib = new GeneralSetting();
             $general_setting = $general_setting_lib->getSetting();
 
-            $loyalty_points = $general_setting->loyalty_points;
-            $loyalty_amount = $general_setting->loyalty_amount;
+           // $loyalty_points = $general_setting->loyalty_points;
+           // $loyalty_amount = $general_setting->loyalty_amount;
            // $delivery_minimum_order = $general_setting->minimum_order;
-            $delivery_charge  = $general_setting->delivery_charge;
+           // $delivery_charge  = $general_setting->delivery_charge;
 			
 			
 			/*-------------------------------- product verification from Database --------------------- */
@@ -178,7 +178,7 @@ class OrderController extends WebController {
 				
 				
 			/*--------------------------------------- Shipping Address -------------------------------------------- */	
-			$data = array();
+	/*		$data = array();
 			$data['entity_type_id']    	=   18;
 			$data['customer_id']		=	$this->_customerId;
 			$data['first_name']			=	$first_name;
@@ -215,7 +215,7 @@ class OrderController extends WebController {
                 }
 				$shipping_address =  $json['data']['shipping_address']['entity_id'];
 
-			}
+			}*/
 
 			
 			/*-------------------------------- order processing --------------------------------------------------- */
@@ -227,15 +227,15 @@ class OrderController extends WebController {
 				$depend_entity[$p]['product_id']		=	$product_list["entity_id"];
 				$depend_entity[$p]['product_name']		=	$product_list["title"];
 				$depend_entity[$p]['product_code']		=	$product_list["product_code"];
-				$depend_entity[$p]['retail_price']		=	$product_list["price"];
-
+				$depend_entity[$p]['price']		=	$product_list["price"];
+                $depend_entity[ $p ]['discount_price'] = "0.00";
                 $price = $product_list['price'];
 
-                $depend_entity[$p]['weight'] = $product_list["weight"];
-                $depend_entity[$p]['serving'] = $product_list["serving"];
-                $depend_entity[$p]['product_type'] = $product_list["product_type"];
-                $depend_entity[$p]['item_unit'] = ($product_list["item_unit"] > 0) ? $product_list["item_unit"] : '';
-                $depend_entity[$p]['category_form'] = ($product_list["category_form"] > 0) ? $product_list["category_form"] : '';
+                //$depend_entity[$p]['weight'] = $product_list["weight"];
+               // $depend_entity[$p]['serving'] = $product_list["serving"];
+                //$depend_entity[$p]['product_type'] = $product_list["product_type"];
+               // $depend_entity[$p]['item_unit'] = ($product_list["item_unit"] > 0) ? $product_list["item_unit"] : '';
+               // $depend_entity[$p]['category_form'] = ($product_list["category_form"] > 0) ? $product_list["category_form"] : '';
 
 				if(isset($product_list['product_promotion_id']) && $product_list['product_promotion_id']>0)
 				{
@@ -272,11 +272,13 @@ class OrderController extends WebController {
 				
 				$items_qty	 =	$items_qty +  $depend_entity[$p]['quantity']; 
 				$subtotal 	 = 	$subtotal  + ($depend_entity[$p]['price'] * $depend_entity[$p]['quantity']);
-				$product_commission = isset($product_list['commission']) ? $product_list['commission'] : 0;
+				//$product_commission = isset($product_list['commission']) ? $product_list['commission'] : 0;
 
-				$commission_for_rider = $commission_for_rider+($product_commission*$depend_entity[$p]['quantity']);
+			//	$commission_for_rider = $commission_for_rider+($product_commission*$depend_entity[$p]['quantity']);
 				$p++;	
 			}
+
+
 			$subtotal  = round($subtotal,2); 
 			$total_items = $p; 
 			$data = array(); 
@@ -333,7 +335,7 @@ class OrderController extends WebController {
 			/*-------------------------------- Discount Calculation ------------------------------*/
 			
 
-			if($coupon_discount >0 ) 
+			/*if($coupon_discount >0 )
 			{
 				//$grand_total = $grand_total - $coupon_discount ; // old before wallet 
 				if($subtotal_with_discount>=$loyalty_amount)
@@ -348,7 +350,7 @@ class OrderController extends WebController {
 					$calculated_loyalty_points	= round(( $subtotal_with_discount / $loyalty_amount ) * $loyalty_points,2) ;
 				else
 					$calculated_loyalty_points  = 0; 
-			}
+			}*/
 
 			/*---------------------------------------Delivery Charges Calculation----------------------------------------------*/
 			/*if($subtotal_with_discount < $delivery_minimum_order)
@@ -416,23 +418,23 @@ class OrderController extends WebController {
 			$data['grand_total'] 			=		"$grand_total";
 			$data['paid_amount']			= 		"$paid_amount";
 			
-			$data['commission_for_rider']	=		"$commission_for_rider";
-			$data['items_qty']				=		"$items_qty";
-			$data['total_items']			=		"$total_items";
+			//$data['commission_for_rider']	=		"$commission_for_rider";
+			//$data['items_qty']				=		"$items_qty";
+			//$data['total_items']			=		"$total_items";
 			$data['customer_id']			=		$this->_customerId;
-			$data['billing_address']	    =		$shipping_address;
-			$data['shipping_address']		=		$shipping_address;
+			//$data['billing_address']	    =		$shipping_address;
+			//$data['shipping_address']		=		$shipping_address;
 			$data['order_coupon_id']		=		$coupon_code;
-			$data['order_number']			=		$order_helper->createOrderNumber($this->_customerId);
+			//$data['order_number']			=		$order_helper->createOrderNumber($this->_customerId);
 			//$data['user_delivery_date']	    =		date('Y-m-d',strtotime($day . "+1 days"));
-			$data['user_delivery_date']	    =		$day;
-			$data['user_delivery_time']	    =		"$delivery_slot_start_time";
-			$data['user_delivery_time_end']	=		"$delivery_slot_end_time";
-			$data['delivery_slot_time_id']  = 		$time;
-			$data['loyalty_points']	 		= 		"$calculated_loyalty_points";
+			//$data['user_delivery_date']	    =		$day;
+			//$data['user_delivery_time']	    =		"$delivery_slot_start_time";
+			//$data['user_delivery_time_end']	=		"$delivery_slot_end_time";
+			//$data['delivery_slot_time_id']  = 		$time;
+			//$data['loyalty_points']	 		= 		"$calculated_loyalty_points";
 			$data['order_notes']			= 		"$order_notes";
 			$data['wallet']					= 		"$wallet"; 
-			$data['delivery_charge']		= 		"$delivery_charge";
+			//$data['delivery_charge']		= 		"$delivery_charge";
 			$data['depend_entity'] 			= 		$depend_entity;
 			$data['_lang'] 					= 		"en";
 			$data['created_at'] 			= 		date("Y-m-d H:i:s");
@@ -463,7 +465,7 @@ class OrderController extends WebController {
 			if($order !=null ) 
 			{
                 $payment_config_flat = new SYSTableFlat('payment_config');
-                $where_condition = 'payment_code = "webpay"';
+                $where_condition = 'payment_code = "stripe"';
                 $payment_config_raw = $payment_config_flat->getDataByWhere($where_condition);
 
                 if($payment_config_raw && isset($payment_config_raw[0])){
@@ -477,7 +479,7 @@ class OrderController extends WebController {
                     $currency			=	"566";
                     $site_redirect_url	=	url('/')."/confirmation?entity_id=".$order['entity_id']."&_token=".$token;
                     $cust_id			=	"$payment_config->payment_user";
-                    $site_name			=	"todaytoday";
+                    $site_name			=	"iPayCards";
                     $cust_name			=	isset($this->_customer->auth->attributes->first_name) ? $this->_customer->auth->attributes->first_name : '';
                     $mackey 			=	"$payment_config->client_id";
                     $data 				= 	$txn_ref.$product_id.$pay_item_id.$amount.$site_redirect_url.$mackey;
@@ -520,7 +522,7 @@ class OrderController extends WebController {
 		
 		
 			
-		}
+		//}
 	}
 
 
@@ -570,7 +572,6 @@ class OrderController extends WebController {
 
             }
 
-
 			if($resp == "00" || $resp == "11" || $resp == "10" )  
 			{
                 $transaction_reference  = 	$request->all();
@@ -597,7 +598,7 @@ class OrderController extends WebController {
                     $data = [];
                     $data = json_decode($lead_json['data']['lead_order'][0]['order_detail'],true);
                     $data['order_status']			=	$order_helper ->getOrderStatusIdByKeyword('customer_care_pending');
-                    $data['payment_method_type']	=	"webpay";
+                    $data['payment_method_type']	=	"stripe";
 
 
                     $data['transaction_reference']	= 	$transaction_reference;
@@ -605,6 +606,8 @@ class OrderController extends WebController {
                     $data['login_entity_id']	=	$this->_customerId;
                     //$response     = json_encode(CustomHelper::appCall($request,"api/system/entities/", 'POST',$data,true));
                     //$json 	  	  = json_decode($response,true);
+
+
                     $ret = $entity_lib->apiPost($data);
                     $json = json_decode(json_encode($ret),true);
 
@@ -673,11 +676,11 @@ class OrderController extends WebController {
                     $data['order_status'] = $order_helper->getOrderStatusIdByKeyword('customer_care_pending');
                     $data['payment_method_type'] = "cod";
                     $data['login_entity_id'] = $this->_customerId;
-                    //echo "<pre>";print_r($data);
+                  // echo "<pre>";print_r($data); exit;
 
                     $ret = $entity_lib->apiPost($data);
                     $json = json_decode(json_encode($ret), TRUE);
-                    //echo "<pre>";print_r($json);
+                 //   echo "<pre>";print_r($json); exit;
                     //$response     = json_encode(CustomHelper::appCall($request,"api/system/entities/", 'POST',$data,true));
                     //$json 	  	  = json_decode($response,true);
 

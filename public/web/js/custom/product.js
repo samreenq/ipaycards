@@ -2694,18 +2694,18 @@
 				if(typeof(localStorage.products)!=="undefined")
 				{
 					//console.log($(".day").val()); console.log($(".time").val()); return false;
-                    if($.trim($(".day").val()) == '' || $.trim($(".time").val()) == ''){
+                   /* if($.trim($(".day").val()) == '' || $.trim($(".time").val()) == ''){
                         $("#show_list").prepend('<div class="alert alert-danger">Please select time slots to process checkout</div>');
                         return false;
 					}
 					else{
                         $("#show_list .alert-danger").remove();
-					}
+					}*/
 
-					localStorage["day"] = $(".day").val();
+					/*localStorage["day"] = $(".day").val();
 					localStorage.setItem("day", $(".day").val());
 					localStorage["time"] = $(".time").val();
-					localStorage.setItem("time", $(".time").val());
+					localStorage.setItem("time", $(".time").val());*/
 					
 					$.ajax ({
 

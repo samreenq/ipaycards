@@ -40,155 +40,13 @@
 				</div>
 				<div class="row clearfix recipeFixed">
 					<div class="col-md-12 col-lg-8 deliveryInfoWrap ">
-						<div class="addressBook whitebg">
-							<!--
-								<div class="address-Header clearfix">
-									<a href="#"><h4 class="pull-left collapsed" role="button" data-toggle="collapse" href="#addressBook" aria-expanded="false" aria-controls="collapseExample">Address Book</h4></a>
-								</div>
-							-->
-							<div class="delivery-Header d-flex align-items-baseline mb15">
-								<h4 class="mr-auto align-items-start">Address Book</h4>
-								<p class="align-items-end">Required*</p>
-							</div>
-								
-							<div id="addressBook">
-								<div class="addressBookForm">
-									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
-									<div class="previousAddress">
-										<div class="oldAddressScroll">
-										<?php 
-												$c=1;
-												if(!empty($address))
-												{
-													foreach($address as $attributes)
-													{
-														if(isset($attributes['street'])) 
-														{
-										?>
-															<div class="radio">
-																<input class="old_address"  type="radio"  name="shipping_address" id="radio<?php echo $c; ?>" value="<?php echo $attributes['entity_id']; ?>"  checked="">
-																<label for="radio<?php echo $c; ?>">
-																	<?php echo $attributes['street']; ?>
-																</label>
-															</div>
-										<?php 
-															$c++;
-														}
-													}
-												}
-										?>
-										</div>
-										<div class="radio">
-												<input class="new_address"   type="radio" name="shipping_address" id="radio<?php echo $c;?>" value="0">
-												<label for="radio<?php echo $c;?>">
-													 Add New Address
-												</label>
-										</div>
-														
-														
-									</div>
-									<div class="addAddressWrap">
-											<input type="button" name="" role="button" data-toggle="collapse" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto address_book_next" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
-									</div>
-									<!--
-											<div class="addAddressWrap">
-												<form class="clearfix"> 
-													<h4>Add Address</h4>
-													<div class="fluid-label">
-														<textarea placeholder="Street Address*"></textarea>
-														<label>Street Address*</label>
-													</div>
-													<input type="submit" name="" value="Save" class="d-flex ml-auto"/>
-												</form>
-											</div>
-									-->
-								</div>
-							</div>
-						</div>
-			
-						<div class="deliveryInfo whitebg">
-							<div class="address-Header clearfix">
-								<h4 class="pull-left collapsed"   role="button" href="#deliveryAddress" aria-expanded="false" aria-controls="collapseExample">Delivery Address</h4>
-							</div>
-							<div id="deliveryAddress">
-								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-								<form>
-								
-									<div class="row">
-										<div class="col-md-12 cuspad">
-											
-											  <div id="error_shipping_verification" class="alert alert-danger help-block text-left animated fadeInDown hide" style="display: none" ></div>
 
-										</div>
-										<div class="col-md-6 cuspad">
-											<div class="fluid-label">
-											  <input required="required" name="checkout_first_name"  id="checkout_first_name"  type="text" placeholder="First Name*" />
-											  <label>First Name*</label>
-											</div>
-										</div>
-										<div class="col-md-6 cuspad">
-											<div class="fluid-label">
-											  <input  required="required" name="checkout_last_name" id="checkout_last_name"   type="text" placeholder="Last Name*" />
-											  <label>Last Name*</label>
-											</div>
-										</div>
-										<div class="col-md-6 cuspad">
-											<div class="fluid-label">
-											  <input required="required" name="checkout_email" id="checkout_email" type="email" placeholder="Email*" />
-											  <label>Email*</label>
-											</div>
-										</div>
-										<div class="col-md-6 cuspad">
-											<div class="fluid-label">
-											  <input  required="required" id="checkout_phone" name="checkout_phone" type="text" placeholder="Phone* (For delivery reminders)" />
-											  <label>Phone* (For delivery reminders)</label>
-											</div>
-										</div>
-										
-										<div class="col-md-12 cuspad">
-											<div class="map_canvas" style="width: 100%; height: 400px; margin: 10px 20px 10px 0; " ></div>
-											<input class="map_textbox" id="geocomplete" type="text" placeholder="Type in an address" value="Nigeria" />
-											<input class="map_search" id="find" type="button" value="Find" />
-											<input id="latitude" name="latitude" type="hidden" >
-											<input id="longitude" name="longitude" type="hidden" >
-											<input class="map_reset" id="reset" type="button" style="display:none;" value="Reset Marker" />
-											<div class="map_text" style="margin-top:-55%">Drag the map to your exact location</div>
-										</div>
-										<br /><br />
-										<div class="col-md-12 cuspad">
-											<div class="fluid-label">
-											  <textarea required="required" id="street" name="formatted_address" placeholder="Street Address* e.g: 19, Ilupeju street isheri oshun, Lagos"></textarea>
-											  <label>Street Address*</label>
-											</div>
-										</div>
-										<!--
-										<div class="col-md-12 cuspad">
-											<div class="clearfix billingCheckbox">
-												<div class="checkbox">
-													  <label class="checkbox-bootstrap">                                        
-														  <input name="same" required="required" type="checkbox">             
-														  <span class="checkbox-placeholder"></span>           
-														  <p>Use this address for my billing information.</p>
-													  </label>
-												 </div>
-											</div>
-										</div>
-										-->
-									
-										<div class="col-md-12 addAddressWrap">
-												<input  class="shipping_verification" type="button" name="" role="button" data-toggle="collapse" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
-										</div>
-										
-									</div>
-								</form>
-							</div>
-						</div>
 						
-						<div class="deliveryInfo deliveryInstructions whitebg">
+						<div class="deliveryInfo deliveryInstructions whitebg activeArrow">
 							<div class="address-Header clearfix">
 								<h4 class="pull-left collapsed"   role="button" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample">Delivery Instructions</h4>
 							</div>
-							<div id="deliveryInstructions" class="collapse">
+							<div id="deliveryInstructions" class="collapse show">
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
 								
 								<form>
@@ -197,7 +55,7 @@
 										<div class="col-md-12 cuspad">
 											<div class="fluid-label">
 											  <textarea id="order_notes" name="order_notes" required="required" placeholder="Add Note*"></textarea>
-											  <label>Add Note*</label>
+											{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
 										<div class="col-md-12 addAddressWrap">
@@ -223,9 +81,9 @@
 										
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
-											<input type="radio" name="payment_method" id="crypto-currency" value="webpay" >
+											<input type="radio" name="payment_method" id="crypto-currency" value="stripe" >
 											<label for="crypto-currency">
-												Webpay 
+												Stripe
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										</div>
@@ -287,10 +145,10 @@
 											<td class="summaryPrice discount_amount">{!! $currency !!} 0.00</td>
 										</tr>
 										
-										<tr>
+										{{--<tr>
 											<td class="summaryTitle">Delivery Charges</td>
 											<td class="summaryPrice delivery_charge">{!! $currency !!} 0.00</td>
-										</tr>
+										</tr>--}}
 										<tr>
 											<td class="summaryTitle">Wallet Amount</td>
 											<td class="summaryPrice customer_wallet">{!! $currency !!} 0.00</td>
@@ -486,7 +344,7 @@
   
       $(function(){
 		  
-		  
+	/*
 		$(".old_address").click(function(){
 				$("#deliveryAddress").hide();
 			});
@@ -497,7 +355,7 @@
 				  
 		 $(".address_book_next").click(function(){
 			$(".deliveryInstructions").toggleClass("activeArrow");
-		});
+		});*/
 
 		$("input.process_order").click(function(){
 			$(".paymentInfo").toggleClass("activeArrow");
@@ -531,7 +389,7 @@
 
 
 						  console.log($('input[name="payment_method"]:checked').val());
-						  if($('input[name="payment_method"]:checked').val() != 'webpay'){
+						  if($('input[name="payment_method"]:checked').val() != 'stripe'){
 
                               $('.add-to-cart').attr('disabled','disabled');
                               $.ajax ({
@@ -573,7 +431,7 @@
 		  
 		  
 		  
-        $("#geocomplete").geocomplete({
+        /*$("#geocomplete").geocomplete({
           map: ".map_canvas",
           details: "form ",
           markerOptions: {
@@ -591,10 +449,10 @@
 		  $("input[name=latitude]").val(result.geometry.location.lat());
           $("input[name=longitude]").val(result.geometry.location.lng());
         });
-		
+		*/
    
         
-        $("#reset").click(function(){
+      /*  $("#reset").click(function(){
           $("#geocomplete").geocomplete("resetMarker");
           $("#reset").hide();
           return false;
@@ -607,7 +465,7 @@
 		
 		var myButtonClasses = document.getElementById("deliveryAddress").classList;
 		
-		setTimeout(function(){myButtonClasses.add("collapse");},2000);
+		setTimeout(function(){myButtonClasses.add("collapse");},2000);*/
 		
       });
 
@@ -639,7 +497,7 @@
 					$("input[type='radio']").click(function(){
 						var payment_method = $("input[name='payment_method']:checked").val();
 						
-						
+						console.log(payment_method);
 						if(payment_method=="webpay")
 							$('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
 						
@@ -650,7 +508,7 @@
 							$('#myform').attr('action', "confirmation");
 						
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
-						$('.add-to-cart').css('background-color','#4fbe9e');
+					//	$('.add-to-cart').css('background-color','#4fbe9e');
 					});
         
 					});
