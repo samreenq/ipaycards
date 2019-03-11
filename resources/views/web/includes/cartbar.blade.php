@@ -38,10 +38,10 @@ if($general_settings){
 											<td class="summaryTitle">@lang('web.sidebar_tax')</td>
 											<td class="summaryPrice">$ 5.00</td>
 										</tr>
-										<tr>
+										{{--<tr>
 											<td class="summaryTitle">@lang('web.sidebar_loyalty_points')</td>
 											<td class="summaryPrice">50 Points</td>
-										</tr>
+										</tr>--}}
 										<tr class="borderB"><td colspan="2"><div></div></td></tr>
 										<tr>
 											<td class="summaryTitle">@lang('web.sidebar_order_total')</td>
@@ -89,10 +89,10 @@ if($general_settings){
 									
 									
 											
-											<tr>
+											{{--<tr>
 												<td class="summaryTitle">@lang('web.sidebar_loyalty_points')</td>
 												<td class="summaryPrice calculated_loyalty_points">0 Points</td>
-											</tr>
+											</tr>--}}
 											<tr class="borderB"><td colspan="2"><div></div></td></tr>
 											<tr>
 												<td class="summaryTitle">@lang('web.sidebar_order_total')</td>

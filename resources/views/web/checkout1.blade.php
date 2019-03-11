@@ -39,46 +39,15 @@
 						<div class="greybg clearfix align-items-center d-sm-flex">
 							<h4 class="mr-auto align-items-start">Your Basket</h4>
 							<div class="align-items-start selectDayWrap">
-								<select class="day js-example-basic-single ">
-								
-									@if(isset($days[date('w')]))
-										<option value="<?php echo date("Y-m-d");?>">Today</option>
-									@endif
-									
-									@if(isset($days[date('w', time() + (86400*1))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*1));?>">Tomorrow</option>
-									@endif
-									
-									@if(isset($days[date('w', time() + (86400*2))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*2));?>"><?php echo date("l", time() + (86400*2));?></option>
-									@endif
-									
-									
-									@if(isset($days[date('w', time() + (86400*3))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*3));?>"><?php echo date("l", time() + (86400*3));?></option>
-									@endif
-									
-									
-									@if(isset($days[date('w', time() + (86400*4))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*4));?>"><?php echo date("l", time() + (86400*4));?></option>
-									@endif
-									
-									@if(isset($days[date('w', time() + (86400*5))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*5));?>"><?php echo date("l", time() + (86400*5));?> </option>
-									@endif
-									
-									@if(isset($days[date('w', time() + (86400*6))]))
-										<option value="<?php echo date("Y-m-d", time() + (86400*6));?>"><?php echo date("l", time() + (86400*6));?> </option>
-									@endif
-									
-									
-								</select>
+								<!--<select class="day js-example-basic-single ">-->
+
+								<!--</select>-->
 							</div>
-							<div class="align-items-start selectTimeWrap pl-sm-2">
+							{{--<div class="align-items-start selectTimeWrap pl-sm-2">
 								<select class="time js-example-basic-single ">
 									<option value="">NA</option>
 								</select>
-							</div>
+							</div>--}}
 						</div>
 						<div id="show_list" class="whitebg recipe-item-list">
 									<div style="

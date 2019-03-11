@@ -102,10 +102,10 @@
 											<td class="summaryPrice">{!!  $general_setting->getPrettyPrice($order_detail['delivery_charge']) !!}</td>
 									</tr>
 
-									<tr>
+									{{--<tr>
 											<td class="summaryTitle">Loyalty Points</td>
 											<td class="summaryPrice"><?php if(isset($order_detail['loyalty_points'])) echo $order_detail['loyalty_points']; ?> Points</td>
-									</tr>
+									</tr>--}}
 									<tr class="borderB">
 											<td colspan="2">
 												<div></div>

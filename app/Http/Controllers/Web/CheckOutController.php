@@ -412,7 +412,7 @@ class CheckOutController extends WebController {
 	public function checkout1(Request $request)
 	{
 						  
-			$json 	= 	json_decode(
+			/*$json 	= 	json_decode(
 							json_encode(
 								CustomHelper::internalCall(
 									$request,
@@ -443,9 +443,9 @@ class CheckOutController extends WebController {
 			
 			}
 			asort($days); 
-			$data['days'] = $days;
+			$data['days'] = $days;*/
 			
-			return View::make('web/checkout1',$data);
+			return View::make('web/checkout1',array());
 		
 	}
 	

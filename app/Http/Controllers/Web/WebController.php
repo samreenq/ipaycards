@@ -52,7 +52,7 @@ class WebController extends Controller
             }
         }
 
-       //echo "<pre>"; print_r($this->_customer);exit;
+       // echo "<pre>"; print_r($this->_customer); exit;
 
         $conf_model = new Conf();
         $fb_raw = $conf_model->getBy("key","facebook");

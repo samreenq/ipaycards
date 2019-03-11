@@ -295,10 +295,10 @@
 											<td class="summaryTitle">Wallet Amount</td>
 											<td class="summaryPrice customer_wallet">{!! $currency !!} 0.00</td>
 										</tr>
-										<tr>
+										{{--<tr>
 											<td class="summaryTitle">Loyalty Points</td>
 											<td class="summaryPrice calculated_loyalty_points">0.00 Points</td>
-										</tr>
+										</tr>--}}
 										
 										
 									<!--
