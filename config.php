@@ -41,10 +41,10 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('ADD_PATH', 'staging/ipay-cards/'); // preceding path to app dir
     define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
     // db details
-    define('MASTER_DB_HOST', 'localhost');
-    define('MASTER_DB_USER', 'cc_us');
-    define('MASTER_DB_PASS', 'C^iz1t36');
-    define('MASTER_DB_NAME', 'cc_db');
+    define('MASTER_DB_HOST', 'sandbox4.cubix.co');
+    define('MASTER_DB_USER', 'us_ipaycards');
+    define('MASTER_DB_PASS', '6S*wy26c');
+    define('MASTER_DB_NAME', 'db_ipaycards');
     define('MASTER_DB_PREFIX', '');
 
     define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
