@@ -3,7 +3,7 @@
  * un-grouped routes
  */
 //Route::any('/', 'IndexController@index');
-Route::any('signup', 'IndexController@signup');
+//Route::any('signup', 'IndexController@signup');
 Route::any('login', 'IndexController@login');
 Route::any('logout', 'IndexController@logout');
 Route::get('forgot_thankyou', 'IndexController@forgotThankyou');

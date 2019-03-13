@@ -199,12 +199,12 @@ class AuthenticationController extends WebController {
 								"last_name"					=>	$request->input('last_name')									,
 								"user_status"				=>	2																,
 								'special'					=>	'0'																,
-								'loyalty_points'			=>	'1'																,
+							//	'loyalty_points'			=>	'1'																,
 								'payment_method_type'		=>	'cod'															,
 								'wallet'					=>	'0'																,
 								'full_name'					=>	$request->input('first_name').' '.$request->input('last_name')	,
 								"mobile_no"					=>	$request->input('mobile_no')									,
-								'refer_friend_code_applied' =>	$request->input('refer_friend_code_applied')
+								//'refer_friend_code_applied' =>	$request->input('refer_friend_code_applied')
 								
 						 ); 
 			$url = $request->input('url');			
