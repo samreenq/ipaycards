@@ -251,7 +251,7 @@
 
         if($("#is_parent:checked").val() == 1){
             $(".parent_id_field").hide();
-         //   $(".is_featured_field").hide();
+           $(".is_featured_field").hide();
             $(".category_type_field").show();
            $(".featured_type_field").hide();
 
@@ -286,6 +286,7 @@
                 $(".parent_id_field").hide();
                 $(".is_featured_field").hide();
                 $(".featured_type_field").hide();
+                $(".is_gift_card_field").show();
                // $(".category_type_field").show();
 
                /* $('.gallery-wrap').show();
@@ -298,6 +299,7 @@
             }else{
                 $(".parent_id_field").show();
                 $(".is_featured_field").show();
+                $(".is_gift_card_field").hide();
                // $(".featured_type_field").show();
                // $(".category_type_field").hide();
 
