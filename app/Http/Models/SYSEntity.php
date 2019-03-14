@@ -1336,28 +1336,7 @@ class SYSEntity extends Base
      */
     public function listHookData($request,$hook,$limit = 5)
     {
-            if($hook == 'recipe_product'){
-                $search_columns['entity_type_id'] = 'product';
-                $search_columns['product_type'] = 2;
-                $search_columns['status'] = 1;
-                $search_columns['availability'] = 1;
-                $response_key = 'product';
-            }
-            else if($hook == 'bundle_product'){
-                $search_columns['entity_type_id'] = 'product';
-                $search_columns['product_type'] = 3;
-                $search_columns['status'] = 1;
-                $search_columns['availability'] = 1;
-                $response_key = 'product';
-            }
-            else if($hook == 'product'){
-                $search_columns['entity_type_id'] = 'product';
-                $search_columns['product_type'] = 1;
-                $search_columns['status'] = 1;
-                $search_columns['availability'] = 1;
-                $response_key = 'product';
-            }
-            else if($hook == 'promotion_discount'){
+           if($hook == 'promotion_discount'){
                 $search_columns['entity_type_id'] = $response_key = $hook;
                 $date = date('Y-m-d');
                 $search_columns['where_condition'] = " AND start_date <= '$date' AND end_date >= '$date'";

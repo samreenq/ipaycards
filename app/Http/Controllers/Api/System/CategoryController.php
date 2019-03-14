@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\System;
 use App\Http\Controllers\Controller;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSEntityHistory;
+use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 use View;
 use Validator;
@@ -476,10 +477,14 @@ class CategoryController extends Controller
 
             // set records
             if (isset($raw_records[0])) {
+
+                $entity_lib = new Entity();
                 //var_dump($raw_records); exit;
                 foreach ($raw_records as $raw_record) {
                     //$record = $raw_record;
                     $record = $this->_entity_model->getData($raw_record->{$this->_entity_model->primaryKey},$request->all(),$status);
+
+                   // echo "<pre>"; print_r($record); exit;
                     //$record->child = $this->_entity_model->getChild($raw_record->{$this->_entity_model->primaryKey});
                     /* Get attachment data*/
                     $gallery = $this->_PLAttachment->getAttachmentByEntityID($raw_record->{$this->_entity_model->primaryKey});
@@ -495,6 +500,18 @@ class CategoryController extends Controller
                         $record->image->compressed_file = $gallery[0]->compressed_file;
                         $record->image->mobile_file = $gallery[0]->mobile_file;
                         $record->image->size = $data_packet['size'];
+                    }
+
+                    if($record->is_parent == 1){
+                        //Get the latest product of category
+                        $params = array(
+                            'entity_type_id' => 'product',
+                            'category_id' => $record->category_id,
+                            'mobile_json' => 1
+                        );
+
+                       $products =  $entity_lib->apiList($params);
+                        //echo "<pre>"; print_r($products); exit;
                     }
 
                     $data[$this->_object_identifier][] = $record;
