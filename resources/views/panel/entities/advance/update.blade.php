@@ -469,6 +469,33 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
             }
         })
         @endif
+
+        if( $("#is_gift_card").val() == 1){
+            // $('.brand_id_field').hide();
+            $('.category_id_field').addClass('hide');
+            $('.gift_category_id_field').removeClass('hide');
+
+
+        }else{
+            // $('.brand_id_field').show();
+            $('.category_id_field').removeClass('hide');
+            $('.gift_category_id_field').addClass('hide');
+        }
+
+        $("#is_gift_card").on("change",function(){
+
+            if($(this).val() == 1){
+                // $('.brand_id_field').hide();
+                $('.category_id_field').addClass('hide');
+                $('.gift_category_id_field').removeClass('hide');
+
+
+            }else{
+                // $('.brand_id_field').show();
+                $('.category_id_field').removeClass('hide');
+                $('.gift_category_id_field').addClass('hide');
+            }
+        });
     });
 
 </script>

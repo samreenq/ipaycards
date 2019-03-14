@@ -879,6 +879,12 @@ Class EntityTrigger
         $request = is_array($request) ? (object)$request : $request;
         $return = $this->_setRetailPrice($request);
 
+        if(isset($request->is_gift_card)){
+
+            if($request->is_gift_card == 1)
+               $return['category_id'] = $request->gift_category_id;
+        }
+
         if (isset($return)) {
             return $return;
         }
@@ -894,6 +900,12 @@ Class EntityTrigger
     {
         $request = is_array($request) ? (object)$request : $request;
         $return = $this->_setRetailPrice($request);
+
+        if(isset($request->is_gift_card)){
+
+            if($request->is_gift_card == 1)
+                $return['category_id'] = $request->gift_category_id;
+        }
 
         if (isset($return)) {
             return $return;
@@ -1112,6 +1124,29 @@ Class EntityTrigger
             }
         }
 
+
+    }
+
+    public function productVerifyTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $response['error'] = 0;
+
+        if(isset($request->is_gift_card)){
+
+            if($request->is_gift_card == 1 && empty($request->gift_category_id)){
+                $response['error'] = TRUE;
+                $response['message'] = trans('system.field_required',array('field' => 'Category'));
+                return $response;
+            }
+
+            if($request->is_gift_card == 0 && empty($request->category_id)){
+                $response['error'] = TRUE;
+                $response['message'] = trans('system.field_required',array('field' => 'Category'));
+                return $response;
+            }
+
+        }
 
     }
 

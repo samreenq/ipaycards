@@ -87,6 +87,7 @@ class CategoryController extends Controller
             'title' => "required|string|alpha_custom|unique:".$this->_entity_model->table.",".$this->_entity_model->primaryKey.",NULL,deleted_at,parent_id,".$request->parent_id,
             'parent_id' => 'required_if:is_parent,0',
             'is_featured' => 'required_if:is_parent,0',
+            'is_gift_card' => 'required_if:is_parent,0',
            // 'featured_type' => 'required_if:is_featured,1'
          );
 
@@ -95,6 +96,7 @@ class CategoryController extends Controller
             "is_parent.required" => "Please choose the main category or sub category",
             'parent_id.required_if' => 'The Parent field is required',
             'is_featured.required_if' => 'The Is Featured field is required',
+            'is_gift_card.required_if' => 'The Is Gift Card field is required',
             //'featured_type.required_if' => 'The Featured type field is required',
         );
 
@@ -264,6 +266,7 @@ class CategoryController extends Controller
             'title' => 'required|string||alpha_custom',
             'parent_id' => 'required_if:is_parent,0',
             'is_featured' => 'required_if:is_parent,0',
+            'is_gift_card' => 'required_if:is_parent,0',
            // 'featured_type' => 'required_if:is_featured,1',
             'status' => 'required'
          );
@@ -272,6 +275,7 @@ class CategoryController extends Controller
         $error_messages = array(
             'parent_id.required_if' => 'The Parent field is required',
             'is_featured.required_if' => 'The Is Featured field is required',
+            'is_gift_card.required_if' => 'The Is Gift Card field is required',
            // 'featured_type.required_if' => 'The Featured type field is required',
         );
 

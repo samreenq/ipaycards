@@ -1064,7 +1064,7 @@ class Fields
 
                                 if($listfield->backend_table_where != ""){
 
-                                    if($listfield->backend_table_where == "is_parent=1"){
+                                    if($listfield->backend_table_where == "is_parent=1" || $listfield->attribute_code == "gift_category_id"){
                                         $query_get_parent = 1;
                                     }
                                     $backend_where .= ' AND '.$listfield->backend_table_where;
