@@ -686,6 +686,10 @@ class Fields
 
 				/*Get entity listing for entity type dropdown*/
 				//$ex2Model = $this->modalPath . "SYSEntity";
+                    if(!empty($listfield->backend_table_where)){
+                        $where_condition .= ' '.$listfield->backend_table_where;
+                    }
+
 				$ex2Model = new SYSEntity();
 				$options = $ex2Model->getEntitiesListing($listfield->attribute_entity_type_id,$listfield->linked_attribute_id,$where_condition);
 
