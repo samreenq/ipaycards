@@ -523,6 +523,7 @@ class EntityAuthController extends Controller
                         //$entity->sent_mobile_verification = $insert_data->sent_mobile_verification;
 
                         // ovverite msg
+                        $this->_apiData['error'] = 0;
                         $this->_apiData['message'] = trans('system.check_email_for_confirmation');
                     }
 
