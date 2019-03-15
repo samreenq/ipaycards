@@ -1536,7 +1536,7 @@ class Fields
 		if(isset($data->identifier)){
 
 			if($data->identifier == 'promotion_item'){
-				if($field->attribute_code == "promotion_product_id" && isset($data->attributes)){
+				if($field->attribute_code == "product_id" && isset($data->attributes)){
 
 					$product_type = EntityHelper::parseAttributeValue( $data->attributes->promotion_type);
 					$where_condition = " product_type = ".$product_type;

@@ -81,9 +81,9 @@
 
         <?php if($entity_data->identifier == "promotion_discount"){
 
-        if(isset( $depend_update_item->attributes->promotion_product_id->detail->attributes)){
+        if(isset( $depend_update_item->attributes->product_id->detail->attributes)){
 
-        $product_attributes = $depend_update_item->attributes->promotion_product_id->detail->attributes;
+        $product_attributes = $depend_update_item->attributes->product_id->detail->attributes;
 
         $sale_price = isset($product_attributes->price) ? $product_attributes->price : "";
         $product_code = isset($product_attributes->product_code) ? $product_attributes->product_code : "";

@@ -46,7 +46,7 @@ class CronController extends Controller {
 			{
 				$promotion[$p]['depend_entity'][$q]['entity_id'] 			 = $promotion_items_attributes->entity_id;
 				$promotion[$p]['depend_entity'][$q]['coupon_type'] 			 = $promotion_items_attributes->coupon_type;
-				$promotion[$p]['depend_entity'][$q]['promotion_product_id']  = $promotion_items_attributes->promotion_product_id; 
+				$promotion[$p]['depend_entity'][$q]['product_id']  = $promotion_items_attributes->product_id;
 				$promotion[$p]['depend_entity'][$q]['discount'] 			 = $promotion_items_attributes->discount;
 				$promotion[$p]['depend_entity'][$q]['promotion_discount_id'] = $promotion_items_attributes->promotion_discount_id;
 				$promotion[$p]['depend_entity'][$q]['promotion_type'] 		 = $promotion_items_attributes->promotion_type;
@@ -64,7 +64,7 @@ print_r($promotion);
 			foreach ( $promotion_attributes['depend_entity'] as $product ) 
 			{
 				
-				$price = $this->_web_entity_model->getVarcharAttributeValue($product['promotion_product_id'],122);
+				$price = $this->_web_entity_model->getVarcharAttributeValue($product['product_id'],122);
 				$price = (isset($price[0]->value)) ? $price[0]->value : null ;
 				 echo ' , '.$price; 
 				 
@@ -80,19 +80,19 @@ print_r($promotion);
 						$discount_price =  $price - $product['discount'] ; 
 					}
 					
-					$has_discount = $this->_web_entity_model->getIntAttributeValue($product['promotion_product_id'],206);
+					$has_discount = $this->_web_entity_model->getIntAttributeValue($product['product_id'],206);
 					$has_discount =  $has_discount[0]->value;
 						
 					
 					if($has_discount == false )   // Update Discount Price 
 					{
 							
-						$result = $this->_web_entity_model->insertVarcharAttributeValue($product['promotion_product_id'],14,205,$discount_price); // 205 is attribute id of discount price  
+						$result = $this->_web_entity_model->insertVarcharAttributeValue($product['product_id'],14,205,$discount_price); // 205 is attribute id of discount price  
 						
 					}
 					if($has_discount == 1 )   // Update Discount Price 
 					{
-						$result = $this->_web_entity_model->updateVarcharAttributeValue($product['promotion_product_id'],205,$discount_price); // 205 is attribute id of discount price  		
+						$result = $this->_web_entity_model->updateVarcharAttributeValue($product['product_id'],205,$discount_price); // 205 is attribute id of discount price  		
 						var_dump($result); 
 					}
 						

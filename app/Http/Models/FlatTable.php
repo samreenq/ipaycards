@@ -302,10 +302,10 @@ Class FlatTable extends Base
     public function getPromotionProducts($date)
     {
         $row = \DB::select("SELECT p.entity_id AS promotion_id, p.title AS promotion_name,p.start_date,p.end_date,
-         pi.promotion_product_id,pi.coupon_type,pi.discount,prod.price
+         pi.product_id,pi.coupon_type,pi.discount,prod.price
          FROM promotion_item_flat `pi`
         LEFT JOIN promotion_discount_flat p ON pi.promotion_discount_id = p.entity_id
-         LEFT JOIN product_flat prod ON prod.entity_id = pi.promotion_product_id
+         LEFT JOIN product_flat prod ON prod.entity_id = pi.product_id
         WHERE p.`deleted_at` IS NULL AND  p.start_date <= '$date' AND  p.end_date >= '$date'");
 
         return isset($row[0]) ? $row : false;

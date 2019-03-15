@@ -267,7 +267,7 @@ class CategoryController extends Controller
             'title' => 'required|string||alpha_custom',
             'parent_id' => 'required_if:is_parent,0',
             'is_featured' => 'required_if:is_parent,0',
-            'is_gift_card' => 'required_if:is_parent,0',
+           // 'is_gift_card' => 'required_if:is_parent,0',
            // 'featured_type' => 'required_if:is_featured,1',
             'status' => 'required'
          );
@@ -276,7 +276,7 @@ class CategoryController extends Controller
         $error_messages = array(
             'parent_id.required_if' => 'The Parent field is required',
             'is_featured.required_if' => 'The Is Featured field is required',
-            'is_gift_card.required_if' => 'The Is Gift Card field is required',
+          //  'is_gift_card.required_if' => 'The Is Gift Card field is required',
            // 'featured_type.required_if' => 'The Featured type field is required',
         );
 
@@ -389,7 +389,7 @@ class CategoryController extends Controller
         $exModel = $this->_model_path . "SYSEntity";
         $exModel = new $exModel;
         // allowed order
-        $allowed_ordering = $allowed_searching = $this->_entity_model->primaryKey . ",parent_id,title,slug,description,created_by,created_at,status,level";
+        $allowed_ordering = $allowed_searching = $this->_entity_model->primaryKey . ",parent_id,title,slug,description,created_by,created_at,status,level,is_gift_card";
         $allowed_sorting = "asc,desc";
 
 
@@ -502,16 +502,38 @@ class CategoryController extends Controller
                         $record->image->size = $data_packet['size'];
                     }
 
-                    if($record->is_parent == 1){
-                        //Get the latest product of category
-                        $params = array(
-                            'entity_type_id' => 'product',
-                            'category_id' => $record->category_id,
-                            'mobile_json' => 1
-                        );
+                    //if recent product is requested then get products from sub categories
+                    if(isset($request->recent_product) && $request->recent_product = 1) {
+                        if ($record->is_parent == 1) {
+                            //Get the latest product of category
+                            if($record->is_gift_card == 1){
+                                $category_ids = $record->category_id;
+                            }
+                            else{
+                                $category_ids = $this->_entity_model->getChildCategories($record->category_id);
+                            }
 
-                       $products =  $entity_lib->apiList($params);
-                        //echo "<pre>"; print_r($products); exit;
+                            if ($category_ids) {
+
+                                $params = [
+                                    'entity_type_id' => 'product',
+                                    'mobile_json' => 1
+                                ];
+
+                                $params['where_condition'] = "AND (category_id IN ($category_ids) AND is_gift_card = $record->is_gift_card)";
+
+
+                                $products_list = $entity_lib->apiList($params);
+                                $products_list = json_decode(json_encode($products_list));
+                                if ($products_list->error == 0 && isset($products_list->data->product)) {
+                                    $record->product = $products_list->data->product;
+                                } else {
+                                    $record->product = [];
+                                }
+                                // echo "<pre>"; print_r($products); exit;
+                            }
+
+                        }
                     }
 
                     $data[$this->_object_identifier][] = $record;

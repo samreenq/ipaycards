@@ -113,7 +113,7 @@ Class PromotionDiscount
 
                         $post_params = array(
                             'entity_type_id' => $entity_type_id,
-                            'entity_id' => $product->promotion_product_id,
+                            'entity_id' => $product->product_id,
                             'inner_response' => 1,
                         );
 
