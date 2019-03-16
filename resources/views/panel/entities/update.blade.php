@@ -50,7 +50,7 @@ $fields = new $fields();
                                     <button type="submit" class="btn ladda-button btn-theme btn-wide mt10 submit-btn" data-style="zoom-in"> <span class="ladda-label">Update</span> </button>
                                         @include(config('panel.DIR').'entities.loader')
                                     @else
-                                        @if(count($modulePermission) && $modulePermission->update_permission == 1 )
+                                        @if(isset($modulePermission) && $modulePermission->update_permission == 1 )
                                     <a href="../update/{{ $update->entity_id }}" class="btn ladda-button btn-theme btn-wide mt10 submit-btn" data-style="zoom-in"><span class="ladda-label">Edit Record</span>
                                     </a>
                                         @endif
