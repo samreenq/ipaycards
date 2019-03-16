@@ -1150,4 +1150,48 @@ Class EntityTrigger
 
     }
 
+    /**
+     * Wallet Transaction Before Post
+     * @param Request $request
+     * @return array
+     */
+    public function walletTransactionBeforePostTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $balance = 0;
+        if (isset($request->customer_id)) {
+
+            if (!empty($request->customer_id) && (isset($request->credit) || isset($request->debit))) {
+
+                $credit = isset($request->credit) ? $request->credit : 0;
+                $debit = isset($request->debit) ? $request->debit : 0;
+
+                //calculate balance by get customer current balance
+                $wallet_transaction = new WalletTransaction();
+                $balance = $wallet_transaction->calculateBalance($request->customer_id, $credit, $debit);
+            }
+        }
+
+        return ['balance' => "$balance"];
+
+    }
+
+    /**
+     * on post wallet transaction update customer
+     * @param Request $request
+     */
+    public function walletTransactionAddTrigger($request, $response_post = FALSE)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        if (isset($request->balance) && isset($request->customer_id)) {
+
+            if (!empty($request->customer_id)) {
+
+                $entity_model = new SYSEntity();
+                $entity_model->updateEntityAttrValue($request->customer_id, 'wallet', "$request->balance", 'customer');
+            }
+
+        }
+    }
+
 }
