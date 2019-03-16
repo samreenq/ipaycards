@@ -224,7 +224,7 @@ Class OrderCart
                         $item->detail = new \StdClass();
                     }
 
-                    if(count($item->detail) > 0)
+                    if(isset($item->detail))
                         $update_item[] = $item;
                     unset($item);
 

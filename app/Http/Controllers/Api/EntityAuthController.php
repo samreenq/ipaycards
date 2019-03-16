@@ -646,7 +646,7 @@ class EntityAuthController extends Controller
 
             // welcome user
             $this->_model->welcome($entity);
-
+            $this->_apiData['error'] = 0;
             $this->_apiData['message'] = trans('system.account_verification_success');
 
             //Call trigger for confirm signup
@@ -762,7 +762,7 @@ class EntityAuthController extends Controller
 
             // response data
             $data[$this->_objectIdentifier] = $this->_model->getData($exists_id, true);
-
+            $this->_apiData['error'] = 0;
 //            $this->_apiData['message'] = trans('system.your_account_is_activated');
             $this->_apiData['message'] = trans('system.account_verification_success');
 
@@ -1099,6 +1099,7 @@ class EntityAuthController extends Controller
             $this->_apiData['message'] = trans('system.already_registered_from_facebook');
         } else {
             // success response
+            $this->_apiData['error'] = 0;
             $this->_apiData['response'] = trans('system.success');
 
             // init output data array
@@ -2446,6 +2447,7 @@ class EntityAuthController extends Controller
 
 
                     // api message
+                    $this->_apiData['error'] = 0;
                     $this->_apiData['message'] = trans('system.account_verification_success');
 
                     //Call trigger for verify Phone
