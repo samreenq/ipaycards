@@ -1520,8 +1520,8 @@ class EntityController extends Controller
             $this->_apiData['message'] = $validator->errors()->first();
         } else {
 
-            $entity = $this->_entityModel->getData($request->{$this->_entityModel->primaryKey});
-            // print_r($entity); exit;
+            $entity = $this->_entityModel->getData($request->{$this->_entityModel->primaryKey},array('mobile_json'=>1));
+           // print_r($entity); exit;
             if (!$entity) {
                 $this->_apiData['message'] = trans('system.entity_is_invalid', array("entity" => "Customer"));
             } else if ((!isset($entity->refer_friend_code)) || (isset($entity->refer_friend_code) && empty($entity->refer_friend_code))) {

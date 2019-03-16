@@ -240,6 +240,7 @@ Class EntityTrigger
         $request = is_array($request) ? (object)$request : $request;
         //set Full Name
         $return['full_name'] =  CustomHelper::setFullName($request);
+        $return['refer_friend_code'] = str_random(8);
         return $return;
     }
 
@@ -256,6 +257,10 @@ Class EntityTrigger
         //set Full Name
         if(isset($request->first_name) && isset($request->last_name)) {
             $return['full_name'] =  CustomHelper::setFullName($request);
+        }
+
+       if(!isset($request->refer_friend_code)) {
+            $return  = ['refer_friend_code' => str_random(8)];
         }
 
         //Update auth status for customer entity
