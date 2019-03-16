@@ -664,6 +664,19 @@ Class EntityTrigger
 
     }
 
+
+    /**
+     * Coupon before post trigger
+     * @param Request $request
+     * @return array
+     */
+    public function couponBeforePostTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+
+        return ['coupon_code' => str_random(8)];
+    }
+
     /**
      * Get product max price and send with list
      * @param $request
