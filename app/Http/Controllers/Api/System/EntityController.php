@@ -1758,7 +1758,7 @@ class EntityController extends Controller
                                         $item->detail = new \StdClass();
                                     }
 
-                                    if (count($item->detail) > 0)
+                                    if (isset($item->detail))
                                         $update_item[] = $item;
                                     unset($item);
 
