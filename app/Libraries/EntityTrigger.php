@@ -155,7 +155,7 @@ Class EntityTrigger
         }
 
 
-      // echo "<pre>"; print_r($return); exit;
+     // echo "<pre>"; print_r($return); exit;
         if (isset($return)) {
             return $return;
         }
@@ -328,7 +328,7 @@ Class EntityTrigger
         $params['entity_id'] = $entity_id;
         $params['order_number'] = "$order_series";
 
-        $subtotal = 0;
+       /* $subtotal = 0;
         if(isset($request->depend_entity) && count($request->depend_entity) > 0){
 
             foreach($request->depend_entity as $depend_entity){
@@ -338,13 +338,12 @@ Class EntityTrigger
                 }else{
                     $subtotal += $depend_entity['price']*$depend_entity['quantity'];
                 }
-
             }
-        }
+        }*/
 
-        $grand_total = $subtotal;
-        $params['subtotal'] = "$subtotal";
-        $params['grand_total'] = "$grand_total";
+       // $grand_total = $subtotal;
+        //$params['subtotal'] = "$subtotal";
+       // $params['grand_total'] = "$grand_total";
         $response = $entity_lib->apiUpdate($params);
 
         //Save Order History
@@ -354,6 +353,36 @@ Class EntityTrigger
         $post_arr['order_status'] = $request->order_status;
         $entity_lib->doPost($post_arr);  unset($post_arr);
 
+
+        $entity_model = new SYSEntity();
+
+        //Insert wallet Transaction
+        if (isset($request->wallet) && isset($request->customer_id)) {
+
+            if (!empty($request->wallet) && !empty($request->customer_id)) {
+
+                $pos_arr = [];
+                $pos_arr['entity_type_id'] = 51;
+                $pos_arr['credit'] = "0";
+                $pos_arr['debit'] = "$request->wallet";
+                $pos_arr['balance'] = '';
+                $pos_arr['customer_id'] = $request->customer_id;
+                $pos_arr['transaction_type'] = 'debit';
+                $pos_arr['order_id'] = $entity_id;
+                $pos_arr['mobile_json'] = $request->mobile_json;
+                $pos_arr['login_entity_id'] = isset($request->login_entity_id) ? $request->login_entity_id : "";
+                $data = $entity_lib->doPost($pos_arr);
+
+                if (isset($data)) {
+                    //Update Customer Wallet
+                    $wallet_transaction = new WalletTransaction();
+                    $current_balance = $wallet_transaction->getCurrentBalance($request->customer_id);
+                    $entity_model->updateEntityAttrValue($request->customer_id, 'wallet', "$current_balance", 'customer');
+                }
+
+
+            }
+        }
 
 
     }
