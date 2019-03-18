@@ -1291,7 +1291,7 @@ class EntityAuthController extends Controller
             // send entity data
             $data[$this->_entityIdentifier] = $entity;
 
-
+            $this->_apiData['error'] = 0;
             $this->_apiData['message'] = trans('system.check_email_for_confirmation');
 
             // assign to output
@@ -2385,6 +2385,7 @@ class EntityAuthController extends Controller
                     $data[$this->_objectIdentifier] = $entity;
 
                     // api message
+                    $this->_apiData['error'] = 0;
                     $this->_apiData['message'] = trans('system.check_email_for_confirmation');
                 } else {
                     // history identifier
@@ -2617,6 +2618,7 @@ class EntityAuthController extends Controller
 					    $this->_apiData['message'] = trans('system.check_phone_for_confirmation');
                 }
 				else{
+                         $this->_apiData['error'] = 0;
 						$this->_apiData['message'] = trans('system.check_email_for_confirmation');
 				}
 
