@@ -54,7 +54,7 @@ Class OrderCart
                             'entity_type_id' => 'product',
                             'entity_id' => implode(',', $entity_ids),
                             'status' => 1,
-                            'availability' => 1,
+                           // 'availability' => 1,
                             'mobile_json' => 1
                         ];
 
@@ -116,9 +116,9 @@ Class OrderCart
                         'title' => $product->title,
                         'thumb' => $thumb,
                         'price' => $price,
-                        'weight' => $product->weight,
-                        'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
-                        'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
+                       // 'weight' => $product->weight,
+                        //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
+                       // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
                         'product_quantity' => $cart_item_quantity[$product->entity_id],
 
                     );
