@@ -277,9 +277,69 @@ Class EntityTrigger
      * @param Request $request
      */
 
-    public function customerAddTrigger($request, $response_post = FALSE)
+    public function customerAddTrigger($request, $entity_id = FALSE)
     {
          $request = is_array($request) ? (object)$request : $request;
+
+        if (isset($request->refer_friend_code_applied)) {
+
+            if (!empty($request->refer_friend_code_applied)) {
+                //check refer code and get entity id and update loyalty points
+                $flat_model = new SYSTableFlat('customer');
+                $friend_id = $flat_model->columnValueByWhere('refer_friend_code', $request->refer_friend_code_applied, 'entity_id');
+
+                if ($friend_id) {
+
+                   // $entity_model = new SYSEntity();
+                    //$entity =  $entity_model->getData($entity_id);
+
+                    //Get General setting
+                    $flat_model = new SYSTableFlat('general_setting');
+                    $setting_raw = $flat_model->getAll();
+
+                    if (isset($setting_raw[0])) {
+
+                        $general_setting = $setting_raw[0];
+
+                       $refer_friend_credit = isset($general_setting->refer_friend_credit) ? $general_setting->refer_friend_credit : 0;
+                        if($refer_friend_credit > 0){
+
+                            $params = array(
+                                'entity_type_id' => 51,
+                                'customer_id' => $entity_id,
+                                'credit' => "$refer_friend_credit",
+                                'debit' => "0",
+                                'transaction_type' => 'credit'
+                            );
+
+                            $entity_lib = new Entity();
+                             $entity_lib->apiPost($params);
+                           // echo "<pre>"; print_r($item); exit;
+                        }
+
+
+                      /*   if ($number_of_refer_friend > 0) {
+
+                            $loyalty_points_refer_friend = isset($general_setting->loyalty_points_refer_friend) ? $general_setting->loyalty_points_refer_friend : 1;
+
+                            //Add loyalty points for refer friend
+                            $refer_friend_points = round($loyalty_points_refer_friend / $number_of_refer_friend, 2);
+
+                            if ($refer_friend_points > 0) {
+                                $field = 'loyalty_points';
+                                $value = $refer_friend_points;
+                                $entity_model->updateEntityAttributeValue($entity_id, $field, $value, '+', 'customer');
+                            }
+                        }*/
+
+
+
+                    }
+
+                } //end of entity id
+
+            }
+        }
     }
 
     /**
