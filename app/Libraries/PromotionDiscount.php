@@ -121,7 +121,7 @@ Class PromotionDiscount
                         $post_params['product_promotion_name'] = "$product->promotion_name";
                         $post_params['promotion_start_date'] = $product->start_date;
                         $post_params['promotion_end_date'] = $product->end_date;
-                        $post_params['promotion_discount_type'] = "$product->coupon_type";
+                        //$post_params['promotion_discount_type'] = "$product->coupon_type";
                         $post_params['promotion_discount'] = "$product->discount";
 
                         if ($product->coupon_type == 'percent')
@@ -176,7 +176,7 @@ Class PromotionDiscount
                     'product_promotion_name',
                     'promotion_start_date',
                     'promotion_end_date',
-                    'promotion_discount_type',
+                  //  'promotion_discount_type',
                     'promotion_discount',
                     'promotion_discount_amount');
     }

@@ -1538,8 +1538,8 @@ class Fields
 			if($data->identifier == 'promotion_item'){
 				if($field->attribute_code == "product_id" && isset($data->attributes)){
 
-					$product_type = EntityHelper::parseAttributeValue( $data->attributes->promotion_type);
-					$where_condition = " product_type = ".$product_type;
+					//$product_type = EntityHelper::parseAttributeValue( $data->attributes->promotion_type);
+					//$where_condition = " product_type = ".$product_type;
 
 					/*if(isset($data->attributes->start_date) && !empty($data->attributes->start_date)){
 						$current_time = date('Y-m-d H:i:s');

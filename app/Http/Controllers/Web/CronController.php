@@ -49,7 +49,7 @@ class CronController extends Controller {
 				$promotion[$p]['depend_entity'][$q]['product_id']  = $promotion_items_attributes->product_id;
 				$promotion[$p]['depend_entity'][$q]['discount'] 			 = $promotion_items_attributes->discount;
 				$promotion[$p]['depend_entity'][$q]['promotion_discount_id'] = $promotion_items_attributes->promotion_discount_id;
-				$promotion[$p]['depend_entity'][$q]['promotion_type'] 		 = $promotion_items_attributes->promotion_type;
+				//$promotion[$p]['depend_entity'][$q]['promotion_type'] 		 = $promotion_items_attributes->promotion_type;
 				$q++;
 			}
 			$p++;
