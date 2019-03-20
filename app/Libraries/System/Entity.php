@@ -827,7 +827,7 @@ Class Entity extends Base
 
         $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_dependent_add_trigger');
         if (method_exists($obj, "$func"))
-            $obj->$func($request);
+            $obj->$func($request,$entity_id);
 
         //Log History and save system notification
         $sys_history = new SYSEntityHistory();

@@ -2918,7 +2918,7 @@ class EntityAuthController extends Controller
                         $this->_apiData['message'] = $trigger_response->message;
                     }
                 }
-
+                $this->_apiData['error'] = 0;
                 $this->_apiData['message'] =  trans($this->_langIdentifier.'.token_cleared');
                 // assign to output
                 $this->_apiData['data'] = $data;
