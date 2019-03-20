@@ -668,7 +668,17 @@ Class Entity extends Base
             );
         }
 
-       //echo "<pre>"; print_r($depend_entity); exit;
+        if (isset($request->entity_type_id) && is_numeric(trim($request->entity_type_id))) {
+            $this->_eTypeData = $this->_eTypeModel->get($request->entity_type_id);
+        } elseif (isset($request->entity_type_id)) {
+            $this->_eTypeData = $this->_eTypeModel->getBy('identifier', $request->entity_type_id);
+            if ($this->_eTypeData) {
+                $request_params['entity_type_id'] = $request->entity_type_id =  $this->_eTypeData->entity_type_id;
+                //$request->replace(array_merge($request->all(), array('entity_type_id' => $this->_eTypeData->entity_type_id)));
+            }
+        }
+
+       //echo "<pre>"; print_r($request->entity_type_id); exit;
         //print_r($request);
         //  print_r($depend_entity); exit;
         $request->entity_auth_id = isset($request->entity_auth_id) ? $request->entity_auth_id : 0;
@@ -683,16 +693,6 @@ Class Entity extends Base
         // validator
         if ($validator->fails()) {
             throw new \Exception($validator->errors()->first());
-        }
-
-
-        if (isset($request->entity_type_id) && is_numeric(trim($request->entity_type_id))) {
-            $this->_eTypeData = $this->_eTypeModel->get($request->entity_type_id);
-        } elseif (isset($request->entity_type_id)) {
-            $this->_eTypeData = $this->_eTypeModel->getBy('identifier', $request->entity_type_id);
-            if ($this->_eTypeData) {
-                //$request->replace(array_merge($request->all(), array('entity_type_id' => $this->_eTypeData->entity_type_id)));
-            }
         }
 
 
@@ -1308,7 +1308,8 @@ Class Entity extends Base
                 $request_params
             );
         }
-
+      //  echo "<pre>"; print_r($request);
+      //  echo "<pre>"; print_r($entityTypeData); exit;
         $obj = new EntityTrigger();
 
         if (isset($request->entity_type_id) && is_numeric($request->entity_type_id)) {
