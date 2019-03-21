@@ -1185,91 +1185,27 @@ Class EntityTrigger
           //  echo "<pre>"; print_r($depend_entity_request);
             if(isset($depend_entity_response->entity->entity_id)) {
 
-                if (isset($depend_entity_request->product_id) && !empty($depend_entity_request->product_id)) {
+                if (isset($depend_entity_request->product_id) && !empty($depend_entity_request->product_id)||
+                    isset($depend_entity_request->deal_id) && !empty($depend_entity_request->deal_id)) {
 
-                    $entity_lib = new Entity();
-
-                    if ($depend_entity_request->is_gift_card == 0){
-
-                            //Get inventory
-                            $flat_table = new SYSTableFlat('inventory');
-                            $data = $flat_table->getDataByWhere(' product_id = ' . $depend_entity_request->product_id . ' AND availability = "available"');
-                            // echo "<pre>"; print_r($data);
-                            if ($data && isset($data[0])) {
-
-
-                                //Update Order Item
-                                $params = [
-                                    'entity_type_id' => 16,
-                                    'entity_id' => $depend_entity_response->entity->entity_id,
-                                    'inventory_id' => $data[0]->entity_id,
-                                    'order_from' => 'in_stock'
-                                ];
-
-                                $item_response = $entity_lib->apiUpdate($params);
-                                //echo "<pre>"; print_r($item_response); exit;
-                                //Update Inventory Status
-                                $params = [
-                                    'entity_type_id' => 73,
-                                    'entity_id' => $data[0]->entity_id,
-                                    'availability' => 'reserved',
-                                ];
-
-                                $entity_lib->apiUpdate($params);
-                            } else {
-                                //Update Order Item
-                                $params = [
-                                    'entity_type_id' => 16,
-                                    'entity_id' => $depend_entity_response->entity->entity_id,
-                                    'order_from' => 'vendor_stock'
-                                ];
-
-                                $entity_lib->apiUpdate($params);
-                            }
-                    }else{
-
-                        $flat_table = new SYSTableFlat('vendor');
-                       $vendor = $flat_table->getColumnByWhere(' identifier = "ipaycards"','entity_id');
-
-                       //Get Product
-                        $flat_table = new SYSTableFlat('product');
-                        $product = $flat_table->getColumnByWhere(' entity_id = '.$depend_entity_request->product_id,'*');
-                     //   echo "<pre>"; print_r($product); exit;
-                        //Create inventory
-                        $params = array(
-                            'entity_type_id' => 'inventory',
-                           'vendor_id' => $vendor->entity_id,
-                            'category_id' => $product->category_id,
-                            'brand_id' => $product->brand_id,
-                            'product_id' => $depend_entity_request->product_id,
-                            'product_code' =>  str_random(8),
-                            'availability' => 'reserved',
-                        );
-
-                       $inventory_response = $entity_lib->apiPost($params);
-                        $inventory_response = json_decode(json_encode($inventory_response));
-
-                        if(isset($inventory_response->data->entity->entity_id)){
-
-                            //echo "<pre>"; print_r($inventory_id); exit;
-                            //Update Order Item
-                            $params = [
-                                'entity_type_id' => 16,
-                                'entity_id' => $depend_entity_response->entity->entity_id,
-                                'inventory_id' => $inventory_response->data->entity->entity_id,
-                                'vendor_id' => $vendor->entity_id,
-                                'order_from' => 'in_stock'
-                            ];
-
-                            $entity_lib->apiUpdate($params);
-                        }
-
+                    $order_item_lib = new OrderItem();
+                    Switch($depend_entity_request->item_type){
+                        case 'gift_card':
+                            $order_item_lib->addGiftCardStock($depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
+                            break;
+                        case 'deal':
+                            $order_id = $depend_entity_response->entity->attributes->order_id->id;
+                            $order_item_lib->addDealStock($order_id,$depend_entity_response->entity->entity_id,$depend_entity_request->deal_id);
+                            break;
+                        default:
+                            $order_item_lib->addProductStock($depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
+                            break;
                     }
+
                 }
 
               }
-        }
-
+            }
 
     }
 
