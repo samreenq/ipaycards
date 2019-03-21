@@ -127,124 +127,6 @@ Class EntityApiController extends Controller{
     }
 
     /**
-     * Get suggested trucks and save temp selected list
-     * @param Request $request
-     * @return \App\Http\Controllers\Response
-     */
-    public function getVehicle(Request $request)
-    {
-        $this->_apiData['error'] = 0;
-
-        // validations
-        $validator = Validator::make($request->all(), array(
-            'weight' => 'required',
-            'volume' => 'required',
-            'pickup_latitude' => 'required',
-            'pickup_longitude' => 'required',
-            'dropoff_latitude' => 'required',
-            'dropoff_longitude' => 'required',
-
-        ));
-
-        if ($validator->fails()) {
-            $this->_apiData['error'] = 1;
-            $this->_apiData['message'] = $validator->errors()->first();
-        } else {
-
-            $this->_apiData['message'] = $this->_apiData['response'] = trans($this->_langIdentifier.".success");
-            //calculate total time
-            $truck_lib = new Truck();
-            $data =  $truck_lib->getSuggestedList($request->all());
-
-            //save Truck Suggest List
-           $truck_suggested_id = $truck_lib->saveSuggestedList($data);
-
-            $this->_apiData['data']['truck'] = $data;
-            $this->_apiData['data']['truck_suggested_id'] = $truck_suggested_id;
-        }
-
-        return $this->__ApiResponse($request, $this->_apiData);
-    }
-
-    /**
-     * Save temp selected truck
-     * @param Request $request
-     * @return \App\Http\Controllers\Response
-     */
-    public function saveSelectedTruck(Request $request)
-    {
-        $this->_apiData['error'] = 0;
-
-        // validations
-        $validator = Validator::make($request->all(), array(
-            'truck_suggested_id' => 'required',
-            'truck_id' => 'required',
-
-        ));
-
-        if ($validator->fails()) {
-            $this->_apiData['error'] = 1;
-            $this->_apiData['message'] = $validator->errors()->first();
-        } else {
-
-            $this->_apiData['message'] = $this->_apiData['response'] = trans($this->_langIdentifier.".success");
-            //calculate total time
-            $truck_lib = new Truck();
-
-            //save Truck Suggest List
-            $data = $truck_lib->saveSelectedTruck($request->truck_suggested_id,$request->truck_id);
-            $data = json_decode(json_encode($data));
-
-            if($data->error == 1){
-                $this->_apiData['error'] = 1;
-                $this->_apiData['message'] = $data->message;
-            }
-            else{
-                $truck_raw = new \StdClass();
-                $truck_raw->truck_selected_id = $data->entity_id;
-                $this->_apiData['data'] = $truck_raw;
-            }
-
-        }
-
-        return $this->__ApiResponse($request, $this->_apiData);
-    }
-
-    /**
-     * @param Request $request
-     * @return \App\Http\Controllers\Response
-     */
-    public function saveDeliveryProfessional(Request $request)
-    {
-        $this->_apiData['error'] = 0;
-
-        // validations
-        $validator = Validator::make($request->all(), array(
-            'truck_selected_id' => 'required',
-            'professional_id' => 'required',
-        ));
-
-        if ($validator->fails()) {
-            $this->_apiData['error'] = 1;
-            $this->_apiData['message'] = $validator->errors()->first();
-        } else {
-
-            $this->_apiData['message'] = $this->_apiData['response'] = trans($this->_langIdentifier.".success");
-            $prof_lib = new DeliveryProfessional();
-           $data = $prof_lib->saveSelectedProfessional($request->truck_selected_id,$request->professional_id);
-
-            $data = json_decode(json_encode($data));
-
-            $this->_apiData['error'] = $data->error;
-            $this->_apiData['message'] = $data->message;
-
-        }
-
-        return $this->__ApiResponse($request, $this->_apiData);
-
-    }
-
-    /**
      * Get Customer Recent Locations
      * @param Request $request
      * @return \App\Http\Controllers\Response
@@ -298,43 +180,6 @@ Class EntityApiController extends Controller{
             $this->_apiData['error'] = 0;
             $this->_apiData['message'] = trans("api_errors.success");
             $this->_apiData['data']['location'] = $locations;
-
-        }
-
-        return $this->__ApiResponse($request, $this->_apiData);
-    }
-
-    /**
-     * @param Request $request
-     * @return \App\Http\Controllers\Response
-     */
-    public function getDriverProfile(Request $request)
-    {
-        $this->_apiData['error'] = 0;
-
-        // validations
-        $validator = Validator::make($request->all(), array(
-            'driver_id' => "required|integer|exists:driver_flat,entity_id,deleted_at,NULL",
-        ));
-
-        if ($validator->fails()) {
-            $this->_apiData['error'] = 1;
-            $this->_apiData['message'] = $validator->errors()->first();
-        } else {
-
-            $this->_apiData['message'] = $this->_apiData['response'] = trans($this->_langIdentifier.".success");
-            $request_params = $request->all();
-
-            $driver_lib = new Driver();
-            $response = $driver_lib->getDriverProfile($request->driver_id,$request_params);
-
-           // echo "<pre>"; print_r($response); exit;
-            $this->_apiData['error'] = $response['error'];
-            $this->_apiData['message'] = $response['message'];
-
-            if(isset($response['data'])){
-                $this->_apiData['data']['driver'] = $response['data'];
-            }
 
         }
 
@@ -571,12 +416,13 @@ Class EntityApiController extends Controller{
         return $this->__ApiResponse($request, $this->_apiData);
     }
 
-    public function trackDriver(Request $request)
+    public function redeemGiftCard(Request $request)
     {
         $this->_apiData['error'] = 0;
         // validations
         $validator = Validator::make($request->all(), [
-            'order_id' => "required|integer|exists:order_flat,entity_id,deleted_at,NULL",
+            'customer_id' => "required|integer|exists:customer_flat,entity_id,deleted_at,NULL",
+            'product_code' =>  "required|exists:inventory_flat,entity_id,deleted_at,NULL",
         ]);
         if ($validator->fails()) {
             $this->_apiData['error'] = 1;
@@ -584,37 +430,13 @@ Class EntityApiController extends Controller{
         } else {
 
             $this->_apiData['error'] = 0;
-            $this->_apiData['message'] = trans('system.success');
 
-            $arr = [];
-            $arr['entity_type_id'] = 'order';
-            $arr['entity_id'] = $request->order_id;
-            $arr['hook'] = 'order_pickup,order_dropoff,order_driver_location';
-            $arr['mobile_json'] = 1;
 
-            $entity_lib = new Entity();
-            $response = $entity_lib->apiGet($arr);
-            $response = json_decode(json_encode($response));
-           // echo "<pre>"; print_r($response); exit;
-            $this->_apiData['error'] = $response->error;
-
-            if(isset($response->message)){
-                $this->_apiData['message'] = $response->message;
-            }
-
-            if(isset($response->data)){
-
-                $data = new \StdClass();
-                $data->order_pickup = $response->data->order->order_pickup;
-                $data->order_dropoff = $response->data->order->order_dropoff;
-                $data->driver_location = isset($response->data->order->order_driver_location[0]->driver_location) ? $response->data->order->order_driver_location[0]->driver_location : "";
-
-                $this->_apiData['data']['tracking'] = $data;
-            }
 
         }
 
         return $this->__ApiResponse($request, $this->_apiData);
+
     }
 
 }
