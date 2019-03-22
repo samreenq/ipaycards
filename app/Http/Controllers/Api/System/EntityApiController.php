@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api\System;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\City;
+use App\Http\Models\Custom\OrderItemFlat;
 use App\Http\Models\FlatTable;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSTableFlat;
@@ -16,6 +17,7 @@ use App\Libraries\OrderHelper;
 use App\Libraries\OrderStatus;
 use App\Libraries\System\Entity;
 use App\Libraries\Truck;
+use App\Libraries\WalletTransaction;
 use Illuminate\Http\Request;
 use Validator;
 use View;
@@ -416,13 +418,18 @@ Class EntityApiController extends Controller{
         return $this->__ApiResponse($request, $this->_apiData);
     }
 
+    /**
+     * @param Request $request
+     * @return \App\Http\Controllers\Response
+     * @throws \Exception
+     */
     public function redeemGiftCard(Request $request)
     {
         $this->_apiData['error'] = 0;
         // validations
         $validator = Validator::make($request->all(), [
             'customer_id' => "required|integer|exists:customer_flat,entity_id,deleted_at,NULL",
-            'product_code' =>  "required|exists:inventory_flat,entity_id,deleted_at,NULL",
+           // 'product_code' =>  "required|exists:inventory_flat,entity_id,deleted_at,NULL",
         ]);
         if ($validator->fails()) {
             $this->_apiData['error'] = 1;
@@ -431,7 +438,53 @@ Class EntityApiController extends Controller{
 
             $this->_apiData['error'] = 0;
 
+            $order_item_flat = new OrderItemFlat();
+           $validate_gift =  $order_item_flat->validateGiftCard($request->product_code);
+           // echo "<pre>"; print_r($validate_gift); exit;
+           if($validate_gift){
 
+               $credit = ($validate_gift->discount_price > 0) ? $validate_gift->discount_price : $validate_gift->price;
+
+               //Add credit in wallet
+               $pos_arr = [];
+               $pos_arr['entity_type_id'] = 'wallet_transaction';
+               $pos_arr['debit'] = "0";
+               $pos_arr['credit'] = "$credit";
+               $pos_arr['balance'] = '';
+               $pos_arr['customer_id'] = $request->customer_id;
+               $pos_arr['transaction_type'] = 'credit';
+               $pos_arr['order_id'] = '';
+               $pos_arr['mobile_json'] = $request->mobile_json;
+               $pos_arr['login_entity_id'] = isset($request->customer_id) ? $request->customer_id : "";
+
+               $entity_lib = new Entity();
+               $data = $entity_lib->apiPost($pos_arr);
+
+               if (isset($data)) {
+                   //Update Customer Wallet
+                   $wallet_transaction = new WalletTransaction();
+                   $current_balance = $wallet_transaction->getCurrentBalance($request->customer_id);
+
+                   $entity_model = new SYSEntity();
+                   $entity_model->updateEntityAttrValue($request->customer_id, 'wallet', "$current_balance", 'customer');
+
+                    //Update Order Item
+                   $params = array(
+                       'entity_type_id' => 'order_item',
+                       'entity_id' => $validate_gift->entity_id,
+                       'is_redeem' => 1
+                   );
+
+                   $data = $entity_lib->apiUpdate($params);
+                   $this->_apiData['error'] = 0;
+                   $this->_apiData['message'] = trans('system.success');
+               }
+
+           }
+           else{
+               $this->_apiData['error'] = 1;
+               $this->_apiData['message'] = trans('system.product_code_redeem');
+           }
 
         }
 
