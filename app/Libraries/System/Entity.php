@@ -1308,6 +1308,10 @@ Class Entity extends Base
                 $request_params
             );
         }
+
+        if(isset($entityTypeData->entity_type_id) && !is_numeric($request->entity_type_id)) {
+            $request_params['entity_type_id'] = $request->entity_type_id = $entityTypeData->entity_type_id;
+        }
       //  echo "<pre>"; print_r($request);
       //  echo "<pre>"; print_r($entityTypeData); exit;
         $obj = new EntityTrigger();
