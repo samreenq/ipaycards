@@ -629,7 +629,7 @@ Class OrderProcess
             $email_content, // order items
         );
 
-        echo $email_content;
+         $email_content;
         # body
         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
