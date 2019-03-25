@@ -1,5 +1,6 @@
 <?php namespace App\Libraries;
 
+use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
 use App\Http\Models\Notification;
 use App\Http\Models\PLAttachment;
@@ -478,7 +479,7 @@ Class EntityTrigger
            // echo "<pre>"; print_r($return); exit;
         }
 
-
+        $return['is_redeem'] =  0;
         return isset($return) ? $return : array();
     }
 
@@ -1295,6 +1296,22 @@ Class EntityTrigger
         }
        // echo "<pre>"; print_r($identifier); exit;
         return ['identifier' => "$identifier"];
+    }
+
+    public function orderAfterTrigger($request,$response,$entity_type,$entity_id)
+    {
+        $order_flat = new OrderFlat();
+        $vendor_stock_count = $order_flat->checkVendorStockOrder($entity_id);
+        //echo "<pre>"; print_r($response); exit;
+        $order = $response;
+        $order_items =  $response->order_item;
+
+        if($vendor_stock_count == 0){
+            $order_process_lib = new OrderProcess();
+            $order_process_lib->processInStockItem($entity_id,$order,$order_items);
+        }
+
+
     }
 
 }

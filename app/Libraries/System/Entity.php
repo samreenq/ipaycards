@@ -622,6 +622,10 @@ Class Entity extends Base
         try {
             $id = $this->doPost($request);
             $data = $this->getData($id, $request);
+
+            //Add after hook
+            $this->apiAfterPost($request,$data,$id);
+
             $this->_apiData['data'] = array($data->object_key => $data, 'identifier' => $data->object_key);
             $this->_apiData['response'] = $this->_apiData['data'] ? trans($this->_langIdentifier.".success") : $this->_apiData['data'];
             $this->_apiData['message'] = trans($this->_langIdentifier.".success");
@@ -1309,7 +1313,7 @@ Class Entity extends Base
             );
         }
 
-        if(isset($entityTypeData->entity_type_id) && !is_numeric($request->entity_type_id)) {
+        if(isset($entityTypeData->identifier) && !is_numeric($request->entity_type_id)) {
             $request_params['entity_type_id'] = $request->entity_type_id = $entityTypeData->entity_type_id;
         }
       //  echo "<pre>"; print_r($request);
@@ -2169,5 +2173,15 @@ Class Entity extends Base
     public function postValidator($request)
     {
         return $this->_postValidator($request);
+    }
+
+    public function apiAfterPost($request,$response,$entity_id)
+    {
+        //echo "<pre>"; print_r( $this->_eTypeData); exit;
+        $entity_trigger = new EntityTrigger();
+        $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_after_trigger');
+        if (method_exists($entity_trigger, "$func")) {
+            $entity_trigger->$func($request,$response,$this->_eTypeData,$entity_id);
+        }
     }
 }

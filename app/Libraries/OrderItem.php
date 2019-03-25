@@ -210,6 +210,7 @@ Class OrderItem
         if ($deal_data && isset($deal_data[0])) {
 
             $deal = $deal_data[0];
+            $vendor_stock = 0;
             $product_ids = explode(',',$deal->product_ids);
 
             if(isset($product_ids)){
@@ -256,8 +257,21 @@ Class OrderItem
                         ];
 
                         $this->_pLib->apiPost($params);
+                        $vendor_stock++;
                     }
                 }
+
+                //Update Order Item in stock /out stock flag
+                $order_from = ($vendor_stock > 0) ? 'vendor_stock' :  'in_stock';
+
+                $params = array(
+                    'entity_type_id' => 'order_item',
+                    'entity_id' => $order_item_id,
+                    'order_from' => $order_from
+                );
+
+                $this->_pLib->apiUpdate($params);
+
             }
 
         }

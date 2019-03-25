@@ -2,10 +2,17 @@
 
 namespace App\Libraries;
 
+use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
+use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\System\Entity;
 use App\Libraries\CustomHelper;
+use App\Http\Models\Conf;
+use App\Http\Models\EmailTemplate;
+use App\Http\Models\Setting;
+use App\Libraries\GeneralSetting;
+use App\Libraries\OrderStatus;
 /**
  * Class OrderProcess
  */
@@ -466,76 +473,176 @@ Class OrderProcess
 
     }
 
-    /**
-     * Set Order final charges when driver arrived
-     * @param $order_id
-     * @param $reached_date
-     * @return array
-     */
-    private function _setFinalCharges($order_raw,$reached_date)
-    {
-        $total_distance = 0;
-
-        if(isset($order_raw[0])){
-
-            $order = $order_raw[0];
-
-            //Get distance covered
-            if(is_string($order->driver_location)){
-
-                $driver_location = json_decode($order->driver_location);
-                $total_points = count($driver_location)-1;
-
-                if((isset($driver_location[0]->latitude) && isset($driver_location[0]->longitude))
-                    && (isset($driver_location[$total_points]->latitude) && isset($driver_location[$total_points]->longitude)))
-                {
-
-                    $google_api = new GoogleApi();
-                    $api_response = $google_api->GetDrivingDistance($driver_location[0]->latitude,$driver_location[0]->longitude,$driver_location[$total_points]->latitude,$driver_location[$total_points]->longitude);
-                    $api_response = json_decode(json_encode($api_response));
-                    //echo "<pre>"; print_r($api_response); exit;
-                    $total_distance =  CustomHelper::metersToMiles($api_response->distance->value);
-                }
-
-            }
-
-            $arrived_date =  $order->arrived_date;
-
-            $to_time = strtotime($reached_date);
-            $from_time = strtotime($arrived_date);
-
-            $total_minutes =  floor(($to_time - $from_time) / 60);
-
-            $actual_charges = ($order->charge_per_minute * $total_minutes)+ $order->base_fee;
-            $actual_charges = CustomHelper::roundOffPrice($actual_charges);
-
-            $grand_total =  $actual_charges + $order->loading_price + (isset($order->extra_item_charges) ? $order->extra_item_charges : 0);
-
-            if($order->payment_method_type == 'stripe'){
-                $stripeFee = self::calcStripeFee($grand_total);
-               // $stripeFee = CustomHelper::roundOffPrice($stripeFee,2);
-                $grand_total = CustomHelper::roundOffPrice($grand_total+$stripeFee,2);
-            }
-
-            $grand_total = CustomHelper::roundOffPrice($grand_total);
-
-            $post_arr['total_minutes'] = "$total_minutes";
-            $post_arr['actual_charges'] = "$actual_charges";
-            $post_arr['grand_total'] = "$grand_total";
-            $post_arr['total_distance'] = "$total_distance";
-            $post_arr['payment_method_fee'] = $stripeFee;
-
-           // echo "<pre>"; print_r($post_arr);
-            return $post_arr;
-        }
-
-        return array();
-
-    }
-
     public static function calcStripeFee($total_amount)
     {
        return  ((($total_amount*2.9)/100)+0.3);
+    }
+
+    /**
+     * @param $order
+     * @param $order_items
+     */
+    public function processInStockItem($order_id,$order,$order_items)
+    {
+        //Get Inventory of Item
+        if($order_items){
+
+            $email_content = "<br>The ordered items are following <br>";
+          //  echo "<pre>"; print_r($order_items); exit;
+            foreach($order_items as $order_item_data){
+
+                $order_item = $order_item_data;
+              //
+                //Create email content
+                if($order_item->item_type->value == 'deal'){
+
+                    $params = array(
+                        'entity_type_id' => 'order_item_deal',
+                        'order_item_id' => $order_item->entity_id,
+                        'order_id' => $order_id,
+                        'mobile_json' => 1,
+                        'in_detail' => 1
+                    );
+
+                  $item_deals =  $this->_entityLib->apiList($params);
+                  $item_deals = json_decode(json_encode($item_deals));
+
+                    if($item_deals->data->page->total_records > 0){
+
+                        $email_content .= '<br>';
+                        $email_content .= $order_item_data->deal_id->value.':';
+
+                        foreach($item_deals->data->order_item_deal as $deals){
+
+                            $product_code = $deals->inventory_id->value;
+                            $email_content .= '<br>';
+                            $email_content .= $deals->product_id->value.' has voucher '.$product_code.'<br>';
+
+                            $this->_updateInventory($deals->inventory_id->id);
+                        }
+
+                    }
+
+                }else{
+                    $product_code = $order_item->inventory_id->value;
+                    $email_content .= '<br>';
+                    $email_content .= $order_item->product_id->value.' has voucher '.$product_code;
+
+                    $this->_updateInventory($order_item->inventory_id->id);
+                }
+
+
+            }
+
+            //Send Email
+            $this->_sendEmail($order,$email_content);
+            $this->_updateOrder($order_id);
+
+        }
+
+    }
+
+    /**
+     * @param $order_id
+     */
+    private function _updateOrder($order_id){
+
+        $entity_lib = new Entity();
+
+        //Update Inventory Status
+        $params = array(
+            'entity_type_id' => 'order_history',
+            'order_id' => $order_id,
+            'order_status' => 'delivered',
+        );
+       // echo "<pre>"; print_r($params);
+       $rr = $entity_lib->apiPost($params);
+      //  echo "<pre>"; print_r($rr); exit;
+    }
+
+    /**
+     * @param $inventory_id
+     */
+    private function _updateInventory($inventory_id)
+    {
+        $entity_lib = new Entity();
+        //Update Inventory Status
+        $params = array(
+            'entity_type_id' => 'inventory',
+            'entity_id' => $inventory_id,
+            'availability' => 'sold',
+        );
+
+        $entity_lib->apiUpdate($params);
+    }
+
+    /**
+     * @param $order
+     * @param $email_content
+     */
+    private function _sendEmail($order,$email_content)
+    {
+        $conf_model = new Conf();
+        $setting_model = new Setting();
+        $email_template_model = new EmailTemplate();
+
+        // configuration
+        $conf = $conf_model->getBy('key', 'site');
+        $conf = json_decode($conf->value);
+
+        if(isset($order->customer_id->detail->auth)){
+            $data = $order->customer_id->detail->auth;
+        }
+        else{
+            $sys_entity = new SYSEntity();
+            $customer = $sys_entity->getData($order->customer_id->id,array('mobile_json'=>1));
+            $data = $customer->auth;
+           // echo "<pre>"; print_r($customer); exit;
+        }
+
+
+        $data->created_at = date('Y-m-d H:i:s');
+
+        // send email to new admin
+        # admin email
+        $setting = $setting_model->getBy('key', 'admin_email');
+        $data->from = $setting->value;
+        # admin email name
+        $setting = $setting_model->getBy('key', 'admin_email_name');
+        $data->from_name = $setting->value;
+
+        # load email template
+        $query = $email_template_model
+            ->where("key", "=", 'new_order')
+            ->whereNull("deleted_at");
+
+        $query->whereNull("plugin_identifier");
+
+        $email_template = $query->first();
+
+        $wildcard['key'] = explode(',', $email_template->wildcards);
+        $wildcard['replace'] = array(
+            $conf->site_name, // APP_NAME
+            url('/'), // APP_LINK
+            $data->name, // ENTITY_NAME
+            $order->order_number, // order number
+            $email_content, // order items
+        );
+
+        echo $email_content;
+        # body
+        $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
+
+
+        # subject
+        $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
+        # send email
+        $order_flat = new OrderFlat();
+        $order_flat->sendMail(
+            array($data->email, $data->name),
+            $body,
+            (array)$data
+        );
     }
 
 

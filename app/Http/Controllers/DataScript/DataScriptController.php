@@ -366,7 +366,7 @@ Class DataScriptController extends Controller
 
     public function updateDate()
     {
-        $product_model = new SYSTableFlat('order');
+       /* $product_model = new SYSTableFlat('order');
         $customers = $product_model->getDataByWhere();
 
         echo '<h3>Orders</h3>';
@@ -394,6 +394,30 @@ Class DataScriptController extends Controller
                 echo '<pre>';
                 print_r($data);
             }
-        }
+        }*/
+
+      $inventory_model = new SYSTableFlat('inventory');
+      $data = $inventory_model->getDataByWhere(' availability <> "available"');
+
+      if($data){
+          $entity_lib = new Entity();
+          foreach($data as $row){
+
+              $params = array(
+                  'entity_type_id' => 'inventory',
+                  'entity_id' => $row->entity_id,
+                  'availability' => 'available'
+
+              );
+              echo '<pre>';
+              print_r($params);
+              $data = $entity_lib->apiUpdate($params);
+
+              echo '<pre>';
+              print_r($data);
+          }
+      }
+
+
     }
 }
