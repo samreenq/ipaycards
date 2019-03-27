@@ -1736,7 +1736,7 @@ class EntityController extends Controller
                         if(isset($return['data']['order_cart'][0]->cart_item)) {
 
                             $cart_items = json_decode($return['data']['order_cart'][0]->cart_item);
-                            if (count($cart_items) > 0) {
+                            if ($cart_items) {
 
                                 $entity_lib = new Entity();
 

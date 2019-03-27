@@ -1,6 +1,6 @@
 <?php
 //$data = array();
-if(count($data) > 0){
+if(isset($data)){
 
 $separate_identifier = array('general_setting','product_tags','recipe_tags');
 $out_of_entity_module = array('role','category','group');
