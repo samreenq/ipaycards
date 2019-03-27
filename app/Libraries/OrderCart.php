@@ -208,18 +208,32 @@ Class OrderCart
 
                 foreach($cart_items as $item){
 
-                    $params = array(
-                        'entity_type_id' => 14,
-                        'entity_id' => $item->product_id,
-                        'status' => 1,
-                        'availability' => 1,
-                        'mobile_json' => 1,
-                    );
+                    if(isset($item->item_type) && in_array($item->item_type,array('product','gift_card'))){
+
+                        $item_type = 'product';
+
+                        $params = array(
+                            'entity_type_id' => 'product',
+                            'entity_id' => $item->product_id,
+                            'status' => 1,
+                            'mobile_json' => 1,
+                        );
+
+                    }else{
+
+                        $item_type = 'deals';
+                        $params = array(
+                            'entity_type_id' => 'deals',
+                            'entity_id' => $item->deal_id,
+                            'status' => 1,
+                            'mobile_json' => 1,
+                        );
+                    }
                    // echo "<pre>"; print_r($params); exit;
                     $product_information = $entity_lib->apiGet($params);
 
-                    if(isset($product_information['data']['product'])){
-                        $item->detail = $product_information['data']['product'];
+                    if(isset($product_information['data'][$item_type])){
+                        $item->detail = $product_information['data'][$item_type];
                     }else{
                         $item->detail = new \StdClass();
                     }
@@ -229,7 +243,6 @@ Class OrderCart
                     unset($item);
 
                 }
-
             }
 
             $cart['data']['order_cart'][0]->cart_item = $update_item;

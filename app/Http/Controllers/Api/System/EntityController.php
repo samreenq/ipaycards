@@ -1729,7 +1729,7 @@ class EntityController extends Controller
                 else{
 
                     //print_r($return['data']['order_cart']); exit;
-                    if(isset($return['data']['order_cart'][0]) && !empty($return['data']['order_cart'][0])){
+                   /* if(isset($return['data']['order_cart'][0]) && !empty($return['data']['order_cart'][0])){
 
                        // echo "<pre>"; print_r($return['data']['order_cart'][0]); exit;
                         $update_item = array();
@@ -1768,9 +1768,9 @@ class EntityController extends Controller
                         }
 
                         $return['data']['order_cart'][0]->cart_item = $update_item;
-                    }
-
-
+                    }*/
+                    $order_cart_lib = new OrderCart();
+                    $return = $order_cart_lib->getOrderCart($request->customer_id);
                     $this->_apiData['response'] = "success";
                     $this->_apiData['data'] = $return['data'];
                 }
