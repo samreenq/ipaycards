@@ -526,7 +526,10 @@ class CategoryController extends Controller
                                 $products_list = $entity_lib->apiList($params);
                                 $products_list = json_decode(json_encode($products_list));
                                 if ($products_list->error == 0 && isset($products_list->data->product)) {
-                                    $record->product = $products_list->data->product;
+                                    if($products_list->data->product)
+                                        $record->product = $products_list->data->product;
+                                    else
+                                        $record->product = [];
                                 } else {
                                     $record->product = [];
                                 }
