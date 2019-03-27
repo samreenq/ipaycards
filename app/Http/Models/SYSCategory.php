@@ -51,7 +51,7 @@ class SYSCategory extends Base
                             $raw = $child;
 
                             $sys_table_flat = new SYSTableFlat('product');
-                            $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($child->category_id)",array('count(entity_id) as total'));
+                            $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($child->category_id) AND status = 1",array('count(entity_id) as total'));
                             $total_products = isset($get_total[0]->total) ? $get_total[0]->total : 0;
                           //  echo "<pre>"; print_r($get_total); exit;
                             //$product_count  = ($child->product_count > 0) ? $child->product_count : 0;
@@ -68,7 +68,7 @@ class SYSCategory extends Base
             elseif(isset($data->is_gift_card) && $data->is_gift_card == 1){
 
                     $sys_table_flat = new SYSTableFlat('product');
-                    $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($data->category_id)",array('count(entity_id) as total'));
+                    $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($data->category_id) AND status = 1",array('count(entity_id) as total'));
                   //  echo "<pre>"; print_r($get_total); exit;
                     $data->product_count = isset($get_total[0]->total) ? $get_total[0]->total : 0;
             }
