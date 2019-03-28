@@ -10,6 +10,49 @@ if(\Session::has(ADMIN_SESS_KEY.'_POST_DATA')){
 <script type="text/javascript" charset="utf-8">
     jQuery(document).ready(function() {
 
+        <?php if(isset($entity_data)){ ?>
+        <?php if($entity_data->identifier == 'product'){ ?>
+
+        $("#item_type").on("change",function(e){
+
+            e.preventDefault();
+            console.log($.trim($(this).val()));
+            if($.trim($(this).val()) == 'gift_card'){
+                // alert(1);
+                // $('.brand_id_field').hide();
+                $('.category_id_field').addClass('hide');
+                $('.gift_category_id_field').removeClass('hide');
+                $('.brand_id_field').addClass('hide');
+                $('.is_featured_field').addClass('hide');
+                $('.featured_type_field').addClass('hide');
+
+                $('.product_ids_field').addClass('hide');
+            }
+            else if($.trim($(this).val()) == 'deal'){
+                $('.category_id_field').addClass('hide');
+                $('.gift_category_id_field').addClass('hide');
+                $('.brand_id_field').addClass('hide');
+
+                $('.is_featured_field').addClass('hide');
+                $('.featured_type_field').addClass('hide');
+
+                $('.product_ids_field').removeClass('hide');
+
+            }  else{
+                $('.brand_id_field').show();
+                $('.category_id_field').removeClass('hide');
+                $('.gift_category_id_field').addClass('hide');
+
+                $('.is_featured_field').removeClass('hide');
+                $('.featured_type_field').removeClass('hide');
+
+                $('.product_ids_field').addClass('hide');
+            }
+
+        });
+        <?php } ?>
+        <?php } ?>
+
     if($('#notify_icon').length > 0){
 
 

@@ -682,21 +682,7 @@ console.log(extra_params);
 
 		 <?php } ?>
 
-         $("#is_gift_card").on("change",function(){
 
-             if($(this).val() == 1){
-                // $('.brand_id_field').hide();
-                 $('.category_id_field').addClass('hide');
-                $('.gift_category_id_field').removeClass('hide');
-
-
-             }else{
-                // $('.brand_id_field').show();
-                $('.category_id_field').removeClass('hide');
-                 $('.gift_category_id_field').addClass('hide');
-             }
-
-         });
 
     });
 </script>
