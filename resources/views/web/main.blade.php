@@ -149,6 +149,7 @@
 									<div class="f_circleG frotateG_08"></div>
 								</div>
                             </div>
+                            <li>Deals</li>
                         </ul>
                         <ul class='hidden-links hidden'></ul>
                     </div>
