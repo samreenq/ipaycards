@@ -208,10 +208,6 @@ Class OrderCart
 
                 foreach($cart_items as $item){
 
-                    if(isset($item->item_type) && in_array($item->item_type,array('product','gift_card'))){
-
-                        $item_type = 'product';
-
                         $params = array(
                             'entity_type_id' => 'product',
                             'entity_id' => $item->product_id,
@@ -219,21 +215,11 @@ Class OrderCart
                             'mobile_json' => 1,
                         );
 
-                    }else{
-
-                        $item_type = 'deals';
-                        $params = array(
-                            'entity_type_id' => 'deals',
-                            'entity_id' => $item->deal_id,
-                            'status' => 1,
-                            'mobile_json' => 1,
-                        );
-                    }
                    // echo "<pre>"; print_r($params); exit;
                     $product_information = $entity_lib->apiGet($params);
 
-                    if(isset($product_information['data'][$item_type])){
-                        $item->detail = $product_information['data'][$item_type];
+                    if(isset($product_information['data']['product'])){
+                        $item->detail = $product_information['data']['product'];
                     }else{
                         $item->detail = new \StdClass();
                     }
