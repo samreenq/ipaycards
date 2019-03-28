@@ -447,6 +447,9 @@ class CategoryController extends Controller
 				$query->where('category_type',"=",$request->input("category_type",""));
 		
 			}
+            //donot get deal category
+            $query->where('category_id','<>',7);
+
             // apply search
             $query = $this->_search($request, $query, $allowed_searching);
             // get total
@@ -511,8 +514,9 @@ class CategoryController extends Controller
                             }
                             else{
                                 $category_ids = $this->_entity_model->getChildCategories($record->category_id);
+                               // echo "<pre>"; print_r($category_ids); exit;
                             }
-
+                           // echo "<pre>"; print_r($category_ids); exit;
                             if ($category_ids) {
 
                                 $params = [
@@ -520,11 +524,13 @@ class CategoryController extends Controller
                                     'mobile_json' => 1
                                 ];
 
-                                $params['where_condition'] = "AND (category_id IN ($category_ids) AND is_gift_card = $record->is_gift_card)";
+                                $params['where_condition'] = "AND category_id IN ($category_ids)";
 
 
                                 $products_list = $entity_lib->apiList($params);
                                 $products_list = json_decode(json_encode($products_list));
+
+                                //echo "<pre>"; print_r($products_list); exit;
                                 if ($products_list->error == 0 && isset($products_list->data->product)) {
                                     if($products_list->data->product)
                                         $record->product = $products_list->data->product;

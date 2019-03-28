@@ -42,7 +42,7 @@ class SYSCategory extends Base
                 $parent_product_count = 0;
                 if(count($data->child)>0){
 
-                    foreach($data->child as $child){
+                    foreach($data->child as $key => $child){
 
 
                       //  print_r($child);
@@ -55,10 +55,10 @@ class SYSCategory extends Base
                             $total_products = isset($get_total[0]->total) ? $get_total[0]->total : 0;
                           //  echo "<pre>"; print_r($get_total); exit;
                             //$product_count  = ($child->product_count > 0) ? $child->product_count : 0;
-                            $raw->product_count = $total_products;
+                            $data->child[$key]->product_count = $total_products;
                             $parent_product_count += $total_products;
 
-                            $data->child[] = $raw;
+                            //$data->child[] = $raw;
                         }
 
                     }
