@@ -221,7 +221,7 @@ Class Entity extends Base
                                 if ($field_action->data_type_id == 9 || $field_action->data_type_id == 5) {
                                     foreach (explode(",", $field_action->json_data) as $tempList) {
                                         $linkedAttribute = $this->getLinkedEntityAttributeValue($field_action->attribute_id, $tempList, $lang);
-                                        if (count($linkedAttribute)) {
+                                        if (count((array)$linkedAttribute)) {
                                             if ($in_detail) $showDetail = $this->getData($linkedAttribute[0]->entity_id, array('mobile_json' => $is_mobile_request)); else $showDetail = '';
                                             $temp[] = array('id' => $linkedAttribute[0]->entity_id, 'value' => $linkedAttribute[0]->attribute, 'detail' => $showDetail);
                                         }
@@ -230,7 +230,7 @@ Class Entity extends Base
                                     if(!empty($field_action->attribute)){
 
                                         $linkedAttribute = $this->getLinkedEntityAttributeValue($field_action->attribute_id, $field_action->attribute, $lang);
-                                        if (count($linkedAttribute)) {
+                                        if (count((array)$linkedAttribute)) {
                                             if ($in_detail) $showDetail = $this->getData($linkedAttribute[0]->entity_id, array('mobile_json' => $is_mobile_request)); else $showDetail = '';
                                             $temp = array('id' => $linkedAttribute[0]->entity_id, 'value' => $linkedAttribute[0]->attribute, 'detail' => $showDetail);
                                         }

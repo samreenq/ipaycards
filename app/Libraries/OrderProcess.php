@@ -5,6 +5,7 @@ namespace App\Libraries;
 use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
 use App\Http\Models\SYSEntity;
+use App\Http\Models\SYSEntityAuth;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\System\Entity;
 use App\Libraries\CustomHelper;
@@ -488,6 +489,9 @@ Class OrderProcess
         if($order_items){
 
             $email_content = "<br>The ordered items are following <br>";
+            $gift_content = $email_content;
+            $is_gift_card = 0;
+            $normal_product = 0;
           //  echo "<pre>"; print_r($order_items); exit;
             foreach($order_items as $order_item_data){
 
@@ -495,6 +499,8 @@ Class OrderProcess
               //
                 //Create email content
                 if($order_item->item_type->value == 'deal'){
+
+                    $normal_product++;
 
                     $params = array(
                         'entity_type_id' => 'order_item_deal',
@@ -510,7 +516,7 @@ Class OrderProcess
                     if($item_deals->data->page->total_records > 0){
 
                         $email_content .= '<br>';
-                        $email_content .= $order_item_data->deal_id->value.':';
+                        $email_content .= $order_item_data->product_id->value.':';
 
                         foreach($item_deals->data->order_item_deal as $deals){
 
@@ -523,7 +529,18 @@ Class OrderProcess
 
                     }
 
-                }else{
+                }
+               elseif($order_item->item_type->value == 'gift_card') {
+
+                   $is_gift_card++;
+                   $product_code = $order_item->inventory_id->value;
+                   $gift_content .= '<br>';
+                   $gift_content .= $order_item->product_id->value.' has voucher '.$product_code;
+                   $this->_updateInventory($order_item->inventory_id->id);
+                }
+                else{
+
+                    $normal_product++;
                     $product_code = $order_item->inventory_id->value;
                     $email_content .= '<br>';
                     $email_content .= $order_item->product_id->value.' has voucher '.$product_code;
@@ -531,11 +548,17 @@ Class OrderProcess
                     $this->_updateInventory($order_item->inventory_id->id);
                 }
 
-
             }
 
             //Send Email
-            $this->_sendEmail($order,$email_content);
+            if($is_gift_card > 0){
+                $this->_sendGiftEmail($order,$gift_content);
+            }
+
+            if($normal_product > 0){
+                $this->_sendEmail($order,$email_content);
+            }
+
             $this->_updateOrder($order_id);
 
         }
@@ -645,6 +668,73 @@ Class OrderProcess
         );
     }
 
+    /**
+     * @param $order
+     * @param $email_content
+     */
+    private function _sendGiftEmail($order,$email_content)
+    {
+        $conf_model = new Conf();
+        $setting_model = new Setting();
+        $email_template_model = new EmailTemplate();
 
+        // configuration
+        $conf = $conf_model->getBy('key', 'site');
+        $conf = json_decode($conf->value);
+
+
+        $sys_entity_auth = new SYSEntityAuth();
+        $data = $sys_entity_auth->getByEmail($order->recipient_email,11);
+
+        if(!isset($data->entity_auth_id)){
+            $data = new \StdClass();
+            $data->name = 'User';
+            $data->email = $order->recipient_email;
+        }
+
+
+        $data->created_at = date('Y-m-d H:i:s');
+
+        // send email to new admin
+        # admin email
+        $setting = $setting_model->getBy('key', 'admin_email');
+        $data->from = $setting->value;
+        # admin email name
+        $setting = $setting_model->getBy('key', 'admin_email_name');
+        $data->from_name = $setting->value;
+
+        # load email template
+        $query = $email_template_model
+            ->where("key", "=", 'new_order')
+            ->whereNull("deleted_at");
+
+        $query->whereNull("plugin_identifier");
+
+        $email_template = $query->first();
+
+        $wildcard['key'] = explode(',', $email_template->wildcards);
+        $wildcard['replace'] = array(
+            $conf->site_name, // APP_NAME
+            url('/'), // APP_LINK
+            $data->name, // ENTITY_NAME
+            $order->order_number, // order number
+            $email_content, // order items
+        );
+
+         $email_content;
+        # body
+        $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
+
+
+        # subject
+        $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
+        # send email
+        $order_flat = new OrderFlat();
+        $order_flat->sendMail(
+            array($data->email, $data->name),
+            $body,
+            (array)$data
+        );
+    }
 
 }

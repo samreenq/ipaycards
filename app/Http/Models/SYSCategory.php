@@ -42,17 +42,36 @@ class SYSCategory extends Base
                 $parent_product_count = 0;
                 if(count($data->child)>0){
 
-                    foreach($data->child as $child){
+                    foreach($data->child as $key => $child){
+
+
                       //  print_r($child);
                         if($child->status == 1){
-                            $product_count  = ($child->product_count > 0) ? $child->product_count : 0;
-                            $parent_product_count += $product_count;
+
+                            $raw = $child;
+
+                            $sys_table_flat = new SYSTableFlat('product');
+                            $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($child->category_id) AND status = 1",array('count(entity_id) as total'));
+                            $total_products = isset($get_total[0]->total) ? $get_total[0]->total : 0;
+                          //  echo "<pre>"; print_r($get_total); exit;
+                            //$product_count  = ($child->product_count > 0) ? $child->product_count : 0;
+                            $data->child[$key]->product_count = $total_products;
+                            $parent_product_count += $total_products;
+
+                            //$data->child[] = $raw;
                         }
+
                     }
                 }
                 $data->product_count =  $parent_product_count;
-        }
+            }
+            elseif(isset($data->is_gift_card) && $data->is_gift_card == 1){
 
+                    $sys_table_flat = new SYSTableFlat('product');
+                    $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($data->category_id) AND status = 1",array('count(entity_id) as total'));
+                  //  echo "<pre>"; print_r($get_total); exit;
+                    $data->product_count = isset($get_total[0]->total) ? $get_total[0]->total : 0;
+            }
         }
 
         return $data;

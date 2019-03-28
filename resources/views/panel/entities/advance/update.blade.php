@@ -470,32 +470,43 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
         })
         @endif
 
-        if( $("#is_gift_card").val() == 1){
-            // $('.brand_id_field').hide();
-            $('.category_id_field').addClass('hide');
-            $('.gift_category_id_field').removeClass('hide');
 
+            <?php if($entity_data->identifier == 'product'){ ?>
 
-        }else{
-            // $('.brand_id_field').show();
-            $('.category_id_field').removeClass('hide');
-            $('.gift_category_id_field').addClass('hide');
-        }
+                var item_type = $('#item_type').val();
 
-        $("#is_gift_card").on("change",function(){
+                if($.trim(item_type) == 'gift_card'){
+                    // alert(1);
+                    // $('.brand_id_field').hide();
+                    $('.category_id_field').addClass('hide');
+                    $('.gift_category_id_field').removeClass('hide');
+                    $('.brand_id_field').addClass('hide');
+                    $('.is_featured_field').addClass('hide');
+                    $('.featured_type_field').addClass('hide');
 
-            if($(this).val() == 1){
-                // $('.brand_id_field').hide();
-                $('.category_id_field').addClass('hide');
-                $('.gift_category_id_field').removeClass('hide');
+                    $('.product_ids_field').addClass('hide');
+                }
+                else if($.trim(item_type) == 'deal'){
+                    $('.category_id_field').addClass('hide');
+                    $('.gift_category_id_field').addClass('hide');
+                    $('.brand_id_field').addClass('hide');
 
+                    $('.is_featured_field').addClass('hide');
+                    $('.featured_type_field').addClass('hide');
 
-            }else{
-                // $('.brand_id_field').show();
-                $('.category_id_field').removeClass('hide');
-                $('.gift_category_id_field').addClass('hide');
-            }
-        });
+                    $('.product_ids_field').removeClass('hide');
+
+                }  else{
+                    $('.brand_id_field').show();
+                    $('.category_id_field').removeClass('hide');
+                    $('.gift_category_id_field').addClass('hide');
+
+                    $('.is_featured_field').removeClass('hide');
+                    $('.featured_type_field').removeClass('hide');
+
+                    $('.product_ids_field').addClass('hide');
+                }
+         <?php } ?>
     });
 
 </script>

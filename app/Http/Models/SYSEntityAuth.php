@@ -2218,5 +2218,23 @@ class SYSEntityAuth extends Base
 
     }
 
+    /**
+     * @param $email
+     * @param $entity_type_id
+     * @return bool|mixed|object
+     */
+    public function getByEmail($email,$entity_type_id)
+    {
+        $query = $this->entityQuery($entity_type_id)
+            ->where('auth.email', '=', $email)
+            ->where('auth.status', '=', 1)
+            ->where('auth.is_verified', '=', 1)
+            ->orderBy("auth.status", "DESC")
+            ->orderBy("entity." . $this->primaryKey, "DESC");
+
+        $row = $query->get(array($this->__fields[0]));
+        return isset($row[0]) ? $this->get($row[0]->{$this->primaryKey}) : FALSE;
+    }
+
 
 }

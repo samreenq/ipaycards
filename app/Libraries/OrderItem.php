@@ -205,8 +205,8 @@ Class OrderItem
     public function addDealStock($order_id,$order_item_id,$deal_id)
     {
         //Get Deal
-        $flat_table = new SYSTableFlat('deals');
-        $deal_data = $flat_table->getDataByWhere(' entity_id = ' . $deal_id);
+        $flat_table = new SYSTableFlat('product');
+        $deal_data = $flat_table->getDataByWhere(' entity_id = ' . $deal_id.' AND item_type = "deal"');
         if ($deal_data && isset($deal_data[0])) {
 
             $deal = $deal_data[0];
@@ -228,7 +228,7 @@ Class OrderItem
                             'entity_type_id' => 'order_item_deal',
                             'order_id' => $order_id,
                             'order_item_id' => $order_item_id,
-                            'deal_id' => $deal_id,
+                            'parent_product_id' => $deal_id,
                             'product_id' => $product_id,
                             'inventory_id' => $data[0]->entity_id,
                             'order_from' => 'in_stock',
@@ -251,7 +251,7 @@ Class OrderItem
                             'entity_type_id' => 'order_item_deal',
                             'order_id' => $order_id,
                             'order_item_id' => $order_item_id,
-                            'deal_id' => $deal_id,
+                            'parent_product_id' => $deal_id,
                             'product_id' => $product_id,
                             'order_from' => 'vendor_stock',
                         ];

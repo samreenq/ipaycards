@@ -1342,6 +1342,11 @@ class SYSEntity extends Base
                 $search_columns['where_condition'] = " AND start_date <= '$date' AND end_date >= '$date'";
 
             }
+        if($hook == 'deals'){
+            $search_columns['entity_type_id'] = $response_key = 'product';
+            $search_columns['where_condition'] = " AND item_type = 'deal'";
+
+        }
             else{
                  $search_columns['entity_type_id'] = $response_key = $hook;
             }
@@ -1379,7 +1384,6 @@ class SYSEntity extends Base
                     //print_r($hook_data->data->{$response_key}); exit;
                     if(isset($hook_data->data->{$response_key})){
                         return $hook_data->data->{$response_key};
-                        // $return[$hook]['page'] = $hook_data->data->page;
                     }
                 }
             }

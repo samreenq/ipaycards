@@ -987,10 +987,12 @@ Class EntityTrigger
         $request = is_array($request) ? (object)$request : $request;
         $return = $this->_setRetailPrice($request);
 
-        if(isset($request->is_gift_card)){
+        if($request->item_type == 'gift_card'){
+             $return['category_id'] = $request->gift_category_id;
+        }
 
-            if($request->is_gift_card == 1)
-               $return['category_id'] = $request->gift_category_id;
+        if($request->item_type == 'deal'){
+            $return['category_id'] = "7";
         }
 
         if (isset($return)) {
@@ -1009,10 +1011,12 @@ Class EntityTrigger
         $request = is_array($request) ? (object)$request : $request;
         $return = $this->_setRetailPrice($request);
 
-        if(isset($request->is_gift_card)){
+        if($request->item_type == 'gift_card'){
+            $return['category_id'] = $request->gift_category_id;
+        }
 
-            if($request->is_gift_card == 1)
-                $return['category_id'] = $request->gift_category_id;
+        if($request->item_type == 'deal'){
+            $return['category_id'] = "7";
         }
 
         if (isset($return)) {
@@ -1097,17 +1101,22 @@ Class EntityTrigger
         $general_setting_lib = new GeneralSetting();
         $setting = $general_setting_lib->getSetting();
 
-        if(isset($setting->selling_price_margin) && !empty($request->buying_price)){
+        if($request->item_type == 'deal'){
+            $return = ['price' => $request->buying_price];
+        }else{
+            if(isset($setting->selling_price_margin) && !empty($request->buying_price)){
 
-            if(!empty($setting->selling_price_margin)){
+                if(!empty($setting->selling_price_margin)){
 
-                $margin = $request->buying_price*($setting->selling_price_margin/100);
-                $return = ['price' => $request->buying_price + $margin];
-            }
-            else{
-                $return = ['price' => $request->buying_price];
+                    $margin = $request->buying_price*($setting->selling_price_margin/100);
+                    $return = ['price' => $request->buying_price + $margin];
+                }
+                else{
+                    $return = ['price' => $request->buying_price];
+                }
             }
         }
+
         return $return;
     }
 
@@ -1190,13 +1199,17 @@ Class EntityTrigger
                     isset($depend_entity_request->deal_id) && !empty($depend_entity_request->deal_id)) {
 
                     $order_item_lib = new OrderItem();
+                   if(!isset($depend_entity_request->item_type)){
+                       $depend_entity_request->item_type = 'product';
+                   }
+
                     Switch($depend_entity_request->item_type){
                         case 'gift_card':
                             $order_item_lib->addGiftCardStock($depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
                             break;
                         case 'deal':
                             $order_id = $depend_entity_response->entity->attributes->order_id->id;
-                            $order_item_lib->addDealStock($order_id,$depend_entity_response->entity->entity_id,$depend_entity_request->deal_id);
+                            $order_item_lib->addDealStock($order_id,$depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
                             break;
                         default:
                             $order_item_lib->addProductStock($depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
@@ -1310,7 +1323,6 @@ Class EntityTrigger
             $order_process_lib = new OrderProcess();
             $order_process_lib->processInStockItem($entity_id,$order,$order_items);
         }
-
 
     }
 
