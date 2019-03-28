@@ -516,7 +516,7 @@ Class OrderProcess
                     if($item_deals->data->page->total_records > 0){
 
                         $email_content .= '<br>';
-                        $email_content .= $order_item_data->deal_id->value.':';
+                        $email_content .= $order_item_data->product_id->value.':';
 
                         foreach($item_deals->data->order_item_deal as $deals){
 

@@ -1209,7 +1209,7 @@ Class EntityTrigger
                             break;
                         case 'deal':
                             $order_id = $depend_entity_response->entity->attributes->order_id->id;
-                            $order_item_lib->addDealStock($order_id,$depend_entity_response->entity->entity_id,$depend_entity_request->deal_id);
+                            $order_item_lib->addDealStock($order_id,$depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
                             break;
                         default:
                             $order_item_lib->addProductStock($depend_entity_response->entity->entity_id,$depend_entity_request->product_id);
@@ -1323,7 +1323,6 @@ Class EntityTrigger
             $order_process_lib = new OrderProcess();
             $order_process_lib->processInStockItem($entity_id,$order,$order_items);
         }
-
 
     }
 
