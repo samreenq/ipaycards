@@ -7,6 +7,7 @@ use App\Http\Models\ApiMethodField;
 use App\Http\Models\Conf;
 use App\Http\Models\EmailTemplate;
 use App\Http\Models\PLAttachment;
+use App\Http\Models\Setting;
 use App\Http\Models\SYSAttributeOption;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSEntityAttribute;
@@ -1537,6 +1538,17 @@ class EntityController extends Controller
                 // configuration
                 $conf = $conf_model->getBy('key', 'site');
                 $conf = json_decode($conf->value);
+
+
+                // send email to new admin
+                $setting_model = new Setting();
+                # admin email
+                $setting = $setting_model->getBy('key', 'admin_email');
+                $entity->from = $setting->value;
+                # admin email name
+                $setting = $setting_model->getBy('key', 'admin_email_name');
+                $entity->from_name = $setting->value;
+
                 // send email
 
                 # load email template
