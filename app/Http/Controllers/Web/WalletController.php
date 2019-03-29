@@ -25,6 +25,8 @@
  
 namespace App\Http\Controllers\Web;
 
+use App\Http\Models\Custom\OrderItemFlat;
+use App\Http\Models\SYSEntity;
 use App\Http\Models\Web\WebEntity;
 
 use App\Http\Controllers\Controller;
@@ -194,6 +196,82 @@ class WalletController extends WebController
 			return $data1;
 		}
 	}
+
+	public function redeemGift(Request $request)
+    {
+        return View::make('web/gift_card',[]);
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function redeemCard(Request $request)
+    {
+        $rules  =  array(
+            'gift_code' 	=>  'required'
+        );
+
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails())
+        {
+            return array(
+                'error' =>1,
+                'message'=> $validator->errors()->first());
+        }else{
+            $order_item_flat = new OrderItemFlat();
+            $validate_gift =  $order_item_flat->validateGiftCard($request->gift_code);
+
+            if($validate_gift){
+
+                $credit = ($validate_gift->discount_price > 0) ? $validate_gift->discount_price : $validate_gift->price;
+
+                //Add credit in wallet
+                $pos_arr = [];
+                $pos_arr['entity_type_id'] = 'wallet_transaction';
+                $pos_arr['debit'] = "0";
+                $pos_arr['credit'] = "$credit";
+                $pos_arr['balance'] = '';
+                $pos_arr['customer_id'] = $this->_customerId;
+                $pos_arr['transaction_type'] = 'credit';
+                $pos_arr['order_id'] = '';
+                $pos_arr['mobile_json'] = 1;
+                $pos_arr['login_entity_id'] = isset($this->_customerId) ? $this->_customerId : "";
+
+                $entity_lib = new Entity();
+                $data = $entity_lib->apiPost($pos_arr);
+
+                if (isset($data)) {
+                    //Update Customer Wallet
+                    $wallet_transaction = new WalletTransaction();
+                    $current_balance = $wallet_transaction->getCurrentBalance($this->_customerId);
+
+                    $entity_model = new SYSEntity();
+                    $entity_model->updateEntityAttrValue($this->_customerId, 'wallet', "$current_balance", 'customer');
+
+                    //Update Order Item
+                    $params = array(
+                        'entity_type_id' => 'order_item',
+                        'entity_id' => $validate_gift->entity_id,
+                        'is_redeem' => 1
+                    );
+
+                    $entity_lib->apiUpdate($params);
+
+                    return array(
+                        'error' => 0,
+                        'message'=> 'Gift code redeem successfully, Please check your wallet'
+                    );
+                }
+
+            }
+            else{
+                return array(
+                    'error' =>1,
+                    'message'=> trans('system.product_code_redeem'));
+            }
+        }
+    }
 	
 
 }

@@ -300,9 +300,9 @@ Route::group(['middleware' => ['web.auth']], function () {
 
 
     Route::get('/wallet', "Web\WalletController@ShowWallet")->name('customer_wallet');//customer_transactions
-
+    Route::get('/gift_card', "Web\WalletController@redeemGift")->name('gift_card');//customer_transactions
     Route::get('/wallet_list', "Web\WalletController@getAllCustomerTransactions")->name('customer_wallet_list');//customer_transactions
-
+    Route::post('/redeem_card', "Web\WalletController@redeemCard")->name('redeem_card');//customer_transactions
     Route::post('/updateCart', "Web\CheckOutController@updateCart")->name('updateCart');
 
 

@@ -138,5 +138,5 @@ return array (
   'token_cleared' => 'Token successfully cleared',
   'invalid_entity' => 'Invalid entity id',
   'no_attribute_defined' => 'No attributes defined',
-    'product_code_redeem' => 'Product Code is already redeem',
+    'product_code_redeem' => 'Invalid gift code / It is already redeem',
 );

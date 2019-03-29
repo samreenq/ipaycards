@@ -429,8 +429,9 @@ Class EntityApiController extends Controller{
         // validations
         $validator = Validator::make($request->all(), [
             'customer_id' => "required|integer|exists:customer_flat,entity_id,deleted_at,NULL",
-           // 'product_code' =>  "required|exists:inventory_flat,entity_id,deleted_at,NULL",
+            'product_code' =>  "required",
         ]);
+
         if ($validator->fails()) {
             $this->_apiData['error'] = 1;
             $this->_apiData['message'] = $validator->errors()->first();

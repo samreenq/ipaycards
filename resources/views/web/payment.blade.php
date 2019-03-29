@@ -60,6 +60,7 @@
 								<li class="li-active"><a href="{{ route('order_history') }}">Order History</a></li>
 								{{--<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 								<li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
+								<li class="li-active"><a href="{{ route('gift_card') }}">Gift Card</a></li>
 								<?php
 							
 										if (isset($_SESSION['fbUserProfile']) )

@@ -61,6 +61,7 @@
 								<li ><a href="{{ route('order_history') }}">Order History</a></li>
 								{{--<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 								<li ><a href="{{ route('customer_wallet') }}">Wallet</a></li>
+								<li class="li-active"><a href="{{ route('gift_card') }}">Gift Card</a></li>
 								
 								
 								
@@ -88,6 +89,7 @@
 										
 
 								?>
+
 										
 							</ul>
 						</aside>
@@ -122,6 +124,8 @@
 								<h4>Payment <a href="{{ route('payment') }}"><span class="icon-tt-edit-icon"></span></a></h4>
 								<p>You don't have a payment method yet.</p>
 							</div>
+
+
 							<!--
 							<div class="editSec">
 								<h4>Order Preferences </h4>

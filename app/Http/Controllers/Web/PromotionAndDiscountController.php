@@ -28,6 +28,7 @@ use App\Http\Controllers\Controller;
 
 use App\Libraries\CustomHelper;
 
+use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 use Illuminate\Http\Input;
 
@@ -75,7 +76,7 @@ class PromotionAndDiscountController extends WebController
 		{
             $date = date('Y-m-d');
 
-			$json = json_decode(
+			/*$json = json_decode(
 						json_encode(
 							CustomHelper::internalCall(
 								$request,
@@ -86,12 +87,26 @@ class PromotionAndDiscountController extends WebController
 									'mobile_json'=>1,
                                     'availability' => 1,
                                     'where_condition' => " AND start_date <= '$date' AND end_date >= '$date'",
+                                    'limit' => 4
 								],
 								false
 							)
 						),
 						true
-					);
+					);*/
+
+			$params = [
+                'entity_type_id'=> 'promotion_discount',
+                'mobile_json'=>1,
+                'availability' => 1,
+                'where_condition' => " AND start_date <= '$date' AND end_date >= '$date'",
+                'limit' => 4
+            ];
+
+			$entity_lib = new Entity();
+			$json = $entity_lib->apiList($params);
+			$json = json_decode(json_encode($json),true);
+
 			$data = [];
 			$data['promotion_discount'] = isset($json['data']['promotion_discount'])? $json['data']['promotion_discount'] : null;
 
