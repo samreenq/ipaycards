@@ -1122,7 +1122,7 @@ class ProductController extends WebController
                 "featured_type"=>$request->input('featured_type'),
                 'status' => 1,
                // 'availability' => 1,
-                'limit'=>4
+                'limit'=>2
             );
 			$data['product_detail_url'] = $request->input('product_detail_url');
             //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
