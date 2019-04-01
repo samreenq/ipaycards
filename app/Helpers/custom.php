@@ -21,36 +21,60 @@
  * Function to convert string, object, array into utf-8 encoding
  *
  * @param $input
+ *
  * @return void
  */
 
 function utf8_encode_deep(&$input)
 {
-    if (is_string($input)) {
-        $input = utf8_encode($input);
-    } else if (is_array($input)) {
-        foreach ($input as &$value) {
-            utf8_encode_deep($value);
-        }
-
-        unset($value);
-    } else if (is_object($input)) {
-        $vars = array_keys(get_object_vars($input));
-
-        foreach ($vars as $var) {
-            utf8_encode_deep($input->$var);
-        }
-    }
+	if ( is_string($input) ) {
+		$input = utf8_encode($input);
+	} else if ( is_array($input) ) {
+		foreach ( $input as &$value ) {
+			utf8_encode_deep($value);
+		}
+		
+		unset($value);
+	} else if ( is_object($input) ) {
+		$vars = array_keys(get_object_vars($input));
+		
+		foreach ( $vars as $var ) {
+			utf8_encode_deep($input->$var);
+		}
+	}
 }
 
-function utf8_encode_str($string)
+
+/**
+ * utf8 Encode String
+ *
+ * @param $str
+ *
+ * @return bool|string|string[]|null
+ */
+function utf8_encode_str($str)
 {
-    return trim(
-        iconv(
-            mb_detect_encoding($string, mb_detect_order(), TRUE),
-            "UTF-8", $string
-        )
-    );
+	//$regex = '/[\x00-\x1F\x7F\xA0]/u'; // A0 is space
+	$regex = '/[\x00-\x1F\x7F]/u';
+	$regex2 = '/[\xA0]/u';
+	
+	try {
+		$enc = preg_replace("/\r|\n/", "", trim(
+			preg_replace($regex, '', // filter further
+				preg_replace($regex2, ' ', // set spaces
+					iconv(
+						mb_detect_encoding($str, mb_detect_order(), TRUE),
+						"UTF-8", $str
+					)
+				)
+			)
+		));
+	} catch ( \Exception $e ) {
+		$enc = utf8_encode($str);
+	}
+	
+	return $enc;
+	
 }
 
 /**
@@ -60,9 +84,9 @@ function utf8_encode_str($string)
  */
 function load_time($started_at = NULL)
 {
-    return $started_at ?
-        'Cool, that only took ' . (microtime(TRUE) - $started_at) . ' seconds!' :
-        'Start time invalid';
+	return $started_at ?
+		'Cool, that only took ' . ( microtime(TRUE) - $started_at ) . ' seconds!' :
+		'Start time invalid';
 }
 
 /**
@@ -72,75 +96,114 @@ function load_time($started_at = NULL)
  * @param int $port
  * @param string $method
  * @param array $params
+ *
  * @throws Exception
  */
 function background_call($url, $port = 80, $method = 'GET', $params = [])
 {
-    // get/set params
-    $parts = parse_url($url);
-    $method = strtoupper($method);
-
-    $url = str_replace(url('/'), '', $url);
-    $url = url('/') . ':' . $port . $url;
-
-    try {
-
-        $fp = fsockopen(
-            $parts['host'],
-            isset($parts['port']) ? $parts['port'] : $port,
-            $errno,
-            $errstr,
-            NULL
-        );
-
-        if ($fp) {
-            //$user_agent = $_SERVER['HTTP_USER_AGENT'];
-            // Fake user agent
-            $user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36';
-
-            // prepare data to write to socket
-            $out = $method . " " . $parts['path'] . " HTTP/1.1\r\n";
-            $out .= "Host: " . $parts['host'] . "\r\n";
-            $out .= "User-Agent: " . $user_agent . "\r\n";
-
-
-            if ($method == 'POST') {
-                $params = is_array($params) ? $params : [];
-
-                // build query param
-                $content = http_build_query($params);
-
-                // push csrf token
-                // push other headers
-                $out .= "Content-Type: application/x-www-form-urlencoded\r\n";
-                $out .= "Content-Length: " . strlen($content) . "\r\n";
-            }
-
-            $out .= "Accept: */*\r\n";
-            $out .= "\r\n";
-
-            fwrite($fp, $out);
-
-            // write post params if exists
-            if ($method == 'POST' && isset($content)) {
-                fwrite($fp, $content);
-            }
-
-            fclose($fp);
-        }
-    } catch
-    (\Exception $e) {
-        //echo "$errstr ($errno)<br />\n";
-        throw new \Exception('bagroundCall : ' . $e->getMessage());
-    }
-
+	// get/set params
+	$parts = parse_url($url);
+	$method = strtoupper($method);
+	
+	$url = str_replace(url('/'), '', $url);
+	$url = url('/') . ':' . $port . $url;
+	
+	try {
+		
+		$fp = fsockopen(
+			$parts['host'],
+			isset($parts['port']) ? $parts['port'] : $port,
+			$errno,
+			$errstr,
+			NULL
+		);
+		
+		if ( $fp ) {
+			//$user_agent = $_SERVER['HTTP_USER_AGENT'];
+			// Fake user agent
+			$user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36';
+			
+			// prepare data to write to socket
+			$out = $method . " " . $parts['path'] . " HTTP/1.1\r\n";
+			$out .= "Host: " . $parts['host'] . "\r\n";
+			$out .= "User-Agent: " . $user_agent . "\r\n";
+			
+			
+			if ( $method == 'POST' ) {
+				$params = is_array($params) ? $params : [];
+				
+				// build query param
+				$content = http_build_query($params);
+				
+				// push csrf token
+				// push other headers
+				$out .= "Content-Type: application/x-www-form-urlencoded\r\n";
+				$out .= "Content-Length: " . strlen($content) . "\r\n";
+			}
+			
+			$out .= "Accept: */*\r\n";
+			$out .= "\r\n";
+			
+			fwrite($fp, $out);
+			
+			// write post params if exists
+			if ( $method == 'POST' && isset($content) ) {
+				fwrite($fp, $content);
+			}
+			
+			fclose($fp);
+		}
+	} catch
+	( \Exception $e ) {
+		//echo "$errstr ($errno)<br />\n";
+		throw new \Exception('bagroundCall : ' . $e->getMessage());
+	}
+	
 }
 
 /**
  * @param $array
+ *
  * @return mixed
  */
-function last_key($array){
-    $keys = array_keys($array);
-    return end($keys);
+function last_key($array)
+{
+	$keys = array_keys($array);
+	return end($keys);
+}
+
+/**
+ * To CamelCase
+ *
+ * @param $word
+ *
+ * @return string|string[]|null
+ */
+function to_camel_case($word)
+{
+	
+	return preg_replace_callback(
+		"/(^|_)([a-z])/",
+		function ($m) {
+			return strtoupper($m[2]);
+		},
+		$word);
+	
+	return preg_replace('/(^|_)([a-z])/e', 'strtoupper("\\2")', $word);
+}
+
+/**
+ * Map Keys
+ *
+ * @param array $array
+ * @param array $mapping_array
+ */
+function map_keys(array &$array, array $mapping_array)
+{
+	array_walk($array, function ($v, $k) use (&$array, $mapping_array) {
+		if ( isset($mapping_array [ $k ]) ) {
+			$array[ $mapping_array [ $k ] ] = $v;
+			unset($array[ $k ]);
+		}
+	});
 }
