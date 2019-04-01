@@ -247,8 +247,44 @@
     </section>
 @endsection
 
+@section("top_category")
+    <section class="greybg topCategories">
+        <div class="container">
+            <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+                <h2 class="mr-auto align-items-start">Gaming Cards</h2>
+                <a href="<?php echo url('/') . '/product?entity_type_id=14&brand_id=1'; ?>"
+                class="align-items-end viewMore">See More</a>
+            </div>
+            <div class="row" id="topCategories">
+                <div style="
+														position: absolute;
+														top: 50%;
+														left: 50%;
+														margin-top: -50px;
+														margin-left: -50px;
+														width: 100px;
+														height: 100px;
+													"
+                     id="LoadingPopularCategoriesImage" align="center" style="display: none">
+                    <div class="floatingCirclesG">
+                        <div class="f_circleG frotateG_01"></div>
+                        <div class="f_circleG frotateG_02"></div>
+                        <div class="f_circleG frotateG_03"></div>
+                        <div class="f_circleG frotateG_04"></div>
+                        <div class="f_circleG frotateG_05"></div>
+                        <div class="f_circleG frotateG_06"></div>
+                        <div class="f_circleG frotateG_07"></div>
+                        <div class="f_circleG frotateG_08"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
 @section("essentials")
-    <section class="greybg essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
+    <section class="lightgreybg essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
         <div class="container">
             <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
                 <h2 class="mr-auto align-items-start">iPayCards Essentials</h2>
@@ -281,7 +317,7 @@
 
 @section("popular_categories")
 
-    <section class="lightgreybg popCate">
+   <!-- <section class="lightgreybg popCate">
         <div class="container">
             <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
                 <h2 class="mr-auto align-items-start">Popular Categories</h2>
@@ -311,21 +347,48 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </section>-->
 
 @endsection
 
+
 @section("testimonial")
-    @include("web/includes/main/testimonial")
+    <section class="greybg popCate">
+        <div class="container">
+            <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+                <h2 class="mr-auto align-items-start">Browse By Categories</h2>
+            </div>
+            <div class="row" id="mainCategory">
+                <div style="
+														position: absolute;
+														top: 50%;
+														left: 50%;
+														margin-top: -50px;
+														margin-left: -50px;
+														width: 100px;
+														height: 100px;
+													"
+                     id="LoadingPopularCategoriesImage" align="center" style="display: none">
+                    <div class="floatingCirclesG">
+                        <div class="f_circleG frotateG_01"></div>
+                        <div class="f_circleG frotateG_02"></div>
+                        <div class="f_circleG frotateG_03"></div>
+                        <div class="f_circleG frotateG_04"></div>
+                        <div class="f_circleG frotateG_05"></div>
+                        <div class="f_circleG frotateG_06"></div>
+                        <div class="f_circleG frotateG_07"></div>
+                        <div class="f_circleG frotateG_08"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @section("footer")
     @include("web/includes/footer")
 @endsection
-
-
-
 
 {{--  Models   --}}
 
@@ -393,10 +456,11 @@
         aboutBusiness("{{ route('aboutBusiness') }}");
         testimonial("{{ route('testimonial') }}");
         promotionAndDiscount("{{ route('promotionAndDiscount') }}");
-
+        mainCategory("{{ route('main_category') }}");
 
         aboutBusiness("{{ route('aboutBusiness') }}");
         referAFriend("{{ route('refer_a_friend') }}");
+        topCategoryProducts(14, 2, "{{ route('top_category_products') }}", "{{ route('product_detail') }}", "{{ route('add_to_wishlist') }}", "{{ route('add_to_cart') }}", "{{ route('total_price') }}");
 
         // Auto Adjust Height
         $(window).on('load', function () {

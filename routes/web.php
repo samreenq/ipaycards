@@ -213,8 +213,9 @@ Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_a
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
 
 Route::get('/testimonial', "Web\TestimonialController@getTestimonial")->name('testimonial');
-
+    Route::get('/main_category', "Web\ProductController@getMainCategory")->name('main_category');
 Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDiscount")->name('promotionAndDiscount');
+    Route::get('/top_category_products', "Web\ProductController@topCategotyProducts")->name('top_category_products');
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');

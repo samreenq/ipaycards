@@ -24,6 +24,7 @@
 		@yield("product_detail")
 		
 		@yield("news_and_peak_seasons")
+		@yield("top_category")
 		@yield("essentials")
 		@yield("guest_chef_deal")
 		@yield("popular_categories")

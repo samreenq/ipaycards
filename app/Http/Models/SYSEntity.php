@@ -642,7 +642,7 @@ class SYSEntity extends Base
                     }
                 }
 
-              //  echo $query; exit;
+             // echo $query; exit;
                 $raw_records = \DB::select($query);
                 //echo "<pre>"; print_r($raw_records); exit;
 
@@ -676,7 +676,7 @@ class SYSEntity extends Base
                 }
             }
 
-
+           // echo $query;
             $raw_records = \DB::select($query);
 
         }

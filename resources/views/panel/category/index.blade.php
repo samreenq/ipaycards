@@ -251,9 +251,9 @@
 
         if($("#is_parent:checked").val() == 1){
             $(".parent_id_field").hide();
-           $(".is_featured_field").hide();
+           $(".is_featured_field").show();
             $(".category_type_field").show();
-           $(".featured_type_field").hide();
+          // $(".featured_type_field").hide();
 
      /*       $('.gallery-wrap').show();
             $('.top-wrap').removeClass('col-md-12');
@@ -264,7 +264,7 @@
 
         }else{
             $(".parent_id_field").show();
-            $(".is_featured_field").show();
+            $(".is_featured_field").hide();
             $(".category_type_field").hide();
 
           /*  $('.gallery-wrap').hide();
@@ -284,8 +284,8 @@
             //alert($("#is_parent:checked").val());
             if($("#is_parent:checked").val() == 1){
                 $(".parent_id_field").hide();
-                $(".is_featured_field").hide();
-                $(".featured_type_field").hide();
+                $(".is_featured_field").show();
+               // $(".featured_type_field").hide();
                 $(".is_gift_card_field").show();
                // $(".category_type_field").show();
 
@@ -298,7 +298,7 @@
 
             }else{
                 $(".parent_id_field").show();
-                $(".is_featured_field").show();
+                $(".is_featured_field").hide();
                 $(".is_gift_card_field").hide();
                // $(".featured_type_field").show();
                // $(".category_type_field").hide();
@@ -313,16 +313,16 @@
         });
 
 
-        $("input[name='is_featured']").on("change",function(){
+      /*  $("input[name='is_featured']").on("change",function(){
             if($(this).val() == 1){
                 $(".featured_type_field").show();
             }
             else{
                 $(".featured_type_field").hide();
             }
-        });
+        });*/
 
-        if($('#is_featured').length > 0){
+       /* if($('#is_featured').length > 0){
 
             $('.featured_type_field').addClass('hide');
 
@@ -334,7 +334,7 @@
                     $('.featured_type_field').addClass('hide');
                 }
             });
-        }
+        }*/
 
     });
 

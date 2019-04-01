@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\FlatTable;
+use App\Http\Models\SYSCategory;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\CustomHelper;
 use App\Libraries\GeneralSetting;
@@ -1241,6 +1242,80 @@ class ProductController extends WebController
 
             return $data1;
         }
+    }
+
+    public function getMainCategory(Request $request)
+    {
+        $params = ['level'=>1,
+            'limit'=>8,
+            'status' => 1];
+
+        $data = [];
+        $response = CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false);
+        $categories = json_decode(json_encode($response));
+        if($categories->error == 0){
+            $data['categories'] = $categories->data->category_listing;
+        }
+        else{
+            $data['categories'] = [];
+        }
+
+
+        return View::make('web/includes/main/category',$data)->__toString();
+       // echo "<pre>"; print_r($categories); exit;
+    }
+
+    public function topCategotyProducts(Request $request)
+    {
+        $params = [
+           // 'level' => 1,
+            'top_category' => 1,
+            'limit' => 1,
+            'status' => 1
+        ];
+
+        $data = [];
+        $response = CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false);
+        $categories = json_decode(json_encode($response));
+       // echo "<pre>"; print_r( $categories); exit;
+
+        if($categories->error == 0){
+            $categories = $categories->data->category_listing[0];
+
+            $category_id = $categories->category_id;
+            $category_model = new SYSCategory();
+            $category_ids = $category_model->getChildCategories($category_id);
+           // echo "<pre>"; print_r( $category_ids); exit;
+            $params = array(
+               'entity_type_id' =>  'product',
+                'where_condition' => "AND FIND_IN_SET('$category_ids',category_id)",
+                'status' => 1,
+            );
+
+            $entity_lib = new Entity();
+
+            $products_list = $entity_lib->apiList($params);
+            $products_list = json_decode(json_encode($products_list),true);
+           // echo "<pre>"; print_r($products_list); exit;
+            if ($products_list['error'] == 0 && isset($products_list['data']['entity_listing'])) {
+                if($products_list['data']['entity_listing'])
+                    $data['products']  = $products_list['data']['entity_listing'];
+                else
+                    $data['products']  = [];
+            } else {
+                $data['products']  = [];
+            }
+
+        }
+        else{
+            $data['products'] = [];
+        }
+
+        $data['category'] = $categories;
+        $data['currency'] = $this->_object_library_general_setting->getCurrency();
+       // echo "<pre>"; print_r( $products_list); exit;
+        return View::make('web/includes/main/top_category',$data)->__toString();
+
     }
 
 }
