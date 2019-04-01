@@ -1139,10 +1139,10 @@ class ProductController extends WebController
      * @param Request $request
      * @return string|\Symfony\Component\Translation\TranslatorInterface
      */
-	public function newsAndPeakSeasons(Request $request) 
+	public function _newsAndPeakSeasons(Request $request)
 	{
 		$rules  =  array(	
-							'featured_type'		 =>  'required'				,	
+							'featured_type'		 =>  'required'				,
 							'product_detail_url' =>  'required'				
 						); 
 		$validator = Validator::make($request->all(),$rules);
@@ -1171,5 +1171,76 @@ class ProductController extends WebController
 			return View::make('web/includes/main/news_and_peak_seasons',$data)->__toString();
 		}
 	}
+
+    public function newsAndPeakSeasons(Request $request)
+    {
+       /* $rules  =  array(
+            'product_detail_url' =>  'required'
+        );
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails())
+        {
+            return trans('web.productError');
+        }
+        else
+        {*/
+            $data = array("entity_type_id"=>'brand',
+                'status' => 1,
+                'limit'=>4);
+
+            $data['product_detail_url'] = '';
+            //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
+            //$json = json_decode($response,true);
+            $entity_lib = new Entity();
+            $response = $entity_lib->apiList($data);
+            $json = json_decode(json_encode($response),true);
+            $data['brands'] = isset($json["data"]['entity_listing'])? $json["data"]["entity_listing"] : null;
+        //echo "<pre>"; print_r( $data['brands']); exit;
+            $data['currency'] = $this->_object_library_general_setting->getCurrency();
+            return View::make('web/includes/main/brands',$data)->__toString();
+       // }
+    }
+
+    public function getBrandProducts(Request $request)
+    {
+        $validator 	= 	Validator::make(
+            $request->all(),
+            [
+                'entity_type_id'	 =>  'required'		,
+                "brand_id"		 =>  'required'
+            ]
+        );
+        if($validator->fails())
+        {
+            return trans('web.productError');
+        }
+        else
+        {
+
+            $data['product_detail_url'] = $request->input('product_detail_url');
+            $limit = $request->input('limit');
+
+            $params = 	[
+                'entity_type_id'		=>		'product',
+                'brand_id'			=>		$request->input('brand_id')	,
+                'status'                => 1,
+                'offset'				=>		$request->input('offset')	,
+                'limit'					=>		$limit,
+                'order_by'          => 'entity_id',
+                'sorting'           => 'DESC'
+            ];
+            $json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($params)),true);
+            $data['products'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
+            $data['currency'] = $this->_object_library_general_setting->getCurrency();
+
+            $data1 = [
+                'products'	=> View::make('web/includes/product/product_list',$data)->__toString(),
+                'items'		=> isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/$limit) : null
+            ];
+
+            return $data1;
+        }
+    }
 
 }

@@ -445,20 +445,17 @@
 						{		
 							$("#LoadingnewsAndPeakSeasonsImage").hide();					
 							$(".newsAndPeakSeasons").empty().append(data); 	
-							add_to_wishlist(Request_url2);
-							
-							
-								
-								
+						   //add_to_wishlist(Request_url2);
+
+
 								// Add Cart Btn Animation
-									
-									$(".panel").on("click", function(e){
+								/*$(".panel").on("click", function(e){
 										  var $_target =  $(e.currentTarget);
 										  var $_panelBody = $_target.find(".collapse");
 										  if($_panelBody){
 											$_panelBody.collapse('toggle')
 										  }
-									});
+									});*/
 									
 									
 									/*
@@ -469,7 +466,7 @@
 									});
 									*/
 									//Inc Dec Button----------------
-									$(".incr-btn4").on("click", function (e) 
+									/*$(".incr-btn4").on("click", function (e)
 									{
 
 										var $button = $(this);
@@ -660,7 +657,7 @@
 										load_cart(Request_url3,Request_url4);
 										e.preventDefault();
 										
-									});		
+									});	*/
 									$(".page_showcase").css({ 'display': "block" });
 						}
 						
@@ -1541,6 +1538,35 @@
 							}	
 						});
 	}
+
+function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_url,Request_url2,Offset,Limit)
+{
+    $("#LoadingImageProducts").show();
+    $.ajax ({
+
+        url: Request_url,
+        type: 'get',
+        data:   {
+            entity_type_id				: 	Entity_type_id 		 ,
+            product_detail_url			:	Product_detail_url	 ,
+            brand_id					:	brand_id 		 ,
+            offset						:	Offset				 ,
+            limit						:	Limit
+        },
+        dataType: 'json',
+        success: function(data)
+        {
+            if(data['items'] > 0){
+                $(".page_showcase").css({ 'display': "block" });
+            }
+            $("#products").empty().append(data['products']);
+            $("#LoadingImageProducts").hide();
+            $('#pagination').pagination('updateItems', data['items']);
+            add_to_wishlist(Request_url2);
+
+        }
+    });
+}
 	
 	function order_history_list(Entity_type_id,Order_history_url,Order_detail_url,Order_review_url,Offset,Limit)
 	{

@@ -585,7 +585,7 @@
 		
 		<?php 
 		
-		if( isset($_REQUEST['category_id']) || isset($_REQUEST['product_promotion_id']) || isset($_REQUEST['featured_type']) || isset($_REQUEST['title']))
+		if( isset($_REQUEST['category_id']) || isset($_REQUEST['product_promotion_id']) || isset($_REQUEST['featured_type']) || isset($_REQUEST['title']) || isset($_REQUEST['brand_id']))
 		{
 
 		?>
@@ -647,6 +647,9 @@
 						}
 			
 				?>
+                        <?php if(isset($_REQUEST['brand_id'])){ ?>
+                            brand_product_list(14,<?php echo $_REQUEST['brand_id']; ?>,"{{ route('brand_products') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+                        <?php } ?>
 
                 <?php   if( isset($_REQUEST['title']) ) {
                         $title = addslashes($_REQUEST['title']);

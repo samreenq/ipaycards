@@ -207,6 +207,7 @@ Route::get('/categories', "Web\ProductController@categories")->name('categories'
 Route::get('/product', "Web\ProductController@getAllProduct")->name('product');
 Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts")->name('product_promotion');
 Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
+    Route::get('/product/brand', "Web\ProductController@getBrandProducts")->name('brand_products');
 
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
