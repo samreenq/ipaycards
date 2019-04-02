@@ -310,6 +310,7 @@ Class EntityTrigger
                                 'customer_id' => $entity_id,
                                 'credit' => "$refer_friend_credit",
                                 'debit' => "0",
+                                'wallet_source' => 'refer_friend',
                                 'transaction_type' => 'credit'
                             );
 
@@ -434,6 +435,7 @@ Class EntityTrigger
                 $pos_arr['balance'] = '';
                 $pos_arr['customer_id'] = $request->customer_id;
                 $pos_arr['transaction_type'] = 'debit';
+                $pos_arr['wallet_source'] = 'order';
                 $pos_arr['order_id'] = $entity_id;
                 $pos_arr['mobile_json'] = $request->mobile_json;
                 $pos_arr['login_entity_id'] = isset($request->login_entity_id) ? $request->login_entity_id : "";

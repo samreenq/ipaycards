@@ -454,12 +454,14 @@ Class EntityApiController extends Controller{
                $pos_arr['balance'] = '';
                $pos_arr['customer_id'] = $request->customer_id;
                $pos_arr['transaction_type'] = 'credit';
+               $pos_arr['wallet_source'] = 'gift_card';
                $pos_arr['order_id'] = '';
                $pos_arr['mobile_json'] = $request->mobile_json;
                $pos_arr['login_entity_id'] = isset($request->customer_id) ? $request->customer_id : "";
 
                $entity_lib = new Entity();
-               $data = $entity_lib->apiPost($pos_arr);
+               $wallet_post = $entity_lib->apiPost($pos_arr);
+               ///$wallet_post = json_decode(json_encode($wallet_post),true);
 
                if (isset($data)) {
                    //Update Customer Wallet
@@ -479,6 +481,7 @@ Class EntityApiController extends Controller{
                    $data = $entity_lib->apiUpdate($params);
                    $this->_apiData['error'] = 0;
                    $this->_apiData['message'] = trans('system.success');
+                   $this->_apiData['data'] = $wallet_post;
                }
 
            }

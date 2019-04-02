@@ -8,9 +8,10 @@
 
 				
 				<tr class="panelled whitebg">
-					<th>Order #</th>
 					<th>Date</th>
 					<th>Type</th>
+					<th>Source</th>
+					<th>Order #</th>
 					<th>Amount</th>
 				</tr>
 	<?php
@@ -22,9 +23,11 @@
 				
 			?>
 						<tr class="panelled whitebg">
-							<td><?php if(isset($customer_wallet_attributes['order_id']['detail']['order_number'])) echo $customer_wallet_attributes['order_id']['detail']['order_number']; ?></td>
 							<td><?php if(isset($customer_wallet_attributes['created_at'])) echo date(DATE_FORMAT_ADMIN, strtotime($customer_wallet_attributes['created_at'])); ?></td>
 							<td><?php if(isset($customer_wallet_attributes['transaction_type']['option'])) echo $customer_wallet_attributes['transaction_type']['option']; ?></td>
+							<td><?php if(isset($customer_wallet_attributes['wallet_source']['option'])) echo $customer_wallet_attributes['wallet_source']['option']; ?></td>
+							<td><?php if(isset($customer_wallet_attributes['order_id']['detail']['order_number'])) echo $customer_wallet_attributes['order_id']['detail']['order_number']; else echo '-'; ?></td>
+
 							<td>
 								<?php 
 										if(isset($customer_wallet_attributes['transaction_type'])) 
