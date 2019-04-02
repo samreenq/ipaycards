@@ -276,7 +276,6 @@
 										
 										$button.parent().find('.quantity').val(newVal);
 										product_quantity  = newVal;
-										alert(product_quantity);
 											
 										if(product_quantity>1)
 										{
