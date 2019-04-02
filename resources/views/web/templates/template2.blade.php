@@ -22,7 +22,7 @@
 		
 		@yield("product")
 		@yield("product_detail")
-		
+		@yield("brands")
 		@yield("news_and_peak_seasons")
 		@yield("top_category")
 		@yield("essentials")

@@ -139,7 +139,7 @@
 									</div>
 								</div>
 							</div>
-
+							<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $productItemsList['attributes']['product_code'] !!}" class="perishable">{!! $productItemsList['attributes']['product_code'] !!}</a>
 							<h4>
 								<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code']; ?>" >
 								@if(isset($productItemsList["attributes"]['title'])) {{ $productItemsList["attributes"]['title'] }} @endif</a>

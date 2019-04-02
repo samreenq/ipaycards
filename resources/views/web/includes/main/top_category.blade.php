@@ -84,9 +84,9 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
                     </div>
                 </div>
             </div>
-
+            <a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $attributes['attributes']['product_code'] !!}" class="perishable">{!! $attributes['attributes']['product_code'] !!}</a>
             <h4>
-                <a href="<?php echo url('/').'/product?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" >
+                <a href="<?php echo url('/').'/product_detail?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" >
                     <?php echo $attributes['attributes']['title'];?>
                 </a>
             </h4>

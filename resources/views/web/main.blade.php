@@ -171,45 +171,7 @@
 @endsection
 
 
-
-
-
-@section("news_and_peak_seasons")
-    <!--<section class="lightgreybg">
-        <div class="np-seasons">
-            <div class="container">
-                <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
-                    <h2 class="mr-auto align-items-start">New and Peak Seasons</h2>
-                    <a href="<?php // echo url('/') . '/product?entity_type_id=14&featured_type=1'; ?>"
-                       class="align-items-end viewMore">See More</a>
-                </div>
-                <div class="row newsAndPeakSeasons">
-                    <div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-                         id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
-						<div class="floatingCirclesG">
-							<div class="f_circleG frotateG_01"></div>
-							<div class="f_circleG frotateG_02"></div>
-							<div class="f_circleG frotateG_03"></div>
-							<div class="f_circleG frotateG_04"></div>
-							<div class="f_circleG frotateG_05"></div>
-							<div class="f_circleG frotateG_06"></div>
-							<div class="f_circleG frotateG_07"></div>
-							<div class="f_circleG frotateG_08"></div>
-						</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>-->
+@section("brands")
     <section class="lightgreybg">
         <div class="np-seasons">
             <div class="container">
@@ -218,7 +180,7 @@
                     <a href="<?php echo url('/') . '/product?entity_type_id=14&featured_type=1'; ?>"
                        class="align-items-end viewMore">See More</a>
                 </div>
-                <div class="row newsAndPeakSeasons">
+                <div class="row brandList">
                     <div style="
 														position: absolute;
 														top: 50%;
@@ -228,7 +190,7 @@
 														width: 100px;
 														height: 100px;
 													"
-                         id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
+                         id="LoadingbrandListImage" align="center" style="display: none">
                         <div class="floatingCirclesG">
                             <div class="f_circleG frotateG_01"></div>
                             <div class="f_circleG frotateG_02"></div>
@@ -246,6 +208,7 @@
         </div>
     </section>
 @endsection
+
 
 @section("top_category")
     <section class="greybg topCategories">
@@ -447,7 +410,7 @@
         load_wishlist("{{route('add_to_wishlist')}}");
 		popularCategories("{{ route('popularCategories') }}");
 
-        newsAndPeakSeasons(14, 1, "{{ route('newsAndPeakSeasons') }}", "{{ route('product_detail') }}", "{{ route('add_to_wishlist') }}", "{{ route('add_to_cart') }}", "{{ route('total_price') }}");
+        brandProducts("{{ route('getBrands') }}", "{{ route('product_detail') }}");
         todayTodayEssentials(14, 2, "{{ route('essentials') }}", "{{ route('product_detail') }}", "{{ route('add_to_wishlist') }}", "{{ route('add_to_cart') }}", "{{ route('total_price') }}");
         signin("{{ route('signin') }}");
        // signup("{{ route('signup') }}", "{{ route('phoneVerification') }}");

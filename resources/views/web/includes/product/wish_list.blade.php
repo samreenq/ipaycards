@@ -40,13 +40,8 @@ if(isset($wishlist))
 									<td class="addItemRecipe"><?php echo $wishlistItems['title'];?></td>
 									<td class="addItemWeight" align="right">
 											<?php 
-												
-											
-																 if(isset( $wishlistItems["weight"])  && isset( $wishlistItems["unit_option"]))
-																	echo '('.$wishlistItems["weight"]." ".$wishlistItems["unit_option"]. ')';
-												 
-											
-												
+												 if(isset( $wishlistItems["product_code"])  && isset( $wishlistItems["product_code"]))
+													echo $wishlistItems["product_code"];
 											?>
 									</td>	
 								</tr>

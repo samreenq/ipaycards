@@ -474,10 +474,7 @@ class ProductController extends WebController
 					true
 				);
 		
-		
-			
-		
-				
+
 		$json2 = json_decode(
 					json_encode(
 						$this->_object_library_entity->apiList(
@@ -491,8 +488,7 @@ class ProductController extends WebController
 					),
 					true
 				);
-
-    //    echo "<pre>"; print_r($json2); exit;
+		//echo "<pre>"; print_r($json2); exit;
 
 		$post_param = $request->all();
 		$request->request->remove('category_id');
@@ -1140,7 +1136,7 @@ class ProductController extends WebController
      * @param Request $request
      * @return string|\Symfony\Component\Translation\TranslatorInterface
      */
-	public function _newsAndPeakSeasons(Request $request)
+	public function newsAndPeakSeasons(Request $request)
 	{
 		$rules  =  array(	
 							'featured_type'		 =>  'required'				,
@@ -1173,34 +1169,22 @@ class ProductController extends WebController
 		}
 	}
 
-    public function newsAndPeakSeasons(Request $request)
+    public function getBrands(Request $request)
     {
-       /* $rules  =  array(
-            'product_detail_url' =>  'required'
-        );
-        $validator = Validator::make($request->all(),$rules);
+        $data = array("entity_type_id"=>'brand',
+            'status' => 1,
+            'limit'=>4);
 
-        if($validator->fails())
-        {
-            return trans('web.productError');
-        }
-        else
-        {*/
-            $data = array("entity_type_id"=>'brand',
-                'status' => 1,
-                'limit'=>4);
-
-            $data['product_detail_url'] = '';
-            //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
-            //$json = json_decode($response,true);
-            $entity_lib = new Entity();
-            $response = $entity_lib->apiList($data);
-            $json = json_decode(json_encode($response),true);
-            $data['brands'] = isset($json["data"]['entity_listing'])? $json["data"]["entity_listing"] : null;
+        $data['product_detail_url'] = '';
+        //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
+        //$json = json_decode($response,true);
+        $entity_lib = new Entity();
+        $response = $entity_lib->apiList($data);
+        $json = json_decode(json_encode($response),true);
+        $data['brands'] = isset($json["data"]['entity_listing'])? $json["data"]["entity_listing"] : null;
         //echo "<pre>"; print_r( $data['brands']); exit;
-            $data['currency'] = $this->_object_library_general_setting->getCurrency();
-            return View::make('web/includes/main/brands',$data)->__toString();
-       // }
+        $data['currency'] = $this->_object_library_general_setting->getCurrency();
+        return View::make('web/includes/main/brands',$data)->__toString();
     }
 
     public function getBrandProducts(Request $request)
