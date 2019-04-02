@@ -228,7 +228,7 @@
 														width: 100px;
 														height: 100px;
 													"
-                     id="LoadingPopularCategoriesImage" align="center" style="display: none">
+                     id="LoadingtopCategoriesImage" align="center" style="display: none">
                     <div class="floatingCirclesG">
                         <div class="f_circleG frotateG_01"></div>
                         <div class="f_circleG frotateG_02"></div>
@@ -254,7 +254,7 @@
                 <a href="<?php echo url('/') . '/product?entity_type_id=14&featured_type=2'; ?>"
                    class="align-items-end viewMore">See More</a>
             </div>
-            <div class="row todayTodayEssentials">
+            <div class="row todayTodayEssentials" id="todayTodayEssentials">
                 <div class="load_spinner" id="LoadingtodayTodayEssentialsImage" align="center">
                     <div class="floatingCirclesG">
 							<div class="f_circleG frotateG_01"></div>
@@ -268,7 +268,6 @@
 						</div>
                 </div>
             </div>
-
 
         </div>
     </section>

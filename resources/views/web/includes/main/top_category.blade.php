@@ -55,7 +55,7 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
 
         {{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
         <img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
-        <div class="product-detail">
+        <div class="product-detail" id="product-{!! $attributes['entity_id'] !!}">
             <div class="addCartWrap">
 
                 <input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />

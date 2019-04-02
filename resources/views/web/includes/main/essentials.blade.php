@@ -49,7 +49,7 @@
 						
 							{{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
 							<img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
-							<div class="product-detail">
+							<div class="product-detail" id="product-{!! $attributes['entity_id'] !!}">
 								<div class="addCartWrap">
 								
 										<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
@@ -64,7 +64,7 @@
 									</button>
 									<div class="pro-inc-wrap">
 										<div class="count-input">
-											<a class="incr-btn incr-btn5 text-right prn" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
+											<a class="incr-btn incr-btn55 text-right prn" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
 											
 											
 											<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
@@ -74,7 +74,7 @@
 											<input type="hidden" class="price" value="<?php echo $price; ?>" />
 											<input class="quantity" type="number" name="product_quantity" value="1" readonly/>
 											
-											<a class="incr-btn incr-btn5 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
+											<a class="incr-btn incr-btn55 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 										</div>
 									</div>
 								</div>

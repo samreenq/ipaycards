@@ -223,26 +223,31 @@
 									add_to_wishlist(Request_url2);
 									
 									// Add Cart Btn Animation
-									$('.addtocart').click(function(){
+									$('.addtocart').on('click',function(){
 										$(this).hide();
-										var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
+										//var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
+										var element  = $(this).parent('.product-detail');
+										var ele_id = $(element).attr('id');
+										$('#'+ele_id).find('.pro-inc-wrap').toggle( "slide");
+
 									});
+
 									
 									
 									//Inc Dec Button----------------
-									$(".incr-btn5").on("click", function (e) 
+									$(".incr-btn55").on("click", function (e)
 									{
 										var $button = $(this);
 										var oldValue = $button.parent().find('.quantity').val();
-									
+
 										var entity_id 			= $button.parent().find('.entity_id').val();
 										var product_code 		= $button.parent().find('.product_code').val();
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   		= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
+										var	price   			= $button.parent().find('.price').val();
+										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 										
 										$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
 										if(oldValue=="0") 
@@ -271,12 +276,13 @@
 										
 										$button.parent().find('.quantity').val(newVal);
 										product_quantity  = newVal;
+										alert(product_quantity);
 											
 										if(product_quantity>1)
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -308,9 +314,9 @@
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
-																	"weight":weight,
+																	/*"weight":weight,
 																	"unit_option":unit_option,
-																	"unit_value":unit_value,
+																	"unit_value":unit_value,*/
 																	"product_quantity":parseInt(product_quantity)
 																 };
 													products.push(string);
@@ -336,9 +342,9 @@
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
+									/*	var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 										
 										$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
 										if(oldValue=="0") 
@@ -377,7 +383,7 @@
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -409,9 +415,9 @@
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
-																	"weight":weight,
+																	/*"weight":weight,
 																	"unit_option":unit_option,
-																	"unit_value":unit_value,
+																	"unit_value":unit_value,*/
 																	"product_quantity":parseInt(product_quantity)
 																 };
 													products.push(string);
@@ -431,7 +437,7 @@
 
 	function topCategoryProducts(Entity_type_id,Featured_type,Request_url1,Product_detail_url,Request_url2,Request_url3,Request_url4)
 	{
-		$("#LoadingtodayTodayEssentialsImage").show();
+		$("#LoadingtopCategoriesImage").show();
 		$.ajax ({
 			url: Request_url1,
 			type: 'get',
@@ -443,7 +449,7 @@
 			dataType: 'text',
 			success: function(data)
 			{
-				$("#LoadingtodayTodayEssentialsImage").hide();
+				$("#LoadingtopCategoriesImage").hide();
 				$(".topCategories").empty().append(data);
 				add_to_wishlist(Request_url2);
 
@@ -561,9 +567,9 @@
 					var	title 		 		= $button.parent().find('.title').val();
 					var	thumb 		 		= $button.parent().find('.thumb').val();
 					var	price   		= $button.parent().find('.price').val();
-					var	weight 		 		= $button.parent().find('.weight').val();
+					/*var	weight 		 		= $button.parent().find('.weight').val();
 					var	unit_option  		= $button.parent().find('.unit_option').val();
-					var	unit_value 	 		= $button.parent().find('.unit_value').val();
+					var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 
 					$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
 					if(oldValue=="0")
@@ -634,9 +640,9 @@
 									"title":title,
 									"thumb":thumb,
 									"price":price,
-									"weight":weight,
+									/*"weight":weight,
 									"unit_option":unit_option,
-									"unit_value":unit_value,
+									"unit_value":unit_value,*/
 									"product_quantity":parseInt(product_quantity)
 								};
 								products.push(string);
@@ -1279,9 +1285,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
+										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 										
 										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 									
@@ -1379,9 +1385,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   			= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
-										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										//var	weight 		 		= $button.parent().find('.weight').val();
+									//	var	unit_option  		= $button.parent().find('.unit_option').val();
+										//var	unit_value 	 		= $button.parent().find('.unit_value').val();
 										
 										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 								
@@ -1421,7 +1427,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -1453,9 +1459,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
-																	"weight":weight,
+																/*	"weight":weight,
 																	"unit_option":unit_option,
-																	"unit_value":unit_value,
+																	"unit_value":unit_value,*/
 																	"product_quantity":parseInt(product_quantity)
 																 };
 													products.push(string);
@@ -1533,9 +1539,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
+										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 										
 										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 									
@@ -1571,7 +1577,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -1603,9 +1609,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
-																	"weight":weight,
+																	/*"weight":weight,
 																	"unit_option":unit_option,
-																	"unit_value":unit_value,
+																	"unit_value":unit_value,*/
 																	"product_quantity":parseInt(product_quantity)
 																 };
 													products.push(string);
@@ -1633,9 +1639,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   			= $button.parent().find('.price').val();
-										var	weight 		 		= $button.parent().find('.weight').val();
+										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();
+										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 										
 										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 								
@@ -1675,7 +1681,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
