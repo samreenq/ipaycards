@@ -230,6 +230,7 @@ class OrderController extends WebController {
 				$depend_entity[$p]['price']		=	$product_list["price"];
                 $depend_entity[ $p ]['discount_price'] = "0.00";
                 $price = $product_list['price'];
+                $depend_entity[$p]['item_type']	=   $product_list["item_type"];
 
                 //$depend_entity[$p]['weight'] = $product_list["weight"];
                // $depend_entity[$p]['serving'] = $product_list["serving"];
@@ -266,6 +267,7 @@ class OrderController extends WebController {
 				{
 					if($productList["entity_id"]==$product_list["entity_id"])
 						$depend_entity[$p]['quantity']	=	$productList["product_quantity"];
+
 				}
 		 
 				$depend_entity[$p]['entity_type_id']    =   16;
@@ -673,14 +675,15 @@ class OrderController extends WebController {
 
                     $data = [];
                     $data = $lead_order;
-                    $data['order_status'] = $order_helper->getOrderStatusIdByKeyword('customer_care_pending');
+                    $data['order_status'] = 'pending';
                     $data['payment_method_type'] = "cod";
                     $data['login_entity_id'] = $this->_customerId;
+                    $data['hook'] = 'order_item';
                   // echo "<pre>";print_r($data); exit;
 
                     $ret = $entity_lib->apiPost($data);
                     $json = json_decode(json_encode($ret), TRUE);
-                 //   echo "<pre>";print_r($json); exit;
+                   //  echo "<pre>";print_r($json); exit;
                     //$response     = json_encode(CustomHelper::appCall($request,"api/system/entities/", 'POST',$data,true));
                     //$json 	  	  = json_decode($response,true);
 

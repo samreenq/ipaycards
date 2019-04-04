@@ -141,6 +141,7 @@ class CategoryController extends Controller
             $entity["description"] = ($request->input('description', "")) ? $request->input('description', "") : '';
             $entity["status"] = 1;
             $entity["featured_type"] = ($request->input('featured_type', "")) ? $request->input('featured_type', "") : '';
+            $entity["top_category"] = $request->input('top_category', 0);
             $entity["created_at"] = date("Y-m-d H:i:s");
 
             $entity_id = $this->_entity_model->put($entity);
@@ -314,8 +315,9 @@ class CategoryController extends Controller
             $entity["description"] = ($request->input('description', "")) ? $request->input('description', "") : '';
             $entity["status"] = ($request->input('status', "")) ? $request->input('status', "") : '';
             $entity["featured_type"] = ($request->input('featured_type', "")) ? $request->input('featured_type', "") : '';
+            $entity["top_category"] = $request->input('top_category', 0);
             $entity["updated_at"] = date("Y-m-d H:i:s");
-
+           // echo "<pre>"; print_r($entity); exit;
 
             $entity_id = $this->_entity_model->set($entity[$this->_entity_pk], $entity);
            // $this->_entity_model->addParentList($entity_id);
@@ -447,6 +449,11 @@ class CategoryController extends Controller
 				$query->where('category_type',"=",$request->input("category_type",""));
 		
 			}
+            if($request->input("top_category"))
+            {
+                $query->where('top_category',"=",$request->input("top_category",0));
+
+            }
             //donot get deal category
             $query->where('category_id','<>',7);
 

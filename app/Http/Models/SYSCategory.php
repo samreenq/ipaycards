@@ -27,7 +27,7 @@ class SYSCategory extends Base
         $this->hidden = array();
 
         // set fields
-        $this->__fields = array($this->primaryKey,'is_parent', 'parent_id', "title", "description",'parent_ids','product_count','level','is_featured','featured_type','category_type','status','created_at', 'updated_at', 'deleted_at','is_gift_card');
+        $this->__fields = array($this->primaryKey,'is_parent', 'parent_id', "title", "description",'parent_ids','product_count','level','is_featured','featured_type','category_type','status','created_at', 'updated_at', 'deleted_at','is_gift_card','top_category');
     }
 
     public function getData($id=0,$status = false)

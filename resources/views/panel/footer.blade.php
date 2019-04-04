@@ -39,7 +39,7 @@ if(\Session::has(ADMIN_SESS_KEY.'_POST_DATA')){
                 $('.product_ids_field').removeClass('hide');
 
             }  else{
-                $('.brand_id_field').show();
+                $('.brand_id_field').removeClass('hide');
                 $('.category_id_field').removeClass('hide');
                 $('.gift_category_id_field').addClass('hide');
 

@@ -480,7 +480,7 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
                     // $('.brand_id_field').hide();
                     $('.category_id_field').addClass('hide');
                     $('.gift_category_id_field').removeClass('hide');
-                    $('.brand_id_field').addClass('hide');
+                    $('.brand_id_field').removeClass('hide');
                     $('.is_featured_field').addClass('hide');
                     $('.featured_type_field').addClass('hide');
 

@@ -196,8 +196,9 @@ Route::get('/cart/show', "Web\ProductController@showCart")->name('show_cart');
 Route::get('/total_price', "Web\ProductController@totalPrice")->name('total_price');
 Route::get('/order/save', "Web\ProductController@saveOrder")->name('save_order');
 Route::get('/product/list', "Web\ProductController@getAllProducts")->name('product_list');
-Route::get('/todaytoday/essentials', "Web\ProductController@todayTodayEssentials")->name('essentials');
-Route::get('/todaytoday/news/Seasons', "Web\ProductController@newsAndPeakSeasons")->name('newsAndPeakSeasons');
+Route::get('/essentials', "Web\ProductController@todayTodayEssentials")->name('essentials');
+Route::get('/news/Seasons', "Web\ProductController@newsAndPeakSeasons")->name('newsAndPeakSeasons');
+    Route::get('/get_brands', "Web\ProductController@getBrands")->name('getBrands');
 Route::get('/product/title', "Web\ProductController@getAllProductsByTitle")->name('product_title');
 Route::get('/product_detail', "Web\ProductController@getProductByCode")->name('product_detail');
 Route::get('/product_categories', "Web\ProductController@getAllProduct")->name('product_categories');
@@ -207,13 +208,15 @@ Route::get('/categories', "Web\ProductController@categories")->name('categories'
 Route::get('/product', "Web\ProductController@getAllProduct")->name('product');
 Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts")->name('product_promotion');
 Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
+    Route::get('/product/brand', "Web\ProductController@getBrandProducts")->name('brand_products');
 
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
 
 Route::get('/testimonial', "Web\TestimonialController@getTestimonial")->name('testimonial');
-
+    Route::get('/main_category', "Web\ProductController@getMainCategory")->name('main_category');
 Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDiscount")->name('promotionAndDiscount');
+    Route::get('/top_category_products', "Web\ProductController@topCategotyProducts")->name('top_category_products');
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');
@@ -300,9 +303,9 @@ Route::group(['middleware' => ['web.auth']], function () {
 
 
     Route::get('/wallet', "Web\WalletController@ShowWallet")->name('customer_wallet');//customer_transactions
-
+    Route::get('/gift_card', "Web\WalletController@redeemGift")->name('gift_card');//customer_transactions
     Route::get('/wallet_list', "Web\WalletController@getAllCustomerTransactions")->name('customer_wallet_list');//customer_transactions
-
+    Route::post('/redeem_card', "Web\WalletController@redeemCard")->name('redeem_card');//customer_transactions
     Route::post('/updateCart', "Web\CheckOutController@updateCart")->name('updateCart');
 
 

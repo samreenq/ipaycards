@@ -61,6 +61,7 @@
 								<li ><a href="{{ route('order_history') }}">Order History</a></li>
 							{{--	<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 								<li class="active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
+								<li class="li-active"><a href="{{ route('gift_card') }}">Gift Card</a></li>
 								<?php
 							
 										if (isset($_SESSION['fbUserProfile']) )
@@ -87,6 +88,7 @@
 							</ul>
 						</aside>
 					</div>
+
 					<div class="col-md-12 col-lg-9 col-xl-10">
 						<div class="refund">
 							<div class="d-sm-flex align-items-center dashboard-header">

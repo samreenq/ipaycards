@@ -168,10 +168,43 @@
 		@include("web/includes/footer")
 	@endsection
 
-	
-	
-	
-	
+@section("brands")
+	<section class="lightgreybg">
+		<div class="np-seasons">
+			<div class="container">
+				<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+					<h2 class="mr-auto align-items-start">Browse By Brands</h2>
+					<a href="<?php echo url('/') . '/product?entity_type_id=14&featured_type=1'; ?>"
+					   class="align-items-end viewMore">See More</a>
+				</div>
+				<div class="row brandList">
+					<div style="
+														position: absolute;
+														top: 50%;
+														left: 50%;
+														margin-top: -50px;
+														margin-left: -50px;
+														width: 100px;
+														height: 100px;
+													"
+						 id="LoadingbrandListImage" align="center" style="display: none">
+						<div class="floatingCirclesG">
+							<div class="f_circleG frotateG_01"></div>
+							<div class="f_circleG frotateG_02"></div>
+							<div class="f_circleG frotateG_03"></div>
+							<div class="f_circleG frotateG_04"></div>
+							<div class="f_circleG frotateG_05"></div>
+							<div class="f_circleG frotateG_06"></div>
+							<div class="f_circleG frotateG_07"></div>
+							<div class="f_circleG frotateG_08"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+@endsection
 	@section("news_and_peak_seasons")
 				<section class="lightgreybg">	
 					<div class="np-seasons">
@@ -209,7 +242,41 @@
 				</section>
 				
 	@endsection
+@section("top_category")
+	<section class="greybg essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
+		<div class="container">
+			<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+				<h2 class="mr-auto align-items-start"></h2>
+				<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=2'; ?>" class="align-items-end viewMore" >See More</a>
+			</div>
+			<div class="row todayTodayEssentials">
+				<div style="
+												position: absolute;
+												top: 50%;
+												left: 50%;
+												margin-top: -50px;
+												margin-left: -50px;
+												width: 100px;
+												height: 100px;
+											"
+					 id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
+					<div class="floatingCirclesG">
+						<div class="f_circleG frotateG_01"></div>
+						<div class="f_circleG frotateG_02"></div>
+						<div class="f_circleG frotateG_03"></div>
+						<div class="f_circleG frotateG_04"></div>
+						<div class="f_circleG frotateG_05"></div>
+						<div class="f_circleG frotateG_06"></div>
+						<div class="f_circleG frotateG_07"></div>
+						<div class="f_circleG frotateG_08"></div>
+					</div>
+				</div>
+			</div>
 
+
+		</div>
+	</section>
+	@endif
 	@section("essentials")
 				<section class="greybg essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">	
 					<div class="container">
@@ -347,8 +414,8 @@
 			total("{{ route('total_price') }}");			
 			add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
 			popularCategories("{{ route('popularCategories') }}");
-			
-			newsAndPeakSeasons(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}","{{ route('add_to_cart') }}","{{ route('total_price') }}");
+
+            brandProducts(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}","{{ route('add_to_cart') }}","{{ route('total_price') }}");
 			todayTodayEssentials(14,2,"{{ route('essentials') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}","{{ route('add_to_cart') }}","{{ route('total_price') }}");
 			signin("{{ route('signin') }}");
 			signup("{{ route('signup') }}","{{ route('phoneVerification') }}");

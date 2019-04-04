@@ -71,7 +71,7 @@
                 $gallery = isset($product['gallery'][0]) ? json_decode(json_encode($product['gallery'])) : false;
                 $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
 
-				 //print_r($categories_all); exit;
+
 				?>
 			<div class="feature-bg" style="background:url(<?php echo url('/').'/public/web/img/product/product-feature-img-1.jpg'; ?>);"></div>
 			<section class="product-detail-Section">
@@ -126,7 +126,9 @@
 							</div>
 							<div class="col-md-12 col-lg-6 pl-lg-0">
 								<div class="productWholeDetail whitebg">
-										<?php 
+
+
+										<?php
 												//if($product['attributes']['category_form']['option'])
 												//{
 										?>

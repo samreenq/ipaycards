@@ -219,12 +219,12 @@ $fields = new $fields();
         @endif
 
         <?php if(isset($update) && $update->is_parent == 1): ?>
-
+alert(1);
             $(".parent_id_field").hide();
             $(".title_field").parent('div').removeClass('col-md-6');
             $(".title_field").parent('div').addClass('col-md-12');
-            $(".is_featured_field").hide();
-            $(".featured_type_field").hide();
+            $(".is_featured_field").show();
+           // $(".featured_type_field").hide();
             $(".is_gift_card_field").show();
 
 
@@ -239,8 +239,8 @@ $fields = new $fields();
         <?php else: ?>
 
             $(".parent_id_field").show();
-            $(".is_featured_field").show();
-            $(".featured_type_field").show();
+            $(".is_featured_field").hide();
+           // $(".featured_type_field").show();
             $(".is_gift_card_field").hide();
            /* $('.gallery-wrap').hide();
            $('.top-wrap').removeClass('col-md-8');
@@ -251,41 +251,41 @@ $fields = new $fields();
         <?php endif; ?>
 
 
-          $("input[name='is_featured']").on("change",function(){
+        {{--  $("input[name='is_featured']").on("change",function(){
             if($(this).val() == 1){
                 $(".featured_type_field").show();
             }
             else{
                 $(".featured_type_field").hide();
             }
-        });
+        });--}}
 
 
         if($('#is_featured').length > 0){
 
 
-            <?php if(isset($update) && isset($update->is_featured)): ?>
+            <?php // if(isset($update) && isset($update->is_featured)): ?>
 
-                var is_featured = "{!! $update->is_featured !!}";
+              {{--  var is_featured = "{!! $update->is_featured !!}";
                     if(is_featured != 1){
                         $('.featured_type_field').addClass('hide');
 
                     }
                     else{
                         $('.featured_type_field').removeClass('hide');
-                    }
-             <?php endif; ?>
+                    }--}}
+             <?php // endif; ?>
 
                // $('.featured_type_field').addClass('hide');
 
-            $('#is_featured').on('change',function(){
+            /*$('#is_featured').on('change',function(){
                 if($('#is_featured').val() == 1){
                     $('.featured_type_field').removeClass('hide');
                 }
                 else{
                     $('.featured_type_field').addClass('hide');
                 }
-            });
+            });*/
         }
 
     });
