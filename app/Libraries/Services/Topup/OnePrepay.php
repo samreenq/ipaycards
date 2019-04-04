@@ -147,7 +147,7 @@ class OnePrepay
 		map_keys(
 			$response,
 			[
-				'Balance'    => 'available_balance',
+				'Balance'    => 'balance',
 				'MerchantId' => 'vendor_name'
 			]
 		);

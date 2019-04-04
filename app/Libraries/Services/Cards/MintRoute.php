@@ -58,7 +58,7 @@ class MintRoute
 			]);
 			
 			$this->_curl->post([
-				'token'      => config('service.MINT_ROUTE.pub_key'),
+				'token' => config('service.MINT_ROUTE.pub_key'),
 				'postedinfo' => AesCtr::encrypt(
 					$params,
 					config('service.MINT_ROUTE.pvt_key'),
@@ -108,12 +108,12 @@ class MintRoute
 			$params = json_encode([
 				'username' => config('service.MINT_ROUTE.username'),
 				'password' => config('service.MINT_ROUTE.password'),
-				'data'     => count($params) > 0 ? [ $params ] : []
+				'data' => count($params) > 0 ? [ $params ] : []
 			]);
 			
 			
 			$this->_curl->post([
-				'token'      => config('service.MINT_ROUTE.pub_key'),
+				'token' => config('service.MINT_ROUTE.pub_key'),
 				'postedinfo' => AesCtr::encrypt(
 					$params,
 					config('service.MINT_ROUTE.pvt_key'),
@@ -172,12 +172,12 @@ class MintRoute
 				$params = json_encode([
 					'username' => config('service.MINT_ROUTE.username'),
 					'password' => config('service.MINT_ROUTE.password'),
-					'data'     => count($params) > 0 ? [ $params ] : []
+					'data' => count($params) > 0 ? [ $params ] : []
 				]);
 				
 				
 				$this->_curl->post([
-					'token'      => config('service.MINT_ROUTE.pub_key'),
+					'token' => config('service.MINT_ROUTE.pub_key'),
 					'postedinfo' => AesCtr::encrypt(
 						$params,
 						config('service.MINT_ROUTE.pvt_key'),
@@ -189,9 +189,10 @@ class MintRoute
 				if ( $this->_curl->error_code )
 					throw new \Exception($this->_curl->error_string);
 				
-				$response = $this->_curl->execute();
+				$response = json_decode($this->_curl->execute(),true);
+				$key = array_key_first($response);
 				
-				return json_decode($response);
+				return $response[$key][$request['brand_id']];
 				
 			}
 			
@@ -227,7 +228,7 @@ class MintRoute
 			]);
 			
 			$this->_curl->post([
-				'token'      => config('service.MINT_ROUTE.pub_key'),
+				'token' => config('service.MINT_ROUTE.pub_key'),
 				'postedinfo' => AesCtr::encrypt(
 					$params,
 					config('service.MINT_ROUTE.pvt_key'),
@@ -277,12 +278,12 @@ class MintRoute
 			$params = json_encode([
 				'username' => config('service.MINT_ROUTE.username'),
 				'password' => config('service.MINT_ROUTE.password'),
-				'data'     => count($params) > 0 ? [ $params ] : []
+				'data' => count($params) > 0 ? [ $params ] : []
 			]);
 			
 			
 			$this->_curl->post([
-				'token'      => config('service.MINT_ROUTE.pub_key'),
+				'token' => config('service.MINT_ROUTE.pub_key'),
 				'postedinfo' => AesCtr::encrypt(
 					$params,
 					config('service.MINT_ROUTE.pvt_key'),
@@ -341,12 +342,12 @@ class MintRoute
 				$params = json_encode([
 					'username' => config('service.MINT_ROUTE.username'),
 					'password' => config('service.MINT_ROUTE.password'),
-					'data'     => count($params) > 0 ? [ $params ] : []
+					'data' => count($params) > 0 ? [ $params ] : []
 				]);
 				
 				
 				$this->_curl->post([
-					'token'      => config('service.MINT_ROUTE.pub_key'),
+					'token' => config('service.MINT_ROUTE.pub_key'),
 					'postedinfo' => AesCtr::encrypt(
 						$params,
 						config('service.MINT_ROUTE.pvt_key'),
@@ -387,8 +388,8 @@ class MintRoute
 			// validation
 			$validation = validator($request, [
 				'denomination_id' => 'required',
-				'quantity'        => 'required|integer',
-				'orderid'         => 'required|string'
+				'quantity' => 'required|integer',
+				'orderid' => 'required|string'
 			]);
 			
 			if ( $validation->fails() ) {
@@ -404,16 +405,16 @@ class MintRoute
 				// allowed filters
 				$allowed_params = [
 					'denomination_id' => NULL,
-					'quantity'        => NULL,
-					'orderid'         => NULL
+					'quantity' => NULL,
+					'orderid' => NULL
 				];
 				// find intersecting keys
 				$params = array_intersect_key($request, $allowed_params);
 				
 				// add default values
 				$params = array_merge($params, [
-					'reserve'  => TRUE,
-					'short'    => TRUE,
+					'reserve' => TRUE,
+					'short' => TRUE,
 					'location' => config('service.MINT_ROUTE.pos_identification')
 				]);
 				
@@ -421,12 +422,12 @@ class MintRoute
 				$params = json_encode([
 					'username' => config('service.MINT_ROUTE.username'),
 					'password' => config('service.MINT_ROUTE.password'),
-					'data'     => count($params) > 0 ? [ $params ] : []
+					'data' => count($params) > 0 ? [ $params ] : []
 				]);
 				
 				
 				$this->_curl->post([
-					'token'      => config('service.MINT_ROUTE.pub_key'),
+					'token' => config('service.MINT_ROUTE.pub_key'),
 					'postedinfo' => AesCtr::encrypt(
 						$params,
 						config('service.MINT_ROUTE.pvt_key'),
@@ -466,9 +467,9 @@ class MintRoute
 		try {
 			// validation
 			$validation = validator($request, [
-				'orderid'         => 'required|string',
+				'orderid' => 'required|string',
 				'denomination_id' => 'required',
-				'quantity'        => 'required|integer'
+				'quantity' => 'required|integer'
 			]);
 			
 			if ( $validation->fails() ) {
@@ -483,16 +484,16 @@ class MintRoute
 				
 				// allowed filters
 				$allowed_params = [
-					'orderid'         => NULL,
+					'orderid' => NULL,
 					'denomination_id' => NULL,
-					'quantity'        => NULL
+					'quantity' => NULL
 				];
 				// find intersecting keys
 				$params = array_intersect_key($request, $allowed_params);
 				
 				// add default values
 				$params = array_merge($params, [
-					'short'    => TRUE,
+					'short' => TRUE,
 					'location' => config('service.MINT_ROUTE.pos_identification')
 				]);
 				
@@ -500,12 +501,12 @@ class MintRoute
 				$params = json_encode([
 					'username' => config('service.MINT_ROUTE.username'),
 					'password' => config('service.MINT_ROUTE.password'),
-					'data'     => count($params) > 0 ? [ $params ] : []
+					'data' => count($params) > 0 ? [ $params ] : []
 				]);
 				
 				
 				$this->_curl->post([
-					'token'      => config('service.MINT_ROUTE.pub_key'),
+					'token' => config('service.MINT_ROUTE.pub_key'),
 					'postedinfo' => AesCtr::encrypt(
 						$params,
 						config('service.MINT_ROUTE.pvt_key'),
@@ -567,12 +568,12 @@ class MintRoute
 				$params = json_encode([
 					'username' => config('service.MINT_ROUTE.username'),
 					'password' => config('service.MINT_ROUTE.password'),
-					'data'     => count($params) > 0 ? [ $params ] : []
+					'data' => count($params) > 0 ? [ $params ] : []
 				]);
 				
 				
 				$this->_curl->post([
-					'token'      => config('service.MINT_ROUTE.pub_key'),
+					'token' => config('service.MINT_ROUTE.pub_key'),
 					'postedinfo' => AesCtr::encrypt(
 						$params,
 						config('service.MINT_ROUTE.pvt_key'),

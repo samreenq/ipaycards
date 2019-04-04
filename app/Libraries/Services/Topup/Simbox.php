@@ -51,26 +51,41 @@ class Simbox
 				. 'send_ussd'
 			);
 			
+			// basic auth
+			$this->_curl->httpLogin(
+				config('service.SIMBOX_PREPAY.username'),
+				config('service.SIMBOX_PREPAY.password')
+			);
+			
+			// params
 			$params = [
-				'port'    => config('service.SIMBOX_PREPAY.port'),
+				'port'    => "[" . config('service.SIMBOX_PREPAY.port') . "]",
 				'command' => 'send',
-				/*'text' => '*139*102*'
+				'text'    => '*139*102*'
 					. config('service.SIMBOX_PREPAY.sim_id')
-					. '*' . config('service.SIMBOX_PREPAY.pin_id') . '*2#',*/
-				'text'    => '*125#',
+					. '*' . config('service.SIMBOX_PREPAY.pin_id') . '*2#',
 			];
 			
+			// send ssd
 			$this->_curl->post($params);
+			
+			// query
+			$this->_curl->create(config('service.SIMBOX_PREPAY.endpoint_url')
+				. 'query_ussd_reply?port=' . config('service.SIMBOX_PREPAY.port')
+			);
+			
 			
 			if ( $this->_curl->error_code )
 				throw new \Exception($this->_curl->error_string);
 			
-			$response = $this->_curl->execute();
+			$response = json_decode($this->_curl->execute());
 			
-			var_dump($response);
-			exit;
+			preg_match('/([\d]+\.[\d]{2})/', $response->reply[0]->text, $matches);
 			
-			return json_decode($response);
+			
+			return [
+				'balance' => ceil($matches[1])
+			];
 			
 			
 		} catch ( \Exception $e ) {
