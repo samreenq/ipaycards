@@ -48,8 +48,6 @@ class SYSCategory extends Base
                       //  print_r($child);
                         if($child->status == 1){
 
-                            $raw = $child;
-
                             $sys_table_flat = new SYSTableFlat('product');
                             $get_total = $sys_table_flat->getDataByWhere(" FIND_IN_SET('".$child->category_id."',category_id) AND status = 1",array('count(entity_id) as total'));
                             $total_products = isset($get_total[0]->total) ? $get_total[0]->total : 0;
@@ -57,8 +55,7 @@ class SYSCategory extends Base
                             //$product_count  = ($child->product_count > 0) ? $child->product_count : 0;
                             $data->child[$key]->product_count = $total_products;
                             $parent_product_count += $total_products;
-
-                            //$data->child[] = $raw;
+                            
                         }
 
                     }

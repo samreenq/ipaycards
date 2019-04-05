@@ -3142,13 +3142,13 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 													$(".greedy-nav-second .hidden-links").addClass("hidden");
 												}
 											});
-											
 
 
 
 
 
-											
+
+
 											// Responsive Menu
 											jQuery(document).on('click', '.mega-dropdown-menu', function(e) {
 											  e.stopPropagation()

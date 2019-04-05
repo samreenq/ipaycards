@@ -15,6 +15,6 @@
 	}
 
 	?>
-<li><a href=" {{ url('/').'/product?entity_type_id=14&category_id=7'}} ">Deals</a></li>
+{{--<li><a href=" {{ url('/').'/product?entity_type_id=14&category_id=7'}} ">Deals</a></li>--}}
 		
 								

@@ -1073,9 +1073,6 @@ class ProductController extends WebController
 		$category_id	= $request->input('category_id');
 
         $params = ['limit'=>1000,'category_id'=>$category_id,'level'=>1];
-		if($category_id == 7){
-            $params['slug'] = 'deal';
-        }
 
         $response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false));
         $json 	  = json_decode($response,true);
