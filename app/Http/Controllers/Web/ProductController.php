@@ -1306,4 +1306,35 @@ class ProductController extends WebController
 
     }
 
+    public function getAllBrands(Request $request)
+    {
+        $data = [];
+        return View::make('web/brand',$data);
+    }
+
+    public function getBrandsAll(Request $request)
+    {
+        $data['product_detail_url'] = $request->input('product_detail_url');
+        $limit = $request->input('limit');
+
+        $params = 	[
+            'entity_type_id'		=>		'brand',
+            'status'                => 1,
+            'offset'				=>		$request->input('offset')	,
+            'limit'					=>		$limit,
+            'order_by'          => 'entity_id',
+            'sorting'           => 'DESC'
+        ];
+        $json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($params)),true);
+        $data['brands'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
+        $data['currency'] = $this->_object_library_general_setting->getCurrency();
+
+        $data1 = [
+            'products'	=> View::make('web/includes//main/all_brands',$data)->__toString(),
+            'items'		=> isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/$limit) : null
+        ];
+
+        return $data1;
+    }
+
 }
