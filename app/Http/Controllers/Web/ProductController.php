@@ -519,6 +519,11 @@ class ProductController extends WebController
             $data['price'] = round($data['price']);
         }
 
+        if(isset($request->brand_id)){
+            $flat_table = new SYSTableFlat('brand');
+            $raw = $flat_table->getDataByWhere(' entity_id = '.$request->brand_id,array('title'));
+            $data['brand'] = $raw[0];
+        }
         //echo "<pre>"; print_r($data); exit;
 		return View::make('web/product',$data);
        

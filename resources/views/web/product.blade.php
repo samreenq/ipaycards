@@ -335,7 +335,28 @@
 										}
 									
 								?>
-								<div id="products"  class="row">
+
+                                    <?php
+                                    if(isset($brand))
+                                    {
+                                    ?>
+									<section class="lightgreybg">
+										<div class="np-seasons">
+											<div class="container">
+												<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+													<h2 class="mr-auto align-items-start">
+														{!! $brand->title !!}
+													</h2>
+
+												</div>
+											</div>
+										</div>
+									</section>
+								<?php
+                                    }
+
+                                    ?>
+									<div id="products"  class="row">
 									
 									<div style="
 														position: absolute;
