@@ -527,6 +527,9 @@ class EntityBackController extends EntityController
                         $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/view/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="View" data-original-title="View"><i class="fa fa-eye"></i></a>';
                      }
 
+                     if($this->_entity_controller->identifier == 'promotion_discount'){
+                         $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/copy/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Copy" data-original-title="Copy"><i class="fa fa-copy"></i></a>'; }
+
 
                     $checkbox .= '<input type="checkbox" id="check_id_' . $paginated_id->{$this->_attribute_pk} . '" name="check_ids[]" value="' . $paginated_id->{$this->_attribute_pk} . '" />';
                     $checkbox .= '<label class="deleted_btn" for="check_id_' . $paginated_id->{$this->_attribute_pk} . '"></label>';
@@ -757,18 +760,21 @@ class EntityBackController extends EntityController
         $array = explode('/',$request->url());
         end($array);
         $this->_assignData["uri_method"] =  prev($array);
-
+      //  echo "<pre>"; print_r( $this->_assignData["uri_method"]); exit;
         // page action
-        if($this->_assignData["uri_method"] != 'view'){
-            $this->_assignData["page_action"] = ucfirst(__FUNCTION__);
-            $this->_assignData["route_action"] = strtolower(__FUNCTION__);
-        }else{
+        if(in_array($this->_assignData["uri_method"],array('view','copy'))){
+
             $this->_assignData["page_action"] = ucfirst($this->_assignData["uri_method"]);
             $this->_assignData["route_action"] = ucfirst($this->_assignData["uri_method"]);
 
             //check if request from notification then update is read
             $entity_notification = new EntityNotification();
             $entity_notification->updateNotificationRead($request->all());
+
+        }else{
+
+            $this->_assignData["page_action"] = ucfirst(__FUNCTION__);
+            $this->_assignData["route_action"] = strtolower(__FUNCTION__);
         }
 
         // validate post form
@@ -783,9 +789,14 @@ class EntityBackController extends EntityController
                     return $this->$func($request);
                 }
                 else{
-                    return $this->_update($request);
-                }
 
+                    if(isset($request->action) && $request->action == 'copy'){
+                        return $this->_add($request);
+                    }else{
+                        return $this->_update($request);
+                    }
+
+                }
             }
 
         }

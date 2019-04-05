@@ -51,6 +51,7 @@ Route::group([
     Route::any('entities/{any}/update/{id}', $ctrl_dir . 'EntityBackController@index');
     Route::any('entities/{any}/view/{id}', $ctrl_dir . 'EntityBackController@update');
     Route::any('entities/{any}/import', $ctrl_dir . 'EntityBackController@import');
+    Route::any('entities/promotion_discount/copy/{id}', $ctrl_dir . 'EntityBackController@update');
     //Route::any('entities/ajax/listing', $ctrl_dir . 'EntityBackController@ajaxListing');
     //Route::any('entities/add', $ctrl_dir . 'EntityBackController@add');
     //Route::any('entities/update/{id}', $ctrl_dir . 'EntityBackController@update');
