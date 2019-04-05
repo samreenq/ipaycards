@@ -448,10 +448,34 @@
 
 			$(document).ready(function(){
 
-                $('#pagination').pagination(
+                $("#LoadingImageProducts").show();
+                $.ajax ({
+                    url: "{{ route('all_brand') }}",
+                    type: 'get',
+                    data:   {
+                        offset				:	0,
+                        limit				:	1000
+
+                    },
+                    dataType: 'json',
+                    success: function(data)
+                    {
+                        //$("#products").append(data);
+                        $("#LoadingImageProducts").hide();
+                        $("#brands").empty().append(data['products']);
+                        $('#pagination').pagination('updateItems', data['items']);
+                        $("#LoadingImageRecipes").hide();
+                        if(data['items'] > 0){
+                            $(".page_showcase").css({ 'display': "block" });
+                        }
+                    }
+
+                });
+
+               /* $('#pagination').pagination(
                     {
                         items: 5,
-                        itemOnPage: 3,
+                        itemOnPage: 20,
                         currentPage: 1,
                         cssStyle: '',
                         prevText: '<span aria-hidden="true">&laquo;</span>',
@@ -459,7 +483,7 @@
                         onInit: function ()
                         {
                             // fire first page loading
-                            limit = 3;
+                            limit = 20;
                             page = 1;
                             offset = (page  * limit) -  limit;
 
@@ -491,37 +515,37 @@
 
 
                         },
-							onPageClick: function (page, evt) {
-								// some code
-								limit = 12;
-								offset = (page * limit) - limit;
+                        onPageClick: function (page, evt) {
+                            // some code
+                            limit = 12;
+                            offset = (page * limit) - limit;
 
-                                $("#LoadingImageProducts").show();
-                                $.ajax ({
-                                    url: "{{ route('all_brand') }}",
-                                    type: 'get',
-                                    data:   {
-                                        offset				:	offset,
-                                        limit				:	limit
+                            $("#LoadingImageProducts").show();
+                            $.ajax ({
+                                url: "{{ route('all_brand') }}",
+                                type: 'get',
+                                data:   {
+                                    offset				:	offset,
+                                    limit				:	limit
 
-                                    },
-                                    dataType: 'json',
-                                    success: function(data)
-                                    {
-                                        //$("#products").append(data);
-                                        $("#LoadingImageProducts").hide();
-                                        $("#brands").empty().append(data['products']);
-                                        $('#pagination').pagination('updateItems', data['items']);
-                                        $("#LoadingImageRecipes").hide();
-                                        if(data['items'] > 0){
-                                            $(".page_showcase").css({ 'display': "block" });
-                                        }
+                                },
+                                dataType: 'json',
+                                success: function(data)
+                                {
+                                    //$("#products").append(data);
+                                    $("#LoadingImageProducts").hide();
+                                    $("#brands").empty().append(data['products']);
+                                    $('#pagination').pagination('updateItems', data['items']);
+                                    $("#LoadingImageRecipes").hide();
+                                    if(data['items'] > 0){
+                                        $(".page_showcase").css({ 'display': "block" });
                                     }
+                                }
 
-                                });
-							}
+                            });
+                        }
 
-                        });
+                    });*/
 			});
 
         var category_id = "<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';?>";

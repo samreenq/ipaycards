@@ -1321,7 +1321,7 @@ class ProductController extends WebController
             'entity_type_id'		=>		'brand',
             'status'                => 1,
             'offset'				=>		$request->input('offset')	,
-            'limit'					=>		$limit,
+            'limit'					=>		1000,
             'order_by'          => 'entity_id',
             'sorting'           => 'DESC'
         ];
