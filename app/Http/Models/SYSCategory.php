@@ -27,7 +27,7 @@ class SYSCategory extends Base
         $this->hidden = array();
 
         // set fields
-        $this->__fields = array($this->primaryKey,'is_parent', 'parent_id', "title", "description",'parent_ids','product_count','level','is_featured','featured_type','category_type','status','created_at', 'updated_at', 'deleted_at','is_gift_card','top_category');
+        $this->__fields = array($this->primaryKey,'is_parent', 'parent_id', "title","slug", "description",'parent_ids','product_count','level','is_featured','featured_type','category_type','status','created_at', 'updated_at', 'deleted_at','is_gift_card','top_category');
     }
 
     public function getData($id=0,$status = false)
@@ -51,7 +51,7 @@ class SYSCategory extends Base
                             $raw = $child;
 
                             $sys_table_flat = new SYSTableFlat('product');
-                            $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($child->category_id) AND status = 1",array('count(entity_id) as total'));
+                            $get_total = $sys_table_flat->getDataByWhere(" FIND_IN_SET('".$child->category_id."',category_id) AND status = 1",array('count(entity_id) as total'));
                             $total_products = isset($get_total[0]->total) ? $get_total[0]->total : 0;
                           //  echo "<pre>"; print_r($get_total); exit;
                             //$product_count  = ($child->product_count > 0) ? $child->product_count : 0;
@@ -65,7 +65,7 @@ class SYSCategory extends Base
                 }
                 $data->product_count =  $parent_product_count;
             }
-            elseif(isset($data->is_gift_card) && $data->is_gift_card == 1){
+            elseif((isset($data->is_gift_card) && $data->is_gift_card == 1) || (isset($data->slug) && $data->slug == 'deal')){
 
                     $sys_table_flat = new SYSTableFlat('product');
                     $get_total = $sys_table_flat->getDataByWhere(" category_id IN ($data->category_id) AND status = 1",array('count(entity_id) as total'));

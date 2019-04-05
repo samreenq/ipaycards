@@ -160,7 +160,7 @@
 																			{
 
 												?>
-																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])) echo $tmp1['title']; if(isset($tmp1['product_count'])) echo '('.$tmp1['product_count'].')'; ?></a></h4></div>
+																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])){ echo $tmp1['title']; } if(isset($tmp1['product_count'])){ echo '('.$tmp1['product_count'].')'; } ?></a></h4></div>
 												<?php
 																			}
 																		}
@@ -677,9 +677,9 @@
                     var	title 		 		= $button.parent().find('.title').val();
                     var	thumb 		 		= $button.parent().find('.thumb').val();
                     var	price   			= $button.parent().find('.price').val();
-                    var	weight 		 		= $button.parent().find('.weight').val();
+                   /* var	weight 		 		= $button.parent().find('.weight').val();
                     var	unit_option  		= $button.parent().find('.unit_option').val();
-                    var	unit_value 	 		= $button.parent().find('.unit_value').val();
+                    var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 
                     $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 
@@ -719,7 +719,7 @@
                     {
                         if(typeof(localStorage.products)=="undefined")
                         {
-                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
                             localStorage["products"] =string;
                         }
 
@@ -751,9 +751,9 @@
                                     "title":title,
                                     "thumb":thumb,
                                     "price":price,
-                                    "weight":weight,
+                                  /*  "weight":weight,
                                     "unit_option":unit_option,
-                                    "unit_value":unit_value,
+                                    "unit_value":unit_value,*/
                                     "product_quantity":parseInt(product_quantity)
                                 };
                                 products.push(string);

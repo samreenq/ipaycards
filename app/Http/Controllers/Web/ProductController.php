@@ -507,7 +507,7 @@ class ProductController extends WebController
 					),
 					true
 				);
-      //  echo "<pre>"; print_r($json3);
+      // echo "<pre>"; print_r($json3); exit;
 		$data['categories'] = isset($json1['data']['category_listing']) ? $json1['data']['category_listing'] : null;
 		$data['category_id'] = isset($json2['data']['product_tags'][0]['category_id']) ?  $json2['data']['product_tags'][0]['category_id'] : null;
 		$data['categories_all'] = isset($json3['data']['category_listing_listing']) ? $json3['data']['category_listing_listing'] : null;
@@ -1071,11 +1071,18 @@ class ProductController extends WebController
 	public function categories(Request $request)
 	{
 		$category_id	= $request->input('category_id');
-		$response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',['limit'=>1000],false));
-		$json 	  = json_decode($response,true);
-		$data['categories'] = $json["data"]["category_listing"];
+
+        $params = ['limit'=>1000,'category_id'=>$category_id,'level'=>1];
+		if($category_id == 7){
+            $params['slug'] = 'deal';
+        }
+
+        $response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false));
+        $json 	  = json_decode($response,true);
+        $data['categories'] = $json["data"]["category_listing"];
+
 		$data['category_id']= $category_id;
-       // echo "<pre>"; print_r($data); exit;
+		//echo "<pre>"; print_r($data); exit;
 		return View::make('web/includes/menus/categories',$data)->__toString();
 	}
 
