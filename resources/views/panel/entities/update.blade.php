@@ -44,6 +44,13 @@ $fields = new $fields();
                                     @include(config('panel.DIR').'entities/'.$form_template_dir.'/depend_update_basic')
                                 @endif
 
+                                <?php
+                                if($uri_method == 'copy'){
+                                if(isset($entity_data->identifier) && (in_array($entity_data->identifier,array('promotion_discount')))){ ?>
+
+                                <button type="button" class="btn ladda-button btn-theme btn-wide add-more-entity" data-style="zoom-in"> <span class="ladda-label">Add More Items</span> </button>
+                                <?php  }  } ?>
+
                                 <?php  } ?>
 
                                 <div class="pull-right p-relative">
