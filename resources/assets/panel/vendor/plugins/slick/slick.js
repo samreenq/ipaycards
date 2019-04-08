@@ -457,7 +457,7 @@
 
         _.$slidesCache = _.$slides;
 
-        _.$slider.addClass('slick-slider');
+        _.$slider.addClass('owl-carousel');
 
         _.$slideTrack = (_.slideCount === 0) ?
             $('<div class="slick-track"/>').appendTo(_.$slider) :
@@ -650,7 +650,7 @@
                 width: ''
             });
 
-        _.$slider.removeClass('slick-slider');
+        _.$slider.removeClass('owl-carousel');
         _.$slider.removeClass('slick-initialized');
 
         _.$list.off('.slick');
