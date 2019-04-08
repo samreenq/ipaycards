@@ -6,6 +6,7 @@
     $where_condition = 'status = 1';
     $cms_raw = $cms_flat->getDataByWhere($where_condition);
 	?>
+
 	<!-- Footer -->
 <footer class="footer whitebg">
 	<div class="container">
@@ -54,5 +55,7 @@
 		</div>
 	</div>
 </footer>
-
+	<!-- Start of salmancubix Zendesk Widget script -->
+	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=cb6b19b8-fca9-402f-8523-79d21b509697"> </script>
+	<!-- End of salmancubix Zendesk Widget script -->
 @show
