@@ -143,7 +143,7 @@ Route::get('order_calendar', $general_panel_dir . 'EntityAjaxController@getOrder
 Route::get('order_calendar_content', $general_panel_dir . 'EntityAjaxController@getOrderCalendarContent');
 
 //Share url
-Route::get('share/{slug}/{id}','OrderController@shareView');
+Route::get('share/{slug}/{id}','OpenGraphController@shareView');
 
 /////////////Website Routes///////////////////////////
 
