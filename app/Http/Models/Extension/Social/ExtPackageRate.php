@@ -94,7 +94,7 @@ class ExtPackageRate extends Base
      *
      * @return Response
      */
-    public function saveData($ext_map_record, $save_data, $timestamp = NULL,$request_params = null)
+    public function saveData($ext_map_record, $save_data, $timestamp = NULL)
     {
         // default vars
         $timestamp = $timestamp == "" ? date("Y-m-d H:i:s") : $timestamp;
@@ -158,7 +158,7 @@ class ExtPackageRate extends Base
             1);
 
         // update aggregate to target entity
-  /*      $params = array(
+        $params = array(
             $this->_entityTypeModel->primaryKey => $ext_map_record->{'target_' . $this->_entityTypeModel->primaryKey},
             $this->_entityModel->primaryKey => $save_data[ 'target_' . $this->_entityModel->primaryKey ],
             // aggregate field
@@ -173,14 +173,11 @@ class ExtPackageRate extends Base
             'ext_average_rating' => floatval(number_format(
                 ($aggregate->json_value->ext_total_rating / $aggregate->json_value->ext_total_raters),
                 2, '.', '')),
-           // 'status' => 1, // active
+            'status' => 1, // active
         );
+
         //$r = CustomHelper::appCall($request, \URL::to(DIR_API) . '/system/entities/update', 'POST', $params);
-        $this->_entityLib->doUpdate($params);*/
-
-        // call hook
-
-        $this->_apiData = CustomHelper::hookData($this->_pHook, __FUNCTION__, $request_params, $aggregate);
+        $this->_entityLib->doUpdate($params);
 
         // get data
         //$data = $this->getData($id);
@@ -247,7 +244,7 @@ class ExtPackageRate extends Base
                 $results->total_rating);
 
             // update aggregate to target entity
-           $params = array(
+            $params = array(
                 $this->_entityTypeModel->primaryKey => $ext_map_record->{'target_' . $this->_entityTypeModel->primaryKey},
                 $this->_entityModel->primaryKey => $record->{'target_' . $this->_entityModel->primaryKey},
                 // aggregate field
