@@ -2674,7 +2674,8 @@ table tr.borderB td div{
 .product-detail a {
     font-size: 20px;
 }
-.topCategories .product-detail h4 {
+.topCategories .product-detail h4,
+.essentials .product-detail h4{
     margin-bottom:12px;
 }
 .topCategories .product-detail .addCartWrap {
