@@ -112,9 +112,9 @@
 					</div>
 				</div>
 				<ul class="headerSlider">
-					<li style="background:url('<?php echo url('/').'/public/web/img/header-bg.jpg\''?>)"></li>
+					<li style="background:url('<?php echo url('/').'/public/web/img/header-bg02.jpg\''?>)"></li>
 					<!-- <li style="background:url(img/header-bg2.jpg);"></li>
-					<li style="background:url(img/header-bg.jpg);"></li>
+					<li style="background:url(img/header-bg02.jpg);"></li>
 					<li style="background:url(img/header-bg2.jpg);"></li> -->
 				</ul>
 

@@ -19,6 +19,7 @@
 @section('header')
     <header id="header">
         <div class="flyout-overlay for_banneroverlay"></div>
+        <a href="javascript:void(0)" class="link_page"></a>
         <div class="fly-nav-inner">
             <div class="container">
                 <button class="dropdown-toggle" data-toggle="dropdown">More <span
@@ -114,7 +115,7 @@
 				<ul class="headerSlider">
 					<li style="background:url('<?php echo url('/').'/public/web/img/header-bg.jpg'?>')"></li>
 					<!-- <li style="background:url(img/header-bg2.jpg);"></li>
-					<li style="background:url(img/header-bg.jpg);"></li>
+					<li style="background:url(img/header-bg02.jpg);"></li>
 					<li style="background:url(img/header-bg2.jpg);"></li> -->
 				</ul>
 
