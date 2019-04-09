@@ -23,7 +23,7 @@ Class OrderItemFlat extends Base {
                 LEFT JOIN order_item_flat oi 
                 LEFT JOIN inventory_flat i ON oi.`inventory_id` = i.`entity_id`
                 ON (o.`entity_id` = oi.`order_id`)
-                WHERE i.product_code = '".$product_code."'
+                WHERE i.voucher_code = '".$product_code."'
                 AND oi.is_redeem = 0";
 
         $row = \DB::select($query);

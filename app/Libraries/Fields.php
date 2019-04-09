@@ -1590,7 +1590,7 @@ class Fields
         if(isset($data->identifier)){
 
            //echo "<pre>"; print_r($field); exit;
-            if($data->identifier == 'inventory'){
+            /*if($data->identifier == 'inventory'){
 
                     if($field->attribute_code == 'product_code'){
                         $field->data_type_identifier = 'textarea';
@@ -1600,7 +1600,7 @@ class Fields
                     }
 
 
-            }
+            }*/
         }
         return $field;
     }
