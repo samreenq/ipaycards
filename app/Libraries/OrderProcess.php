@@ -661,7 +661,7 @@ Class OrderProcess
 
          $email_content;
         # body
-        echo $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
+         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
