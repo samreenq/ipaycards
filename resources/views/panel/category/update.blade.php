@@ -219,7 +219,7 @@ $fields = new $fields();
         @endif
 
         <?php if(isset($update) && $update->is_parent == 1): ?>
-alert(1);
+
             $(".parent_id_field").hide();
             $(".title_field").parent('div').removeClass('col-md-6');
             $(".title_field").parent('div').addClass('col-md-12');
