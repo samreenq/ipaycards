@@ -94,8 +94,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $attributes['attributes']['product_code'] !!}"
-                       class="perishable">{!! $attributes['attributes']['product_code'] !!}</a>
+                    {{--<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $attributes['attributes']['product_code'] !!}"--}}
+                       {{--class="perishable">{!! $attributes['attributes']['product_code'] !!}</a>--}}
                     <h4>
                         <a href="<?php echo url('/') . '/product_detail?entity_type_id=' . $attributes['entity_type_id'] . '&product_code=' . $attributes['attributes']['product_code'] ?>">
                             <?php echo $attributes['attributes']['title'];?>
@@ -120,10 +120,12 @@
                         if (isset($attributes["attributes"]['promotion_discount_amount']))
                             $price = $attributes["attributes"]['promotion_discount_amount'];
                         ?>
-                        <p class="prise"><?php echo $currency ?> <?php if (isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
-                        <p class="prise">&nbsp;&nbsp;&nbsp;</p>
-                        <p class="prise">
-                            <strike><?php echo $currency . ' ' . $attributes["attributes"]['price']; ?>  </strike></p>
+                            <p class="prise for_strike">
+                                <strike><?php echo $currency . ' ' . $attributes["attributes"]['price']; ?>  </strike></p>
+                            <p class="prise">&nbsp;&nbsp;&nbsp;</p>
+                            <p class="prise"><?php echo $currency ?> <?php if (isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
+
+
                         <?php
                         }
                         else

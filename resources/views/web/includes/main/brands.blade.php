@@ -13,12 +13,14 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
 
     <div class="product-wrap whitebg">
         <img width="268px" height="221px"    src='<?php echo $image; ?>' class="img-responsive" />
-        <div class="product-detail">
+        <div class="product-detail br_p_d">
             <h4>
                 <a href="{!! url('/').'/product?brand_id='.$brand['entity_id'] !!}" >
                     <?php echo $brand['attributes']['title'];?>
+                    <span class="lnr lnr-arrow-right"></span>
                 </a>
             </h4>
+
         </div>
     </div>
 

@@ -16,8 +16,11 @@
 
 				 <!-- Custom styles for this template -->
 					<link href="<?php echo url('/').'/public/web/css/custom.css'; ?>" rel="stylesheet">
-					<link href="<?php echo url('/').'/public/web/css/font-awesome.css'; ?>" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/css/price_range.css'; ?>" rel="stylesheet">
+					{{--FontAwesome--}}
+					<link href="<?php echo url('/').'/public/web/css/font-awesome.css'; ?>" rel="stylesheet">
 					{{--Owl Carousel--}}
 					<link href="<?php echo url('/').'/public/web/lib/owl-carousel/css/owl.theme.default.css'; ?>" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/lib/owl-carousel/css/owl.carousel.css'; ?>" rel="stylesheet">
+					{{--Linear Icon--}}
+					<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
