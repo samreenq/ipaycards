@@ -6747,11 +6747,13 @@ input[type=number] {
     position: relative;
     z-index: 2;
 }
-.brands_slide.owl-theme .owl-nav {
+.brands_slide.owl-theme .owl-nav,
+.game_slide.owl-theme .owl-nav{
     display: block !important;
     margin: 0;
 }
-.brands_slide.owl-theme .owl-nav [class*='owl-'] {
+.brands_slide.owl-theme .owl-nav [class*='owl-'],
+.game_slide.owl-theme .owl-nav [class*='owl-']{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -6763,34 +6765,42 @@ input[type=number] {
     transition: all .3s ease-in-out;
     color:#48494d;
 }
-.brands_slide.owl-theme .owl-nav .owl-prev {
+.brands_slide.owl-theme .owl-nav .owl-prev,
+.game_slide.owl-theme .owl-nav .owl-prev{
     left: -30px;
     right: auto;
 }
-.brands_slide.owl-theme .owl-nav [class*='owl-'] span.ic {
+.brands_slide.owl-theme .owl-nav [class*='owl-'] span.ic,
+.game_slide.owl-theme .owl-nav [class*='owl-'] span.ic{
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     font-size: 26px;
 }
-.brands_slide.owl-theme .owl-nav .owl-prev span.prev_ic:before {
+.brands_slide.owl-theme .owl-nav .owl-prev span.prev_ic:before,
+.game_slide.owl-theme .owl-nav .owl-prev span.prev_ic:before{
     content: "\f104";
 }
-.brands_slide.owl-theme .owl-nav .owl-next {
+.brands_slide.owl-theme .owl-nav .owl-next,
+.game_slide.owl-theme .owl-nav .owl-next{
     right: -30px;
     left: auto;
 }
-.brands_slide.owl-theme:hover .owl-nav .owl-next {
+.brands_slide.owl-theme:hover .owl-nav .owl-next,
+.game_slide.owl-theme:hover .owl-nav .owl-next{
     right: -45px;
 }
-.brands_slide.owl-theme:hover .owl-nav .owl-prev {
+.brands_slide.owl-theme:hover .owl-nav .owl-prev,
+.game_slide.owl-theme:hover .owl-nav .owl-prev{
     left: -45px;
 }
-.brands_slide.owl-theme .owl-nav .owl-next span.next_ic:before {
+.brands_slide.owl-theme .owl-nav .owl-next span.next_ic:before,
+.game_slide.owl-theme .owl-nav .owl-next span.next_ic:before{
     content: "\f105";
 }
-.brands_slide.owl-theme .owl-nav [class*='owl-']:hover {
+.brands_slide.owl-theme .owl-nav [class*='owl-']:hover,
+.game_slide.owl-theme .owl-nav [class*='owl-']:hover{
     background-color: transparent;
     color: #99aeba;
 }
