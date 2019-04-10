@@ -197,7 +197,7 @@ Class EntityNotification
                     )
                 ];
 
-              //  echo "<pre>"; print_r($notification_data); exit;
+              //  echo "<pre>"; print_r($notification_data);
                 //update notification entity history
                 \DB::table('sys_entity_history')
                     ->where('entity_history_id',$entity_history->entity_history_id)
@@ -211,6 +211,8 @@ Class EntityNotification
                     if($actor_entity->attributes->is_notify->value == 1){
                         $notification_model = new Notification();
                         $ret = $notification_model->pn_android($actor_entity->auth->device_token, $notification_data,'consumer');
+                       // echo "<pre>"; print_r($ret); exit;
+
                     }
                 }
             }
@@ -382,7 +384,7 @@ Class EntityNotification
                     //  echo "<pre>"; print_r($ret);exit;
                 }
 
-            }
+        }
 
         }
         return;
@@ -503,26 +505,11 @@ Class EntityNotification
 
         Switch(trim($order_status_key)){
             case 'confirmed':
-                return 'Thanks for using Rite Hauler. Your order '.$order_number.' is confirmed. We will notify you again before pickup.';
-            case 'arrived':
-                $driver_name = $order->attributes->driver_id->detail->attributes->full_name;
-                $driver_phone = $order->attributes->driver_id->detail->auth->mobile_no;
-                $vehicle_name = $order->attributes->vehicle_id->value;
-                $vehicle_code = $order->attributes->vehicle_id->detail->attributes->vehicle_code;
-               return 'Your driver is here for order '.$order_number.'. Driver is '.$driver_name.', '.$driver_phone.', '.$vehicle_name.', '.$vehicle_code.'. Have a pleasant ride!';
-               // print_r($cont); exit;
-            case 'on_the_way':
-                return 'The driver is on the way towards your destination to drop your order '.$order_number.'.';
-            case 'reached':
-                return 'Your order '.$order_number.' reached the destination. Please make the payment of '.$order->attributes->grand_total.'. Please rate this ride.';
-            case 'completed':
-                return 'Thanks for using Rite Hauler. Your order '.$order_number.' is completed.';
-            case 'driver_cancelled':
-                return 'Sorry! The pickup has been declined for order '.$order_number.'. A cancellation fee will be charged.';
+                return 'Thanks for using iPayCards. Your order '.$order_number.' is confirmed. We will notify you again before pickup.';
+           case 'delivered':
+                return 'Thanks for using iPayCards. Your order '.$order_number.' is delivered.';
             case 'cancelled':
                 return 'Sorry! Your order '.$order_number.' has been canceled. Please reschedule your order again.';
-            case 'assigned':
-                return 'Order '.$order_number.' has been updated to '. $order->order_status->value;
             default:
                 return 'Order '.$order_number.' has been updated to '. $order->order_status->value;
         }

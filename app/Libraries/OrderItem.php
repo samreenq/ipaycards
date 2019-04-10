@@ -142,11 +142,19 @@ Class OrderItem
             //echo "<pre>"; print_r($inventory_id); exit;
             //Update Order Item
             $params = [
-                'entity_type_id' => 16,
+                'entity_type_id' => 'order_item',
                 'entity_id' => $order_item_id,
                 'inventory_id' => $inventory_response->data->entity->entity_id,
                 'vendor_id' => $vendor->entity_id,
                 'order_from' => 'in_stock'
+            ];
+
+            $this->_pLib->apiUpdate($params);
+
+            $params = [
+                'entity_type_id' => 'inventory',
+                'entity_id' => $inventory_response->data->entity->entity_id,
+                'title' => 'INV'.$inventory_response->data->entity->entity_id,
             ];
 
             $this->_pLib->apiUpdate($params);
