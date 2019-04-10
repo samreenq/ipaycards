@@ -320,64 +320,67 @@ Class EntityNotification
             if($history_notification) {
 
                 //Get actor entity Data
-                $actor_entity = $this->_getEntityData($entity_history->actor_entity_type_id,$entity_history->actor_entity_id);
+                $actor_entity = $this->_getEntityData($entity_history->actor_entity_type_id, $entity_history->actor_entity_id);
                 if (isset($actor_entity->attributes)) {
                     $actor = $actor_entity->attributes;
                 }
 
                 //Get Target entity Data
-                $target_entity = $this->_getEntityData($entity_history->entity_type_id,$entity_history->entity_id);
+                $target_entity = $this->_getEntityData($entity_history->entity_type_id, $entity_history->entity_id);
                 if (isset($target_entity->attributes)) {
                     $target = $target_entity->attributes;
                 }
 
-                //Replace and set body for message
-                $replacers = [
-                    'order_number' => $target->order_number,
-                    'status' => $target->order_status->detail->attributes->display_title,
-                ];
+                if ($target->order_status->detail->attributes->keyword == 'delivered') {
 
-                // set body
-                if ($history_notification->wildcards != "") {
-                    $wildcards = explode(",", $history_notification->wildcards);
-                    // $replacers = explode(",",$history_notification->replacers);
-                    // replace title
-                    $history_notification->title = str_replace($wildcards, $replacers, $history_notification->title);
-                    eval("\$history_notification->title = \"$history_notification->title\";");
-                    // replace body
-                    $history_notification->body = str_replace($wildcards, $replacers, $history_notification->body);
-                    eval("\$history_notification->body = \"$history_notification->body\";");
+                    //Replace and set body for message
+                    $replacers = [
+                        'order_number' => $target->order_number,
+                        'status' => $target->order_status->detail->attributes->display_title,
+                    ];
+
+                    // set body
+                    if ($history_notification->wildcards != "") {
+                        $wildcards = explode(",", $history_notification->wildcards);
+                        // $replacers = explode(",",$history_notification->replacers);
+                        // replace title
+                        $history_notification->title = str_replace($wildcards, $replacers, $history_notification->title);
+                        eval("\$history_notification->title = \"$history_notification->title\";");
+                        // replace body
+                        $history_notification->body = str_replace($wildcards, $replacers, $history_notification->body);
+                        eval("\$history_notification->body = \"$history_notification->body\";");
+                    }
+                    // prepare notification data
+                    $notification_data = [
+                        "title" => $history_notification->title,
+                        "body" => $history_notification->body,
+                        "key_code" => intval($history_notification->key_code),
+                        "sound" => isset($actor->sound) ? $actor->sound : "default",
+                        "badge" => isset($actor->count_notification) ? $actor->count_notification : "",
+                        // 'collapse_key' => $target_entity->entity_id,
+                        // 'tag'        => "$target_entity->entity_id",
+                        //"user" => $user ? $user : array(),
+                        //"target_user" => $target_user ? $target_user : array(),
+                        // "user_id" => $actor_entity->entity_id,
+                        // "target_user_id" => isset($target_entity->entity_id) ? $target_entity->entity_id : "",
+                        // "user_name" => isset($actor->first_name) ? $actor->first_name : "",
+                        //  "target_user_name" => "",
+                        "my_custom_data" => [
+                            'entity_id' => $target_entity->entity_id,
+                            "user_id" => $actor_entity->entity_id,
+                            "user_name" => isset($actor->first_name) ? $actor->first_name : "",
+                            "order_number" => $target->order_number,
+                            'identifier' => 'order_update',
+                        ]
+                    ];
+
+                    //  echo "<pre>"; print_r($notification_data);
+
+                    //send Notification
+                    $notification_model = new Notification();
+                    $ret = $notification_model->pn_android($actor_entity->auth->device_token, $notification_data);
+                    //  echo "<pre>"; print_r($ret);exit;
                 }
-                // prepare notification data
-                $notification_data = [
-                    "title"     => $history_notification->title,
-                    "body"      => $history_notification->body,
-                    "key_code"  => intval($history_notification->key_code),
-                     "sound"    => isset($actor->sound) ? $actor->sound : "default",
-                     "badge"    => isset($actor->count_notification) ? $actor->count_notification : "",
-                   // 'collapse_key' => $target_entity->entity_id,
-                   // 'tag'        => "$target_entity->entity_id",
-                    //"user" => $user ? $user : array(),
-                    //"target_user" => $target_user ? $target_user : array(),
-                   // "user_id" => $actor_entity->entity_id,
-                   // "target_user_id" => isset($target_entity->entity_id) ? $target_entity->entity_id : "",
-                   // "user_name" => isset($actor->first_name) ? $actor->first_name : "",
-                  //  "target_user_name" => "",
-                    "my_custom_data"    => array(
-                        'entity_id'     => $target_entity->entity_id,
-                        "user_id"       => $actor_entity->entity_id,
-                        "user_name"     => isset($actor->first_name) ? $actor->first_name : "",
-                        "order_number"  =>  $target->order_number,
-                        'identifier'    => 'order_update',
-                    )
-                ];
-
-              //  echo "<pre>"; print_r($notification_data);
-
-                //send Notification
-                $notification_model = new Notification();
-                $ret = $notification_model->pn_android($actor_entity->auth->device_token, $notification_data);
-             //  echo "<pre>"; print_r($ret);exit;
 
             }
 
