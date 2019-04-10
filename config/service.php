@@ -33,7 +33,7 @@ return [
 	/**
 	 * Simbox Configurations
 	 */
-	'SIMBOX_PREPAY' => [
+	'SIMBOX' => [
 		'endpoint_url' => 'http://ipay1060.pointto.us:8088/api/',
 		// auth
 		'username' => 'iPay1060USER',

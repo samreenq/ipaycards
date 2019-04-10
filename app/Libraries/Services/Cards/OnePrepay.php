@@ -85,22 +85,34 @@ class OnePrepay
 		
 	}
 	
+	
 	/**
-	 * Response Key Mapping
+	 * Brands
 	 *
-	 * @param array $response
+	 * @param array|NULL $request
+	 *
+	 * @return mixed
+	 * @throws \Exception
 	 */
-	private function _responseMapping(array &$response = [])
+	public function brands(array $request = NULL)
 	{
-		// map keys
-		map_keys(
-			$response,
+		// fetch brands
+		$records = DB::table('vendor_brands AS vp')
+			->get();
+		
+		// change keys
+		$records = change_keys(
+			json_decode(json_encode($records), TRUE),
 			[
-				'Balance' => 'balance',
-				'MerchantId' => 'vendor_name'
-			]
-		);
+				'id' => 'brand_id',
+				'brand' => 'brand_name'
+			]);
+		
+		return $this->_responseMapping($records);
+		
+		
 	}
+	
 	
 	/**
 	 * Denominations
@@ -132,7 +144,18 @@ class OnePrepay
 				->select('*', $pr_field . ' AS product_code')
 				->get();
 			
-			return [ 'denominations' => $records ];
+			// change keys
+			$records = change_keys(
+				[
+					'denominations' => json_decode(json_encode($records), TRUE)
+				],
+				[
+					//'id' => 'denomination_id',
+					'product_code' => 'denomination_id',
+					'value' => 'denomination_value'
+				]);
+			
+			return $this->_responseMapping($records);
 			
 		}
 		
@@ -148,15 +171,8 @@ class OnePrepay
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function reserve(array $request = NULL)
+	public function purchase(array $request = NULL)
 	{
-		
-		$a  = array_fill(0, 10, null);
-		//var_dump($a);
-		$b = array_chunk($a, 5);
-		var_dump(count($b));
-		exit;
-		
 		
 		// set params
 		$request['quantity'] = 1;
@@ -174,25 +190,16 @@ class OnePrepay
 			
 			try {
 				// params
-				/*$input_xml = '<RequestXml>
-					<Type>PinlessRequest</Type>
-					<TerminalId>' . config('service.ONE_PREPAY.terminal_id') . '</TerminalId>
-					<Password>' . config('service.ONE_PREPAY.password') . '</Password>
-					<Language>eng</Language>
-					<ReceiptNo>6866565243</ReceiptNo>
-					<AccountNo>XXXXX</AccountNo>
-					<Amount>50</Amount>
-					<ClerkId>1</ClerkId>
-					<ProdCode>XXXXX</ProdCode>
-				</RequestXml>';*/
-				
 				$input_xml = '<RequestXml>
-					<Type>PinlessRequest</Type>
+					<Type>PinRequest</Type>
 					<TerminalId>' . config('service.ONE_PREPAY.terminal_id') . '</TerminalId>
 					<Password>' . config('service.ONE_PREPAY.password') . '</Password>
 					<Language>eng</Language>
+					<ReceiptNo>501327588</ReceiptNo>
+					<ValueCode>25</ValueCode>
 					<ClerkId>1</ClerkId>
-					<ProdCode>XXXXX</ProdCode>
+					<RefNo>123456</RefNo>
+					<ProdCode>' . $request['denomination_id'] . '</ProdCode>
 				</RequestXml>';
 				
 				// remove whitespaces between tags
@@ -227,6 +234,17 @@ class OnePrepay
 			}
 			
 		}
+	}
+	
+	
+	/**
+	 * Response Key Mapping
+	 *
+	 * @param array $response
+	 */
+	private function _responseMapping(array &$response = [])
+	{
+		return $response;
 	}
 	
 	

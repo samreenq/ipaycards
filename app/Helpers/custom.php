@@ -193,6 +193,25 @@ function to_camel_case($word)
 }
 
 /**
+ * Change Keys
+ *
+ * @param array $array
+ * @param array $mapping_array
+ *
+ * @return array
+ */
+function change_keys(array $array, array $mapping_array)
+{
+	$arr = [];
+	foreach ( $array as $k => $v ) {
+		$key = $mapping_array[ $k ] ?? $k;
+		$arr[ $key ] = is_array($v) ? change_keys($v, $mapping_array) : $v;
+	}
+	return $arr;
+}
+
+
+/**
  * Map Keys
  *
  * @param array $array
