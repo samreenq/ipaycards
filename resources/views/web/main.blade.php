@@ -15,7 +15,6 @@
 @section("cartbar")
     @include("web/includes/cartbar")
 @endsection
-@include(config('panel.DIR').'flash_message')
 @section('header')
     <header id="header">
         <div class="flyout-overlay for_banneroverlay"></div>
