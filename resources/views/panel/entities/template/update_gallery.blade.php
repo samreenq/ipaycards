@@ -1,5 +1,5 @@
 <div class="row entity_wrap" id="entity_data">
-
+    <input type="hidden" name="action" value="{!! strtolower($page_action) !!}">
     <input type="hidden" name="_token" value="{!! csrf_token() !!}"/>
     <input type="hidden" name="do_post" value="1"/>
     <input type="hidden" name="entity_type_id" id="entity_type_id" value="{!! $entity_data->entity_type_id !!}"/>

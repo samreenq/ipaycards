@@ -397,7 +397,7 @@ Class DataScriptController extends Controller
         }*/
 
       $inventory_model = new SYSTableFlat('inventory');
-      $data = $inventory_model->getDataByWhere(' availability <> "available"');
+      $data = $inventory_model->getDataByWhere();
 
       if($data){
           $entity_lib = new Entity();
@@ -406,7 +406,8 @@ Class DataScriptController extends Controller
               $params = array(
                   'entity_type_id' => 'inventory',
                   'entity_id' => $row->entity_id,
-                  'availability' => 'available'
+                  'voucher_code' => encrypt($row->voucher_code),
+                  'title' => 'INV'.$row->entity_id,
 
               );
               echo '<pre>';

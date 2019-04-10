@@ -160,7 +160,7 @@
 																			{
 
 												?>
-																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])) echo $tmp1['title']; if(isset($tmp1['product_count'])) echo '('.$tmp1['product_count'].')'; ?></a></h4></div>
+																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])){ echo $tmp1['title']; } if(isset($tmp1['product_count'])){ echo '('.$tmp1['product_count'].')'; } ?></a></h4></div>
 												<?php
 																			}
 																		}
@@ -318,7 +318,7 @@
 																				echo "New and Peak Seasons";
 																			
 																			if($_REQUEST['featured_type']==2) 
-																				echo "Special Deals";
+																				echo "iPayCards Essentials";
 																		}
 																	
 																		if(isset($_REQUEST['product_promotion_id']))
@@ -335,7 +335,28 @@
 										}
 									
 								?>
-								<div id="products"  class="row">
+
+                                    <?php
+                                    if(isset($brand))
+                                    {
+                                    ?>
+									<section class="lightgreybg">
+										<div class="np-seasons">
+											<div class="container">
+												<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+													<h2 class="mr-auto align-items-start">
+														{!! $brand->title !!}
+													</h2>
+
+												</div>
+											</div>
+										</div>
+									</section>
+								<?php
+                                    }
+
+                                    ?>
+									<div id="products"  class="row">
 									
 									<div style="
 														position: absolute;
@@ -677,9 +698,9 @@
                     var	title 		 		= $button.parent().find('.title').val();
                     var	thumb 		 		= $button.parent().find('.thumb').val();
                     var	price   			= $button.parent().find('.price').val();
-                    var	weight 		 		= $button.parent().find('.weight').val();
+                   /* var	weight 		 		= $button.parent().find('.weight').val();
                     var	unit_option  		= $button.parent().find('.unit_option').val();
-                    var	unit_value 	 		= $button.parent().find('.unit_value').val();
+                    var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 
                     $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 
@@ -719,7 +740,7 @@
                     {
                         if(typeof(localStorage.products)=="undefined")
                         {
-                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
                             localStorage["products"] =string;
                         }
 
@@ -751,9 +772,9 @@
                                     "title":title,
                                     "thumb":thumb,
                                     "price":price,
-                                    "weight":weight,
+                                  /*  "weight":weight,
                                     "unit_option":unit_option,
-                                    "unit_value":unit_value,
+                                    "unit_value":unit_value,*/
                                     "product_quantity":parseInt(product_quantity)
                                 };
                                 products.push(string);

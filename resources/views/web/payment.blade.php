@@ -100,7 +100,7 @@
 									<img src="<?php echo url('/').'/public/web/img/volet-logo.svg'?>" alt="bitcoin-logo" width="35"/>
 									<input type="radio" class="payment_method_type" name="payment_method_type" id="cash-on-delivery" value="cod" <?php if(isset($customer[0]['payment_method_type']['value'])) if($customer[0]['payment_method_type']['value']=="cod") echo "checked"; ?> >
 									<label for="cash-on-delivery">
-										Cash On Delivery
+										iPay Wallet
 									</label>
 									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 								

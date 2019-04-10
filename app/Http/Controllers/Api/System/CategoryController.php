@@ -455,7 +455,10 @@ class CategoryController extends Controller
 
             }
             //donot get deal category
-            $query->where('category_id','<>',7);
+            if(isset($request->recent_product) && $request->recent_product = 1) {
+                $query->where('category_id','<>',7);
+            }
+
 
             // apply search
             $query = $this->_search($request, $query, $allowed_searching);

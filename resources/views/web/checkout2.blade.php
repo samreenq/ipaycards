@@ -93,20 +93,20 @@
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
 											<input type="radio" name="payment_method" id="credit-card" value="wallet" >
 											<label for="credit-card">
-												Wallet
+												iPay Wallet
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										</div>
 										
 										
-										<div class="big-radio cash CashDeliveryWrap noselect">
+										<!--<div class="big-radio cash CashDeliveryWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/volet-logo.svg'?>" alt="bitcoin-logo" width="35"/>
 											<input type="radio" name="payment_method" id="cash-on-delivery" value="cod">
 											<label for="cash-on-delivery">
 												Cash On Delivery
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-										</div>
+										</div>-->
 										
 									</div>
 								</div>

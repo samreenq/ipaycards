@@ -21,9 +21,50 @@
 <script type="text/javascript" src="<?php echo url('/').'/public/web/js/retina.min.js';?>"></script>
 <script src="<?php echo url('/').'/public/web/js/hoverline.js';?>"></script>
 <script src="<?php echo url('/').'/public/web/js/jquery.bxslider.min.js';?>"></script>
+{{--owlCarousel--}}
+<script src="<?php echo url('/').'/public/web/lib/owl-carousel/js/owl.carousel.js';?>"></script>
+
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 <script>
+
+
+
+
 	$(document).ajaxComplete(function () {
+        $('.brands_slide').owlCarousel({
+            loop:false,
+            slideBy: 1,
+            margin:10,
+            nav: true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
+        $('.game_slide').owlCarousel({
+            loop:false,
+            slideBy: 1,
+            margin:10,
+            nav: true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
 		$('.smBannerSlider').bxSlider({
 			controls: false,
 			auto: true,

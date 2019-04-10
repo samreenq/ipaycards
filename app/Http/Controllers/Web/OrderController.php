@@ -406,10 +406,8 @@ class OrderController extends WebController {
                 $wallet = 0;
             }
 
-
 			
 			/*--------------------------------------------------------------------------------------------------------------------*/
-
 
 
 			$order_helper = new OrderHelper();
@@ -599,7 +597,7 @@ class OrderController extends WebController {
 
                     $data = [];
                     $data = json_decode($lead_json['data']['lead_order'][0]['order_detail'],true);
-                    $data['order_status']			=	$order_helper ->getOrderStatusIdByKeyword('customer_care_pending');
+                    $data['order_status']			=	$order_helper ->getOrderStatusIdByKeyword('pending');
                     $data['payment_method_type']	=	"stripe";
 
 

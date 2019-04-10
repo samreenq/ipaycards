@@ -496,6 +496,7 @@ Class OrderProcess
             foreach($order_items as $order_item_data){
 
                 $order_item = $order_item_data;
+                $sys_flat_model = new SYSTableFlat('inventory');
               //
                 //Create email content
                 if($order_item->item_type->value == 'deal'){
@@ -520,7 +521,9 @@ Class OrderProcess
 
                         foreach($item_deals->data->order_item_deal as $deals){
 
-                            $product_code = $deals->inventory_id->value;
+                           $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$deals->inventory_id->id,array('voucher_code'));
+                            $product_code = decrypt($inventory[0]->voucher_code);
+
                             $email_content .= '<br>';
                             $email_content .= $deals->product_id->value.' has voucher '.$product_code.'<br>';
 
@@ -533,7 +536,9 @@ Class OrderProcess
                elseif($order_item->item_type->value == 'gift_card') {
 
                    $is_gift_card++;
-                   $product_code = $order_item->inventory_id->value;
+                   $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array('voucher_code'));
+                   $product_code = decrypt($inventory[0]->voucher_code);
+
                    $gift_content .= '<br>';
                    $gift_content .= $order_item->product_id->value.' has voucher '.$product_code;
                    $this->_updateInventory($order_item->inventory_id->id);
@@ -541,7 +546,9 @@ Class OrderProcess
                 else{
 
                     $normal_product++;
-                    $product_code = $order_item->inventory_id->value;
+                    $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array('voucher_code'));
+                    $product_code = decrypt($inventory[0]->voucher_code);
+
                     $email_content .= '<br>';
                     $email_content .= $order_item->product_id->value.' has voucher '.$product_code;
 
@@ -654,8 +661,7 @@ Class OrderProcess
 
          $email_content;
         # body
-        $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
-
+         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);

@@ -1174,10 +1174,10 @@ Class EntityTrigger
 	{
 		$request = is_array($request) ? (object) $request : $request;
 		
-		if ( isset($request->product_code) && !empty($request->product_code) ) {
+		if ( isset($request->voucher_code) && !empty($request->voucher_code) ) {
 			
-			$product_code_arr = preg_split("/\r\n|\n|\r/", $request->product_code);
-			$return = [ 'product_code' => implode(',', $product_code_arr) ];
+			$product_code_arr = preg_split("/\r\n|\n|\r/", $request->voucher_code);
+			$return = [ 'voucher_code' => implode(',', $product_code_arr) ];
 		}
 		
 		if ( isset($return) ) {
@@ -1195,11 +1195,11 @@ Class EntityTrigger
 	{
 		$request = is_array($request) ? (object) $request : $request;
 		
-		if ( isset($request->product_code) ) {
+		if ( isset($request->voucher_code) ) {
 			
 			$entity_lib = new Entity();
 			
-			$product_codes = explode(',', $request->product_code);
+			$product_codes = explode(',', $request->voucher_code);
 			
 			if ( count($product_codes) > 0 ) {
 				
@@ -1209,13 +1209,13 @@ Class EntityTrigger
 						$params = array(
 							'entity_type_id' => 73,
 							'entity_id' => $entity_id,
-							'product_code' => $product_code
+							'voucher_code' => encrypt($product_code)
 						);
 						
 						$response = $entity_lib->apiUpdate($params);
 						
 					} else {
-						$request->product_code = $product_code;
+						$request->voucher_code = encrypt($product_code);
 						$params = is_object($request) ? (array) $request : $request;
 						$response = $entity_lib->apiPost($params);
 					}

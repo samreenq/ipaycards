@@ -507,7 +507,7 @@ class ProductController extends WebController
 					),
 					true
 				);
-      //  echo "<pre>"; print_r($json3);
+      // echo "<pre>"; print_r($json3); exit;
 		$data['categories'] = isset($json1['data']['category_listing']) ? $json1['data']['category_listing'] : null;
 		$data['category_id'] = isset($json2['data']['product_tags'][0]['category_id']) ?  $json2['data']['product_tags'][0]['category_id'] : null;
 		$data['categories_all'] = isset($json3['data']['category_listing_listing']) ? $json3['data']['category_listing_listing'] : null;
@@ -519,6 +519,11 @@ class ProductController extends WebController
             $data['price'] = round($data['price']);
         }
 
+        if(isset($request->brand_id)){
+            $flat_table = new SYSTableFlat('brand');
+            $raw = $flat_table->getDataByWhere(' entity_id = '.$request->brand_id,array('title'));
+            $data['brand'] = $raw[0];
+        }
         //echo "<pre>"; print_r($data); exit;
 		return View::make('web/product',$data);
        
@@ -1071,11 +1076,15 @@ class ProductController extends WebController
 	public function categories(Request $request)
 	{
 		$category_id	= $request->input('category_id');
-		$response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',['limit'=>1000],false));
-		$json 	  = json_decode($response,true);
-		$data['categories'] = $json["data"]["category_listing"];
+
+        $params = ['limit'=>1000,'category_id'=>$category_id,'level'=>1];
+
+        $response = json_encode(CustomHelper::internalCall($request,"api/system/category/listing", 'GET',$params,false));
+        $json 	  = json_decode($response,true);
+        $data['categories'] = $json["data"]["category_listing"];
+
 		$data['category_id']= $category_id;
-       // echo "<pre>"; print_r($data); exit;
+		//echo "<pre>"; print_r($data); exit;
 		return View::make('web/includes/menus/categories',$data)->__toString();
 	}
 
@@ -1300,6 +1309,37 @@ class ProductController extends WebController
        // echo "<pre>"; print_r( $products_list); exit;
         return View::make('web/includes/main/top_category',$data)->__toString();
 
+    }
+
+    public function getAllBrands(Request $request)
+    {
+        $data = [];
+        return View::make('web/brand',$data);
+    }
+
+    public function getBrandsAll(Request $request)
+    {
+        $data['product_detail_url'] = $request->input('product_detail_url');
+        $limit = $request->input('limit');
+
+        $params = 	[
+            'entity_type_id'		=>		'brand',
+            'status'                => 1,
+            'offset'				=>		$request->input('offset')	,
+            'limit'					=>		1000,
+            'order_by'          => 'entity_id',
+            'sorting'           => 'DESC'
+        ];
+        $json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($params)),true);
+        $data['brands'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
+        $data['currency'] = $this->_object_library_general_setting->getCurrency();
+
+        $data1 = [
+            'products'	=> View::make('web/includes//main/all_brands',$data)->__toString(),
+            'items'		=> isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/$limit) : null
+        ];
+
+        return $data1;
     }
 
 }

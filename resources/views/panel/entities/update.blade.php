@@ -16,6 +16,7 @@ $fields = new $fields();
                     </div>
                     <div class="panel-body p20 pb10">
                         <form  name="data_form" method="post" id="data_form" class="panel-collapse collapse in">
+
                             <div class="main admin-form ">
                                 @include(config('panel.DIR').'flash_message')
                                 @if (Session::has('message'))
@@ -43,11 +44,18 @@ $fields = new $fields();
                                     @include(config('panel.DIR').'entities/'.$form_template_dir.'/depend_update_basic')
                                 @endif
 
+                                <?php
+                                if($uri_method == 'copy'){
+                                if(isset($entity_data->identifier) && (in_array($entity_data->identifier,array('promotion_discount')))){ ?>
+
+                                <button type="button" class="btn ladda-button btn-theme btn-wide add-more-entity" data-style="zoom-in"> <span class="ladda-label">Add More Items</span> </button>
+                                <?php  }  } ?>
+
                                 <?php  } ?>
 
                                 <div class="pull-right p-relative">
                                     @if($uri_method != 'view' )
-                                    <button type="submit" class="btn ladda-button btn-theme btn-wide mt10 submit-btn" data-style="zoom-in"> <span class="ladda-label">Update</span> </button>
+                                    <button type="submit" class="btn ladda-button btn-theme btn-wide mt10 submit-btn" data-style="zoom-in"> <span class="ladda-label">@if($uri_method == 'update' )Update @else Submit @endif</span> </button>
                                         @include(config('panel.DIR').'entities.loader')
                                     @else
                                         @if(isset($modulePermission) && $modulePermission->update_permission == 1 )
@@ -210,7 +218,7 @@ $fields = new $fields();
         }
         <?php } ?>
 
-        @if($entity_data->depend_entity_type > 0)
+        @if($entity_data->depend_entity_type > 0 && strtolower($page_action) != 'copy')
 
         $(".submit-btn").attr("type", "button");
 

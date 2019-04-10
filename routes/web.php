@@ -143,7 +143,7 @@ Route::get('order_calendar', $general_panel_dir . 'EntityAjaxController@getOrder
 Route::get('order_calendar_content', $general_panel_dir . 'EntityAjaxController@getOrderCalendarContent');
 
 //Share url
-Route::get('share/{slug}/{id}','OrderController@shareView');
+Route::get('share/{slug}/{id}','OpenGraphController@shareView');
 
 /////////////Website Routes///////////////////////////
 
@@ -210,6 +210,7 @@ Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts"
 Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
     Route::get('/product/brand', "Web\ProductController@getBrandProducts")->name('brand_products');
 
+
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
 
@@ -217,6 +218,9 @@ Route::get('/testimonial', "Web\TestimonialController@getTestimonial")->name('te
     Route::get('/main_category', "Web\ProductController@getMainCategory")->name('main_category');
 Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDiscount")->name('promotionAndDiscount');
     Route::get('/top_category_products', "Web\ProductController@topCategotyProducts")->name('top_category_products');
+
+    Route::get('/brand', "Web\ProductController@getAllBrands")->name('brand');
+    Route::get('/product/all_brand', "Web\ProductController@getBrandsAll")->name('all_brand');
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');

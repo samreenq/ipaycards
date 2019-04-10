@@ -3,29 +3,33 @@
 
 
 <?php
-
+//echo "<pre>"; print_r($categories); exit;
 	foreach ( $categories as $tmp ) 
 	{
 		if($tmp['category_id']==$category_id)
 			if($tmp['parent_id']!=0 )
 				$category_id = $tmp['parent_id'];
-	}
 
+		if(isset($tmp['child'])){
 
-	foreach ( $categories as $main_Categories ) 
-	{
-		if($main_Categories['parent_id']==$category_id)
-		{
-		    if($main_Categories['status'] != 1) continue;
-?>
-			<li class="vegePanel panel">
-				<a <?php if(isset($_REQUEST['category_id'])) if($_REQUEST['category_id']==$main_Categories['category_id'] )echo "style='color:#72cbb1'" ?>href=" {{ url('/').'/product?entity_type_id=14&category_id='.$main_Categories['category_id'] }} "><?php echo $main_Categories['title']." ( ".$main_Categories['product_count']." ) "; ?> </a> 
-			</li>
-<?php 	
+            foreach ($tmp['child'] as $main_Categories )
+            {
+				if($main_Categories['parent_id']==$category_id)
+				{
+				if($main_Categories['status'] != 1) continue;
+				?>
+				<li class="vegePanel panel">
+					<a <?php if(isset($_REQUEST['category_id'])) if($_REQUEST['category_id']==$main_Categories['category_id'] )echo "style='color:#72cbb1'" ?>href=" {{ url('/').'/product?entity_type_id=14&category_id='.$main_Categories['category_id'] }} "><?php echo $main_Categories['title']." ( ".$main_Categories['product_count']." ) "; ?> </a>
+				</li>
+				<?php
+				}
+
+				}
+
+            }
 		}
-		
-	}
-	?>
+
+		?>
 	
 
 <?php 

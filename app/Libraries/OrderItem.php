@@ -123,13 +123,14 @@ Class OrderItem
         $product = $flat_table->getColumnByWhere(' entity_id = '.$product_id,'*');
         //   echo "<pre>"; print_r($product); exit;
         //Create inventory
+        $voucher_code =  str_random(8);
         $params = array(
             'entity_type_id' => 'inventory',
             'vendor_id' => $vendor->entity_id,
             'category_id' => $product->category_id,
             'brand_id' => $product->brand_id,
             'product_id' => $product_id,
-            'product_code' =>  str_random(8),
+            'voucher_code' => encrypt($voucher_code),
             'availability' => 'reserved',
         );
 
