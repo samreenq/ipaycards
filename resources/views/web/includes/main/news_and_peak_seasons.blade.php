@@ -47,14 +47,16 @@
 								<input type="hidden" class="weight" value="<?php if(isset($attributes["attributes"]['weight'])) echo $attributes["attributes"]['weight']; ?>" />
 								<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
 								<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
-								
+								<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
+
 							{{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
 							<img width="268px" height="221px"    src='<?php echo $image; ?>' class="img-responsive" />
 							<div class="product-detail">
 								<div class="addCartWrap">
-								
-										
-											<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
+
+									<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
+
+									<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
 											<input type="hidden" class="product_code" value="<?php if(isset($attributes["attributes"]['product_code'])) echo $attributes["attributes"]['product_code'] ?>" />
 											<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
 											<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
@@ -63,10 +65,11 @@
 											<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
 											<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
 											<input type="hidden" class="quantity" name="product_quantity" value="1"/>
-											
-											
-											
-									<button class="addtocart">
+                                        <input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
+
+
+
+                                    <button class="addtocart">
 										<span class="icon-tt-cart-Icon"></span>
 									</button>
 									<div class="pro-inc-wrap">
@@ -82,7 +85,8 @@
 											<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
 											<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
 											<input class="quantity" type="text" name="product_quantity" value="1" readonly/>
-											
+											<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type'])) echo $attributes["attributes"]['item_type'] ?>" />
+
 											<a class="incr-btn incr-btn4 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 										</div>
 									</div>

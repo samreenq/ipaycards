@@ -52,6 +52,7 @@
                 <input type="hidden" class="thumb"
                        value="<?php if (isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>"/>
                 <input type="hidden" class="price" value="<?php echo $price; ?>"/>
+                <input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
                 {{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
                 <img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
@@ -68,6 +69,7 @@
                                value="<?php if (isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>"/>
                         <input type="hidden" class="price" value="<?php echo $price; ?>"/>
                         <input class="quantity" type="hidden" name="product_quantity" value="1"/>
+                        <input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
                         <button class="addtocart">
                             <span class="icon-tt-cart-Icon"></span>
@@ -88,6 +90,7 @@
                                        value="<?php if (isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>"/>
                                 <input type="hidden" class="price" value="<?php echo $price; ?>"/>
                                 <input class="quantity" type="number" name="product_quantity" value="1" readonly/>
+                                <input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
                                 <a class="incr-btn incr-btn5 text-left pln" data-action="increase" href="#"><span
                                             class="icon-tt-plus-icon"></span></a>

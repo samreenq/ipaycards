@@ -83,10 +83,9 @@
 						<input type="hidden" class="weight" value="<?php if(isset($productItemsList["attributes"]['weight'])) echo $productItemsList["attributes"]['weight']; ?>" />
 						<input type="hidden" class="unit_option" value="<?php if(isset($productItemsList["attributes"]['item_unit']['option'])) echo $productItemsList["attributes"]['item_unit']['option']; ?>" />
 						<input type="hidden" class="unit_value" value="<?php if(isset($productItemsList["attributes"]['item_unit']['value'])) echo $productItemsList["attributes"]['item_unit']['value']; ?>" />
-						
+						<input type="hidden" class="item_type" value="<?php if(isset($productItemsList["attributes"]['item_type']['value'])) echo $productItemsList["attributes"]['item_type']['value'] ?>" />
 						
 
-					
 							
 							@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
 					
@@ -110,10 +109,9 @@
 									<input type="hidden" class="unit_option" value="<?php if(isset($productItemsList["attributes"]['item_unit']['option'])) echo $productItemsList["attributes"]['item_unit']['option']; ?>" />
 									<input type="hidden" class="unit_value" value="<?php if(isset($productItemsList["attributes"]['item_unit']['value'])) echo $productItemsList["attributes"]['item_unit']['value']; ?>" />
 									<input type="hidden" class="quantity" name="product_quantity" value="1"/>
-											
-											
-							
-							
+									<input type="hidden" class="item_type" value="<?php if(isset($productItemsList["attributes"]['item_type']['value'])) echo $productItemsList["attributes"]['item_type']['value'] ?>" />
+
+
 								<button class="addtocart">
 									<span class="icon-tt-cart-Icon"></span>
 								</button>
@@ -132,8 +130,10 @@
 										<input type="hidden" class="unit_option" value="<?php if(isset($productItemsList["attributes"]['item_unit']['option'])) echo $productItemsList["attributes"]['item_unit']['option']; ?>" />
 										<input type="hidden" class="unit_value" value="<?php if(isset($productItemsList["attributes"]['item_unit']['value'])) echo $productItemsList["attributes"]['item_unit']['value']; ?>" />
 										<input class="quantity" type="number" name="product_quantity" value="1"/>
-										
-										<a class=" incr-btn incr-btn3 text-left pln" data-action="increase" >
+										<input type="hidden" class="item_type" value="<?php if(isset($productItemsList["attributes"]['item_type']['value'])) echo $productItemsList["attributes"]['item_type']['value'] ?>" />
+
+
+											<a class=" incr-btn incr-btn3 text-left pln" data-action="increase" >
 											<span class="add icon-tt-plus-icon"></span>
 										</a>
 									</div>

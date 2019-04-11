@@ -245,6 +245,7 @@
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   			= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -281,7 +282,7 @@
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -313,6 +314,7 @@
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+																	"item_type":item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -341,6 +343,7 @@
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 									/*	var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -382,7 +385,7 @@
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","item_type":"'+item_type+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -414,6 +417,7 @@
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+                                                        "item_type":item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -470,9 +474,10 @@
 					var	title 		 		= $button.parent().find('.title').val();
 					var	thumb 		 		= $button.parent().find('.thumb').val();
 					var	price   		= $button.parent().find('.price').val();
-					var	weight 		 		= $button.parent().find('.weight').val();
+					/*var	weight 		 		= $button.parent().find('.weight').val();
 					var	unit_option  		= $button.parent().find('.unit_option').val();
-					var	unit_value 	 		= $button.parent().find('.unit_value').val();
+					var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+                    var	item_type   		= $button.parent().find('.item_type').val();
 
 					$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
 					if(oldValue=="0")
@@ -506,7 +511,7 @@
 					{
 						if(typeof(localStorage.products)=="undefined")
 						{
-							var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+							var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
 							localStorage["products"] =string;
 						}
 
@@ -538,9 +543,10 @@
 									"title":title,
 									"thumb":thumb,
 									"price":price,
-									"weight":weight,
+									"item_type":item_type,
+									/*"weight":weight,
 									"unit_option":unit_option,
-									"unit_value":unit_value,
+									"unit_value":unit_value,*/
 									"product_quantity":parseInt(product_quantity)
 								};
 								products.push(string);
@@ -566,6 +572,7 @@
 					var	title 		 		= $button.parent().find('.title').val();
 					var	thumb 		 		= $button.parent().find('.thumb').val();
 					var	price   		= $button.parent().find('.price').val();
+                    var	item_type   		= $button.parent().find('.item_type').val();
 					/*var	weight 		 		= $button.parent().find('.weight').val();
 					var	unit_option  		= $button.parent().find('.unit_option').val();
 					var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -607,7 +614,7 @@
 					{
 						if(typeof(localStorage.products)=="undefined")
 						{
-							var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+							var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
 							localStorage["products"] =string;
 						}
 
@@ -639,6 +646,7 @@
 									"title":title,
 									"thumb":thumb,
 									"price":price,
+									"item_type" : item_type,
 									/*"weight":weight,
 									"unit_option":unit_option,
 									"unit_value":unit_value,*/
@@ -709,9 +717,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 var	title 		 		= $button.parent().find('.title').val();
                 var	thumb 		 		= $button.parent().find('.thumb').val();
                 var	price   		= $button.parent().find('.price').val();
-                var	weight 		 		= $button.parent().find('.weight').val();
+                var	item_type   		= $button.parent().find('.item_type').val();
+                /*var	weight 		 		= $button.parent().find('.weight').val();
                 var	unit_option  		= $button.parent().find('.unit_option').val();
-                var	unit_value 	 		= $button.parent().find('.unit_value').val();
+                var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 
                 $button.parent().find('.incr-btn4[data-action="decrease"]').removeClass('inactive');
 
@@ -748,7 +757,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 {
                     if(typeof(localStorage.products)=="undefined")
                     {
-                        var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                        var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
                         localStorage["products"] =string;
                     }
 
@@ -780,9 +789,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                                 "title":title,
                                 "thumb":thumb,
                                 "price":price,
-                                "weight":weight,
+								"item_type" : item_type,
+                               /* "weight":weight,
                                 "unit_option":unit_option,
-                                "unit_value":unit_value,
+                                "unit_value":unit_value,*/
                                 "product_quantity":parseInt(product_quantity)
                             };
                             products.push(string);
@@ -807,9 +817,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 var	title 		 		= $button.parent().find('.title').val();
                 var	thumb 		 		= $button.parent().find('.thumb').val();
                 var	price   			= $button.parent().find('.price').val();
-                var	weight 		 		= $button.parent().find('.weight').val();
+                var	item_type   		= $button.parent().find('.item_type').val();
+               /* var	weight 		 		= $button.parent().find('.weight').val();
                 var	unit_option  		= $button.parent().find('.unit_option').val();
-                var	unit_value 	 		= $button.parent().find('.unit_value').val();
+                var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
 
                 $button.parent().find('.incr-btn4[data-action="decrease"]').removeClass('inactive');
 
@@ -843,7 +854,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 {
                     if(typeof(localStorage.products)=="undefined")
                     {
-                        var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                        var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
                         localStorage["products"] =string;
                     }
 
@@ -875,14 +886,16 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                                 "title":title,
                                 "thumb":thumb,
                                 "price":price,
-                                "weight":weight,
+								"item_type" : item_type,
+                                /*"weight":weight,
                                 "unit_option":unit_option,
-                                "unit_value":unit_value,
+                                "unit_value":unit_value,*/
                                 "product_quantity":parseInt(product_quantity)
                             };
                             products.push(string);
                         }
                         localStorage.setItem("products", JSON.stringify(products));
+                        console.log(products);
                         total(Request_url4);
                     }
                 }
@@ -1284,10 +1297,11 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-										
+										console.log(item_type);
 										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
 									
 										if(oldValue=="0") 
@@ -1322,7 +1336,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -1354,9 +1368,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
-																	"weight":weight,
+																	"item_type" : item_type,
+																	/*"weight":weight,
 																	"unit_option":unit_option,
-																	"unit_value":unit_value,
+																	"unit_value":unit_value,*/
 																	"product_quantity":parseInt(product_quantity)
 																 };
 													products.push(string);
@@ -1384,6 +1399,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   			= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										//var	weight 		 		= $button.parent().find('.weight').val();
 									//	var	unit_option  		= $button.parent().find('.unit_option').val();
 										//var	unit_value 	 		= $button.parent().find('.unit_value').val();
@@ -1458,6 +1474,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+																	"item_type" : item_type,
 																/*	"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -1538,6 +1555,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -1576,7 +1594,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","item_type":"'+item_type+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -1608,6 +1626,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+																	"item_type" : item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -1638,6 +1657,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   			= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -1712,6 +1732,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+																	"item_type" : item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -1888,7 +1909,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										var product_code  = $button.parent().find('.product_code').val(); 
 										var title  = $button.parent().find('.title').val(); 
 										var thumb  = $button.parent().find('.thumb').val(); 
-										var price  = $button.parent().find('.price').val(); 
+										var price  = $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 									/*	var weight  = $button.parent().find('.weight').val();
 										var unit_option  = $button.parent().find('.unit_option').val(); 
 										var unit_value  = $button.parent().find('.unit_value').val(); */
@@ -1927,6 +1949,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																var title =data[i]['title'];
 																var thumb = data[i]['thumb'];
 																var price = data[i]['price'];
+																var item_type = data[i]['item_type']
 																/*var weight = data[i]['weight'];
 																var unit_option = data[i]['unit_option'];
 																var unit_value = data[i]['unit_value'];*/
@@ -1937,7 +1960,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																				"product_code":product_code ,
 																				"title":title,
 																				"thumb":thumb,
-																				"price":price
+																				"price":price,
+																				"item_type" : item_type,
 																				/*"weight":weight,
 																				"unit_option":unit_option,
 																				"unit_value":unit_value,*/
@@ -1967,6 +1991,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																var title =data[i]['title'];
 																var thumb = data[i]['thumb'];
 																var price = data[i]['price'];
+                                                                var item_type = data[i]['item_type']
 																/*var weight = data[i]['weight'];
 																var unit_option = data[i]['unit_option'];
 																var unit_value = data[i]['unit_value'];*/
@@ -1978,6 +2003,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																				"title":title,
 																				"thumb":thumb,
 																				"price":price,
+                                                                    			"item_type" : item_type,
 																				/*"weight":weight,
 																				"unit_option":unit_option,
 																				"unit_value":unit_value,*/
@@ -2244,6 +2270,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -2314,6 +2341,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+                                                        			"item_type":item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -2342,6 +2370,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										var	title 		 		= $button.parent().find('.title').val();
 										var	thumb 		 		= $button.parent().find('.thumb').val();
 										var	price   		= $button.parent().find('.price').val();
+                                        var	item_type   		= $button.parent().find('.item_type').val();
 										/*var	weight 		 		= $button.parent().find('.weight').val();
 										var	unit_option  		= $button.parent().find('.unit_option').val();
 										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -2384,7 +2413,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										{
 											if(typeof(localStorage.products)=="undefined")
 											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","item_type":"'+item_type+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 												localStorage["products"] =string;
 											}
 					
@@ -2416,6 +2445,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 																	"title":title,
 																	"thumb":thumb,
 																	"price":price,
+																	"item_type":item_type,
 																	/*"weight":weight,
 																	"unit_option":unit_option,
 																	"unit_value":unit_value,*/
@@ -2489,8 +2519,9 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 												$(id2).empty().append(price);
 												e.preventDefault();
 												var Product_code = $button.parent().find('.product_code').val();
+                                                var item_type = $button.parent().find('.item_type').val();
 												var Product_quantity = newVal;
-												save(Product_code,Product_quantity,Request_url1);
+												save(Product_code,Product_quantity,item_type,Request_url1);
 												total(Request_url2);
 												
 											});
@@ -2614,9 +2645,10 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 												$(id2).empty().append(price);
 												e.preventDefault();
 												var Product_code = $button.parent().find('.product_code').val();
+                                                var item_type = $button.parent().find('.item_type').val();
 												var Product_quantity = newVal;
 								
-												save(Product_code,Product_quantity,Request_url1);
+												save(Product_code,Product_quantity,item_type,Request_url1);
 												total(Request_url2);
 												
 											});
@@ -2635,7 +2667,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 
 	}
 	
-	function save(Product_code,Product_quantity,Request_url)
+	function save(Product_code,Product_quantity,item_type,Request_url)
 	{
 		
 		product_code = Product_code; 
@@ -2644,7 +2676,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 		if(typeof(localStorage.products)=="undefined")
 		{
 				
-			var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+			var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
 			localStorage["products"] =string;
 		}
 												
@@ -2744,16 +2776,17 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 				var product_code 		= $("input[name=product_code]").val();   
 				var title 		 		= $("input[name=title]").val(); 
 				var thumb 		 		= $("input[name=thumb]").val(); 
-				var price 	 			= $("input[name=price]").val(); 
-				/*var weight 		 		= $("input[name=weight]").val();
-				var unit_option  		= $("input[name=unit_option]").val(); 
-				var unit_value 	 		= $("input[name=unit_value]").val(); */
+				var price 	 			= $("input[name=price]").val();
+                var item_type 	 			= $("input[name=item_type]").val();
+                /*var weight 		 		= $("input[name=weight]").val();
+                var unit_option  		= $("input[name=unit_option]").val();
+                var unit_value 	 		= $("input[name=unit_value]").val(); */
 						
 				
 				
 				if(typeof(localStorage.products)=="undefined")
 				{
-					var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
+					var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","item_type":"'+item_type+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
 					localStorage["products"] =string;
 				
 				}
@@ -2797,6 +2830,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										"title":title,
 										"thumb":thumb,
 										"price":price,
+                            			"item_type":item_type,
 									/*	"weight":weight,
 										"unit_option":unit_option,
 										"unit_value":unit_value,*/
@@ -2858,9 +2892,10 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 												$(id2).empty().append(price);
 												e.preventDefault();
 												var Product_code = $button.parent().find('.product_code').val();
+                                                var item_type = $button.parent().find('.item_type').val();
 												var Product_quantity = newVal;
 												
-												save(Product_code,Product_quantity,Request_url1);
+												save(Product_code,Product_quantity,item_type,Request_url1);
 												total(Request_url1);
 												
 											});
@@ -2918,6 +2953,19 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
                                 $("#show_list").prepend('<div class="alert alert-danger">'+data.message+'</div>');
                                 return false;
 							}else{
+                                localStorage.removeItem('is_gift_card');
+								var products = JSON.parse(localStorage.products);
+                                localStorage.setItem('is_gift_card',0);
+
+                                $.each(products,function(k,v){
+                                    console.log(v.item_type);
+                                	if($.trim(v.item_type) == 'gift_card'){
+                                        //console.log(v);
+                                        localStorage.setItem('is_gift_card',1);
+									}
+
+                                });
+
                                 window.location = Request_url2 ;
 							}
 
@@ -3025,7 +3073,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 							day							:	Day,
 							time						:   Time,
 							shipping_address			: 	$("input[name='shipping_address']:checked").val(),
-							
+                            recipient_email				:    $('#recipient_email').val(),
+							is_gift_card				:	localStorage.is_gift_card,
 						},
 						dataType: 'json',
 						success: function(data)
