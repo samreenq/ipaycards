@@ -24,7 +24,7 @@ Route::group([
 	 * Topup
 	 */
 	Route::get('topup/balance', 'TopupController@balance');
-	Route::get('topup/products', 'TopupController@products');
+	Route::get('topup/send', 'TopupController@send');
 	
 	
 	/**

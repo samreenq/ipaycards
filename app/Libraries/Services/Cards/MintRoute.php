@@ -126,7 +126,7 @@ class MintRoute
 			
 			$response = $this->_curl->execute();
 			
-			return json_decode($response);
+			return json_decode($response)->{$request['category_id']};
 			
 			
 		} catch ( \Exception $e ) {
