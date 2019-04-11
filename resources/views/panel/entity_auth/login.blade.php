@@ -33,7 +33,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon"
-          href="{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/img/favicon.ico?v=0.0">
+          href="{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/img/favicon.png?v=0.1">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,7 +58,7 @@
 			<div class="left-panel light-color">
 				<div class="logo-holder"><img src="{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/img/logos/admin-logo-white.png" class="logo" width="250px"></div>
 				<div class="signup-carousel slider-carousel">
-					<div class="f-s-slide slide1" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin01.jpg');">
+					<div class="f-s-slide slide1" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin01.png');">
 						<div class="gradient-overlay"></div>
 						<div class="f-s-wrap">
 							<div class="f-s-cont">
@@ -67,7 +67,7 @@
 							</div>
 						</div>    
 					</div>
-					<div class="f-s-slide slide2" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin02.jpg');">
+					<div class="f-s-slide slide2" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin02.png');">
 						<div class="gradient-overlay"></div>
 						<div class="f-s-wrap">
 							<div class="f-s-cont">
@@ -76,7 +76,7 @@
 							</div>
 						</div>    
 					</div>
-					<div class="f-s-slide slide3" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin03.jpg');">
+					<div class="f-s-slide slide3" style="background:url('{!! \URL::to(config('panel.DIR_PANEL_RESOURCE')) !!}/assets/client/slider-signin03.png');">
 						<div class="gradient-overlay"></div>
 						<div class="f-s-wrap">
 							<div class="f-s-cont">

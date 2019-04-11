@@ -22188,14 +22188,14 @@ fieldset[disabled] .btn-dark.active {
 }
 .radio-custom.radio-system label:before,
 .checkbox-custom.checkbox-system label:before {
-  border-color: #ff7f5d;
+  border-color: #139cb4;
 }
 .radio-custom.radio-system input[type=radio]:checked + label:after,
 .radio-custom.radio-system input[type=checkbox]:checked + label:after,
 .checkbox-custom.checkbox-system input[type=checkbox]:checked + label:after,
 .checkbox-custom.checkbox-system input[type=radio]:checked + label:after {
-  background-color: #ff7f5d;
-  color: #ff7f5d;
+  background-color: #139cb4;
+  color: #139cb4;
 }
 .checkbox-custom.fill.checkbox-system label:before {
   background-color: #48c9a9;
@@ -25198,10 +25198,12 @@ div.jsoneditor-tree, textarea.jsoneditor-text, div.ace-jsoneditor {
   height: 100%;
   min-height: 100%;
 }
-.login-theme02 .signup-carousel .f-s-slide{
+.login-theme02 .signup-carousel .f-s-slide {
   position: relative;
   height: 100%;
   background-size: cover !important;
+  background-position: 60% 50% !important;
+  background-repeat: no-repeat !important;
 }
 .login-theme02 .login-wrap .tab-content{
   width: 60%;
@@ -25230,6 +25232,7 @@ div.jsoneditor-tree, textarea.jsoneditor-text, div.ace-jsoneditor {
   left: 0px;
   z-index: 5000;
   margin-left: 4.2%;
+  width: 135px;
 }
 .login-theme02 .signup-carousel, .login-theme02 .signup-carousel .slick-list, .login-theme02 .signup-carousel .slick-track, .login-theme02 .signup-carousel .slick-slide {
   height: 100%;

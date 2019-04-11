@@ -197,7 +197,7 @@ Class EntityNotification
                     )
                 ];
 
-              //  echo "<pre>"; print_r($notification_data);
+               // echo "<pre>"; print_r($notification_data);
                 //update notification entity history
                 \DB::table('sys_entity_history')
                     ->where('entity_history_id',$entity_history->entity_history_id)
@@ -211,12 +211,13 @@ Class EntityNotification
                     if($actor_entity->attributes->is_notify->value == 1){
                         $notification_model = new Notification();
                         $ret = $notification_model->pn_android($actor_entity->auth->device_token, $notification_data,'consumer');
-                       // echo "<pre>"; print_r($ret); exit;
+                      // echo "<pre>"; print_r($ret); exit;
 
                     }
                 }
             }
         }
+        //exit;
         return;
     }
 

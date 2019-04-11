@@ -58,7 +58,7 @@ Class OrderStatus
                 $sys_history->logHistory('order_driver_notify', $order_response->data->entity_id, $order_response->data->attributes->driver_id->id, $other_data, $timestamp, $request);
             }
             //customer notification
-            $customer_notification_status = ['confirmed','cancelled','arrived','reached','on_the_way','driver_cancelled','completed'];
+            $customer_notification_status = ['delivered'];
             if(in_array($order_status,$customer_notification_status) || $update_order_flage === true){
                 $other_data['entity_type_id'] = $order_response->data->entity_type_id;
                 $other_data['actor_entity_type_id'] = 'customer';
