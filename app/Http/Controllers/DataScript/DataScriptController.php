@@ -21,6 +21,7 @@ use App\Libraries\System\Entity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Libraries\CustomHelper;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Schema;
 use Intervention\Image\File;
 use Validator;
@@ -403,10 +404,11 @@ Class DataScriptController extends Controller
           $entity_lib = new Entity();
           foreach($data as $row){
 
+              $voucher_code = str_random(5);
               $params = array(
                   'entity_type_id' => 'inventory',
                   'entity_id' => $row->entity_id,
-                  'voucher_code' => encrypt($row->voucher_code),
+                   'voucher_code' => Crypt::encrypt($voucher_code),
                   'title' => 'INV'.$row->entity_id,
 
               );

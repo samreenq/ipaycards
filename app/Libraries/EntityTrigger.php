@@ -9,6 +9,7 @@ use App\Http\Models\SYSEntityHistory;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class CustomHelper
@@ -1209,13 +1210,13 @@ Class EntityTrigger
 						$params = array(
 							'entity_type_id' => 73,
 							'entity_id' => $entity_id,
-							'voucher_code' => encrypt($product_code)
+							'voucher_code' => Crypt::encrypt($product_code)
 						);
 						
 						$response = $entity_lib->apiUpdate($params);
 						
 					} else {
-						$request->voucher_code = encrypt($product_code);
+						$request->voucher_code = Crypt::encrypt($product_code);
 						$params = is_object($request) ? (array) $request : $request;
 						$response = $entity_lib->apiPost($params);
 					}

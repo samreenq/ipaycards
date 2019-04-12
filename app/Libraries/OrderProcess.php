@@ -14,6 +14,8 @@ use App\Http\Models\EmailTemplate;
 use App\Http\Models\Setting;
 use App\Libraries\GeneralSetting;
 use App\Libraries\OrderStatus;
+use Illuminate\Support\Facades\Crypt;
+
 /**
  * Class OrderProcess
  */
@@ -522,7 +524,7 @@ Class OrderProcess
                         foreach($item_deals->data->order_item_deal as $deals){
 
                            $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$deals->inventory_id->id,array('voucher_code'));
-                            $product_code = decrypt($inventory[0]->voucher_code);
+                            $product_code = Crypt::decrypt($inventory[0]->voucher_code);
 
                             $email_content .= '<br>';
                             $email_content .= $deals->product_id->value.' has voucher '.$product_code.'<br>';
@@ -537,7 +539,7 @@ Class OrderProcess
 
                    $is_gift_card++;
                    $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array('voucher_code'));
-                   $product_code = decrypt($inventory[0]->voucher_code);
+                    $product_code = Crypt::decrypt($inventory[0]->voucher_code);
 
                    $gift_content .= '<br>';
                    $gift_content .= $order_item->product_id->value.' has voucher '.$product_code;
@@ -547,7 +549,7 @@ Class OrderProcess
 
                     $normal_product++;
                     $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array('voucher_code'));
-                    $product_code = decrypt($inventory[0]->voucher_code);
+                    $product_code = Crypt::decrypt($inventory[0]->voucher_code);
 
                     $email_content .= '<br>';
                     $email_content .= $order_item->product_id->value.' has voucher '.$product_code;
@@ -659,7 +661,7 @@ Class OrderProcess
             $email_content, // order items
         );
 
-         $email_content;
+        // echo $email_content;
         # body
          $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
@@ -727,7 +729,7 @@ Class OrderProcess
             $email_content, // order items
         );
 
-         $email_content;
+       // echo $email_content;
         # body
         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 

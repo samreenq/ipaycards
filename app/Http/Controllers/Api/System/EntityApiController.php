@@ -19,6 +19,7 @@ use App\Libraries\System\Entity;
 use App\Libraries\Truck;
 use App\Libraries\WalletTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Validator;
 use View;
 
@@ -446,9 +447,11 @@ Class EntityApiController extends Controller
 		} else {
 			
 			$this->_apiData['error'] = 0;
-			
+
+			$voucher_code = Crypt::encrypt($request->product_code);
+
 			$order_item_flat = new OrderItemFlat();
-			$validate_gift = $order_item_flat->validateGiftCard($request->product_code);
+			$validate_gift = $order_item_flat->validateGiftCard($voucher_code);
 			// echo "<pre>"; print_r($validate_gift); exit;
 			if ( $validate_gift ) {
 				
