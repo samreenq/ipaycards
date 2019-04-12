@@ -314,7 +314,7 @@ Class EntityTrigger
 							
 							$params = array(
 								'entity_type_id' => 51,
-								'customer_id' => $entity_id,
+								'customer_id' => $friend_id,
 								'credit' => "$refer_friend_credit",
 								'debit' => "0",
 								'wallet_source' => 'refer_friend',
