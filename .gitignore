@@ -20,5 +20,5 @@ resources.rar
 /public/system/
 /composer.lock
 vendor/
-
+config.php
 /storage/logs/*
