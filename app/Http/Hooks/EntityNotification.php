@@ -418,7 +418,7 @@ Class EntityNotification
      * @param $history_data
      * @param $entity_history
      */
-    public function orderDiscussionAdd($history_data,$entity_history)
+    public function _orderDiscussionAdd($history_data,$entity_history)
     {
 
         if( $history_data->notify_entity > 0) {

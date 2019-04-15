@@ -182,6 +182,10 @@ Class Entity extends Base
 
                 foreach ($attrs as $field_action) {
 
+                    if($field_action->attribute_code == 'voucher_code'){
+                        continue;
+                    }
+
                     //echo $field_action->attribute_code;
                      $field_action->name =  $field_action->attribute_code;
 

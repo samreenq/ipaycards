@@ -45,6 +45,7 @@ use Facebook\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 
+use Illuminate\Support\Facades\Crypt;
 use View;
 use Validator;
 
@@ -219,6 +220,7 @@ class WalletController extends WebController
                 'error' =>1,
                 'message'=> $validator->errors()->first());
         }else{
+
             $order_item_flat = new OrderItemFlat();
             $validate_gift =  $order_item_flat->validateGiftCard($request->gift_code);
 
@@ -240,14 +242,15 @@ class WalletController extends WebController
 
                 $entity_lib = new Entity();
                 $data = $entity_lib->apiPost($pos_arr);
+                $data = json_decode(json_encode($data));
 
-                if (isset($data)) {
+                if (isset($data->error) && $data->error == 0) {
                     //Update Customer Wallet
-                    $wallet_transaction = new WalletTransaction();
+                   /* $wallet_transaction = new WalletTransaction();
                     $current_balance = $wallet_transaction->getCurrentBalance($this->_customerId);
 
                     $entity_model = new SYSEntity();
-                    $entity_model->updateEntityAttrValue($this->_customerId, 'wallet', "$current_balance", 'customer');
+                    $entity_model->updateEntityAttrValue($this->_customerId, 'wallet', "$current_balance", 'customer');*/
 
                     //Update Order Item
                     $params = array(
@@ -261,6 +264,12 @@ class WalletController extends WebController
                     return array(
                         'error' => 0,
                         'message'=> 'Gift code redeem successfully, Please check your wallet'
+                    );
+                }
+                else{
+                    return array(
+                        'error' => 1,
+                        'message'=> $data->message
                     );
                 }
 

@@ -18,12 +18,14 @@ Class OrderItemFlat extends Base {
 
     public function validateGiftCard($product_code)
     {
+        $encryption_key = config('constants.ENCRYPTION_KEY');
+
         $query = "SELECT oi.* 
                 FROM order_flat o
                 LEFT JOIN order_item_flat oi 
                 LEFT JOIN inventory_flat i ON oi.`inventory_id` = i.`entity_id`
                 ON (o.`entity_id` = oi.`order_id`)
-                WHERE i.voucher_code = '".$product_code."'
+                WHERE i.voucher_code = AES_ENCRYPT('".$product_code."', '".$encryption_key."')
                 AND oi.is_redeem = 0";
 
         $row = \DB::select($query);

@@ -405,11 +405,16 @@ Class DataScriptController extends Controller
           foreach($data as $row){
 
               $voucher_code = str_random(5);
+
+              $encryption_key = config('constants.ENCRYPTION_KEY');
+              $voucher_code =  \DB::raw("AES_ENCRYPT('".$voucher_code."', '".$encryption_key."')");
+
+
               $params = array(
                   'entity_type_id' => 'inventory',
                   'entity_id' => $row->entity_id,
-                   'voucher_code' => Crypt::encrypt($voucher_code),
-                  'title' => 'INV'.$row->entity_id,
+                   'voucher_code' => $voucher_code,
+                  //'title' => 'INV'.$row->entity_id,
 
               );
               echo '<pre>';

@@ -455,10 +455,10 @@ Class EntityTrigger
 				
 				if ( isset($data) ) {
 					//Update Customer Wallet
-					$wallet_transaction = new WalletTransaction();
+				/*	$wallet_transaction = new WalletTransaction();
 					$current_balance = $wallet_transaction->getCurrentBalance($request->customer_id);
 					$entity_model->updateEntityAttrValue($request->customer_id, 'wallet', "$current_balance", 'customer');
-				}
+				*/}
 				
 				
 			}
@@ -1201,7 +1201,8 @@ Class EntityTrigger
 			$entity_lib = new Entity();
 			
 			$product_codes = explode(',', $request->voucher_code);
-			
+
+			$encryption_key = config('constants.ENCRYPTION_KEY');
 			if ( count($product_codes) > 0 ) {
 				
 				foreach ( $product_codes as $key => $product_code ) {
@@ -1210,16 +1211,20 @@ Class EntityTrigger
 						$params = array(
 							'entity_type_id' => 73,
 							'entity_id' => $entity_id,
-							'voucher_code' => Crypt::encrypt($product_code)
+							'title' => 'INV'.$entity_id,
+							'voucher_code' => \DB::raw("AES_ENCRYPT('".$product_code."', '".$encryption_key."')")
 						);
-						
-						$response = $entity_lib->apiUpdate($params);
-						
-					} else {
-						$request->voucher_code = Crypt::encrypt($product_code);
+                       // echo "<pre>"; print_r($params);
+                        $response = $entity_lib->apiUpdate($params);
+
+                        //echo "<pre>"; print_r($response); exit;
+
+                    } else {
+
+                        $request->voucher_code = \DB::raw("AES_ENCRYPT('".$product_code."', '".$encryption_key."')");
 						$params = is_object($request) ? (array) $request : $request;
 						$response = $entity_lib->apiPost($params);
-					}
+                    }
 					
 				} // end of foreach loop
 			}

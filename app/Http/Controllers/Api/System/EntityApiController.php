@@ -448,10 +448,8 @@ Class EntityApiController extends Controller
 			
 			$this->_apiData['error'] = 0;
 
-			$voucher_code = Crypt::encrypt($request->product_code);
-
 			$order_item_flat = new OrderItemFlat();
-			$validate_gift = $order_item_flat->validateGiftCard($voucher_code);
+			$validate_gift = $order_item_flat->validateGiftCard($request->product_code);
 			// echo "<pre>"; print_r($validate_gift); exit;
 			if ( $validate_gift ) {
 				
@@ -467,21 +465,21 @@ Class EntityApiController extends Controller
 				$pos_arr['transaction_type'] = 'credit';
 				$pos_arr['wallet_source'] = 'gift_card';
 				$pos_arr['order_id'] = '';
-				$pos_arr['mobile_json'] = $request->mobile_json;
+				$pos_arr['mobile_json'] = 1;
 				$pos_arr['login_entity_id'] = isset($request->customer_id) ? $request->customer_id : "";
 				
 				$entity_lib = new Entity();
 				$wallet_post = $entity_lib->apiPost($pos_arr);
 				$wallet_post = json_decode(json_encode($wallet_post),true);
 				
-				if ( isset($data) ) {
+				if ( isset($wallet_post['error']) && $wallet_post['error'] == 0) {
 					//Update Customer Wallet
-					$wallet_transaction = new WalletTransaction();
+					/*$wallet_transaction = new WalletTransaction();
 					$current_balance = $wallet_transaction->getCurrentBalance($request->customer_id);
 					
 					$entity_model = new SYSEntity();
 					$entity_model->updateEntityAttrValue($request->customer_id, 'wallet', "$current_balance", 'customer');
-					
+					*/
 					//Update Order Item
 					$params = array(
 						'entity_type_id' => 'order_item',
@@ -490,13 +488,15 @@ Class EntityApiController extends Controller
 					);
 					
 					$data = $entity_lib->apiUpdate($params);
+
+                   // echo "<pre>"; print_r($wallet_post); exit;
 					$this->_apiData['error'] = 0;
 					$this->_apiData['message'] = trans('system.success');
-					$this->_apiData['data'] = $wallet_post;
+					$this->_apiData['data'] = $wallet_post['data']['wallet_transaction'];
 				} else {
 					// by SK : response requested by Mehran
-					$this->_apiData['message'] = trans('system.success');
-					$this->_apiData['data'] = $wallet_post['data'];
+					$this->_apiData['error'] = 1;
+					$this->_apiData['message'] = $wallet_post['message'];
 				}
 				
 			} else {
