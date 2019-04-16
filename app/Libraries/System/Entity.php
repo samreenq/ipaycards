@@ -2183,7 +2183,7 @@ Class Entity extends Base
     {
         //echo "<pre>"; print_r( $this->_eTypeData); exit;
         $entity_trigger = new EntityTrigger();
-        $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_after_trigger');
+        $func = CustomHelper::convertToCamel($this->_eTypeData->identifier . '_after_post_trigger');
         if (method_exists($entity_trigger, "$func")) {
             $entity_trigger->$func($request,$response,$this->_eTypeData,$entity_id);
         }

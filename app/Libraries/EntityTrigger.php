@@ -1173,7 +1173,7 @@ Class EntityTrigger
 	 */
 	public function inventoryBeforePostTrigger($request)
 	{
-		$request = is_array($request) ? (object) $request : $request;
+		/*$request = is_array($request) ? (object) $request : $request;
 		
 		if ( isset($request->voucher_code) && !empty($request->voucher_code) ) {
 			
@@ -1183,7 +1183,7 @@ Class EntityTrigger
 		
 		if ( isset($return) ) {
 			return $return;
-		}
+		}*/
 		
 		return FALSE;
 	}
@@ -1201,7 +1201,7 @@ Class EntityTrigger
 			$entity_lib = new Entity();
 			
 			$product_codes = explode(',', $request->voucher_code);
-
+          //  echo "<pre>"; print_r($product_codes); exit;
 			$encryption_key = config('constants.ENCRYPTION_KEY');
 			if ( count($product_codes) > 0 ) {
 				
@@ -1221,10 +1221,16 @@ Class EntityTrigger
 
                     } else {
 
-                        $request->voucher_code = \DB::raw("AES_ENCRYPT('".$product_code."', '".$encryption_key."')");
+                        //$request->voucher_code = \DB::raw("AES_ENCRYPT('".$product_code."', '".$encryption_key."')");
 						$params = is_object($request) ? (array) $request : $request;
+
+						$params['voucher_code'] = \DB::raw("AES_ENCRYPT('".$product_code."', '".$encryption_key."')");
+                       // echo "<pre>"; print_r($params);
 						$response = $entity_lib->apiPost($params);
+
+                        //echo "<pre>"; print_r($response); exit;
                     }
+                    unset($product_code);
 					
 				} // end of foreach loop
 			}
@@ -1366,7 +1372,7 @@ Class EntityTrigger
 		return [ 'identifier' => "$identifier" ];
 	}
 	
-	public function orderAfterTrigger($request, $response, $entity_type, $entity_id)
+	public function orderAfterPostTrigger($request, $response, $entity_type, $entity_id)
 	{
 		$order_flat = new OrderFlat();
 		$vendor_stock_count = $order_flat->checkVendorStockOrder($entity_id);
@@ -1380,5 +1386,19 @@ Class EntityTrigger
 		}
 		
 	}
+
+	public function inventoryAfterPostTrigger($request, $response, $entity_type, $entity_id)
+    {
+        if(isset($entity_id)){
+            $params = array(
+                'entity_type_id' => 73,
+                'entity_id' => $entity_id,
+                'title' => 'INV'.$entity_id,
+            );
+
+            $entity_lib = new Entity();
+            $entity_lib->apiUpdate($params);
+        }
+    }
 	
 }
