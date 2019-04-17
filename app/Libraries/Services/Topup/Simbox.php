@@ -156,7 +156,7 @@ class Simbox
 				'text' => '*139*100'
 					. '*' . config('service.SIMBOX.sim_id')
 					. '*' . config('service.SIMBOX.pin_id')
-					. '*5'
+					. '*1' // (1:time, 5:credit)
 					. '*' . $request['amount']
 					. '*' . $request['account_no']
 					. '*' . $request['account_no']
