@@ -35,7 +35,18 @@ class OrderController extends WebController {
 	}
 
 	public function saveOrder(Request $request)
-	{ //echo '<pre>'; print_r($request->all()); exit;
+	{// echo '<pre>'; print_r($request->all()); exit;
+
+        if(isset($request->is_gift_card)){
+            if($request->is_gift_card == 1 && $request->recipient_email == ''){
+                return array(
+                    'error' => 1,
+                    'message' => 'Recipient email is required'
+                );
+            }
+        }
+
+
 		$order_helper = new OrderHelper();
 		/*$rules  =   [
             'shipping_address'=>'required_without:checkout_first_name,checkout_last_name'	,
@@ -417,7 +428,8 @@ class OrderController extends WebController {
 			$data['subtotal_with_discount'] =		"$subtotal_with_discount";
 			$data['grand_total'] 			=		"$grand_total";
 			$data['paid_amount']			= 		"$paid_amount";
-			
+            $data['recipient_email']			= 	"$request->recipient_email";
+
 			//$data['commission_for_rider']	=		"$commission_for_rider";
 			//$data['items_qty']				=		"$items_qty";
 			//$data['total_items']			=		"$total_items";

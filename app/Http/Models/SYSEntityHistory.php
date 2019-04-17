@@ -59,7 +59,7 @@ class SYSEntityHistory extends Base
 
                 if(isset($request_params->login_entity_id) && !empty($request_params->login_entity_id)){
                     $actor_entity_id = $request_params->login_entity_id;
-                   // $other_data['actor_entity_type_id'] = 'customer';
+                    $other_data['actor_entity_type_id'] = 'customer';
                 }
                 else{
                     $sys_entity_auth_model = new SYSEntityAuth();

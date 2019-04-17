@@ -3,7 +3,11 @@
 $fields = "App\Libraries\Fields";
 $fields = new $fields();
 
-$heading =  isset($entity_data->title) ? $entity_data->title : $module;
+//$heading =  isset($entity_data->title) ? $entity_data->title : $module;
+if(!isset($heading)){
+    $heading =  isset($entity_data->title) ? $entity_data->title : $module;
+}
+
 ?>
 <!-- Begin: Content -->
     <section id="content_wrapper" class="content">
@@ -107,17 +111,6 @@ $heading =  isset($entity_data->title) ? $entity_data->title : $module;
                                     ?>
 
                                 </div> {{--end of entity_wrap--}}
-                               <?php if($uri_method == 'view' && in_array($entity_data->identifier,array('driver','customer'))){ ?>
-                               <div>
-                                   <div class="section-divider mb30 mt15" id="spy1">
-                                       <span>Order Statistics</span>
-                                   </div>
-
-                                   <div id="orderContent">
-                                       Loading...
-                                   </div>
-                               </div>
-                               <?php } ?>
 
                                <div class="ajax_content"></div>
 

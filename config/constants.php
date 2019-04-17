@@ -179,4 +179,5 @@ return [
     'LANGUAGE_PATH' => "resources/lang/",
     'TRANSLATION_FILE_NAME' => 'system.php',
     'TRANSLATION_VALIDATION_FILE' => 'validation.php',
+    'ENCRYPTION_KEY' => 'bProHyNjWw',
 ];

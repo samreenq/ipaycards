@@ -50,8 +50,16 @@
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
 								
 								<form>
+
 									<div class="row">
-										
+
+										<div class="col-md-12 cuspad recipient_email" style="display: none;">
+											<div class="fluid-label">
+												<input type="text" id="recipient_email" name="recipient_email"  placeholder="Recipient Email" />
+												{{--  <label>Add Note*</label>--}}
+											</div>
+										</div>
+
 										<div class="col-md-12 cuspad">
 											<div class="fluid-label">
 											  <textarea id="order_notes" name="order_notes" required="required" placeholder="Add Note*"></textarea>
@@ -340,6 +348,14 @@
 					localStorage["coupon_code"] =" ";
 					localStorage.setItem("coupon_code", " ");
 				}
+
+        $(document).ready(function() {
+            console.log(localStorage.is_gift_card);
+
+            if(localStorage.is_gift_card == 1){
+                $('.recipient_email').show();
+			}
+        });
 				
   
       $(function(){
@@ -493,6 +509,8 @@
 		
 		*/
 				 $(document).ready(function(){
+
+				     console.log(JSON.parse(localStorage.products));
 					
 					$("input[type='radio']").click(function(){
 						var payment_method = $("input[name='payment_method']:checked").val();

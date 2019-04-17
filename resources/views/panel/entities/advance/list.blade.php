@@ -1,7 +1,7 @@
 <!-- recent orders table -->
 <div class="panel panel-theme panel-border top mb25">
     <div class="panel-heading">
-        <span class="panel-title">Listing</span>
+        <span class="panel-title">{!! $entity_data->title !!} Listing</span>
         <span class="panel-controls">
 					@if(!empty($delete_permission) && $delete_permission == 1)
                 <a class="select_action" title="delete">

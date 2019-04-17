@@ -426,10 +426,11 @@ class ProductController extends WebController
 								$data1[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
 								$data1[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
 								$data1[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-								$data1[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                                  $data1[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']['value']) ? $wishlist_attribute['product']['item_type']['value'] : null;
+								/*$data1[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
 								$data1[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
 								$data1[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;	 
-								
+								*/
 								if($data1[$p]['entity_id'] == $data['product']['entity_id'] )
 									$data['wishlist'] = 1; 
 								
@@ -778,10 +779,11 @@ class ProductController extends WebController
 				$depend_entity[$p]['order_id']		=	'1';
 				$depend_entity[$p]['row_total']		=	(int)$productList["price"] * $productList["product_quantity"] ; 
 				$depend_entity[$p]['customer_id']	=	'45';
-				$depend_entity[$p]['product_id']	=	$productList["product_code"];
+				$depend_entity[$p]['product_id']	=	$productList["product_id"];
 				$depend_entity[$p]['product_code']	=	$productList["product_code"];
 				$depend_entity[$p]['title']			=	$productList["title"];
-				$depend_entity[$p]['price']	=	$productList["price"];
+				$depend_entity[$p]['price']	= $productList["price"];
+                $depend_entity[$p]['item_type']	=	$productList["item_type"];
 				$grand_total  = $grand_total + $depend_entity[$p]['row_total'];
 				$total_items  = $total_items + $product_quantity;
 				$p++;	
@@ -902,10 +904,11 @@ class ProductController extends WebController
 				$data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
 				$data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
 				$data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-				$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
-				$data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
-				$data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;	 		
-				$p++;
+                $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
+                $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
+                */$p++;
 						
 			}
 			$data['wishlist'] = $data; 
@@ -986,10 +989,11 @@ class ProductController extends WebController
 							$data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
 							$data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
 							$data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-							$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
-							$data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
-							$data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;	 
-							$p++;
+                            $data[$p]['item_type'] 			= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                            /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                            $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
+                            $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
+                            */$p++;
 							
 						}
 						$data['wishlist'] = $data; 
@@ -1039,10 +1043,11 @@ class ProductController extends WebController
 					$data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
 					$data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
 					$data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-					$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
-					$data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
-					$data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;	 
-					$p++;
+                    $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                    /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                    $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
+                    $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
+                    */$p++;
 					
 				}
 				
@@ -1137,6 +1142,8 @@ class ProductController extends WebController
 			$data['essentials'] = isset($json["data"]['entity_listing'])? $json["data"]["entity_listing"] : null;
 			
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
+
+          // echo "<pre>"; print_r($data); exit;
 			return View::make('web/includes/main/essentials',$data)->__toString();
 		}
 	}

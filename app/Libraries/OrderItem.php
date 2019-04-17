@@ -12,6 +12,7 @@ namespace App\Libraries;
 
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\System\Entity;
+use Illuminate\Support\Facades\Crypt;
 
 Class OrderItem
 {
@@ -123,30 +124,39 @@ Class OrderItem
         $product = $flat_table->getColumnByWhere(' entity_id = '.$product_id,'*');
         //   echo "<pre>"; print_r($product); exit;
         //Create inventory
-        $voucher_code =  str_random(8);
+         $voucher_code =  str_random(5);
+
         $params = array(
             'entity_type_id' => 'inventory',
             'vendor_id' => $vendor->entity_id,
             'category_id' => $product->category_id,
             'brand_id' => $product->brand_id,
             'product_id' => $product_id,
-            'voucher_code' => encrypt($voucher_code),
+            'voucher_code' => $voucher_code,
             'availability' => 'reserved',
         );
-
+      //  echo "<pre>"; print_r($params);
         $inventory_response = $this->_pLib->apiPost($params);
         $inventory_response = json_decode(json_encode($inventory_response));
-
+      //  echo "<pre>"; print_r($inventory_response);
         if(isset($inventory_response->data->entity->entity_id)){
 
             //echo "<pre>"; print_r($inventory_id); exit;
             //Update Order Item
             $params = [
-                'entity_type_id' => 16,
+                'entity_type_id' => 'order_item',
                 'entity_id' => $order_item_id,
                 'inventory_id' => $inventory_response->data->entity->entity_id,
                 'vendor_id' => $vendor->entity_id,
                 'order_from' => 'in_stock'
+            ];
+
+            $this->_pLib->apiUpdate($params);
+
+            $params = [
+                'entity_type_id' => 'inventory',
+                'entity_id' => $inventory_response->data->entity->entity_id,
+                'title' => 'INV'.$inventory_response->data->entity->entity_id,
             ];
 
             $this->_pLib->apiUpdate($params);

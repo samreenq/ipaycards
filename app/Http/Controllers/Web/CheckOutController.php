@@ -460,7 +460,7 @@ class CheckOutController extends WebController {
 	 
 	public function checkout2(Request $request)
 	{
-			$data = array("entity_type_id"=>18,"customer_id"=>	$this->_customerId);
+			/*$data = array("entity_type_id"=>18,"customer_id"=>	$this->_customerId);
 			$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET', $data,true));
 			
 			$json = json_decode(
@@ -476,9 +476,9 @@ class CheckOutController extends WebController {
 							)
 						),
 						true
-					);
-					
-			$data['address'] = isset($json["data"]["shipping_address"])? $json["data"]["shipping_address"] : null;
+					);*/
+        $data = [];
+        $data['address'] =  null;
         $data['currency'] = $this->_object_helper_customer->getCurrency();
 		return View::make('web/checkout2',$data);
 	}

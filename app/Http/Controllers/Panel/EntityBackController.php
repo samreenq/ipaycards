@@ -906,6 +906,8 @@ class EntityBackController extends EntityController
        // $request->entity_type_id =15;
         if($this->_assignData["uri_method"] == 'view' && $this->_entity_controller->identifier == 'customer'){
 
+            $this->_assignData["heading"] = $this->_entity_controller->title;
+
             $entity_type_model = new SYSEntityType();
             $this->_entity_controller = $entity_type_model ->where("identifier", "=",'order')
                 ->whereNull("deleted_at")
