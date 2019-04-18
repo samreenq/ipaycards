@@ -114,6 +114,10 @@ if(!isset($heading)){
 
                                <div class="ajax_content"></div>
 
+                               @if($uri_method == 'view' && $entity_data->identifier == 'order')
+                                    <h4>Customer Wallet: {!! ($update->attributes->wallet > 0) ? '$'.$update->attributes->wallet : 0 !!}</h4>
+                              @endif
+
                                 <div class="pull-right p-relative">
                                     @if($uri_method != 'view' )
                                         <button type="submit" class="btn ladda-button btn-theme btn-wide mt10" data-style="zoom-in"> <span class="ladda-label">Update</span> </button>
@@ -142,6 +146,31 @@ if(!isset($heading)){
 </section>
 <!-- Detailed View Popup -->
 <!-- End: Content-Wrapper -->
+
+<!-- Modal -->
+<div class="modal fade" id="orderModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Order Status</h4>
+            </div>
+            <div class="modal-body" >
+                <div class="alert-message"></div>
+                <div id="orderContent">
+                    Loading...
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                <button type="button" class="btn ladda-button btn-theme btn-wide mt10 order-update-btn" data-style="zoom-in" >Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Required Plugin CSS -->
 <link rel="stylesheet" type="text/css" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/datepicker/css/bootstrap-datetimepicker.css' ) !!}">
 <link rel="stylesheet" type="text/css" href="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/daterange/daterangepicker.css' ) !!}">

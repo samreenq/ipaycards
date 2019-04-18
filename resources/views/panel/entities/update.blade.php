@@ -73,12 +73,41 @@ $fields = new $fields();
                 </div>
             </section>
 
+        <!-- Modal -->
+        <div class="modal fade" id="orderModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Order Status</h4>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="alert-message"></div>
+                        <div id="orderContent">
+                            Loading...
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                        <button type="button" class="btn ladda-button btn-theme btn-wide mt10 order-update-btn" data-style="zoom-in" >Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- End: Content -->
     <!-- Begin: Page Footer -->
     @include(config('panel.DIR') . 'footer_bottom')
 </section>
 <!-- End: Page Footer -->
+<!-- Page Plugins -->
+<script type="text/javascript" src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE') . 'vendor/plugins/magnific/jquery.magnific-popup.js' ) !!}"></script>
+
 <script type="text/javascript">
+
+
     $(function () {
         $('#entity_type_id').val("<?php echo $entity_data->entity_type_id;?>");
 
@@ -401,6 +430,49 @@ $fields = new $fields();
                         <?php } ?>
                     }
                   <?php } ?>
+
+    });
+
+    $(document).ready(function() {
+
+        var modalContent = $('#modal-content');
+        modalContent.on('click', '.holder-style', function(e) {
+            e.preventDefault();
+            modalContent.find('.holder-style').removeClass('holder-active');
+            $(this).addClass('holder-active');
+        });
+
+        // Form Skin Switcher
+        $(document).on('click', '#view_popup',function() {
+
+            // Inline Admin-Form example
+            $.magnificPopup.open({
+                removalDelay: 500, //delay removal by X to allow out-animation,
+                items: {
+                    src: "#modal-panel"
+                },
+                // overflowY: 'hidden', //
+                callbacks: {
+                    beforeOpen: function(e) {
+                        var Animation = "mfp-slideDown";
+                        this.st.mainClass = Animation;
+                    }
+                },
+                midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+            });
+
+        });
+
+        // Update Content show
+        $(document).on('click',".updateBtn ",function(){
+            $(".updateWrap ").fadeIn(1500)
+        });
+
+        $(document).on('click',".updateBtn ",function(){
+            $('html, body').animate({
+                scrollTop: $(".updateWrap ").offset().top
+            }, 1000);
+        });
 
     });
 
