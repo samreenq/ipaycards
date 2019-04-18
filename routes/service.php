@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 // Services API Routes
 Route::group([
 	'middleware' => 'api.auth',
-	'namespace'  => 'Api\Service',
-	'prefix'     => 'api/service/'
+	'namespace' => 'Api\Service',
+	'prefix' => 'api/service/'
 ], function () {
 	/**
 	 * Topup
@@ -41,7 +41,13 @@ Route::group([
 	Route::post('card/purchase', 'CardController@purchase');
 	Route::get('card/get_order', 'CardController@getOrder');
 	
+	/**
+	 * Payment
+	 */
+	Route::get('payment/balance', 'PaymentController@balance');
+	Route::post('payment/customer', 'PaymentController@postCustomer');
+	Route::post('payment/card_token', 'PaymentController@postCardToken');
+	Route::post('payment/bank_token', 'PaymentController@postBankToken');
+	
+	
 });
-
-
-//Route::any('hh/service/card/get', 'CardController@get');

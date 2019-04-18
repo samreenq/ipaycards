@@ -45,5 +45,14 @@ return [
 		'sim_id' => '102762',
 		'pin_id' => '3152',
 	],
+	
+	
+	/**
+	 * Stripe Configurations
+	 */
+	'STRIPE' => [
+		'pub_key' => 'pk_test_hfJNKIjr1S7rKdmI0YAYnrEL',
+		'secret_key' => 'sk_test_t9tYp8V52h1JOren3Ac09Ymd',
+	],
 
 ];

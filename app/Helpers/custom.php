@@ -244,3 +244,20 @@ if ( !function_exists('array_key_first') ) {
 		return $array ? array_keys($array)[0] : NULL;
 	}
 }
+
+
+/**
+ * Check Value
+ *
+ * @param $var
+ * @param null $def_value
+ * @return null
+ */
+function check_val(&$var, $def_value = NULL)
+{
+	$param = is_object($var) ? (array)$var : $var;
+	
+	return isset($param) ?
+		(is_string($param) ? trim($param) : $param)
+		: $def_value;
+}
