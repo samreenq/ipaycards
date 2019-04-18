@@ -690,6 +690,10 @@ class Fields
                         $where_condition .= ' '.$listfield->backend_table_where;
                     }
 
+                    if($entity_type_id == 16 && $listfield->attribute_code == 'product_id'){
+                        $where_condition = '';
+                    }
+
 				$ex2Model = new SYSEntity();
 				$options = $ex2Model->getEntitiesListing($listfield->attribute_entity_type_id,$listfield->linked_attribute_id,$where_condition);
 
