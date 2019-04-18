@@ -61,18 +61,18 @@ class TopupController extends Controller
 	{
 		
 		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->balance();
+			
 			// success response
 			$this->_apiData['response'] = "success";
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
 			
-			// assign to output
-			$this->_apiData['data'] = $this->_pLib->balance();
-			
 		} catch ( \Exception $e ) {
-			$this->_apiData['trace'] = $e->getTraceAsString();
 			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
 		}
 		
 		return $this->_apiData;
@@ -90,18 +90,48 @@ class TopupController extends Controller
 	{
 		
 		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->send($request->all());
+			
 			// success response
 			$this->_apiData['response'] = "success";
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
 			
-			// assign to output
-			$this->_apiData['data'] = $this->_pLib->send($request->all());
 			
 		} catch ( \Exception $e ) {
-			$this->_apiData['trace'] = $e->getTraceAsString();
 			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Products
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function products(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->products($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
 		}
 		
 		return $this->_apiData;

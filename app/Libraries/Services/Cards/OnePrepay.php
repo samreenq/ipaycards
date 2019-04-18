@@ -164,7 +164,7 @@ class OnePrepay
 	
 	
 	/**
-	 * Reserve
+	 * Purchase
 	 *
 	 * @param array|NULL $request
 	 *

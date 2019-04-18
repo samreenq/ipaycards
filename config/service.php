@@ -26,7 +26,9 @@ return [
 		// credentials
 		'terminal_id' => 'IP4ALL-1',
 		'password' => 'IP123456',
-		'mode' => 'sandbox'
+		'mode' => 'sandbox',
+		// transaction prefix
+		'trans_prefix' => 'IP-'
 	],
 	
 	
