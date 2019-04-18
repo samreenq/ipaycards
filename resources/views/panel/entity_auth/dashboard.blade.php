@@ -149,68 +149,12 @@
                         <h2 class="mt15 lh15 total_driver">
                             <b>0</b>
                         </h2>
-                        <h5 class="text-muted">Total Drivers</h5>
+                        <h5 class="text-muted">Total Products</h5>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row mb10">
-            <div class="col-sm-6 col-md-3">
-                <div class="panel light of-h mb10 br-darkgrey-a">
-                    <div class="pn pl20 p15">
-                        <div class="icon-bg">
-                            <span class="icon-ttp-sale">
-								<span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span>
-							</span>
-                        </div>
-                        <h2 class="mt15 lh15 new_rides">
-                            <b>0</b>
-                        </h2>
-                        <h5 class="text-muted">New Rides</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="panel light of-h mb10 br-darkgrey-a">
-                    <div class="pn pl20 p15">
-                        <div class="icon-bg">
-                            <span class="icon-ttp-order"></span>
-                        </div>
-                        <h2 class="mt15 lh15 on_going_rides">
-                            <b>0</b>
-                        </h2>
-                        <h5 class="text-muted">On Going Rides</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="panel light of-h mb10 br-darkgrey-a">
-                    <div class="pn pl20 p15">
-                        <div class="icon-bg">
-                            <span class="icon-ttp-customer"></span>
-                        </div>
-                        <h2 class="mt15 lh15 cancelled_rides">
-                            <b>0</b>
-                        </h2>
-                        <h5 class="text-muted">Cancelled Rides</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="panel light of-h mb10 br-darkgrey-a">
-                    <div class="pn pl20 p15">
-                        <div class="icon-bg">
-                            <span class="icon-ttp-product"></span>
-                        </div>
-                        <h2 class="mt15 lh15 completed_rides">
-                            <b>0</b>
-                        </h2>
-                        <h5 class="text-muted">Completed Rides</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Admin-panels -->
         <div class="admin-panels fade-onload dashboard_widgets">
@@ -233,17 +177,18 @@
             <!-- end: .row -->
 
             <div class="row">
-                <div class="col-md-6">
                     <!-- Pie Chart -->
-                    <div class="panel mb20" id="p12.2">
-                        <div class="panel-heading">
-                            <span class="panel-title">Top Driver</span>
-                        </div>
-                        <div class="panel-body pn">
-                            <div id="top_driver" style="width: 100%; height: 250px; margin: 0 auto"></div>
+                    <div class="col-md-6 d-flex ">
+                        <div class="panel mb20 wfull" id="p14.1">
+                            <div class="panel-heading">
+                                <span class="panel-title">Peak Order Time</span>
+                            </div>
+                            <div class="panel-body pn">
+                                <div id="peak_time" style="width: 100%; height: 300px; margin: 0 auto"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
                     <div class="col-md-6">
                     <!-- Pie Chart -->
                     <div class="panel mb20" id="p12.1">
@@ -258,36 +203,18 @@
             </div>
 
             <div class="row d-flex">
-                <div class="col-md-6 d-flex ">
-                    <div class="panel mb20 wfull" id="p14.1">
-                        <div class="panel-heading">
-                            <span class="panel-title">Peak Order Time</span>
-                        </div>
-                        <div class="panel-body pn">
-                            <div id="peak_time" style="width: 100%; height: 300px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-6 d-flex">
-                    <div class="panel mb20 wfull" id="p13.1">
-                        <div class="panel-heading">
-                            <span class="panel-title">Top City</span>
-                        </div>
-                        <div class="panel-body pn">
-                            <div id="top_city" style="width: 100%; height: 210px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
 
             <div class="row d-flex">
 
-                <div class="col-md-4 d-flex ">
+                <div class="col-md-6 d-flex ">
 
                     <div class="panel mb20 wfull" id="p5">
                         <div class="panel-heading">
-                            <span class="panel-title">Total Vehicle</span>
+                            <span class="panel-title">Total Products</span>
                         </div>
                         <div class="panel-body">
                             <div class="mb20 text-right">
@@ -314,7 +241,7 @@
 
                 </div>
 
-                <div class="col-md-4 d-flex ">
+                <div class="col-md-6 d-flex ">
                     <div class="panel mb20 wfull" id="p19.1">
                         <div class="panel-heading">
                             <span class="panel-title">Customer List</span>
@@ -339,65 +266,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 d-flex ">
-
-                    <div class="panel mb20 wfull" id="p19.2">
-                        <div class="panel-heading">
-                            <span class="panel-title">Driver List</span>
-                        </div>
-                        <div class="panel-body pn">
-                            <table class="table mbn tc-med-1 tc-bold-2">
-                                <thead>
-                                <tr class="hidden">
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                </tr>
-                                </thead>
-                                <tbody id="driver_list">
-                                <tr>
-                                    <td>
-                                        <span class="fa fa-circle text-warning fs14 mr10"></span>No Record Found</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- end: .row -->
         </div>
-
-        <div class="row dashboardForm">
-            <div class="col-md-12">
-                <div class="panel mb20">
-                    <div class="panel-heading">
-                        <span class="panel-title">Map</span>
-                        <span class="panel-controls">
-                            <form class="admin-form">
-                                <label class="field select">
-                                    <select class="field_dropdown2 form-control" id="driver_status" name="driver_status">
-                                        <option value="" selected="selected">All Drive</option>
-                                        <option value="1">Online</option>
-                                        <option value="0">Offline</option>
-                                        <option value="2">On Ride</option>
-
-                                    </select><i class="arrow"></i>
-                                </label>
-                            </form>
-                        </span>
-                    </div>
-                    <div class="panel-body" id="mapWrap">
-                        <div style="width:100%; height:400px;" id="map_canvas" class="mapping"></div>
-
-                     {{--   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.0339928370745!2d69.31817291507974!3d41.32987417926943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef4ec32242aa1%3A0x1d7ab8fa6515bea9!2sSayram+Blind+Alley%2C+Tashkent%2C+Uzbekistan!5e0!3m2!1sen!2s!4v1535459950308" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
---}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-            </div>
-        </div>
+        
     </section>
     <!-- End: Content -->
 
@@ -638,12 +510,9 @@
         getTotalStats(filter_by,start_date,end_date);
         totalSales(filter_by,start_date,end_date,highColors);
         listWidgets(filter_by,start_date,end_date);
-        topDriver(filter_by,start_date,end_date,highColors);
         topCustomerList(filter_by,start_date,end_date,highColors);
-        topDriverList(filter_by,start_date,end_date,highColors);
-        topCity(filter_by,start_date,end_date);
         peakOrderTime(filter_by,start_date,end_date);
-        topVehiclesByOrder(filter_by,start_date,end_date);
+        topProductByOrder(filter_by,start_date,end_date);
     }
 
     function getTotalStats(filter_by,start_date,end_date)
@@ -663,10 +532,10 @@
                 $('.total_order b').text(resposne.total_order);
                 $('.total_customer b').text(resposne.total_customer);
                 $('.total_driver b').text(resposne.total_driver);
-                $('.new_rides b').text(resposne.new_rides);
-                $('.on_going_rides b').text(resposne.on_going_rides);
-                $('.cancelled_rides b').text(resposne.cancelled_rides);
-                $('.completed_rides b').text(resposne.completed_rides);
+                //$('.new_rides b').text(resposne.new_rides);
+                //$('.on_going_rides b').text(resposne.on_going_rides);
+              //  $('.cancelled_rides b').text(resposne.cancelled_rides);
+              //  $('.completed_rides b').text(resposne.completed_rides);
             }
         });
     }
@@ -782,88 +651,7 @@
             }
         });
     }
-
-    function topDriverList(filter_by,start_date,end_date)
-    {
-        //console.log(start_date); console.log(end_date);
-        $.ajax({
-            url: "<?php echo url('topDriverList'); ?>",
-            dataType: "json",
-            data: {"filter_type": filter_by,"start_date":start_date,"end_date":end_date},
-            beforeSend: function () {
-                // $('#' + chosen_id).empty();
-            }
-        }).done(function (data) {
-            if(data.error == 0){
-                var response = data.data;
-                $('#driver_list').html('');
-                $('#driver_list').html(response.coupon_list);
-
-            }
-        });
-    }
-
-    function topDriver(filter_by,start_date,end_date,highColors)
-    {
-        $.ajax({
-            url: "<?php echo url('topDriver'); ?>",
-            dataType: "json",
-            data: {"filter_type": filter_by,"start_date":start_date,"end_date":end_date},
-            beforeSend: function () {
-                // $('#' + chosen_id).empty();
-            }
-        }).done(function (data) {
-            var response = data.data;
-                if ($('#top_driver').length) {
-                    // Pie Chart1
-                    $('#top_driver').highcharts({
-                        credits: false,
-                        chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false
-                        },
-                        title: {
-                            text: null
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        },
-                        plotOptions: {
-                            pie: {
-                                center: ['30%', '50%'],
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: false
-                                },
-                                showInLegend: true
-                            }
-                        },
-                        colors: highColors,
-                        legend: {
-                            x: 90,
-                            floating: true,
-                            verticalAlign: "middle",
-                            layout: "vertical",
-                            itemMarginTop: 10
-                        },
-                        series: [{
-                            type: 'pie',
-                            name: 'Total Order',
-                            data: response
-
-                        }]
-                    });
-                }
-           // End High Pie Charts Demo
-        });
-    }
-
-    function topCustomer(filter_by,start_date,end_date,highColors)
-    {
-
-    }
+    
 
     function peakOrderTime(filter_by,start_date,end_date,highColors)
     {
@@ -924,72 +712,13 @@
             }
         });
     }
+    
 
-    function topCity(filter_by,start_date,end_date,highColors)
+    function topProductByOrder(filter_by,start_date,end_date)
     {
         // console.log(start_date); console.log(end_date);
         $.ajax({
-            url: "<?php echo url('topCity'); ?>",
-            dataType: "json",
-            data: {"filter_type": filter_by,"start_date":start_date,"end_date":end_date},
-            beforeSend: function () {
-                // $('#' + chosen_id).empty();
-            }
-        }).done(function (data) {
-            if(data.error == 0){
-                var response = data.data;
-
-                $('#top_city').highcharts({
-                    chart: {
-                        type: 'column'
-                    },
-                    title: {
-                        text: ''
-                    },
-                    subtitle: {
-                        text: ''
-                    },
-                    xAxis: {
-                        categories: response.title,
-                        crosshair: true
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Order Count'
-                        }
-                    },
-                    tooltip: {
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true
-                    },
-                    plotOptions: {
-                        column: {
-                            pointPadding: 0.2,
-                            borderWidth: 0
-                        }
-                    },
-                    series: [{
-                        name: 'Total Order',
-                        data: response.total
-
-                    }]
-                });
-
-
-            }
-        });
-    }
-
-    function topVehiclesByOrder(filter_by,start_date,end_date)
-    {
-        // console.log(start_date); console.log(end_date);
-        $.ajax({
-            url: "<?php echo url('getTopVehicles') ?>",
+            url: "<?php echo url('getTopProducts') ?>",
             dataType: "json",
             data: {"filter_type": filter_by,"start_date":start_date,"end_date":end_date},
             beforeSend: function () {

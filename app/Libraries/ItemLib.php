@@ -25,6 +25,19 @@ Class ItemLib
     }
 
     /**
+     * Get Total customer count
+     * @param $start_date
+     * @param $end_date
+     * @return mixed
+     */
+    public function totalCount($start_date,$end_date)
+    {
+        $where_condition = " created_at >= '$start_date' AND created_at <= '$end_date'";
+        $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) as total_count');
+        return $return->total_count;
+    }
+
+    /**
      * Check if other item exist then update count
      * other wise insert item
      * @param $title

@@ -160,7 +160,7 @@ Class OrderHelper
             $return['currency'] = $general_setting->getCurrency();
             foreach($data as $row){
                 $return['date'][] = $row->created_date;
-                $return['total'][] = ($row->total && $row->total > 0) ? $row->total : 0;
+                $return['total'][] = ($row->total && $row->total > 0) ? round($row->total,2) : 0;
 
             }
 
