@@ -698,6 +698,7 @@
                     var	title 		 		= $button.parent().find('.title').val();
                     var	thumb 		 		= $button.parent().find('.thumb').val();
                     var	price   			= $button.parent().find('.price').val();
+                    var	item_type   			= $button.parent().find('.item_type').val();
                    /* var	weight 		 		= $button.parent().find('.weight').val();
                     var	unit_option  		= $button.parent().find('.unit_option').val();
                     var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
@@ -740,8 +741,9 @@
                     {
                         if(typeof(localStorage.products)=="undefined")
                         {
-                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
-                            localStorage["products"] =string;
+                            var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                            localStorage.products =string;
+                            console.log('sam',localStorage.products)
                         }
 
                         if(typeof(localStorage.products)!=="undefined")
@@ -772,6 +774,7 @@
                                     "title":title,
                                     "thumb":thumb,
                                     "price":price,
+                                    "item_type":item_type,
                                   /*  "weight":weight,
                                     "unit_option":unit_option,
                                     "unit_value":unit_value,*/
