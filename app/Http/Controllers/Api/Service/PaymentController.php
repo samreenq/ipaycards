@@ -115,6 +115,36 @@ class PaymentController extends Controller
 	
 	
 	/**
+	 * Get Customer
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function getCustomer(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->getCustomer($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
 	 * Post Card Token
 	 *
 	 * @param Request $request
@@ -172,5 +202,127 @@ class PaymentController extends Controller
 		
 		return $this->_apiData;
 	}
+	
+	
+	/**
+	 * Get Token
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function getToken(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->getToken($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Post Charge
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function postCharge(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->postCharge($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Post Reserve
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function postReserve(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->postReserve($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Get Charge
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function getCharge(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->getCharge($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
 	
 }

@@ -46,8 +46,13 @@ Route::group([
 	 */
 	Route::get('payment/balance', 'PaymentController@balance');
 	Route::post('payment/customer', 'PaymentController@postCustomer');
+	Route::get('payment/customer', 'PaymentController@getCustomer');
 	Route::post('payment/card_token', 'PaymentController@postCardToken');
 	Route::post('payment/bank_token', 'PaymentController@postBankToken');
+	Route::get('payment/token', 'PaymentController@getToken');
+	Route::post('payment/charge', 'PaymentController@postCharge');
+	Route::get('payment/charge', 'PaymentController@getCharge');
+	Route::post('payment/reserve', 'PaymentController@postReserve');
 	
 	
 });

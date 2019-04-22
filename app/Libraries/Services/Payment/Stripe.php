@@ -92,6 +92,40 @@ class Stripe
 	
 	
 	/**
+	 * Get Customer
+	 *
+	 * @param array $request
+	 *
+	 * @return \Stripe\Customer
+	 * @throws \Exception
+	 */
+	public function getCustomer(array $request)
+	{
+		try {
+			
+			// validation
+			$validation = validator($request, [
+				'token' => 'required|string|min:5'
+			]);
+			
+			if ( $validation->fails() )
+				throw new \Exception($validation->errors()->first());
+			
+			
+			$allowed_params = [ 'token' => NULL ];
+			// find intersecting keys
+			$request = array_intersect_key($request, $allowed_params);
+			
+			return \Stripe\Customer::retrieve($request['token']);
+			
+			
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+	}
+	
+	
+	/**
 	 * Post Card Token
 	 *
 	 * @param array $request
@@ -211,6 +245,175 @@ class Stripe
 					"routing_number" => check_val($request['routing_number']),
 				]
 			]);
+			
+			
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+	}
+	
+	
+	/**
+	 * Get Token
+	 *
+	 * @param array $request
+	 *
+	 * @return \Stripe\Customer
+	 * @throws \Exception
+	 */
+	public function getToken(array $request)
+	{
+		try {
+			
+			// validation
+			$validation = validator($request, [
+				'token' => 'required|string|min:5'
+			]);
+			
+			if ( $validation->fails() )
+				throw new \Exception($validation->errors()->first());
+			
+			
+			$allowed_params = [ 'token' => NULL ];
+			// find intersecting keys
+			$request = array_intersect_key($request, $allowed_params);
+			
+			return \Stripe\Token::retrieve($request['token']);
+			
+			
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+	}
+	
+	
+	/**
+	 * Post Charge
+	 *
+	 * @param array $request
+	 *
+	 * @return \Stripe\Customer
+	 * @throws \Exception
+	 */
+	public function postCharge(array $request)
+	{
+		try {
+			
+			// validation
+			$validation = validator($request, [
+				'amount' => 'required|numeric|min:1',
+				'currency' => 'required|string|min:3|max:3',
+				//'token' => 'required|string|min:5',
+				'customer' => 'required|string|min:5'
+			]);
+			
+			if ( $validation->fails() )
+				throw new \Exception($validation->errors()->first());
+			
+			
+			$allowed_params = [
+				'amount' => NULL,
+				'currency' => NULL,
+				//'token' => NULL,
+				'customer' => NULL,
+			];
+			// find intersecting keys
+			$request = array_intersect_key($request, $allowed_params);
+			
+			// post data
+			$post_data = [
+				"amount" => ( intval($request['amount']) * 100 ),
+				"currency" => $request['currency'],
+				//"source" => $request['token'],
+				"customer" => $request['customer'],
+			];
+			
+			
+			return \Stripe\Charge::create($post_data);
+			
+			
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+	}
+	
+	
+	
+	/**
+	 * Get Charge
+	 *
+	 * @param array $request
+	 *
+	 * @return \Stripe\Customer
+	 * @throws \Exception
+	 */
+	public function getCharge(array $request)
+	{
+		try {
+			
+			// validation
+			$validation = validator($request, [
+				'token' => 'required|string|min:5'
+			]);
+			
+			if ( $validation->fails() )
+				throw new \Exception($validation->errors()->first());
+			
+			
+			$allowed_params = [ 'token' => NULL ];
+			// find intersecting keys
+			$request = array_intersect_key($request, $allowed_params);
+			
+			return \Stripe\Charge::retrieve($request['token']);
+			
+			
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+	}
+	
+	
+	/**
+	 * Post Reserve
+	 *
+	 * @param array $request
+	 *
+	 * @return \Stripe\Customer
+	 * @throws \Exception
+	 */
+	public function postReserve(array $request)
+	{
+		try {
+			
+			// validation
+			$validation = validator($request, [
+				'amount' => 'required|numeric|min:1',
+				'currency' => 'required|string|min:3|max:3',
+				'customer' => 'required|string|min:5'
+			]);
+			
+			if ( $validation->fails() )
+				throw new \Exception($validation->errors()->first());
+			
+			
+			$allowed_params = [
+				'amount' => NULL,
+				'currency' => NULL,
+				'customer' => NULL,
+			];
+			// find intersecting keys
+			$request = array_intersect_key($request, $allowed_params);
+			
+			// post data
+			$post_data = [
+				"amount" => ( intval($request['amount']) * 100 ),
+				"currency" => $request['currency'],
+				"customer" => $request['customer'],
+				'capture' => FALSE
+			];
+			
+			
+			return \Stripe\Charge::create($post_data);
 			
 			
 		} catch ( \Exception $e ) {
