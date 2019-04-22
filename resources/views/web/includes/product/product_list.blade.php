@@ -97,7 +97,7 @@
 						<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code'];  ?>" >
 							<img class="lazyload img-responsive" src='<?php echo $image; ?>' class="img-responsive" width="268px" height="221px"/>
 						</a>
-						<div class="product-detail">
+						<div class="product-detail" id="product-{!! $productItemsList['entity_id'] !!}">
 							<div class="addCartWrap">	
 							
 									<input type="hidden" class="entity_id" value="<?php if(isset($productItemsList['entity_id'])) echo $productItemsList['entity_id']; ?>" />

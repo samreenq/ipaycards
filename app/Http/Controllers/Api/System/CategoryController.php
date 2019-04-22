@@ -87,8 +87,8 @@ class CategoryController extends Controller
             'is_parent' => "required",
             'title' => "required|string|alpha_custom|unique:".$this->_entity_model->table.",".$this->_entity_model->primaryKey.",NULL,deleted_at,parent_id,".$request->parent_id,
             'parent_id' => 'required_if:is_parent,0',
-            'is_featured' => 'required_if:is_parent,0',
-            'is_gift_card' => 'required_if:is_parent,0',
+            'is_featured' => 'required_if:is_parent,1',
+            'is_gift_card' => 'required_if:is_parent,1',
            // 'featured_type' => 'required_if:is_featured,1'
          );
 
@@ -267,7 +267,7 @@ class CategoryController extends Controller
             $this->_entity_pk => 'required|integer|exists:' . $this->_entity_model->table . "," . $this->_entity_model->primaryKey . ",deleted_at,NULL",
             'title' => 'required|string||alpha_custom',
             'parent_id' => 'required_if:is_parent,0',
-            'is_featured' => 'required_if:is_parent,0',
+            'is_featured' => 'required_if:is_parent,1',
            // 'is_gift_card' => 'required_if:is_parent,0',
            // 'featured_type' => 'required_if:is_featured,1',
             'status' => 'required'

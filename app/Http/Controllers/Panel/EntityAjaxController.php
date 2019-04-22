@@ -16,6 +16,7 @@ use App\Libraries\EntityDriver;
 use App\Libraries\EntityNotification;
 use App\Libraries\Fields;
 use App\Libraries\GeneralSetting;
+use App\Libraries\ItemLib;
 use App\Libraries\OrderHelper;
 use App\Libraries\OrderHistory;
 use App\Libraries\OrderStatus;
@@ -356,26 +357,19 @@ Class EntityAjaxController extends EntityBackController
         $general_setting     = new GeneralSetting();
         $order_helper_lib    = new OrderHelper();
         $customer_lib        = new EntityCustomer();
-        $driver_lib          = new EntityDriver();
+        $item_lib = new ItemLib();
 
 
         $total_sale      = $order_helper_lib->totalSale($start_date,$end_date);
         $total_order     = $order_helper_lib->totalOrder($start_date,$end_date);
         $total_customer  = $customer_lib->totalCount($start_date,$end_date);
-        $total_driver    = $driver_lib->totalCount($start_date,$end_date);
-        $new_rides       = $order_helper_lib->getRides($start_date,$end_date,993);
-        $on_going_rides  = $order_helper_lib->getRides($start_date,$end_date,999,1000,1001);
-        $cancelled_rides = $order_helper_lib->getRides($start_date,$end_date,995,3005);
-        $completed_rides = $order_helper_lib->getRides($start_date,$end_date,1002);
+        $total_driver    = $item_lib->totalCount($start_date,$end_date);
 
         $data['total_sales']    = ($total_sale && $total_sale > 0) ? $general_setting->getPrettyPrice($total_sale) : 0;
         $data['total_order']    = ($total_order && $total_order > 0) ? $total_order : 0;
         $data['total_customer'] = ($total_customer && $total_customer > 0) ? $total_customer : 0;
         $data['total_driver']   = ($total_driver && $total_driver > 0) ? $total_driver : 0;
-        $data['new_rides']      = ($new_rides && $new_rides > 0) ? $new_rides : 0;
-        $data['on_going_rides'] = ($on_going_rides && $on_going_rides > 0) ? $on_going_rides : 0;
-        $data['cancelled_rides'] = ($cancelled_rides && $cancelled_rides > 0) ? $cancelled_rides : 0;
-        $data['completed_rides'] = ($completed_rides && $completed_rides > 0) ? $completed_rides : 0;
+
 
         return array('error' => 0,'data'=> $data,'message' => 'success');
 
@@ -595,7 +589,7 @@ Class EntityAjaxController extends EntityBackController
      * @param Request $request
      * @return array
      */
-    public function getTopVehicles(Request $request)
+    public function getTopProducts(Request $request)
     {
         $data = array();
         if($request->filter_type == "date"){

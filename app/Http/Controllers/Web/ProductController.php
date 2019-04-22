@@ -168,7 +168,7 @@ class ProductController extends WebController
                 'entity_type_id'		=>		'product',
                 'product_promotion_id'	=>		$request->input('product_promotion_id')	,
                'status'            => 1,
-               'availability' => 1,
+             //  'availability' => 1,
                 'offset'				=>		$request->input('offset'),
                 'limit'					=>		$limit,
                 'order_by'          => 'entity_id',

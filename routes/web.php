@@ -107,7 +107,7 @@ Route::any('topDeliverySlot', $general_panel_dir . 'EntityAjaxController@topDeli
 Route::any('topCity', $general_panel_dir . 'EntityAjaxController@topCity');
 Route::any('peakOrderTime', $general_panel_dir . 'EntityAjaxController@peakOrderTime');
 Route::any('getProductsByType', $general_panel_dir . 'EntityAjaxController@getProductsByType');
-Route::any('getTopVehicles', $general_panel_dir . 'EntityAjaxController@getTopVehicles');
+Route::any('getTopProducts', $general_panel_dir . 'EntityAjaxController@getTopProducts');
 
 Route::get('getDeliverySlot', $general_panel_dir . 'EntityAjaxController@getDeliverySlot');
 

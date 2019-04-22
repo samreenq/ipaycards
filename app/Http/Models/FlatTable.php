@@ -252,19 +252,9 @@ Class FlatTable extends Base
      */
     public function topVehicles($start_date,$end_date,$limit = 3)
     {
-        $row = \DB::select("SELECT 
-                                COUNT(otf.truck_id) AS total,
-                                tf.title
-                            FROM
-                                order_flat `of`
-                                    INNER JOIN
-                                order_trucks_flat otf ON otf.order_id = `of`.entity_id
-                                    INNER JOIN
-                                truck_flat tf ON tf.entity_id = otf.truck_id
-                            WHERE `of`.deleted_at IS NULL
-                                GROUP BY otf.truck_id
-                            ORDER BY total DESC
-                            LIMIT 3");
+        $row = \DB::select("SELECT COUNT(oi.entity_id) AS total,p.title FROM order_item_flat oi
+                LEFT JOIN product_flat p ON p.entity_id = oi.product_id                 
+                  GROUP BY oi.product_id ORDER BY total DESC LIMIT 0,3");
 
         if($row)
             return isset($row[0]) ? $row : false;
@@ -372,12 +362,12 @@ Class FlatTable extends Base
              FROM order_flat o
              GROUP BY DAYNAME(o.created_at),HOUR(o.created_at)
              ORDER BY total_count DESC";*/
-        $row = \DB::select("SELECT DAYNAME(o.pickup_date) AS day_name,COUNT(o.entity_id) AS total_count
+        $row = \DB::select("SELECT DAYNAME(o.created_at) AS day_name,COUNT(o.entity_id) AS total_count
             FROM order_flat o
              WHERE o.deleted_at IS NULL
                   AND o.created_at >= '$start_date'
                   AND o.created_at <= '$end_date'
-            GROUP BY DAYNAME(o.pickup_date)
+            GROUP BY DAYNAME(o.created_at)
             ORDER BY total_count DESC");
 
         return isset($row[0]) ? $row : false;
