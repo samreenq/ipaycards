@@ -21,6 +21,7 @@ use App\Libraries\OrderHelper;
 use App\Libraries\OrderHistory;
 use App\Libraries\OrderStatus;
 use App\Libraries\ProductHelper;
+use App\Libraries\Services\Cards;
 use App\Libraries\System\Entity;
 use App\Libraries\Truck;
 use Auth;
@@ -1030,5 +1031,34 @@ Class EntityAjaxController extends EntityBackController
 
         return array('error' =>1,'data'=> [],'message' => 'No Data');
     }
+
+    public function vendorBrands(Request $request)
+    {
+        if(isset($request->category_id)){
+
+            $pLib = new Cards(request('vendor', $request->vendor_id));
+            $data = $pLib->brands(['category_id'=> $request->category_id]);
+
+            return array('error' =>0,'data'=> $data,'message' => 'success');
+
+        }
+
+        return array('error' =>1,'data'=> [],'message' => 'No Data');
+    }
+
+    public function brandProducts(Request $request)
+    {
+        if(isset($request->brand_id)){
+
+            $pLib = new Cards(request('vendor', $request->vendor_id));
+            $data = $pLib->denominations(['brand_id'=> $request->brand_id]);
+            //echo "<pre>"; print_r($data); exit;
+            return array('error' =>0,'data'=> $data['denominations'],'message' => 'success');
+
+        }
+
+        return array('error' =>1,'data'=> [],'message' => 'No Data');
+    }
+
 
 }

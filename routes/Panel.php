@@ -52,6 +52,7 @@ Route::group([
     Route::any('entities/{any}/view/{id}', $ctrl_dir . 'EntityBackController@update');
     Route::any('entities/{any}/import', $ctrl_dir . 'EntityBackController@import');
     Route::any('entities/promotion_discount/copy/{id}', $ctrl_dir . 'EntityBackController@update');
+    Route::any('entities/product/integrate/{vendor}/{id}', $ctrl_dir . 'EntityBackController@vendorIntegration');
     //Route::any('entities/ajax/listing', $ctrl_dir . 'EntityBackController@ajaxListing');
     //Route::any('entities/add', $ctrl_dir . 'EntityBackController@add');
     //Route::any('entities/update/{id}', $ctrl_dir . 'EntityBackController@update');
@@ -130,6 +131,7 @@ Route::group([
     Route::any('rating/ajaxListing',$ctrl_dir . 'EntityBackController@ratingAjaxListing');
     Route::any('entities/rating/rating-detail/{id}',$ctrl_dir . 'EntityBackController@ratingDetail');
     Route::any('order/calendar', $ctrl_dir . 'EntityBackController@calendar');
+
 });
 
 Route::group([
@@ -164,3 +166,5 @@ Route::any('available_vehicles', $ctrl_dir . 'EntityAjaxController@getAvailableV
 Route::any('getCategoryBrands', $ctrl_dir . 'EntityAjaxController@getCategoryBrands');
 Route::any('getProductByBrand', $ctrl_dir . 'EntityAjaxController@getProductByBrand');
 Route::any('getBrandCategories', $ctrl_dir . 'EntityAjaxController@getBrandCategories');
+Route::any('/vendor_products', $ctrl_dir . 'EntityAjaxController@vendorBrands');
+Route::any('/brand_products', $ctrl_dir . 'EntityAjaxController@brandProducts');

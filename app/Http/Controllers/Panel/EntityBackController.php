@@ -23,6 +23,7 @@ use App\Libraries\Module;
 use App\Libraries\OrderHelper;
 use App\Libraries\OrderStatus;
 use App\Libraries\ProductHelper;
+use App\Libraries\Services\Cards;
 use App\Libraries\System\Entity;
 use Auth;
 use Carbon\Carbon;
@@ -528,7 +529,12 @@ class EntityBackController extends EntityController
                      }
 
                      if($this->_entity_controller->identifier == 'promotion_discount'){
-                         $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/copy/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Copy" data-original-title="Copy"><i class="fa fa-copy"></i></a>'; }
+                         $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/copy/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Copy" data-original-title="Copy"><i class="fa fa-copy"></i></a>';
+                    }
+
+                    if($this->_entity_controller->identifier == 'product'){
+                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
+                    }
 
 
                     $checkbox .= '<input type="checkbox" id="check_id_' . $paginated_id->{$this->_attribute_pk} . '" name="check_ids[]" value="' . $paginated_id->{$this->_attribute_pk} . '" />';
@@ -2697,6 +2703,34 @@ class EntityBackController extends EntityController
        // $view_file = $this->_assignData["dir"] . 'order/calendar';
         $view =  View::make($view_file, $this->_assignData);
         return $view;
+    }
+
+    public function vendorIntegration(Request $request)
+    {
+        $this->_assignData["page_action"] = " Mintroute Integration";
+
+        $last_key = key( array_slice( $this->_requested_route_params, -1, 1, TRUE ) );
+        $id = $this->_requested_route_params[$last_key];
+        $vendor = $this->_requested_route_params[$last_key-1];
+       // echo "<pre>"; print_r($this->_requested_route_params); exit;
+        $pLib = new Cards(request('vendor', $vendor));
+
+        $this->_assignData["vendor_id"] = $vendor;
+
+        if(trim($vendor) == 'mint_route'){
+            $this->_assignData["categories"] = $pLib->categories();
+            $this->_assignData["brands"] = $pLib->brands(['category_id'=> $this->_assignData["categories"][0]->category_id]);
+            $this->_assignData["products"] =  [];
+        }
+        else{
+            $this->_assignData["brands"] = $pLib->brands();
+            $this->_assignData["products"] =  [];
+        }
+
+
+        $view_file = $this->_assignData["dir"] . 'product/vendor_integrate';
+
+       return  View::make($view_file, $this->_assignData);
     }
 }
     
