@@ -276,6 +276,34 @@ class CardController extends Controller
 	
 	
 	/**
+	 * Post Order
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function postOrder(Request $request)
+	{
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->postOrder($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
 	 * Get Order
 	 *
 	 * @param Request $request

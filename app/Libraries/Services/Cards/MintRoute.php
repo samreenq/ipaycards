@@ -189,10 +189,10 @@ class MintRoute
 				if ( $this->_curl->error_code )
 					throw new \Exception($this->_curl->error_string);
 				
-				$response = json_decode($this->_curl->execute(),true);
+				$response = json_decode($this->_curl->execute(), TRUE);
 				$key = array_key_first($response);
 				
-				return $response[$key][$request['brand_id']];
+				return $response[ $key ][ $request['brand_id'] ];
 				
 			}
 			
@@ -388,7 +388,7 @@ class MintRoute
 			// validation
 			$validation = validator($request, [
 				'denomination_id' => 'required',
-				'quantity' => 'required|integer',
+				//'quantity' => 'required|integer',
 				'orderid' => 'required|string'
 			]);
 			
@@ -405,7 +405,7 @@ class MintRoute
 				// allowed filters
 				$allowed_params = [
 					'denomination_id' => NULL,
-					'quantity' => NULL,
+					//'quantity' => NULL,
 					'orderid' => NULL
 				];
 				// find intersecting keys
@@ -415,7 +415,88 @@ class MintRoute
 				$params = array_merge($params, [
 					'reserve' => TRUE,
 					'short' => TRUE,
-					'location' => config('service.MINT_ROUTE.pos_identification')
+					'location' => config('service.MINT_ROUTE.pos_identification'),
+					'quantity' => 1
+				]);
+				
+				// collect params
+				$params = json_encode([
+					'username' => config('service.MINT_ROUTE.username'),
+					'password' => config('service.MINT_ROUTE.password'),
+					'data' => count($params) > 0 ? [ $params ] : []
+				]);
+				
+				
+				$this->_curl->post([
+					'token' => config('service.MINT_ROUTE.pub_key'),
+					'postedinfo' => AesCtr::encrypt(
+						$params,
+						config('service.MINT_ROUTE.pvt_key'),
+						config('service.MINT_ROUTE.enc_bits')
+					)
+				]);
+				
+				// if error
+				if ( $this->_curl->error_code )
+					throw new \Exception($this->_curl->error_string);
+				
+				$response = $this->_curl->execute();
+				
+				return json_decode($response);
+				
+			}
+			
+			
+		} catch ( \Exception $e ) {
+			
+			throw new \Exception($e->getMessage());
+		}
+		
+	}
+	
+	
+	/**
+	 * Post Order
+	 *
+	 * @param array|NULL $request
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function postOrder(array $request = NULL)
+	{
+		try {
+			// validation
+			$validation = validator($request, [
+				'orderid' => 'required|string',
+				'denomination_id' => 'required',
+				//'quantity' => 'required|integer'
+			]);
+			
+			if ( $validation->fails() ) {
+				throw new \Exception($validation->errors()->first());
+			} else {
+				
+				// init request
+				$this->_curl->create(
+					config('service.MINT_ROUTE.endpoint_url')
+					. 'voucher'
+				);
+				
+				// allowed filters
+				$allowed_params = [
+					'orderid' => NULL,
+					'denomination_id' => NULL,
+					//'quantity' => NULL
+				];
+				// find intersecting keys
+				$params = array_intersect_key($request, $allowed_params);
+				
+				// add default values
+				$params = array_merge($params, [
+					'short' => TRUE,
+					'location' => config('service.MINT_ROUTE.pos_identification'),
+					'quantity' => 1
 				]);
 				
 				// collect params
@@ -464,63 +545,35 @@ class MintRoute
 	 */
 	public function purchase(array $request = NULL)
 	{
+		$unique_key = config('service.MINT_ROUTE.trans_prefix') . uniqid();
+		
 		try {
 			// validation
 			$validation = validator($request, [
-				'orderid' => 'required|string',
-				'denomination_id' => 'required',
-				'quantity' => 'required|integer'
+				//'orderid' => 'required|string',
+				'denomination_id' => 'required'
 			]);
 			
 			if ( $validation->fails() ) {
 				throw new \Exception($validation->errors()->first());
 			} else {
 				
-				// init request
-				$this->_curl->create(
-					config('service.MINT_ROUTE.endpoint_url')
-					. 'voucher'
-				);
+				// merge in request
+				$request['orderid'] = $unique_key;
 				
-				// allowed filters
-				$allowed_params = [
-					'orderid' => NULL,
-					'denomination_id' => NULL,
-					'quantity' => NULL
-				];
-				// find intersecting keys
-				$params = array_intersect_key($request, $allowed_params);
+				// reserve
+				try {
+					$this->reserve($request);
+				} catch ( \Exception $e ) {
+					throw new \Exception($e->getMessage());
+				}
 				
-				// add default values
-				$params = array_merge($params, [
-					'short' => TRUE,
-					'location' => config('service.MINT_ROUTE.pos_identification')
-				]);
-				
-				// collect params
-				$params = json_encode([
-					'username' => config('service.MINT_ROUTE.username'),
-					'password' => config('service.MINT_ROUTE.password'),
-					'data' => count($params) > 0 ? [ $params ] : []
-				]);
-				
-				
-				$this->_curl->post([
-					'token' => config('service.MINT_ROUTE.pub_key'),
-					'postedinfo' => AesCtr::encrypt(
-						$params,
-						config('service.MINT_ROUTE.pvt_key'),
-						config('service.MINT_ROUTE.enc_bits')
-					)
-				]);
-				
-				// if error
-				if ( $this->_curl->error_code )
-					throw new \Exception($this->_curl->error_string);
-				
-				$response = $this->_curl->execute();
-				
-				return json_decode($response);
+				// purchase and return data
+				try {
+					return $this->postOrder($request);
+				} catch ( \Exception $e ) {
+					throw new \Exception($e->getMessage());
+				}
 				
 			}
 			

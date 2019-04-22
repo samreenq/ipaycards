@@ -36,6 +36,7 @@ Route::group([
 	Route::get('card/denominations', 'CardController@denominations');
 	Route::get('card/balance', 'CardController@balance');
 	Route::get('card/orders', 'CardController@orders');
+	Route::post('card/order', 'CardController@postOrder');
 	Route::get('card/check_availability', 'CardController@checkAvailability');
 	Route::post('card/reserve', 'CardController@reserve');
 	Route::post('card/purchase', 'CardController@purchase');

@@ -164,7 +164,7 @@ class OnePrepay
 	
 	
 	/**
-	 * Purchase
+	 * Send
 	 *
 	 * @param array|NULL $request
 	 *
@@ -174,14 +174,10 @@ class OnePrepay
 	public function purchase(array $request = NULL)
 	{
 		
-		// set params
-		$request['quantity'] = 1;
-		
 		// validation
 		$validation = validator($request, [
 			'denomination_id' => 'required',
-			'quantity' => 'required|integer',
-			'orderid' => 'required|string'
+			'amount' => 'required|numeric|min:5'
 		]);
 		
 		if ( $validation->fails() ) {
@@ -189,17 +185,23 @@ class OnePrepay
 		} else {
 			
 			try {
+				$unique_key = config('service.ONE_PREPAY.trans_prefix') . uniqid();
+				
+				/**
+				 * Pinless request 1
+				 */
+				
 				// params
 				$input_xml = '<RequestXml>
 					<Type>PinRequest</Type>
 					<TerminalId>' . config('service.ONE_PREPAY.terminal_id') . '</TerminalId>
 					<Password>' . config('service.ONE_PREPAY.password') . '</Password>
 					<Language>eng</Language>
-					<ReceiptNo>501327588</ReceiptNo>
-					<ValueCode>25</ValueCode>
-					<ClerkId>1</ClerkId>
-					<RefNo>123456</RefNo>
 					<ProdCode>' . $request['denomination_id'] . '</ProdCode>
+					<ValueCode>' . $request['amount'] . '</ValueCode>
+					<RefNo>' . $unique_key . '</RefNo>
+					<ReceiptNo>' . $unique_key . '</ReceiptNo>
+					<ClerkId>1</ClerkId>
 				</RequestXml>';
 				
 				// remove whitespaces between tags
@@ -222,8 +224,6 @@ class OnePrepay
 				if ( intval($response['StatusCode']) > 0 )
 					throw new \Exception($response['StatusDescription']);
 				
-				// parse through mapping
-				//$this->_responseMapping($response);
 				
 				return $response;
 				
