@@ -214,7 +214,7 @@
 
                     <div class="panel mb20 wfull" id="p5">
                         <div class="panel-heading">
-                            <span class="panel-title">Total Products</span>
+                            <span class="panel-title">Top Products</span>
                         </div>
                         <div class="panel-body">
                             <div class="mb20 text-right">
