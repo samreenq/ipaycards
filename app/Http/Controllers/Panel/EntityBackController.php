@@ -25,6 +25,7 @@ use App\Libraries\OrderStatus;
 use App\Libraries\ProductHelper;
 use App\Libraries\Services\Cards;
 use App\Libraries\System\Entity;
+use App\Libraries\VendorIntegration;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -533,7 +534,7 @@ class EntityBackController extends EntityController
                     }
 
                     if($this->_entity_controller->identifier == 'product'){
-                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
+                       // $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
                     }
 
 
@@ -2705,26 +2706,52 @@ class EntityBackController extends EntityController
         return $view;
     }
 
-    public function vendorIntegration(Request $request)
+    public function addVendorIntegration(Request $request)
     {
         $this->_assignData["page_action"] = " Mintroute Integration";
 
         $last_key = key( array_slice( $this->_requested_route_params, -1, 1, TRUE ) );
         $id = $this->_requested_route_params[$last_key];
         $vendor = $this->_requested_route_params[$last_key-1];
-       // echo "<pre>"; print_r($this->_requested_route_params); exit;
+        $vendor_key = str_replace('_','',$vendor);
+
         $pLib = new Cards(request('vendor', $vendor));
 
         $this->_assignData["vendor_id"] = $vendor;
+        $this->_assignData["entity_id"] =  $id;
+
+        $getData = $this->_pLib->apiGet(['entity_type_id' => 'product', 'entity_id' => $id]);
+        $getData = json_decode(json_encode($getData));
+        //echo "<pre>"; print_r($getData); exit;
+
+        if($getData->error == 0){
+
+            $this->_assignData["product"] = $getData->data->entity->attributes;
+
+            if(trim($vendor) == 'mint_route' && $this->_assignData["product"]->mintroute_product_id != ''){
+                $this->_assignData["product_info"] = json_decode($this->_assignData["product"]->mintroute_product_info);
+            }
+
+            if(trim($vendor) == 'prepay' && $this->_assignData["product"]->prepay_product_id != ''){
+                $this->_assignData["product_info"] = json_decode($this->_assignData["product"]->prepay_product_info);
+            }
+        }
 
         if(trim($vendor) == 'mint_route'){
             $this->_assignData["categories"] = $pLib->categories();
-            $this->_assignData["brands"] = $pLib->brands(['category_id'=> $this->_assignData["categories"][0]->category_id]);
-            $this->_assignData["products"] =  [];
+            $this->_assignData["brands"] = (isset($this->_assignData["product_info"]->category_id)) ?  $pLib->brands(['category_id'=> $this->_assignData["product_info"]->category_id]) : [];
         }
         else{
             $this->_assignData["brands"] = $pLib->brands();
-            $this->_assignData["products"] =  [];
+        }
+
+        $vendor_products =  (isset($this->_assignData["product_info"]->brand_id)) ?  $pLib->denominations(['brand_id'=> $this->_assignData["product_info"]->brand_id]) : [];
+        //echo "<pre>"; print_r($vendor_products); exit;
+
+        $this->_assignData["denominations"] = isset($vendor_products['denominations']) ? json_decode(json_encode($vendor_products['denominations'])) : [];
+
+        if ($request->do_post == 1) {
+            return $this->_addVendorIntegration($request);
         }
 
 
@@ -2732,5 +2759,33 @@ class EntityBackController extends EntityController
 
        return  View::make($view_file, $this->_assignData);
     }
+
+    public function _addVendorIntegration(Request $request)
+    {
+        $vendor_integration_lib = new VendorIntegration();
+        $return = $vendor_integration_lib->integrateProduct($request->all());
+
+        if ($return->error == "1") {
+
+            $assignData['error'] = 1;
+            $assignData['message'] = $return->message;
+
+        } else {
+
+            \Session::put(ADMIN_SESS_KEY . 'success_msg', 'success');
+
+            $redirect = \URL::to($this->_panelPath . $this->_object_identifier . "/" . $this->_entity_controller->identifier);
+
+            $assignData['error'] = 0;
+            $assignData['message'] = $return->message;
+            $assignData['redirect'] = $redirect;
+
+        }
+
+        return $assignData;
+
+    }
+
+
 }
     

@@ -1054,7 +1054,6 @@ Class EntityAjaxController extends EntityBackController
             $data = $pLib->denominations(['brand_id'=> $request->brand_id]);
             //echo "<pre>"; print_r($data); exit;
             return array('error' =>0,'data'=> $data['denominations'],'message' => 'success');
-
         }
 
         return array('error' =>1,'data'=> [],'message' => 'No Data');
