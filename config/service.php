@@ -15,7 +15,9 @@ return [
 		// encryption bits
 		'enc_bits' => 256,
 		// other
-		'pos_identification' => 'iPay4All'
+		'pos_identification' => 'iPay4All',
+		// transaction prefix
+		'trans_prefix' => 'IP-',
 	],
 	
 	/**
