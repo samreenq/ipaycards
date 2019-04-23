@@ -534,10 +534,9 @@ class EntityBackController extends EntityController
                     }
 
                     if($this->_entity_controller->identifier == 'product'){
-                       // $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
+                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
+                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/one_prepay/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Prepay" data-original-title="Integrate with Prepay"><i class="fa fa-cog"></i></a>';
                     }
-
-
                     $checkbox .= '<input type="checkbox" id="check_id_' . $paginated_id->{$this->_attribute_pk} . '" name="check_ids[]" value="' . $paginated_id->{$this->_attribute_pk} . '" />';
                     $checkbox .= '<label class="deleted_btn" for="check_id_' . $paginated_id->{$this->_attribute_pk} . '"></label>';
                     $options .= '</div>';
@@ -2732,8 +2731,8 @@ class EntityBackController extends EntityController
                 $this->_assignData["product_info"] = json_decode($this->_assignData["product"]->mintroute_product_info);
             }
 
-            if(trim($vendor) == 'prepay' && $this->_assignData["product"]->prepay_product_id != ''){
-                $this->_assignData["product_info"] = json_decode($this->_assignData["product"]->prepay_product_info);
+            if(trim($vendor) == 'one_prepay' && $this->_assignData["product"]->oneprepay_product_id != ''){
+                $this->_assignData["product_info"] = json_decode($this->_assignData["product"]->oneprepay_product_info);
             }
         }
 
@@ -2742,14 +2741,16 @@ class EntityBackController extends EntityController
             $this->_assignData["brands"] = (isset($this->_assignData["product_info"]->category_id)) ?  $pLib->brands(['category_id'=> $this->_assignData["product_info"]->category_id]) : [];
         }
         else{
-            $this->_assignData["brands"] = $pLib->brands();
+           $brands =  $pLib->brands();
+            $this->_assignData["brands"] = json_decode(json_encode($brands));
+
         }
 
         $vendor_products =  (isset($this->_assignData["product_info"]->brand_id)) ?  $pLib->denominations(['brand_id'=> $this->_assignData["product_info"]->brand_id]) : [];
         //echo "<pre>"; print_r($vendor_products); exit;
 
         $this->_assignData["denominations"] = isset($vendor_products['denominations']) ? json_decode(json_encode($vendor_products['denominations'])) : [];
-
+        //echo "<pre>"; print_r($this->_assignData["denominations"]); exit;
         if ($request->do_post == 1) {
             return $this->_addVendorIntegration($request);
         }
