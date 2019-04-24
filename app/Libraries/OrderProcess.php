@@ -7,6 +7,7 @@ use App\Http\Models\FlatTable;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSEntityAuth;
 use App\Http\Models\SYSTableFlat;
+use App\Libraries\Services\Cards;
 use App\Libraries\System\Entity;
 use App\Libraries\CustomHelper;
 use App\Http\Models\Conf;
@@ -748,5 +749,136 @@ Class OrderProcess
             (array)$data
         );
     }
+
+    public function processOutOfStockItem($order_id,$order,$order_items)
+    {
+        try {
+            //Get Inventory of Item
+            if ($order_items) {
+
+                $email_content = "<br>The ordered items are following <br>";
+
+                $mLib = new Cards(request('vendor', 'mint_route'));
+                $oLib = new Cards(request('vendor', 'one_prepay'));
+
+                foreach ($order_items as $order_item) {
+
+                    if ($order_item->item_type->value == 'product') {
+
+                        $mintroute_product_id = $order_item->product_id->detail->mintroute_product_id;
+                        $prepay_product_id = $order_item->product_id->detail->oneprepay_product_id;
+
+                        $mintroute_product_info = json_decode($order_item->product_id->detail->mintroute_product_info);
+                        $oneprepay_product_info = json_decode($order_item->product_id->detail->oneprepay_product_info);
+
+                        $mintroute_order = FALSE;
+                        $prepay_order = FALSE;
+
+                        //Compare Both
+                        if (!empty($mintroute_product_id) && !empty($prepay_product_id)) {
+
+                            if ($mintroute_product_info->denomination_value < $oneprepay_product_info->denomination_value) {
+                                //Order from mintroute
+                                $mintroute_order = TRUE;
+                            } else {
+                                //Order from One Prepay
+                                $prepay_order = TRUE;
+                            }
+                        }
+                            elseif (!empty($mintroute_product_id) && empty($prepay_product_id)) { //Order from mintroute
+                                $mintroute_order = TRUE;
+                            }
+                            elseif (empty($mintroute_product_id) && !empty($prepay_product_id)) { //Order from One Prepay
+                                $prepay_order = TRUE;
+                            }
+
+                            try{
+                                if ($mintroute_order) {
+                                    //Order from mintroute
+                                    $order_response = $mLib->purchase(['denomination_id' => 1]);
+
+                                    if(isset($order_response->status) && $order_response->status == 1){
+
+                                        //echo "<pre>"; print_r($order_response); exit;
+                                        $voucher_arr = (array)$order_response->voucher;
+                                        $voucher_code = $voucher_arr['Pin Code'];
+                                    }
+                                }
+
+                                if ($prepay_order) {
+                                    //Order from One Prepay
+                                    $order_response = $oLib->purchase(['denomination_id' => $prepay_product_id, 'amount' => $oneprepay_product_info->denomination_value]);
+                                }
+
+                                if(isset($voucher_code) && !empty($voucher_code)){
+
+                                    //Add Inventory
+                                    $params = array(
+                                        'entity_type_id' => 'inventory',
+                                        //'vendor_id' => $vendor->entity_id,
+                                        'category_id' => $order_item->product_id->detail->category_id,
+                                        'brand_id' =>  $order_item->product_id->detail->brand_id,
+                                        'product_id' => $order_item->product_id->id,
+                                        'voucher_code' => $voucher_code,
+                                        'order_from' => 'vendor_stock',
+                                        'availability' => 'sold',
+                                    );
+                                    //  echo "<pre>"; print_r($params);
+                                    $inventory_response = $this->_pLib->apiPost($params);
+                                    $inventory_response = json_decode(json_encode($inventory_response));
+                                    //  echo "<pre>"; print_r($inventory_response);
+                                    if(isset($inventory_response->data->entity->entity_id)){
+
+                                        //echo "<pre>"; print_r($inventory_id); exit;
+                                        //Update Order Item
+                                        $params = [
+                                            'entity_type_id' => 'order_item',
+                                            'entity_id' => $order_item->entity_id,
+                                            'inventory_id' => $inventory_response->data->entity->entity_id,
+                                           // 'vendor_id' => $vendor->entity_id,
+                                        ];
+
+                                        $this->_pLib->apiUpdate($params);
+
+                                    }
+
+                                    //Update Order Item
+
+                                    $email_content .= '<br>';
+                                    $email_content .= $order_item->product_id->value.' has voucher '.$voucher_code;
+
+                                }
+                                else{
+                                    $email_content .= '<br>';
+                                    $email_content .= $order_item->product_id->value.' is out of stock';
+                                }
+
+                            }
+                            catch (\Exception $ee){
+                              //  print_r($ee->getMessage()); exit;
+                                throw new \Exception($ee->getMessage());
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+                if ($email_content != '') {
+                    $this->_sendEmail($order, $email_content);
+                }
+
+                $this->_updateOrder($order_id);
+
+        }
+        catch ( \Exception $e ) {
+            throw new \Exception($e->getMessage());
+        }
+
+    }
+
+
 
 }

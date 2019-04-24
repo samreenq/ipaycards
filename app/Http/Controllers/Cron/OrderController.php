@@ -20,71 +20,71 @@ use Illuminate\Http\Request;
 Class OrderController extends Controller
 {
 
+    private $_apiData;
     /**
      * @param Request $request
      */
     public function processOrder(Request $request)
     {
-        $current_date = date('Y-m-d');
 
-        $params = array(
-            'entity_type_id' => 15,
-            'order_status' => 'pending',
-           // 'where_condition' => ' AND created_date >= '.trim($current_date)
-            'hook' => 'order_item',
-            'mobile_json' => 1,
-            'in_detail' => 1
-        );
+        try {
+            $current_date = date('Y-m-d');
 
-        $entity_lib = new Entity();
-        $response = $entity_lib->apiList($params);
-        $response = json_decode(json_encode($response));
+            $order_flat = new OrderFlat();
+            $order_process = new OrderProcess();
 
-        if(isset($response->data->page->total_records)){
+            $orders = $order_flat->getVendorStockOrder();
 
-            if($response->data->page->total_records > 0){
+            if(count($orders) > 0) {
 
-                $orders = $response->data->order;
+                foreach ($orders as $order_data) {
 
-                echo '<h3>Orders to Process</h3>';
+                    $params = array(
+                        'entity_type_id' => 15,
+                        'entity_id' => $order_data->order_id,
+                        'hook' => 'order_item',
+                        'mobile_json' => 1,
+                        'in_detail' => 1
+                    );
 
+                    $entity_lib = new Entity();
+                    $response = $entity_lib->apiGet($params);
+                    $response = json_decode(json_encode($response));
+                    // echo "<pre>"; print_r($response); exit;
+                    if(isset($response->data->order)){
 
-                if(count($orders) > 0){
+                        $order = $response->data->order;
 
-                    foreach($orders as $order_data){
+                        echo '<h3>Orders to Process</h3>';
 
-                        $order_id = $order_data->entity_id;
-                        $order = $order_data;
-
-                        //Check In Stock or Out of stock
-                        $order_flat = new OrderFlat();
-                        $vendor_stock_count = $order_flat->checkVendorStockOrder($order_id);
-
-                        //in stock Order
-                        $order_process_lib = new OrderProcess();
-                        if($vendor_stock_count == 0){
-                           // echo "<pre>"; print_r($order_data); exit;
-                            $order_process_lib->processInStockItem($order_id,$order,$order_data->order_item);
-
-                        }else{
-
-                            //Vendor Stock Order
+                        $order_process->processOutOfStockItem($order_data->order_id,$order,$order->order_item);
 
 
-                        }
+                        // echo "<pre>"; print_r($order->order_item); exit;
+
+
+
 
                     }
 
+
                 }
             }
+
+            // success response
+            $this->_apiData['response'] = "success";
+
+            // message
+            $this->_apiData['message'] = trans('system.success');
+
+        } catch ( \Exception $e ) {
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
         }
 
+        return $this->_apiData;
 
     }
-
-
-
-
 
 
 
