@@ -85,7 +85,7 @@
 											<input type="hidden" class="unit_option" value="<?php if(isset($attributes["attributes"]['item_unit']['option'])) echo $attributes["attributes"]['item_unit']['option']; ?>" />
 											<input type="hidden" class="unit_value" value="<?php if(isset($attributes["attributes"]['item_unit']['value'])) echo $attributes["attributes"]['item_unit']['value']; ?>" />
 											<input class="quantity" type="text" name="product_quantity" value="1" readonly/>
-											<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type'])) echo $attributes["attributes"]['item_type'] ?>" />
+											<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
 											<a class="incr-btn incr-btn4 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 										</div>

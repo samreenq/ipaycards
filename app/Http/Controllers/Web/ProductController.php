@@ -1169,7 +1169,7 @@ class ProductController extends WebController
 			$data = array("entity_type_id"=>'product',
                 "featured_type"=>$request->input('featured_type'),
                 'status' => 1,
-                'availability' => 1,
+               // 'availability' => 1,
                 'limit'=>4);
 
 			$data['product_detail_url'] = $request->input('product_detail_url');
@@ -1279,38 +1279,50 @@ class ProductController extends WebController
         $categories = json_decode(json_encode($response));
        // echo "<pre>"; print_r( $categories); exit;
 
+        $data['products'] = [];
+
         if($categories->error == 0){
             $categories = $categories->data->category_listing[0];
 
             $category_id = $categories->category_id;
             $category_model = new SYSCategory();
             $category_ids = $category_model->getChildCategories($category_id);
-           // echo "<pre>"; print_r( $category_ids); exit;
-            $params = array(
-               'entity_type_id' =>  'product',
-                'where_condition' => "AND FIND_IN_SET('$category_ids',category_id)",
-                'status' => 1,
-            );
 
-            $entity_lib = new Entity();
+            if($category_ids){
 
-            $products_list = $entity_lib->apiList($params);
-            $products_list = json_decode(json_encode($products_list),true);
-           // echo "<pre>"; print_r($products_list); exit;
-            if ($products_list['error'] == 0 && isset($products_list['data']['entity_listing'])) {
-                if($products_list['data']['entity_listing'])
-                    $data['products']  = $products_list['data']['entity_listing'];
-                else
+                $where_condition = '';
+                foreach(explode(',',$category_ids) as $cat_id){
+
+                    if(!empty($where_condition)){
+                        $where_condition .= ' OR ';
+                    }
+
+                    $where_condition .= ' FIND_IN_SET("'.$cat_id.'",category_id)';
+                }
+
+               // echo $where_condition; exit;
+                $params = array(
+                    'entity_type_id' =>  'product',
+                    'where_condition' => "AND ".$where_condition,
+                    'status' => 1,
+                );
+
+                $entity_lib = new Entity();
+
+                $products_list = $entity_lib->apiList($params);
+                $products_list = json_decode(json_encode($products_list),true);
+              //  echo "<pre>"; print_r( $products_list); exit;
+                if ($products_list['error'] == 0 && isset($products_list['data']['entity_listing'])) {
+                    if($products_list['data']['entity_listing'])
+                        $data['products']  = $products_list['data']['entity_listing'];
+                    else
+                        $data['products']  = [];
+                } else {
                     $data['products']  = [];
-            } else {
-                $data['products']  = [];
+                }
             }
 
         }
-        else{
-            $data['products'] = [];
-        }
-
         $data['category'] = $categories;
         $data['currency'] = $this->_object_library_general_setting->getCurrency();
        // echo "<pre>"; print_r( $products_list); exit;

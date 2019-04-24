@@ -22,3 +22,4 @@ resources.rar
 vendor/
 config.php
 /storage/logs/*
+/public/files/*
