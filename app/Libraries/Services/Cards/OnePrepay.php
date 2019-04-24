@@ -74,9 +74,6 @@ class OnePrepay
 			if ( intval($response['StatusCode']) > 0 )
 				throw new \Exception($response['StatusDescription']);
 			
-			// parse through mapping
-			$this->_responseMapping($response);
-			
 			return $response;
 			
 		} catch ( \Exception $e ) {
@@ -108,7 +105,7 @@ class OnePrepay
 				'brand' => 'brand_name'
 			]);
 		
-		return $this->_responseMapping($records);
+		return $records;
 		
 		
 	}
@@ -155,7 +152,7 @@ class OnePrepay
 					'value' => 'denomination_value'
 				]);
 			
-			return $this->_responseMapping($records);
+			return $records;
 			
 		}
 		
@@ -234,17 +231,6 @@ class OnePrepay
 			}
 			
 		}
-	}
-	
-	
-	/**
-	 * Response Key Mapping
-	 *
-	 * @param array $response
-	 */
-	private function _responseMapping(array &$response = [])
-	{
-		return $response;
 	}
 	
 	
