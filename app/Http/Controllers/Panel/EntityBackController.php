@@ -533,10 +533,13 @@ class EntityBackController extends EntityController
                          $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/copy/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Copy" data-original-title="Copy"><i class="fa fa-copy"></i></a>';
                     }
 
+                   // echo "<pre>"; print_r($paginated_id); exit;
                     if($this->_entity_controller->identifier == 'product'){
-                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
-                        $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/one_prepay/' . $paginated_id->{$this->_attribute_pk}.$sub_link) . '" data-toggle="tooltip" title="Integrate with Prepay" data-original-title="Integrate with Prepay"><i class="fa fa-cog"></i></a>';
-                    }
+                        if($paginated_id->attributes->item_type->value == 'product') {
+                            $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/mint_route/' . $paginated_id->{$this->_attribute_pk} . $sub_link) . '" data-toggle="tooltip" title="Integrate with Mintroute" data-original-title="Integrate with Mintroute"><i class="fa fa-cog"></i></a>';
+                            $options .= '<a class="btn btn-xs btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/integrate/one_prepay/' . $paginated_id->{$this->_attribute_pk} . $sub_link) . '" data-toggle="tooltip" title="Integrate with Prepay" data-original-title="Integrate with Prepay"><i class="fa fa-cog"></i></a>';
+                        }
+                     }
                     $checkbox .= '<input type="checkbox" id="check_id_' . $paginated_id->{$this->_attribute_pk} . '" name="check_ids[]" value="' . $paginated_id->{$this->_attribute_pk} . '" />';
                     $checkbox .= '<label class="deleted_btn" for="check_id_' . $paginated_id->{$this->_attribute_pk} . '"></label>';
                     $options .= '</div>';
