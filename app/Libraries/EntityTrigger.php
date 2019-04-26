@@ -1382,7 +1382,7 @@ Class EntityTrigger
 		
 		if ( $vendor_stock_count == 0 ) {
 			$order_process_lib = new OrderSendCards();
-			$order_process_lib->processInStockItem($entity_id, $order, $order_items);
+			$order_process_lib->processInStockItemOrder($entity_id, $order, $order_items);
 		}
 		
 	}

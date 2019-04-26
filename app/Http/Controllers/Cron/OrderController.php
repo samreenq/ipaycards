@@ -43,7 +43,7 @@ Class OrderController extends Controller
 
                     $params = [
                         'entity_type_id' => 'order',
-                        'entity_id' => $order_data->order_id,
+                        'entity_id' => $order_data->entity_id,
                         'hook' => 'order_item',
                         'mobile_json' => 1,
                         'in_detail' => 1
@@ -55,13 +55,13 @@ Class OrderController extends Controller
                     if (isset($response->data->order)) {
 
                         $order = $response->data->order;
-                        $return = $order_process->processOutOfStockItem($order_data->order_id, $order, $order->order_item);
+                        $return = $order_process->processOutOfStockItem($order_data->entity_id, $order, $order->order_item);
 
                         $this->_apiData['message'] = $return['message'];
 
                         // echo "<pre>"; print_r($order->order_item); exit;
                     }
-                    break;
+                  //  break;
                 } //end of foreach
             } else {
                 $this->_apiData['message'] = 'No Orders Found';

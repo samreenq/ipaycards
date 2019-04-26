@@ -1247,23 +1247,6 @@ Class OrderHelper
         return $display_status;
     }
 
-    /**
-     * @param $order_id
-     */
-    public function updateOrder($order_id){
-
-        $entity_lib = new Entity();
-
-        //Update Inventory Status
-        $params = array(
-            'entity_type_id' => 'order_history',
-            'order_id' => $order_id,
-            'order_status' => 'delivered',
-        );
-        $rr = $entity_lib->apiPost($params);
-
-    }
-
 
 
 

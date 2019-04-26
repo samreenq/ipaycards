@@ -180,12 +180,15 @@ Class OrderFlat extends Base
 
     public function getVendorStockOrder()
     {
+        //  AND o.created_at < '$date'
+        $date = date('Y-m-d');
         $query = "SELECT o.entity_id 
             FROM order_item_flat oi
             LEFT JOIN order_flat o ON o.entity_id = oi.order_id
             LEFT JOIN order_statuses_flat os ON o.order_status = os.entity_id
             WHERE os.keyword = 'pending'
             AND oi.order_from = 'vendor_stock' 
+            AND o.entity_id = 8018
             GROUP BY oi.order_id";
 
         $row = \DB::select($query);

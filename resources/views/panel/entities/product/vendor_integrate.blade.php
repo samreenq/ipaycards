@@ -138,7 +138,7 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
                     $('#brand_id').append('<option value="">-Select Brand-</option>');
 
                     if(data.error == 1){
-                        $('.alert-message').html(alertMsg(data.message));
+                      //  $('.alert-message').html(alertMsg(data.message));
                     }
                     else{
                         $(data.data).each(function (index, ele) {
@@ -166,7 +166,7 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
                     $('#product_id').append('<option value="">-Select Product-</option>');
 
                     if(data.error == 1){
-                        $('.alert-message').html(alertMsg(data.message));
+                       // $('.alert-message').html(alertMsg(data.message));
                     }
                     else{
 
