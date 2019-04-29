@@ -6,7 +6,6 @@ use App\Http\Models\EmailTemplate;
 use App\Http\Models\Setting;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSEntityAuth;
-use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
 
 Class EmailLib {
@@ -71,8 +70,7 @@ Class EmailLib {
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
         # send email
-        $order_flat = new OrderFlat();
-        $order_flat->sendMail(
+        $conf_model->sendMail(
             array($data->email, $data->name),
             $body,
             (array)$data
@@ -139,8 +137,8 @@ Class EmailLib {
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
         # send email
-        $order_flat = new OrderFlat();
-        $order_flat->sendMail(
+
+        $conf_model->sendMail(
             array($data->email, $data->name),
             $body,
             (array)$data
