@@ -226,6 +226,7 @@ $fields = new $fields();
             $(".is_featured_field").show();
            // $(".featured_type_field").hide();
             $(".is_gift_card_field").show();
+            $(".top_category_field").show();
 
 
            /* $('.gallery-wrap').show();
@@ -242,6 +243,7 @@ $fields = new $fields();
             $(".is_featured_field").hide();
            // $(".featured_type_field").show();
             $(".is_gift_card_field").hide();
+            $(".top_category_field").hide();
            /* $('.gallery-wrap').hide();
            $('.top-wrap').removeClass('col-md-8');
            $('.top-wrap').addClass('col-md-12');
