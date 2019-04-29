@@ -142,6 +142,7 @@ class CategoryController extends Controller
             $entity["status"] = 1;
             $entity["featured_type"] = ($request->input('featured_type', "")) ? $request->input('featured_type', "") : '';
             $entity["top_category"] = $request->input('top_category', 0);
+            $entity["is_gift_card"] = $request->input('is_gift_card', 0);
             $entity["created_at"] = date("Y-m-d H:i:s");
 
             $entity_id = $this->_entity_model->put($entity);
@@ -316,6 +317,7 @@ class CategoryController extends Controller
             $entity["status"] = ($request->input('status', "")) ? $request->input('status', "") : '';
             $entity["featured_type"] = ($request->input('featured_type', "")) ? $request->input('featured_type', "") : '';
             $entity["top_category"] = $request->input('top_category', 0);
+            $entity["is_gift_card"] = $request->input('is_gift_card', 0);
             $entity["updated_at"] = date("Y-m-d H:i:s");
            // echo "<pre>"; print_r($entity); exit;
 
@@ -531,6 +533,7 @@ class CategoryController extends Controller
 
                                 $params = [
                                     'entity_type_id' => 'product',
+                                    'status' => 1,
                                     'mobile_json' => 1
                                 ];
 
