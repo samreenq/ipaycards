@@ -1004,8 +1004,7 @@ class EntityAuthController extends EntityController
 
         $this->_assignData['records'] = $data['records'];
 
-
-        $this->_assignData['entity_data'] = (object)$this->_entity_controller['attributes'];
+        $this->_assignData['entity_data'] = $this->_entity_controller;
         $this->_assignData['form_template_dir'] = "template/";
         $view_file = $this->_assignData["dir"] . 'profile_update';
 
