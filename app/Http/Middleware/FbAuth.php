@@ -3,6 +3,7 @@
 
 
 namespace App\Http\Middleware;
+use App\Http\Models\Conf;
 use Session;
 use Cookie; 
 use Closure;
@@ -58,8 +59,15 @@ class FbAuth
 		else
 		{
 
-				$appId = '902201553268257'; //Facebook App ID
-				$appSecret = '45dfb4827383399ad2c9d9f417b9352e'; //Facebook App Secret
+            $conf_model = new Conf();
+
+            // configuration
+            $conf = $conf_model->getBy('key', 'facebook');
+            $conf = json_decode($conf->value);
+
+
+				$appId = $conf->app_id; //Facebook App ID
+				$appSecret = $conf->secret; //Facebook App Secret
 				
 				//$appId = '547070199013117'; //Mehran Facebook App ID
 				//$appSecret = '85a38a289dd71be1d1213b5c7774848d'; //Mehran Facebook App Secret
