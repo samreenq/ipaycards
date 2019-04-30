@@ -662,7 +662,9 @@ class EntityAuthController extends EntityController
      */
     public function logout(Request $request)
     {
-        $this->_entity_model->logout();
+        $this->_entity_model->logout(false);
+        $panel_dir = $this->__getPanelPath();
+        return redirect($panel_dir.'login/');
     }
 
     /**
