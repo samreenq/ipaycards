@@ -17,13 +17,13 @@
 				<div class="row">
 					<div class="col-md-6 cuspad">
 						<div class="fluid-label">
-						  <input id="account_first_name" name="account_first_name" type="text" required="required" class="form-control" placeholder="First Name" />
+						  <input id="account_first_name" value="{!! isset($user['attributes']['first_name']) ? $user['attributes']['first_name'] : "" !!}" name="account_first_name" type="text" required="required" class="form-control" placeholder="First Name" />
 						  <label>First Name</label>
 						</div>
 					</div>
 					<div class="col-md-6 cuspad">
 						<div class="fluid-label">
-						  <input id="account_last_name" name="account_last_name" type="text" required="required" class="form-control" placeholder="Last Name" />
+						  <input id="account_last_name" value="{!! isset($user['attributes']['last_name']) ? $user['attributes']['last_name'] : "" !!}"  name="account_last_name" type="text" required="required" class="form-control" placeholder="Last Name" />
 						  <label>Last Name</label>
 						</div>
 					</div>
