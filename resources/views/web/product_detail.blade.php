@@ -129,6 +129,37 @@
 
 
 										<?php
+
+                                    	$price = '';
+										$product_price = $product["attributes"]['price'];
+
+                                    if(isset($product["attributes"]['product_promotion_id']))
+                                    {
+                                        if($product["attributes"]['product_promotion_id']>0)
+                                        {
+                                            if(isset($product["attributes"]['promotion_start_date']))
+                                                $start_date = date("Y-m-d H:i:s",strtotime($product["attributes"]['promotion_start_date']));
+                                            if(isset($product["attributes"]['promotion_end_date']))
+                                                $end_date = date("Y-m-d H:i:s",strtotime($product["attributes"]['promotion_end_date']));
+                                            $current_date = date("Y-m-d H:i:s");
+
+                                            if(isset($start_date) && isset($end_date))
+                                            {
+                                                if($current_date >=$start_date && $current_date <=$end_date )
+                                                {
+                                                    if(isset($product["attributes"]['promotion_discount_amount']))
+                                                    {
+                                                        $price = $product["attributes"]['promotion_discount_amount'];
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+										
+										
 												//if($product['attributes']['category_form']['option'])
 												//{
 										?>
@@ -137,7 +168,13 @@
 											//	}
 										?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
-										<h3>$ <?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?> <?php if(isset($product["attributes"]['weight']) && isset($product["attributes"]['item_unit']['value']) && $product["attributes"]['item_unit']['option']) echo '/ ('.$product["attributes"]['weight'].' '.$product["attributes"]['item_unit']['option'].')'; ?></h3>
+
+										@if(empty($price))
+												<h3>$<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?></h3>
+											@else
+												<h3><strike><?php if(isset($product["attributes"]['price'])) echo '$'.$product["attributes"]['price']; ?></strike>&nbsp;${!! $price !!}</h3>
+											@endif
+
 										<p>@if(isset($product['attributes']['description'])) {{ $product['attributes']['description'] }} @endif</p>
 								
 										<div class="cartShareWrap"> 
@@ -148,7 +185,7 @@
 													<input type="hidden" name="product_code" value="<?php if(isset($product["attributes"]['product_code'])) echo $product["attributes"]['product_code'] ?>" />
 													<input type="hidden" name="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
 													<input type="hidden" name="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
-													<input type="hidden" name="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
+													<input type="hidden" name="price" value="<?php if(!empty($price)) echo $price; else echo $product["attributes"]['price']; ?>" />
 													<input type="hidden" name="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
 													<input type="hidden" name="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
 													<input type="hidden" name="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
@@ -178,8 +215,8 @@
 													<input type="hidden" class="product_code" value="<?php if(isset($product["attributes"]['product'])) echo $product["attributes"]['product_code'] ?>" />
 													<input type="hidden" class="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
 													<input type="hidden" class="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
-													<input type="hidden" class="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
-													<input type="hidden" class="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
+												<input type="hidden" name="price" value="<?php if(!empty($price)) echo $price; else echo $product["attributes"]['price']; ?>" />
+												<input type="hidden" class="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
 													<input type="hidden" class="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
 													<input type="hidden" class="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
 													
