@@ -2697,6 +2697,13 @@ table tr.borderB td div{
     color: #EF9B9B;
     font-size: 15px;
 }
+p.prise_fordetail.for_strike {
+    color: #EF9B9B;
+    font-size: 20px;
+    display: inline-block;
+    font-weight: 400;
+    margin-right: 15px;
+}
 .product-footer {
     display: flex;
     align-items: center;
@@ -3539,6 +3546,7 @@ ul.footerCont {
     font-weight:300;
     color:#48494d;
     margin-bottom: 25px;
+    display: inline-block;
 }
 .productWholeDetail p{
     font-weight:300;
