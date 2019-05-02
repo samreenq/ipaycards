@@ -235,7 +235,7 @@ section {
     padding:70px 0;
 }
 .greybg{
-    background-color:#eceef2;
+    background-color:#edeef2;
 }
 .lightgreybg,
 body{
@@ -1838,7 +1838,7 @@ body.nav-expanded {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link.active:focus {
     color: #48494d;
-    border-bottom:2px solid #4fbe9e;
+    border-bottom:2px solid #139cb4;
     background-color: transparent;
     border-top: 0;
     border-left: 0;
@@ -1991,7 +1991,7 @@ table tr.borderB td div{
 .wishListOrderTotal td.totalPrice,
 .OrderDetailTotal td.totalPrice{
     font-size:25px;
-    color:#4fbe9e;
+    color:#139cb4;
     font-weight:400;
     text-align:right;
 }
@@ -2028,7 +2028,7 @@ table tr.borderB td div{
 .basketFooter a,
 .wishListFooter a {
     display: block;
-    background-color: #4fbe9e;
+    background-color: #139cb4 !important;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
@@ -2406,6 +2406,7 @@ table tr.borderB td div{
     display:block;
     width: 100%;
     height: 135px;
+    border-radius: 8px;
 }
 .three-sm-banner-wrap .sm-banner-1{
     background:url(../img/small-banner-img-1.png) no-repeat top left ;
@@ -2531,12 +2532,12 @@ table tr.borderB td div{
     background-color: #139CB4;
 }
 .product-detail .pro-inc-wrap{
-    background-color: #51be9f;
+    background-color: #0c90a7;
 }
 .product-detail {
     position: relative;
     padding: 15px 20px;
-    border-top: 1px solid #f0f1f2;
+    border-top: 0;
 }
 .topCategories .product-detail {
     padding: 30px 20px 15px;
@@ -6835,4 +6836,19 @@ input[type=number] {
     background-color: transparent;
     color: #99aeba;
 }
+.essentials, .browse_brand_sec {
+    background-color: #fff;
+}
+.essentials .product-wrap .img-responsive,
+.browse_brand_sec .product-wrap .img-responsive,
+.popCate .product-wrap,
+.topCategories .product-wrap{
+    border-radius: 10px;
+}
+.popCate .product-wrap .img-responsive,
+.topCategories .product-wrap .img-responsive {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 /*End AS CSS*/
