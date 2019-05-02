@@ -67,7 +67,7 @@
 											</div>
 										</div>
 										<div class="col-md-12 addAddressWrap">
-												<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+												<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 										
 									</div>
@@ -526,7 +526,7 @@
 							$('#myform').attr('action', "confirmation");
 						
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
-					//	$('.add-to-cart').css('background-color','#4fbe9e');
+					//	$('.add-to-cart').css('background-color','#139CB4');
 					});
         
 					});

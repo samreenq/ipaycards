@@ -118,74 +118,38 @@
 								-->
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12 col-lg-6 pr-lg-0">
-								<img width="570px" height="488px" src="<?php echo $image; ?>" alt="img" class=" img-responsive"/> <!--class="productBigImg" -->
-							
-							
-							</div>
-							<div class="col-md-12 col-lg-6 pl-lg-0">
-								<div class="productWholeDetail whitebg">
+						<div class="detail_container whitebg">
+							<div class="row">
+								<div class="col-md-12 col-lg-6 pr-lg-0 align-items-start d-flex">
+									<img src="<?php echo $image; ?>" alt="img" class="detail_img img-responsive"/> <!--class="productBigImg" -->
 
 
-										<?php
+								</div>
+								<div class="col-md-12 col-lg-6 pl-lg-0">
+									<div class="productWholeDetail whitebg">
 
-                                    	$price = '';
-										$product_price = $product["attributes"]['price'];
 
-                                    if(isset($product["attributes"]['product_promotion_id']))
-                                    {
-                                        if($product["attributes"]['product_promotion_id']>0)
-                                        {
-                                            if(isset($product["attributes"]['promotion_start_date']))
-                                                $start_date = date("Y-m-d H:i:s",strtotime($product["attributes"]['promotion_start_date']));
-                                            if(isset($product["attributes"]['promotion_end_date']))
-                                                $end_date = date("Y-m-d H:i:s",strtotime($product["attributes"]['promotion_end_date']));
-                                            $current_date = date("Y-m-d H:i:s");
-
-                                            if(isset($start_date) && isset($end_date))
-                                            {
-                                                if($current_date >=$start_date && $current_date <=$end_date )
-                                                {
-                                                    if(isset($product["attributes"]['promotion_discount_amount']))
-                                                    {
-                                                        $price = $product["attributes"]['promotion_discount_amount'];
-                                                    }
-
-                                                }
-                                            }
-
-                                        }
-                                    }
-
-										
-										
-												//if($product['attributes']['category_form']['option'])
-												//{
-										?>
-													{{--<a href="#" class="perishable">--}}<?php  //echo $product['attributes']['category_form']['option']; ?>{{--</a>--}}
-										<?php 
-											//	}
-										?>
+                                        <?php
+                                        //if($product['attributes']['category_form']['option'])
+                                        //{
+                                        ?>
+										{{--<a href="#" class="perishable">--}}<?php  //echo $product['attributes']['category_form']['option']; ?>{{--</a>--}}
+                                        <?php
+                                        //	}
+                                        ?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
-
-										@if(empty($price))
-												<h3>$<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?></h3>
-											@else
-												<h3><strike><?php if(isset($product["attributes"]['price'])) echo '$'.$product["attributes"]['price']; ?></strike>&nbsp;${!! $price !!}</h3>
-											@endif
-
+										<h3>$ <?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?> <?php if(isset($product["attributes"]['weight']) && isset($product["attributes"]['item_unit']['value']) && $product["attributes"]['item_unit']['option']) echo '/ ('.$product["attributes"]['weight'].' '.$product["attributes"]['item_unit']['option'].')'; ?></h3>
 										<p>@if(isset($product['attributes']['description'])) {{ $product['attributes']['description'] }} @endif</p>
-								
-										<div class="cartShareWrap"> 
-											<div class="d-sm-flex align-items-center mb50">
+
+										<div class="cartShareWrap">
+											<div class="d-sm-flex align-items-center mb30">
 												<div class="count-input">
 													<a class="incr-btn prn text-right" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
 													<input type="hidden" name="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
 													<input type="hidden" name="product_code" value="<?php if(isset($product["attributes"]['product_code'])) echo $product["attributes"]['product_code'] ?>" />
 													<input type="hidden" name="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
 													<input type="hidden" name="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
-													<input type="hidden" name="price" value="<?php if(!empty($price)) echo $price; else echo $product["attributes"]['price']; ?>" />
+													<input type="hidden" name="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
 													<input type="hidden" name="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
 													<input type="hidden" name="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
 													<input type="hidden" name="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
@@ -193,43 +157,44 @@
 													<input type="hidden" class="item_type" value="<?php if(isset($product["attributes"]['item_type']['value'])) echo $product["attributes"]['item_type']['value'] ?>" />
 
 													<input class="quantity"  name="product_quantity"  type="text"  value="1"/>
-													
-												
 
-					
-													
-													
-													
+
+
+
+
+
+
 													<a class="incr-btn pln text-left" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 												</div>
 												<button type="submit"  class="add add-to-cart wishlist">Add to cart</button>
-												
+
 											</div>
-											
+
 
 											<ul class="share-wishlist-wrap d-sm-flex ">
 												<li><a href="#" data-toggle="modal" data-target=".socialmedia" ><span class="icon-tt-share-icon"></span> Share</a></li>
-														
 
-													<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
-													<input type="hidden" class="product_code" value="<?php if(isset($product["attributes"]['product'])) echo $product["attributes"]['product_code'] ?>" />
-													<input type="hidden" class="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
-													<input type="hidden" class="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
-												<input type="hidden" name="price" value="<?php if(!empty($price)) echo $price; else echo $product["attributes"]['price']; ?>" />
+
+												<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
+												<input type="hidden" class="product_code" value="<?php if(isset($product["attributes"]['product'])) echo $product["attributes"]['product_code'] ?>" />
+												<input type="hidden" class="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
+												<input type="hidden" class="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
+												<input type="hidden" class="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
 												<input type="hidden" class="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
-													<input type="hidden" class="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
-													<input type="hidden" class="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
-													
+												<input type="hidden" class="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
+												<input type="hidden" class="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
+
 												<li class="wishlist" >
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #4fbe9e;" <?php } ?>  ></span>
-															@else
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;" <?php } ?>  ></span>
+													@else
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
 													@endif
-												 Add to Wishlist</li>
+													Add to Wishlist</li>
 											</ul>
 										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -503,7 +468,7 @@
 					});
 					
 					$('.wishlist').on('click',function(e){
-						$('.add_to_wishlist_button').css('color','#4fbe9e');
+						$('.add_to_wishlist_button').css('color','#139CB4');
 					});
 					
 					$('.basketList').enscroll({

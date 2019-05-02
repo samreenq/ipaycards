@@ -105,10 +105,11 @@
 												{
 													if(isset($attributes["attributes"]['promotion_discount_amount']))
 														$price = $attributes["attributes"]['promotion_discount_amount'];
-								?>
-													<p class="prise"><?php echo $currency ?> <?php if(isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
+								?>					<p class="prise for_strike"><strike><?php echo $currency.' '.$attributes["attributes"]['price']; ?>  </strike></p>
 													<p class="prise">&nbsp;&nbsp;&nbsp;</p>
-													<p class="prise"><strike><?php echo $currency.' '.$attributes["attributes"]['price']; ?>  </strike></p>
+													<p class="prise"><?php echo $currency ?> <?php if(isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
+
+
 								<?php 		
 												}
 												else 

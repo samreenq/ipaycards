@@ -304,8 +304,7 @@
 								<?php 
 										if(isset($_REQUEST['featured_type']) || isset($_REQUEST['product_promotion_id']))
 										{
-								?>								
-											<section class="lightgreybg">
+								?>
 													<div class="np-seasons">
 														<div class="container">
 															<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
@@ -330,7 +329,6 @@
 															</div>
 														</div>
 													</div>
-											</section>	
 								<?php 
 										}
 									
@@ -340,18 +338,15 @@
                                     if(isset($brand))
                                     {
                                     ?>
-									<section class="lightgreybg">
 										<div class="np-seasons">
 											<div class="container">
-												<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
+												<div class="row align-items-baseline mb30 stitle-wrap">
 													<h2 class="mr-auto align-items-start">
 														{!! $brand->title !!}
 													</h2>
-
 												</div>
 											</div>
 										</div>
-									</section>
 								<?php
                                     }
 
