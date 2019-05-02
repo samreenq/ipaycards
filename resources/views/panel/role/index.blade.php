@@ -26,7 +26,7 @@
                 <!-- Form Design Change -->
                 <div class="panel panel-theme panel-border top mb25">
                     <div class="panel-heading">
-                        <span class="panel-title">Listing</span>
+                        <span class="panel-title">{!! isset($s_title) ? $s_title : '' !!} Listing</span>
                     </div>
                     <form name="listing_form" method="post">
                         <div class="panel-body dark pn">
