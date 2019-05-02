@@ -101,7 +101,7 @@
                             <label>Gift Code</label>
                         </div>
                         <div class="submitBtnWrap">
-                            <input style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
+                            <input style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
                         </div>
                     </form>
                     </div>

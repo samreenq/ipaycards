@@ -123,7 +123,7 @@
 		if(products.length>=1)
 		{		
 			
-			$(".check_out").css({ 'background-color': "#4fbe9e" });
+			$(".check_out").css({ 'background-color': "#139CB4" });
 			$(".check_out").css({ 'display': "block" });
 		}
 		else
@@ -2530,7 +2530,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 												
 											});
 											total(Request_url2);
-											$(".check_out").css({ 'background-color': "#4fbe9e" });
+											$(".check_out").css({ 'background-color': "#139CB4" });
 											$(".check_out").css({ 'display': "block" });
 											
 									}
@@ -2849,7 +2849,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 					var products = JSON.parse(localStorage.products);
 					if(products.length>=1)
 					{
-						$(".check_out").css({ 'background-color': "#4fbe9e" });
+						$(".check_out").css({ 'background-color': "#139CB4" });
 						$(".check_out").css({ 'display': "block" });
 						$.ajax ({
 									url: Request_url2,
@@ -3100,7 +3100,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
                                 $("#hash").val(lead_order['hash']);
 
                                 $("button[type=submit]").removeAttr("disabled");
-                                $("button[type=submit]").css("background-color","#4fbe9e");
+                                $("button[type=submit]").css("background-color","#139CB4");
 
                             }
                             else{

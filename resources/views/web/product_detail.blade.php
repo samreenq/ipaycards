@@ -118,30 +118,31 @@
 								-->
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12 col-lg-6 pr-lg-0">
-								<img width="570px" height="488px" src="<?php echo $image; ?>" alt="img" class=" img-responsive"/> <!--class="productBigImg" -->
-							
-							
-							</div>
-							<div class="col-md-12 col-lg-6 pl-lg-0">
-								<div class="productWholeDetail whitebg">
+						<div class="detail_container whitebg">
+							<div class="row">
+								<div class="col-md-12 col-lg-6 pr-lg-0 align-items-start d-flex">
+									<img src="<?php echo $image; ?>" alt="img" class="detail_img img-responsive"/> <!--class="productBigImg" -->
 
 
-										<?php
-												//if($product['attributes']['category_form']['option'])
-												//{
-										?>
-													{{--<a href="#" class="perishable">--}}<?php  //echo $product['attributes']['category_form']['option']; ?>{{--</a>--}}
-										<?php 
-											//	}
-										?>
+								</div>
+								<div class="col-md-12 col-lg-6 pl-lg-0">
+									<div class="productWholeDetail whitebg">
+
+
+                                        <?php
+                                        //if($product['attributes']['category_form']['option'])
+                                        //{
+                                        ?>
+										{{--<a href="#" class="perishable">--}}<?php  //echo $product['attributes']['category_form']['option']; ?>{{--</a>--}}
+                                        <?php
+                                        //	}
+                                        ?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
 										<h3>$ <?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?> <?php if(isset($product["attributes"]['weight']) && isset($product["attributes"]['item_unit']['value']) && $product["attributes"]['item_unit']['option']) echo '/ ('.$product["attributes"]['weight'].' '.$product["attributes"]['item_unit']['option'].')'; ?></h3>
 										<p>@if(isset($product['attributes']['description'])) {{ $product['attributes']['description'] }} @endif</p>
-								
-										<div class="cartShareWrap"> 
-											<div class="d-sm-flex align-items-center mb50">
+
+										<div class="cartShareWrap">
+											<div class="d-sm-flex align-items-center mb30">
 												<div class="count-input">
 													<a class="incr-btn prn text-right" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
 													<input type="hidden" name="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
@@ -156,43 +157,44 @@
 													<input type="hidden" class="item_type" value="<?php if(isset($product["attributes"]['item_type']['value'])) echo $product["attributes"]['item_type']['value'] ?>" />
 
 													<input class="quantity"  name="product_quantity"  type="text"  value="1"/>
-													
-												
 
-					
-													
-													
-													
+
+
+
+
+
+
 													<a class="incr-btn pln text-left" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 												</div>
 												<button type="submit"  class="add add-to-cart wishlist">Add to cart</button>
-												
+
 											</div>
-											
+
 
 											<ul class="share-wishlist-wrap d-sm-flex ">
 												<li><a href="#" data-toggle="modal" data-target=".socialmedia" ><span class="icon-tt-share-icon"></span> Share</a></li>
-														
 
-													<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
-													<input type="hidden" class="product_code" value="<?php if(isset($product["attributes"]['product'])) echo $product["attributes"]['product_code'] ?>" />
-													<input type="hidden" class="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
-													<input type="hidden" class="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
-													<input type="hidden" class="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
-													<input type="hidden" class="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
-													<input type="hidden" class="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
-													<input type="hidden" class="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
-													
+
+												<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
+												<input type="hidden" class="product_code" value="<?php if(isset($product["attributes"]['product'])) echo $product["attributes"]['product_code'] ?>" />
+												<input type="hidden" class="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
+												<input type="hidden" class="thumb" value="<?php if(isset($product['gallery'][0]['file'])) echo $product['gallery'][0]['file']; ?>" />
+												<input type="hidden" class="price" value="<?php if(isset($product["attributes"]['price'])) echo $product["attributes"]['price']; ?>" />
+												<input type="hidden" class="weight" value="<?php if(isset($product["attributes"]['weight'])) echo $product["attributes"]['weight']; ?>" />
+												<input type="hidden" class="unit_option" value="<?php if(isset($product["attributes"]['item_unit']['option'])) echo $product["attributes"]['item_unit']['option']; ?>" />
+												<input type="hidden" class="unit_value" value="<?php if(isset($product["attributes"]['item_unit']['value'])) echo $product["attributes"]['item_unit']['value']; ?>" />
+
 												<li class="wishlist" >
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #4fbe9e;" <?php } ?>  ></span>
-															@else
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;" <?php } ?>  ></span>
+													@else
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
 													@endif
-												 Add to Wishlist</li>
+													Add to Wishlist</li>
 											</ul>
 										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -466,7 +468,7 @@
 					});
 					
 					$('.wishlist').on('click',function(e){
-						$('.add_to_wishlist_button').css('color','#4fbe9e');
+						$('.add_to_wishlist_button').css('color','#139CB4');
 					});
 					
 					$('.basketList').enscroll({
