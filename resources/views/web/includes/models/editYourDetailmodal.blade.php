@@ -36,7 +36,7 @@
 					</div>
 					-->
 				</div>
-				<div class="clearfix forgotWrap">
+				<!--<div class="clearfix forgotWrap">
 					<div class="checkbox">
 						<label class="checkbox-bootstrap">                                        
 							<input id="term_and_condition" name="term_and_condition" type="checkbox" required="required" />             
@@ -44,7 +44,7 @@
 							<p>I agree with <a target="_blank" href="<?php echo url('/').'/cms/terms_and_condition' ?>">Terms &amp; Conditions </a></p>
 						</label>
 					</div>
-				</div>
+				</div>-->
 				<div class="submitBtnWrap">
 					<input id="save_your_account" type="button" value="Save" name="" class="save_your_account"/>
 				</div>

@@ -923,6 +923,7 @@ class EntityBackController extends EntityController
                 ->first();
 
          //   echo "<pre>"; print_r($request->all()); exit;
+            $request->request->add(['customer_id'=>$this->_segment_id]);
             $this->listing($request);
         }
 
