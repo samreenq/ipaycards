@@ -172,7 +172,7 @@
 
 
 @section("brands")
-    <section class="lightgreybg">
+    <section class="browse_brand_sec">
         <div class="np-seasons">
             <div class="container">
                 <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
@@ -247,7 +247,7 @@
 @endsection
 
 @section("essentials")
-    <section class="lightgreybg essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
+    <section class="essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
         <div class="container">
             <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
                 <h2 class="mr-auto align-items-start">iPayCards Essentials</h2>
