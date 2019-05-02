@@ -6850,5 +6850,8 @@ input[type=number] {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+.essentials .product-wrap, .popCate .product-wrap {
+    margin-bottom: 25px;
+}
 
 /*End AS CSS*/
