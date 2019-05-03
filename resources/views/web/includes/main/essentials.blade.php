@@ -49,7 +49,7 @@
 
 						
 							{{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
-							<img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
+							<img src='<?php echo $image; ?>' class="img-responsive"/>
 							<div class="product-detail" id="product-{!! $attributes['entity_id'] !!}">
 								<div class="addCartWrap">
 								
