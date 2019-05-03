@@ -1400,5 +1400,23 @@ Class EntityTrigger
             $entity_lib->apiUpdate($params);
         }
     }
+
+    /**
+     * check end date with start date
+     * @param $request
+     * @return mixed
+     */
+    public function PromotionDiscountVerifyTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $response['error'] = 0;
+
+        if(strtotime($request->start_date) > strtotime($request->end_date)){
+            $response['error'] = TRUE;
+            $response['message'] = trans('api_errors.end_must_greater_start_date');
+            return $response;
+        }
+
+    }
 	
 }
