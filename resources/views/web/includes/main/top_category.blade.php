@@ -55,7 +55,7 @@
                 <input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
                 {{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
-                <img width="268px" height="180px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
+                <img src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
                 <div class="product-detail" id="product-{!! $attributes['entity_id'] !!}">
                     <div class="addCartWrap">
 

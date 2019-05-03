@@ -6854,15 +6854,13 @@ input[type=number] {
 .popCate .product-wrap,
 .topCategories .product-wrap,
 .product-Section .product-wrap{
-    border-radius: 10px;
-    object-fit: cover;
+    border-radius: 15px;
 }
 .popCate .product-wrap .img-responsive,
 .topCategories .product-wrap .img-responsive,
 .product-Section .product-wrap .img-responsive{
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 .essentials .product-wrap, .popCate .product-wrap {
     margin-bottom: 25px;
@@ -6870,5 +6868,7 @@ input[type=number] {
 .detail_container {
     padding: 25px 15px;
 }
-
+.product-wrap .img-responsive {
+    height: 159px;
+}
 /*End AS CSS*/
