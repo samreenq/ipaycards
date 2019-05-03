@@ -39,7 +39,7 @@
 							<aside>
 								<ul class="sidebar__inner" role="tablist">
 									<li class="li-active"><a href="{{ route('your_account') }}">Your Account</a></li>
-									<li class="li-active active"><a href="{{ route('payment') }}">Payment</a></li>
+									<!--<li class="li-active active"><a href="{{ route('payment') }}">Payment</a></li>-->
 									<li class="li-active"><a href="{{ route('order_history') }}">Order History</a></li>
 									<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>
 									<li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>

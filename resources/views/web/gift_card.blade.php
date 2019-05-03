@@ -40,7 +40,7 @@
                         <li class="col-sm-12">
                             <ul class="sidebar__inner">
                                 <li class="li-active"><a href="{{ route('account_detail') }}">Your Account</a></li>
-                                <li class="li-active "><a href="{{ route('payment') }}">Payment</a></li>
+                                <!--<li class="li-active "><a href="{{ route('payment') }}">Payment</a></li>-->
                                 <li class="li-active "><a href="{{ route('order_history') }}">Order History</a></li>
                                 {{--<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>--}}
                                 <li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
@@ -57,7 +57,7 @@
                     <aside>
                         <ul class="sidebar__inner">
                             <li class="active"><a href="{{ route('account_detail') }}">Your Account</a></li>
-                            <li ><a href="{{ route('payment') }}">Payment</a></li>
+                           <!-- <li ><a href="{{ route('payment') }}">Payment</a></li>-->
                             <li ><a href="{{ route('order_history') }}">Order History</a></li>
                             {{--<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
                             <li ><a href="{{ route('customer_wallet') }}">Wallet</a></li>
