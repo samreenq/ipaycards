@@ -106,7 +106,7 @@ Route::group([
     Route::any('category/ajax/listing', $ctrl_dir . 'CategoryController@ajaxListing');;
     Route::any('category/add', $ctrl_dir . 'CategoryController@add');
     Route::any('category/update/{id}', $ctrl_dir . 'CategoryController@update');
-    Route::any('category/view/{id}', $ctrl_dir . 'CategoryController@view');
+    Route::any('category/view/{id}', $ctrl_dir . 'CategoryController@update');
 
     //Groups
     Route::any('group', $ctrl_dir . 'GroupController@index');

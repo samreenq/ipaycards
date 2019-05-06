@@ -77,7 +77,7 @@ $fields = new $fields();
                                                 if(isset($record->element_type) && $record->element_type=='text'){
                                                     $record->element_type='input';
                                                 }
-                                                 echo $fields->randerFields($record,$update,0,true);
+                                                 echo $fields->randerFields($record,$update,0,true,array('uri_method' => $uri_method));
                                                 ?> </div> {{--end of section--}}
 
                                             <?php
@@ -108,7 +108,12 @@ $fields = new $fields();
                             </div>
 
                             <div class="pull-right">
+                                @if($uri_method != 'view' )
                                 <button type="submit" class="btn ladda-button btn-theme btn-wide mt10" data-style="zoom-in"> <span class="ladda-label">Submit</span> </button>
+                                    @include(config('panel.DIR').'entities.loader')
+                                @else
+                                    <a href="../update/{{ $update->category_id }}" type="submit" class="btn ladda-button btn-theme btn-wide mt10" data-style="zoom-in"> <span class="ladda-label">Edit Record</span> </a>
+                                @endif
                             </div>
                             <!-- end section row section -->
                         </div>
@@ -142,7 +147,7 @@ $fields = new $fields();
         var myDropzone = new Dropzone("div#dropzoneFileUpload", {
 
             url: baseUrl + "{!! URL::to('/api/system/attachment/save') !!}",
-            addRemoveLinks: true,
+            addRemoveLinks: '{{ $uri_method != 'view' ? true : false }}',
             maxFiles:1,
             thumbnailWidth: parseInt(minThumbWidth),
             thumbnailHeight: parseInt(minThumbHeight),

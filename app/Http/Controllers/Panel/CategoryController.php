@@ -371,6 +371,11 @@ class CategoryController extends EntityController
         $this->_assignData["page_action"] = ucfirst(__FUNCTION__);
         $this->_assignData["route_action"] = strtolower(__FUNCTION__);
 
+        $array = explode('/',$request->url());
+        end($array);
+        $this->_assignData["uri_method"] =  prev($array);
+
+
         // validate post form
         if (isset($request->do_post)) {
             return $this->_update($request);
