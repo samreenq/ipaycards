@@ -945,7 +945,8 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										data:   {
 													login_id	:	$('#login_id').val(),
 													password	:	$('#password').val(), 
-													url			:	''
+													url			:	'',
+													cart_item    : localStorage.products,
 												},
 										dataType: 'json',
 										success: function(data)

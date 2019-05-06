@@ -21,7 +21,7 @@ Class OrderCart
         $this->_sysTableFlatModel = new SYSTableFlat('order_cart');
     }
 
-    public function getCart($customer_id)
+    public function getCart($customer_id,$guest_cart = false)
     {
         try {
             $cart_products = [];
@@ -36,13 +36,21 @@ Class OrderCart
                 if ($order_cart) {
                     $cart_items = json_decode($order_cart->cart_item);
 
-                    $entity_ids = $cart_item_quantity = [];
+                    $entity_ids = $cart_item_quantity  = [];
 
                     if ($cart_items) {
                         foreach ($cart_items as $item) {
                             $entity_ids[] = $item->product_id;
                             $cart_item_quantity[ $item->product_id ] = $item->quantity;
+                        }
+                    }
 
+                    if($guest_cart){
+                        foreach($guest_cart as $guest_item){
+                            if(!in_array($guest_item->product_id,$entity_ids)){
+                                $entity_ids[] = $guest_item->product_id;
+                                $cart_item_quantity[ $guest_item->product_id ] = $guest_item->quantity;
+                            }
                         }
                     }
 
@@ -62,6 +70,10 @@ Class OrderCart
                         $products = json_decode(json_encode($products_response));
                         $cart_products = $this->_getUpdatedProducts($products, $cart_item_quantity);
                       // echo "<pre>"; print_r( $cart_products);exit;
+
+                        if($guest_cart){
+                            $this->saveCart($customer_id,$cart_products);
+                        }
                     }
                 }
             }
@@ -120,6 +132,7 @@ Class OrderCart
                         //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
                        // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
                         'product_quantity' => $cart_item_quantity[$product->entity_id],
+                        'item_type' => $product->item_type->value,
 
                     );
                     //echo "<pre>"; print_r($cart_product);
@@ -136,7 +149,8 @@ Class OrderCart
 
     /**
      * @param bool $customer_id
-     * @param $products
+     * @param string $products
+     * @return array|bool
      */
     public function saveCart($customer_id = false,$products = '')
     {

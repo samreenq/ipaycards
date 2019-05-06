@@ -113,9 +113,10 @@ class AuthenticationController extends WebController {
             );
             $response = json_encode(CustomHelper::internalCall($request,"api/entity_auth/signin", 'POST', $data,true));
             $json = json_decode($response,true);
+            $cart_item = !empty($request->cart_item) ? json_decode($request->cart_item) : false;
 
 
-           // echo "<pre>"; print_r( $json); exit;
+          //  echo "<pre>"; print_r( $cart_item); exit;
 
             $url = $request->input('url');
             $json1 = $json;
@@ -140,7 +141,7 @@ class AuthenticationController extends WebController {
 
                 //Get customer cart
                 $order_cart_lib = new OrderCart();
-               return $order_cart_lib->getCart($json1['data']['entity_auth']['entity_id']);
+               return $order_cart_lib->getCart($json1['data']['entity_auth']['entity_id'],$cart_item);
 
             }
             else
