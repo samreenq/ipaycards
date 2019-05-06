@@ -408,7 +408,7 @@ class CategoryController extends EntityController
                     if(isset($this->_assignData["update"]->is_parent)){
 
                         if($this->_assignData["update"]->is_parent == 1){
-                            if (in_array($record->name, array('parent_id','is_featured'))) {
+                            if (in_array($record->name, array('parent_id'))) {
                                 continue;
                             }
                         }
@@ -559,7 +559,7 @@ class CategoryController extends EntityController
                     if(isset($this->_assignData["update"]->is_parent)){
 
                         if($this->_assignData["update"]->is_parent == 1){
-                            if (in_array($record->name, array('parent_id','is_featured','featured_type'))) {
+                            if (in_array($record->name, array('parent_id','featured_type'))) {
                                 continue;
                             }
                         }

@@ -136,7 +136,7 @@ class CategoryController extends Controller
 
 
             // other data
-            $entity["is_featured"] = ($request->input('is_featured', "")) ? $request->input('is_featured', "") : 0;
+            $entity["is_featured"] = ($request->input('is_featured', 2)) ? $request->input('is_featured', 2) : 2;
 		    $entity["parent_id"] = ($request->input('parent_id', "")) ? $request->input('parent_id', "") : 0;
             $entity["description"] = ($request->input('description', "")) ? $request->input('description', "") : '';
             $entity["status"] = 1;
@@ -312,7 +312,7 @@ class CategoryController extends Controller
 
             // other data
             $entity["parent_id"] = ($request->input('parent_id', "")) ? $request->input('parent_id', "") : 0;
-            $entity["is_featured"] = ($request->input('is_featured', "")) ? $request->input('is_featured', "") : 0;
+            $entity["is_featured"] = ($request->input('is_featured', 2)) ? $request->input('is_featured', 2) : 2;
             $entity["description"] = ($request->input('description', "")) ? $request->input('description', "") : '';
             $entity["status"] = ($request->input('status', "")) ? $request->input('status', "") : '';
             $entity["featured_type"] = ($request->input('featured_type', "")) ? $request->input('featured_type', "") : '';
