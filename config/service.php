@@ -46,6 +46,13 @@ return [
 		'port' => 2,
 		'sim_id' => '102762',
 		'pin_id' => '3152',
+		// recharge type
+		'recharge_type' => [
+			1, // more time
+			5, // more credit
+			8, // more international
+			9 // more data
+		]
 	],
 	
 	
