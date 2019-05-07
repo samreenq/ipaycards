@@ -56,5 +56,14 @@ return [
 		'pub_key' => 'pk_test_hfJNKIjr1S7rKdmI0YAYnrEL',
 		'secret_key' => 'sk_test_t9tYp8V52h1JOren3Ac09Ymd',
 	],
+	
+	/**
+	 * Authy Configurations
+	 */
+	'AUTHY' => [
+		'endpoint_url' => 'https://api.authy.com/protected/json/',
+		'app_id' => '172148',
+		'api_key' => 'faD8wtdn96oOF1X56A2IARLpQrl11tXt',
+	],
 
 ];

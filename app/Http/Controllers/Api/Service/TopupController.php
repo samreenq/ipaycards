@@ -138,4 +138,64 @@ class TopupController extends Controller
 	}
 	
 	
+	/**
+	 * Check
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function check(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->check($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Send Verified
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function sendVerified(Request $request)
+	{
+		
+		try {
+			// assign to output
+			$this->_apiData['data'] = $this->_pLib->sendVerified($request->all());
+			
+			// success response
+			$this->_apiData['response'] = "success";
+			
+			// message
+			$this->_apiData['message'] = trans('system.success');
+			
+			
+		} catch ( \Exception $e ) {
+			$this->_apiData['message'] = $e->getMessage();
+			$this->_apiData['trace'] = $e->getTraceAsString();
+		}
+		
+		return $this->_apiData;
+	}
+	
+	
 }
