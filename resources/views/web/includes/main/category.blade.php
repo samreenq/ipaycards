@@ -18,7 +18,7 @@
 
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <div class="product-wrap whitebg">
-                            <img width="268px" height="221px"    src='<?php echo $image; ?>' class="img-responsive" />
+                            <img width="268px" height="180px"    src='<?php echo $image; ?>' class="img-responsive" />
                             <div class="product-detail br_p_d">
                                 <h4>
                                     <a href="{!! url('/').'/product?category_id='.$category->category_id !!}" >

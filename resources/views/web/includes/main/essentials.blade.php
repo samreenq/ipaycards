@@ -49,7 +49,7 @@
 
 						
 							{{--<button class="like-btn wishlist"><span class="icon-tt-like-icon"></span></button>--}}
-							<img width="268px" height="221px" src='<?php echo $image; ?>' class="img-responsive" width="268px"/>
+							<img src='<?php echo $image; ?>' class="img-responsive"/>
 							<div class="product-detail" id="product-{!! $attributes['entity_id'] !!}">
 								<div class="addCartWrap">
 								
@@ -105,10 +105,11 @@
 												{
 													if(isset($attributes["attributes"]['promotion_discount_amount']))
 														$price = $attributes["attributes"]['promotion_discount_amount'];
-								?>
-													<p class="prise"><?php echo $currency ?> <?php if(isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
+								?>					<p class="prise for_strike"><strike><?php echo $currency.' '.$attributes["attributes"]['price']; ?>  </strike></p>
 													<p class="prise">&nbsp;&nbsp;&nbsp;</p>
-													<p class="prise"><strike><?php echo $currency.' '.$attributes["attributes"]['price']; ?>  </strike></p>
+													<p class="prise"><?php echo $currency ?> <?php if(isset($attributes["attributes"]['promotion_discount_amount'])) echo $attributes["attributes"]['promotion_discount_amount']; ?></p>
+
+
 								<?php 		
 												}
 												else 

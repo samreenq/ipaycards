@@ -747,10 +747,10 @@ class ProductController extends WebController
 			
 			$data1['subtotal'] = $subtotal; 
 			$data1['discount_amount'] = $discount_amount; 
-			$data1['subtotal_with_discount'] = $subtotal_with_discount;
+			$data1['subtotal_with_discountl'] = $subtotal_with_discount;
 			$data1['delivery_charge'] = $delivery_charge; 
 			$data1['grand_total'] = $grand_total;
-			$data1['customer_wallet'] = $customer_wallet;
+			$data1['customer_wallet'] = ($customer_wallet > 0) ? $customer_wallet : '0.00';
 			$data1['calculated_loyalty_points']	 = $calculated_loyalty_points;
 			$data1['paid_amount'] = $paid_amount;
 			$data1['currency'] = $this->_object_library_general_setting->getCurrency();

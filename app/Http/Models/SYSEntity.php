@@ -1345,6 +1345,7 @@ class SYSEntity extends Base
         if($hook == 'deals'){
             $search_columns['entity_type_id'] = $response_key = 'product';
             $search_columns['where_condition'] = " AND item_type = 'deal'";
+            $search_columns['status'] = 1;
 
         }
             else{

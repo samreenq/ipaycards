@@ -14,7 +14,7 @@
             <!-- recent orders table -->
             <div class="panel panel-theme panel-border top mb25">
                 <div class="panel-heading">
-                    <span class="panel-title">Listing</span>
+                    <span class="panel-title">{!! isset($s_title) ? $s_title : '' !!} Listing</span>
 					<span class="panel-controls">
                         <a class="select_action" title="delete">
 						<button type="button" class="btn-default btn-sm link-unstyled ib" ><span class="icon mdi mdi-delete pr5 fs15"></span> Delete</button>

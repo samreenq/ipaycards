@@ -758,17 +758,19 @@ class Fields
 								$result = \DB::select("SELECT category_id From $recored->backend_table where `deleted_at` IS NULL AND `level` = 1 AND `status` = 1");
 								$categories = (count($result)) ? $result : false;
 
-								if(count($categories) > 0){
-                                    (!empty($is_multiple)) ? $disabled = 'disabled' : '';
-									$selected = '';
-									$return .= "<label class=\"$lblb_class field select \">
+								if($categories){
+								    if(count($categories)> 0) {
+                                        (!empty($is_multiple)) ? $disabled = 'disabled' : '';
+                                        $selected = '';
+                                        $return .= "<label class=\"$lblb_class field select \">
 													<select $name $field_id class=\"$field_class form-control $select2_class\" $is_read_only>";
-									$return.='<option  value="" '.$is_multiple.'>-- Select '.$field_title.' --</option>';
+                                        $return .= '<option  value="" ' . $is_multiple . '>-- Select ' . $field_title . ' --</option>';
 
-									//Render category options by indenting
-									$return .= self::getCategoryFieldByIndent($categories,$_value,$default_value,$is_update);
+                                        //Render category options by indenting
+                                        $return .= self::getCategoryFieldByIndent($categories, $_value, $default_value, $is_update);
 
-									$return .= "</select></label>";
+                                        $return .= "</select></label>";
+                                    }
 								}
 
 							}
@@ -1087,22 +1089,23 @@ class Fields
 
 
                                 $categories = (count($result)) ? $result : FALSE;
+                                 if($categories) {
+                                     if (count($categories) > 0) {
 
-                                if (count($categories) > 0) {
+                                         //Render category options by indenting
+                                         if ($query_get_parent == 0) {
+                                             $return .= self::getCategoryFieldByIndent($categories, isset($field_values) ? $field_values : [], $default_value, $is_update, TRUE);
 
-                                    //Render category options by indenting
-                                    if ($query_get_parent == 0) {
-                                        $return .= self::getCategoryFieldByIndent($categories, isset($field_values) ? $field_values : [], $default_value, $is_update, TRUE);
+                                         } else {
+                                             $return .= self::getCategoryParentOptions($categories, isset($field_values) ? $field_values : [], $default_value, $is_update, TRUE);
 
-                                    } else {
-                                        $return .= self::getCategoryParentOptions($categories, isset($field_values) ? $field_values : [], $default_value, $is_update, TRUE);
+                                         }
 
-                                    }
-
-                                    $return .= "</select><i class=\"arrow\"></i>";
-                                    $return .= '<input type="hidden" ' . $field_id . ' ' . $name . ' value="' . $_value . '" />';
-                                    $return .= "</label>";
-                                }
+                                         $return .= "</select><i class=\"arrow\"></i>";
+                                         $return .= '<input type="hidden" ' . $field_id . ' ' . $name . ' value="' . $_value . '" />';
+                                         $return .= "</label>";
+                                     }
+                                 }
 
                             } else {
                                 $result = \DB::select("SELECT $listfield->backend_table_option as `option`, $listfield->backend_table_value as `value` From $listfield->backend_table;");

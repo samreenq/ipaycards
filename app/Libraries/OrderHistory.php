@@ -50,4 +50,20 @@ Class OrderHistory
         }
         return $post_arr;
     }
+
+    /**
+     * @param $order_id
+     */
+    public function updateOrderDelivered($order_id){
+
+        $entity_lib = new Entity();
+
+        //Update Inventory Status
+        $params = array(
+            'entity_type_id' => 'order_history',
+            'order_id' => $order_id,
+            'order_status' => 'delivered',
+        );
+        $rr = $entity_lib->apiPost($params);
+    }
 }

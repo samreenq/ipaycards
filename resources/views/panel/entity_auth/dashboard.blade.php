@@ -397,7 +397,16 @@
                 end_date = $('.end_date').val();
             }
             $(".alert-danger").remove();
-            dashboardWidgets(filter_by,start_date,end_date,highColors,product_type);
+
+            if(start_date != '' && end_date != ''){
+                if(Date.parse(start_date) < Date.parse(end_date)){
+                    dashboardWidgets(filter_by,start_date,end_date,highColors,product_type);
+                }
+            }
+            else{
+                dashboardWidgets(filter_by,start_date,end_date,highColors,product_type);
+            }
+
         });
 
 
@@ -431,6 +440,21 @@
                 $(window).trigger('resize');
             }
         });
+
+
+
+
+    });
+
+    function dashboardWidgets(filter_by,start_date,end_date,highColors,product_type)
+    {
+       // $(".alert-danger").remove();
+        if(filter_by == "date" && (start_date == "" || end_date == "")){
+            message = 'Start Date and End Date is required';
+           // $('.alert-message').append('<div class="alert alert-danger fade in"> <a href="#" class="close" data-dismiss="alert">&times;</a>'+message+'</div>');
+
+           // return false;
+        }
 
         //top customer pie chart
         $.ajax({
@@ -487,25 +511,6 @@
                 });
             }
         });
-
-        driverLocations('');
-        $('#driver_status').on('change',function(){
-            //console.log($(this).find("option:selected").text());
-           driverLocations($(this).val());
-        });
-
-
-    });
-
-    function dashboardWidgets(filter_by,start_date,end_date,highColors,product_type)
-    {
-       // $(".alert-danger").remove();
-        if(filter_by == "date" && (start_date == "" || end_date == "")){
-            message = 'Start Date and End Date is required';
-            $('.alert-message').append('<div class="alert alert-danger fade in"> <a href="#" class="close" data-dismiss="alert">&times;</a>'+message+'</div>');
-
-            return false;
-        }
 
         getTotalStats(filter_by,start_date,end_date);
         totalSales(filter_by,start_date,end_date,highColors);
@@ -729,13 +734,20 @@
                 var response = data.data;
                 if(response.length > 0)
                 {
-                    $('#c1_title').text(response[0].title);
-                    $('#c2_title').text(response[1].title);
-                    $('#c3_title').text(response[2].title);
+                    if(response[0]){
+                        $('#c1_title').text(response[0].title);
+                        $('#c1').attr('value',response[0].total);
+                    }
 
-                    $('#c1').attr('value',response[0].total);
-                    $('#c2').attr('value',response[1].total);
-                    $('#c3').attr('value',response[2].total);
+                    if(response[1]){
+                        $('#c1_title').text(response[1].title);
+                        $('#c1').attr('value',response[1].total);
+                    }
+
+                    if(response[2]){
+                        $('#c1_title').text(response[2].title);
+                        $('#c1').attr('value',response[2].total);
+                    }
 
                     //  console.log('info-circle');
                     var infoCircle = $('.info-circle');
@@ -910,31 +922,6 @@
 
     }
 
-
-    function driverLocations(driver_status)
-    {
-        $('#mapWrap .alert-danger').remove();
-        $.ajax({
-            url: "<?php echo url('getDriverLocation'); ?>",
-            dataType: "json",
-            data: {"driver_status": driver_status },
-            beforeSend: function () {
-                // $('#' + chosen_id).empty();
-            }
-        }).done(function (data) {
-            if(data.error == 0){
-                var response = data.data;
-                initialize(response);
-
-            }
-            else{
-                var tt = $('#driver_status').find("option:selected").text();
-                var msg = 'There is no driver '+tt;
-                $('#map_canvas').before('<div class="alert alert-danger">'+msg+'</div>');
-                displayMap();
-            }
-        });
-    }
 
 
 

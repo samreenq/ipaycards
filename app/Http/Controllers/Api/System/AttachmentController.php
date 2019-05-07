@@ -254,7 +254,8 @@ class AttachmentController extends Controller
             //check size as size check is not working in validation rules
             if ($request->attachment_type_id == 8){
                 $max_size = config("constants.MAX_IMAGE_SIZE");
-                $file_size = strtolower($request->file($file_index)->getClientSize());
+                $file_size = strtolower($request->file($file_index)->getSize());
+
                 if($file_size > $max_size){
                     $this->_apiData['message'] = trans('system.max_size_image');
                     return $this->__apiResponse($request, $this->_apiData);

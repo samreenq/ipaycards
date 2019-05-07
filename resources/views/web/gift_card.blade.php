@@ -40,7 +40,7 @@
                         <li class="col-sm-12">
                             <ul class="sidebar__inner">
                                 <li class="li-active"><a href="{{ route('account_detail') }}">Your Account</a></li>
-                                <li class="li-active "><a href="{{ route('payment') }}">Payment</a></li>
+                                <!--<li class="li-active "><a href="{{ route('payment') }}">Payment</a></li>-->
                                 <li class="li-active "><a href="{{ route('order_history') }}">Order History</a></li>
                                 {{--<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>--}}
                                 <li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
@@ -57,7 +57,7 @@
                     <aside>
                         <ul class="sidebar__inner">
                             <li class="active"><a href="{{ route('account_detail') }}">Your Account</a></li>
-                            <li ><a href="{{ route('payment') }}">Payment</a></li>
+                           <!-- <li ><a href="{{ route('payment') }}">Payment</a></li>-->
                             <li ><a href="{{ route('order_history') }}">Order History</a></li>
                             {{--<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
                             <li ><a href="{{ route('customer_wallet') }}">Wallet</a></li>
@@ -101,7 +101,7 @@
                             <label>Gift Code</label>
                         </div>
                         <div class="submitBtnWrap">
-                            <input style="cursor:pointer;background-color: #4fbe9e; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
+                            <input style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
                         </div>
                     </form>
                     </div>

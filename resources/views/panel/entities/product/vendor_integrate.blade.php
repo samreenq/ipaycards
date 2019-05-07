@@ -83,7 +83,13 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
                                                 <option value="">-Select Product-</option>
                                                 @if(count($denominations)>0)
                                                     @foreach($denominations as $denomination)
-                                                        <option <?php if(!empty($selected_denomination) && $selected_denomination == $denomination->denomination_id){ ?> selected <?php } ?> value="{!! $denomination->denomination_id !!}">{!! $denomination->denomination_name !!}</option>
+                                                        <?php
+                                                        if($vendor_id == 'mint_route')
+                                                            $denomination_name = $denomination->denomination_name;
+                                                            else
+                                                                $denomination_name = $denomination->description;
+                                                        ?>
+                                                        <option <?php if(!empty($selected_denomination) && $selected_denomination == $denomination->denomination_id){ ?> selected <?php } ?> value="{!! $denomination->denomination_id !!}">{!! $denomination_name !!}</option>
                                                     @endforeach
                                                     @endif
                                             </select>
@@ -119,7 +125,8 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
 
         $('#category_id').on('change',function(){
 
-            $('#brand_id').not(':first').empty();
+            $('#brand_id').empty();
+            $("#brand_id").select2("val", "");
 
             $.ajax({
                 type: "GET",
@@ -128,8 +135,10 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
                 data: { "category_id": $(this).val()},
                 success: function (data) {
 
+                    $('#brand_id').append('<option value="">-Select Brand-</option>');
+
                     if(data.error == 1){
-                        $('.alert-message').html(alertMsg(data.message));
+                      //  $('.alert-message').html(alertMsg(data.message));
                     }
                     else{
                         $(data.data).each(function (index, ele) {
@@ -144,7 +153,8 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
 
         $('#brand_id').on('change',function(){
 
-            $('#product_id').not(':first').remove();
+            $('#product_id').empty();
+            $("#product_id").select2("val", "");
 
             $.ajax({
                 type: "GET",
@@ -153,15 +163,23 @@ $selected_denomination = isset($product_info->denomination_id) ? $product_info->
                 data: {"vendor_id": $('#vendor_id').val(), "brand_id": $(this).val() },
                 success: function (data) {
 
+                    $('#product_id').append('<option value="">-Select Product-</option>');
+
                     if(data.error == 1){
-                        $('.alert-message').html(alertMsg(data.message));
+                       // $('.alert-message').html(alertMsg(data.message));
                     }
                     else{
 
                         $(data.data).each(function (index, ele) {
-                            $('#product_id').append('<option value="' + ele.denomination_id + '">' + ele.denomination_name + '</option>');
+
+                             if($('#vendor_id').val() == 'mint_route')
+                                    var product_name = ele.denomination_name;
+                                else
+                                 var product_name = ele.description;
+                                    $('#product_id').append('<option value="' + ele.denomination_id + '">' + product_name + '</option>');
 
                         });
+
                         $("#product_id").trigger("chosen:updated");
 
                     }

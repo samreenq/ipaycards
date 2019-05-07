@@ -19,14 +19,14 @@ use Carbon\Carbon;
 Class OrderHelper
 {
 
-    private $_SYSTableFlatModel = '';
+    private $_sysTableFlatModel = '';
 
     /**
      * ProductHelper constructor.
      */
     public function __construct()
     {
-        $this->_SYSTableFlatModel = new SYSTableFlat('order');
+        $this->_sysTableFlatModel = new SYSTableFlat('order');
         $this->_orderStatusModel = new SYSTableFlat('order_statuses');
     }
 
@@ -93,7 +93,7 @@ Class OrderHelper
      */
     public function getOrder($order_id)
     {
-        return $this->_SYSTableFlatModel->getColumnsByWhere('order_id',$order_id);
+        return $this->_sysTableFlatModel->getColumnsByWhere('order_id',$order_id);
     }
 
     /**
@@ -115,7 +115,7 @@ Class OrderHelper
     public function totalOrder($start_date,$end_date)
     {
         $where_condition = " created_at >= '$start_date' AND created_at <= '$end_date'";
-        $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) as total_count');
+        $return = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) as total_count');
         return $return->total_count;
     }
 
@@ -127,7 +127,7 @@ Class OrderHelper
     public function totalSale($start_date,$end_date)
     {
         $where_condition = " created_at >= '$start_date' AND created_at <= '$end_date'";
-        $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'SUM(grand_total) as total_sale');
+        $return = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'SUM(grand_total) as total_sale');
         return $return->total_sale;
     }
 
@@ -139,7 +139,7 @@ Class OrderHelper
     public function getRides($start_date,$end_date,$status = 993)
     {
         $where_condition = " created_at >= '$start_date' AND created_at <= '$end_date' AND order_status IN ($status) AND deleted_at IS NULL ";
-        $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(id) AS total_rides');
+        $return = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'COUNT(id) AS total_rides');
         return $return->total_rides;
     }
 
@@ -943,7 +943,7 @@ Class OrderHelper
 
         $where_condition .= " AND order_status IN (".$order_status.")";
 
-        $cancel_order_raw = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
+        $cancel_order_raw = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
        return isset($cancel_order_raw) ? $cancel_order_raw->total_order : 0;
 
     }
@@ -959,7 +959,7 @@ Class OrderHelper
     {
         $where_condition = $this->_entityWhereCondition($entity_type_identifier,$entity_id,$where_condition);
             //echo $where_condition;
-        $total_order_raw = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
+        $total_order_raw = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
         return isset($total_order_raw) ? $total_order_raw->total_order : 0;
 
     }
@@ -982,7 +982,7 @@ Class OrderHelper
         }
         $where_condition .= " AND order_status = ".$order_status;
 
-        $order_raw = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
+        $order_raw = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) AS total_order');
         return isset($order_raw->total_order) ? $order_raw->total_order : 0;
 
     }
@@ -1004,7 +1004,7 @@ Class OrderHelper
         }
         $where_condition .= " AND order_status = ".$order_status;
 
-        $order_raw = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'SUM(grand_total) AS total');
+        $order_raw = $this->_sysTableFlatModel->getColumnByWhere($where_condition,'SUM(grand_total) AS total');
         return isset($order_raw->total) ? $order_raw->total : 0;
 
     }
@@ -1176,7 +1176,7 @@ Class OrderHelper
         $total = 0;
         $where_condition = $this->_entityWhereCondition($entity_type_identifier,$entity_id,$where_condition);
         //echo $where_condition;
-        $orders = $this->_SYSTableFlatModel->getDataByWhere($where_condition,array('entity_id'));
+        $orders = $this->_sysTableFlatModel->getDataByWhere($where_condition,array('entity_id'));
 
 
        if($orders){

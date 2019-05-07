@@ -38,7 +38,7 @@ $fields = new $fields();
                                 }
 
                                 if (isset($records[0])) {
-                                 //  print_r($records); exit;
+                                   //print_r($records); exit;
                                 ?>
 
                                 <?php
@@ -226,6 +226,7 @@ $fields = new $fields();
             $(".is_featured_field").show();
            // $(".featured_type_field").hide();
             $(".is_gift_card_field").show();
+            $(".top_category_field").show();
 
 
            /* $('.gallery-wrap').show();
@@ -242,6 +243,7 @@ $fields = new $fields();
             $(".is_featured_field").hide();
            // $(".featured_type_field").show();
             $(".is_gift_card_field").hide();
+            $(".top_category_field").hide();
            /* $('.gallery-wrap').hide();
            $('.top-wrap').removeClass('col-md-8');
            $('.top-wrap').addClass('col-md-12');
@@ -261,32 +263,6 @@ $fields = new $fields();
         });--}}
 
 
-        if($('#is_featured').length > 0){
-
-
-            <?php // if(isset($update) && isset($update->is_featured)): ?>
-
-              {{--  var is_featured = "{!! $update->is_featured !!}";
-                    if(is_featured != 1){
-                        $('.featured_type_field').addClass('hide');
-
-                    }
-                    else{
-                        $('.featured_type_field').removeClass('hide');
-                    }--}}
-             <?php // endif; ?>
-
-               // $('.featured_type_field').addClass('hide');
-
-            /*$('#is_featured').on('change',function(){
-                if($('#is_featured').val() == 1){
-                    $('.featured_type_field').removeClass('hide');
-                }
-                else{
-                    $('.featured_type_field').addClass('hide');
-                }
-            });*/
-        }
 
     });
 </script> 

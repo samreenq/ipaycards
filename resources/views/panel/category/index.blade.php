@@ -253,6 +253,7 @@
             $(".parent_id_field").hide();
            $(".is_featured_field").show();
             $(".category_type_field").show();
+            $(".top_category_field").show();
           // $(".featured_type_field").hide();
 
      /*       $('.gallery-wrap').show();
@@ -266,6 +267,7 @@
             $(".parent_id_field").show();
             $(".is_featured_field").hide();
             $(".category_type_field").hide();
+            $(".top_category_field").hide();
 
           /*  $('.gallery-wrap').hide();
             $('.top-wrap').removeClass('col-md-8');
@@ -287,6 +289,7 @@
                 $(".is_featured_field").show();
                // $(".featured_type_field").hide();
                 $(".is_gift_card_field").show();
+                $(".top_category_field").show();
                // $(".category_type_field").show();
 
                /* $('.gallery-wrap').show();
@@ -300,6 +303,7 @@
                 $(".parent_id_field").show();
                 $(".is_featured_field").hide();
                 $(".is_gift_card_field").hide();
+                $(".top_category_field").hide();
                // $(".featured_type_field").show();
                // $(".category_type_field").hide();
 

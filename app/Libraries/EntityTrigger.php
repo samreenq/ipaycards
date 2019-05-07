@@ -1381,8 +1381,8 @@ Class EntityTrigger
 		$order_items = $response->order_item;
 		
 		if ( $vendor_stock_count == 0 ) {
-			$order_process_lib = new OrderProcess();
-			$order_process_lib->processInStockItem($entity_id, $order, $order_items);
+			$order_process_lib = new OrderSendCards();
+			$order_process_lib->processInStockItemOrder($entity_id, $order, $order_items);
 		}
 		
 	}
@@ -1399,6 +1399,24 @@ Class EntityTrigger
             $entity_lib = new Entity();
             $entity_lib->apiUpdate($params);
         }
+    }
+
+    /**
+     * check end date with start date
+     * @param $request
+     * @return mixed
+     */
+    public function PromotionDiscountVerifyTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $response['error'] = 0;
+
+        if(strtotime($request->start_date) > strtotime($request->end_date)){
+            $response['error'] = TRUE;
+            $response['message'] = trans('api_errors.end_must_greater_start_date');
+            return $response;
+        }
+
     }
 	
 }

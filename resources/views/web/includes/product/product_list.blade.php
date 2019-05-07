@@ -95,7 +95,7 @@
 								
 							@endif
 						<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code'];  ?>" >
-							<img class="lazyload img-responsive" src='<?php echo $image; ?>' class="img-responsive" width="268px" height="221px"/>
+							<img class="lazyload img-responsive" src='<?php echo $image; ?>' class="img-responsive" width="268px" height="180px"/>
 						</a>
 						<div class="product-detail" id="product-{!! $productItemsList['entity_id'] !!}">
 							<div class="addCartWrap">	
@@ -139,7 +139,7 @@
 									</div>
 								</div>
 							</div>
-							<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $productItemsList['attributes']['product_code'] !!}" class="perishable">{!! $productItemsList['attributes']['product_code'] !!}</a>
+							{{--<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $productItemsList['attributes']['product_code'] !!}" class="perishable">{!! $productItemsList['attributes']['product_code'] !!}</a>--}}
 							<h4>
 								<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code']; ?>" >
 								@if(isset($productItemsList["attributes"]['title'])) {{ $productItemsList["attributes"]['title'] }} @endif</a>
@@ -178,9 +178,11 @@
 														if(isset($productItemsList["attributes"]['promotion_discount_amount']))
 															$price = $productItemsList["attributes"]['promotion_discount_amount'];
 								?>
-														<p class="prise"><?php echo $currency; ?>  <?php if(isset($productItemsList["attributes"]['promotion_discount_amount'])) echo $productItemsList["attributes"]['promotion_discount_amount']; ?></p>
+														<p class="prise for_strike"><strike><?php echo $currency; ?>  <?php echo $productItemsList["attributes"]['price']; ?>  </strike></p>
 														<p class="prise">&nbsp;&nbsp;&nbsp;</p>
-														<p class="prise"><strike><?php echo $currency; ?>  <?php echo $productItemsList["attributes"]['price']; ?>  </strike></p>
+														<p class="prise"><?php echo $currency; ?>  <?php if(isset($productItemsList["attributes"]['promotion_discount_amount'])) echo $productItemsList["attributes"]['promotion_discount_amount']; ?></p>
+
+
 								<?php 		
 													}
 													else 
