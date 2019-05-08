@@ -140,9 +140,55 @@ class OnePrepay
 	 */
 	public function send(array $request = NULL)
 	{
-		// set params
-		$request['quantity'] = 1;
+		// validation
+		$validation = validator($request, [
+			'denomination_id' => 'required',
+			'account_no' => 'required|string|min:5',
+			'amount' => 'required|numeric|min:5'
+		]);
 		
+		if ( $validation->fails() ) {
+			throw new \Exception($validation->errors()->first());
+		} else {
+			
+			try {
+				
+				// pinless 1
+				try {
+					$response = $this->check($request);
+				} catch ( \Exception $e ) {
+					throw new \Exception($e->getMessage());
+				}
+				
+				// pinless 2
+				try {
+					// merge key
+					$request['request_key'] = $response['request_key'];
+					return $this->sendVerified($request);
+				} catch ( \Exception $e ) {
+					throw new \Exception($e->getMessage());
+				}
+				
+				
+			} catch ( \Exception $e ) {
+				
+				throw new \Exception($e->getMessage());
+			}
+			
+		}
+	}
+	
+	
+	/**
+	 * Check
+	 *
+	 * @param array|NULL $request
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function check(array $request = NULL)
+	{
 		// validation
 		$validation = validator($request, [
 			'denomination_id' => 'required',
@@ -194,6 +240,45 @@ class OnePrepay
 				if ( intval($response['StatusCode']) > 0 )
 					throw new \Exception($response['StatusDescription']);
 				
+				// set key
+				$response['request_key'] = $unique_key;
+				
+				return $response;
+				
+				
+			} catch ( \Exception $e ) {
+				
+				throw new \Exception($e->getMessage());
+			}
+			
+		}
+	}
+	
+	
+	/**
+	 * Send Verified
+	 *
+	 * @param array|NULL $request
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function sendVerified(array $request = NULL)
+	{
+		// validation
+		$validation = validator($request, [
+			'denomination_id' => 'required',
+			'account_no' => 'required|string|min:5',
+			'amount' => 'required|numeric|min:5',
+			'request_key' => 'required|string|min:5'
+		]);
+		
+		if ( $validation->fails() ) {
+			throw new \Exception($validation->errors()->first());
+		} else {
+			
+			try {
+				
 				/**
 				 * Pinless request 2
 				 */
@@ -207,8 +292,8 @@ class OnePrepay
 					<ProdCode>' . $request['denomination_id'] . '</ProdCode>
 					<Amount>' . $request['amount'] . '</Amount>
 					<AccountNo>' . $request['account_no'] . '</AccountNo>
-					<ReceiptNo>' . $unique_key . '</ReceiptNo>
-					<RefNo>' . $unique_key . '</RefNo>
+					<ReceiptNo>' . $request['request_key'] . '</ReceiptNo>
+					<RefNo>' . $request['request_key'] . '</RefNo>
 				</RequestXml>';
 				
 				// remove whitespaces between tags
