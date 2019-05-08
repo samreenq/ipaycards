@@ -46,6 +46,13 @@ return [
 		'port' => 2,
 		'sim_id' => '102762',
 		'pin_id' => '3152',
+		// recharge type
+		'recharge_type' => [
+			1, // more time
+			5, // more credit
+			8, // more international
+			9 // more data
+		]
 	],
 	
 	
@@ -55,6 +62,15 @@ return [
 	'STRIPE' => [
 		'pub_key' => 'pk_test_hfJNKIjr1S7rKdmI0YAYnrEL',
 		'secret_key' => 'sk_test_t9tYp8V52h1JOren3Ac09Ymd',
+	],
+	
+	/**
+	 * Authy Configurations
+	 */
+	'AUTHY' => [
+		'endpoint_url' => 'https://api.authy.com/protected/json/',
+		'app_id' => '172148',
+		'api_key' => 'faD8wtdn96oOF1X56A2IARLpQrl11tXt',
 	],
 
 ];

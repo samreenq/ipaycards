@@ -132,7 +132,8 @@ class Simbox
 		// validation
 		$validation = validator($request, [
 			'account_no' => 'required|string|min:5',
-			'amount' => 'required|numeric|min:5'
+			'amount' => 'required|numeric|min:5',
+			'type' => 'numeric|in:' . implode(config('service.SIMBOX.recharge_type'))
 		]);
 		
 		if ( $validation->fails() )
@@ -143,7 +144,8 @@ class Simbox
 			// allowed filters
 			$allowed_params = [
 				'account_no' => NULL,
-				'amount' => NULL
+				'amount' => NULL,
+				'type' => NULL
 			];
 			// find intersecting keys
 			$request = array_intersect_key($request, $allowed_params);
@@ -156,7 +158,7 @@ class Simbox
 				'text' => '*139*100'
 					. '*' . config('service.SIMBOX.sim_id')
 					. '*' . config('service.SIMBOX.pin_id')
-					. '*1' // (1:time, 5:credit)
+					. '*' . check_val($request['type'], 1) // more time
 					. '*' . $request['amount']
 					. '*' . $request['account_no']
 					. '*' . $request['account_no']

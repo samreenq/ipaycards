@@ -26,6 +26,8 @@ Route::group([
 	Route::get('topup/balance', 'TopupController@balance');
 	Route::get('topup/send', 'TopupController@send');
 	Route::get('topup/products', 'TopupController@products');
+	Route::get('topup/check', 'TopupController@check');
+	Route::get('topup/send_verified', 'TopupController@sendVerified');
 	
 	
 	/**
@@ -54,6 +56,13 @@ Route::group([
 	Route::post('payment/charge', 'PaymentController@postCharge');
 	Route::get('payment/charge', 'PaymentController@getCharge');
 	Route::post('payment/reserve', 'PaymentController@postReserve');
+	
+	
+	/**
+	 * OTP
+	 */
+	Route::post('otp/send', 'OTPController@send');
+	Route::get('otp/verify', 'OTPController@verify');
 	
 	
 });
