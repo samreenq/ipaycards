@@ -72,7 +72,8 @@ class FbAuth
 				//$appId = '547070199013117'; //Mehran Facebook App ID
 				//$appSecret = '85a38a289dd71be1d1213b5c7774848d'; //Mehran Facebook App Secret
 
-				$redirectURL = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; //Callback URL
+				$redirectURL = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; //Callback URL
+              //  $redirectURL = url('/');
 				$fbPermissions = array('email');  //Optional permissions
 
 				$fb = new Facebook(array(
@@ -112,8 +113,6 @@ class FbAuth
 				$_SESSION['loginurl'] = $loginURL;
 				if (isset($_SESSION['fbAccessToken']) && isset($_GET['code']))
 				{
-
-
 
 					if (isset($_SESSION['facebook_access_token'])) {
 						$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);

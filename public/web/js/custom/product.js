@@ -3909,7 +3909,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										$(".signinError").empty().append('Notification has been successfully send to your friend!');
                                         //$(".signinError").empty();
                                        // $(".signinError").removeClassesExceptThese(["signinError"]);
-                                       // $('#refer_email').val('');
+                                        $('#refer_email').val('');
                                         timeRefer = setInterval(function(){
                                             $('.referfriendmodal').modal('hide');
                                             clearInterval(timeRefer);

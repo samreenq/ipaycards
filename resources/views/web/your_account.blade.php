@@ -120,10 +120,10 @@
 							<?php 
 									}
 							?>
-							<div class="editSec">
-								<h4>Payment <a href="{{ route('payment') }}"><span class="icon-tt-edit-icon"></span></a></h4>
-								<p>You don't have a payment method yet.</p>
-							</div>
+							{{--<div class="editSec">--}}
+								{{--<h4>Payment <a href="{{ route('payment') }}"><span class="icon-tt-edit-icon"></span></a></h4>--}}
+								{{--<p>You don't have a payment method yet.</p>--}}
+							{{--</div>--}}
 
 
 							<!--
