@@ -64,8 +64,8 @@ class TopupController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->balance();
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -93,8 +93,8 @@ class TopupController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->send($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -123,8 +123,8 @@ class TopupController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->products($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -152,8 +152,8 @@ class TopupController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->check($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -182,8 +182,8 @@ class TopupController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->sendVerified($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -197,5 +197,268 @@ class TopupController extends Controller
 		return $this->_apiData;
 	}
 	
+	
+	/**
+	 * Mobile Topup
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function mobileTopup(Request $request)
+	{
+		// validation
+		$validation = validator($request->all(), [
+			'service_type' => 'required|in:du,etisalat',
+			'recharge_type' => 'required_if:service_type,du',
+			'customer_no' => 'required|numeric|min:5',
+			'amount' => 'required|numeric|min:5',
+		]);
+		
+		if ( $validation->fails() ) {
+			$this->_apiData['message'] = $validation->errors()->first();
+		} else {
+			
+			try {
+				
+				// load library
+				$simbox_lib = new Topup('simbox');
+				$one_prepay_lib = new Topup('one_prepay');
+				
+				// init vars
+				$params = $request->all();
+				$response = NULL;
+				
+				// get product denomination (product code for one_prepay)
+				$products = $one_prepay_lib->products([
+					'brand' => $params['service_type']
+				]);
+				$denomination = $products['denominations'][0]['denomination_id'];
+				
+				
+				// if request for du
+				if ( $params['service_type'] == 'du' ) {
+					
+					try {
+						// send
+						$response = $simbox_lib->send([
+							'account_no' => $params['customer_no'],
+							'type' => $params['recharge_type'],
+							'amount' => $params['amount']
+						]);
+						
+					} catch ( \Exception $e ) {
+						// if load credit, let it continue with one_prepay
+						if ( intval($params['recharge_type']) == 5 ) {
+							try {
+								// send
+								$response = $one_prepay_lib->send([
+									'account_no' => $params['customer_no'],
+									'amount' => $params['amount'],
+									'denomination_id' => $denomination
+								]);
+								
+							} catch ( \Exception $e ) {
+								// if load credit, let it continue to other API
+								throw new \Exception($e->getMessage());
+							}
+						} else
+							throw new \Exception($e->getMessage());
+						
+					}
+					
+				} else {
+					
+					try {
+						// send
+						$response = $one_prepay_lib->send([
+							'account_no' => $params['customer_no'],
+							'amount' => $params['amount'],
+							'denomination_id' => $denomination
+						]);
+						
+					} catch ( \Exception $e ) {
+						// if load credit, let it continue to other API
+						throw new \Exception($e->getMessage());
+					}
+					
+				}
+				
+				
+				// assign to output
+				$this->_apiData['data'] = $response;
+				$this->_apiData['response'] = "success";
+				$this->_apiData['error'] = 0;
+				
+				// message
+				$this->_apiData['message'] = trans('system.success');
+				
+				
+			} catch ( \Exception $e ) {
+				$this->_apiData['message'] = $e->getMessage();
+				$this->_apiData['trace'] = $e->getTraceAsString();
+			}
+			
+		}
+		
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Service Check
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function serviceCheck(Request $request)
+	{
+		// validation
+		$validation = validator($request->all(), [
+			'service_type' => 'required|in:fly_dubai,addc',
+			'customer_no' => 'required|numeric|min:5'
+		]);
+		
+		if ( $validation->fails() ) {
+			$this->_apiData['message'] = $validation->errors()->first();
+		} else {
+			
+			try {
+				
+				// load library
+				$one_prepay_lib = new Topup('one_prepay');
+				
+				// init vars
+				$params = $request->all();
+				$response = NULL;
+				
+				// get product denomination (product code for one_prepay)
+				$products = $one_prepay_lib->products([
+					'brand' => $params['service_type']
+				]);
+				$denomination = $products['denominations'][0]['denomination_id'];
+				
+				try {
+					// send
+					$response = $one_prepay_lib->check([
+						'account_no' => $params['customer_no'],
+						'amount' => 0,
+						'denomination_id' => $denomination
+					]);
+					
+				} catch ( \Exception $e ) {
+					// if load credit, let it continue to other API
+					throw new \Exception($e->getMessage());
+				}
+				
+				// merge params
+				if ( $params['service_type'] == 'addc' ) {
+					$response = array_merge($response, [
+						'amount' => $response['AdditionalInfo']['Item'][0],
+						'customer_name' => $response['AdditionalInfo']['Item'][1],
+						'info' => $response['ReceiptInfo']['QueryRes'],
+					]);
+				} else {
+					$response = array_merge($response, [
+						'amount' => $response['AdditionalInfo']['Item'][3],
+						'customer_name' => $response['AdditionalInfo']['Item'][0],
+						'info' => $response['ReceiptInfo']['QueryRes'],
+					]);
+				}
+				
+				
+				// assign to output
+				$this->_apiData['data'] = $response;
+				$this->_apiData['response'] = "success";
+				$this->_apiData['error'] = 0;
+				
+				// message
+				$this->_apiData['message'] = trans('system.success');
+				
+				
+			} catch ( \Exception $e ) {
+				$this->_apiData['message'] = $e->getMessage();
+				$this->_apiData['trace'] = $e->getTraceAsString();
+			}
+			
+		}
+		
+		
+		return $this->_apiData;
+	}
+	
+	
+	/**
+	 * Service Topup
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	public function serviceTopup(Request $request)
+	{
+		// validation
+		$validation = validator($request->all(), [
+			'service_type' => 'required|in:fly_dubai,addc',
+			'customer_no' => 'required|numeric|min:5',
+			'amount' => 'required|numeric|min:1',
+			'request_key' => 'required|string|min:5',
+		]);
+		
+		if ( $validation->fails() ) {
+			$this->_apiData['message'] = $validation->errors()->first();
+		} else {
+			
+			try {
+				
+				// load library
+				$one_prepay_lib = new Topup('one_prepay');
+				
+				// init vars
+				$params = $request->all();
+				$response = NULL;
+				
+				// get product denomination (product code for one_prepay)
+				$products = $one_prepay_lib->products([
+					'brand' => $params['service_type']
+				]);
+				$denomination = $products['denominations'][0]['denomination_id'];
+				
+				try {
+					// send
+					$response = $one_prepay_lib->sendVerified([
+						'account_no' => $params['customer_no'],
+						'amount' => $params['amount'],
+						'denomination_id' => $denomination,
+						'request_key' => $params['request_key'],
+					]);
+					
+				} catch ( \Exception $e ) {
+					// if load credit, let it continue to other API
+					throw new \Exception($e->getMessage());
+				}
+				
+				
+				// assign to output
+				$this->_apiData['data'] = $response;
+				$this->_apiData['response'] = "success";
+				$this->_apiData['error'] = 0;
+				
+				// message
+				$this->_apiData['message'] = trans('system.success');
+				
+				
+			} catch ( \Exception $e ) {
+				$this->_apiData['message'] = $e->getMessage();
+				$this->_apiData['trace'] = $e->getTraceAsString();
+			}
+			
+		}
+		
+		
+		return $this->_apiData;
+	}
 	
 }

@@ -28,6 +28,10 @@ Route::group([
 	Route::get('topup/products', 'TopupController@products');
 	Route::get('topup/check', 'TopupController@check');
 	Route::get('topup/send_verified', 'TopupController@sendVerified');
+	// customized for project
+	Route::post('topup/mobile_topup', 'TopupController@mobileTopup');
+	Route::post('topup/service_check', 'TopupController@serviceCheck');
+	Route::post('topup/service_topup', 'TopupController@serviceTopup');
 	
 	
 	/**

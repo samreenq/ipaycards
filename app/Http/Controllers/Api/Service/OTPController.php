@@ -64,8 +64,8 @@ class OTPController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->send($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -93,8 +93,8 @@ class OTPController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->verify($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
