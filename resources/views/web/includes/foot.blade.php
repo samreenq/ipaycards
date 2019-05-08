@@ -159,6 +159,7 @@
                 data:   {
                     _token: crsf_token,
                     platform: 	'facebook',
+                    cart_item    : localStorage.products,
                     data: response,
                 },
                 dataType: 'json',

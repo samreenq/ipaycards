@@ -21,8 +21,9 @@ Class OrderCart
         $this->_sysTableFlatModel = new SYSTableFlat('order_cart');
     }
 
-    public function getCart($customer_id,$guest_cart = false)
+    public function mergeWebCart($customer_id,$guest_cart = false)
     {
+
         try {
             $cart_products = [];
             $where_condition = ' customer_id = ' . $customer_id;
@@ -46,12 +47,20 @@ Class OrderCart
                     }
 
                     if($guest_cart){
+
                         foreach($guest_cart as $guest_item){
-                            if(!in_array($guest_item->product_id,$entity_ids)){
-                                $entity_ids[] = $guest_item->product_id;
-                                $cart_item_quantity[ $guest_item->product_id ] = $guest_item->quantity;
+
+                            $product_id = isset($guest_item->entity_id) ? $guest_item->entity_id : $item->entity_id;
+                            $quantity =  isset($guest_item->product_quantity) ? $guest_item->product_quantity : $item->product_quantity;
+
+                            if(!in_array($product_id,$entity_ids)){
+                                $entity_ids[] = $product_id;
                             }
+                            $cart_item_quantity[ $product_id ] = $quantity;
+                            unset($guest_item);
                         }
+
+                       // echo "<pre>"; print_r($cart_item_quantity); exit;
                     }
 
                     if (count($entity_ids) > 0) {
@@ -69,10 +78,10 @@ Class OrderCart
                         $products_response = $entity_model->apiList($params);
                         $products = json_decode(json_encode($products_response));
                         $cart_products = $this->_getUpdatedProducts($products, $cart_item_quantity);
-                      // echo "<pre>"; print_r( $cart_products);exit;
+
 
                         if($guest_cart){
-                            $this->saveCart($customer_id,$cart_products);
+                            $this->saveCart($customer_id,json_encode($cart_products));
                         }
                     }
                 }
@@ -173,8 +182,6 @@ Class OrderCart
                 $entity_lib = new Entity();
                 $response =   $entity_lib->apiUpdate($params);
 
-               // echo "<pre>"; print_r( $response);exit;
-
             }else{
                 $params = array(
                     'entity_type_id' => 54,
@@ -250,6 +257,80 @@ Class OrderCart
 
        // print_r($cart); exit;
         return $cart;
+
+    }
+
+    /**
+     * @param $customer_id
+     * @param bool $guest_cart
+     * @return mixed
+     */
+    public function mergeCart($customer_id,$guest_cart = false)
+    {
+        try {
+            $where_condition = ' customer_id = ' . $customer_id;
+            $order_cart_record = $this->_sysTableFlatModel->getDataByWhere($where_condition);
+
+
+            if ($order_cart_record) {
+
+                $order_cart = $order_cart_record[0];
+
+                if ($order_cart) {
+                    $cart_items = json_decode($order_cart->cart_item);
+
+                    $entity_ids = $cart_item_quantity  = [];
+
+                    if ($cart_items) {
+                        foreach ($cart_items as $item) {
+                            $entity_ids[] = $item->product_id;
+                            $cart_item_quantity[ $item->product_id ] = $item->quantity;
+                        }
+                    }
+
+                    if($guest_cart){
+
+                        foreach($guest_cart as $guest_item){
+
+                            $product_id = isset($guest_item->product_id) ? $guest_item->product_id : $item->product_id;
+                            $quantity =  isset($guest_item->quantity) ? $guest_item->quantity : $item->quantity;
+
+                            if(!in_array($product_id,$entity_ids)){
+                                $entity_ids[] = $product_id;
+                            }
+                            $cart_item_quantity[ $product_id ] = $quantity;
+                            unset($guest_item);
+                        }
+
+                    }
+
+                        $save_cart = [];
+                        if(count($cart_item_quantity) > 0 ){
+
+                            foreach($cart_item_quantity as $id => $cart_quantity){
+                                $save_cart[] = array(
+                                    'product_id' => $id,
+                                    'quantity' => $cart_quantity
+                                );
+                            }
+                            $this->saveCart($customer_id,json_encode($save_cart));
+                        }
+                        else{
+                            $this->saveCart($customer_id);
+                        }
+                    //echo "<pre>"; print_r($save_cart); exit;
+
+                }
+            }
+
+            $return['error'] = 0;
+            $return['message'] = 'success';
+            return $return;
+
+        } catch (\Exception $e) {
+            $return['error'] = 1;
+            $return['message'] = $e->getMessage();
+        }
 
     }
 

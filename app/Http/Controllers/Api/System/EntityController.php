@@ -1739,48 +1739,6 @@ class EntityController extends Controller
                     $this->_apiData['message'] = $return['message'];
                 }
                 else{
-
-                    //print_r($return['data']['order_cart']); exit;
-                   /* if(isset($return['data']['order_cart'][0]) && !empty($return['data']['order_cart'][0])){
-
-                       // echo "<pre>"; print_r($return['data']['order_cart'][0]); exit;
-                        $update_item = array();
-                        if(isset($return['data']['order_cart'][0]->cart_item)) {
-
-                            $cart_items = json_decode($return['data']['order_cart'][0]->cart_item);
-                            if ($cart_items) {
-
-                                $entity_lib = new Entity();
-
-                                foreach ($cart_items as $item) {
-
-                                    $params = [
-                                        'entity_type_id' => 14,
-                                        'entity_id' => $item->product_id,
-                                        'status' => 1,
-                                        'availability' => 1,
-                                        'mobile_json' => 1,
-                                    ];
-                                    // echo "<pre>"; print_r($params); exit;
-                                    $product_information = $entity_lib->apiGet($params);
-
-                                    if (isset($product_information['data']['product'])) {
-                                        $item->detail = $product_information['data']['product'];
-                                    } else {
-                                        $item->detail = new \StdClass();
-                                    }
-
-                                    if (isset($item->detail))
-                                        $update_item[] = $item;
-                                    unset($item);
-
-                                }
-
-                            }
-                        }
-
-                        $return['data']['order_cart'][0]->cart_item = $update_item;
-                    }*/
                     $order_cart_lib = new OrderCart();
                     $return = $order_cart_lib->getOrderCart($request->customer_id);
                     $this->_apiData['response'] = "success";

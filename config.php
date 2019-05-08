@@ -49,13 +49,13 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 
     define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
     define('MAIL_HOST', 'smtp.gmail.com');
-    define('MAIL_PORT', 465);
+    define('MAIL_PORT', 587);
     define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
     define('MAIL_PASSWORD', "smtp@123");
 }
 // Slave Database Constants
 define('SLAVE_DB_HOST', MASTER_DB_HOST);
-define('MYSQL_PORT', 3306);
+define('MYSQL_PORT', 3308);
 
 // Cache constants
 define('CACHE_ON', FALSE); // bool : TRUE = on | FALSE = off

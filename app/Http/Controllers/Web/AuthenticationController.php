@@ -141,7 +141,7 @@ class AuthenticationController extends WebController {
 
                 //Get customer cart
                 $order_cart_lib = new OrderCart();
-               return $order_cart_lib->getCart($json1['data']['entity_auth']['entity_id'],$cart_item);
+               return $order_cart_lib->mergeWebCart($json1['data']['entity_auth']['entity_id'],$cart_item);
 
             }
             else
@@ -498,6 +498,8 @@ class AuthenticationController extends WebController {
         if((isset($request->platform) && $request->platform == 'facebook')
             && isset($request->data['id'])) {
 
+            $cart_item = !empty($request->cart_item) ? json_decode($request->cart_item) : false;
+
             $user = (object)$request->data;
 
             $json = json_decode(
@@ -541,7 +543,7 @@ class AuthenticationController extends WebController {
 
                 //Get customer cart
                 $order_cart_lib = new OrderCart();
-                return $order_cart_lib->getCart($json_auth['data']['entity_auth']['entity_id']);
+                return $order_cart_lib->mergeWebCart($json_auth['data']['entity_auth']['entity_id'],$cart_item);
 
             }
             return $json_auth;

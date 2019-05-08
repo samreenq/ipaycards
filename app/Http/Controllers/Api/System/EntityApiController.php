@@ -13,6 +13,7 @@ use App\Libraries\Driver;
 use App\Libraries\EntityNotification;
 use App\Libraries\GeneralSetting;
 use App\Libraries\ItemLib;
+use App\Libraries\OrderCart;
 use App\Libraries\OrderHelper;
 use App\Libraries\OrderStatus;
 use App\Libraries\System\Entity;
@@ -294,5 +295,48 @@ Class EntityApiController extends Controller
 		return $this->__ApiResponse($request, $this->_apiData);
 		
 	}
-	
+
+    /**
+     * @param Request $request
+     * @return \App\Http\Controllers\Response
+     */
+
+    public function mergeCart(Request $request)
+    {
+        $this->_apiData['error'] = 0;
+        // validations
+        $validator = Validator::make($request->all(), array(
+            'customer_id' => 'required|integer|exists:customer_flat,entity_id,deleted_at,NULL',
+        ));
+
+
+        if ($validator->fails()) {
+            $this->_apiData['error'] = 1;
+            $this->_apiData['message'] = $validator->errors()->first();
+        } else {
+
+            $cart_item = $request->cart_item;
+            if(!empty($cart_item)){
+                $cart_item = is_array($cart_item) ? $cart_item : json_decode($cart_item);
+            }
+
+            $order_cart_lib = new OrderCart();
+            $return = $order_cart_lib->mergeCart($request->customer_id,$cart_item);
+
+            //print_r($return);
+            if($return['error'] == 1){
+                $this->_apiData['error'] = 1;
+                $this->_apiData['message'] = $return['message'];
+            }
+            else{
+                $this->_apiData['error'] = 0;
+                $this->_apiData['message'] = trans($this->_langIdentifier . ".success");
+
+                $return = $order_cart_lib->getOrderCart($request->customer_id);
+                $this->_apiData['data'] = $return['data'];
+            }
+        }
+
+        return $this->__ApiResponse($request, $this->_apiData);
+    }
 }
