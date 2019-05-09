@@ -26,6 +26,7 @@ class CardController extends Controller
 		// error response by default
 		$this->_apiData['kick_user'] = 0;
 		$this->_apiData['response'] = "error";
+		$this->_apiData['error'] = 0;
 		
 		// lib
 		try {
@@ -62,8 +63,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->categories();
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -90,8 +91,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->brands($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -119,8 +120,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->denominations($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -147,8 +148,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->balance();
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -176,8 +177,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->orders($request->all())->data;
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -204,8 +205,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->checkAvailability($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -232,8 +233,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->reserve($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -260,8 +261,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->purchase($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -288,8 +289,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postOrder($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -316,8 +317,8 @@ class CardController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->getOrder($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');

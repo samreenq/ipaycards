@@ -69,8 +69,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->balance();
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -98,8 +98,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postCustomer($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -128,8 +128,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->getCustomer($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -158,8 +158,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postCardToken($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -188,8 +188,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postBankToken($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -218,8 +218,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->getToken($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -248,8 +248,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postCharge($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -278,8 +278,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->postReserve($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');
@@ -308,8 +308,8 @@ class PaymentController extends Controller
 			// assign to output
 			$this->_apiData['data'] = $this->_pLib->getCharge($request->all());
 			
-			// success response
 			$this->_apiData['response'] = "success";
+			$this->_apiData['error'] = 0;
 			
 			// message
 			$this->_apiData['message'] = trans('system.success');

@@ -106,12 +106,19 @@ class OnePrepay
 		$pr_field = config('service.ONE_PREPAY.mode') == 'sandbox' ?
 			'vp.uat_product_code' : 'vp.live_product_code';
 		
-		$records = DB::table('vendor_products AS vp')
+		// prepare query
+		$query = DB::table('vendor_products AS vp')
 			->join('vendor_brands AS vb', 'vb.id', '=', 'vp.brand_id')
 			->where('vp.transaction_type', '=', 'pinless')
 			//->where('vp.brand_id', '=', $request['brand_id'])
-			->select('*', $pr_field . ' AS product_code')
-			->get();
+			->select('*', $pr_field . ' AS product_code');
+		
+		// if provided brand
+		if ( check_val($request['brand']) )
+			$query->where('vb.brand', strtolower($request['brand']));
+		
+		// get
+		$records = $query->get();
 		
 		// change keys
 		$records = change_keys(
@@ -193,7 +200,7 @@ class OnePrepay
 		$validation = validator($request, [
 			'denomination_id' => 'required',
 			'account_no' => 'required|string|min:5',
-			'amount' => 'required|numeric|min:5'
+			'amount' => 'required|numeric'
 		]);
 		
 		if ( $validation->fails() ) {

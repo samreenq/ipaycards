@@ -234,4 +234,48 @@ class OnePrepay
 	}
 	
 	
+	/**
+	 * Products
+	 *
+	 * @param array|NULL $request
+	 *
+	 * @throws \Exception
+	 */
+	public function products(array $request = NULL)
+	{
+		// product field
+		$pr_field = config('service.ONE_PREPAY.mode') == 'sandbox' ?
+			'vp.uat_product_code' : 'vp.live_product_code';
+		
+		// prepare query
+		$query = DB::table('vendor_products AS vp')
+			->join('vendor_brands AS vb', 'vb.id', '=', 'vp.brand_id')
+			->where('vp.transaction_type', '=', 'pin')
+			//->where('vp.brand_id', '=', $request['brand_id'])
+			->select('*', $pr_field . ' AS product_code');
+		
+		// if provided brand
+		if ( check_val($request['brand']) )
+			$query->where('vb.brand', strtolower($request['brand']));
+		
+		// get
+		$records = $query->get();
+		
+		// change keys
+		$records = change_keys(
+			[
+				'denominations' => json_decode(json_encode($records), TRUE)
+			],
+			[
+				//'id' => 'denomination_id',
+				'product_code' => 'denomination_id',
+				'value' => 'denomination_value'
+			]);
+		
+		return $records;
+		
+		
+	}
+	
+	
 }
