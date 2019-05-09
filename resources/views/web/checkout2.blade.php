@@ -50,8 +50,17 @@
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
 								
 								<form>
-
+									<div class="discount" ></div>
 									<div class="row">
+										<div class="col-md-10 cuspad" >
+											<div class="fluid-label">
+												<input type="text" id="coupon_code" name="coupon_code"  placeholder="Coupon Code" />
+												{{--  <label>Add Note*</label>--}}
+											</div>
+										</div>
+										<div class="col-md-2 cuspad" >
+											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+										</div>
 
 										<div class="col-md-12 cuspad recipient_email" style="display: none;">
 											<div class="fluid-label">
@@ -130,15 +139,15 @@
 								<h4>Summary</h4>
 								
 								<p>Organic Oroblanco Grapefruits are the off season citrus great for juicing.</p>
-								<form role="form">
+								<!--<form role="form">
 									<div class="fluid-label">
 									   <span class="icon-tt-cupon-icon"></span>
 									   <input id="coupon_code" type="text" placeholder="Coupon Code" />
 									   <label>Coupon Code</label>
 									</div>
 									<input style="cursor:pointer;" type="button" name="" value="Apply" class="calculateDiscount coupon-btn"/>
-								</form>
-								<div class="discount" ></div>
+								</form>-->
+
 								<div class="checkOrderTotal">
 									<table width="100%"> 
 									
@@ -203,6 +212,7 @@
 										$hash 				=	hash('sha512', $data );*/
 									?>
 									<form id="myform" name="myform" method="post" action="">
+										<input id="order_coupon_id" name="order_coupon_id" type="hidden" value="" />
 										<input id="entity_id" 			name="entity_id" type="hidden" value="" />
 										<input id="txn_ref" 			name="txn_ref" type="hidden" value="" />
 										<input id="product_id" 			name="product_id" type="hidden" value="" />

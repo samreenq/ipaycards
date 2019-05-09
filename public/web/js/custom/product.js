@@ -1150,9 +1150,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																		    $(".discount").toggleClass('alert alert-danger'); 
 																			
 																			$(".discount_amount").empty().append(data['currency']+" "+data['discount_amount']);
-																			$(".delivery_charge").empty().append(data['currency']+" "+data['delivery_charge']);
+																			//$(".delivery_charge").empty().append(data['currency']+" "+data['delivery_charge']);
 																			$(".customer_wallet").empty().append(data['currency']+" "+data['customer_wallet']); 	
-																			$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points"); 		
+																			//$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points");
 																			$(".paid_amount").empty().append(data['currency']+" "+data['paid_amount']);
 																	}
 																});

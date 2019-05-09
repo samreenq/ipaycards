@@ -136,7 +136,7 @@ class OrderController extends WebController {
 			
 			/*-------------------------------- coupon verification from Database --------------------- */
 
-			
+
 			if($coupon_code>0) {
 
                 $coupon_flat = new SYSTableFlat('coupon');
@@ -453,7 +453,7 @@ class OrderController extends WebController {
 			$data['mobile_json']			=		1;
 			//$data['entity_type_id']         = 50;
 
-           // echo "<pre>"; print_r( $data);exit;
+       //   echo "<pre>"; print_r( $data);exit;
 
            $lead_params = [
                 'entity_type_id' 		 => 50,
@@ -688,6 +688,7 @@ class OrderController extends WebController {
                     $data['order_status'] = 'pending';
                     $data['payment_method_type'] = "cod";
                     $data['login_entity_id'] = $this->_customerId;
+                   // $data['order_coupon_id'] = $request->input('order_coupon_id',0);
                     $data['hook'] = 'order_item';
                   // echo "<pre>";print_r($data); exit;
 
