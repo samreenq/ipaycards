@@ -2756,11 +2756,13 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										$(".customer_wallet").empty().append(data['currency']+' '+data['customer_wallet']); 	
 										$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points"); 		
 										$(".paid_amount").empty().append(data['currency']+' '+data['paid_amount']);
+
+                                        $("#paid_amount").val(data['paid_amount']);
 										
 										if(data['paid_amount']==0)
 										{
 											$(".cash").css({ 'display': "none" });
-											$(".webpay").css({ 'display': "none" });
+											//$(".webpay").css({ 'display': "none" });
 										}
 									
 									}

@@ -94,11 +94,11 @@
 							<div class="collapse" id="paymentinfo">
 								<div class="paymentInfoForm">
 									<div class="payment-method">
-										
-										
+
+										<input type="hidden" name="paid_amount" id="paid_amount" value="" />
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
-											<input type="radio" name="payment_method" id="crypto-currency" value="stripe" >
+										<input type="hidden" name="payment_method"  id="payment_method" value="stripe" >
 											<label for="crypto-currency">
 												Stripe
 											</label>
@@ -106,14 +106,14 @@
 										</div>
 										
 										
-										<div class="big-radio wallet cryptoCurrencyWrap noselect">
+										<!--<div class="big-radio wallet cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
 											<input type="radio" name="payment_method" id="credit-card" value="wallet" >
 											<label for="credit-card">
 												iPay Wallet
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-										</div>
+										</div> -->
 										
 										
 										<!--<div class="big-radio cash CashDeliveryWrap noselect">
@@ -149,6 +149,7 @@
 								</form>-->
 
 								<div class="checkOrderTotal">
+
 									<table width="100%"> 
 									
 									
@@ -390,6 +391,18 @@
 		  
 		  $('.add-to-cart').on('click',function(){
 
+              console.log($('#paid_amount').val() );
+
+              if($('#paid_amount').val() == 0){
+                  $("input[name='payment_method']").val('cod');
+                  $('#myform').attr('action', "confirmation");
+              }else{
+                  $("input[name='payment_method']").val('stripe');
+                  $('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
+              }
+              console.log($("input[name='payment_method']").val());
+
+
 		      if($('#myform').attr('action') == '' || $('#myform').attr('action') == undefined){
                 //  $('.add-to-cart').attr('disabled','disabled');
                   $('.error-message').html('');
@@ -526,15 +539,15 @@
 						var payment_method = $("input[name='payment_method']:checked").val();
 						
 						console.log(payment_method);
-						if(payment_method=="webpay")
+						/*if(payment_method=="webpay")
 							$('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
 						
 						if(payment_method=="wallet")
 							$('#myform').attr('action', "confirmation");
 						
 						if(payment_method=="cod")
-							$('#myform').attr('action', "confirmation");
-						
+							$('#myform').attr('action', "confirmation");*/
+
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
 					//	$('.add-to-cart').css('background-color','#139CB4');
 					});
