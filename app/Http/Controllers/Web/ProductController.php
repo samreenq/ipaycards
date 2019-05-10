@@ -1189,7 +1189,7 @@ class ProductController extends WebController
     {
         $data = array("entity_type_id"=>'brand',
             'status' => 1,
-            'limit'=>4);
+            'limit'=>10);
 
         $data['product_detail_url'] = '';
         //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));

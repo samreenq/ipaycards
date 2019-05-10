@@ -309,7 +309,7 @@ Class OrderProcess
         }
 
 
-        if($request->status_keyword == 'completed'){
+        if($request->status_keyword == 'delivered'){
             $post_arr['delivery_date'] = date('Y-m-d H:i:s');
 
             if(isset($request->transaction_id) && !empty($request->transaction_id))
