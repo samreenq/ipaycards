@@ -58,7 +58,7 @@
 						<aside>
 							<ul class="sidebar__inner">
 								<li><a href="{{ route('account_detail') }}">Your Account</a></li>
-								<li><a href="{{ route('payment') }}">Payment</a></li>
+								<!--<li><a href="{{ route('payment') }}">Payment</a></li> -->
 								<li ><a href="{{ route('order_history') }}">Order History</a></li>
 							{{--	<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
 								<li class="active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>

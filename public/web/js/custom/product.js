@@ -3700,8 +3700,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 
 			$( "#save_your_account" ).click(function() 
 			{
-				if($("#term_and_condition").prop('checked') == true)
-				{
+			//	if($("#term_and_condition").prop('checked') == true)
+			//	{
 				
 					$.ajax ({		
 							url: changeYourAccountDetailUrl,
@@ -3744,16 +3744,16 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 							}
 						});
 						
-				}
-				else
-				{
+				//}
+				//else
+				//{
                    // showAlert('Please agree with terms and conditions!');
-					$("#account_response").addClass('alert alert-danger');
+					//$("#account_response").addClass('alert alert-danger');
 			/*		$("#account_response").css("color", "red");
 					$("#account_response").css("background-color",'#f8d7da');
 					$("#account_response").css("border-color",'#f5c6cb');*/
-					$("#account_response").empty().append('Please agree with terms and conditions!');
-				}
+					//$("#account_response").empty().append('Please agree with terms and conditions!');
+				//}
 				
 			});
 	}
