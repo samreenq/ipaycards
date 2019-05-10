@@ -122,6 +122,8 @@ Class EmailLib {
             $gift_content .= '<br>'.$order->recipient_message.'<br>';
         }
 
+        $gift_content .= "<br>The ordered items are following.";
+
         $email_content = $gift_content.$email_content;
 
         $data->created_at = date('Y-m-d H:i:s');
