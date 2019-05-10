@@ -728,7 +728,7 @@ class AccountController extends WebController {
                     true
                 );
             }
-            echo "<pre>"; print_r($json); exit;
+            //echo "<pre>"; print_r($json); exit;
             $data = [];
             $data['customer'] = isset($json['data']['customer']) ? $json['data']['customer'] : null;
             $data['error'] 	  = isset($json['error']) ? $json['error'] : null;

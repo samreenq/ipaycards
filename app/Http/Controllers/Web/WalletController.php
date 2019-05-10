@@ -27,6 +27,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Models\Custom\OrderItemFlat;
 use App\Http\Models\SYSEntity;
+use App\Http\Models\SYSTableFlat;
 use App\Http\Models\Web\WebEntity;
 
 use App\Http\Controllers\Controller;
@@ -125,7 +126,12 @@ class WalletController extends WebController
 
 			$customer_balance =  $this->_customer_wallet->getCurrentBalance($this->_customerId);
             $customer_balance = $general_setting->getPrettyPrice($customer_balance);
-			return View::make('web/wallet',['customer_balance' 	=> 	$customer_balance]);
+
+            $flat_table = new SYSTableFlat('customer');
+            $customer_raw = $flat_table->getDataByWhere(' entity_id = '.$this->_customerId,array('default_wallet_payment'));
+
+            $default_wallet_payment = isset($customer_raw[0]->default_wallet_payment) ? $customer_raw[0]->default_wallet_payment : 2;
+            return View::make('web/wallet',['customer_balance' 	=> 	$customer_balance,'default_wallet_payment' => $default_wallet_payment]);
 		}
 	}
 	
@@ -184,15 +190,20 @@ class WalletController extends WebController
 
             $general_setting = new GeneralSetting();
             $customer_balance = $general_setting->getPrettyPrice($customer_balance);
-		
+
+            $flat_table = new SYSTableFlat('customer');
+           $customer_raw = $flat_table->getDataByWhere(' entity_id = '.$this->_customerId,array('default_wallet_payment'));
+
 			$data = [		
 						'customer_wallet'	=>	$customer_wallet,
-						'customer_balance' 	=> 	$customer_balance 
+						'customer_balance' 	=> 	$customer_balance,
+                        'default_wallet_payment' => isset($customer_raw[0]->default_wallet_payment) ? $customer_raw[0]->default_wallet_payment : 2
 					]; 
 					
 			$data1['wallet'] = View::make('web/includes/account/wallet_history_detail', $data)->__toString();
 			$data1['items'] = isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/10) : null;
             $data1['customer_balance'] = $customer_balance;
+            $data1['default_wallet_payment'] = isset($customer_raw[0]->default_wallet_payment) ? $customer_raw[0]->default_wallet_payment : 2;
 				
 			return $data1;
 		}

@@ -130,13 +130,14 @@
 							</div>
 
 							<div class="payment-method">
+								<div id="error_msg_change_payment_method"></div>
 								<div class="">
 									Default Payment via Wallet
-									<input type="radio" name="default_wallet_payment"  id="default_wallet_payment_yes" value="1" >
+									<input type="radio" <?php if($default_wallet_payment == 1){ ?>checked <?php } ?> name="default_wallet_payment"  id="default_wallet_payment_yes" value="1" >
 									<label for="default_wallet_payment_yes">
 										Yes
 									</label>
-									<input type="radio" name="default_wallet_payment"  id="default_wallet_payment_no" value="2" >
+									<input type="radio"  <?php if($default_wallet_payment == 2){ ?>checked <?php } ?> name="default_wallet_payment"  id="default_wallet_payment_no" value="2" >
 									<label for="default_wallet_payment_no">
 										No
 									</label>
@@ -393,7 +394,7 @@
                             {
 
                                 $("#error_msg_change_payment_method").addClass('alert alert-success');
-                                $("#error_msg_change_payment_method").empty().append('Payment method has been updated successfully!');
+                                $("#error_msg_change_payment_method").empty().append('Default Payment via wallet has been updated successfully!');
 
 
                             }
