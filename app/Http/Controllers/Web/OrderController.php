@@ -38,11 +38,22 @@ class OrderController extends WebController {
 	{// echo '<pre>'; print_r($request->all()); exit;
 
         if(isset($request->is_gift_card)){
-            if($request->is_gift_card == 1 && $request->recipient_email == ''){
-                return array(
-                    'error' => 1,
-                    'message' => 'Recipient email is required'
-                );
+            if($request->is_gift_card == 1){
+
+                if($request->recipient_name == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient Name is required'
+                    );
+                }
+
+                if($request->recipient_email == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient Email is required'
+                    );
+                }
+
             }
         }
 
@@ -440,7 +451,9 @@ class OrderController extends WebController {
 			$data['subtotal_with_discount'] =		"$subtotal_with_discount";
 			$data['grand_total'] 			=		"$grand_total";
 			$data['paid_amount']			= 		"$paid_amount";
+            $data['recipient_name']			    = 	"$request->recipient_name";
             $data['recipient_email']			= 	"$request->recipient_email";
+            $data['recipient_message']			= 	"$request->recipient_message";
 
 			//$data['commission_for_rider']	=		"$commission_for_rider";
 			//$data['items_qty']				=		"$items_qty";

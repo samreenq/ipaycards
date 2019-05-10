@@ -65,7 +65,7 @@ Class EmailLib {
 
         // echo $email_content;
         # body
-         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
+         echo $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
@@ -97,10 +97,32 @@ Class EmailLib {
 
         if(!isset($data->entity_auth_id)){
             $data = new \StdClass();
-            $data->name = 'User';
+            $data->name = $order->recipient_name;
             $data->email = $order->recipient_email;
         }
 
+
+        if(isset($order->customer_id->detail->auth)){
+            $customer_auth = $order->customer_id->detail->auth;
+        }
+        else{
+            $sys_entity = new SYSEntity();
+            $customer = $sys_entity->getData($order->customer_id->id,array('mobile_json'=>1));
+            $customer_auth = $customer->auth;
+            // echo "<pre>"; print_r($customer); exit;
+        }
+
+
+        $data->name = $order->recipient_name;
+        $data->email = $order->recipient_email;
+
+        $gift_content = $customer_auth->name.' has sent you gift card with message';
+
+        if($order->recipient_message != ''){
+            $gift_content .= '<br>'.$order->recipient_message.'<br>';
+        }
+
+        $email_content = $gift_content.$email_content;
 
         $data->created_at = date('Y-m-d H:i:s');
 
@@ -132,7 +154,7 @@ Class EmailLib {
 
         // echo $email_content;
         # body
-         $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
+        echo $body = str_replace($wildcard['key'], $wildcard['replace'], $email_template->body);
 
         # subject
         $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);

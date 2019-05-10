@@ -62,12 +62,25 @@
 											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 
-										<div class="col-md-12 cuspad recipient_email" style="display: none;">
+                                        <div class="col-md-6 cuspad recipient" style="display: none;">
+                                            <div class="fluid-label">
+                                                <input type="text" id="recipient_name" name="recipient_name"  placeholder="Recipient Name" />
+                                                {{--  <label>Add Note*</label>--}}
+                                            </div>
+                                        </div>
+										<div class="col-md-6 cuspad recipient" style="display: none;">
 											<div class="fluid-label">
 												<input type="text" id="recipient_email" name="recipient_email"  placeholder="Recipient Email" />
 												{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
+
+                                        <div class="col-md-12 cuspad recipient" style="display: none;">
+                                            <div class="fluid-label">
+                                                <textarea id="recipient_message" name="recipient_message" required="required" placeholder="Recipient Message*"></textarea>
+                                                {{--  <label>Add Note*</label>--}}
+                                            </div>
+                                        </div>
 
 										<div class="col-md-12 cuspad">
 											<div class="fluid-label">
@@ -364,7 +377,7 @@
             console.log(localStorage.is_gift_card);
 
             if(localStorage.is_gift_card == 1){
-                $('.recipient_email').show();
+                $('.recipient').show();
 			}
         });
 				
