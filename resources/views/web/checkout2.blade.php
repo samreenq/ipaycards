@@ -427,8 +427,8 @@
                   }
 
 
-						  console.log($('input[name="payment_method"]:checked').val());
-						  if($('input[name="payment_method"]:checked').val() != 'stripe'){
+						  console.log($('input[name="payment_method"]').val());
+						  if($('input[name="payment_method"]').val() != 'stripe'){
 
                               $('.add-to-cart').attr('disabled','disabled');
                               $.ajax ({
