@@ -29,6 +29,7 @@
 	@endsection	
 	
 	@section("order_history")
+
 		
 		<section class="dashboard-Section lightgreybg">
 			<div class="flyout-overlay"></div>
@@ -89,6 +90,7 @@
 						</aside>
 					</div>
 
+
 					<div class="col-md-12 col-lg-9 col-xl-10">
 						<div class="refund">
 							<div class="d-sm-flex align-items-center dashboard-header">
@@ -126,8 +128,24 @@
 									<ul class="pagination cusPagination float-right" id="pagination"></ul>
 								</nav>
 							</div>
+
+							<div class="payment-method">
+								<div class="">
+									Default Payment via Wallet
+									<input type="radio" name="default_wallet_payment"  id="default_wallet_payment_yes" value="1" >
+									<label for="default_wallet_payment_yes">
+										Yes
+									</label>
+									<input type="radio" name="default_wallet_payment"  id="default_wallet_payment_no" value="2" >
+									<label for="default_wallet_payment_no">
+										No
+									</label>
+								</div>
+							</div>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</section>
@@ -351,6 +369,37 @@
 				});
 				
 				// Wizard Form
+
+				$('input[name="default_wallet_payment"]').on('click',function(){
+
+				    //console.log($(this).val());
+                    $.ajax ({
+                        url: "{{ route('wallet_default') }}",
+                        data:
+                            {
+                                default_wallet_payment	: $(this).val()
+                            },
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(data)
+                        {
+                            if(	data['error'] == 1 )
+                            {
+                                $("#error_msg_change_payment_method").addClass('alert alert-danger');
+                                $("#error_msg_change_payment_method").empty().append(data['message']);
+
+                            }
+                            if(	data['error'] == 0 )
+                            {
+
+                                $("#error_msg_change_payment_method").addClass('alert alert-success');
+                                $("#error_msg_change_payment_method").empty().append('Payment method has been updated successfully!');
+
+
+                            }
+                        }
+                    });
+				});
 				
 			});
 			
@@ -464,7 +513,9 @@
 					var collection = current_url[1];
 					collection = collection.replace('_',' ');
 					$('.dropdownActivePage').html(collection);
-				} 
+				}
+
+
 			
 		</script>
 	@endsection
