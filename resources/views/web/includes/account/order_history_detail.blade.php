@@ -32,7 +32,7 @@
 						<?php if(isset($orderAttributes['reviews']) && !empty($orderAttributes['reviews'])){ ?>
 								<a href="#"  data-toggle="modal"  data-target=".orderReviewmodel" class="review reviewMore">Reviewed</a>
                             <?php }else{ ?>
-                            <?php if(isset($orderAttributes['order_status']['detail']['keyword']) && trim($orderAttributes['order_status']['detail']['keyword']) == 'delivered_approved' ){ ?>
+                            <?php if(isset($orderAttributes['order_status']['detail']['keyword']) && trim($orderAttributes['order_status']['detail']['keyword']) == 'delivered' ){ ?>
 							<a href="#" class="review reviewMore">Write a review</a>
 						<?php }  }?>
 						</td>

@@ -196,13 +196,9 @@ class AccountController extends WebController {
 		else 
 		{
 			$json = json_decode(
-						json_encode(
-							CustomHelper::internalCall(
-								$request,
-								'api/system/entities/', 
-								'GET', 
+						json_encode(  $this->_object_library_entity->apiGet(
 								[
-									'entity_type_id'	=>	15,
+									'entity_type_id'	=>	'order',
 									'mobile_json'		=>	1,
 									'hook'				=>	'order_item',
 									'entity_id'			=>	$request->input('entity_id')
@@ -251,12 +247,13 @@ class AccountController extends WebController {
 			$limit =  $request->input('limit');
 
 						$tmp = [
-											'entity_type_id'	=> 15,
+											'entity_type_id'	=> 'order',
 											'customer_id'		=> $this->_customerId,
 											'offset'			=> $request->input('offset'),
 											'limit'				=> $limit,
 											'entity_id'			=> '',
-											'mobile_json'		=> 1
+											'mobile_json'		=> 1,
+                                            'in_detail'         => 1
 										];
 
 				$json = json_decode(
@@ -271,8 +268,8 @@ class AccountController extends WebController {
 
 
             $data['order'] = isset($json['data']['order'])? $json['data']['order'] : null;
-					
-					
+
+          //  echo "<pre>"; print_r($data); exit;
 				$data1['order'] = View::make('web/includes/account/order_history_detail',$data)->__toString();
 				$data1['items'] = isset($json['data']['page']['total_records'])
                                     ?

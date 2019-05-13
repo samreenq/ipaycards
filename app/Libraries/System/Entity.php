@@ -364,9 +364,14 @@ Class Entity extends Base
 
                                    }else{
                                        //otherwise get from attribute options
-                                       foreach (explode(",", $field_action->json_data) as $tempList) {
-                                           $temp[] = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $tempList);
+                                       if($field_action->json_data != ''){
+                                           foreach (explode(",", $field_action->json_data) as $tempList) {
+                                               $temp[] = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $tempList);
+                                           }
+                                       }else{
+                                           $temp[] = [];
                                        }
+
                                    }
 
 
@@ -378,9 +383,15 @@ Class Entity extends Base
                                 } else if ($field_action->data_type_id == '6' || $field_action->data_type_id == '11' || $field_action->data_type_id == '4' || $field_action->data_type_id == '12') {
 
                                     if (!$is_mobile_request)
-                                        $data->attributes[ $field_action->name ] = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $field_action->attribute);
+                                        if($field_action->attribute != '')
+                                            $data->attributes[ $field_action->name ] = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $field_action->attribute);
+                                        else
+                                            $data->{$field_action->name} = [];
                                     else
-                                        $data->{$field_action->name} = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $field_action->attribute);
+                                        if($field_action->attribute != '')
+                                            $data->{$field_action->name} = $this->_attributeOptionModel->getAttributeById($field_action->attribute_id, $field_action->attribute);
+                                        else
+                                            $data->{$field_action->name} = [];
                                 } else {
                                     if (!$is_mobile_request)
                                         $data->attributes[ $field_action->name ] = $field_action->attribute;
