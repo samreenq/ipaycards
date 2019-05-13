@@ -403,7 +403,7 @@ Class EntityHelper
 
         }
         else{
-            return false;
+            return '';
         }
     }
 
