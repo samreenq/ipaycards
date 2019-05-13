@@ -175,7 +175,7 @@ class WalletController extends WebController
                                             'sorting' => 'DESC',
                                             'customer_id' => $this->_customerId,
                                            // 'in_detail' => 0,
-                                            'mobile_json' => 1
+                                         //   'mobile_json' => 1
 										]
 									)
 								),
@@ -183,7 +183,7 @@ class WalletController extends WebController
 							);
            // echo "<pre>"; print_r( $json);exit;
 
-            $customer_wallet  = isset($json['data']['wallet_transaction']) ? $json['data']['wallet_transaction'] : array() ;
+            $customer_wallet  = isset($json['data']['entity_listing']) ? $json['data']['entity_listing'] : array() ;
 
 
 			$customer_balance =  $this->_customer_wallet->getCurrentBalance($this->_customerId);

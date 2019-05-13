@@ -252,7 +252,7 @@ class AccountController extends WebController {
 											'offset'			=> $request->input('offset'),
 											'limit'				=> $limit,
 											'entity_id'			=> '',
-											'mobile_json'		=> 1,
+											//'mobile_json'		=> 1,
                                             'in_detail'         => 1
 										];
 
@@ -267,7 +267,7 @@ class AccountController extends WebController {
 							);
 
 
-            $data['order'] = isset($json['data']['order'])? $json['data']['order'] : null;
+            $data['order'] = isset($json['data']['entity_listing'])? $json['data']['entity_listing'] : null;
 
           //  echo "<pre>"; print_r($data); exit;
 				$data1['order'] = View::make('web/includes/account/order_history_detail',$data)->__toString();
