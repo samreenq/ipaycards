@@ -48,7 +48,7 @@ class Authy
 	{
 		// validation
 		$validation = validator($request, [
-			'country_code' => 'required|min:1|max:2',
+			'country_code' => 'required|min:1|max:3',
 			'phone_number' => 'required|string|min:7|max:11',
 		]);
 		
@@ -113,7 +113,7 @@ class Authy
 	{
 		// validation
 		$validation = validator($request, [
-			'country_code' => 'required|min:1|max:2',
+			'country_code' => 'required|min:1|max:3',
 			'phone_number' => 'required|string|min:7|max:11',
 			'verification_code' => 'required|string|min:4|max:12',
 		]);

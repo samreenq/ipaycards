@@ -26,6 +26,7 @@ class OTPController extends Controller
 		// error response by default
 		$this->_apiData['kick_user'] = 0;
 		$this->_apiData['response'] = "error";
+		$this->_apiData['error'] = 1;
 		
 		// lib
 		try {
