@@ -32,11 +32,7 @@
 											<p>Rider Id: -</p>
 											<p>Rider Name: -</p>
 									</div>--}}
-									<div class="odcont col-sm-6 col-md-6 col-lg-3">
-											<h4>Delivery Address</h4>
-											<p><?php if(isset($order_detail['shipping_address']['detail']['first_name'])) echo $order_detail['shipping_address']['detail']['first_name']; ?> </p>
-											<p><?php if(isset($order_detail['shipping_address']['detail']['street'])) echo $order_detail['shipping_address']['detail']['street']; ?></p>
-									</div>
+
 									<div class="odcont col-sm-6 col-md-6 col-lg-3">
 											<h4>Payment</h4>
 											<p><?php if(isset($order_detail['payment_method_type']['option'])) echo $order_detail['payment_method_type']['option']; ?></p>
@@ -45,9 +41,8 @@
 									</div>
 									<div class="odcont col-sm-6 col-md-6 col-lg-3">
 											<h4>Time and Date</h4>
-											<p>Delivery Date: <?php if(isset($order_detail['user_delivery_date'])) echo date("M d, Y",strtotime($order_detail['user_delivery_date'])); ?></p>
-											<p>Delivery Time:<?php if(isset($order_detail['user_delivery_time'])) echo date("g:i A",strtotime($order_detail['user_delivery_time'])); ?><?php if(isset($order_detail['user_delivery_time_end']) && $order_detail['user_delivery_time_end'] != '') echo ' - '.date("g:i A",strtotime($order_detail['user_delivery_time_end'])); ?></p>
-										
+											<p><?php if(isset($order_detail['delivery_date']) && !empty($order_detail['delivery_date'])) echo date("M d, Y",strtotime($order_detail['delivery_date'])); ?></p>
+
 									</div>
 								</div>
 						</div>

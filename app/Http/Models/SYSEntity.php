@@ -1370,7 +1370,7 @@ class SYSEntity extends Base
                 }
 
             }else{
-                $search_columns['limit'] = $limit;
+                $search_columns['limit'] = 4;
                 $search_columns['mobile_json'] = 1;
                 $search_columns['inner_response'] = 1;
                 $entity_lib = new Entity();

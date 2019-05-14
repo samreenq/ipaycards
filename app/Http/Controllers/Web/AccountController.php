@@ -683,5 +683,59 @@ class AccountController extends WebController {
     {
         return View::make('web/order_history');
     }
+
+    /**
+     * Change the Payment Method of Customer using internal call ( API )
+     *
+     * @param Request $request the string to get the data from GET and POST Method
+     * @return the $data which has updated Payment Method of Customer
+     * @access public
+     *
+     */
+    public function updateWalletDefault(Request $request)
+    {
+        $validator =Validator::make(
+            $request->all(),
+            [
+                'default_wallet_payment'	=>	'required'
+            ]
+        );
+        if($validator->fails())
+        {
+            return trans('web.productError');
+        }
+        else
+        {
+            $default_wallet_payment  	= $request->input('default_wallet_payment');
+
+            $customer_id  =   $this->_customerId;
+
+            if($customer_id){
+                $json=  json_decode(
+                    json_encode(
+                        $this->_object_library_entity->apiUpdate(
+                            [
+                                'entity_id'				=>	$customer_id,
+                                'entity_type_id'		=>	11,
+                                'default_wallet_payment'	=>	$default_wallet_payment,
+                                'mobile_json'			=>	1,
+                                'login_entity_id'   => $customer_id,
+
+                            ],
+                            true
+                        )
+                    ),
+                    true
+                );
+            }
+            //echo "<pre>"; print_r($json); exit;
+            $data = [];
+            $data['customer'] = isset($json['data']['customer']) ? $json['data']['customer'] : null;
+            $data['error'] 	  = isset($json['error']) ? $json['error'] : null;
+            $data['message']  = isset($json['message']) ?  $json['message'] : null ;
+
+            return $data;
+        }
+    }
 	
 }

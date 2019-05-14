@@ -1,4 +1,3 @@
-
 <?php
         if(isset($is_update_order)){
             if(isset($data['order'])){
@@ -7,7 +6,7 @@
             }
         }
 
-    $discount = (isset($order->discount) && $order->discount > 0) ? $order->discount : "0.00";
+    $discount = (isset($order->discount_amount) && $order->discount_amount > 0) ? $order->discount_amount : "0.00";
     //$estimated_minutes = isset($order->estimated_minutes) ? $order->estimated_minutes : "";
 
     $subtotal = isset($order->subtotal) ? $order->subtotal : 0;

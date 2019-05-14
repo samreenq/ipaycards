@@ -38,11 +38,22 @@ class OrderController extends WebController {
 	{// echo '<pre>'; print_r($request->all()); exit;
 
         if(isset($request->is_gift_card)){
-            if($request->is_gift_card == 1 && $request->recipient_email == ''){
-                return array(
-                    'error' => 1,
-                    'message' => 'Recipient email is required'
-                );
+            if($request->is_gift_card == 1){
+
+                if($request->recipient_name == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient Name is required'
+                    );
+                }
+
+                if($request->recipient_email == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient Email is required'
+                    );
+                }
+
             }
         }
 
@@ -136,7 +147,7 @@ class OrderController extends WebController {
 			
 			/*-------------------------------- coupon verification from Database --------------------- */
 
-			
+
 			if($coupon_code>0) {
 
                 $coupon_flat = new SYSTableFlat('coupon');
@@ -397,7 +408,7 @@ class OrderController extends WebController {
                 $pay_from_wallet = $customer->default_wallet_payment;
             }
 
-            if($pay_from_wallet == 1){
+          /*  if($pay_from_wallet == 1){
 
                 if($wallet >= $grand_total )
                 {
@@ -415,8 +426,20 @@ class OrderController extends WebController {
             else{
                 $paid_amount = $grand_total;
                 $wallet = 0;
+            }*/
+
+            if($wallet >= $grand_total )
+            {
+
+                $wallet = round($grand_total,0);
+                $paid_amount = 0;
             }
 
+            if($wallet < $grand_total )
+            {
+                $paid_amount = $grand_total  - $wallet;
+                $paid_amount = round($paid_amount,2);
+            }
 			
 			/*--------------------------------------------------------------------------------------------------------------------*/
 
@@ -428,7 +451,9 @@ class OrderController extends WebController {
 			$data['subtotal_with_discount'] =		"$subtotal_with_discount";
 			$data['grand_total'] 			=		"$grand_total";
 			$data['paid_amount']			= 		"$paid_amount";
+            $data['recipient_name']			    = 	"$request->recipient_name";
             $data['recipient_email']			= 	"$request->recipient_email";
+            $data['recipient_message']			= 	"$request->recipient_message";
 
 			//$data['commission_for_rider']	=		"$commission_for_rider";
 			//$data['items_qty']				=		"$items_qty";
@@ -453,7 +478,7 @@ class OrderController extends WebController {
 			$data['mobile_json']			=		1;
 			//$data['entity_type_id']         = 50;
 
-           // echo "<pre>"; print_r( $data);exit;
+       //   echo "<pre>"; print_r( $data);exit;
 
            $lead_params = [
                 'entity_type_id' 		 => 50,
@@ -688,6 +713,7 @@ class OrderController extends WebController {
                     $data['order_status'] = 'pending';
                     $data['payment_method_type'] = "cod";
                     $data['login_entity_id'] = $this->_customerId;
+                   // $data['order_coupon_id'] = $request->input('order_coupon_id',0);
                     $data['hook'] = 'order_item';
                   // echo "<pre>";print_r($data); exit;
 

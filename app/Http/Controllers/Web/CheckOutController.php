@@ -278,15 +278,15 @@ class CheckOutController extends WebController {
 													)),
 												true);
 								
-									$loyalty_points = $json['data']['general_setting'][0]['loyalty_points'];
-									$loyalty_amount = $json['data']['general_setting'][0]['loyalty_amount'];
+									//$loyalty_points = $json['data']['general_setting'][0]['loyalty_points'];
+									//$loyalty_amount = $json['data']['general_setting'][0]['loyalty_amount'];
 									
-									if($subtotal_with_discount>=$loyalty_amount)
+									/*if($subtotal_with_discount>=$loyalty_amount)
 										$calculated_loyalty_points	= round(( $subtotal_with_discount / $loyalty_amount ) * $loyalty_points,2) ;
 									else
 										$calculated_loyalty_points  = 0; 
 									
-									$data1['calculated_loyalty_points']	 = $calculated_loyalty_points;
+									$data1['calculated_loyalty_points']	 = $calculated_loyalty_points;*/
 									$data1['currency'] =$this->_object_helper_customer->getCurrency();
 									
 									return $data1; 

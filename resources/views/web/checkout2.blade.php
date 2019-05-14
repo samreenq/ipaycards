@@ -50,15 +50,37 @@
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>			
 								
 								<form>
-
+									<div class="discount" ></div>
 									<div class="row">
+										<div class="col-md-10 cuspad" >
+											<div class="fluid-label">
+												<input type="text" id="coupon_code" name="coupon_code"  placeholder="Coupon Code" />
+												{{--  <label>Add Note*</label>--}}
+											</div>
+										</div>
+										<div class="col-md-2 cuspad" >
+											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+										</div>
 
-										<div class="col-md-12 cuspad recipient_email" style="display: none;">
+                                        <div class="col-md-6 cuspad recipient" style="display: none;">
+                                            <div class="fluid-label">
+                                                <input type="text" id="recipient_name" name="recipient_name"  placeholder="Recipient Name" />
+                                                {{--  <label>Add Note*</label>--}}
+                                            </div>
+                                        </div>
+										<div class="col-md-6 cuspad recipient" style="display: none;">
 											<div class="fluid-label">
 												<input type="text" id="recipient_email" name="recipient_email"  placeholder="Recipient Email" />
 												{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
+
+                                        <div class="col-md-12 cuspad recipient" style="display: none;">
+                                            <div class="fluid-label">
+                                                <textarea id="recipient_message" name="recipient_message" required="required" placeholder="Recipient Message*"></textarea>
+                                                {{--  <label>Add Note*</label>--}}
+                                            </div>
+                                        </div>
 
 										<div class="col-md-12 cuspad">
 											<div class="fluid-label">
@@ -85,11 +107,11 @@
 							<div class="collapse" id="paymentinfo">
 								<div class="paymentInfoForm">
 									<div class="payment-method">
-										
-										
+
+										<input type="hidden" name="paid_amount" id="paid_amount" value="" />
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
-											<input type="radio" name="payment_method" id="crypto-currency" value="stripe" >
+										<input type="hidden" name="payment_method"  id="payment_method" value="stripe" >
 											<label for="crypto-currency">
 												Stripe
 											</label>
@@ -97,14 +119,14 @@
 										</div>
 										
 										
-										<div class="big-radio wallet cryptoCurrencyWrap noselect">
+										<!--<div class="big-radio wallet cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
 											<input type="radio" name="payment_method" id="credit-card" value="wallet" >
 											<label for="credit-card">
 												iPay Wallet
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-										</div>
+										</div> -->
 										
 										
 										<!--<div class="big-radio cash CashDeliveryWrap noselect">
@@ -130,16 +152,17 @@
 								<h4>Summary</h4>
 								
 								<p>Organic Oroblanco Grapefruits are the off season citrus great for juicing.</p>
-								<form role="form">
+								<!--<form role="form">
 									<div class="fluid-label">
 									   <span class="icon-tt-cupon-icon"></span>
 									   <input id="coupon_code" type="text" placeholder="Coupon Code" />
 									   <label>Coupon Code</label>
 									</div>
 									<input style="cursor:pointer;" type="button" name="" value="Apply" class="calculateDiscount coupon-btn"/>
-								</form>
-								<div class="discount" ></div>
+								</form>-->
+
 								<div class="checkOrderTotal">
+
 									<table width="100%"> 
 									
 									
@@ -203,6 +226,7 @@
 										$hash 				=	hash('sha512', $data );*/
 									?>
 									<form id="myform" name="myform" method="post" action="">
+										<input id="order_coupon_id" name="order_coupon_id" type="hidden" value="" />
 										<input id="entity_id" 			name="entity_id" type="hidden" value="" />
 										<input id="txn_ref" 			name="txn_ref" type="hidden" value="" />
 										<input id="product_id" 			name="product_id" type="hidden" value="" />
@@ -353,7 +377,7 @@
             console.log(localStorage.is_gift_card);
 
             if(localStorage.is_gift_card == 1){
-                $('.recipient_email').show();
+                $('.recipient').show();
 			}
         });
 				
@@ -380,6 +404,18 @@
 		  
 		  $('.add-to-cart').on('click',function(){
 
+              console.log($('#paid_amount').val() );
+
+              if($('#paid_amount').val() == 0){
+                  $("input[name='payment_method']").val('cod');
+                  $('#myform').attr('action', "confirmation");
+              }else{
+                  $("input[name='payment_method']").val('stripe');
+                  $('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
+              }
+              console.log($("input[name='payment_method']").val());
+
+
 		      if($('#myform').attr('action') == '' || $('#myform').attr('action') == undefined){
                 //  $('.add-to-cart').attr('disabled','disabled');
                   $('.error-message').html('');
@@ -404,8 +440,8 @@
                   }
 
 
-						  console.log($('input[name="payment_method"]:checked').val());
-						  if($('input[name="payment_method"]:checked').val() != 'stripe'){
+						  console.log($('input[name="payment_method"]').val());
+						  if($('input[name="payment_method"]').val() != 'stripe'){
 
                               $('.add-to-cart').attr('disabled','disabled');
                               $.ajax ({
@@ -516,15 +552,15 @@
 						var payment_method = $("input[name='payment_method']:checked").val();
 						
 						console.log(payment_method);
-						if(payment_method=="webpay")
+						/*if(payment_method=="webpay")
 							$('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
 						
 						if(payment_method=="wallet")
 							$('#myform').attr('action', "confirmation");
 						
 						if(payment_method=="cod")
-							$('#myform').attr('action', "confirmation");
-						
+							$('#myform').attr('action', "confirmation");*/
+
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
 					//	$('.add-to-cart').css('background-color','#139CB4');
 					});

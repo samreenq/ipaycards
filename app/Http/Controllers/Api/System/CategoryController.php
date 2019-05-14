@@ -534,7 +534,8 @@ class CategoryController extends Controller
                                 $params = [
                                     'entity_type_id' => 'product',
                                     'status' => 1,
-                                    'mobile_json' => 1
+                                    'mobile_json' => 1,
+                                    'limit' => 4,
                                 ];
 
                                 $params['where_condition'] = "AND category_id IN ($category_ids)";

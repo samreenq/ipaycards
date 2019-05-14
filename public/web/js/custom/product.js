@@ -1150,9 +1150,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 																		    $(".discount").toggleClass('alert alert-danger'); 
 																			
 																			$(".discount_amount").empty().append(data['currency']+" "+data['discount_amount']);
-																			$(".delivery_charge").empty().append(data['currency']+" "+data['delivery_charge']);
+																			//$(".delivery_charge").empty().append(data['currency']+" "+data['delivery_charge']);
 																			$(".customer_wallet").empty().append(data['currency']+" "+data['customer_wallet']); 	
-																			$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points"); 		
+																			//$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points");
 																			$(".paid_amount").empty().append(data['currency']+" "+data['paid_amount']);
 																	}
 																});
@@ -2756,11 +2756,13 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 										$(".customer_wallet").empty().append(data['currency']+' '+data['customer_wallet']); 	
 										$(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points"); 		
 										$(".paid_amount").empty().append(data['currency']+' '+data['paid_amount']);
+
+                                        $("#paid_amount").val(data['paid_amount']);
 										
 										if(data['paid_amount']==0)
 										{
 											$(".cash").css({ 'display': "none" });
-											$(".webpay").css({ 'display': "none" });
+											//$(".webpay").css({ 'display': "none" });
 										}
 									
 									}
@@ -3698,8 +3700,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 
 			$( "#save_your_account" ).click(function() 
 			{
-				if($("#term_and_condition").prop('checked') == true)
-				{
+			//	if($("#term_and_condition").prop('checked') == true)
+			//	{
 				
 					$.ajax ({		
 							url: changeYourAccountDetailUrl,
@@ -3742,16 +3744,16 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 							}
 						});
 						
-				}
-				else
-				{
+				//}
+				//else
+				//{
                    // showAlert('Please agree with terms and conditions!');
-					$("#account_response").addClass('alert alert-danger');
+					//$("#account_response").addClass('alert alert-danger');
 			/*		$("#account_response").css("color", "red");
 					$("#account_response").css("background-color",'#f8d7da');
 					$("#account_response").css("border-color",'#f5c6cb');*/
-					$("#account_response").empty().append('Please agree with terms and conditions!');
-				}
+					//$("#account_response").empty().append('Please agree with terms and conditions!');
+				//}
 				
 			});
 	}

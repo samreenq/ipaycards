@@ -23,7 +23,7 @@ Class OrderSendCards {
         $this->_vendorOrderLogsModel = new VendorOrderLogs();
         $this->_inventory_lib = new InventoryLib();
         $this->_emailContent =  "<br>The ordered items are following <br>";
-        $this->_emailContentGift =  "<br>The ordered items are following <br>";
+        $this->_emailContentGift =  "<br>";
     }
     /**
      * @param $order
@@ -114,12 +114,14 @@ Class OrderSendCards {
                 $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array($column));
                 $product_code = $inventory[0]->voucher_code;
 
-                $this->_emailContentGift .= '<br>';
-                $this->_emailContentGift .= $order_item->product_id->value.' has voucher '.$product_code;
+                $email_cont = '<br>';
+                $email_cont .= $order_item->product_id->value.' has voucher '.$product_code;
 
-                $this->_emailContent .= $this->_emailContentGift;
+                $this->_emailContentGift .= $email_cont;
+                $this->_emailContent .= $email_cont;
 
-                $this->_inventory_lib->updateStatusSold($order_item->inventory_id->id);
+
+                    $this->_inventory_lib->updateStatusSold($order_item->inventory_id->id);
             }
             else{
                // $normal_product++;

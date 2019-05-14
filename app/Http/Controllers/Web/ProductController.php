@@ -747,7 +747,7 @@ class ProductController extends WebController
 			
 			$data1['subtotal'] = $subtotal; 
 			$data1['discount_amount'] = $discount_amount; 
-			$data1['subtotal_with_discountl'] = $subtotal_with_discount;
+			$data1['subtotal_with_discount'] = $subtotal_with_discount;
 			$data1['delivery_charge'] = $delivery_charge; 
 			$data1['grand_total'] = $grand_total;
 			$data1['customer_wallet'] = ($customer_wallet > 0) ? $customer_wallet : '0.00';
@@ -1189,7 +1189,7 @@ class ProductController extends WebController
     {
         $data = array("entity_type_id"=>'brand',
             'status' => 1,
-            'limit'=>4);
+            'limit'=>10);
 
         $data['product_detail_url'] = '';
         //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));

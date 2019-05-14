@@ -4539,7 +4539,7 @@ ul.footerCont {
 }
 .payment-method .big-radio {
     padding-left: 20px;
-    padding: 20px 30px 20px 55px;
+    padding: 20px 30px 20px;
     margin-bottom: 0;
 }
 .payment-method .big-radio.noselect {
@@ -4566,6 +4566,7 @@ ul.footerCont {
     border: 1px solid #d7d7d7;
     border-radius: 50%;
     background-color: #fff;
+    display: none;
 }
 .payment-method .big-radio label::after {
     display: inline-block;
@@ -4582,6 +4583,7 @@ ul.footerCont {
     -ms-transform: scale(0, 0);
     -o-transform: scale(0, 0);
     transform: scale(0, 0);
+    display: none;
 }
 .payment-method .big-radio input[type="radio"] {
     opacity: 0;
