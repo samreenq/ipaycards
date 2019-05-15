@@ -760,23 +760,23 @@
 						if(isset($_REQUEST['product_promotion_id']))
 						{
 				?>
-							promoted_product_list(14,"<?php echo $_REQUEST['product_promotion_id']; ?>","{{ route('product_promotion') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",'','',offset,limit);
+                			promoted_product_list(14,<?php echo $_REQUEST['product_promotion_id']; ?>,"{{ route('product_promotion') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
 				<?php
 						}
 						if(isset($_REQUEST['featured_type']))
 						{
 				?>
-							feature_product_list(14,"<?php echo $_REQUEST['featured_type']; ?>","{{ route('featured_type') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+                feature_product_list(14,<?php echo $_REQUEST['featured_type']; ?>,"{{ route('featured_type') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
 				
-				<?php 
-						}
-			
-						
-				?>
+				<?php } ?>
+
+                <?php if(isset($_REQUEST['brand_id'])){ ?>
+                brand_product_list(14,<?php echo $_REQUEST['brand_id']; ?>,"{{ route('brand_products') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
+                <?php } ?>
 
                 <?php   if( isset($_REQUEST['title']) ) {
                 $title = addslashes($_REQUEST['title']); ?>
-                product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('product_detail') }}",offset,limit);
+                product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
                 <?php	} ?>
 
 			}
@@ -820,15 +820,7 @@
 						// when scroll to bottom of the page
 						
 
-						<?php 
-						if( isset($_REQUEST['category_id']) ) 
-						{
-							
-				?>
-							product_list("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}"14,<?php echo $cat_id; ?>,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1);
-				<?php 
-						}
-				?>
+
 					}
 
 

@@ -1314,7 +1314,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 									$("#LoadingImageSearchProducts").hide();
 									$('#pagination').pagination('updateItems', data['items']);
 
-                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
+                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5);
 									
 								
 							}

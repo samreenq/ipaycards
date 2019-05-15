@@ -55,7 +55,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 }
 // Slave Database Constants
 define('SLAVE_DB_HOST', MASTER_DB_HOST);
-define('MYSQL_PORT', 3306);
+define('MYSQL_PORT', 3308);
 
 // Cache constants
 define('CACHE_ON', FALSE); // bool : TRUE = on | FALSE = off
