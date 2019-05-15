@@ -23,23 +23,10 @@
 
 	@section('header')
 			<!-- Header -->	
-		<?php 
-				if(isset($_REQUEST['category_id']))
-				{
-					$cat_id =$_REQUEST['category_id'];
-					foreach ( $categories as $tmp ) 
-					{
-						if($tmp['parent_id']==0)
-						{
-							if($tmp['category_id']==$_REQUEST['category_id']) 
-							{
-								if(isset($tmp['child'][0]['category_id']))
-									$cat_id = $tmp['child'][0]['category_id'];
-							}
-						}
-					}
-				}
-		?>
+<?php
+//echo "<pre>"; print_r($categories); exit;
+
+?>
 		
 	<header id="inner-header">
 		<div class="container pageNavWrap">
@@ -112,94 +99,36 @@
 					</div>
 				</div>
 				<div class="container">
+					@if(!empty($cat_id))
 					<div class="proAdvSearchcBtn text-right">
 						<input type="button" class="advance_search" value="Advance Search" />
-					</div>	
+					</div>
+					@endif
+
 					<div class="row">
-						
-						
-							<?php 
-							
-							if(isset($_REQUEST['category_id']))
-																{
-																	
-									?>
-									
-										
-										<div class="prod-left-bar col-md-12 col-lg-3 affix">
-											<div id="sidebar">
-												<div class="sidebar__inner">
+						<div class="prod-left-bar col-md-12 col-lg-3 affix">
+							<div id="sidebar">
+								<div class="sidebar__inner">
 
-												<?php
+						@if(!empty($cat_id))
 
-
-
-
-
-
-
-													if(isset($_REQUEST['category_id']))
-													{
-														foreach ( $categories as $tmp )
-														{
-															if($_REQUEST['category_id']==$tmp['category_id'])
-															{
-
-																	if($tmp['is_parent']==1)
-																	{
-												?>
-																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp['category_id']}}" ><?php if(isset($tmp['title'])) echo $tmp['title']; if(isset($tmp['product_count'])) echo '('.$tmp['product_count'].')'; ?></a></h4></div>
-												<?php
-																	}
-																	else
-																	{
-																		foreach ( $categories_all as $tmp1 )
-																		{
-
-																			if($tmp1['category_id']==$tmp['parent_id'])
-																			{
-
-												?>
-																			<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$tmp1['category_id']}}" ><?php if(isset($tmp1['title'])){ echo $tmp1['title']; } if(isset($tmp1['product_count'])){ echo '('.$tmp1['product_count'].')'; } ?></a></h4></div>
-												<?php
-																			}
-																		}
-																	}
-
-															}
-														}
-													}
-												?>
-
-													
-												<ul class="categories vegeListWrap pl15" id="accordion">
-													
-																	<div style="
-																					position: absolute;
-																					top: 50%;
-																					left: 50%;
-																					margin-top: -50px;
-																					margin-left: -50px;
-																					width: 100px;
-																					height: 100px;
-																				"
-																				id="LoadingImageCategories" align="center" style="display: none">
-																		  <div class="floatingCirclesG">
-																				<div class="f_circleG frotateG_01"></div>
-																				<div class="f_circleG frotateG_02"></div>
-																				<div class="f_circleG frotateG_03"></div>
-																				<div class="f_circleG frotateG_04"></div>
-																				<div class="f_circleG frotateG_05"></div>
-																				<div class="f_circleG frotateG_06"></div>
-																				<div class="f_circleG frotateG_07"></div>
-																				<div class="f_circleG frotateG_08"></div>
-																			</div>
-																		  
-																	</div>
-														
+										<div class="main_categeory"><h4><a style="color: #48494d !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$categories->category_id }}" ><?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?></a></h4></div>
+									@if($categories->child && count($categories->child)>0)
+											<ul class="categories vegeListWrap pl15" id="accordion">
+												@foreach($categories->child as $category_raw)
+													<?php
+                                                    $text_color = '#48494d';
+														if($cat_id == $category_raw->category_id){
+														    $text_color = '#EF9B9B';
+														    }
+													?>
+													<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id }}" ><?php if(isset($category_raw->title)) echo $category_raw->title; if(isset($category_raw->product_count)) echo '('.$category_raw->product_count.')'; ?></a></li>
+											@endforeach
 												</ul>
-												<div class="productFiltSide" style="display:none">
-													
+										@endif
+									@endif
+											<div class="productFiltSide" style="display:none">
+
 													<div class="productSideFilter">
 														<p>
 														  <h4 for="amount">Price</h4>
@@ -209,59 +138,59 @@
 														</p>
 														<div id="slider-range"></div>
 													</div>
-													
-													<?php 
-													
-														
-													
-														
+
+													<?php
+
+
+
+
 														//category_id
 														//price
 														//searchable_tags
-														
-														
+
+
 													?>
-													
-													
+
+
 													<input id="searchable_tags" name="searchable_tags" type="hidden" value="" />
 													<input id="category_id" name="category_id" type="hidden" value="" />
 													<input id="product_form" name="product_form" type="hidden" value="" />
-													
+
 
 													<div class="productSideFilter">
 														  <h4>Searchable tags</h4>
 														  <ul>
-															<?php 
+															<?php
 																	if(isset($searchable_tags))
 																		foreach($searchable_tags as $searchable_tags_attributes)
 																		{
-															?>	
-																				<li><a class="searchable_tags search_filter" data-id="<?php echo $searchable_tags_attributes['id'];?>" data-attr="searchable_tags"><?php echo $searchable_tags_attributes['value'];?></a></li>
-															<?php	
-																		}
-															
 															?>
-															
+																				<li><a class="searchable_tags search_filter" data-id="<?php echo $searchable_tags_attributes['id'];?>" data-attr="searchable_tags"><?php echo $searchable_tags_attributes['value'];?></a></li>
+															<?php
+																		}
+
+															?>
+
 														  </ul>
 													</div>
 													<div class="productSideFilter">
 														  <h4>Categories</h4>
 														  <ul>
-															<?php 
+															<?php
 																	if(isset($category_id))
 																		foreach($category_id as $category_id_attributes)
 																		{
-																		
-															?>		
-																				<li><a class="category_id search_filter" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title'];?></a></li>
-															<?php	
-																		}
-															
+
 															?>
-															
+																				<li><a class="category_id search_filter" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title'];?></a></li>
+															<?php
+																		}
+
+															?>
+
 														  </ul>
 													</div>
-													
+
 													<div class="productResetBtn">
 													<br />
 																<input type="button" class="reset" style="cursor: pointer;" value="Reset" />
@@ -269,7 +198,7 @@
 																<div 	style="
 																					position: absolute;
 																					margin: -32px 0px 0px 142px;
-																
+
 																			"
 																		id="LoadingImageSearchProducts" align="center" style="display: none"
 																>
@@ -285,23 +214,21 @@
 																			</div>
 																</div>
 													</div>
-													
-													
+
+
 												</div>
 												</div>
 											</div>
 										</div>
-						
-						<?php 
-								}
-									?>
-								
+
+
+
 						<div class="prod-right-bar col-md-12 <?php if(!isset($_REQUEST['category_id'])){ ?>col-lg-12 <?php }else { ?> col-lg-9<?php } ?>" >
 							<div class="tab-pane in active" id="tab1default">
-								
-								
-							
-								<?php 
+
+
+
+								<?php
 										if(isset($_REQUEST['featured_type']) || isset($_REQUEST['product_promotion_id']))
 										{
 								?>
@@ -309,29 +236,29 @@
 														<div class="container">
 															<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
 																<h2 class="mr-auto align-items-start">
-																
-																	<?php 
+
+																	<?php
 																		if(isset($_REQUEST['featured_type']))
 																		{
-																			if($_REQUEST['featured_type']==1) 
+																			if($_REQUEST['featured_type']==1)
 																				echo "New and Peak Seasons";
-																			
-																			if($_REQUEST['featured_type']==2) 
+
+																			if($_REQUEST['featured_type']==2)
 																				echo "iPayCards Essentials";
 																		}
-																	
+
 																		if(isset($_REQUEST['product_promotion_id']))
 																			echo isset($list_heading) ? $list_heading :  "Promotions and Discounts";
-																
+
 																	?>
 																</h2>
-																
+
 															</div>
 														</div>
 													</div>
-								<?php 
+								<?php
 										}
-									
+
 								?>
 
                                     <?php
@@ -352,7 +279,7 @@
 
                                     ?>
 									<div id="products"  class="row">
-									
+
 									<div style="
 														position: absolute;
 														top: 50%;
@@ -361,7 +288,7 @@
 														margin-left: -50px;
 														width: 100px;
 														height: 100px;
-									
+
 												"
 
 											id="LoadingImageProducts" align="center" style="display: none"
@@ -378,9 +305,9 @@
 												</div>
 									</div>
 								</div>
-								
-								
-							</div>	
+
+
+							</div>
 						</div>
 					</div>
 					
@@ -651,26 +578,26 @@
 						if(isset($_REQUEST['product_promotion_id']))
 						{
 				?>
-							promoted_product_list(14,<?php echo $_REQUEST['product_promotion_id']; ?>,"{{ route('product_promotion') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+							promoted_product_list(14,<?php echo $_REQUEST['product_promotion_id']; ?>,"{{ route('product_promotion') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
 				<?php
 						}
 						if(isset($_REQUEST['featured_type']))
 						{
 				?>
-							feature_product_list(14,<?php echo $_REQUEST['featured_type']; ?>,"{{ route('featured_type') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+							feature_product_list(14,<?php echo $_REQUEST['featured_type']; ?>,"{{ route('featured_type') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
 				
 				<?php 
 						}
 			
 				?>
                         <?php if(isset($_REQUEST['brand_id'])){ ?>
-                            brand_product_list(14,<?php echo $_REQUEST['brand_id']; ?>,"{{ route('brand_products') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+                            brand_product_list(14,<?php echo $_REQUEST['brand_id']; ?>,"{{ route('brand_products') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
                         <?php } ?>
 
                 <?php   if( isset($_REQUEST['title']) ) {
                         $title = addslashes($_REQUEST['title']);
                     ?>
-                    product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('product_detail') }}",offset,limit);
+                    product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
 
                 // Add Cart Btn Animation
                 $('.addtocart').click(function(){
@@ -833,23 +760,23 @@
 						if(isset($_REQUEST['product_promotion_id']))
 						{
 				?>
-							promoted_product_list(14,"<?php echo $_REQUEST['product_promotion_id']; ?>","{{ route('product_promotion') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",'','',offset,limit);
+                			promoted_product_list(14,<?php echo $_REQUEST['product_promotion_id']; ?>,"{{ route('product_promotion') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
 				<?php
 						}
 						if(isset($_REQUEST['featured_type']))
 						{
 				?>
-							feature_product_list(14,"<?php echo $_REQUEST['featured_type']; ?>","{{ route('featured_type') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
+                feature_product_list(14,<?php echo $_REQUEST['featured_type']; ?>,"{{ route('featured_type') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1,offset,limit);
 				
-				<?php 
-						}
-			
-						
-				?>
+				<?php } ?>
+
+                <?php if(isset($_REQUEST['brand_id'])){ ?>
+                brand_product_list(14,<?php echo $_REQUEST['brand_id']; ?>,"{{ route('brand_products') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
+                <?php } ?>
 
                 <?php   if( isset($_REQUEST['title']) ) {
                 $title = addslashes($_REQUEST['title']); ?>
-                product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('product_detail') }}",offset,limit);
+                product_list_by_title(14,"<?php echo $title ?>", "{{ route('product_title') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",offset,limit);
                 <?php	} ?>
 
 			}
@@ -859,17 +786,7 @@
 		?>
 
 
-		<?php 
-				if( isset($_REQUEST['category_id']) ) 
-				{
-		?>
-					product_categories("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",<?php if(isset($_REQUEST['category_id'])) echo $_REQUEST['category_id'] ?>);
-						
-		<?php 
-				}
-				
 
-			 ?>
 
         var category_id = "<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';?>";
         menus("{{ route('menus') }}",category_id) ;
@@ -903,15 +820,7 @@
 						// when scroll to bottom of the page
 						
 
-						<?php 
-						if( isset($_REQUEST['category_id']) ) 
-						{
-							
-				?>
-							product_list("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}"14,<?php echo $cat_id; ?>,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",1);
-				<?php 
-						}
-				?>
+
 					}
 
 

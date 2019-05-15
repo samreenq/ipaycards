@@ -234,7 +234,7 @@
                 first_name					:	$('#first_name').val()					,
                 last_name 					:	$('#last_name').val()					,
                 mobile_no					:	$('#mobile_no').val()					,
-                //refer_friend_code_applied	:	$('#refer_friend_code_applied').val()	,
+               refer_friend_code_applied	:	$('#refer_friend_code_applied').val()	,
                 _token						:   crsf_token,
                 term_condition				:  terms_condition,
                 url							:	''

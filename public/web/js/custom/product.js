@@ -1273,228 +1273,8 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 									$("#LoadingImageProducts").hide();
 									$("#LoadingImageSearchProducts").hide();
 									$('#pagination').pagination('updateItems', data['items']);
-									
-									add_to_wishlist(Request_url5);
-									
-									
-									
-								
-									// Add Cart Btn Animation
-									$('.addtocart').click(function(){
-										
-										$(this).hide();
-										var abc = $(this).parent().find('.pro-inc-wrap').toggle("slide");
-										
-									});
-									
-									
-										//Inc Dec Button----------------
-									$(".incr-btn3").on("click", function (e) 
-									{
-												
-										
-										var $button = $(this);
-										var oldValue = $button.parent().find('.quantity').val();
-									
-										var entity_id 			= $button.parent().find('.entity_id').val();
-										var product_code 		= $button.parent().find('.product_code').val();
-										var	title 		 		= $button.parent().find('.title').val();
-										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   		= $button.parent().find('.price').val();
-                                        var	item_type   		= $button.parent().find('.item_type').val();
-										/*var	weight 		 		= $button.parent().find('.weight').val();
-										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-										console.log(item_type);
-										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
-									
-										if(oldValue=="0") 
-										{
-										//	var oldValue = parseFloat(oldValue) + 1;
-											//var newVal	= oldValue;
-										}
-										if ($button.data('action') == "increase") {
-											var newVal = parseFloat(oldValue) + 1;
-										}
-										if ($button.data('action') == "decrease") 
-										{
-											// Don't allow decrementing below 1
-											if (oldValue > 1) {
-												var newVal = parseFloat(oldValue) - 1;
-											} else {
-												newVal = 1;
-												$button.addClass('inactive');
-												//$('.pro-inc-wrap').hide();
-												//$('.addtocart').show();
-												$button.parent().parent().hide();
-												$button.parent().parent().parent().find('.addtocart').show();
-												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-											}
-										}
-										
-										
-										$button.parent().find('.quantity').val(newVal);
-										product_quantity  = newVal;
-											
-										if(product_quantity>1)
-										{
-											if(typeof(localStorage.products)=="undefined")
-											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
-												localStorage["products"] =string;
-											}
-					
-											if(typeof(localStorage.products)!=="undefined")
-											{
-												var products = JSON.parse(localStorage.products);
-												var products1 = [];
-												n = 0 ; 
-												for (var i = 0; i <products.length; i++) 
-												{
-													if(product_code === products[i].product_code)
-													{  
-													   //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity); 
-													   products[i].product_quantity  =  parseInt(product_quantity); 
-													   n=0;
-													   break;  
-													}
-													else 
-													{
-														n=1;
-													}  
-												}
-												if ( n==1 )
-												{
-													var len = products1.length;
-													var string = {
-																	"entity_id":entity_id,
-																	"product_code":product_code ,
-																	"title":title,
-																	"thumb":thumb,
-																	"price":price,
-																	"item_type" : item_type,
-																	/*"weight":weight,
-																	"unit_option":unit_option,
-																	"unit_value":unit_value,*/
-																	"product_quantity":parseInt(product_quantity)
-																 };
-													products.push(string);
-												}
-												localStorage.setItem("products", JSON.stringify(products));
-												total(Request_url2);				
-											}	
-										}
-										
-										load_cart(Request_url3,Request_url2);
-										
-										
-									});	
-									
-									
-									//Inc Dec Button----------------
-									$(".addtocart").on("click", function (e) 
-									{
-										var $button = $(this);
-										var oldValue = $button.parent().find('.quantity').val();
-									
-									
-										var entity_id 			= $button.parent().find('.entity_id').val();
-										var product_code 		= $button.parent().find('.product_code').val();
-										var	title 		 		= $button.parent().find('.title').val();
-										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   			= $button.parent().find('.price').val();
-                                        var	item_type   		= $button.parent().find('.item_type').val();
-										//var	weight 		 		= $button.parent().find('.weight').val();
-									//	var	unit_option  		= $button.parent().find('.unit_option').val();
-										//var	unit_value 	 		= $button.parent().find('.unit_value').val();
-										
-										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
-								
-										if(oldValue=="0") 
-										{
-											//var oldValue = parseFloat(oldValue) + 1;
-										//	var newVal	= oldValue;
-										}
-										if ($button.data('action') == "increase") {
-											var newVal = parseFloat(oldValue) + 1;
-										}
-										if ($button.data('action') == "decrease") 
-										{
-											// Don't allow decrementing below 1
-											if (oldValue > 1) {
-												var newVal = parseFloat(oldValue) - 1;
-											} else {
-												newVal = 1;
-												$button.addClass('inactive');
-												$('.pro-inc-wrap').hide();
-												$('.addtocart').show();
-												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-											}
-										}
-										
-										
-										if(oldValue=="1") 
-										{
-											 oldValue = parseFloat(oldValue);
-											var newVal	= oldValue;
-										}
-									
-										//$button.parent().find('.quantity').val(newVal);
-										product_quantity  = newVal;
-										
-										if(product_quantity==1)
-										{
-											if(typeof(localStorage.products)=="undefined")
-											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
-												localStorage.products =string;
-                                                console.log(localStorage.products);
-											}
-					
-											if(typeof(localStorage.products)!=="undefined")
-											{
-												var products = JSON.parse(localStorage.products);
-												var products1 = [];
-												n = 0 ; 
-												for (var i = 0; i <products.length; i++) 
-												{
-													if(product_code === products[i].product_code)
-													{  
-													   //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity); 
-													   products[i].product_quantity  =  parseInt(product_quantity); 
-													   n=0;
-													   break;  
-													}
-													else 
-													{
-														n=1;
-													}  
-												}
-												if ( n==1 )
-												{
-													var len = products1.length;
-													var string = {
-																	"entity_id":entity_id,
-																	"product_code":product_code ,
-																	"title":title,
-																	"thumb":thumb,
-																	"price":price,
-																	"item_type" : item_type,
-																/*	"weight":weight,
-																	"unit_option":unit_option,
-																	"unit_value":unit_value,*/
-																	"product_quantity":parseInt(product_quantity)
-																 };
-													products.push(string);
-												}
-												localStorage.setItem("products", JSON.stringify(products));
-												total(Request_url2);				
-											}	
-										}
-										
-										load_cart(Request_url3,Request_url2);
-										e.preventDefault();
-									});
+
+                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
 									
 								
 							}
@@ -1533,233 +1313,15 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 									$("#LoadingImageProducts").hide();
 									$("#LoadingImageSearchProducts").hide();
 									$('#pagination').pagination('updateItems', data['items']);
-									
-									add_to_wishlist(Request_url5);
-									
-									
-									
-									// Add Cart Btn Animation
-									$('.addtocart').click(function(){
-										
-										$(this).hide();
-										var abc = $(this).parent().find('.pro-inc-wrap').toggle("slide");
-										
-									});
-									
-									
-										//Inc Dec Button----------------
-									$(".incr-btn3").on("click", function (e) 
-									{
-												
-										
-										var $button = $(this);
-										var oldValue = $button.parent().find('.quantity').val();
-									
-										var entity_id 			= $button.parent().find('.entity_id').val();
-										var product_code 		= $button.parent().find('.product_code').val();
-										var	title 		 		= $button.parent().find('.title').val();
-										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   		= $button.parent().find('.price').val();
-                                        var	item_type   		= $button.parent().find('.item_type').val();
-										/*var	weight 		 		= $button.parent().find('.weight').val();
-										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-										
-										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
-									
-										if(oldValue=="0") 
-										{
-										//	var oldValue = parseFloat(oldValue) + 1;
-											//var newVal	= oldValue;
-										}
-										if ($button.data('action') == "increase") {
-											var newVal = parseFloat(oldValue) + 1;
-										}
-										if ($button.data('action') == "decrease") 
-										{
-											// Don't allow decrementing below 1
-											if (oldValue > 1) {
-												var newVal = parseFloat(oldValue) - 1;
-											} else {
-												newVal = 1;
-												$button.addClass('inactive');
-												//$('.pro-inc-wrap').hide();
-												//$('.addtocart').show();
-												$button.parent().parent().hide();
-												$button.parent().parent().parent().find('.addtocart').show();
-												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-											}
-										}
-										
-										
-										$button.parent().find('.quantity').val(newVal);
-										product_quantity  = newVal;
-											
-										if(product_quantity>1)
-										{
-											if(typeof(localStorage.products)=="undefined")
-											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","item_type":"'+item_type+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
-												localStorage["products"] =string;
-											}
-					
-											if(typeof(localStorage.products)!=="undefined")
-											{
-												var products = JSON.parse(localStorage.products);
-												var products1 = [];
-												n = 0 ; 
-												for (var i = 0; i <products.length; i++) 
-												{
-													if(product_code === products[i].product_code)
-													{  
-													   //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity); 
-													   products[i].product_quantity  =  parseInt(product_quantity); 
-													   n=0;
-													   break;  
-													}
-													else 
-													{
-														n=1;
-													}  
-												}
-												if ( n==1 )
-												{
-													var len = products1.length;
-													var string = {
-																	"entity_id":entity_id,
-																	"product_code":product_code ,
-																	"title":title,
-																	"thumb":thumb,
-																	"price":price,
-																	"item_type" : item_type,
-																	/*"weight":weight,
-																	"unit_option":unit_option,
-																	"unit_value":unit_value,*/
-																	"product_quantity":parseInt(product_quantity)
-																 };
-													products.push(string);
-												}
-												localStorage.setItem("products", JSON.stringify(products));
-												total(Request_url2);				
-											}	
-										}
-										
-										load_cart(Request_url3,Request_url2);
-										
-										
-									});	
-									
-									
-									//Inc Dec Button----------------
-									$(".addtocart").on("click", function (e) 
-									{
-										var $button = $(this);
-										var oldValue = $button.parent().find('.quantity').val();
-									
-									
-										var entity_id 			= $button.parent().find('.entity_id').val();
-										var product_code 		= $button.parent().find('.product_code').val();
-										var	title 		 		= $button.parent().find('.title').val();
-										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   			= $button.parent().find('.price').val();
-                                        var	item_type   		= $button.parent().find('.item_type').val();
-										/*var	weight 		 		= $button.parent().find('.weight').val();
-										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-										
-										$button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
-								
-										if(oldValue=="0") 
-										{
-											//var oldValue = parseFloat(oldValue) + 1;
-										//	var newVal	= oldValue;
-										}
-										if ($button.data('action') == "increase") {
-											var newVal = parseFloat(oldValue) + 1;
-										}
-										if ($button.data('action') == "decrease") 
-										{
-											// Don't allow decrementing below 1
-											if (oldValue > 1) {
-												var newVal = parseFloat(oldValue) - 1;
-											} else {
-												newVal = 1;
-												$button.addClass('inactive');
-												$('.pro-inc-wrap').hide();
-												$('.addtocart').show();
-												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-											}
-										}
-										
-										
-										if(oldValue=="1") 
-										{
-											 oldValue = parseFloat(oldValue);
-											var newVal	= oldValue;
-										}
-									
-										//$button.parent().find('.quantity').val(newVal);
-										product_quantity  = newVal;
-										
-										if(product_quantity==1)
-										{
-											if(typeof(localStorage.products)=="undefined")
-											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","product_quantity":'+parseInt(product_quantity)+'}]';
-												localStorage["products"] =string;
-											}
-					
-											if(typeof(localStorage.products)!=="undefined")
-											{
-												var products = JSON.parse(localStorage.products);
-												var products1 = [];
-												n = 0 ; 
-												for (var i = 0; i <products.length; i++) 
-												{
-													if(product_code === products[i].product_code)
-													{  
-													   //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity); 
-													   products[i].product_quantity  =  parseInt(product_quantity); 
-													   n=0;
-													   break;  
-													}
-													else 
-													{
-														n=1;
-													}  
-												}
-												if ( n==1 )
-												{
-													var len = products1.length;
-													var string = {
-																	"entity_id":entity_id,
-																	"product_code":product_code ,
-																	"title":title,
-																	"thumb":thumb,
-																	"price":price,
-																	"item_type" : item_type,
-																	/*"weight":weight,
-																	"unit_option":unit_option,
-																	"unit_value":unit_value,*/
-																	"product_quantity":parseInt(product_quantity)
-																 };
-													products.push(string);
-												}
-												localStorage.setItem("products", JSON.stringify(products));
-												total(Request_url2);				
-											}	
-										}
-										
-										load_cart(Request_url3,Request_url2);
-										e.preventDefault();
-									});
+
+                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5);
 									
 								
 							}
 			            });
 		
 	}
-	function promoted_product_list(Entity_type_id,Product_promotion_id,Request_url,Product_detail_url,Request_url2,Perishable,Offset,Limit)
+	function promoted_product_list(Entity_type_id,Product_promotion_id,Request_url,Request_url2,Request_url3,Request_url4,Product_detail_url,Request_url5,Offset,Limit)
 	{
 				$("#LoadingImageProducts").show();
 				$.ajax ({
@@ -1770,7 +1332,6 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 										entity_type_id				: 	Entity_type_id 		 ,
 										product_detail_url			:	Product_detail_url	 ,
 										product_promotion_id		:	Product_promotion_id ,
-										perishable					:	Perishable			 ,
 										offset						:	Offset				 ,
 										limit						:	Limit
 									},
@@ -1781,13 +1342,13 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 									$("#products").empty().append(data['products']);
 									$("#LoadingImageProducts").hide();
 									$('#pagination').pagination('updateItems', data['items']);
-									add_to_wishlist(Request_url2);
+                                	addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5);
 									
 							}	
 						});
 	}
 	
-	function feature_product_list(Entity_type_id,Featured_type,Request_url,Product_detail_url,Request_url2,Perishable,Offset,Limit)
+	function feature_product_list(Entity_type_id,Featured_type,Request_url,Request_url2,Request_url3,Request_url4,Product_detail_url,Request_url5,Perishable,Offset,Limit)
 	{
 				$("#LoadingImageProducts").show();
 				$.ajax ({
@@ -1811,13 +1372,15 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 									$("#products").empty().append(data['products']);
 									$("#LoadingImageProducts").hide();
 									$('#pagination').pagination('updateItems', data['items']);
-									add_to_wishlist(Request_url2);
+
+                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
 									
 							}	
 						});
 	}
 
-function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_url,Request_url2,Offset,Limit)
+
+function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Request_url3,Request_url4,Product_detail_url,Request_url5,Offset,Limit)
 {
     $("#LoadingImageProducts").show();
     $.ajax ({
@@ -1840,7 +1403,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
             $("#products").empty().append(data['products']);
             $("#LoadingImageProducts").hide();
             $('#pagination').pagination('updateItems', data['items']);
-            add_to_wishlist(Request_url2);
+
+            addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
 
         }
     });
@@ -2096,7 +1660,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 			
 	}
 	
-	function product_list_by_title(Entity_type_id,Title,Request_url,Product_detail_url,offset,limit)
+	function product_list_by_title(Entity_type_id,Title,Request_url,Request_url2,Request_url3,Request_url4,Product_detail_url,Request_url5,offset,limit)
 	{
 
 				$("#LoadingImageProducts").show();
@@ -2123,6 +1687,8 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
                                 if(data['items'] > 0){
                                     $(".page_showcase").css({ 'display': "block" });
                                 }
+
+                                addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
 							}
 								
 						});
@@ -3080,7 +2646,9 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 							day							:	Day,
 							time						:   Time,
 							shipping_address			: 	$("input[name='shipping_address']:checked").val(),
+                            recipient_name				:    $('#recipient_name').val(),
                             recipient_email				:    $('#recipient_email').val(),
+                            recipient_message				:    $('#recipient_message').val(),
 							is_gift_card				:	localStorage.is_gift_card,
 						},
 						dataType: 'json',
@@ -4063,16 +3631,233 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Product_detail_u
 				
 														
 			}
-		}); 
-	
-		
-		
-		
-		
-		
-		
+		});
 		
 	}
+
+function addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
+{
+    add_to_wishlist(Request_url5);
+
+    // Add Cart Btn Animation
+    $('.addtocart').click(function(){
+
+        $(this).hide();
+        var abc = $(this).parent().find('.pro-inc-wrap').toggle("slide");
+
+    });
+
+
+    //Inc Dec Button----------------
+    $(".incr-btn3").on("click", function (e)
+    {
+
+
+        var $button = $(this);
+        var oldValue = $button.parent().find('.quantity').val();
+
+        var entity_id 			= $button.parent().find('.entity_id').val();
+        var product_code 		= $button.parent().find('.product_code').val();
+        var	title 		 		= $button.parent().find('.title').val();
+        var	thumb 		 		= $button.parent().find('.thumb').val();
+        var	price   		= $button.parent().find('.price').val();
+        var	item_type   		= $button.parent().find('.item_type').val();
+        /*var	weight 		 		= $button.parent().find('.weight').val();
+        var	unit_option  		= $button.parent().find('.unit_option').val();
+        var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+        console.log(item_type);
+        $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
+
+        if(oldValue=="0")
+        {
+            //	var oldValue = parseFloat(oldValue) + 1;
+            //var newVal	= oldValue;
+        }
+        if ($button.data('action') == "increase") {
+            var newVal = parseFloat(oldValue) + 1;
+        }
+        if ($button.data('action') == "decrease")
+        {
+            // Don't allow decrementing below 1
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+                $button.addClass('inactive');
+                //$('.pro-inc-wrap').hide();
+                //$('.addtocart').show();
+                $button.parent().parent().hide();
+                $button.parent().parent().parent().find('.addtocart').show();
+                deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
+            }
+        }
+
+
+        $button.parent().find('.quantity').val(newVal);
+        product_quantity  = newVal;
+
+        if(product_quantity>1)
+        {
+            if(typeof(localStorage.products)=="undefined")
+            {
+                var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                localStorage["products"] =string;
+            }
+
+            if(typeof(localStorage.products)!=="undefined")
+            {
+                var products = JSON.parse(localStorage.products);
+                var products1 = [];
+                n = 0 ;
+                for (var i = 0; i <products.length; i++)
+                {
+                    if(product_code === products[i].product_code)
+                    {
+                        //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                        products[i].product_quantity  =  parseInt(product_quantity);
+                        n=0;
+                        break;
+                    }
+                    else
+                    {
+                        n=1;
+                    }
+                }
+                if ( n==1 )
+                {
+                    var len = products1.length;
+                    var string = {
+                        "entity_id":entity_id,
+                        "product_code":product_code ,
+                        "title":title,
+                        "thumb":thumb,
+                        "price":price,
+                        "item_type" : item_type,
+                        /*"weight":weight,
+                        "unit_option":unit_option,
+                        "unit_value":unit_value,*/
+                        "product_quantity":parseInt(product_quantity)
+                    };
+                    products.push(string);
+                }
+                localStorage.setItem("products", JSON.stringify(products));
+                total(Request_url2);
+            }
+        }
+
+        load_cart(Request_url3,Request_url2);
+
+
+    });
+
+
+    //Inc Dec Button----------------
+    $(".addtocart").on("click", function (e)
+    {
+        var $button = $(this);
+        var oldValue = $button.parent().find('.quantity').val();
+
+
+        var entity_id 			= $button.parent().find('.entity_id').val();
+        var product_code 		= $button.parent().find('.product_code').val();
+        var	title 		 		= $button.parent().find('.title').val();
+        var	thumb 		 		= $button.parent().find('.thumb').val();
+        var	price   			= $button.parent().find('.price').val();
+        var	item_type   		= $button.parent().find('.item_type').val();
+        //var	weight 		 		= $button.parent().find('.weight').val();
+        //	var	unit_option  		= $button.parent().find('.unit_option').val();
+        //var	unit_value 	 		= $button.parent().find('.unit_value').val();
+
+        $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
+
+        if(oldValue=="0")
+        {
+            //var oldValue = parseFloat(oldValue) + 1;
+            //	var newVal	= oldValue;
+        }
+        if ($button.data('action') == "increase") {
+            var newVal = parseFloat(oldValue) + 1;
+        }
+        if ($button.data('action') == "decrease")
+        {
+            // Don't allow decrementing below 1
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+                $button.addClass('inactive');
+                //$('.pro-inc-wrap').hide();
+                $('.addtocart').show();
+                //   $(this).hide();
+                var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
+                deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
+            }
+        }
+
+
+        if(oldValue=="1")
+        {
+            oldValue = parseFloat(oldValue);
+            var newVal	= oldValue;
+        }
+
+        //$button.parent().find('.quantity').val(newVal);
+        product_quantity  = newVal;
+
+        if(product_quantity==1)
+        {
+            if(typeof(localStorage.products)=="undefined")
+            {
+                var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
+                localStorage.products =string;
+                console.log(localStorage.products);
+            }
+
+            if(typeof(localStorage.products)!=="undefined")
+            {
+                var products = JSON.parse(localStorage.products);
+                var products1 = [];
+                n = 0 ;
+                for (var i = 0; i <products.length; i++)
+                {
+                    if(product_code === products[i].product_code)
+                    {
+                        //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                        products[i].product_quantity  =  parseInt(product_quantity);
+                        n=0;
+                        break;
+                    }
+                    else
+                    {
+                        n=1;
+                    }
+                }
+                if ( n==1 )
+                {
+                    var len = products1.length;
+                    var string = {
+                        "entity_id":entity_id,
+                        "product_code":product_code ,
+                        "title":title,
+                        "thumb":thumb,
+                        "price":price,
+                        "item_type" : item_type,
+                        /*	"weight":weight,
+                            "unit_option":unit_option,
+                            "unit_value":unit_value,*/
+                        "product_quantity":parseInt(product_quantity)
+                    };
+                    products.push(string);
+                }
+                localStorage.setItem("products", JSON.stringify(products));
+                total(Request_url2);
+            }
+        }
+
+        load_cart(Request_url3,Request_url2);
+        e.preventDefault();
+    });
+}
 
 function showAlert(msg)
 {

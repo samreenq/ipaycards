@@ -18,15 +18,15 @@
                 if($customer_wallet && count($customer_wallet) > 0)
                 {
 
-				foreach ( $customer_wallet as $customer_wallet_attributes ) 
+				foreach ( $customer_wallet as $raw )
 				{
-				
+                $customer_wallet_attributes = $raw['attributes'];
 			?>
 						<tr class="panelled whitebg">
-							<td><?php if(isset($customer_wallet_attributes['created_at'])) echo date(DATE_FORMAT_ADMIN, strtotime($customer_wallet_attributes['created_at'])); ?></td>
+							<td><?php if(isset($raw['created_at'])) echo date(DATE_FORMAT_ADMIN, strtotime($raw['created_at'])); ?></td>
 							<td><?php if(isset($customer_wallet_attributes['transaction_type']['option'])) echo $customer_wallet_attributes['transaction_type']['option']; ?></td>
 							<td><?php if(isset($customer_wallet_attributes['wallet_source']['option'])) echo $customer_wallet_attributes['wallet_source']['option']; ?></td>
-							<td><?php if(isset($customer_wallet_attributes['order_id']['detail']['order_number'])) echo $customer_wallet_attributes['order_id']['detail']['order_number']; else echo '-'; ?></td>
+							<td><?php if(isset($customer_wallet_attributes['order_id']['detail']['attributes']['order_number'])) echo $customer_wallet_attributes['order_id']['detail']['attributes']['order_number']; else echo '-'; ?></td>
 
 							<td>
 								<?php 

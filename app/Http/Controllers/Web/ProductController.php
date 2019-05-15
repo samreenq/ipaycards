@@ -448,6 +448,29 @@ class ProductController extends WebController
 	
 	public function getAllProduct(Request $request) 
 	{
+
+        $data['cat_id'] = isset($request->category_id) ? $request->category_id : '';
+
+        if(isset($request->category_id)){
+            $sys_category = new SYSCategory();
+            $category_raw =  $sys_category->get($request->category_id);
+
+            if($category_raw->is_parent == 1){
+                $categories = $sys_category->getData($request->category_id);
+                if(isset($categories->child) && count($categories->child)){
+                    $data['cat_id'] = $categories->child[0]->category_id;
+                }
+            }
+            else{
+                $categories = $sys_category->getData($category_raw->parent_id);
+            }
+           // echo "<pre>"; print_r($categories); exit;
+        }
+
+        $data['categories'] = isset($categories) ? $categories : [];
+        $data['category'] = isset($category_raw) ? $category_raw : false;
+
+
 		$data['request']['entity_type_id']  = $request["entity_type_id"];
 		$data['request']['category_id'] 	= $request["category_id"];
 
@@ -509,7 +532,12 @@ class ProductController extends WebController
 					true
 				);
       // echo "<pre>"; print_r($json3); exit;
-		$data['categories'] = isset($json1['data']['category_listing']) ? $json1['data']['category_listing'] : null;
+
+
+
+
+
+       // $data['categories'] = isset($json1['data']['category_listing']) ? $json1['data']['category_listing'] : null;
 		$data['category_id'] = isset($json2['data']['product_tags'][0]['category_id']) ?  $json2['data']['product_tags'][0]['category_id'] : null;
 		$data['categories_all'] = isset($json3['data']['category_listing_listing']) ? $json3['data']['category_listing_listing'] : null;
 		$data['price'] = isset($json2['data']['product_tags'][0]['price']) ?  $json2['data']['product_tags'][0]['price'] : 0;

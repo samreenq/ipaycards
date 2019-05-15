@@ -111,7 +111,7 @@
 										<input type="hidden" name="paid_amount" id="paid_amount" value="" />
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
-										<input type="hidden" name="payment_method"  id="payment_method" value="stripe" >
+										<input type="hidden" name="payment_method"  id="payment_method" value="cod" >
 											<label for="crypto-currency">
 												Stripe
 											</label>
@@ -410,8 +410,9 @@
                   $("input[name='payment_method']").val('cod');
                   $('#myform').attr('action', "confirmation");
               }else{
-                  $("input[name='payment_method']").val('stripe');
-                  $('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
+                  $("input[name='payment_method']").val('cod');
+                  //$('#myform').attr('action', "https://sandbox.interswitchng.com/collections/w/pay");
+                  $('#myform').attr('action', "confirmation");
               }
               console.log($("input[name='payment_method']").val());
 
