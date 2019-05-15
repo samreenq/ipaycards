@@ -318,7 +318,7 @@ class TopupController extends Controller
 		// validation
 		$validation = validator($request->all(), [
 			'service_type' => 'required|in:fly_dubai,addc',
-			'customer_no' => 'required|numeric|min:5'
+			'customer_no' => 'required|string|min:5'
 		]);
 		
 		if ( $validation->fails() ) {
@@ -402,7 +402,7 @@ class TopupController extends Controller
 		// validation
 		$validation = validator($request->all(), [
 			'service_type' => 'required|in:fly_dubai,addc',
-			'customer_no' => 'required|numeric|min:5',
+			'customer_no' => 'required|string|min:5',
 			'amount' => 'required|numeric|min:1',
 			'request_key' => 'required|string|min:5',
 		]);
