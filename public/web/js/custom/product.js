@@ -1426,8 +1426,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
 											} else {
 												newVal = 1;
 												$button.addClass('inactive');
-												$('.pro-inc-wrap').hide();
+												//$('.pro-inc-wrap').hide();
 												$('.addtocart').show();
+                                             //   $(this).hide();
+                                                var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
 												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
 											}
 										}
