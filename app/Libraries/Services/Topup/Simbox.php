@@ -129,16 +129,18 @@ class Simbox
 	 */
 	public function send(array $request)
 	{
+		$types = array_values(config('service.SIMBOX.recharge_type'));
+		
 		// validation
 		$validation = validator($request, [
 			'account_no' => 'required|string|min:5',
 			'amount' => 'required|numeric|min:5',
-			'type' => 'numeric|in:' . implode(config('service.SIMBOX.recharge_type'))
+			'type' => 'numeric|in:' .
+				implode(",", $types)
 		]);
 		
 		if ( $validation->fails() )
 			throw new \Exception($validation->errors()->first());
-		
 		
 		try {
 			// allowed filters

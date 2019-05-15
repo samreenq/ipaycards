@@ -26,7 +26,7 @@ class CardController extends Controller
 		// error response by default
 		$this->_apiData['kick_user'] = 0;
 		$this->_apiData['response'] = "error";
-		$this->_apiData['error'] = 0;
+		$this->_apiData['error'] = 1;
 		
 		// lib
 		try {

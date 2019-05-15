@@ -26,6 +26,7 @@ class TopupController extends Controller
 		// error response by default
 		$this->_apiData['kick_user'] = 0;
 		$this->_apiData['response'] = "error";
+		$this->_apiData['error'] = 1;
 		
 		// lib
 		try {
@@ -235,14 +236,13 @@ class TopupController extends Controller
 				]);
 				$denomination = $products['denominations'][0]['denomination_id'];
 				
-				
 				// if request for du
 				if ( $params['service_type'] == 'du' ) {
 					
 					try {
 						// send
 						$response = $simbox_lib->send([
-							'account_no' => $params['customer_no'],
+							'account_no' => ltrim($params['customer_no'],"+"),
 							'type' => $params['recharge_type'],
 							'amount' => $params['amount']
 						]);
