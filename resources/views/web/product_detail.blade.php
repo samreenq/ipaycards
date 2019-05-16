@@ -408,7 +408,7 @@
 			load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
 			total("{{ route('total_price') }}");			
 			add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
-			newsAndPeakSeasons(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}","{{ route('add_to_cart') }}","{{ route('total_price') }}");
+			newsAndPeakSeasons(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}");
 		
 			signin("{{ route('signin') }}");
 			//signup("{{ route('signup') }}");

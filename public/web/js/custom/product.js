@@ -669,7 +669,7 @@
 			}
 		});
 	}
-function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_detail_url,Request_url2,Request_url3,Request_url4)
+function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Request_url2,Request_url3,Request_url4,Product_detail_url,Request_url5)
 {
     $("#LoadingnewsAndPeakSeasonsImage").show();
     $.ajax ({
@@ -685,10 +685,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
         {
             $("#LoadingnewsAndPeakSeasonsImage").hide();
             $(".newsAndPeakSeasons").empty().append(data);
-            add_to_wishlist(Request_url2);
+          //  add_to_wishlist(Request_url2);
 
 
-
+            addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5);
 
             // Add Cart Btn Animation
 
@@ -709,7 +709,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
             });
             */
             //Inc Dec Button----------------
-            $(".incr-btn4").on("click", function (e)
+           /* $(".incr-btn4").on("click", function (e)
             {
 
                 var $button = $(this);
@@ -721,9 +721,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 var	thumb 		 		= $button.parent().find('.thumb').val();
                 var	price   		= $button.parent().find('.price').val();
                 var	item_type   		= $button.parent().find('.item_type').val();
-                /*var	weight 		 		= $button.parent().find('.weight').val();
+                /!*var	weight 		 		= $button.parent().find('.weight').val();
                 var	unit_option  		= $button.parent().find('.unit_option').val();
-                var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+                var	unit_value 	 		= $button.parent().find('.unit_value').val();*!/
 
                 $button.parent().find('.incr-btn4[data-action="decrease"]').removeClass('inactive');
 
@@ -793,9 +793,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                                 "thumb":thumb,
                                 "price":price,
 								"item_type" : item_type,
-                               /* "weight":weight,
+                               /!* "weight":weight,
                                 "unit_option":unit_option,
-                                "unit_value":unit_value,*/
+                                "unit_value":unit_value,*!/
                                 "product_quantity":parseInt(product_quantity)
                             };
                             products.push(string);
@@ -806,10 +806,10 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 }
                 load_cart(Request_url3,Request_url4);
                 e.preventDefault();
-            });
+            });*/
 
             //Inc Dec Button----------------
-            $(".addtocart").on("click", function (e)
+            /*$(".addtocart").on("click", function (e)
             {
 
                 var $button = $(this);
@@ -821,9 +821,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 var	thumb 		 		= $button.parent().find('.thumb').val();
                 var	price   			= $button.parent().find('.price').val();
                 var	item_type   		= $button.parent().find('.item_type').val();
-               /* var	weight 		 		= $button.parent().find('.weight').val();
+               /!* var	weight 		 		= $button.parent().find('.weight').val();
                 var	unit_option  		= $button.parent().find('.unit_option').val();
-                var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+                var	unit_value 	 		= $button.parent().find('.unit_value').val();*!/
 
                 $button.parent().find('.incr-btn4[data-action="decrease"]').removeClass('inactive');
 
@@ -890,9 +890,9 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                                 "thumb":thumb,
                                 "price":price,
 								"item_type" : item_type,
-                                /*"weight":weight,
+                                /!*"weight":weight,
                                 "unit_option":unit_option,
-                                "unit_value":unit_value,*/
+                                "unit_value":unit_value,*!/
                                 "product_quantity":parseInt(product_quantity)
                             };
                             products.push(string);
@@ -905,7 +905,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Product_de
                 load_cart(Request_url3,Request_url4);
                 e.preventDefault();
 
-            });
+            });*/
             $(".page_showcase").css({ 'display': "block" });
         }
 
