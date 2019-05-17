@@ -226,7 +226,7 @@ class AttachmentController extends Controller
             $error_messages = array('dimensions' => trans('validation.dimensions', array('min_width' =>config("constants.MIN_IMAGE_WIDTH"),'min_height' =>config("constants.MIN_IMAGE_HEIGHT"))),
             );
             $rules = [
-                $file_index => ['required','dimensions:min_width=300,min_height=200'],
+                $file_index => ['required','dimensions:min_width=330,min_height=220'],
                 'extension' => 'in:' . str_replace('.', '', @strtolower($attachment_type->allowed_extensions)),
 
             ];
