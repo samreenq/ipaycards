@@ -22,8 +22,8 @@ Class OrderSendCards {
         $this->_pLib = new Entity();
         $this->_vendorOrderLogsModel = new VendorOrderLogs();
         $this->_inventory_lib = new InventoryLib();
-        $this->_emailContent =  "<br>The ordered items are following <br>";
-        $this->_emailContentGift =  "<br>";
+        $this->_emailContent =  "";
+        $this->_emailContentGift =  "";
     }
     /**
      * @param $order
@@ -42,6 +42,7 @@ Class OrderSendCards {
             //Send Email
             $email_lib = new EmailLib();
             $order_history = new OrderHistory();
+
             if($this->_emailContentGift != ''){
                 $email_lib->sendGiftEmail($order,$this->_emailContentGift);
             }

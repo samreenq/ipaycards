@@ -54,6 +54,10 @@ Class EmailLib {
 
         $email_template = $query->first();
 
+        $content = "<br>The ordered items are following <br>";
+
+        $email_content = $content.$email_content;
+
         $wildcard['key'] = explode(',', $email_template->wildcards);
         $wildcard['replace'] = array(
             $conf->site_name, // APP_NAME
