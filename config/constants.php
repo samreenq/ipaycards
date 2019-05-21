@@ -158,8 +158,8 @@ return [
     ),
 
     //images constants
-    'MIN_IMAGE_WIDTH' => 300,
-    'MIN_IMAGE_HEIGHT' => 200,
+    'MIN_IMAGE_WIDTH' => 330,
+    'MIN_IMAGE_HEIGHT' => 220,
     'MAX_IMAGE_SIZE' => 1024 * 1024 * 1,
     'MAX_MOBILE_IMAGE_SIZE' => 960,
 
