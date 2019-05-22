@@ -41,3 +41,27 @@
         </div>
     </div>
 </div>
+@if(!empty($order->recipient_email))
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-theme top mb25">
+            <div class="panel-body p20 pb10">
+                <table width="100%" class="orderPrevDetail">
+                    <tr>
+                        <td>Recipient Name</td>
+                        <td><b>{!! $order->recipient_name !!}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Recipient Email</td>
+                        <td><b>{!! $order->recipient_email !!}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Recipient Message</td>
+                        <td><b>{!! $order->recipient_message !!}</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
