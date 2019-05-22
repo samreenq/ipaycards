@@ -22,7 +22,7 @@ Class OrderItemFlat extends Base {
 
         $query = "SELECT oi.* 
                 FROM order_flat o
-                LEFT JOIN order_item_flat oi 
+                LEFT JOIN order_item_deal_flat oi 
                 LEFT JOIN inventory_flat i ON oi.`inventory_id` = i.`entity_id`
                 ON (o.`entity_id` = oi.`order_id`)
                 WHERE i.voucher_code = AES_ENCRYPT('".$product_code."', '".$encryption_key."')
