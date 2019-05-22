@@ -177,7 +177,7 @@ Class OrderSendCards {
             }
 
                 //Update Order Item
-                $params = [
+              /*  $params = [
                     'entity_type_id' => 'order_item',
                     'entity_id' => $order_item->entity_id,
                     'delivery_status' => 'delivered'
@@ -185,8 +185,8 @@ Class OrderSendCards {
 
                 // echo "<pre>"; print_r($params);
                 $oi_response = $this->_pLib->apiUpdate($params);
-                $oi_response = json_decode(json_encode($oi_response));
-             }
+                $oi_response = json_decode(json_encode($oi_response));*/
+    }
 
 
     /**
@@ -205,7 +205,7 @@ Class OrderSendCards {
         
         try {
             //Get Inventory of Item
-                $this->_emailContent = "<br>The ordered items are following <br>";
+              //  $this->_emailContent = "<br>The ordered items are following <br>";
 
                 $this->_mLib = new Cards(request('vendor', 'mint_route'));
                 $this->_oLib = new Cards(request('vendor', 'one_prepay'));
@@ -216,23 +216,8 @@ Class OrderSendCards {
 
                 foreach ($order_items as $order_item) {
 
-                    if($order_item->order_from->value == 'vendor_stock')
-                    {
-                        Switch($order_item->item_type->value){
-
-                            case 'deal':
-                                $this->_processDeal($order_id,$order_item,$order_item->item_type->value,$order_item->entity_id);
-                                break;
-
-                            case 'product':
-                                $this->_processProduct($order_id,$order_item,$order_item->item_type->value);
-                                break;
-
-                        }
-                    }
-                    else{
-                        $this->processInStockItem($order_id,$order_item,$order_item->item_type->value);
-                    }
+                    $this->_processDeal($order_id,$order_item,$order_item->item_type->value);
+                    $this->processInStockItem($order_id,$order_item,$order_item->item_type->value);
 
                 }
 
@@ -257,7 +242,7 @@ Class OrderSendCards {
         return $this->_assignData;
     }
 
-    private function _processDeal($order_id,$order_item,$item_type,$order_item_id)
+    private function _processDeal($order_id,$order_item,$item_type)
     {
         try{
             $params = array(
@@ -274,8 +259,10 @@ Class OrderSendCards {
 
             if($item_deals->data->page->total_records > 0) {
 
-                $this->_emailContent .= '<br>';
-                $this->_emailContent .= 'You have ordered deal: '.$order_item->product_id->value . ':';
+                if($item_type == 'deal'){
+                    $this->_emailContent .= '<br>';
+                    $this->_emailContent .= 'You have ordered deal: '.$order_item->product_id->value . ':';
+                }
 
                 $this->_assignData['deal_count'] = 0;
 
@@ -285,9 +272,9 @@ Class OrderSendCards {
                 }
 
                 //Update Order Item
-                $param = [
+               /* $param = [
                     'entity_type_id' => 'order_item',
-                    'entity_id'     => $order_item_id,
+                    'entity_id'     => $order_item->entity_id,
                     'delivery_status' => 'delivered'
                 ];
 
@@ -299,7 +286,7 @@ Class OrderSendCards {
                     $param['delivery_status'] = 'pending';
                 }
 
-                $this->_pLib->apiUpdate($param);
+                $this->_pLib->apiUpdate($param);*/
             }
         }
         catch ( \Exception $e ) {
@@ -352,120 +339,130 @@ Class OrderSendCards {
                 $prepay_order = TRUE;
             }
 
-            try {
-                if ($mintroute_order) {
+                try {
+                    if ($mintroute_order) {
 
-                    $vendor_id = $this->_mVendor->entity_id;
-                    //Order from mintroute
-                    $order_response = $this->_mLib->purchase(['denomination_id' => $mintroute_product_id]);
-                    $this->_vendorOrderLogsModel->add('mintroute',$order_id,$order_item_id,$order_item->product_id->id,['denomination_id' => $mintroute_product_id],(array)$order_response);
+                        $vendor_id = $this->_mVendor->entity_id;
+                        //Order from mintroute
+                        $order_response = $this->_mLib->purchase(['denomination_id' => $mintroute_product_id]);
+                        $this->_vendorOrderLogsModel->add('mintroute', $order_id, $order_item_id,$deal_id, $order_item->product_id->id, ['denomination_id' => $mintroute_product_id], (array)$order_response);
 
-                    if (isset($order_response->status) && $order_response->status == 1) {
+                        if (isset($order_response->status) && $order_response->status == 1) {
 
-                        //echo "<pre>"; print_r($order_response); exit;
-                        $voucher_arr = (array)$order_response->voucher;
-                        $voucher_code = $voucher_arr['Serial Number'];
+                            //echo "<pre>"; print_r($order_response); exit;
+                            $voucher_arr = (array)$order_response->voucher;
+                            $voucher_code = $voucher_arr['Serial Number'];
+                        }
+
                     }
 
-                }
+                    if ($prepay_order) {
 
-                if ($prepay_order) {
+                        $vendor_id = $this->_oVendor->entity_id;
+                        //Order from One Prepay
+                        $order_response = $this->_oLib->purchase(['denomination_id' => $prepay_product_id, 'amount' => $oneprepay_product_info->denomination_value]);
+                        $this->_vendorOrderLogsModel->add('oneprepay', $order_id, $order_item_id, $deal_id,$order_item->product_id->id, ['denomination_id' => $mintroute_product_id], (array)$order_response);
 
-                    $vendor_id = $this->_oVendor->entity_id;
-                    //Order from One Prepay
-                    $order_response = $this->_oLib->purchase(['denomination_id' => $prepay_product_id, 'amount' => $oneprepay_product_info->denomination_value]);
-                    $this->_vendorOrderLogsModel->add('oneprepay',$order_id,$order_item_id,$order_item->product_id->id,['denomination_id' => $mintroute_product_id],(array)$order_response);
+                        if ($order_response['StatusCode'] == 0) {
+                            $voucher_code = $order_response['PinData']['PinSerial'];
+                        }
 
-                    if ($order_response['StatusCode'] == 0) {
-                        $voucher_code = $order_response['PinData']['PinSerial'];
                     }
+                   // echo "<pre>"; print_r($order_response);
+                    // change keys
+                    if (isset($voucher_code) && $voucher_code != '') {
 
-                }
-
-                // change keys
-                if (isset($voucher_code) && $voucher_code != '') {
-
-                    //Add Inventory
-                    $params = [
-                        'entity_type_id' => 'inventory',
-                        'vendor_id' => $vendor_id,
-                        'category_id' => $cat_ids,
-                        'brand_id' => $order_item->product_id->detail->brand_id->id,
-                        'product_id' => $order_item->product_id->id,
-                        'voucher_code' => $voucher_code,
-                        'order_from' => 'vendor_stock',
-                        'availability' => 'sold',
-                    ];
-                  //  echo "<pre>"; print_r($params);
-                    $inventory_response = $this->_pLib->apiPost($params);
-                    $inventory_response = json_decode(json_encode($inventory_response));
-                   // echo "<pre>"; print_r($inventory_response);
-                    if (isset($inventory_response->data->entity->entity_id)) {
-
-                        //Update Order Item
+                        //Add Inventory
                         $params = [
-                            'inventory_id' => $inventory_response->data->entity->entity_id,
+                            'entity_type_id' => 'inventory',
                             'vendor_id' => $vendor_id,
-                            'delivery_status' => 'delivered'
+                            'category_id' => $cat_ids,
+                            'brand_id' => $order_item->product_id->detail->brand_id->id,
+                            'product_id' => $order_item->product_id->id,
+                            'voucher_code' => $voucher_code,
+                            'order_from' => 'vendor_stock',
+                            'availability' => 'sold',
                         ];
+                        //  echo "<pre>"; print_r($params);
+                        $inventory_response = $this->_pLib->apiPost($params);
+                        $inventory_response = json_decode(json_encode($inventory_response));
+                        // echo "<pre>"; print_r($inventory_response);
+                        if (isset($inventory_response->data->entity->entity_id)) {
 
-                        if ($item_type == 'deal') {
+                            //Update Order Item
+                            $params = [
+                                'inventory_id' => $inventory_response->data->entity->entity_id,
+                                'vendor_id' => $vendor_id,
+                                'delivery_status' => 'delivered'
+                            ];
 
                             $params['entity_type_id'] = 'order_item_deal';
                             $params['entity_id'] = $deal_id;
-                        } else {
-                            $params['entity_type_id'] = 'order_item';
-                            $params['entity_id'] = $order_item->entity_id;
+                            /*if ($item_type == 'deal') {
+
+                                $params['entity_type_id'] = 'order_item_deal';
+                                $params['entity_id'] = $deal_id;
+                            } else {
+                                $params['entity_type_id'] = 'order_item';
+                                $params['entity_id'] = $order_item->entity_id;
+                            }*/
+
+                            // echo "<pre>"; print_r($params);
+                            $oi_response = $this->_pLib->apiUpdate($params);
+                            $oi_response = json_decode(json_encode($oi_response));
+                            // echo "<pre>"; print_r($oi_response);
+
+                            $this->_assignData['deal_count']++;
                         }
 
-                       // echo "<pre>"; print_r($params);
-                        $oi_response = $this->_pLib->apiUpdate($params);
-                        $oi_response = json_decode(json_encode($oi_response));
-                       // echo "<pre>"; print_r($oi_response);
+                        $this->_emailContent .= '<br>';
+                        $this->_emailContent .= $order_item->product_id->value . ' has voucher ' . $voucher_code;
 
-                        $this->_assignData['deal_count']++;
+                    } else {
+                        $this->_emailContent .= '<br>';
+                        $this->_emailContent .= $order_item->product_id->value . ' is out of stock';
                     }
 
-                    $this->_emailContent .= '<br>';
-                    $this->_emailContent .= $order_item->product_id->value . ' has voucher ' . $voucher_code;
+                } catch (\Exception $ee) {
+                    //
+                    $this->_assignData['error'] = 1;
+                    $this->_assignData['message'] .= 'Order# ' . $order_id . ' ' . $order_item->product_id->value . ' is out of stock';
+                    $this->_assignData['message'] .= ' - Error: ';
+                    $this->_assignData['message'] .= $ee->getMessage();
+                    //  print_r($ee->getMessage()); exit;
+                    //  throw new \Exception($ee->getMessage());
 
-                } else {
                     $this->_emailContent .= '<br>';
                     $this->_emailContent .= $order_item->product_id->value . ' is out of stock';
-                }
 
-            } catch (\Exception $ee) {
-                //
-                $this->_assignData['error'] = 1;
-                $this->_assignData['message'] .= 'Order# ' . $order_id . ' ' . $order_item->product_id->value . ' is out of stock';
-                $this->_assignData['message'] .= ' - Error: ';
-                $this->_assignData['message'] .= $ee->getMessage();
-                //  print_r($ee->getMessage()); exit;
-                //  throw new \Exception($ee->getMessage());
-
-                $this->_emailContent .= '<br>';
-                $this->_emailContent .= $order_item->product_id->value . ' is out of stock';
-
-                //Update Order Item
-                if ($item_type == 'deal') {
+                    //Update Order Item
                     $params = [
                         'entity_type_id' => 'order_item_deal',
                         'entity_id' => $deal_id,
                         'vendor_id' => $vendor_id,
                         'delivery_status' => 'pending'
                     ];
-                } else {
-                    $params = [
-                        'entity_type_id' => 'order_item',
-                        'entity_id' => $order_item->entity_id,
-                        'vendor_id' => $vendor_id,
-                        'delivery_status' => 'pending'
-                    ];
+                    /*if ($item_type == 'deal') {
+                        $params = [
+                            'entity_type_id' => 'order_item_deal',
+                            'entity_id' => $deal_id,
+                            'vendor_id' => $vendor_id,
+                            'delivery_status' => 'pending'
+                        ];
+                    } else {
+                        $params = [
+                            'entity_type_id' => 'order_item',
+                            'entity_id' => $order_item->entity_id,
+                            'vendor_id' => $vendor_id,
+                            'delivery_status' => 'pending'
+                        ];
+                    }*/
+
+                    $this->_pLib->apiUpdate($params);
+
                 }
 
-                $this->_pLib->apiUpdate($params);
 
-            }
         } catch ( \Exception $e ) {
                 $this->_assignData['error'] = 1;
                 $this->_assignData['message'] .=  $e->getMessage();
