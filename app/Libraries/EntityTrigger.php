@@ -1252,7 +1252,9 @@ Class EntityTrigger
 			$depend_entity_response = is_array($depend_entity_response) ? (object) $depend_entity_response : $depend_entity_response;
 			//  echo "<pre>"; print_r($depend_entity_request);
 			if ( isset($depend_entity_response->entity->entity_id) ) {
-				
+
+                $order_id = $depend_entity_response->entity->attributes->order_id->id;
+
 				if ( isset($depend_entity_request->product_id) && !empty($depend_entity_request->product_id) ||
 					isset($depend_entity_request->deal_id) && !empty($depend_entity_request->deal_id) ) {
 					
@@ -1263,14 +1265,13 @@ Class EntityTrigger
 					
 					Switch ( $depend_entity_request->item_type ) {
 						case 'gift_card':
-							$order_item_lib->addGiftCardStock($depend_entity_response->entity->entity_id, $depend_entity_request->product_id);
+							$order_item_lib->addGiftCardStock($order_id,$depend_entity_response->entity->entity_id, $depend_entity_request->product_id,$depend_entity_request->quantity);
 							break;
 						case 'deal':
-							$order_id = $depend_entity_response->entity->attributes->order_id->id;
-							$order_item_lib->addDealStock($order_id, $depend_entity_response->entity->entity_id, $depend_entity_request->product_id);
+							$order_item_lib->addDealStock($order_id, $depend_entity_response->entity->entity_id, $depend_entity_request->product_id,$depend_entity_request->quantity);
 							break;
 						default:
-							$order_item_lib->addProductStock($depend_entity_response->entity->entity_id, $depend_entity_request->product_id);
+							$order_item_lib->addProductStock($order_id,$depend_entity_response->entity->entity_id, $depend_entity_request->product_id,$depend_entity_request->quantity);
 							break;
 					}
 					

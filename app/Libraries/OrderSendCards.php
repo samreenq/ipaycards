@@ -64,26 +64,26 @@ Class OrderSendCards {
         $column = "CAST(AES_DECRYPT(voucher_code, '".$encryption_key."') AS CHAR(50)) AS voucher_code";
 
         $sys_flat_model = new SYSTableFlat('inventory');
+
+        $params = array(
+            'entity_type_id' => 'order_item_deal',
+            'order_item_id' => $order_item->entity_id,
+            'order_id' => $order_id,
+            'order_from' => 'in_stock',
+            'mobile_json' => 1,
+            'in_detail' => 1
+        );
+
+        $item_deals =  $this->_pLib->apiList($params);
+        $item_deals = json_decode(json_encode($item_deals));
         //
         //Create email content
             if($order_item->item_type->value == 'deal'){
 
-                $params = array(
-                    'entity_type_id' => 'order_item_deal',
-                    'order_item_id' => $order_item->entity_id,
-                    'order_id' => $order_id,
-                    'order_from' => 'in_stock',
-                    'mobile_json' => 1,
-                    'in_detail' => 1
-                );
-
-                $item_deals =  $this->_pLib->apiList($params);
-                $item_deals = json_decode(json_encode($item_deals));
-
                 if($item_deals->data->page->total_records > 0){
 
                     $this->_emailContent .= '<br>';
-                    $this->_emailContent .= $order_item->product_id->value.':';
+                    $this->_emailContent .= 'You have ordered deal: '.$order_item->product_id->value.':';
 
                     foreach($item_deals->data->order_item_deal as $deals){
 
@@ -112,28 +112,68 @@ Class OrderSendCards {
             elseif($order_item->item_type->value == 'gift_card') {
               //  $is_gift_card++;
 
-                $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array($column));
-                $product_code = $inventory[0]->voucher_code;
+                if($item_deals->data->page->total_records > 0) {
 
-                $email_cont = '<br>';
-                $email_cont .= $order_item->product_id->value.' has voucher '.$product_code;
+                    $email_cont = '';
+                    foreach ($item_deals->data->order_item_deal as $deals) {
 
-                $this->_emailContentGift .= $email_cont;
-                $this->_emailContent .= $email_cont;
+                        $inventory = $sys_flat_model->getDataByWhere(' entity_id = ' . $deals->inventory_id->id, [$column]);
+                        $product_code = $inventory[0]->voucher_code;
 
+                        $email_cont .= '<br>';
+                        $email_cont .= $deals->product_id->value . ' has voucher ' . $product_code;
 
-                    $this->_inventory_lib->updateStatusSold($order_item->inventory_id->id);
+                       // $this->_emailContent .= $email_cont;
+
+                        $this->_inventory_lib->updateStatusSold($deals->inventory_id->id);
+
+                        //Update Order item Deal
+                        $params = [
+                            'entity_type_id' => 'order_item_deal',
+                            'entity_id' => $deals->entity_id,
+                            'delivery_status' => 'delivered'
+                        ];
+                        // echo "<pre>"; print_r($params);
+                        $oi_response = $this->_pLib->apiUpdate($params);
+                        $oi_response = json_decode(json_encode($oi_response));
+
+                    }
+
+                     $this->_emailContentGift = $email_cont;
+                     unset($email_cont);
+                    $this->_emailContent .= $this->_emailContentGift;
+                }
             }
             else{
                // $normal_product++;
+                if($item_deals->data->page->total_records > 0) {
 
-                $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$order_item->inventory_id->id,array($column));
-                $product_code = $inventory[0]->voucher_code;
+                    $emailContent = '';
+                    foreach ($item_deals->data->order_item_deal as $deals) {
 
-                $this->_emailContent .= '<br>';
-                $this->_emailContent .= $order_item->product_id->value.' has voucher '.$product_code;
+                        $inventory =  $sys_flat_model->getDataByWhere(' entity_id = '.$deals->inventory_id->id,array($column));
+                        $product_code = $inventory[0]->voucher_code;
 
-                $this->_inventory_lib->updateStatusSold($order_item->inventory_id->id);
+                        $emailContent .= '<br>';
+                        $emailContent .= $deals->product_id->value.' has voucher '.$product_code;
+
+                        $this->_inventory_lib->updateStatusSold($deals->inventory_id->id);
+
+                        //Update Order item Deal
+                        $params = [
+                            'entity_type_id' => 'order_item_deal',
+                            'entity_id' => $deals->entity_id,
+                            'delivery_status' => 'delivered'
+                        ];
+                        // echo "<pre>"; print_r($params);
+                        $oi_response = $this->_pLib->apiUpdate($params);
+                        $oi_response = json_decode(json_encode($oi_response));
+                    }
+
+                    $this->_emailContent .= $emailContent;
+                }
+
+
             }
 
                 //Update Order Item
@@ -146,7 +186,7 @@ Class OrderSendCards {
                 // echo "<pre>"; print_r($params);
                 $oi_response = $this->_pLib->apiUpdate($params);
                 $oi_response = json_decode(json_encode($oi_response));
-     }
+             }
 
 
     /**
@@ -235,7 +275,7 @@ Class OrderSendCards {
             if($item_deals->data->page->total_records > 0) {
 
                 $this->_emailContent .= '<br>';
-                $this->_emailContent .= $order_item->product_id->value . ':';
+                $this->_emailContent .= 'You have ordered deal: '.$order_item->product_id->value . ':';
 
                 $this->_assignData['deal_count'] = 0;
 

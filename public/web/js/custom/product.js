@@ -235,100 +235,93 @@
 									
 									
 									//Inc Dec Button----------------
-									$(".incr-btn55").on("click", function (e)
-									{
-										var $button = $(this);
-										var oldValue = $button.parent().find('.quantity').val();
+									$(".incr-btn55").on("click", function (e) {
+                                        var $button = $(this);
+                                        var oldValue = $button.parent().find('.quantity').val();
 
-										var entity_id 			= $button.parent().find('.entity_id').val();
-										var product_code 		= $button.parent().find('.product_code').val();
-										var	title 		 		= $button.parent().find('.title').val();
-										var	thumb 		 		= $button.parent().find('.thumb').val();
-										var	price   			= $button.parent().find('.price').val();
-                                        var	item_type   		= $button.parent().find('.item_type').val();
-										/*var	weight 		 		= $button.parent().find('.weight').val();
-										var	unit_option  		= $button.parent().find('.unit_option').val();
-										var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-										
-										$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
-										if(oldValue=="0") 
-										{
-										//	var oldValue = parseFloat(oldValue) + 1;
-											//var newVal	= oldValue;
-										}
-										if ($button.data('action') == "increase") {
-											var newVal = parseFloat(oldValue) + 1;
-										}
-										if ($button.data('action') == "decrease") 
-										{
-											// Don't allow decrementing below 1
-											if (oldValue > 1) {
-												var newVal = parseFloat(oldValue) - 1;
-											} else {
-												newVal = 1;
-												$button.addClass('inactive');
-												
-												$button.parent().parent().hide();
-												$button.parent().parent().parent().find('.addtocart').show();
-												deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-											}
-										}
-										
-										
-										$button.parent().find('.quantity').val(newVal);
-										product_quantity  = newVal;
-											
-										if(product_quantity>1)
-										{
-											if(typeof(localStorage.products)=="undefined")
-											{
-												var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
-												localStorage.products =string;
-                                                console.log('sam',localStorage.products);
-											}
-					
-											if(typeof(localStorage.products)!=="undefined")
-											{
-												var products = JSON.parse(localStorage.products);
-												var products1 = [];
-												n = 0 ; 
-												for (var i = 0; i <products.length; i++) 
-												{
-													if(product_code === products[i].product_code)
-													{  
-													   //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity); 
-													   products[i].product_quantity  =  parseInt(product_quantity); 
-													   n=0;
-													   break;  
-													}
-													else 
-													{
-														n=1;
-													}  
-												}
-												if ( n==1 )
-												{
-													var len = products1.length;
-													var string = {
-																	"entity_id":entity_id,
-																	"product_code":product_code ,
-																	"title":title,
-																	"thumb":thumb,
-																	"price":price,
-																	"item_type":item_type,
-																	/*"weight":weight,
-																	"unit_option":unit_option,
-																	"unit_value":unit_value,*/
-																	"product_quantity":parseInt(product_quantity)
-																 };
-													products.push(string);
-												}
-												localStorage.setItem("products", JSON.stringify(products));
-												total(Request_url4);				
-											}	
-										}											
-										load_cart(Request_url3,Request_url4);
-										e.preventDefault();
+                                        if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
+
+                                        var entity_id = $button.parent().find('.entity_id').val();
+                                        var product_code = $button.parent().find('.product_code').val();
+                                        var title = $button.parent().find('.title').val();
+                                        var thumb = $button.parent().find('.thumb').val();
+                                        var price = $button.parent().find('.price').val();
+                                        var item_type = $button.parent().find('.item_type').val();
+                                        /*var	weight 		 		= $button.parent().find('.weight').val();
+                                        var	unit_option  		= $button.parent().find('.unit_option').val();
+                                        var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+
+                                        $button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
+                                        if (oldValue == "0") {
+                                            //	var oldValue = parseFloat(oldValue) + 1;
+                                            //var newVal	= oldValue;
+                                        }
+                                        if ($button.data('action') == "increase") {
+                                            var newVal = parseFloat(oldValue) + 1;
+                                        }
+                                        if ($button.data('action') == "decrease") {
+                                            // Don't allow decrementing below 1
+                                            if (oldValue > 1) {
+                                                var newVal = parseFloat(oldValue) - 1;
+                                            } else {
+                                                newVal = 1;
+                                                $button.addClass('inactive');
+
+                                                $button.parent().parent().hide();
+                                                $button.parent().parent().parent().find('.addtocart').show();
+                                                deleteCartProduct(product_code, Request_url3, Request_url4, Request_url2);
+                                            }
+                                        }
+
+
+                                        $button.parent().find('.quantity').val(newVal);
+                                        product_quantity = newVal;
+
+                                        if (product_quantity > 1) {
+                                            if (typeof(localStorage.products) == "undefined") {
+                                                var string = '[{"entity_id":' + entity_id + ',"product_code":"' + product_code + '","title":"' + title + '","thumb":"' + thumb + '","price":"' + price + '","item_type":"' + item_type + '","product_quantity":' + parseInt(product_quantity) + '}]';
+                                                localStorage.products = string;
+                                                console.log('sam', localStorage.products);
+                                            }
+
+                                            if (typeof(localStorage.products) !== "undefined") {
+                                                var products = JSON.parse(localStorage.products);
+                                                var products1 = [];
+                                                n = 0;
+                                                for (var i = 0; i < products.length; i++) {
+                                                    if (product_code === products[i].product_code) {
+                                                        //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                                                        products[i].product_quantity = parseInt(product_quantity);
+                                                        n = 0;
+                                                        break;
+                                                    }
+                                                    else {
+                                                        n = 1;
+                                                    }
+                                                }
+                                                if (n == 1) {
+                                                    var len = products1.length;
+                                                    var string = {
+                                                        "entity_id": entity_id,
+                                                        "product_code": product_code,
+                                                        "title": title,
+                                                        "thumb": thumb,
+                                                        "price": price,
+                                                        "item_type": item_type,
+                                                        /*"weight":weight,
+                                                        "unit_option":unit_option,
+                                                        "unit_value":unit_value,*/
+                                                        "product_quantity": parseInt(product_quantity)
+                                                    };
+                                                    products.push(string);
+                                                }
+                                                localStorage.setItem("products", JSON.stringify(products));
+                                                total(Request_url4);
+                                            }
+                                        }
+                                        load_cart(Request_url3, Request_url4);
+                                        e.preventDefault();
+                                    	}
 									});	
 									
 									
@@ -466,100 +459,95 @@
 
 
 				//Inc Dec Button----------------
-				$(".incr-btn5").on("click", function (e)
-				{
-					var $button = $(this);
-					var oldValue = $button.parent().find('.quantity').val();
+				$(".incr-btn5").on("click", function (e) {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('.quantity').val();
 
-					var entity_id 			= $button.parent().find('.entity_id').val();
-					var product_code 		= $button.parent().find('.product_code').val();
-					var	title 		 		= $button.parent().find('.title').val();
-					var	thumb 		 		= $button.parent().find('.thumb').val();
-					var	price   		= $button.parent().find('.price').val();
-					/*var	weight 		 		= $button.parent().find('.weight').val();
-					var	unit_option  		= $button.parent().find('.unit_option').val();
-					var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-                    var	item_type   		= $button.parent().find('.item_type').val();
+                   // alert(oldValue);
+                    if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
 
-					$button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
-					if(oldValue=="0")
-					{
-						//	var oldValue = parseFloat(oldValue) + 1;
-						//var newVal	= oldValue;
-					}
-					if ($button.data('action') == "increase") {
-						var newVal = parseFloat(oldValue) + 1;
-					}
-					if ($button.data('action') == "decrease")
-					{
-						// Don't allow decrementing below 1
-						if (oldValue > 1) {
-							var newVal = parseFloat(oldValue) - 1;
-						} else {
-							newVal = 1;
-							$button.addClass('inactive');
+                    var entity_id = $button.parent().find('.entity_id').val();
+                    var product_code = $button.parent().find('.product_code').val();
+                    var title = $button.parent().find('.title').val();
+                    var thumb = $button.parent().find('.thumb').val();
+                    var price = $button.parent().find('.price').val();
+                    /*var	weight 		 		= $button.parent().find('.weight').val();
+                    var	unit_option  		= $button.parent().find('.unit_option').val();
+                    var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+                    var item_type = $button.parent().find('.item_type').val();
 
-							$button.parent().parent().hide();
-							$button.parent().parent().parent().find('.addtocart').show();
-							deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
-						}
-					}
+                    $button.parent().find('.incr-btn5[data-action="decrease"]').removeClass('inactive');
+                    if (oldValue == "0") {
+                        //	var oldValue = parseFloat(oldValue) + 1;
+                        //var newVal	= oldValue;
+                    }
+                    if ($button.data('action') == "increase") {
+                        var newVal = parseFloat(oldValue) + 1;
+                    }
+
+                    if ($button.data('action') == "decrease") {
+                        // Don't allow decrementing below 1
+                        if (oldValue > 1) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 1;
+                            $button.addClass('inactive');
+
+                            $button.parent().parent().hide();
+                            $button.parent().parent().parent().find('.addtocart').show();
+                            deleteCartProduct(product_code, Request_url3, Request_url4, Request_url2);
+                        }
+                    }
 
 
-					$button.parent().find('.quantity').val(newVal);
-					product_quantity  = newVal;
+                    $button.parent().find('.quantity').val(newVal);
+                    product_quantity = newVal;
 
-					if(product_quantity>1)
-					{
-						if(typeof(localStorage.products)=="undefined")
-						{
-							var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
-							localStorage["products"] =string;
-                            console.log('sam',localStorage.products);
-						}
+                    if (product_quantity > 1) {
+                        if (typeof(localStorage.products) == "undefined") {
+                            var string = '[{"entity_id":' + entity_id + ',"product_code":"' + product_code + '","title":"' + title + '","thumb":"' + thumb + '","price":"' + price + '","item_type":"' + item_type + '","product_quantity":' + parseInt(product_quantity) + '}]';
+                            localStorage["products"] = string;
+                            console.log('sam', localStorage.products);
+                        }
 
-						if(typeof(localStorage.products)!=="undefined")
-						{
-							var products = JSON.parse(localStorage.products);
-							var products1 = [];
-							n = 0 ;
-							for (var i = 0; i <products.length; i++)
-							{
-								if(product_code === products[i].product_code)
-								{
-									//products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
-									products[i].product_quantity  =  parseInt(product_quantity);
-									n=0;
-									break;
-								}
-								else
-								{
-									n=1;
-								}
-							}
-							if ( n==1 )
-							{
-								var len = products1.length;
-								var string = {
-									"entity_id":entity_id,
-									"product_code":product_code ,
-									"title":title,
-									"thumb":thumb,
-									"price":price,
-									"item_type":item_type,
-									/*"weight":weight,
-									"unit_option":unit_option,
-									"unit_value":unit_value,*/
-									"product_quantity":parseInt(product_quantity)
-								};
-								products.push(string);
-							}
-							localStorage.setItem("products", JSON.stringify(products));
-							total(Request_url4);
-						}
-					}
-					load_cart(Request_url3,Request_url4);
-					e.preventDefault();
+                        if (typeof(localStorage.products) !== "undefined") {
+                            var products = JSON.parse(localStorage.products);
+                            var products1 = [];
+                            n = 0;
+                            for (var i = 0; i < products.length; i++) {
+                                if (product_code === products[i].product_code) {
+                                    //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                                    products[i].product_quantity = parseInt(product_quantity);
+                                    n = 0;
+                                    break;
+                                }
+                                else {
+                                    n = 1;
+                                }
+                            }
+                            if (n == 1) {
+                                var len = products1.length;
+                                var string = {
+                                    "entity_id": entity_id,
+                                    "product_code": product_code,
+                                    "title": title,
+                                    "thumb": thumb,
+                                    "price": price,
+                                    "item_type": item_type,
+                                    /*"weight":weight,
+                                    "unit_option":unit_option,
+                                    "unit_value":unit_value,*/
+                                    "product_quantity": parseInt(product_quantity)
+                                };
+                                products.push(string);
+                            }
+                            localStorage.setItem("products", JSON.stringify(products));
+                            total(Request_url4);
+                        }
+                    }
+                    load_cart(Request_url3, Request_url4);
+                    e.preventDefault();
+                }
 				});
 
 
@@ -2043,7 +2031,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Req
 				var products = JSON.parse(localStorage.products);
 					
 				if(products.length>=1)
-				{		
+				{
 						
 						$.ajax ({
 									
@@ -2054,51 +2042,55 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Req
 											},
 									dataType: 'text',
 									success: function(data)
-									{		
+									{
+                                        //localStorage.removeItem('products');
+                                        //localStorage.setItem('products',  JSON.stringify(data['products']));
+
 											$("#cart").empty().append(data);
 											
 											
-											$(".incr-btn1  ").on("click", function (e) 
+											$(".incr-btn1").on("click", function (e)
 											{
 												var $button = $(this);
 												var id  = $button.parent().find('.price_id').val(); 
 												id1 = '.quantity'+id; 
 												id2 = '.price'+id;
 												var oldValue = $(id1).val();
-												$button.parent().find('.incr-btn1[data-action="decrease"]').removeClass('inactive');
-												price = parseFloat($(id2).html());
-												
-												if ($button.data('action') == "increase") 
-												{
-													var newVal = parseFloat(oldValue) + 1;
-												} 
-												if ($button.data('action') == "decrease") 
-												{
-													if (oldValue > 1) 
-													{
-														var newVal = parseFloat(oldValue) - 1;
-													} 
-													else 
-													{
-														newVal = 1;
-														$button.addClass('inactive');
-													}
-												}
-												$(id1).val(newVal);
-												price = (price / oldValue) * newVal ; 
-												price = Math.round(price*100)/100;
-												$(id2).empty().append(price);
-												e.preventDefault();
-												var Product_code = $button.parent().find('.product_code').val();
-                                                var item_type = $button.parent().find('.item_type').val();
-												var Product_quantity = newVal;
-												save(Product_code,Product_quantity,item_type,Request_url1);
-												total(Request_url2);
+
+                                                if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
+                                                    $button.parent().find('.incr-btn1[data-action="decrease"]').removeClass('inactive');
+                                                    price = parseFloat($(id2).html());
+
+                                                    if ($button.data('action') == "increase") {
+                                                        var newVal = parseFloat(oldValue) + 1;
+                                                    }
+                                                    if ($button.data('action') == "decrease") {
+                                                        if (oldValue > 1) {
+                                                            var newVal = parseFloat(oldValue) - 1;
+                                                        }
+                                                        else {
+                                                            newVal = 1;
+                                                            $button.addClass('inactive');
+                                                        }
+                                                    }
+                                                    $(id1).val(newVal);
+                                                    price = (price / oldValue) * newVal;
+                                                    price = Math.round(price * 100) / 100;
+                                                    $(id2).empty().append(price);
+                                                    e.preventDefault();
+                                                    var Product_code = $button.parent().find('.product_code').val();
+                                                    var item_type = $button.parent().find('.item_type').val();
+                                                    var Product_quantity = newVal;
+                                                    save(Product_code, Product_quantity, item_type, Request_url1);
+                                                    total(Request_url2);
+                                                }
 												
 											});
 											total(Request_url2);
 											$(".check_out").css({ 'background-color': "#139CB4" });
 											$(".check_out").css({ 'display': "block" });
+
+
 											
 									}
 										
@@ -2182,45 +2174,44 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Req
                                                     $('button.checkout').removeAttr('disabled');
 												}
 
-											$(".incr-btn2").on("click", function (e) 
-											{
-												var $button = $(this);
-												var id  = $button.parent().find('.price_id').val(); 
-												id1 = '.quantity'+id; 
-												id2 = '.price'+id;
-												var oldValue = $(id1).val();
-												$button.parent().find('.incr-btn2[data-action="decrease"]').removeClass('inactive');
-												//.closest( '#parentselector' )
-												price = parseFloat($(id2).html());
-												
-												if ($button.data('action') == "increase") 
-												{
-													var newVal = parseFloat(oldValue) + 1;
-												} 
-												if ($button.data('action') == "decrease") 
-												{
-													if (oldValue > 1) 
-													{
-														var newVal = parseFloat(oldValue) - 1;
-													} 
-													else 
-													{
-														newVal = 1;
-														$button.addClass('inactive');
-													}
-												}
-												$(id1).val(newVal);
-												price = (price / oldValue) * newVal ; 
-												price = Math.round(price*100)/100;
-											
-												$(id2).empty().append(price);
-												e.preventDefault();
-												var Product_code = $button.parent().find('.product_code').val();
+											$(".incr-btn2").on("click", function (e) {
+                                                var $button = $(this);
+                                                var id = $button.parent().find('.price_id').val();
+                                                id1 = '.quantity' + id;
+                                                id2 = '.price' + id;
+                                                var oldValue = $(id1).val();
+
+                                                if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
+
+                                                $button.parent().find('.incr-btn2[data-action="decrease"]').removeClass('inactive');
+                                                //.closest( '#parentselector' )
+                                                price = parseFloat($(id2).html());
+
+                                                if ($button.data('action') == "increase") {
+                                                    var newVal = parseFloat(oldValue) + 1;
+                                                }
+                                                if ($button.data('action') == "decrease") {
+                                                    if (oldValue > 1) {
+                                                        var newVal = parseFloat(oldValue) - 1;
+                                                    }
+                                                    else {
+                                                        newVal = 1;
+                                                        $button.addClass('inactive');
+                                                    }
+                                                }
+                                                $(id1).val(newVal);
+                                                price = (price / oldValue) * newVal;
+                                                price = Math.round(price * 100) / 100;
+
+                                                $(id2).empty().append(price);
+                                                e.preventDefault();
+                                                var Product_code = $button.parent().find('.product_code').val();
                                                 var item_type = $button.parent().find('.item_type').val();
-												var Product_quantity = newVal;
-								
-												save(Product_code,Product_quantity,item_type,Request_url1);
-												total(Request_url2);
+                                                var Product_quantity = newVal;
+
+                                                save(Product_code, Product_quantity, item_type, Request_url1);
+                                                total(Request_url2);
+                                            }
 												
 											});
 											
@@ -2430,7 +2421,7 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Req
 									success: function(data)
 									{		
 										$("#cart").empty().append(data);
-										$(".incr-btn1 ").on("click", function (e) 
+										$(".incr-btn1").on("click", function (e)
 											{
 												var $button = $(this);
 												var id  = $button.parent().find('.price_id').val(); 
@@ -2438,38 +2429,37 @@ function brand_product_list(Entity_type_id,brand_id,Request_url,Request_url2,Req
 												id2 = '.price'+id;
 												
 												var oldValue = $(id1).val();
-												
-												$button.parent().find('.incr-btn1[data-action="decrease"]').removeClass('inactive');
-												price = parseFloat($(id2).html());
-												if ($button.data('action') == "increase") 
-												{
-													
-														var newVal = parseFloat(oldValue) + 1;
-												} 
-												if ($button.data('action') == "decrease")  
-												{
-													if (oldValue > 1) 
-													{
-														var newVal = parseFloat(oldValue) - 1;
-													} 
-													else 
-													{
-														newVal = 1;
-														$button.addClass('inactive');
-													}
-												}
-												$(id1).val(newVal);
-												
-												price = (price / oldValue) * newVal ; 
-												price = Math.round(price*100)/100;
-												$(id2).empty().append(price);
-												e.preventDefault();
-												var Product_code = $button.parent().find('.product_code').val();
-                                                var item_type = $button.parent().find('.item_type').val();
-												var Product_quantity = newVal;
-												
-												save(Product_code,Product_quantity,item_type,Request_url1);
-												total(Request_url1);
+
+												if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
+
+                                                    $button.parent().find('.incr-btn1[data-action="decrease"]').removeClass('inactive');
+                                                    price = parseFloat($(id2).html());
+                                                    if ($button.data('action') == "increase") {
+
+                                                        var newVal = parseFloat(oldValue) + 1;
+                                                    }
+                                                    if ($button.data('action') == "decrease") {
+                                                        if (oldValue > 1) {
+                                                            var newVal = parseFloat(oldValue) - 1;
+                                                        }
+                                                        else {
+                                                            newVal = 1;
+                                                            $button.addClass('inactive');
+                                                        }
+                                                    }
+                                                    $(id1).val(newVal);
+
+                                                    price = (price / oldValue) * newVal;
+                                                    price = Math.round(price * 100) / 100;
+                                                    $(id2).empty().append(price);
+                                                    e.preventDefault();
+                                                    var Product_code = $button.parent().find('.product_code').val();
+                                                    var item_type = $button.parent().find('.item_type').val();
+                                                    var Product_quantity = newVal;
+
+                                                    save(Product_code, Product_quantity, item_type, Request_url1);
+                                                    total(Request_url1);
+                                                }
 												
 											});
 											
@@ -3652,101 +3642,93 @@ function addCartProcess(Request_url2,Request_url3,Request_url4,Request_url5)
     $(".incr-btn3").on("click", function (e)
     {
 
-
         var $button = $(this);
         var oldValue = $button.parent().find('.quantity').val();
 
-        var entity_id 			= $button.parent().find('.entity_id').val();
-        var product_code 		= $button.parent().find('.product_code').val();
-        var	title 		 		= $button.parent().find('.title').val();
-        var	thumb 		 		= $button.parent().find('.thumb').val();
-        var	price   		= $button.parent().find('.price').val();
-        var	item_type   		= $button.parent().find('.item_type').val();
-        /*var	weight 		 		= $button.parent().find('.weight').val();
-        var	unit_option  		= $button.parent().find('.unit_option').val();
-        var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
-        console.log(item_type);
-        $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
+        if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
 
-        if(oldValue=="0")
-        {
-            //	var oldValue = parseFloat(oldValue) + 1;
-            //var newVal	= oldValue;
-        }
-        if ($button.data('action') == "increase") {
-            var newVal = parseFloat(oldValue) + 1;
-        }
-        if ($button.data('action') == "decrease")
-        {
-            // Don't allow decrementing below 1
-            if (oldValue > 1) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 1;
-                $button.addClass('inactive');
-                //$('.pro-inc-wrap').hide();
-                //$('.addtocart').show();
-                $button.parent().parent().hide();
-                $button.parent().parent().parent().find('.addtocart').show();
-                deleteCartProduct(product_code,Request_url3,Request_url4,Request_url2);
+            var entity_id = $button.parent().find('.entity_id').val();
+            var product_code = $button.parent().find('.product_code').val();
+            var title = $button.parent().find('.title').val();
+            var thumb = $button.parent().find('.thumb').val();
+            var price = $button.parent().find('.price').val();
+            var item_type = $button.parent().find('.item_type').val();
+            /*var	weight 		 		= $button.parent().find('.weight').val();
+            var	unit_option  		= $button.parent().find('.unit_option').val();
+            var	unit_value 	 		= $button.parent().find('.unit_value').val();*/
+            console.log(item_type);
+            $button.parent().find('.incr-btn3[data-action="decrease"]').removeClass('inactive');
+
+            if (oldValue == "0") {
+                //	var oldValue = parseFloat(oldValue) + 1;
+                //var newVal	= oldValue;
             }
-        }
-
-
-        $button.parent().find('.quantity').val(newVal);
-        product_quantity  = newVal;
-
-        if(product_quantity>1)
-        {
-            if(typeof(localStorage.products)=="undefined")
-            {
-                var string =  '[{"entity_id":'+entity_id+',"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","item_type":"'+item_type+'","product_quantity":'+parseInt(product_quantity)+'}]';
-                localStorage["products"] =string;
+            if ($button.data('action') == "increase") {
+                var newVal = parseFloat(oldValue) + 1;
             }
-
-            if(typeof(localStorage.products)!=="undefined")
-            {
-                var products = JSON.parse(localStorage.products);
-                var products1 = [];
-                n = 0 ;
-                for (var i = 0; i <products.length; i++)
-                {
-                    if(product_code === products[i].product_code)
-                    {
-                        //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
-                        products[i].product_quantity  =  parseInt(product_quantity);
-                        n=0;
-                        break;
-                    }
-                    else
-                    {
-                        n=1;
-                    }
+            if ($button.data('action') == "decrease") {
+                // Don't allow decrementing below 1
+                if (oldValue > 1) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 1;
+                    $button.addClass('inactive');
+                    //$('.pro-inc-wrap').hide();
+                    //$('.addtocart').show();
+                    $button.parent().parent().hide();
+                    $button.parent().parent().parent().find('.addtocart').show();
+                    deleteCartProduct(product_code, Request_url3, Request_url4, Request_url2);
                 }
-                if ( n==1 )
-                {
-                    var len = products1.length;
-                    var string = {
-                        "entity_id":entity_id,
-                        "product_code":product_code ,
-                        "title":title,
-                        "thumb":thumb,
-                        "price":price,
-                        "item_type" : item_type,
-                        /*"weight":weight,
-                        "unit_option":unit_option,
-                        "unit_value":unit_value,*/
-                        "product_quantity":parseInt(product_quantity)
-                    };
-                    products.push(string);
-                }
-                localStorage.setItem("products", JSON.stringify(products));
-                total(Request_url2);
             }
+
+
+            $button.parent().find('.quantity').val(newVal);
+            product_quantity = newVal;
+
+            if (product_quantity > 1) {
+                if (typeof(localStorage.products) == "undefined") {
+                    var string = '[{"entity_id":' + entity_id + ',"product_code":"' + product_code + '","title":"' + title + '","thumb":"' + thumb + '","price":"' + price + '","item_type":"' + item_type + '","product_quantity":' + parseInt(product_quantity) + '}]';
+                    localStorage["products"] = string;
+                }
+
+                if (typeof(localStorage.products) !== "undefined") {
+                    var products = JSON.parse(localStorage.products);
+                    var products1 = [];
+                    n = 0;
+                    for (var i = 0; i < products.length; i++) {
+                        if (product_code === products[i].product_code) {
+                            //products[i].product_quantity  = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                            products[i].product_quantity = parseInt(product_quantity);
+                            n = 0;
+                            break;
+                        }
+                        else {
+                            n = 1;
+                        }
+                    }
+                    if (n == 1) {
+                        var len = products1.length;
+                        var string = {
+                            "entity_id": entity_id,
+                            "product_code": product_code,
+                            "title": title,
+                            "thumb": thumb,
+                            "price": price,
+                            "item_type": item_type,
+                            /*"weight":weight,
+                            "unit_option":unit_option,
+                            "unit_value":unit_value,*/
+                            "product_quantity": parseInt(product_quantity)
+                        };
+                        products.push(string);
+                    }
+                    localStorage.setItem("products", JSON.stringify(products));
+                    total(Request_url2);
+                }
+            }
+
+            load_cart(Request_url3, Request_url2);
         }
-
-        load_cart(Request_url3,Request_url2);
-
 
     });
 
