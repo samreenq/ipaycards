@@ -74,6 +74,16 @@
 
 						
 						<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
+						<li>
+							Topups
+							<ul class="navbar-nav mr-auto">
+								<li><a href="{!! url('/').'/topup/du' !!}" >Du</a></li>
+								<li><a href="{!! url('/').'/topup/etisalat' !!}" >Etisalat</a></li>
+								<li><a href="{!! url('/').'/fly_dubai' !!}" >Fly Dubai</a></li>
+								<li><a href="{!! url('/').'/addc' !!}" >addc</a></li>
+							</ul>
+
+						</li>
 					</ul>
 
 
