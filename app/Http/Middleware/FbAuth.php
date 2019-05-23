@@ -72,8 +72,8 @@ class FbAuth
 				//$appId = '547070199013117'; //Mehran Facebook App ID
 				//$appSecret = '85a38a289dd71be1d1213b5c7774848d'; //Mehran Facebook App Secret
 
-				$redirectURL = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; //Callback URL
-              //  $redirectURL = url('/');
+				// $redirectURL = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; //Callback URL
+                 $redirectURL = $request->fullUrl();
 				$fbPermissions = array('email');  //Optional permissions
 
 				$fb = new Facebook(array(
