@@ -1917,6 +1917,15 @@ function setSelect2MultiValue(form_id)
 
 }
 
+function clearSelect2(form_id)
+{
+    if($('form[name="'+form_id+'"] .select2-multiple').length > 0 ){
+        $('form[name="'+form_id+'"] .select2-multiple').each(function() {
+            $(this).select2('val', '');
+        });
+    }
+}
+
 function setDependForm()
 {
     //  var form_data = $('.entity_wrap').find('select, textarea, input').serialize();

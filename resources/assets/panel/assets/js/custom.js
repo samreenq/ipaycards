@@ -49,9 +49,11 @@ function dgSearch(dg) {
            /* $("select").multiselect({
                 selectAll: false
             });*/
-			$.each($('#entity-search-fields').find('select, textarea, input[type="text"],input[type="input"]'), function() {
+			$.each($('#entity-search-fields').find('select, textarea, input[type="text"],input[type="input"],input[type="hidden"]'), function() {
 				this.value = '';
 			});
+
+            clearSelect2('searchEntity');
 			dg_ajax_params = {};
 			dg.ajax.reload();
 		});
