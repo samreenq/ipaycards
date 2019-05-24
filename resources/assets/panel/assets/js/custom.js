@@ -58,6 +58,8 @@ function dgSearch(dg) {
 		// -search
 		$( 'a#grid_search', this.footer() ).on( 'click', function () {
 
+            setSelect2MultiValue('searchEntity');
+
 			var search_column = {};
 			$.each($('#entity-search-fields').find('select, textarea, input').serializeArray(), function() {
 				if(this.value != ""){

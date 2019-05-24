@@ -1910,7 +1910,7 @@ function setSelect2MultiValue(form_id)
             //console.log(selected_ids);
             var ele_id = $(this).attr('id');
             var ele_hidden_id =ele_id.replace("_select2", "");
-            $("#"+ele_hidden_id).val(selected_ids);
+            $('form[name="'+form_id+'"]').find("#"+ele_hidden_id).val(selected_ids);
 
         });
     }
