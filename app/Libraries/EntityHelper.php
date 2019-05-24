@@ -498,7 +498,7 @@ Class EntityHelper
                         $att_code = $listing_field->attribute_code;
 
                       // $field_value = empty($entity_attr->{$att_code}) ? '' : $entity_attr->{$att_code};
-                        $field_value = ($entity_attr->{$att_code} != '' || $entity_attr->{$att_code} === 0) ? $entity_attr->{$att_code} : '';
+                        $field_value = (isset($entity_attr->{$att_code}) && ($entity_attr->{$att_code} != '' || $entity_attr->{$att_code} === 0)) ? $entity_attr->{$att_code} : '';
                         //Get Attribute value to display
 
                        // echo "<pre>"; print_r($att_code.'-'.$field_value); continue;
