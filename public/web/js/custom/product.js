@@ -1270,7 +1270,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Request_ur
 		
 	}
 	
-	function product_list2(Request_url1,Request_url2,Request_url3,Request_url4,Entity_type_id,Category_id,Request_url,Product_detail_url,Request_url5,Product_form,Searchable_tags,Low_price,High_price,Offset,Limit)
+	function product_list2(Request_url1,Request_url2,Request_url3,Request_url4,Entity_type_id,Category_id,Request_url,Product_detail_url,Request_url5,Product_form,Searchable_tags,Low_price,High_price,brand_id,Offset,Limit)
 	{
 				$("#LoadingImageProducts").show();
 				$("#LoadingImageSearchProducts").show();
@@ -1287,6 +1287,7 @@ function newsAndPeakSeasons(Entity_type_id,Featured_type,Request_url1,Request_ur
 										searchable_tags		:	Searchable_tags		,
 										low_price			:	Low_price			,
 										high_price			:	High_price			,
+                                		brand_id			:	brand_id			,
 										offset				:	Offset				,
 										limit				:	Limit
 									},

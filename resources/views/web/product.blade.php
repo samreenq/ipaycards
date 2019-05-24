@@ -155,7 +155,7 @@
 													<input id="searchable_tags" name="searchable_tags" type="hidden" value="" />
 													<input id="category_id" name="category_id" type="hidden" value="" />
 													<input id="product_form" name="product_form" type="hidden" value="" />
-
+													<input id="brand_id" name="brand_id" type="hidden" value="" />
 
 													<div class="productSideFilter">
 														  <h4>Searchable tags</h4>
@@ -190,6 +190,23 @@
 
 														  </ul>
 													</div>
+
+												<div class="productSideFilter">
+													<h4>Brands</h4>
+													<ul>
+                                                        <?php
+                                                        if(isset($brand_ids))
+                                                        foreach($brand_ids as $brand_id)
+                                                        {
+															?>
+															<li><a class="brand_id search_filter" data-id="<?php echo $brand_id['id'];?>" data-attr="brand_id"   id="<?php echo $brand_id['id'];?>"><?php echo $brand_id['value'];?></a></li>
+															<?php
+                                                        }
+
+                                                        ?>
+
+													</ul>
+												</div>
 
 													<div class="productResetBtn">
 													<br />
@@ -417,6 +434,7 @@
 				$('#searchable_tags').val('');
 				$('#category_id').val('');
 				$('#product_form').val('');
+                $('#brand_id').val('');
 				
 				$('#low_price').val('1');
 				$('#amount').val('$1 - $<?php if(isset($price)) echo $price; ?>');
@@ -437,6 +455,7 @@
 				
 				category_id = $('#category_id').val();
 				searchable_tags	 = $('#searchable_tags').val();
+                brand_id	 = $('#brand_id').val();
 				
 				if($('#product_form').val().includes(","))
 					product_form=' ';
@@ -447,7 +466,7 @@
 				high_price = $('#high_price').val();
 				
 				//alert(low_price.length); 
-				if( category_id.length !==0 || searchable_tags.length !== 0 || product_form.length  !== 0 || low_price.length !==0 || high_price.length !==0 ) 
+				if( category_id.length !==0 || searchable_tags.length !== 0 || product_form.length  !== 0 || low_price.length !==0 || high_price.length !==0 || brand_id.length !== 0)
 				{
 					//alert('click');
 					limit = 12;
@@ -455,7 +474,7 @@
 					offset = (page  * limit) -  limit;
 					
 					
-					product_list2("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,offset,limit);
+					product_list2("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,brand_id,offset,limit);
 				
 				
 				
