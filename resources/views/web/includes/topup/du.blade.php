@@ -197,6 +197,7 @@
                                 <div class="fieldset-content">
                                     <div class="row">
                                         <div class="col-md-6 offset-md-3 text-center">
+                                            <span class="mt-3 mb-5 d-block check-circle"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
                                             <p class="mb-2">Your payment has been processed successfully and you booking is confirmed.</p>
                                             <p>Please check your email for booking details.</p>
                                         </div>
@@ -275,10 +276,9 @@
 @section("foot")
     @include("web/includes/foot")
 
-
-    <script src="<?php echo url('/').'/public/web/js/enscroll.min.js'?>"></script>
+    <script src="<?php echo url('/').'/public/web/js/enscroll.min.js';?>"></script>
     <script src="<?php echo url('/').'/public/web/js/select2.min.js'?>"></script>
-    <script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js';?>"></script>
+    <script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/jquery.validate.min.js'?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js'></script>
