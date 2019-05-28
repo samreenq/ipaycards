@@ -60,6 +60,11 @@ Class TopupsController extends WebController
         return View::make('web/includes/topup/addc',$data);
     }
 
+    public function otpSend(Request $request)
+    {
+
+    }
+
 
 
 }

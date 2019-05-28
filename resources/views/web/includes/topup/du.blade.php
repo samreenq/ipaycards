@@ -6,6 +6,7 @@
     @include("web/includes/head")
 
     <link href="<?php echo url('/').'/public/web/css/select2.css'; ?>" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/css/intlTelInput.css'>
 
 @endsection
 
@@ -56,8 +57,8 @@
                                         <div class="col-sm-4">
                                             <label for="mobileNumber" class="form-label m-0"><b>Enter mobile number:</b></label>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <input type="text" name="mobileNumber" class="form-control" id="mobileNumber" placeholder="(###) ###-####" />
+                                        <div class="input-group col-sm-8">
+                                            <input type="tel" name="mobileNumber" class="form-control w-100" id="mobileNumber" placeholder="(###) ###-####" />
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
@@ -291,6 +292,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js'></script>
     <script src="<?php echo url('/').'/public/web/js/verification-code.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/jquery.steps.min.js'?>"></script>
+    <script src="<?php echo url('/').'/public/web/js/wiz-form.js'?>"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/js/intlTelInput.min.js'></script>
+
 
 
     <script>
