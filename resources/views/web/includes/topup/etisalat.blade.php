@@ -6,6 +6,7 @@
     @include("web/includes/head")
 
     <link href="<?php echo url('/').'/public/web/css/select2.css'; ?>" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/css/intlTelInput.css'>
 
 @endsection
 
@@ -243,6 +244,7 @@
     <script src="<?php echo url('/').'/public/web/js/verification-code.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/jquery.steps.min.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/wiz-form.js'?>"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/js/intlTelInput.min.js'></script>
 
 
     <script>

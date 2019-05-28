@@ -6918,3 +6918,5 @@ input[type=number] {
 #form input::-moz-selection {background: transparent;}
 #form input::selection {background: transparent;}
 .check-circle i {color: #139cb4;font-size: 120px;}
+.intl-tel-input {
+    width: 100% !important;}
