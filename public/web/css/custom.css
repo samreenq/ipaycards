@@ -6880,7 +6880,7 @@ input[type=number] {
 .steps ul {justify-content: space-around;-moz-justify-content: space-around;-webkit-justify-content: space-around;-o-justify-content: space-around;-ms-justify-content: space-around;}
 .steps ul li {padding-right: 30px;padding-left: 0px;position: relative;}
 .steps ul li:last-child {padding-right: 0;}
-.steps ul li:after {position: absolute;width: 1px;height: 30px;content: "";background: #ebebeb;right: 18px;top: 50%;transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);-ms-transform: translateY(-50%);}
+.steps ul li:after {position: absolute;width: 1px;height: 30px;content: "";background: #ebebeb;right: 16px;top: 50%;transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);-ms-transform: translateY(-50%);}
 .steps ul li a {color: #000000;text-decoration: none;font-weight: bold;}
 .steps ul li:last-child:after {width: 0px;}
 .steps ul .current a {color: #139CB4;}
@@ -6896,7 +6896,7 @@ input[type=number] {
 .actions ul li:first-child a:hover {background-color: #dfdfdf;}
 .actions ul li a {width: 150px;height: 50px;color: #fff;background: #139CB4;align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: center;-moz-justify-content: center;-webkit-justify-content: center;-o-justify-content: center;-ms-justify-content: center;text-decoration: none;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;-o-border-radius: 5px;-ms-border-radius: 5px;transition: all .2s ease-in-out;}
 .actions ul li a:hover {background-color: rgba(19, 156, 180, 0.76);}
-.number {width: 31px;height: 31px;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: center;-moz-justify-content: center;-webkit-justify-content: center;-o-justify-content: center;-ms-justify-content: center;border: 2px solid #000000;margin-right: 15px;}
+.number {width: 31px;height: 31px;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: center;-moz-justify-content: center;-webkit-justify-content: center;-o-justify-content: center;-ms-justify-content: center;border: 2px solid #000000;margin-right: 10px;}
 .content h3 {display: none;}
 .fieldset-content .form-control:focus {border: 1px solid #139cb4; box-shadow: none}
 .fieldset-content {border-bottom: 1px solid #ebebeb;padding: 50px 0;}
