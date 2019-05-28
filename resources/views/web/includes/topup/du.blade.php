@@ -42,7 +42,10 @@
                 </div>--}}
                 <div class="col-md-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
                     <div class="dashboard-content panelled whitebg">
-                        <form role="form" method="post" id="signup-form" class="signup-form">
+                        <form role="form" method="post" id="topup-form" class="signup-form">
+                            <input type="hidden" name="number" id="number" value="" />
+                            <input type="hidden" name="amount" id="amount" value="" />
+                            <input type="hidden" name="recharge_type" id="recharge_type" value="" />
                             <h3>
                                 <span class="title_text">Infomation</span>
                             </h3>
@@ -62,7 +65,7 @@
                                             <label for="amount" class="form-label m-0"><b>Enter amount (AED):</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" name="amount" class="form-control" id="amount" placeholder="" />
+                                            <input type="text" name="customerAmount" class="form-control" id="customerAmount" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
@@ -72,16 +75,20 @@
                                         <div class="col-sm-8">
                                             <div class="d-flex">
                                                 <div class="custom-control custom-radio mb-2 mr-4">
-                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                    <input type="radio" id="customRadio1" name="chargeType" value="8" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio1">More International</label>
                                                 </div>
                                                 <div class="custom-control custom-radio mb-2 mr-4">
-                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                    <input type="radio" id="customRadio2" name="chargeType" value="5" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio2">More Credit</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                                    <input type="radio" id="customRadio3" name="chargeType" value="1" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio3">More Time</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio4" name="chargeType" value="9" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio4">More Data</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -284,10 +291,71 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js'></script>
     <script src="<?php echo url('/').'/public/web/js/verification-code.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/jquery.steps.min.js'?>"></script>
-    <script src="<?php echo url('/').'/public/web/js/wiz-form.js'?>"></script>
 
 
     <script>
+
+
+        var form = $("#topup-form");
+
+        form.steps({
+            headerTag: "h3",
+            bodyTag: "fieldset",
+            transitionEffect: "slideLeft",
+            labels: {
+                previous: 'Previous',
+                next: 'Next',
+                finish: 'Submit',
+                current: ''
+            },
+            titleTemplate: '<div class="title"><span class="number">#index#</span>#title#</div>',
+            onStepChanging: function(event, currentIndex, newIndex) {
+                form.validate().settings.ignore = ":disabled,:hidden";
+                // console.log(form.steps("getCurrentIndex"));
+                console.log(currentIndex,newIndex);
+
+                var move = true;
+                if (currentIndex == 0) {
+                    move = true;
+
+                    $('#number').val($('#mobileNumber').val());
+                    $('#amount').val($('#customerAmount').val());
+                    $('#recharge_type').val($('input[name="chargeType"]:checked').val());
+
+                    /*$.ajax({
+                        type: 'POST',
+                        url: "Reservation.aspx/SomeFunction",
+                        data: serializeData({  }),
+                        contentType: "application/json",
+                        dataType: 'json',
+                        async: false,
+                        cache: false,
+                        timeout: 30000,
+                        success: function (data) {
+                            move = data.d;
+                            return true;
+                        },
+                        error: ajaxLoadError
+                    });*/
+                }
+                return move;
+           // saveState: true
+
+             // return form.valid();
+            },
+            onFinishing: function(event, currentIndex) {
+                form.validate().settings.ignore = ":disabled";
+                //console.log(getCurrentIndex);
+                return form.valid();
+            },
+            onFinished: function(event, currentIndex) {
+                alert('Sumited');
+            }
+
+        });
+
+
+
 
         load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
         total("{{ route('total_price') }}");
