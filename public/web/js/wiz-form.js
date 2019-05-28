@@ -7,7 +7,7 @@
         },
         rules: {
             username: {
-                required: true,
+                required: true
             },
             email: {
                 required: true,
@@ -21,7 +21,7 @@
         },
         onfocusout: function(element) {
             $(element).valid();
-        },
+        }
     });
     form.steps({
         headerTag: "h3",
@@ -41,7 +41,7 @@
         },
         onFinishing: function(event, currentIndex) {
             form.validate().settings.ignore = ":disabled";
-            console.log(getCurrentIndex);
+            //console.log(getCurrentIndex);
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
@@ -62,8 +62,8 @@
         equalTo: ""
     });
 
-    $('#button').click(function () {
+    /*$('#button').click(function () {
         $("input[type='file']").trigger('click');
-    })
+    })*/
 
 })(jQuery);
