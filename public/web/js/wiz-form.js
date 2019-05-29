@@ -36,12 +36,12 @@
         titleTemplate: '<div class="title"><span class="number">#index#</span>#title#</div>',
         onStepChanging: function(event, currentIndex, newIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
-            // console.log(form.steps("getCurrentIndex"));
+           // console.log(form.steps("getCurrentIndex"));
             return form.valid();
         },
         onFinishing: function(event, currentIndex) {
             form.validate().settings.ignore = ":disabled";
-            //console.log(getCurrentIndex);
+           //console.log(getCurrentIndex);
             return form.valid();
         },
         onFinished: function(event, currentIndex) {

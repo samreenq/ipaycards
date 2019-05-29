@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Libraries\Custom\TopupLib;
 use App\Libraries\System\Entity;
 
 use View;
@@ -20,6 +21,7 @@ Class TopupsController extends WebController
      */
     private $_object_library_entity;
 
+    private $_apiData = array();
 
     /**
      * Sets the $_customer_wallet with wallet Transaction Helper object and
@@ -60,8 +62,42 @@ Class TopupsController extends WebController
         return View::make('web/includes/topup/addc',$data);
     }
 
-    public function otpSend(Request $request)
+    /**
+     * @param Request $request
+     */
+    public function sendTopup(Request $request)
     {
+        try {
+            // assign to output
+
+            //process Payment
+
+            //Send Topup
+            $params = $request->all();
+            $params['customer_no'] = "+971589802894";
+           // $params['customer_no'] = "+".$request->customer_no;
+
+            $topup_lib = new TopupLib();
+            $return =  $topup_lib->mobileTopup($params);
+           // echo "<pre>"; print_r($return); exit;
+            if(isset($return['data'])){
+                $this->_apiData['data'] = $return['data'];
+            }
+            if(isset($return['response'])){
+                $this->_apiData['response'] = $return['response'];
+            }
+
+            $this->_apiData['error'] = $return['error'];
+
+            // message
+            $this->_apiData['message'] = $return['message'];
+
+        } catch ( \Exception $e ) {
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
 
     }
 

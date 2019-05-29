@@ -44,6 +44,7 @@
                 <div class="col-md-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
                     <div class="dashboard-content panelled whitebg">
                         <form role="form" method="post" id="topup-form" class="signup-form">
+                            <input type="hidden" name="dial_code" id="dial_code" value="" />
                             <input type="hidden" name="number" id="number" value="" />
                             <input type="hidden" name="amount" id="amount" value="" />
                             <input type="hidden" name="recharge_type" id="recharge_type" value="" />
@@ -53,6 +54,7 @@
                             <fieldset>
                                 <h2 class="mt-4">Enter Your Personal details</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert1 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
                                             <label for="mobileNumber" class="form-label m-0"><b>Enter mobile number:</b></label>
@@ -69,21 +71,21 @@
                                             <input type="text" name="customerAmount" class="form-control" id="customerAmount" placeholder="" />
                                         </div>
                                     </div>
-                                    <div class="form-group row align-items-center">
+                                    <div class="form-group row">
                                         <div class="col-sm-4">
                                          <label for="amount" class="form-label mb-3"><b>More options:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <div class="d-flex">
-                                                <div class="custom-control custom-radio mb-2 mr-4">
+                                            <div class="">
+                                                <div class="custom-control custom-radio mb-2">
                                                     <input type="radio" id="customRadio1" name="chargeType" value="8" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio1">More International</label>
                                                 </div>
-                                                <div class="custom-control custom-radio mb-2 mr-4">
+                                                <div class="custom-control custom-radio mb-2">
                                                     <input type="radio" id="customRadio2" name="chargeType" value="5" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio2">More Credit</label>
                                                 </div>
-                                                <div class="custom-control custom-radio">
+                                                <div class="custom-control custom-radio mb-2">
                                                     <input type="radio" id="customRadio3" name="chargeType" value="1" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio3">More Time</label>
                                                 </div>
@@ -108,12 +110,13 @@
 
                                 <h2 class="mt-4">Verification Your Phone</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert2 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
                                             <label for="mobileNumber" class="form-label m-0"><b>Mobile number:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>+0012258888</b></span>
+                                            <span><b id="selectedMobile">+0012258888</b></span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
@@ -121,7 +124,7 @@
                                             <label for="amount" class="form-label m-0"><b>Amount:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>350</b> AED</span>
+                                            <span><b id="selectedAmount">350</b> AED</span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
@@ -131,7 +134,7 @@
                                         <div class="col-sm-8">
                                             <div class="custom-control custom-radio m-0">
                                                 <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-                                                <label class="custom-control-label" for="customRadio1">More International</label>
+                                                <label class="custom-control-label" for="customRadio1" id="selectedType">More International</label>
                                             </div>
                                         </div>
                                     </div>
@@ -142,10 +145,10 @@
                                         <div class="col-sm-8">
                                             <div id="form">
                                                 <div class="d-flex" id="form">
-                                                    <input class="form-control ml-0" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                                    <input class="form-control ml-0"  name="otp[]" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
                                                 </div>
                                                 <span>Enter OTP you recieved on the above number. <a href="#">Resend OTP</a></span>
                                             </div>
@@ -165,13 +168,14 @@
                             <fieldset>
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert3 alert-danger" style="display: none;"></div>
                                     <div id="credit">
                                         <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input class="form-control cc-number" maxlength="19" name="credit-number" pattern="\d*" placeholder="Card Number" type="tel" />
+                                                <input class="form-control cc-number" maxlength="19" id="card_number" name="card_number" pattern="\d*" placeholder="Card Number" type="tel" />
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -179,7 +183,7 @@
                                                 <label for="cvc" class="form-label m-0"><b>Card Expiry:</b></label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input class="form-control cc-expires" maxlength="7" name="credit-expires" pattern="\d*" placeholder="MM / YY" type="tel" />
+                                                <input class="form-control cc-expires" maxlength="7" id="expiry_date" name="expiry_date" pattern="\d*" placeholder="MM / YY" type="tel" />
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -187,7 +191,7 @@
                                                 <label for="cvc" class="form-label m-0"><b>CVC:</b></label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <input class="form-control cc-cvc" maxlength="4" name="credit-cvc" pattern="\d*" placeholder="CVC" type="tel" />
+                                                <input class="form-control cc-cvc" maxlength="4" id="cvc" name="cvc" pattern="\d*" placeholder="CVC" type="tel" />
                                             </div>
                                         </div>
                                     </div>
@@ -296,9 +300,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/js/intlTelInput.min.js'></script>
 
 
-
     <script>
-
 
         var form = $("#topup-form");
 
@@ -320,42 +322,125 @@
 
                 var move = true;
                 if (currentIndex == 0) {
-                    move = true;
 
+                    $('.alert1').hide();
+
+                    var move = false;
                     $('#number').val($('#mobileNumber').val());
                     $('#amount').val($('#customerAmount').val());
                     $('#recharge_type').val($('input[name="chargeType"]:checked').val());
 
-                    /*$.ajax({
-                        type: 'POST',
-                        url: "Reservation.aspx/SomeFunction",
-                        data: serializeData({  }),
-                        contentType: "application/json",
-                        dataType: 'json',
+                    var countryData = $("#mobileNumber").intlTelInput("getSelectedCountryData");
+                    var dial_code = countryData.dialCode;
+                    console.log(dial_code);
+
+                    $('#dial_code').val(dial_code);
+
+                    var selected_type = $('input[name="chargeType"]:checked').next('label').text();
+
+                    $('#selectedMobile').text(''); $('#selectedMobile').text(dial_code+$('#mobileNumber').val());
+                    $('#selectedAmount').text(''); $('#selectedAmount').text($('#customerAmount').val());
+                    $('#selectedType').text(''); $('#selectedType').text(selected_type);
+
+                    $.ajax({
+                        url: "<?php echo url('api/service/otp/send'); ?>",
+                        type: "POST",
                         async: false,
-                        cache: false,
-                        timeout: 30000,
-                        success: function (data) {
-                            move = data.d;
-                            return true;
-                        },
-                        error: ajaxLoadError
-                    });*/
+                        dataType: "json",
+                        data: {"vendor": "authy","country_code":dial_code,"phone_number":$('#mobileNumber').val()},
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if(data.error == 1){
+                            $('.alert1').text('');
+                            $('.alert1').text(data.message);
+                            $('.alert1').show();
+                            move = false;
+                        }else{
+                            move = true;
+                        }
+                        console.log('step1',move);
+                       // return move;
+                    });
                 }
+                if (currentIndex == 1) {
+
+                    $('.alert2').hide();
+
+                    var otp = '';
+                    $('input[name^="otp"]').each(function() {
+                       // alert($(this).val());
+                        otp += $(this).val();
+                        console.log(otp);
+                    });
+
+                    $.ajax({
+                        url: "<?php echo url('api/service/otp/verify'); ?>",
+                        type: "GET",
+                        async: false,
+                        dataType: "json",
+                        data: {"vendor": "authy","country_code":$('#dial_code').val(),"phone_number":$('#mobileNumber').val(),"verification_code":otp},
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if(data.error == 1){
+                            move = false;
+                            $('.alert2').text('');
+                            $('.alert2').text(data.message);
+                            $('.alert2').show();
+                        }else{
+                            move = true;
+                        }
+                        console.log('step2-',move);
+                        // return move;
+                    });
+                }
+                if (currentIndex == 2) {
+
+                    $('.alert3').hide();
+
+                    $.ajax({
+                        url: "<?php echo url('topup/send'); ?>",
+                        type: "POST",
+                        async: false,
+                        dataType: "json",
+                        data: {
+                            "_token": "{!! csrf_token() !!}",
+                            "service_type": "du",
+                            "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
+                            "recharge_type":$('#recharge_type').val(),
+                            "amount":$('#amount').val(),
+                            "card_number":$('#card_number').val(),
+                            "expiry_date":$('#expiry_date').val(),
+                            "cvc":$('#cvc').val()
+                        },
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if(data.error == 1){
+                            move = false;
+                            $('.alert3').text('');
+                            $('.alert3').text(data.message);
+                            $('.alert3').show();
+
+                        }else{
+                            move = true;
+                        }
+                        console.log('step3-',move);
+                        // return move;
+                    });
+                }
+
                 return move;
-           // saveState: true
+           //
 
              // return form.valid();
             },
-            onFinishing: function(event, currentIndex) {
-                form.validate().settings.ignore = ":disabled";
-                //console.log(getCurrentIndex);
-                return form.valid();
-            },
-            onFinished: function(event, currentIndex) {
-                alert('Sumited');
-            }
 
+            saveState: true
         });
 
 
