@@ -44,6 +44,7 @@
                 <div class="col-md-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
                     <div class="dashboard-content panelled whitebg">
                         <form role="form" method="post" id="topup-form" class="signup-form">
+                            <input type="hidden" name="service_type" id="service_type" value="du" />
                             <input type="hidden" name="dial_code" id="dial_code" value="" />
                             <input type="hidden" name="number" id="number" value="" />
                             <input type="hidden" name="amount" id="amount" value="" />
@@ -325,6 +326,27 @@
 
                     $('.alert1').hide();
 
+                    if($('#mobileNumber').val() == ''){
+                        $('.alert1').show();
+                        $('.alert1').text('');
+                        $('.alert1').text('The phone number field is required.');
+                        return false;
+                    }
+
+                    if($('#customerAmount').val() == ''){
+                        $('.alert1').show();
+                        $('.alert1').text('');
+                        $('.alert1').text('The amount field is required.');
+                        return false;
+                    }
+
+                    if($('input[name="chargeType"]:checked').length == 0){
+                        $('.alert1').show();
+                        $('.alert1').text('');
+                        $('.alert1').text('Please select recharge type');
+                        return false;
+                    }
+
                     var move = false;
                     $('#number').val($('#mobileNumber').val());
                     $('#amount').val($('#customerAmount').val());
@@ -408,7 +430,7 @@
                         dataType: "json",
                         data: {
                             "_token": "{!! csrf_token() !!}",
-                            "service_type": "du",
+                            "service_type": $('#service_type').val(),
                             "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
                             "recharge_type":$('#recharge_type').val(),
                             "amount":$('#amount').val(),

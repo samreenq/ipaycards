@@ -43,7 +43,7 @@ Class TopupLib
                 $one_prepay_lib = new Topup('one_prepay');
 
                 // init vars
-                $params = $request->all();
+                $params = $request;
                 $response = NULL;
 
                 // get product denomination (product code for one_prepay)
