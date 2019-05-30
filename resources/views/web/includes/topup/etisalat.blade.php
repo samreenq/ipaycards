@@ -76,6 +76,7 @@
                                 <h2 class="mt-4">Verification Your Phone</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert2 alert-danger" style="display: none;"></div>
+                                    <div class="alert alert-success success-msg2" style="display: none;"></div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
                                             <label for="mobileNumber" class="form-label m-0"><b>Mobile number:</b></label>
@@ -275,6 +276,7 @@
                 // console.log(form.steps("getCurrentIndex"));
                 console.log(currentIndex,newIndex);
 
+                $('.success-msg2').hide();
                 var move = true;
                 if (currentIndex == 0) {
 
@@ -409,6 +411,37 @@
 
             saveState: true
         });
+
+        $('#resend_otp').on('click',function(){
+
+            $('.success-msg2').hide();
+
+            $.ajax({
+                url: "<?php echo url('api/service/otp/send'); ?>",
+                type: "POST",
+                async: false,
+                dataType: "json",
+                data: {"vendor": "authy","country_code":$('#dial_code').val(),"phone_number":$('#mobileNumber').val()},
+                beforeSend: function () {
+                }
+            }).done(function (data) {
+
+                if(data.error == 1){
+                    $('.alert2').text('');
+                    $('.alert2').text(data.message);
+                    $('.alert2').show();
+
+                }else{
+                    $('.success-msg2').show();
+                    $('.success-msg2').text('');
+                    $('.success-msg2').text('Code successfully sent');
+                }
+                // return move;
+            });
+
+
+        });
+
         load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
         total("{{ route('total_price') }}");
         add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
