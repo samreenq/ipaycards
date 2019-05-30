@@ -225,6 +225,7 @@ Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDisc
     Route::get('/brand', "Web\ProductController@getAllBrands")->name('brand');
     Route::get('/product/all_brand', "Web\ProductController@getBrandsAll")->name('all_brand');
     Route::any('/topup/send', "Web\TopupsController@sendTopup")->name('send_topup');
+    Route::any('/service_topup/send', "Web\TopupsController@sendServiceTopup")->name('send_service_topup');
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');

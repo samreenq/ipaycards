@@ -100,7 +100,39 @@ Class TopupsController extends WebController
         return $this->_apiData;
 
     }
+    public function sendServiceTopup(Request $request)
+    {
+        try {
+            // assign to output
 
+            //process Payment
+
+            //Send Topup
+            $params = $request->all();
+
+            $topup_lib = new TopupLib();
+            $return =  $topup_lib->serviceTopup($params);
+            // echo "<pre>"; print_r($return); exit;
+            if(isset($return['data'])){
+                $this->_apiData['data'] = $return['data'];
+            }
+            if(isset($return['response'])){
+                $this->_apiData['response'] = $return['response'];
+            }
+
+            $this->_apiData['error'] = $return['error'];
+
+            // message
+            $this->_apiData['message'] = $return['message'];
+
+        } catch ( \Exception $e ) {
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
+
+    }
 
 
 }

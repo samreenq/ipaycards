@@ -32,13 +32,18 @@
             <div class="row">
                 <div class="col-md-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
                     <div class="dashboard-content panelled whitebg">
-                        <form role="form" method="post" id="signup-form" class="signup-form">
+                        <form role="form" method="post" id="topup-form" class="signup-form">
+                            <input type="hidden" name="service_type" id="service_type" value="fly_dubai" />
+                            <input type="hidden" name="customer_no" id="customer_no" value="" />
+                            <input type="hidden" name="request_key" id="request_key" value="" />
+                            <input type="hidden" name="amount" id="amount" value="" />
                             <h3>
                                 <span class="title_text">Infomation</span>
                             </h3>
                             <fieldset>
                                 <h2 class="mt-4">Enter Your Personal details</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert1 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
                                             <label for="pnrNumber" class="form-label m-0"><b>Enter PNR number:</b></label>
@@ -61,12 +66,13 @@
 
                                 <h2 class="mt-4">Verification Your Phone</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert2 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
                                             <label for="pnrNumber" class="form-label m-0"><b>PNR number:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>KJ27QM</b></span>
+                                            <span><b id="pnrNumberText">KJ27QM</b></span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
@@ -74,34 +80,27 @@
                                             <label class="form-label m-0"><b>Contact name:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>Andrew</b></span>
+                                            <span><b id="customerNameText">Andrew</b></span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
-                                            <label class="form-label m-0"><b>Confirmation number:</b></label>
+                                            <label class="form-label m-0"><b>Amount:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>KJ27QM</b></span>
+                                            <span><b id="amountText">25</b></span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <div class="col-sm-4">
-                                            <label class="form-label m-0"><b>Reservation balance:</b></label>
+                                            <label class="form-label m-0"><b>Info:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b>123</b></span>
+                                            <span><b id="infoText">123</b></span>
                                         </div>
                                     </div>
-                                    <div class="form-group row align-items-center">
-                                        <div class="col-sm-4">
-                                            <label class="form-label m-0"><b>Currency:</b></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <span><b>USD</b></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row align-items-center">
+
+                                    {{--<div class="form-group row align-items-center">
                                         <div class="col-sm-12">
                                             <label class="form-label m-0 mt-4"><b>Payment information:</b></label>
                                         </div>
@@ -129,7 +128,7 @@
                                         <div class="col-sm-8">
                                             <span><b>USD </b>385</span>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
 
                                 <div class="fieldset-footer">
@@ -144,6 +143,7 @@
                             <fieldset>
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
+                                    <div class="alert alert3 alert-danger" style="display: none;"></div>
                                     <div id="credit">
                                         <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
@@ -275,6 +275,138 @@
 
 
     <script>
+
+        var form = $("#topup-form");
+
+
+        form.steps({
+            headerTag: "h3",
+            bodyTag: "fieldset",
+            transitionEffect: "slideLeft",
+            labels: {
+                previous: 'Previous',
+                next: 'Next',
+                finish: 'Submit',
+                current: ''
+            },
+            titleTemplate: '<div class="title"><span class="number">#index#</span>#title#</div>',
+            onStepChanging: function(event, currentIndex, newIndex) {
+                form.validate().settings.ignore = ":disabled,:hidden";
+                // console.log(form.steps("getCurrentIndex"));
+                console.log(currentIndex,newIndex);
+
+                $('.success-msg2').hide();
+
+                var move = true;
+                if (currentIndex == 0) {
+
+                    $('.alert1').hide();
+
+                    if($('#pnrNumber').val() == ''){
+                        $('.alert1').show();
+                        $('.alert1').text('');
+                        $('.alert1').text('The PNR number field is required.');
+                        return false;
+                    }
+
+
+                    var move = false;
+                    $('#customer_no').val($('#pnrNumber').val());
+
+
+
+                    $.ajax({
+                        url: "<?php echo url('api/service/topup/service_check'); ?>",
+                        type: "POST",
+                        async: false,
+                        dataType: "json",
+                        data: {"service_type": $('#service_type').val(),"customer_no":$('#pnrNumber').val()},
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if(data.error == 1){
+                            $('.alert1').text('');
+                            $('.alert1').text(data.message);
+                            $('.alert1').show();
+                            move = false;
+                        }else{
+                            $('#amount').val(data.data.amount);
+                            $('#request_key').val(data.data.request_key);
+
+                            var str = data.data.info;
+                            var res = str.replace(/\n/g, "<br />");
+
+                            console.log('updated',res);
+                            $('#pnrNumberText').text(''); $('#pnrNumberText').text($('#customer_no').val());
+                            $('#customerNameText').text(''); $('#customerNameText').text(data.data.customer_name);
+                            $('#amountText').text(''); $('#amountText').text(data.data.amount);
+                            $('#infoText').text(''); $('#infoText').html(res);
+
+                            move = true;
+                        }
+                        console.log('step1',move);
+                        // return move;
+                    });
+                }
+                if (currentIndex == 1) {
+
+                    $('.alert2').hide();
+
+                    if($('#amount').val() == '' || $('#customer_no').val() == '' || $('#request_key').val() == '' || $('#service_type').val() == ''){
+                        move = false;
+                        $('.alert2').text('');
+                        $('.alert2').text('Please proceed again few fields are missing');
+                        $('.alert2').show();
+                    }else{
+                        move = true;
+                    }
+                }
+                if (currentIndex == 2) {
+
+                    $('.alert3').hide();
+
+                    $.ajax({
+                        url: "<?php echo url('service_topup/send'); ?>",
+                        type: "POST",
+                        async: false,
+                        dataType: "json",
+                        data: {
+                            "_token": "{!! csrf_token() !!}",
+                            "service_type": $('#service_type').val(),
+                            "customer_no":$('#customer_no').val(),
+                            "request_key":$('#request_key').val(),
+                            "amount":$('#amount').val(),
+                            "card_number":$('#card_number').val(),
+                            "expiry_date":$('#expiry_date').val(),
+                            "cvc":$('#cvc').val()
+                        },
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if(data.error == 1){
+                            move = false;
+                            $('.alert3').text('');
+                            $('.alert3').text(data.message);
+                            $('.alert3').show();
+
+                        }else{
+                            move = true;
+                        }
+                        console.log('step3-',move);
+                        // return move;
+                    });
+                }
+
+                return move;
+                //
+
+                // return form.valid();
+            },
+
+            saveState: true
+        });
 
         load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
         total("{{ route('total_price') }}");

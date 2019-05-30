@@ -120,6 +120,76 @@ Class TopupLib
 
         return $this->_apiData;
     }
+    /**
+     * Service Topup
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function serviceTopup($request)
+    {
+        // validation
+        $validation = validator($request, [
+            'service_type' => 'required|in:fly_dubai,addc',
+            'customer_no' => 'required|string|min:5',
+            'amount' => 'required|numeric|min:1',
+            'request_key' => 'required|string|min:5',
+        ]);
+
+        if ( $validation->fails() ) {
+            $this->_apiData['message'] = $validation->errors()->first();
+        } else {
+
+            try {
+
+                // load library
+                $one_prepay_lib = new Topup('one_prepay');
+
+                // init vars
+                $params = $request;
+                $response = NULL;
+
+                // get product denomination (product code for one_prepay)
+                $products = $one_prepay_lib->products([
+                    'brand' => $params['service_type']
+                ]);
+                $denomination = $products['denominations'][0]['denomination_id'];
+
+                try {
+                    // send
+                    $response = $one_prepay_lib->sendVerified([
+                        'account_no' => $params['customer_no'],
+                        'amount' => $params['amount'],
+                        'denomination_id' => $denomination,
+                        'request_key' => $params['request_key'],
+                    ]);
+
+                } catch ( \Exception $e ) {
+                    // if load credit, let it continue to other API
+                    throw new \Exception($e->getMessage());
+                }
+
+
+                // assign to output
+                $this->_apiData['data'] = $response;
+                $this->_apiData['response'] = "success";
+                $this->_apiData['error'] = 0;
+
+                // message
+                $this->_apiData['message'] = trans('system.success');
+
+
+            } catch ( \Exception $e ) {
+                $this->_apiData['message'] = $e->getMessage();
+                $this->_apiData['trace'] = $e->getTraceAsString();
+            }
+
+        }
+
+
+        return $this->_apiData;
+    }
 
 
 
