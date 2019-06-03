@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Service;
 
 use App\Http\Controllers\Controller;
 use App\Libraries\Services\Topup;
+use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 
 
@@ -283,7 +284,22 @@ class TopupController extends Controller
 					}
 					
 				}
-				
+
+                //Save Topup History
+                $arr = array(
+                    'entity_type_id' => 'topup',
+                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
+                    'customer_no' => $params['customer_no'],
+                    'amount' => $params['amount'],
+                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
+                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
+                    'source' => isset($params['source']) ? $params['source'] : '',
+                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
+                    'topup_response' => isset($response) ? json_encode($response) : '',
+                );
+
+                $entity_lib = new Entity();
+                $entity_lib->apiPost($arr);
 				
 				// assign to output
 				$this->_apiData['data'] = $response;
@@ -439,8 +455,23 @@ class TopupController extends Controller
 					// if load credit, let it continue to other API
 					throw new \Exception($e->getMessage());
 				}
-				
-				
+
+                //Save Topup History
+                $arr = array(
+                    'entity_type_id' => 'topup',
+                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
+                    'customer_no' => $params['customer_no'],
+                    'amount' => $params['amount'],
+                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
+                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
+                    'source' => isset($params['source']) ? $params['source'] : '',
+                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
+                    'topup_response' => isset($response) ? json_encode($response) : '',
+                );
+
+                $entity_lib = new Entity();
+                $entity_lib->apiPost($arr);
+
 				// assign to output
 				$this->_apiData['data'] = $response;
 				$this->_apiData['response'] = "success";

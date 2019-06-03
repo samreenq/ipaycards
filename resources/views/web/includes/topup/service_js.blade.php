@@ -37,7 +37,6 @@
                     return false;
                 }
 
-
                 var move = false;
                 $('#customer_no').val($('#pnrNumber').val());
 
@@ -109,7 +108,8 @@
                         "amount": $('#amount').val(),
                         "card_number": $('#card_number').val(),
                         "expiry_date": $('#expiry_date').val(),
-                        "cvc": $('#cvc').val()
+                        "cvc": $('#cvc').val(),
+                        "source" : "web"
                     },
                     beforeSend: function () {
                     }

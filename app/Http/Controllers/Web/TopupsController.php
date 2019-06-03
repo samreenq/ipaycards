@@ -77,6 +77,9 @@ Class TopupsController extends WebController
             $params['customer_no'] = "+971589802894";
            // $params['customer_no'] = "+".$request->customer_no;
 
+            $params['reference_id'] = ($params['source'] == 'web') ? $request->getClientIp(true) : '';
+           // echo "<pre>"; print_r($params); exit;
+
             $topup_lib = new TopupLib();
             $return =  $topup_lib->mobileTopup($params);
            // echo "<pre>"; print_r($return); exit;
@@ -87,7 +90,9 @@ Class TopupsController extends WebController
                 $this->_apiData['response'] = $return['response'];
             }
 
-            $this->_apiData['error'] = $return['error'];
+            if(isset($return['error'])){
+                $this->_apiData['error'] = $return['error'];
+            }
 
             // message
             $this->_apiData['message'] = $return['message'];
@@ -109,6 +114,7 @@ Class TopupsController extends WebController
 
             //Send Topup
             $params = $request->all();
+            $params['reference_id'] = ($params['source'] == 'web') ? $request->getClientIp(true) : '';
 
             $topup_lib = new TopupLib();
             $return =  $topup_lib->serviceTopup($params);

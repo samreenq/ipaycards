@@ -8,6 +8,7 @@
 namespace App\Libraries\Custom;
 
 use App\Libraries\Services\Topup;
+use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 
 Class TopupLib
@@ -33,6 +34,7 @@ Class TopupLib
         ]);
 
         if ( $validation->fails() ) {
+            $this->_apiData['error'] = 1;
             $this->_apiData['message'] = $validation->errors()->first();
         } else {
 
@@ -76,10 +78,19 @@ Class TopupLib
 
                             } catch ( \Exception $e ) {
                                 // if load credit, let it continue to other API
-                                throw new \Exception($e->getMessage());
+                                //throw new \Exception($e->getMessage());
+                                $this->_apiData['error'] = 1;
+                                $this->_apiData['message'] = $e->getMessage();
+                                $this->_apiData['trace'] = $e->getTraceAsString();
+                                return  $this->_apiData;
                             }
-                        } else
-                            throw new \Exception($e->getMessage());
+                        } else{
+                            // throw new \Exception($e->getMessage());
+                            $this->_apiData['error'] = 1;
+                            $this->_apiData['message'] = $e->getMessage();
+                            $this->_apiData['trace'] = $e->getTraceAsString();
+                            return  $this->_apiData;
+                        }
 
                     }
 
@@ -95,15 +106,37 @@ Class TopupLib
 
                     } catch ( \Exception $e ) {
                         // if load credit, let it continue to other API
-                        throw new \Exception($e->getMessage());
+                      // throw new \Exception($e->getMessage());
+                        $this->_apiData['error'] = 1;
+                        $this->_apiData['message'] = $e->getMessage();
+                        $this->_apiData['trace'] = $e->getTraceAsString();
+                        return  $this->_apiData;
                     }
 
                 }
 
 
+                //Save Topup History
+                $arr = array(
+                    'entity_type_id' => 'topup',
+                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
+                    'customer_no' => $params['customer_no'],
+                    'amount' => $params['amount'],
+                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
+                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
+                    'source' => isset($params['source']) ? $params['source'] : '',
+                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
+                    'topup_response' => isset($response) ? json_encode($response) : '',
+                );
+
+              //  echo "<pre>"; print_r($arr);
+                $entity_lib = new Entity();
+                $resp = $entity_lib->apiPost($arr);
+               // echo "<pre>"; print_r($resp);
+
                 // assign to output
                 $this->_apiData['data'] = $response;
-                $this->_apiData['response'] = "success";
+                $this->_apiData['response'] = trans('system.success');
                 $this->_apiData['error'] = 0;
 
                 // message
@@ -111,6 +144,7 @@ Class TopupLib
 
 
             } catch ( \Exception $e ) {
+                $this->_apiData['error'] = 1;
                 $this->_apiData['message'] = $e->getMessage();
                 $this->_apiData['trace'] = $e->getTraceAsString();
             }
@@ -138,6 +172,7 @@ Class TopupLib
         ]);
 
         if ( $validation->fails() ) {
+            $this->_apiData['error'] = 1;
             $this->_apiData['message'] = $validation->errors()->first();
         } else {
 
@@ -167,13 +202,32 @@ Class TopupLib
 
                 } catch ( \Exception $e ) {
                     // if load credit, let it continue to other API
-                    throw new \Exception($e->getMessage());
+                  //  throw new \Exception($e->getMessage());
+                    $this->_apiData['error'] = 1;
+                    $this->_apiData['message'] = $e->getMessage();
+                    $this->_apiData['trace'] = $e->getTraceAsString();
                 }
 
 
+                //Save Topup History
+                $arr = array(
+                    'entity_type_id' => 'topup',
+                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
+                    'customer_no' => $params['customer_no'],
+                    'amount' => $params['amount'],
+                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
+                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
+                    'source' => isset($params['source']) ? $params['source'] : '',
+                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
+                    'topup_response' => isset($response) ? json_encode($response) : '',
+                );
+
+                $entity_lib = new Entity();
+                $entity_lib->apiPost($arr);
+
                 // assign to output
                 $this->_apiData['data'] = $response;
-                $this->_apiData['response'] = "success";
+                $this->_apiData['response'] = trans('system.success');
                 $this->_apiData['error'] = 0;
 
                 // message
@@ -181,6 +235,7 @@ Class TopupLib
 
 
             } catch ( \Exception $e ) {
+                $this->_apiData['error'] = 1;
                 $this->_apiData['message'] = $e->getMessage();
                 $this->_apiData['trace'] = $e->getTraceAsString();
             }
