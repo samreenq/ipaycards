@@ -1425,6 +1425,21 @@ Class EntityTrigger
             return $response;
         }
 
+        //Check if products are duplicating
+        $product_ids = [];
+        foreach ($request->depend_entity as $depend_entity) {
+            $product_id = $depend_entity['product_id'];
+
+            if (in_array($product_id,$product_ids)) {
+                $response['error'] = TRUE;
+                $response['message'] = 'Products are duplicating.';
+
+                return $response;
+            }
+
+            $product_ids[] = $product_id;
+        }
+
     }
 	
 }
