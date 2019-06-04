@@ -82,7 +82,7 @@
 								<a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>
 								<a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>
 								<a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
-								<a class="dropdown-item" href="{!! url('/').'/addc' !!}">addc</a>
+								<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
 							</div>
 						</li>
 						{{--<li>

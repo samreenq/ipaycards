@@ -212,7 +212,7 @@
                 e.preventDefault();
                 $('#resend_otp').removeAttr('href');
 
-                var timeLeft = 30;
+                var timeLeft = 60;
                 var elem = document.getElementById('time');
                 var timerId = setInterval(countdown, 1000);
 
