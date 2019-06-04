@@ -299,7 +299,19 @@ class TopupController extends Controller
                 );
 
                 $entity_lib = new Entity();
-                $entity_lib->apiPost($arr);
+                $topup_response = $entity_lib->apiPost($arr);
+                $topup_response = json_decode(json_encode($topup_response));
+
+                //  echo "<pre>"; print_r($inventory_response);
+                if (isset($topup_response->data->entity->entity_id)) {
+                    $param = array(
+                        'entity_type_id' => 'topup',
+                        'entity_id' => $topup_response->data->entity->entity_id,
+                        'topup_no' => 'T'.$topup_response->data->entity->entity_id,
+                    );
+
+                    $entity_lib->apiUpdate($param);
+                }
 				
 				// assign to output
 				$this->_apiData['data'] = $response;
@@ -470,7 +482,19 @@ class TopupController extends Controller
                 );
 
                 $entity_lib = new Entity();
-                $entity_lib->apiPost($arr);
+                $topup_response = $entity_lib->apiPost($arr);
+                $topup_response = json_decode(json_encode($topup_response));
+
+                //  echo "<pre>"; print_r($inventory_response);
+                if (isset($topup_response->data->entity->entity_id)) {
+                    $param = array(
+                        'entity_type_id' => 'topup',
+                        'entity_id' => $topup_response->data->entity->entity_id,
+                        'topup_no' => 'T'.$topup_response->data->entity->entity_id,
+                    );
+
+                    $entity_lib->apiUpdate($param);
+                }
 
 				// assign to output
 				$this->_apiData['data'] = $response;
