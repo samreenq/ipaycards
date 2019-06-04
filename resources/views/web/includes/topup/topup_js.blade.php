@@ -182,8 +182,9 @@
         saveState: true
     });
 
-    $('#resend_otp').on('click',function(){
 
+    var handler = function(e){
+        //code here
         $('.success-msg2').hide();
 
         $.ajax({
@@ -201,15 +202,50 @@
                 $('.alert2').text(data.message);
                 $('.alert2').show();
 
+
             }else{
                 $('.success-msg2').show();
                 $('.success-msg2').text('');
                 $('.success-msg2').text('Code successfully sent');
+
+                $('#time').show();
+                e.preventDefault();
+                $('#resend_otp').removeAttr('href');
+
+                var timeLeft = 30;
+                var elem = document.getElementById('time');
+                var timerId = setInterval(countdown, 1000);
+
+                function countdown() {
+                    if (timeLeft == -1) {
+                        clearTimeout(timerId);
+                        doSomething();
+                    } else {
+
+                        elem.innerHTML = timeLeft + ' seconds remaining';
+                        timeLeft--;
+                    }
+                }
+
+                function doSomething() {
+                    $('#time').hide();
+
+                    $('#resend_otp').on("click",handler);
+                    $('#resend_otp').attr('href','javascript:void(0)');
+                }
+
+                $('#resend_otp').off("click",handler);
             }
             // return move;
         });
+    }
+
+    $('#resend_otp').on("click",handler);
+    $('#resend_otp').on('click',function(e){
 
 
     });
+
+
 
 </script>

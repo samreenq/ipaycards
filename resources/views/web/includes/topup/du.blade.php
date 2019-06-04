@@ -153,6 +153,7 @@
                                                     <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
                                                 </div>
                                                 <span>Enter OTP you recieved on the above number. <a href="javascript:void(0);" id="resend_otp">Resend OTP</a></span>
+                                                <span id="time" style="display: none;"></span>
                                             </div>
                                         </div>
                                     </div>
