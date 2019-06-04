@@ -3,6 +3,7 @@
 use App\Http\Models\Custom\OrderFlat;
 use App\Http\Models\FlatTable;
 use App\Http\Models\Notification;
+use App\Http\Models\SYSCategory;
 use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSEntityAuth;
 use App\Http\Models\SYSEntityHistory;
@@ -1030,7 +1031,10 @@ Class EntityTrigger
 		}
 		
 		if ( $request->item_type == 'deal' ) {
-			$return['category_id'] = "7";
+		    $sys_category_model = new SYSCategory();
+		    $category = $sys_category_model->where('slug','deal')->first();
+
+			$return['category_id'] = isset($category->category_id) ? $category->category_id : '';
 		}
 		
 		if ( isset($return) ) {
@@ -1059,7 +1063,10 @@ Class EntityTrigger
 		}
 		
 		if ( $request->item_type == 'deal' ) {
-			$return['category_id'] = "7";
+            $sys_category_model = new SYSCategory();
+            $category = $sys_category_model->where('slug','deal')->first();
+
+            $return['category_id'] = isset($category->category_id) ? $category->category_id : '';
 		}
 		
 		if ( isset($return) ) {
