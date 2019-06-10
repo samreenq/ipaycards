@@ -1910,11 +1910,20 @@ function setSelect2MultiValue(form_id)
             //console.log(selected_ids);
             var ele_id = $(this).attr('id');
             var ele_hidden_id =ele_id.replace("_select2", "");
-            $("#"+ele_hidden_id).val(selected_ids);
+            $('form[name="'+form_id+'"]').find("#"+ele_hidden_id).val(selected_ids);
 
         });
     }
 
+}
+
+function clearSelect2(form_id)
+{
+    if($('form[name="'+form_id+'"] .select2-multiple').length > 0 ){
+        $('form[name="'+form_id+'"] .select2-multiple').each(function() {
+            $(this).select2('val', '');
+        });
+    }
 }
 
 function setDependForm()

@@ -6874,3 +6874,49 @@ input[type=number] {
     height: 159px;
 }
 /*End AS CSS*/
+
+/* Wizard Form css */
+.steps {display: flex;align-items: center;justify-content: center;background-color: #f7f7f7;padding: 12px 20px;}
+.steps ul {justify-content: space-around;-moz-justify-content: space-around;-webkit-justify-content: space-around;-o-justify-content: space-around;-ms-justify-content: space-around;}
+.steps ul li {padding-right: 30px;padding-left: 0px;position: relative;}
+.steps ul li:last-child {padding-right: 0;}
+.steps ul li:after {position: absolute;width: 1px;height: 30px;content: "";background: #ebebeb;right: 16px;top: 50%;transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);-ms-transform: translateY(-50%);}
+.steps ul li a {color: #000000;text-decoration: none;font-weight: bold;}
+.steps ul li:last-child:after {width: 0px;}
+.steps ul .current a {color: #139CB4;}
+.steps ul .current a .number {border: 2px solid #139CB4;}
+.steps ul .done a {color: #139CB4;}
+.steps ul .done a .number {position: relative;font-size: 0px;border: 2px solid #139CB4;}
+.steps ul .done a .number:after {position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 14px;font-family: 'FontAwesome';content: '\f00c';font-weight: bold;}
+.actions {position: absolute;right: 35px;bottom: 19px;}
+.actions ul {align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: flex-end;-moz-justify-content: flex-end;-webkit-justify-content: flex-end;-o-justify-content: flex-end;-ms-justify-content: flex-end;width: 100%; }
+.actions ul .disabled {display: none;}
+.actions ul li {margin-left: 10px;}
+.actions ul li:first-child a {background: #f8f8f8;color: #999;}
+.actions ul li:first-child a:hover {background-color: #dfdfdf;}
+.actions ul li a {width: 150px;height: 50px;color: #fff;background: #139CB4;align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: center;-moz-justify-content: center;-webkit-justify-content: center;-o-justify-content: center;-ms-justify-content: center;text-decoration: none;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;-o-border-radius: 5px;-ms-border-radius: 5px;transition: all .2s ease-in-out;}
+.actions ul li a:hover {background-color: rgba(19, 156, 180, 0.76);}
+.number {width: 31px;height: 31px;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;-o-border-radius: 50%;-ms-border-radius: 50%;align-items: center;-moz-align-items: center;-webkit-align-items: center;-o-align-items: center;-ms-align-items: center;justify-content: center;-moz-justify-content: center;-webkit-justify-content: center;-o-justify-content: center;-ms-justify-content: center;border: 2px solid #000000;margin-right: 10px;}
+.content h3 {display: none;}
+.fieldset-content .form-control:focus {border: 1px solid #139cb4; box-shadow: none}
+.fieldset-content {border-bottom: 1px solid #ebebeb;padding: 50px 0;}
+.fieldset-footer {padding: 32px 0 10px;}
+.fieldset-footer span {color: #999;}
+#val, #button, .steps ul, .actions ul, .actions ul li a, .title, .number {display: flex;display: -webkit-flex;align-items: center;}
+.fieldset-content .form-control::-webkit-input-placeholder {color:#ced4da;font-size: 14px;}
+.fieldset-content .form-control::-moz-placeholder { /* Firefox 19+ */color:#ced4da;font-size: 14px;}
+.fieldset-content .form-control:-ms-input-placeholder { /* IE 10+ */color:#ced4da;font-size: 14px;}
+.fieldset-content .form-control:-moz-placeholder { /* Firefox 18- */color:#ced4da;font-size: 14px;}
+.fieldset-content .custom-control-input:checked~.custom-control-label::before {background-color: #139cb4;}
+.fieldset-content .custom-radio .custom-control-input:checked~.custom-control-label::before {background-color: #139cb4;}
+.custom-control-input:focus~.custom-control-label::before {box-shadow: none;outline: none;}
+
+/**/
+#form input {margin: 0 5px;text-align: center;line-height: 24px;font-size: 24px;border: solid 1px #ccc;box-shadow: 0 0 5px #ccc inset;outline: none;width: 40px;transition: all 0.2s ease-in-out;border-radius: 3px;padding: 5px;}
+#form span {font-size: 12px;}
+#form input:focus {border-color: #139cb4;box-shadow: 0 0 4px #139cb4 inset;}
+#form input::-moz-selection {background: transparent;}
+#form input::selection {background: transparent;}
+.check-circle i {color: #139cb4;font-size: 120px;}
+.intl-tel-input {
+    width: 100% !important;}

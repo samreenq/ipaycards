@@ -18,11 +18,12 @@ Class VendorOrderLogs extends Base
         $this->__table = $this->table = 'vendor_order_logs';
     }
 
-    public function add($vendor,$order_id,$order_item_id,$product_id,$params,$response)
+    public function add($vendor,$order_id,$order_item_id,$order_stock_id,$product_id,$params,$response)
     {
         $this->vendor = $vendor;
         $this->order_id = $order_id;
         $this->order_item_id = $order_item_id;
+        $this->order_stock_id = $order_stock_id;
         $this->product_id = $product_id;
         $this->request_params = json_encode($params);
         $this->response = json_encode($response);

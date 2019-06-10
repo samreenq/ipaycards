@@ -408,7 +408,7 @@
 			load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
 			total("{{ route('total_price') }}");			
 			add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
-			newsAndPeakSeasons(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}","{{ route('add_to_cart') }}","{{ route('total_price') }}");
+			newsAndPeakSeasons(14,1,"{{ route('newsAndPeakSeasons') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}");
 		
 			signin("{{ route('signin') }}");
 			//signup("{{ route('signup') }}");
@@ -537,20 +537,23 @@
 				$(".incr-btn").on("click", function (e) {
 					var $button = $(this);
 					var oldValue = $button.parent().find('.quantity').val();
-					$button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
-					if ($button.data('action') == "increase") {
-						var newVal = parseFloat(oldValue) + 1;
-					} else {
-						// Don't allow decrementing below 1
-						if (oldValue > 1) {
-							var newVal = parseFloat(oldValue) - 1;
-						} else {
-							newVal = 1;
-							$button.addClass('inactive');
-						}
-					}
-					$button.parent().find('.quantity').val(newVal);
-					e.preventDefault();
+
+                    if((oldValue <= 4 && $button.data('action') == "increase") || $button.data('action') == "decrease") {
+                        $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
+                        if ($button.data('action') == "increase") {
+                            var newVal = parseFloat(oldValue) + 1;
+                        } else {
+                            // Don't allow decrementing below 1
+                            if (oldValue > 1) {
+                                var newVal = parseFloat(oldValue) - 1;
+                            } else {
+                                newVal = 1;
+                                $button.addClass('inactive');
+                            }
+                        }
+                        $button.parent().find('.quantity').val(newVal);
+                        e.preventDefault();
+                    }
 				});
 				
 				

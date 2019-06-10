@@ -49,14 +49,18 @@ function dgSearch(dg) {
            /* $("select").multiselect({
                 selectAll: false
             });*/
-			$.each($('#entity-search-fields').find('select, textarea, input[type="text"],input[type="input"]'), function() {
+			$.each($('#entity-search-fields').find('select, textarea, input[type="text"],input[type="input"],input[type="hidden"]'), function() {
 				this.value = '';
 			});
+
+            clearSelect2('searchEntity');
 			dg_ajax_params = {};
 			dg.ajax.reload();
 		});
 		// -search
 		$( 'a#grid_search', this.footer() ).on( 'click', function () {
+
+            setSelect2MultiValue('searchEntity');
 
 			var search_column = {};
 			$.each($('#entity-search-fields').find('select, textarea, input').serializeArray(), function() {
@@ -188,8 +192,24 @@ $(function () {
     //App.initHelpers('table-tools');
 	// Init page helpers (Summernote + CKEditor plugins)
 	//App.initHelpers(['summernote', 'ckeditor']);
-	
-	
+
+    $.ucfirst = function(str) {
+
+        var text = str;
+        var parts = text.split(' '),
+            len = parts.length,
+            i, words = [];
+        for (i = 0; i < len; i++) {
+            var part = parts[i];
+            var first = part[0].toUpperCase();
+            var rest = part.substring(1, part.length);
+            var word = first + rest;
+            words.push(word);
+
+        }
+
+        return words.join(' ');
+    };
 	
 	/**
 	* Miscellenous Events

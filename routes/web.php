@@ -209,7 +209,10 @@ Route::get('/product', "Web\ProductController@getAllProduct")->name('product');
 Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts")->name('product_promotion');
 Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
     Route::get('/product/brand', "Web\ProductController@getBrandProducts")->name('brand_products');
-
+    Route::any('/topup/du', "Web\TopupsController@du")->name('du');
+    Route::any('/topup/etisalat', "Web\TopupsController@etisalat")->name('etisalat');
+    Route::any('/fly_dubai', "Web\TopupsController@flyDubai")->name('fly_dubai');
+    Route::any('/addc', "Web\TopupsController@addc")->name('addc');
 
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
@@ -221,6 +224,8 @@ Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDisc
 
     Route::get('/brand', "Web\ProductController@getAllBrands")->name('brand');
     Route::get('/product/all_brand', "Web\ProductController@getBrandsAll")->name('all_brand');
+    Route::any('/topup/send', "Web\TopupsController@sendTopup")->name('send_topup');
+    Route::any('/service_topup/send', "Web\TopupsController@sendServiceTopup")->name('send_service_topup');
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');

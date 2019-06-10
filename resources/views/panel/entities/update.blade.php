@@ -431,6 +431,22 @@ $fields = new $fields();
                     }
                   <?php } ?>
 
+                  <?php if($entity_data->identifier == "promotion_discount"){ ?>
+
+
+                  $(document).on('change',"#coupon_type",function(){
+
+                      var bulk_id =  $(this).parents('div.bulk_entity_raw').attr('id');
+                      var discount_text = 'Discount';
+
+                      var change_text = $(this).val();
+                      $('#'+bulk_id).find('.discount_field label.field-label').text('');
+                      $('#'+bulk_id).find('.discount_field label.field-label').text($.ucfirst(change_text)+' '+discount_text);
+                      //console.log(bulk_id)
+                  });
+
+        <?php } ?>
+
     });
 
     $(document).ready(function() {

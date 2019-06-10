@@ -97,7 +97,8 @@ class ProductController extends WebController
 								//'product_type'		=>	1,
 								'category_id'		=>	$request->input('category_id'),
 							//	'category_form'		=>	$request->input('category_form'),
-							//	'searchable_tags'	=>	$request->input('searchable_tags'),
+								'searchable_tags'	=>	$request->input('searchable_tags'),
+                                'brand_id'	=>	$request->input('brand_id'),
 								'range_fields'		=>	'price',
                                 'status'            => 1,
                                // 'availability' => 1,
@@ -448,7 +449,6 @@ class ProductController extends WebController
 	
 	public function getAllProduct(Request $request) 
 	{
-
         $data['cat_id'] = isset($request->category_id) ? $request->category_id : '';
 
         if(isset($request->category_id)){
@@ -543,6 +543,7 @@ class ProductController extends WebController
 		$data['price'] = isset($json2['data']['product_tags'][0]['price']) ?  $json2['data']['product_tags'][0]['price'] : 0;
 		$data['searchable_tags'] = isset($json2['data']['product_tags'][0]['searchable_tags']) ?  $json2['data']['product_tags'][0]['searchable_tags'] : null;
 		//$data['product_form'] = isset($json2['data']['product_tags'][0]['product_form']) ?  $json2['data']['product_tags'][0]['product_form'] : null;
+        $data['brand_ids'] = isset($json2['data']['product_tags'][0]['brand_ids']) ?  $json2['data']['product_tags'][0]['brand_ids'] : null;
 
         if($data['price'] > 0){
             $data['price'] = round($data['price']);
@@ -855,6 +856,96 @@ class ProductController extends WebController
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
 			return  View::make('web/includes/product/cart_list',$data)->__toString();
 		}  
+    }
+    public function _addToCart(Request $request)
+    {
+        $rules  =  array(	'data' =>  'required'		);
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails())
+        {
+            return '';
+        }
+        else
+        {
+            $order_cart = [];
+            $requested_products = [];
+            $final_cart = [];
+            $product = $request->input('data');
+
+
+            if (isset($product)){
+
+                foreach($product as $p){
+                    $entity_ids[] = $p['entity_id'];
+                    $requested_products[$p['entity_id']] = $p['product_quantity'];
+
+                }
+
+                $product_ids = implode(',',$entity_ids);
+
+                $params = array(
+                    'entity_type_id' => 'product',
+                    'entity_id' => $product_ids,
+                    'mobile_json' => 1,
+                    'in_detail' => 1,
+                    'limit' => -1
+                );
+
+                $response = $this->_object_library_entity->apiList($params);
+                $response = json_decode(json_encode($response));
+
+                // echo "<pre>"; print_r($response); exit;
+                if($response->error == 0 && isset($response->data->product)){
+
+                    foreach($response->data->product as $productAtrributes){
+
+                        if ($productAtrributes->status->value == 1) {
+
+                            if(!empty($productAtrributes->promotion_discount_amount)){
+                                $price = $productAtrributes->promotion_discount_amount;
+                            }else{
+                                $price = $productAtrributes->price;
+                            }
+
+                            $quantity = $requested_products[$productAtrributes->entity_id];
+
+                            //  $subtotal = $subtotal + ($quantity * $price);
+                            // $total_cart_products++;
+
+                            $order_cart[] = [
+                                'product_id' => $productAtrributes->entity_id,
+                                'quantity' =>$quantity,
+                            ];
+
+                            $gallery = isset($productAtrributes->gallery[0]) ? $productAtrributes->gallery : false;
+                            $image = Fields::getGalleryImage($gallery,'product','thumb');
+
+                            $final_cart[] = array(
+                                'entity_id' => $productAtrributes->entity_id,
+                                'product_code' => $productAtrributes->product_code,
+                                'title' => $productAtrributes->product_code,
+                                'thumb' => $image,
+                                'price' => $price,
+                                'product_quantity' => $quantity,
+                                'item_type' => $productAtrributes->item_type->value,
+                            );
+
+                        }
+                    }
+
+                }
+            }
+
+            //Save Cart
+            if (isset($this->_customerId) && $this->_customerId > 0){
+                $order_cart_lib = new OrderCart();
+                $order_cart_lib->saveCart($this->_customerId,json_encode($order_cart));
+            }
+
+            $data['products'] = $final_cart;
+            $data['currency'] = $this->_object_library_general_setting->getCurrency();
+            return  View::make('web/includes/product/cart_list',$data)->__toString();
+        }
     }
 	public function deleteToWishlist(Request $request) 
 	{

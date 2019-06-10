@@ -33,7 +33,7 @@
 					//Get image of product
    				 $gallery = isset($attributes['gallery'][0]) ? json_decode(json_encode($attributes['gallery'])) : false;
    				 $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
-				
+    				$thumb = \App\Libraries\Fields::getGalleryImage($gallery, 'product', 'thumb');
 			?>
 					
 					<div class="col-xs-12 col-sm-6 col-lg-6">
@@ -43,7 +43,7 @@
 								<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
 								<input type="hidden" class="product_code" value="<?php if(isset($attributes["attributes"]['product_code'])) echo $attributes["attributes"]['product_code'] ?>" />
 								<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
-								<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
+								<input type="hidden" class="thumb" value="<?php echo $thumb; ?>" />
 								<input type="hidden" class="price" value="<?php echo $price; ?>" />
 							<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
@@ -56,8 +56,7 @@
 										<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
 										<input type="hidden" class="product_code" value="<?php if(isset($attributes["attributes"]['product_code'])) echo $attributes["attributes"]['product_code'] ?>" />
 										<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
-										<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
-										<input type="hidden" class="price" value="<?php echo $price; ?>" />
+									<input type="hidden" class="thumb" value="<?php echo $thumb; ?>" /><input type="hidden" class="price" value="<?php echo $price; ?>" />
 										<input class="quantity" type="hidden" name="product_quantity" value="1"/>
 									<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
@@ -72,8 +71,7 @@
 											<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
 											<input type="hidden" class="product_code" value="<?php if(isset($attributes["attributes"]['product_code'])) echo $attributes["attributes"]['product_code'] ?>" />
 											<input type="hidden" class="title" value="<?php if(isset($attributes["attributes"]['title'])) echo $attributes["attributes"]['title']; ?>" />
-											<input type="hidden" class="thumb" value="<?php if(isset($attributes['gallery'][0]['file'])) echo $attributes['gallery'][0]['file']; ?>" />
-											<input type="hidden" class="price" value="<?php echo $price; ?>" />
+											<input type="hidden" class="thumb" value="<?php echo $thumb; ?>" /><input type="hidden" class="price" value="<?php echo $price; ?>" />
 											<input class="quantity" type="number" name="product_quantity" value="1" readonly/>
 											<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 

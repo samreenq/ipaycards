@@ -241,7 +241,7 @@ class PLAttachment extends Base {
 			// resize image instance
 			$size = explode('x', $size);
 			//$img->resize($size[0], $size[0]); // creates image {width}x{height}
-			$img->fit($size[0]); // fits image as per width
+			$img->fit(config('constants.MIN_IMAGE_WIDTH'),config('constants.MIN_IMAGE_HEIGHT')); // fits image as per width
 			// insert a watermark
 			//$img->insert($path.$prefix.$filename);
 			// save image in desired format, and return path

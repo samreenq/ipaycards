@@ -265,7 +265,7 @@ class WalletController extends WebController
 
                     //Update Order Item
                     $params = array(
-                        'entity_type_id' => 'order_item',
+                        'entity_type_id' => 'order_item_deal',
                         'entity_id' => $validate_gift->entity_id,
                         'is_redeem' => 1
                     );

@@ -171,7 +171,8 @@ Class OrderFlat extends Base
 
     public function checkVendorStockOrder($order_id)
     {
-        $query = "SELECT COUNT(entity_id) AS total_count FROM order_item_flat WHERE order_id = $order_id AND order_from = 'vendor_stock'";
+        //$query = "SELECT COUNT(entity_id) AS total_count FROM order_item_flat WHERE order_id = $order_id AND order_from = 'vendor_stock'";
+        $query = "SELECT COUNT(entity_id) AS total_count FROM order_item_deal_flat WHERE order_id = $order_id AND order_from = 'vendor_stock'";
         //echo $query;
         $row = \DB::select($query);
         return isset($row[0]->total_count) ? $row[0]->total_count : 0;
@@ -183,12 +184,11 @@ Class OrderFlat extends Base
         //  AND o.created_at < '$date'
         $date = date('Y-m-d');
         $query = "SELECT o.entity_id 
-            FROM order_item_flat oi
+            FROM order_item_deal_flat oi
             LEFT JOIN order_flat o ON o.entity_id = oi.order_id
             LEFT JOIN order_statuses_flat os ON o.order_status = os.entity_id
             WHERE os.keyword = 'pending'
             AND oi.order_from = 'vendor_stock' 
-            AND o.entity_id = 8018
             GROUP BY oi.order_id";
 
         $row = \DB::select($query);

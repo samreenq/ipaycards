@@ -526,10 +526,14 @@ class CategoryController extends Controller
                             }
                             else{
                                 $category_ids = $this->_entity_model->getChildCategories($record->category_id);
-                               // echo "<pre>"; print_r($category_ids); exit;
                             }
                            // echo "<pre>"; print_r($category_ids); exit;
-                            if ($category_ids) {
+                            if (!empty($category_ids)) {
+                                $and = '';
+                                foreach(explode(',',$category_ids) as $cat_id){
+                                    $and .= ($and == '') ? " AND " : " OR ";
+                                    $and .= " FIND_IN_SET('".$cat_id."',category_id)";
+                                }
 
                                 $params = [
                                     'entity_type_id' => 'product',
@@ -538,9 +542,10 @@ class CategoryController extends Controller
                                     'limit' => 4,
                                 ];
 
-                                $params['where_condition'] = "AND category_id IN ($category_ids)";
-
-
+                                if(!empty($and)){
+                                    $params['where_condition'] = $and;
+                                }
+                               // echo "<pre>"; print_r($params); exit;
                                 $products_list = $entity_lib->apiList($params);
                                 $products_list = json_decode(json_encode($products_list));
 
