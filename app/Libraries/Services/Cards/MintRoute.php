@@ -46,7 +46,7 @@ class MintRoute
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function categories()
+	public function xcategories()
 	{
 		try {
 			// init request
@@ -81,6 +81,62 @@ class MintRoute
 			
 			throw new \Exception($e->getMessage());
 		}
+		
+	}
+	
+	
+	/**
+	 * Categories
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function categories()
+	{
+		// init params
+		$params = [];
+		
+		// collect params
+		$params = json_encode([
+			'username' => config('service.MINT_ROUTE.username'),
+			'password' => config('service.MINT_ROUTE.password'),
+			'data' => count($params) > 0 ? [ $params ] : []
+		]);
+		
+		
+		try {
+			
+			$call = $this->_client->post(
+				config('service.MINT_ROUTE.endpoint_url')
+				. 'category',
+				[ 'headers' => [
+					'Content-Type' => 'application/json'
+				],
+					'form_params' => [
+						'token' => config('service.MINT_ROUTE.pub_key'),
+						'postedinfo' => AesCtr::encrypt(
+							$params,
+							config('service.MINT_ROUTE.pvt_key'),
+							config('service.MINT_ROUTE.enc_bits')
+						)
+					]
+				]
+			);
+			
+			$response = $call->getBody()->getContents();
+			
+			return json_decode($response);
+			
+			
+		} catch ( BadResponseException $e ) {
+			//$response = json_decode($e->getResponse()->getBody()->getContents());
+			$response = $e->getResponse()->getBody()->getContents();
+			$response = strip_tags($response, "<p>");
+			throw new \Exception($response);
+		} catch ( \Exception $e ) {
+			throw new \Exception($e->getMessage());
+		}
+		
 		
 	}
 	
