@@ -50,7 +50,7 @@ Class PaymentLib
             $response = $call->getBody()->getContents();
 
             $order_payment_logs = new OrderPaymentLogs();
-            $order_payment_logs->add('create_session',$request->lead_order_id,$params,$response);
+            $order_payment_logs->add('create_session',$request->lead_order_id,$params,json_decode($response));
 
             return json_decode($response);
 
@@ -80,7 +80,7 @@ Class PaymentLib
             $response = $call->getBody()->getContents();
 
             $order_payment_logs = new OrderPaymentLogs();
-            $order_payment_logs->add('payment_status',$request->order_id,['order_id'=>$request->order_id],$response);
+            $order_payment_logs->add('payment_status',$request->order_id,['order_id'=>$request->order_id],json_decode($response));
 
             return json_decode($response);
 

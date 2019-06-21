@@ -22,7 +22,7 @@ Class OrderPaymentLogs extends Base
     {
         $this->method = $method;
         $this->lead_order_id = $lead_order_id;
-        $this->request_params = json_encode($params);
+        $this->request = json_encode($params);
         $this->response = json_encode($response);
         $this->created_at = date('Y-m-d H:i:s');
         $this->save();
