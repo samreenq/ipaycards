@@ -41,22 +41,32 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="order-Confirm whitebg">
+
 						<img src="<?php echo url('/').'/public/web/img/confirm-order-fuirt-img.jpg'?>" alt="img"/>
-						<h2>Congratulations!</h2>
-						<h4>Order <?php echo isset($order_number) ? $order_number : ''; ?> is confirmed</h4>
-						<p>It will be delivered soon to your desired location</p>
-						<br /><br />
-						<!--
-								<div class="orderConfirnmSm">
-									<p>Share to</p>
-									<ul>
-										<li><a href="#" class="twitter"><span class="icon-tt-twitter-icon"></span></a></li>
-										<li><a href="#" class="facebook"><span class="icon-tt-facebook-icon"></span></a></li>
-									</ul>
-								</div>
-						-->
-						<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">
-					</div>
+						<div class="error-message"></div>
+
+						<div class="order-pending">
+							<h2>Wait...</h2>
+							<p>Please Wait While order is processing for Transaction Order ID : <span id="lead_order_id"></span></p>
+						</div>
+						<div class="order-done hide">
+							<h2>Congratulations!</h2>
+							<h4>Order <span id="final_order_id"></span> is confirmed</h4>
+							<p>It will be delivered soon to your desired location</p>
+
+							<br /><br />
+							<!--
+									<div class="orderConfirnmSm">
+										<p>Share to</p>
+										<ul>
+											<li><a href="#" class="twitter"><span class="icon-tt-twitter-icon"></span></a></li>
+											<li><a href="#" class="facebook"><span class="icon-tt-facebook-icon"></span></a></li>
+										</ul>
+									</div>
+							-->
+							<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -180,6 +190,47 @@
 				//signup("{{ route('signup') }}");
 				referAFriend("{{ route('refer_a_friend') }}");
 				aboutBusiness("{{ route('aboutBusiness') }}")	;
+
+				$(document).ready(function(){
+
+                        console.log($('input[name="payment_method"]').val());
+
+                        var entity_id = localStorage.lead_order_id;
+                        var payment_method = localStorage.charge_type;
+
+                           if(entity_id  != undefined) {
+
+                               $('#lead_order_id').text(entity_id);
+
+                               $.ajax({
+                                   url: "{{ route('confirmation') }}",
+                                   type: 'post',
+                                   data: {_token: "{!! csrf_token() !!}", entity_id: entity_id,payment_method: payment_method},
+                                   dataType: 'json',
+                                   success: function (data) {
+                                       if (data.error == 0) {
+                                           $('.order-pending').addClass('hide');
+                                           $('.order-done').removeClass('hide');
+                                           $('#final_order_id').text(data.data.order_id);
+                                           localStorage.removeItem('products');
+                                           localStorage.removeItem('lead_order_id');
+                                           //window.location = site_url+'/checkout3/'+data.data.order_id;
+                                       } else {
+                                           // $('.add-to-cart').removeAttr('disabled');
+                                           $('.error-message').html('');
+                                           $('.error-message').append('<div class="alert alert-danger">' + data.message + '</div>');
+                                           return false;
+                                       }
+                                   }
+
+                               });
+                           }
+                           else{
+                               window.location.href = "{!! url('/') !!}";
+						   }
+
+
+				});
 			
 				
 				// Auto Adjust Height

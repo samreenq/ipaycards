@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Web\OrderEntity;
+use App\Libraries\Custom\PaymentLib;
 use Illuminate\Http\Input;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
@@ -154,7 +155,29 @@ class PaymentController extends WebController
 			$data['data'] =  json_encode($request->all()); 
 			return View::make('web/includes/payment/webpay', $data);
 		}
-	}	
+	}
+
+	public function getSessionID(Request $request)
+    {
+        try{
+
+            $payment_lib = new PaymentLib();
+            $this->_apiData['data'] = $payment_lib->getSessionID($request->all());
+
+
+        } catch ( \Exception $e ) {
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
+
+    }
+
+    public function paymentPage(Request $request)
+    {
+        return View::make('pay');
+    }
 
 
 }

@@ -188,6 +188,8 @@ Route::get('/termAndCondition', "Web\FaqController@termAndCondition")->name('ter
 
 Route::get('/saveorder', "Web\OrderController@saveOrder")->name('saveorder');
 Route::post('/confirmation', "Web\OrderController@confirmation")->name('confirmation');
+Route::post('/checkout_order', "Web\OrderController@checkoutOrder")->name('checkout_order');
+
 
 Route::get('/cart/add', "Web\ProductController@addToCart")->name('add_to_cart');
 Route::get('/wishlist/add', "Web\ProductController@addToWishlist")->name('add_to_wishlist');
@@ -300,7 +302,7 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/discount', "Web\CheckOutController@discountCalculation")->name('discount');
     Route::get('/checkout', "Web\CheckOutController@checkout")->name('checkout');
     Route::get('/time', "Web\CheckOutController@getAllTimeSlots")->name('delivery_slot');
-    Route::get('/checkout3/{id}', "Web\CheckOutController@checkoutCart");
+    Route::get('/checkout3', "Web\CheckOutController@checkoutCart");
     Route::get('/checkout4', "Web\CheckOutController@checkoutOrder")->name('checkout4');
 
     /*    Route::get('/checkout3', function () {
@@ -316,8 +318,8 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/wallet_list', "Web\WalletController@getAllCustomerTransactions")->name('customer_wallet_list');//customer_transactions
     Route::post('/redeem_card', "Web\WalletController@redeemCard")->name('redeem_card');//customer_transactions
     Route::post('/updateCart', "Web\CheckOutController@updateCart")->name('updateCart');
-
-
+    Route::post('/get_session', "Web\PaymentController@getSessionID")->name('get_session');
+    Route::get('/payment_page', "Web\PaymentController@paymentPage")->name('payment_page');
 });
 
 ///

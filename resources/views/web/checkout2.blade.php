@@ -62,6 +62,15 @@
 											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 
+                                        <?php  if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type == 'facebook' && $login_customer->auth->mobile_no == ''){ ?>
+
+										<div class="col-md-6 cuspad checkout_mobile_number">
+											<div class="fluid-label">
+												<input type="text" placeholder="Contact Number*" id="checkout_mobile_number" name="checkout_mobile_number"  value="{!! $login_customer->auth->mobile_no !!}">
+											</div>
+										</div>
+                                        <?php } ?>
+
                                         <div class="col-md-6 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
                                                 <input type="text" id="recipient_name" name="recipient_name"  placeholder="Recipient Name" />
@@ -89,7 +98,8 @@
 											</div>
 										</div>
 										<div class="col-md-12 addAddressWrap">
-												<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+												{{--<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
+											<input  type="button" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 										
 									</div>
@@ -99,12 +109,12 @@
 						 
 						<div class="paymentInfo whitebg">
 							<div class="payment-Header clearfix">
-								<h4 class="pull-left collapsed" role="button"  aria-expanded="false" aria-controls="collapseExample">Payment Info</h4>
+								<h4 class="pull-left collapsed" role="button"  aria-expanded="true" aria-controls="collapseExample">Payment Info</h4>
 							</div>
 							
 							
 
-							<div class="collapse" id="paymentinfo">
+							<div class="collapse show" id="paymentinfo">
 								<div class="paymentInfoForm">
 									<div class="payment-method">
 
@@ -113,11 +123,11 @@
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
 										<input type="hidden" name="payment_method"  id="payment_method" value="cod" >
 											<label for="crypto-currency">
-												Stripe
+												Master Card
 											</label>
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										</div>
-										
+
 										
 										<!--<div class="big-radio wallet cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
@@ -138,6 +148,9 @@
 											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
 										</div>-->
 										
+									</div>
+
+									<div class="payment-page">
 									</div>
 								</div>
 							</div>
@@ -227,34 +240,15 @@
 									?>
 									<form id="myform" name="myform" method="post" action="">
 										<input id="order_coupon_id" name="order_coupon_id" type="hidden" value="" />
-										<input id="entity_id" 			name="entity_id" type="hidden" value="" />
-										<input id="txn_ref" 			name="txn_ref" type="hidden" value="" />
-										<input id="product_id" 			name="product_id" type="hidden" value="" />
-										<input id="pay_item_id" 		name="pay_item_id" type="hidden" value="" />
-										<input id="amount" 				name="amount" type="hidden" value="" />
-										<input id="currency" 			name="currency" type="hidden" value="" />
-										<input id="site_redirect_url" 	name="site_redirect_url" type="hidden" value=""/>
-										<input id="cust_id" 			name="cust_id" type="hidden" value=""/>
-										<input id="site_name" 			name="site_name" type="hidden" value=""/>
-										<input id="cust_name" 			name="cust_name" type="hidden" value="" />
-										<input id="hash" 				name="hash" type="hidden" value="" />
 										<input id="checkout_mobile" 	name="checkout_mobile" type="hidden" value="{!! (isset($login_customer->auth->mobile_no)) ? $login_customer->auth->mobile_no: '' !!}" />
 										<input id="auth_platform_type" name="auth_platform_type" type="hidden" value="{!! (isset($login_customer->auth->platform_type)) ? $login_customer->auth->platform_type: '' !!}" />
 										{{ csrf_field() }}
 
 
-										<button  type="button" class="add-to-cart"  style="width: 100%;border: none;margin: 20px 0 15px ;background-color:#8080808f;" >Process Order</button>
+										<button  type="button" disabled="disabled" class="add-to-cart"  style="width: 100%;border: none;margin: 20px 0 15px ;background-color:#8080808f;" >Process Order</button>
 									</form>
 
-										<?php  if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type == 'facebook' && $login_customer->auth->mobile_no == ''){ ?>
 
-										<div class="row checkout_mobile_number">
-											<div class="fluid-label col-md-12 cuspad" fluid-label="">
-												<input type="text" placeholder="Contact Number*" id="checkout_mobile_number" name="checkout_mobile_number" style="top: 0px;" value="{!! $login_customer->auth->mobile_no !!}">
-												<label >Contact Number*</label>
-											</div>
-										</div>
-										<?php } ?>
 										<div class="error-message"></div>
 										<p class="text-center"><span class="icon-tt-lock-icon"></span> Secure SSL Checkout</p>
 									</div>
@@ -334,15 +328,23 @@
 
         $google_api_key = (isset($google_key->value)) ? $google_key->value : "";
 				?>
-		
+		<script>
+
+		</script>
+		<script src="https://ap-gateway.mastercard.com/checkout/version/51/checkout.js"
+				data-error="errorPayment"
+				data-cancel="cancelPayment"
+				data-complete="checkout3">
+		</script>
+
 		<script src="<?php echo url('/').'/public/web/js/enscroll.min.js'?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/select2.min.js'?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js';?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key={!! $google_api_key !!}&amp;libraries=places"></script>
 		<script src="<?php echo url('/').'/public/web/js/jquery.geocomplete.js'; ?>"></script>
-    
-    <script>
+
+		<script type="text/javascript">
 	
 		<?php 
 			if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
@@ -380,7 +382,78 @@
                 $('.recipient').show();
 			}
         });
-				
+
+	function cancelPayment()
+	{
+	    window.location.href = "{!! url('/').'/checkout2' !!}";
+	}
+
+        function errorPayment(error)
+        {
+            console.log('Erorr Payment',error)
+        }
+
+        var payment_merchant = 'TEST222204083001';
+
+        $('.add-to-cart').on('click',function(){
+
+            if($('#paid_amount').val() > 0) {
+
+                var amt = $("#paid_amount").val();
+                var amount = parseFloat(amt / 100);
+
+                localStorage.setItem('charge_type','master_card');
+
+                $.ajax({
+                    url: "{{ route('get_session') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                        "lead_order_id": $("#entity_id").val(),
+                        "amount": parseFloat($('#paid_amount').val())
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                        Checkout.configure({
+                            merchant: 'TEST222204083001',
+                            order: {
+                                amount: parseFloat($('#paid_amount').val()),
+                                currency: 'USD',
+                                description: 'Ordered goods',
+                                id: $("#entity_id").val()
+                            },
+                            session: {
+                                id: data.data.session.id
+                            },
+                            interaction: {
+                                merchant: {
+                                    name: 'iPayCards',
+                                    address: {
+                                        line1: '200 Sample St',
+                                        line2: '1234 Example Town'
+                                    }
+                                }
+                            }
+                        });
+
+                        setTimeout(
+                            function () {
+                                Checkout.showLightbox();
+                            }, 1000
+                        )
+
+                    },
+                    error: function (xhr, statusText, err) {
+                        //alert("Error:" + xhr.status);
+                        console.log("Error:" + xhr.getAllResponseHeaders());
+                    }
+                });
+            }
+            else{
+                localStorage.setItem('charge_type','cod');
+			}
+        });
   
       $(function(){
 		  
@@ -398,12 +471,19 @@
 		});*/
 
 		$("input.process_order").click(function(){
-			$(".paymentInfo").toggleClass("activeArrow");
+			//$(".paymentInfo").toggleClass("activeArrow");
 		});
-				
-		  
-		  $('.add-to-cart').on('click',function(){
 
+
+
+		  function testOrder(test)
+		  {
+		      console.log("Payment Complete",test);
+		      return;
+		  }
+		  
+		  function processFinalOrder()
+		  {
               console.log($('#paid_amount').val() );
 
               if($('#paid_amount').val() == 0){
@@ -417,70 +497,52 @@
               console.log($("input[name='payment_method']").val());
 
 
-		      if($('#myform').attr('action') == '' || $('#myform').attr('action') == undefined){
-                //  $('.add-to-cart').attr('disabled','disabled');
+              if($('#myform').attr('action') == '' || $('#myform').attr('action') == undefined){
+                  //  $('.add-to-cart').attr('disabled','disabled');
                   $('.error-message').html('');
                   $('.error-message').append('<div class="alert alert-danger">Please select all information to process order.</div>');
-			  }
-			  else{
+              }
+              else{
 
-		          if($('#checkout_mobile_number').length > 0){
 
-                      if($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() == ''){
 
-                          //$('.add-to-cart').attr('disabled','disabled');
-                          $('.error-message').html('');
-                          $('.error-message').append('<div class="alert alert-danger">The contact number is required to process order.</div>');
-                          return false;
-                      }
+                  console.log($('input[name="payment_method"]').val());
+                  if($('input[name="payment_method"]').val() != 'stripe'){
 
-                      if($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() != ''){
-                          $('#checkout_mobile').val($('#checkout_mobile_number').val());
-                      }
+                      $('.add-to-cart').attr('disabled','disabled');
+                      $.ajax ({
+                          url: "{{ route('confirmation') }}",
+                          type: 'post',
+                          data:  $('#myform').serialize(),
+                          dataType: 'json',
+                          success: function(data)
+                          {
+                              if(data.error == 0){
+                                  localStorage.removeItem('products');
+                                  window.location = site_url+'/checkout3/'+data.data.order_id;
+                              }
+                              else{
+                                  $('.add-to-cart').removeAttr('disabled');
+                                  $('.error-message').html('');
+                                  $('.error-message').append('<div class="alert alert-danger">'+data.message+'</div>');
+                                  return false;
+                              }
+                          }
 
+                      });
+
+
+                  }else{
+                      $('.add-to-cart').removeAttr('disabled');
+                      $('.alert-danger').remove();
+                      localStorage.removeItem('products');
+                      $('#myform').submit();
                   }
 
 
-						  console.log($('input[name="payment_method"]').val());
-						  if($('input[name="payment_method"]').val() != 'stripe'){
 
-                              $('.add-to-cart').attr('disabled','disabled');
-                              $.ajax ({
-                                  url: "{{ route('confirmation') }}",
-                                  type: 'post',
-                                  data:  $('#myform').serialize(),
-                                  dataType: 'json',
-                                  success: function(data)
-                                  {
-                                      if(data.error == 0){
-                                          localStorage.removeItem('products');
-                                         window.location = site_url+'/checkout3/'+data.data.order_id;
-                                      }
-                                      else{
-                                          $('.add-to-cart').removeAttr('disabled');
-                                          $('.error-message').html('');
-                                          $('.error-message').append('<div class="alert alert-danger">'+data.message+'</div>');
-                                          return false;
-                                      }
-                                  }
-
-                              });
-
-
-						  }else{
-							  $('.add-to-cart').removeAttr('disabled');
-							  $('.alert-danger').remove();
-							  localStorage.removeItem('products');
-							  $('#myform').submit();
-						  }
-
-
-
-			  	}
-		  });
-		  
-		  
-		  
+              }
+		  }
 		  
 		  
 		  
@@ -565,13 +627,15 @@
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
 					//	$('.add-to-cart').css('background-color','#139CB4');
 					});
+
+
         
 					});
 				load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
 				show_cart("{{ route('show_cart') }}","{{ route('total_price') }}");
 				total("{{ route('total_price') }}");			
 				add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
-				process_order("{{ route('saveorder') }}");
+				process_order("{{ route('saveorder') }}","{{ route('get_session') }}","{{ csrf_token() }}");
 				
 				signin("{{ route('signin') }}");
 				//signup("{{ route('signup') }}");
@@ -675,6 +739,7 @@
 					});
 					
 					// Wizard Form
+
 					
 					
 				});

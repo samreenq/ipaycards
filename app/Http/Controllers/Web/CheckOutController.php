@@ -500,20 +500,20 @@ class CheckOutController extends WebController {
         }
     }
 
-    public function checkoutCart(Request $request,$id)
+    public function checkoutCart(Request $request)
     {
         $order_number = '';
-        if($id != ''){
+       /* if($id != ''){
             $flat_table_model = new SYSTableFlat('order');
             $where = ' entity_id ='.$id;
             $data = $flat_table_model->getColumnByWhere($where,'order_number');
 
             $order_number = $data->order_number;
-        }
+        }*/
 
-        $data = ['order_number' => $order_number];
+       // $data = ['order_number' => $order_number];
 
-        return View::make('web/checkout3',$data);
+        return View::make('web/checkout3');
     }
 
     public function checkoutOrder(Request $request)

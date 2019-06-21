@@ -16,6 +16,8 @@ Route::group(['middleware' => ['api.auth'], "prefix" => $api_routes_prefix], fun
             Route::$type($uri_mask_response['uri'], $ctrl_dir . $uri_mask_response['controller']);
         }
     }
+
+    Route::any('/payment/get_session', $ctrl_dir.'PayController@getSessionID')->name('get_session');;
 });
 
 Route::group(['middleware' => ['api.auth'], "prefix" => $routes_prefix], function() use ($ctrl_dir,$routes_prefix) {
