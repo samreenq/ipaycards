@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Libraries\Custom;
+use App\Http\Models\Custom\OrderPaymentLogs;
 use GuzzleHttp\Client;
 
 Class PaymentLib
@@ -26,6 +27,15 @@ Class PaymentLib
         $request = is_array($request) ? (object) $request : $request;
         try {
 
+            $params = [
+                "apiOperation" => "CREATE_CHECKOUT_SESSION",
+                "order" => [
+                    "currency" => "USD",
+                    "id" => $request->lead_order_id,
+                    "amount" =>  $request->amount
+                ]
+            ];
+
             $call = $this->_client->post(
                 "https://ap-gateway.mastercard.com/api/rest/version/51/merchant/TEST222204083001/session",
                 [
@@ -33,19 +43,14 @@ Class PaymentLib
                     'headers' => [
                     'Content-Type' => 'application/json'
                 ],
-                    'json' => [
-                        "apiOperation" => "CREATE_CHECKOUT_SESSION",
-                        "order" => [
-                            "currency" => "USD",
-                            "id" => $request->lead_order_id,
-                            "amount" =>  $request->amount
-                        ]
-
-                    ]
+                    'json' => $params
                 ]
             );
 
             $response = $call->getBody()->getContents();
+
+            $order_payment_logs = new OrderPaymentLogs();
+            $order_payment_logs->add('create_session',$request->lead_order_id,$params,$response);
 
             return json_decode($response);
 
@@ -73,6 +78,9 @@ Class PaymentLib
                    'Content-Type' => 'application/json'
                ]]);
             $response = $call->getBody()->getContents();
+
+            $order_payment_logs = new OrderPaymentLogs();
+            $order_payment_logs->add('payment_status',$request->order_id,['order_id'=>$request->order_id],$response);
 
             return json_decode($response);
 

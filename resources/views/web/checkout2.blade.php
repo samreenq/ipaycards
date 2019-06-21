@@ -452,6 +452,7 @@
             }
             else{
                 localStorage.setItem('charge_type','cod');
+                window.location.href = "{!! url('/').'/checkout3' !!}"
 			}
         });
   

@@ -1382,16 +1382,24 @@ Class EntityTrigger
 	
 	public function orderAfterPostTrigger($request, $response, $entity_type, $entity_id)
 	{
-		$order_flat = new OrderFlat();
-		$vendor_stock_count = $order_flat->checkVendorStockOrder($entity_id);
-		//echo "<pre>"; print_r($response); exit;
-		$order = $response;
-		$order_items = $response->order_item;
-		
-		if ( $vendor_stock_count == 0 ) {
-			$order_process_lib = new OrderSendCards();
-			$order_process_lib->processInStockItemOrder($entity_id, $order, $order_items);
-		}
+	    $flat_table = new SYSTableFlat('order_status');
+	    $order_status = $flat_table->columnValueByWhere('entity_id',$response->order_status->id,'keyword');
+
+	    if($order_status == 'payment_received'){
+
+            $order_flat = new OrderFlat();
+            $vendor_stock_count = $order_flat->checkVendorStockOrder($entity_id);
+            //echo "<pre>"; print_r($response); exit;
+            $order = $response;
+            $order_items = $response->order_item;
+
+            if ( $vendor_stock_count == 0 ) {
+                $order_process_lib = new OrderSendCards();
+                $order_process_lib->processInStockItemOrder($entity_id, $order, $order_items);
+            }
+
+        }
+
 		
 	}
 

@@ -437,25 +437,8 @@ class OrderController extends WebController {
                 $pay_from_wallet = $customer->default_wallet_payment;
             }
 
-          /*  if($pay_from_wallet == 1){
 
-                if($wallet >= $grand_total )
-                {
-
-                    $wallet = round($grand_total,0);
-                    $paid_amount = 0;
-                }
-
-                if($wallet < $grand_total )
-                {
-                    $paid_amount = $grand_total  - $wallet;
-                    $paid_amount = round($paid_amount,2);
-                }
-            }
-            else{
-                $paid_amount = $grand_total;
-                $wallet = 0;
-            }*/
+        if($pay_from_wallet == 1){
 
             if($wallet >= $grand_total )
             {
@@ -469,6 +452,11 @@ class OrderController extends WebController {
                 $paid_amount = $grand_total  - $wallet;
                 $paid_amount = round($paid_amount,2);
             }
+        }
+        else{
+            $paid_amount = $grand_total;
+            $wallet = 0;
+        }
 			
 			/*--------------------------------------------------------------------------------------------------------------------*/
 
