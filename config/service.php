@@ -73,4 +73,11 @@ return [
 		'api_key' => 'faD8wtdn96oOF1X56A2IARLpQrl11tXt',
 	],
 
+    'MASTER_CARD' => array(
+        'merchant_id' => 'TEST222204083001',
+        'url' => 'https://ap-gateway.mastercard.com/api/rest/version/51/merchant/',
+        'username' => 'merchant.TEST222204083001',
+        'password' => 'ffa4f48c03844c346cccede2eb790ca5'
+    ),
+
 ];

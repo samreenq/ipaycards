@@ -7,9 +7,6 @@ use GuzzleHttp\Client;
 Class PaymentLib
 {
 
-    private $_apiData = array();
-
-
     /**
      * MintRoute constructor.
      */
@@ -19,11 +16,14 @@ Class PaymentLib
 
     }
 
-
+    /**
+     * @param $request
+     * @return mixed
+     * @throws \Exception
+     */
     public function getSessionID($request)
     {
 // init params
-        $params = [];
         $request = is_array($request) ? (object) $request : $request;
         try {
 
@@ -37,9 +37,9 @@ Class PaymentLib
             ];
 
             $call = $this->_client->post(
-                "https://ap-gateway.mastercard.com/api/rest/version/51/merchant/TEST222204083001/session",
+                config('service.MASTER_CARD.url').config('service.MASTER_CARD.merchant_id')."/session",
                 [
-                    'auth' => ['merchant.TEST222204083001', 'ffa4f48c03844c346cccede2eb790ca5'], /*if you don't need to use a password, just leave it null*/
+                    'auth' => [config('service.MASTER_CARD.username'), config('service.MASTER_CARD.password')], /*if you don't need to use a password, just leave it null*/
                     'headers' => [
                     'Content-Type' => 'application/json'
                 ],
@@ -65,15 +65,20 @@ Class PaymentLib
         }
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     * @throws \Exception
+     */
     public function getPaymentStatus($request)
     {
         $request = is_array($request) ? (object) $request : $request;
         try{
 
-            $url = "https://ap-gateway.mastercard.com/api/rest/version/50/merchant/TEST222204083001/order/".$request->order_id;
+            $url = config('service.MASTER_CARD.url').config('service.MASTER_CARD.merchant_id')."/order/".$request->order_id;
 
            $call = $this->_client->get($url,[
-               'auth' => ['merchant.TEST222204083001', 'ffa4f48c03844c346cccede2eb790ca5'], /*if you don't need to use a password, just leave it null*/
+               'auth' => [config('service.MASTER_CARD.username'), config('service.MASTER_CARD.password')], /*if you don't need to use a password, just leave it null*/
                'headers' => [
                    'Content-Type' => 'application/json'
                ]]);
