@@ -67,11 +67,19 @@ return [
 	/**
 	 * Authy Configurations
 	 */
-	'AUTHY' => [
+	//Salman Quote
+	/*'AUTHY' => [
 		'endpoint_url' => 'https://api.authy.com/protected/json/',
 		'app_id' => '172148',
 		'api_key' => 'faD8wtdn96oOF1X56A2IARLpQrl11tXt',
-	],
+	],*/
+
+    'AUTHY' => [
+        'endpoint_url' => 'https://api.authy.com/protected/json/',
+        'app_id' => '236783',
+        'api_key' => 'vs4BC7AYmIHd0Rlx3lqHi0K9QQVy05WI',
+    ],
+
 
     'MASTER_CARD' => array(
         'merchant_id' => 'TEST222204083001',

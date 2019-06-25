@@ -140,5 +140,11 @@ Class TopupsController extends WebController
 
     }
 
+    public function checkout(Request $request)
+    {
+        $data = [];
+        return View::make('web/includes/topup/checkout',$data);
+    }
+
 
 }

@@ -1,7 +1,22 @@
+<script src="https://ap-gateway.mastercard.com/checkout/version/51/checkout.js"
+            data-beforeRedirect="Checkout.saveFormFields"
+            data-afterRedirect="Checkout.restoreFormFields"
+            data-complete="topup/checkout">
+    </script>
 <script>
+
+    function restoreFormFields(fields)
+    {
+        console.log(fields)
+    }
+
+
+
     var form = $("#topup-form");
 
     $("a[href$='previous']").hide();
+
+
 
     form.steps({
         headerTag: "h3",
@@ -13,6 +28,7 @@
             finish: 'Submit',
             current: ''
         },
+        isFinishing: false,
         titleTemplate: '<div class="title"><span class="number">#index#</span>#title#</div>',
         onStepChanging: function(event, currentIndex, newIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
@@ -125,6 +141,85 @@
                         $('.alert2').show();
                     }else{
                         move = true;
+
+                        var payment_merchant = 'TEST222204083001';
+                        var order_id = "{!! time() !!}";
+
+                        $('#order_id').val(order_id);
+
+                        var recharge_type = '';
+                        if(service_type == 'du'){
+                            recharge_type = $('#recharge_type').val();
+                        }
+
+                        $.ajax({
+                            url: "{{ route('topup_session') }}",
+                            type: 'POST',
+                            data: {
+                                _token: "{!! csrf_token() !!}",
+                                "amount": $('#amount').val(),
+                                "data" :{
+                                    "service_type": $('#service_type').val(),
+                                    "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
+                                    "recharge_type":recharge_type,
+                                    "amount": $('#amount').val(),
+                                    "source": "web",
+                                }
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+
+                                if(data.error == 0){
+
+                                    localStorage.setItem('lead_topup_id',data.lead_topup_id);
+
+
+                                    Checkout.configure({
+                                        merchant: payment_merchant,
+                                        order: {
+                                            amount: $('#amount').val(),
+                                            currency: 'USD',
+                                            description: 'Topup',
+                                            id: data.lead_topup_id
+                                        },
+                                        session: {
+                                            id: data.data.session.id
+                                        },
+                                        interaction: {
+                                            merchant: {
+                                                name: 'iPayCards - Transaction Order ID: '+data.lead_topup_id,
+                                            }
+                                        }
+                                    });
+
+                                    setTimeout(
+                                        function () {
+                                            Checkout.showLightbox();
+                                        }, 1000
+                                    )
+                                }
+                                else{
+                                    $('.alert3').text('');
+                                    $('.alert3').text(data.message);
+                                    $('.alert3').show();
+                                    move = false;
+
+                                }
+
+
+                            },
+                            error: function (xhr, statusText, err) {
+                                //alert("Error:" + xhr.status);
+                                console.log("Error:" + xhr.getAllResponseHeaders());
+
+                                $('.alert3').text('');
+                                $('.alert3').text(statusText);
+                                $('.alert3').show();
+                                move = false;
+                            }
+                        });
+
+
                     }
                     console.log('step2-',move);
                     // return move;
@@ -134,7 +229,7 @@
 
                 $('.alert3').hide();
 
-                var recharge_type = '';
+                /*var recharge_type = '';
                 if(service_type == 'du'){
                     recharge_type = $('#recharge_type').val();
                 }
@@ -170,7 +265,9 @@
                     }
                     console.log('step3-',move);
                     // return move;
-                });
+                });*/
+
+
             }
 
             return move;
@@ -178,7 +275,6 @@
 
             // return form.valid();
         },
-
         saveState: true
     });
 

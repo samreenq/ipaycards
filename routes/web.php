@@ -211,10 +211,19 @@ Route::get('/product', "Web\ProductController@getAllProduct")->name('product');
 Route::get('/product/promotion', "Web\ProductController@getAllPromotionProducts")->name('product_promotion');
 Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->name('featured_type');
     Route::get('/product/brand', "Web\ProductController@getBrandProducts")->name('brand_products');
+
+
+/*    Topup Web*/
+
     Route::any('/topup/du', "Web\TopupsController@du")->name('du');
     Route::any('/topup/etisalat', "Web\TopupsController@etisalat")->name('etisalat');
     Route::any('/fly_dubai', "Web\TopupsController@flyDubai")->name('fly_dubai');
     Route::any('/addc', "Web\TopupsController@addc")->name('addc');
+    Route::any('/topup/checkout', "Web\TopupsController@checkout")->name('topup_checkout');
+    Route::any('/topup/send', "Web\TopupsController@sendTopup")->name('send_topup');
+    Route::any('/service_topup/send', "Web\TopupsController@sendServiceTopup")->name('send_service_topup');
+
+
 
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');
@@ -226,8 +235,7 @@ Route::get('/promotion', "Web\PromotionAndDiscountController@getPromotionAndDisc
 
     Route::get('/brand', "Web\ProductController@getAllBrands")->name('brand');
     Route::get('/product/all_brand', "Web\ProductController@getBrandsAll")->name('all_brand');
-    Route::any('/topup/send', "Web\TopupsController@sendTopup")->name('send_topup');
-    Route::any('/service_topup/send', "Web\TopupsController@sendServiceTopup")->name('send_service_topup');
+
 
 Route::get('dashboard', function () {
     return View::make('web/dashboard');
@@ -318,7 +326,7 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/wallet_list', "Web\WalletController@getAllCustomerTransactions")->name('customer_wallet_list');//customer_transactions
     Route::post('/redeem_card', "Web\WalletController@redeemCard")->name('redeem_card');//customer_transactions
     Route::post('/updateCart', "Web\CheckOutController@updateCart")->name('updateCart');
-    Route::post('/get_session', "Web\PaymentController@getSessionID")->name('get_session');
+   // Route::post('/get_session', "Web\PaymentController@getSessionID")->name('get_session');
     Route::get('/payment_page', "Web\PaymentController@paymentPage")->name('payment_page');
 });
 

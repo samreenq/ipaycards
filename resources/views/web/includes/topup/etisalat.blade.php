@@ -38,6 +38,7 @@
                             <input type="hidden" name="dial_code" id="dial_code" value="" />
                             <input type="hidden" name="number" id="number" value="" />
                             <input type="hidden" name="amount" id="amount" value="" />
+                            <input type="hidden" name="order_id" id="order_id" value="" />
                             <h3>
                                 <span class="title_text">Infomation</span>
                             </h3>
@@ -125,7 +126,10 @@
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
-                                    <div id="credit">
+                                    <div class="alert alert-success success-msg3" style="display: none;"></div>
+                                    <div id="credit">Master Card
+                                    <p>lorium lipsum lorium lipsum</p></div>
+                                   {{-- <div id="credit">
                                         <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>
@@ -150,7 +154,7 @@
                                                 <input class="form-control cc-cvc" maxlength="4" id="cvc" name="cvc" pattern="\d*" placeholder="CVC" type="tel" />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
 
                                 <div class="fieldset-footer">
@@ -158,7 +162,7 @@
                                 </div>
                             </fieldset>
 
-                            <h3>
+                           {{-- <h3>
                                 <span class="title_text">Checkout</span>
                             </h3>
                             <fieldset>
@@ -176,7 +180,7 @@
                                 <div class="fieldset-footer">
                                     <span>Step 4 of 4</span>
                                 </div>
-                            </fieldset>
+                            </fieldset>--}}
                         </form>
                     </div>
                 </div>
@@ -319,12 +323,6 @@
                 resize('.basketList',true); //basketList
                 resize('.wishList',false); //wishList
             });
-
-
-
-
-
-
 
 
 

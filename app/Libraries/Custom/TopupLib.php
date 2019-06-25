@@ -7,6 +7,7 @@
  */
 namespace App\Libraries\Custom;
 
+use App\Http\Models\SYSTableFlat;
 use App\Libraries\Services\Topup;
 use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
@@ -47,12 +48,15 @@ Class TopupLib
                 // init vars
                 $params = $request;
                 $response = NULL;
+                $params['customer_no'] = "+971589802894";
 
                 // get product denomination (product code for one_prepay)
                 $products = $one_prepay_lib->products([
                     'brand' => $params['service_type']
                 ]);
                 $denomination = $products['denominations'][0]['denomination_id'];
+
+               // echo '<pre>'; print_r($params);
 
                 // if request for du
                 if ( $params['service_type'] == 'du' ) {
@@ -115,36 +119,6 @@ Class TopupLib
 
                 }
 
-
-                //Save Topup History
-                $arr = array(
-                    'entity_type_id' => 'topup',
-                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
-                    'customer_no' => $params['customer_no'],
-                    'amount' => $params['amount'],
-                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
-                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
-                    'source' => isset($params['source']) ? $params['source'] : '',
-                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
-                    'topup_response' => isset($response) ? json_encode($response) : '',
-                );
-
-              //  echo "<pre>"; print_r($arr);
-                $entity_lib = new Entity();
-                $topup_response = $entity_lib->apiPost($arr);
-                $topup_response = json_decode(json_encode($topup_response));
-
-                //  echo "<pre>"; print_r($inventory_response);
-                if (isset($topup_response->data->entity->entity_id)) {
-                    $param = array(
-                        'entity_type_id' => 'topup',
-                        'entity_id' => $topup_response->data->entity->entity_id,
-                        'topup_no' => 'T'.$topup_response->data->entity->entity_id,
-                    );
-
-                    $entity_lib->apiUpdate($param);
-                }
-               // echo "<pre>"; print_r($resp);
 
                 // assign to output
                 $this->_apiData['data'] = $response;
@@ -264,6 +238,112 @@ Class TopupLib
                 $this->_apiData['trace'] = $e->getTraceAsString();
             }
 
+        }
+
+
+        return $this->_apiData;
+    }
+
+    public function topupOrder($request)
+    {
+
+        $request = is_array($request) ? (object) $request : $request;
+
+        try{
+
+            //check lead order
+            $flat_table = new SYSTableFlat('lead_topup');
+            $topup_order = $flat_table->getDataByWhere(' entity_id = '.$request->lead_topup_id);
+
+            if($topup_order){
+
+                $topup_order_raw = $topup_order[0];
+                $data = json_decode($topup_order_raw->order_detail,true);
+
+                //Get Payment Status/////////////////
+                $payment_lib = new PaymentLib();
+                $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->lead_topup_id]);
+
+                // echo '<pre>'; print_r($payment_response); exit;
+
+                if(!isset($payment_response->result)){
+                    return array(
+                        'error' => 1,
+                        'message' => "Unable to process request, Please contact to support team"
+                    );
+                }
+
+                if(strtolower($payment_response->result) == 'error'){
+                    return array(
+                        'error' => 1,
+                        'message' => "Unable to get payment status, Please contact to support team",
+                        /* 'debug'  => $response->error->explanation*/
+                    );
+                }
+
+
+                //Send Topup/////////////////////
+                //$params = $data;
+                // $data['customer_no'] = "+".$data['customer_no'];
+                $data['reference_id'] = ($data['source'] == 'web') ? '' : '';
+                // echo "<pre>"; print_r($data); exit;
+
+                $send_topup =  $this->mobileTopup($data);
+               // echo "<pre>"; print_r($send_topup);
+                if($send_topup['error'] == 1){
+                    return $send_topup;
+                }
+
+                //Save Topup History///////////////////////
+
+                $data['entity_type_id'] = 'topup';
+                $data['topup_response'] = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
+
+                $card = $payment_response->sourceOfFunds->provided->card;
+
+                // $data['transaction_response'] = json_encode($payment_response);
+                $data['reference_id'] = isset($request->reference_id) ? $request->reference_id : '127.0.0.1';
+                $data['lead_order_id'] = $request->lead_topup_id;
+                $data['card_id'] = $card->nameOnCard;
+                $data['card_type'] = $card->scheme;
+                $data['card_last_digit'] = substr($card->number,-4);
+                $data['transaction_id'] = $payment_response->transaction[0]->authorizationResponse->transactionIdentifier;
+
+                //echo "<pre>"; print_r($data);
+                $entity_lib = new Entity();
+                $topup_response = $entity_lib->apiPost($data);
+                $topup_response = json_decode(json_encode($topup_response));
+
+               // echo "<pre>"; print_r($topup_response);
+                if (isset($topup_response->data->entity->entity_id)) {
+                    $param = array(
+                        'entity_type_id' => 'topup',
+                        'entity_id' => $topup_response->data->entity->entity_id,
+                        'topup_no' => 'T'.$topup_response->data->entity->entity_id,
+                    );
+
+                    $entity_lib->apiUpdate($param);
+
+                    $this->_apiData['error'] = 0;
+                    $this->_apiData['message'] = 'Success';
+                    $this->_apiData['data'] = array('order_id' => 'T'.$topup_response->data->entity->entity_id);
+                }
+                else{
+                   return $topup_response;
+                }
+                // echo "<pre>"; print_r($resp);
+
+            }
+            else{
+                $this->_apiData['error'] = 1;
+                $this->_apiData['message'] = 'No order found';
+            }
+        } catch ( \Exception $e ) {
+            // if load credit, let it continue to other API
+            //  throw new \Exception($e->getMessage());
+            $this->_apiData['error'] = 1;
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
         }
 
 

@@ -416,7 +416,7 @@
                     success: function (data) {
 
                         Checkout.configure({
-                            merchant: 'TEST222204083001',
+                            merchant: payment_merchant,
                             order: {
                                 amount: parseFloat($('#paid_amount').val()),
                                 currency: 'USD',
