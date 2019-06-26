@@ -1,3 +1,8 @@
+<script src="https://ap-gateway.mastercard.com/checkout/version/51/checkout.js"
+        data-beforeRedirect="Checkout.saveFormFields"
+        data-afterRedirect="Checkout.restoreFormFields"
+        data-complete="topup/checkout">
+</script>
 <script>
 
 
@@ -89,14 +94,88 @@
                     $('.alert2').show();
                 } else {
                     move = true;
+                    //Intialize payment
+
+                    var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
+
+                    $.ajax({
+                        url: "{{ route('topup_session') }}",
+                        type: 'POST',
+                        data: {
+                            _token: "{!! csrf_token() !!}",
+                            "amount": $('#amount').val(),
+                            "data" :{
+                                "service_type": $('#service_type').val(),
+                                "customer_no": $('#customer_no').val(),
+                                "request_key": $('#request_key').val(),
+                                "amount": $('#amount').val(),
+                                "source" : "web"
+                            }
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+
+                            if(data.error == 0){
+
+                                localStorage.setItem('lead_topup_id',data.lead_topup_id);
+
+
+                                Checkout.configure({
+                                    merchant: payment_merchant,
+                                    order: {
+                                        amount: $('#amount').val(),
+                                        currency: 'USD',
+                                        description: 'Topup',
+                                        id: data.lead_topup_id
+                                    },
+                                    session: {
+                                        id: data.data.session.id
+                                    },
+                                    interaction: {
+                                        merchant: {
+                                            name: 'iPayCards - Transaction Order ID: '+data.lead_topup_id,
+                                        }
+                                    }
+                                });
+
+                                Checkout.showLightbox();
+
+                                /*setTimeout(
+                                    function () {
+                                        Checkout.showLightbox();
+                                    }, 1000
+                                )*/
+                            }
+                            else{
+                                $('.alert3').text('');
+                                $('.alert3').text(data.message);
+                                $('.alert3').show();
+                                move = false;
+
+                            }
+
+
+                        },
+                        error: function (xhr, statusText, err) {
+                            //alert("Error:" + xhr.status);
+                            console.log("Error:" + xhr.getAllResponseHeaders());
+
+                            $('.alert3').text('');
+                            $('.alert3').text(statusText);
+                            $('.alert3').show();
+                            move = false;
+                        }
+                    });
+
+
                 }
             }
             if (currentIndex == 2) {
 
                 $('.alert3').hide();
 
-                $.ajax({
-                    url: "<?php echo url('service_topup/send'); ?>",
+              /*  $.ajax({
+                    url: "<?php // echo url('service_topup/send'); ?>",
                     type: "POST",
                     async: false,
                     dataType: "json",
@@ -126,7 +205,7 @@
                     }
                     console.log('step3-', move);
                     // return move;
-                });
+                });*/
             }
 
             return move;

@@ -36,7 +36,6 @@
             console.log(currentIndex,newIndex);
 
             $('.success-msg2').hide();
-            $("a[href$='previous']").hide();
 
             var service_type = $('#service_type').val();
 
@@ -142,10 +141,8 @@
                     }else{
                         move = true;
 
-                        var payment_merchant = 'TEST222204083001';
-                        var order_id = "{!! time() !!}";
 
-                        $('#order_id').val(order_id);
+                        var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
 
                         var recharge_type = '';
                         if(service_type == 'du'){
@@ -195,7 +192,7 @@
                                     setTimeout(
                                         function () {
                                             Checkout.showLightbox();
-                                        }, 1000
+                                        }, 500
                                     )
                                 }
                                 else{

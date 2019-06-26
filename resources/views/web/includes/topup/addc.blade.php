@@ -115,7 +115,10 @@
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
                                     <div id="credit">
-                                        <div class="form-group row align-items-center">
+                                        <h5>Master Card</h5>
+                                        <p>Please wait while payment process is starting</p><br>
+                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" />
+                                       {{-- <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>
                                             </div>
@@ -138,7 +141,7 @@
                                             <div class="col-sm-8">
                                                 <input class="form-control cc-cvc" maxlength="4" id="cvc" name="cvc" pattern="\d*" placeholder="CVC" type="tel" />
                                             </div>
-                                        </div>
+                                        </div>--}}
                                     </div>
                                 </div>
 
@@ -147,10 +150,10 @@
                                 </div>
                             </fieldset>
 
-                            <h3>
+                           -<h3>
                                 <span class="title_text">Checkout</span>
                             </h3>
-                            <fieldset>
+                             <fieldset>
                                 <div class="fieldset-content">
                                     <div class="row">
                                         <div class="col-md-6 offset-md-3 text-center">

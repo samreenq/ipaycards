@@ -196,7 +196,7 @@ Class TopupLib
 
 
                 //Save Topup History
-                $arr = array(
+               /* $arr = array(
                     'entity_type_id' => 'topup',
                     'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
                     'customer_no' => $params['customer_no'],
@@ -221,7 +221,7 @@ Class TopupLib
                     );
 
                     $entity_lib->apiUpdate($param);
-                }
+                }*/
 
                 // assign to output
                 $this->_apiData['data'] = $response;
@@ -288,7 +288,12 @@ Class TopupLib
                 $data['reference_id'] = ($data['source'] == 'web') ? '' : '';
                 // echo "<pre>"; print_r($data); exit;
 
-                $send_topup =  $this->mobileTopup($data);
+                if(in_array($data['service_type'],array('du','etisalat'))){
+                    $send_topup =  $this->mobileTopup($data);
+                }else{
+                    $send_topup = $this->serviceTopup($data);
+                }
+
                // echo "<pre>"; print_r($send_topup);
                 if($send_topup['error'] == 1){
                     return $send_topup;

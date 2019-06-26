@@ -127,8 +127,11 @@
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
                                     <div class="alert alert-success success-msg3" style="display: none;"></div>
-                                    <div id="credit">Master Card
-                                    <p>lorium lipsum lorium lipsum</p></div>
+                                    <div id="credit">
+                                        <h5>Master Card</h5>
+                                        <p>Please wait while payment process is starting</p><br>
+                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" />Please wait while payment process is starting</p>
+                                    </div>
                                    {{-- <div id="credit">
                                         <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
@@ -162,25 +165,25 @@
                                 </div>
                             </fieldset>
 
-                           {{-- <h3>
+                            <h3>
                                 <span class="title_text">Checkout</span>
                             </h3>
                             <fieldset>
-                                <div class="fieldset-content">
-                                    <div class="alert alert4 alert-danger" style="display: none;"></div>
-                                    <div class="row">
-                                        <div class="col-md-6 offset-md-3 text-center">
-                                            <span class="mt-3 mb-5 d-block check-circle"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                                            <p class="mb-2">Your payment has been processed successfully and you booking is confirmed.</p>
-                                            <p>Please check your email for booking details.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                 <div class="fieldset-content">
+                                     <div class="alert alert4 alert-danger" style="display: none;"></div>
+                                     <div class="row">
+                                         <div class="col-md-6 offset-md-3 text-center">
+                                             <span class="mt-3 mb-5 d-block check-circle"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                             <p class="mb-2">Your payment has been processed successfully and you booking is confirmed.</p>
+                                             <p>Please check your email for booking details.</p>
+                                         </div>
+                                     </div>
+                                 </div>
 
-                                <div class="fieldset-footer">
-                                    <span>Step 4 of 4</span>
-                                </div>
-                            </fieldset>--}}
+                                 <div class="fieldset-footer">
+                                     <span>Step 4 of 4</span>
+                                 </div>
+                             </fieldset>
                         </form>
                     </div>
                 </div>

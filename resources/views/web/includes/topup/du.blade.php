@@ -172,11 +172,15 @@
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
+                                    <div class="alert alert-success success-msg3" style="display: none;"></div>
                                     <div id="credit">
-                                        <div class="form-group row align-items-center">
+                                        <h5>Master Card</h5>
+                                        <p>Please wait while payment process is starting</p><br>
+                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" />
+                                      {{--  <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>
-                                            </div>
+                                                  </div>
                                             <div class="col-sm-8">
                                                 <input class="form-control cc-number" maxlength="19" id="card_number" name="card_number" pattern="\d*" placeholder="Card Number" type="tel" />
                                             </div>
@@ -196,7 +200,7 @@
                                             <div class="col-sm-8">
                                                 <input class="form-control cc-cvc" maxlength="4" id="cvc" name="cvc" pattern="\d*" placeholder="CVC" type="tel" />
                                             </div>
-                                        </div>
+                                        </div>--}}
                                     </div>
                                 </div>
 
