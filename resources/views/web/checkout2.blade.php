@@ -419,7 +419,7 @@
                             merchant: payment_merchant,
                             order: {
                                 amount: parseFloat($('#paid_amount').val()),
-                                currency: 'USD',
+                                currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                 description: 'iPayCards Gift Cards',
                                 id: $("#entity_id").val()
                             },

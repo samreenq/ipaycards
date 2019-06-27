@@ -32,7 +32,7 @@ Class PaymentLib
             $params = [
                 "apiOperation" => "CREATE_CHECKOUT_SESSION",
                 "order" => [
-                    "currency" => "USD",
+                    "currency" => config('service.MASTER_CARD.currency'),
                     "id" => $request->lead_order_id,
                     "amount" =>  $request->amount
                 ]

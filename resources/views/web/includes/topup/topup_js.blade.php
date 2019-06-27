@@ -175,7 +175,7 @@
                                         merchant: payment_merchant,
                                         order: {
                                             amount: $('#amount').val(),
-                                            currency: 'USD',
+                                            currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                             description: 'Recharge '+$('#service_type').val(),
                                             id: data.lead_topup_id
                                         },

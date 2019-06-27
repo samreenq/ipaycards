@@ -118,13 +118,13 @@
                             if(data.error == 0){
 
                                 localStorage.setItem('lead_topup_id',data.lead_topup_id);
-
+                                console.log('currency',"{!! config('service.MASTER_CARD.currency') !!}");
 
                                 Checkout.configure({
                                     merchant: payment_merchant,
                                     order: {
                                         amount: $('#amount').val(),
-                                        currency: 'USD',
+                                        currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                         description: 'Recharge '+$('#service_type').val(),
                                         id: data.lead_topup_id
                                     },
