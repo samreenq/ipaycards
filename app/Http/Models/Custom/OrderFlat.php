@@ -187,7 +187,7 @@ Class OrderFlat extends Base
             FROM order_item_deal_flat oi
             LEFT JOIN order_flat o ON o.entity_id = oi.order_id
             LEFT JOIN order_statuses_flat os ON o.order_status = os.entity_id
-            WHERE os.keyword = 'pending'
+            WHERE os.keyword = 'payment_received'
             AND oi.order_from = 'vendor_stock' 
             GROUP BY oi.order_id";
 
