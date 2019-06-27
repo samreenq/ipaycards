@@ -19,6 +19,7 @@ use App\Libraries\EntityDriver;
 use App\Libraries\EntityHelper;
 use App\Libraries\EntityNotification;
 use App\Libraries\Fields;
+use App\Libraries\GeneralSetting;
 use App\Libraries\Module;
 use App\Libraries\OrderHelper;
 use App\Libraries\OrderStatus;
@@ -925,6 +926,11 @@ class EntityBackController extends EntityController
          //   echo "<pre>"; print_r($request->all()); exit;
             $request->request->add(['customer_id'=>$this->_segment_id]);
             $this->listing($request);
+        }
+
+        if($this->_entity_controller->identifier == 'order'){
+            $general_setting = new GeneralSetting();
+            $this->_assignData['currency'] = $general_setting->getCurrency();
         }
 
         $view = View::make($view_file, $this->_assignData);

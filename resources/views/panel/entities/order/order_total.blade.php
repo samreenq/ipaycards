@@ -26,14 +26,14 @@
         <table width="100%" class="table orderPrevDetail">
             <tr>
                 <td>Subtotal</td>
-                <td align="right"><b><span>$</span><span>{!! $subtotal !!}</span></b></td>
+                <td align="right"><b><span>{!! $currency !!}</span>&nbsp;<span>{!! $subtotal !!}</span></b></td>
             </tr>
             <tr>
                 <td>Discount</td>
-                <td align="right"><b><span>$</span><span>{!! $discount !!}</span></b></td>
+                <td align="right"><b><span>{!! $currency !!}</span>&nbsp;<span>{!! $discount !!}</span></b></td>
             </tr>
             <tr>
                 <td>Grand Total</td>
-                <td align="right"><b><span>$</span><span>{!! $grand_total !!}</span></b></td>
+                <td align="right"><b><span>{!! $currency !!}</span>&nbsp;<span>{!! $grand_total !!}</span></b></td>
             </tr>
         </table>
