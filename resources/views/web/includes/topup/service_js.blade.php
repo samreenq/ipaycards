@@ -125,7 +125,7 @@
                                     order: {
                                         amount: $('#amount').val(),
                                         currency: 'USD',
-                                        description: 'Topup',
+                                        description: 'Recharge '+$('#service_type').val(),
                                         id: data.lead_topup_id
                                     },
                                     session: {

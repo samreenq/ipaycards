@@ -76,7 +76,7 @@
 						<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
 						<li class="dropdown">
 							<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Topups
+								Recharge
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>

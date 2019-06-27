@@ -176,7 +176,7 @@
                                         order: {
                                             amount: $('#amount').val(),
                                             currency: 'USD',
-                                            description: 'Topup',
+                                            description: 'Recharge '+$('#service_type').val(),
                                             id: data.lead_topup_id
                                         },
                                         session: {
@@ -232,7 +232,7 @@
                 }
 
                 $.ajax({
-                    url: "<?php echo url('topup/send'); ?>",
+                    url: "<?php // echo url('topup/send'); ?>",
                     type: "POST",
                     async: false,
                     dataType: "json",
