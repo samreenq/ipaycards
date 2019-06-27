@@ -168,10 +168,10 @@
                                         ?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
 											@if(empty($price))
-												<h3>$<?php echo $product_price; ?></h3>
+												<h3>{!! $currency.$product_price !!}</h3>
 											@else
 												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo '$'.$product_price; ?></strike></p>
-												<h3>&nbsp;${!! $price !!}</h3>
+												<h3>&nbsp;{!! $currency.$price !!}</h3>
 
 												@endif
 											<?php if(isset($product["attributes"]['weight']) && isset($product["attributes"]['item_unit']['value']) && $product["attributes"]['item_unit']['option']) echo '/ ('.$product["attributes"]['weight'].' '.$product["attributes"]['item_unit']['option'].')'; ?></h3>

@@ -548,6 +548,7 @@ class ProductController extends WebController
         if($data['price'] > 0){
             $data['price'] = round($data['price']);
         }
+        $data['currency'] = $this->_object_library_general_setting->getCurrency();
 
         if(isset($request->brand_id)){
             $flat_table = new SYSTableFlat('brand');
