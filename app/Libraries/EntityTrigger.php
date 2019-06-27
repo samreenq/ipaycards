@@ -1382,7 +1382,7 @@ Class EntityTrigger
 	
 	public function orderAfterPostTrigger($request, $response, $entity_type, $entity_id)
 	{
-	    $flat_table = new SYSTableFlat('order_status');
+	    $flat_table = new SYSTableFlat('order_statuses');
 	    $order_status = $flat_table->columnValueByWhere('entity_id',$response->order_status->id,'keyword');
 
 	    if($order_status == 'payment_received'){

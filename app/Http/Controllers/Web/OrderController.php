@@ -614,7 +614,7 @@ class OrderController extends WebController {
                     if($request->payment_method == 'master_card'){
 
                         $payment_lib = new PaymentLib();
-                        $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->entity_id]);
+                        $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->entity_id],'order');
 
                        // echo '<pre>'; print_r($payment_response); exit;
 

@@ -69,9 +69,10 @@ Class PayController extends Controller
                 if (isset($lead_order->data->entity->entity_id)) {
 
                     $lead_order_id = $lead_order->data->entity->entity_id;
+                    $request_param = ['lead_order_id'=>$lead_order_id,'amount' => $request->amount,'service_type'=>$request->data['service_type']];
 
                     $payment_lib = new PaymentLib();
-                    $this->_apiData['data'] = $payment_lib->getSessionID(['lead_order_id'=>$lead_order_id,'amount' => $request->amount]);
+                    $this->_apiData['data'] = $payment_lib->getSessionID($request_param,'topup');
                     $this->_apiData['lead_topup_id'] = $lead_order_id;
                 }
             }

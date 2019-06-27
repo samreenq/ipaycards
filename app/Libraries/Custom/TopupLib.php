@@ -262,7 +262,7 @@ Class TopupLib
 
                 //Get Payment Status/////////////////
                 $payment_lib = new PaymentLib();
-                $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->lead_topup_id]);
+                $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->lead_topup_id,'service_type'=>$data['service_type']],'topup');
 
                 // echo '<pre>'; print_r($payment_response); exit;
 

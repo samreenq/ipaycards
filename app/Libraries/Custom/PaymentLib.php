@@ -2,6 +2,7 @@
 
 namespace App\Libraries\Custom;
 use App\Http\Models\Custom\OrderPaymentLogs;
+use App\Http\Models\Custom\TopupPaymentLogs;
 use GuzzleHttp\Client;
 
 Class PaymentLib
@@ -21,10 +22,11 @@ Class PaymentLib
      * @return mixed
      * @throws \Exception
      */
-    public function getSessionID($request)
+    public function getSessionID($request,$order_type = 'order')
     {
 // init params
         $request = is_array($request) ? (object) $request : $request;
+       // echo '<pre>'; print_r($request); exit;
         try {
 
             $params = [
@@ -49,8 +51,15 @@ Class PaymentLib
 
             $response = $call->getBody()->getContents();
 
-            $order_payment_logs = new OrderPaymentLogs();
-            $order_payment_logs->add('create_session',$request->lead_order_id,$params,json_decode($response));
+            //Save Payment Logs
+            if($order_type == 'order'){
+                $order_payment_logs = new OrderPaymentLogs();
+                $order_payment_logs->add('create_session',$request->lead_order_id,$params,json_decode($response));
+            }else{
+                $order_payment_logs = new TopupPaymentLogs();
+                $order_payment_logs->add($request->service_type,'create_session',$request->lead_order_id,$params,json_decode($response));
+            }
+
 
             return json_decode($response);
 
@@ -70,9 +79,10 @@ Class PaymentLib
      * @return mixed
      * @throws \Exception
      */
-    public function getPaymentStatus($request)
+    public function getPaymentStatus($request,$order_type = 'order')
     {
         $request = is_array($request) ? (object) $request : $request;
+
         try{
 
             $url = config('service.MASTER_CARD.url').config('service.MASTER_CARD.merchant_id')."/order/".$request->order_id;
@@ -84,8 +94,16 @@ Class PaymentLib
                ]]);
             $response = $call->getBody()->getContents();
 
-            $order_payment_logs = new OrderPaymentLogs();
-            $order_payment_logs->add('payment_status',$request->order_id,['order_id'=>$request->order_id],json_decode($response));
+            //Save Payment Logs
+            if($order_type == 'order'){
+                $order_payment_logs = new OrderPaymentLogs();
+                $order_payment_logs->add('payment_status',$request->order_id,['order_id'=>$request->order_id],json_decode($response));
+
+            }else{
+                $order_payment_logs = new TopupPaymentLogs();
+                $order_payment_logs->add($request->service_type,'payment_status',$request->order_id,['order_id'=>$request->order_id],json_decode($response));
+            }
+
 
             return json_decode($response);
 

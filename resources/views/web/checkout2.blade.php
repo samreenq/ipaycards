@@ -393,7 +393,7 @@
             console.log('Erorr Payment',error)
         }
 
-        var payment_merchant = 'TEST222204083001';
+        var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
 
         $('.add-to-cart').on('click',function(){
 
@@ -420,7 +420,7 @@
                             order: {
                                 amount: parseFloat($('#paid_amount').val()),
                                 currency: 'USD',
-                                description: 'Ordered goods',
+                                description: 'iPayCards Gift Cards',
                                 id: $("#entity_id").val()
                             },
                             session: {
@@ -428,11 +428,7 @@
                             },
                             interaction: {
                                 merchant: {
-                                    name: 'iPayCards',
-                                    address: {
-                                        line1: '200 Sample St',
-                                        line2: '1234 Example Town'
-                                    }
+                                    name: 'iPayCards - Transaction Order ID: '+$("#entity_id").val(),
                                 }
                             }
                         });

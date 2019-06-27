@@ -42,7 +42,7 @@
 				<div class="col-md-8">
 					<div class="order-Confirm whitebg">
 
-						<img src="<?php echo url('/').'/public/web/img/confirm-order-fuirt-img.jpg'?>" alt="img"/>
+						{{--<img src="<?php echo url('/').'/public/web/img/confirm-order-fuirt-img.jpg'?>" alt="img"/>--}}
 						<div class="error-message"></div>
 
 						<div class="order-pending">
