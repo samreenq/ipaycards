@@ -25,9 +25,40 @@
 				<div class="ftrlinks col-sm-4 col-md-3 col-lg-2 ml-lg-auto">
 					<h4>Shop With Us</h4>
 					<ul>
-						<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal">How it Works</a></li>
+						<!--<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal">How it Works</a></li>-->
 						<li><a href="{{ route('mobileapp') }}">Mobile App</a></li>
-						<li><a href="#">Refer a Friend</a></li>
+
+                        <?php
+
+                        if (isset($_SESSION['fbUserProfile']) )
+                        {
+                        ?>
+						<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
+
+                        <?php
+                        }
+
+                        if (Session::has('users')  )
+                        {
+
+                        ?>
+						<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
+
+
+                        <?php
+                        }
+                        if (!Session::has('users') && !isset($_SESSION['fbUserProfile']) )
+                        {
+
+                        ?>
+
+						<li><a href="#" data-toggle="modal" data-target=".siginmodal" class="tooltip1" >@lang('web.navbar_menu_name_3')</a></li>
+
+                        <?php
+                        }
+
+
+                        ?>
 					</ul>
 				</div>
 				<div class="ftrlinks col-sm-4 col-md-2 col-lg-2">
@@ -44,7 +75,7 @@
 				<div class="ftrlinks col-sm-4 col-md-1 col-lg-2">
 					<h4>Help</h4>
 					<ul>
-						<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="deliver-info-model">Delivery Info</a></li>
+						<!--<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="deliver-info-model">Delivery Info</a></li>-->
 						<li><a href="{{ route('faq') }}">FAQs</a></li>
 					</ul>
 				</div>
