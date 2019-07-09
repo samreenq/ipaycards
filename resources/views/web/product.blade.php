@@ -415,7 +415,7 @@
 				$('.categories').css('display','none');
 				$('.productFiltSide').css('display','block');
 				
-				data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"><img class="img-responsive" src="<?php echo url('/').'/public/web/img/error404.png';?>" alt="error404" width="309"></div><div class="error404content text-center"><h2>No Product Found</h2><p>We are sorry but the product you are looking for does not exist.<br>You could return to the <a href="<?php echo url('/');?>">homepage</a></p></div></div>';
+				data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"></div><div class="error404content text-center"><h2>No Product Found</h2><p>We are sorry but the product you are looking for does not exist.<br>You could return to the <a href="<?php echo url('/');?>">homepage</a></p></div></div>';
 				
 				
 				$("#products").empty().append(data);

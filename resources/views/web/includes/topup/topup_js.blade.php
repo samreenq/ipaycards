@@ -1,6 +1,6 @@
 <script src="https://ap-gateway.mastercard.com/checkout/version/51/checkout.js"
-            data-beforeRedirect="Checkout.saveFormFields"
-            data-afterRedirect="Checkout.restoreFormFields"
+        data-error="errorPayment"
+        data-cancel="cancelPayment"
             data-complete="topup/checkout">
     </script>
 <script>
@@ -340,5 +340,15 @@
     });
 
 
+    function cancelPayment()
+    {
+        window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
+    }
+
+    function errorPayment(error)
+    {
+        console.log('Erorr Payment',error);
+        window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
+    }
 
 </script>

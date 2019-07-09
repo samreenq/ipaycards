@@ -36,44 +36,44 @@
 				  <!-- navbar toggle menu start -->
 				  <div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav mr-auto">
-						<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="how-work">@lang('web.navbar_menu_name_1')</a></li>
-						<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="delivery-info-model">@lang('web.navbar_menu_name_2')</a></li>
+						<!--<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="how-work">@lang('web.navbar_menu_name_1')</a></li>
+						<li><a href="#" data-toggle="modal" data-target=".aboutUsmodal" id="delivery-info-model">@lang('web.navbar_menu_name_2')</a></li> -->
 					
 						
 						<?php
 							
-							if (isset($_SESSION['fbUserProfile']) )
+							/*if (isset($_SESSION['fbUserProfile']) )
 							{
-						?>
+						*/?><!--
 									<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
 						
 						<?php
-								}
+/*								}
 
 								if (Session::has('users')  )
 								{
 							
-						?>
+						*/?>
 									<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
 						
 						
-						<?php 
+						<?php /*
 								}
 								if (!Session::has('users') && !isset($_SESSION['fbUserProfile']) )
 								{
 
-						?>
+						*/?>
 									
 									<li><a href="#" data-toggle="modal" data-target=".siginmodal" class="tooltip1" >@lang('web.navbar_menu_name_3')<span class="tooltiptext">Please Sign-in before Referring to a Friend! </span></a></li>
 						
-						<?php 
-								}
+						--><?php /*
+								}*/
 
 
 						?>
 
 						
-						<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
+						<!--<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
 						<li class="dropdown">
 							<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Recharge
@@ -84,7 +84,7 @@
 								<a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
 								<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
 							</div>
-						</li>
+						</li> -->
 						{{--<li>
 							Topups
 							<ul class="navbar-nav mr-auto">

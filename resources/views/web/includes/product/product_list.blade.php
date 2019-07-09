@@ -253,7 +253,7 @@
 					
 					<div class="error404Wrap ml-auto mr-auto mt70 mb70">
 										<div class="error404img mt50 mb50">
-											<img class="img-responsive" src="{{ url('/') }}/public/web/img/error404.png" alt="error404" width="309">
+											<!--<img class="img-responsive" src="{{ url('/') }}/public/web/img/error404.png" alt="error404" width="309">-->
 										</div>
 										<div class="error404content text-center">
 											<h2>No Product Found</h2>
