@@ -219,7 +219,7 @@
     <section class="essentials ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-hide">
         <div class="container">
             <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
-                <h2 class="mr-auto align-items-start">iPayCards Essentials</h2>
+                <h2 class="mr-auto align-items-start">Our Featured Items</h2>
                 <a href="<?php echo url('/') . '/product?entity_type_id=14&featured_type=2'; ?>"
                    class="align-items-end viewMore">See More</a>
             </div>

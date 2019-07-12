@@ -43,7 +43,7 @@
 				  <label>Password</label>
 				</div>
 				<div class="d-sm-flex forgotWrap">
-					<p class="mr-auto align-items-start">Not a Member yet? <a class="open_sigupmodal">Sign Up</a></p>
+					<p class="mr-auto align-items-start">Not a Member yet? <a class="open_sigupmodal">Register New User</a></p>
 					<p class="align-items-end"><a class="open_forPassmodal" >Forgot Password?</a></p>
 				</div>
 				<div class="submitBtnWrap">

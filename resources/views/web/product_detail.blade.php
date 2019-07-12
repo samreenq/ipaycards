@@ -260,7 +260,7 @@
 					<div class="np-seasons">
 						<div class="container">
 							<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
-								<h2 class="mr-auto align-items-start">New and Peak Seasons</h2>
+								<h2 class="mr-auto align-items-start">Related Items</h2>
 								<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=1'; ?>" class="align-items-end viewMore" >See More</a>
 							</div>
 							<div class="row newsAndPeakSeasons">

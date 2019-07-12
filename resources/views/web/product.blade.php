@@ -258,10 +258,10 @@
 																		if(isset($_REQUEST['featured_type']))
 																		{
 																			if($_REQUEST['featured_type']==1)
-																				echo "New and Peak Seasons";
+																				echo "Related Items";
 
 																			if($_REQUEST['featured_type']==2)
-																				echo "iPayCards Essentials";
+																				echo "Our Featured Items";
 																		}
 
 																		if(isset($_REQUEST['product_promotion_id']))
@@ -415,7 +415,7 @@
 				$('.categories').css('display','none');
 				$('.productFiltSide').css('display','block');
 				
-				data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"></div><div class="error404content text-center"><h2>No Product Found</h2><p>We are sorry but the product you are looking for does not exist.<br>You could return to the <a href="<?php echo url('/');?>">homepage</a></p></div></div>';
+				data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"></div><div class="error404content text-center"><h2>No Product Found</h2><p>The product you are looking for doesn\'t exist. Try another keyword or return to <a href="<?php echo url('/');?>">home</a></p></div></div>';
 				
 				
 				$("#products").empty().append(data);

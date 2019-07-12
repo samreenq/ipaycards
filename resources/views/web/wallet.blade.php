@@ -132,7 +132,7 @@
 							<div class="payment-method">
 								<div id="error_msg_change_payment_method"></div>
 								<div class="">
-									Default Payment via Wallet
+									Default Payment via Gift Card
 									<input type="radio" <?php if($default_wallet_payment == 1){ ?>checked <?php } ?> name="default_wallet_payment"  id="default_wallet_payment_yes" value="1" >
 									<label for="default_wallet_payment_yes">
 										Yes

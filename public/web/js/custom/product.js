@@ -3240,6 +3240,7 @@ function changeYourAccountDetail(changeYourAccountDetailUrl)
             {
                 if(	data['message'] == "Success" )
                 {
+                    $("#account_response").empty().append('Your account is updated successfully');
                     if($("#account_response").hasClass('alert')){
                         $("#account_response").removeClass('alert-danger');
                     }

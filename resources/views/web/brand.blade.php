@@ -315,10 +315,10 @@
 																		if(isset($_REQUEST['featured_type']))
 																		{
 																			if($_REQUEST['featured_type']==1) 
-																				echo "New and Peak Seasons";
+																				echo "Related Items";
 																			
 																			if($_REQUEST['featured_type']==2) 
-																				echo "iPayCards Essentials";
+																				echo "Our Featured Items";
 																		}
 																	
 																		if(isset($_REQUEST['product_promotion_id']))

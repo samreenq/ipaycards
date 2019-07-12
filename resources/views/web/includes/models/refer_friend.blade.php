@@ -29,7 +29,7 @@
 				</div>
 				<div class="submitBtnWrap">
 					<div class="" > <!-- lodingBtn-->  
-						<input style="cursor:pointer" type="submit" value="Start" name="" class="referBtn"/>
+						<input style="cursor:pointer" type="submit" value="Invite" name="" class="referBtn"/>
 					</div>
 				</div>
 		

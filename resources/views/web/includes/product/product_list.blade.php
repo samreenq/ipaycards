@@ -257,7 +257,7 @@
 										</div>
 										<div class="error404content text-center">
 											<h2>No Product Found</h2>
-											<p>We are sorry but the product you are looking for does not exist.<br>You could return to the <a href="{{url('/')}}">homepage</a></p>
+											<p>The product you are looking for doesn't exist. Try another keyword or return to <a href="{{url('/')}}">home</a></p>
 										</div>
 					</div>
 

@@ -60,8 +60,8 @@
 								<!--<li ><a href="{{ route('payment') }}">Payment</a></li>-->
 								<li ><a href="{{ route('order_history') }}">Order History</a></li>
 								{{--<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
-								<li ><a href="{{ route('customer_wallet') }}">Wallet</a></li>
-								<li class="li-active"><a href="{{ route('gift_card') }}">Gift Card</a></li>
+								<li ><a href="{{ route('customer_wallet') }}">Gift Card Settings</a></li>
+								<li class="li-active"><a href="{{ route('gift_card') }}">Add Gift Card</a></li>
 								
 								
 								

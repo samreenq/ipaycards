@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>&copy; Copyright 2018 {!! APP_NAME !!}. All rights reserved.</p>
+			<p>&copy; Copyright {!! date('Y') !!} {!! APP_NAME !!}. All rights reserved.</p>
 		</div>
 	</div>
 </footer>

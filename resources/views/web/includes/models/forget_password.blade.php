@@ -18,7 +18,7 @@
 				  <label>Email</label>
 				</div>
 				<div class="submitBtnWrap">
-					<input id="forget_your_account_password" type="button" value="Save" name="" class="signBtn"/>
+					<input id="forget_your_account_password" type="button" value="Submit" name="" class="signBtn"/>
 				</div>
 			</form>
 		  </div>
