@@ -79,8 +79,7 @@
 										</div>
 									</div>
 								</div>
-								<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $attributes['attributes']['product_code'] !!}" class="perishable">{!! $attributes['attributes']['product_code'] !!}</a>
-								<h4>	
+								<h4>
 									<a href="<?php echo $product_detail_url.'?entity_type_id='.$attributes['entity_type_id'].'&product_code='.$attributes['attributes']['product_code'] ?>" >
 										<?php echo $attributes['attributes']['title'];?>
 									</a>
