@@ -239,7 +239,7 @@ section {
 }
 .lightgreybg,
 body{
-    background-color:#f8f9fb;
+    background-color:#fbfbfb;
 }
 .whitebg{
     background-color:#fff;
@@ -2405,7 +2405,7 @@ table tr.borderB td div{
     overflow:hidden;
     display:block;
     width: 100%;
-    height: 135px;
+    /*height: 135px;*/
     border-radius: 8px;
 }
 .three-sm-banner-wrap .sm-banner-1{
@@ -2435,7 +2435,7 @@ table tr.borderB td div{
     overflow:hidden;
     padding: 28px 32px;
     width: 100%;
-    height: 164px;
+    /*height: 164px;*/
 }
 .three-sm-banner-wrap .sm-banner-3 img{
     position:absolute;
@@ -2539,6 +2539,7 @@ table tr.borderB td div{
     padding: 15px 20px;
     border-top: 0;
 }
+.essentials .product-detail,
 .topCategories .product-detail,
 .product-Section .product-detail {
     padding: 30px 20px 15px;
@@ -2680,6 +2681,7 @@ table tr.borderB td div{
 .essentials .product-detail h4{
     margin-bottom:12px;
 }
+.essentials .product-detail .addCartWrap,
 .topCategories .product-detail .addCartWrap,
 .product-Section .product-detail .addCartWrap{
     right: auto;
@@ -6851,22 +6853,26 @@ input[type=number] {
 .essentials, .browse_brand_sec {
     background-color: #fff;
 }
-.essentials .product-wrap .img-responsive,
 .browse_brand_sec .product-wrap .img-responsive,
 .popCate .product-wrap,
 .topCategories .product-wrap,
+.essentials .product-wrap,
 .product-Section .product-wrap{
     border-radius: 15px;
 }
 .popCate .product-wrap .img-responsive,
 .topCategories .product-wrap .img-responsive,
+.essentials .product-wrap .img-responsive,
 .product-Section .product-wrap .img-responsive{
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
-.essentials .product-wrap, .popCate .product-wrap {
+.popCate .product-wrap {
     margin-bottom: 25px;
 }
+/*.essentials .product-wrap, .popCate .product-wrap {
+    margin-bottom: 25px;
+}*/
 .detail_container {
     padding: 25px 15px;
 }
