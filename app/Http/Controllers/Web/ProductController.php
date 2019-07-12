@@ -1252,7 +1252,7 @@ class ProductController extends WebController
                 "featured_type"=>$request->input('featured_type'),
                 'status' => 1,
                // 'availability' => 1,
-                'limit'=>2
+                'limit'=>4
             );
 			$data['product_detail_url'] = $request->input('product_detail_url');
             //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
@@ -1402,11 +1402,18 @@ class ProductController extends WebController
         $data['products'] = [];
 
         if($categories->error == 0){
-            $categories = $categories->data->category_listing[0];
+            $category = $categories->data->category_listing[0];
 
-            $category_id = $categories->category_id;
-            $category_model = new SYSCategory();
-            $category_ids = $category_model->getChildCategories($category_id);
+
+            $category_id = $category->category_id;
+
+            if($category->is_gift_card == 0){
+                $category_model = new SYSCategory();
+                $category_ids = $category_model->getChildCategories($category_id);
+            }else{
+                $category_ids = $category_id;
+            }
+            //echo '<pre>'; print_r($category_ids); exit;
 
             if($category_ids){
 
@@ -1443,7 +1450,9 @@ class ProductController extends WebController
             }
 
         }
-        $data['category'] = $categories;
+
+       // echo '<pre>'; print_r($data); exit;
+        $data['category'] = $category;
         $data['currency'] = $this->_object_library_general_setting->getCurrency();
        // echo "<pre>"; print_r( $products_list); exit;
         return View::make('web/includes/main/top_category',$data)->__toString();
