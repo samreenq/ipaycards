@@ -202,7 +202,7 @@
 
 													<a class="incr-btn pln text-left" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
 												</div>
-												<button type="submit"  class="add add-to-cart wishlist">Add to cart</button>
+												<button type="submit"  class="add add-to-cart">Add to cart</button>
 
 											</div>
 

@@ -1457,7 +1457,7 @@ function wallet_history_list(Entity_type_id,Wallet_history_url,Offset,Limit)
 
 function add_to_wishlist(Request_url1)
 {
-    $(".wishlist").on("click", function (e)
+    $(".add_to_wishlist_button").on("click", function (e)
     {
 
         var $button = $(this);
