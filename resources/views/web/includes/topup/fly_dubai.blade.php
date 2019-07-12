@@ -22,6 +22,9 @@
     @include("web/includes/cartbar")
 @endsection
 
+@section('header')
+    @include("web/includes/topup_head")
+@endsection
 
 @section("faq")
 

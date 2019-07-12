@@ -23,6 +23,9 @@
     @include("web/includes/cartbar")
 @endsection
 
+@section('header')
+    @include("web/includes/topup_head")
+@endsection
 
 @section("faq")
 
@@ -309,6 +312,7 @@
     @include("web/includes/topup/topup_js")
     <script>
 
+        menus("{{ route('menus') }}",<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';  ?>) ;
 
 
         load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");

@@ -73,28 +73,9 @@
 						?>
 
 						
-						<!--<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
-						<li class="dropdown">
-							<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Recharge
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>
-								<a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>
-								<a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
-								<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
-							</div>
-						</li> -->
-						{{--<li>
-							Topups
-							<ul class="navbar-nav mr-auto">
-								<li><a href="{!! url('/').'/topup/du' !!}" >Du</a></li>
-								<li><a href="{!! url('/').'/topup/etisalat' !!}" >Etisalat</a></li>
-								<li><a href="{!! url('/').'/fly_dubai' !!}" >Fly Dubai</a></li>
-								<li><a href="{!! url('/').'/addc' !!}" >addc</a></li>
-							</ul>
+						<!--<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>-->
 
-						</li>--}}
+
 					</ul>
 
 
@@ -108,7 +89,7 @@
 									<li><a href="{{ route('account_detail') }}" >@lang('web.navbar_menu_account')</a></li>
 								<!--	<li><a href="<?php echo $_SESSION['logoutURL']; ?>" >@lang('web.navbar_menu_sign_Out')</a></li>
 								-->	<li><a href="{{ route('signout') }}" >@lang('web.navbar_menu_sign_Out')</a></li>
-							
+
 								</ul>
 
 					  <?php
@@ -119,6 +100,17 @@
 						
 					?>
 								<ul class="nav navbar-nav navbar-right header-cart">
+									<li class="dropdown">
+										<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Recharge
+										</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>
+											<a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>
+											<a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
+											<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
+										</div>
+									</li>
 									<li><a href="{{ route('account_detail') }}" >@lang('web.navbar_menu_account')</a></li>
 									<li><a href="{{ route('signout') }}" >@lang('web.navbar_menu_sign_Out')</a></li>
 								</ul>
@@ -130,6 +122,17 @@
 
 					?>
 								<ul class="nav navbar-nav navbar-right header-cart">
+									<li class="dropdown">
+										<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Recharge
+										</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>
+											<a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>
+											<a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
+											<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
+										</div>
+									</li>
 									<li><a href="#" data-toggle="modal" data-target=".siginmodal">@lang('web.navbar_menu_sign_in')</a></li>
 									<li><a href="#" data-toggle="modal" data-target=".signupmodal">@lang('web.navbar_menu_sign_up')</a></li>
 								</ul>
