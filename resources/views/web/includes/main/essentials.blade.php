@@ -36,8 +36,8 @@
     				$thumb = \App\Libraries\Fields::getGalleryImage($gallery, 'product', 'thumb');
 			?>
 					
-					<div class="col-xs-12 col-sm-6 col-lg-3">
-						<div class="product-wrap whitebg">
+					<div class="col-xs-12 col-sm-6 col-lg-3 d-flex">
+						<div class="product-wrap lightgreybg">
 									
 							
 								<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />

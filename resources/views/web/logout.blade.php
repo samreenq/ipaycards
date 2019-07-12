@@ -191,12 +191,12 @@
 				}
 				
 				$(document).ready(function() {
-					resize('.basketList',true); //basketList
+					resize('.basketList',false); //basketList
 					resize('.wishList',false); //wishList
 				});
 				
 				$(window).resize(function() {
-					resize('.basketList',true); //basketList
+					resize('.basketList',false); //basketList
 					resize('.wishList',false); //wishList
 				});
 					

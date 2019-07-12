@@ -74,7 +74,7 @@
 
 				?>
 			<div class="feature-bg" style="background:url(<?php echo url('/').'/public/web/img/product/product-feature-img-1.jpg'; ?>);"></div>
-			<section class="product-detail-Section">
+			<section class="product-detail-Section pb-0">
 				<div class="container">
 					<div class="productHeader">
 						<div class="row align-items-baseline no-gutters mb20">
@@ -256,7 +256,7 @@
 	
 	@section("news_and_peak_seasons")
 	
-				<section class="lightgreybg">	
+				<section class="lightgreybg topCategories">
 					<div class="np-seasons">
 						<div class="container">
 							<div class="row align-items-baseline no-gutters mb30 stitle-wrap">
@@ -449,12 +449,12 @@
 					}
 					
 					$(document).ready(function() {
-						resize('.basketList',true); //basketList
+						resize('.basketList',false); //basketList
 						resize('.wishList',false); //wishList
 					});
 					
 					$(window).resize(function() {
-						resize('.basketList',true); //basketList
+						resize('.basketList',false); //basketList
 						resize('.wishList',false); //wishList
 					});
 						

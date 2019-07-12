@@ -11,7 +11,7 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
         ?>
 
 
-    <div class="product-wrap whitebg">
+    <div class="product-wrap lightgreybg">
         <img src='<?php echo $image; ?>' class="img-responsive" />
         <div class="product-detail br_p_d">
             <h4>

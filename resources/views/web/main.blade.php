@@ -480,11 +480,11 @@
                 e.preventDefault();
                 $('body').removeClass('nav-expanded');
             });
-            $('.basketList').enscroll({
+            /*$('.basketList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',
                 verticalHandleClass: 'handle3'
-            });
+            });*/
             $('.wishList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',
