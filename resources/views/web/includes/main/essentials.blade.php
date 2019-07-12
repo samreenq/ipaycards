@@ -36,7 +36,7 @@
     				$thumb = \App\Libraries\Fields::getGalleryImage($gallery, 'product', 'thumb');
 			?>
 					
-					<div class="col-xs-12 col-sm-6 col-lg-6">
+					<div class="col-xs-12 col-sm-6 col-lg-3">
 						<div class="product-wrap whitebg">
 									
 							
