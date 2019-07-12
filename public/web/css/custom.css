@@ -2217,6 +2217,7 @@ table tr.borderB td div{
 .page-nav ul li:last-child{
     margin-right:0;
 }
+.topupMenu .page-nav ul li a{color:#000;}
 .page-nav ul li a{
     font-size:18px;
     color:#fff;
@@ -2237,6 +2238,7 @@ table tr.borderB td div{
     color:#fff;
     opacity:1;
 }
+.topupMenu .greedy-nav {border-bottom: 1px solid rgb(206, 212, 218);}
 .greedy-nav {
     width: 100%;
     position: relative;
