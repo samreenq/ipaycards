@@ -1,7 +1,7 @@
 <script src="https://ap-gateway.mastercard.com/checkout/version/51/checkout.js"
         data-error="errorPayment"
         data-cancel="cancelPayment"
-        data-complete="topup/checkout">
+        data-complete="{!! url('/') !!}/topup/checkout">
 </script>
 <script>
 
