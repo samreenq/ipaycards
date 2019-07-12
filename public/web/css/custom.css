@@ -333,7 +333,7 @@ input, button {
 label.checkbox-bootstrap p {
     display: inline-block;
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     line-height: 0;
     vertical-align: middle;
@@ -374,7 +374,7 @@ label.checkbox-bootstrap {
     position: relative;
     padding-left: 5px;
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom:0;
 }
@@ -442,7 +442,7 @@ aside ul li {
 aside ul li a {
     font-size: 18px;
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     border:none;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -452,7 +452,7 @@ aside ul li a:focus,
 aside ul li a:hover {
     text-decoration: none;
     background-color: transparent;
-    color: #48494d;
+    color: #000;
 }
 
 /* #Tab
@@ -498,7 +498,7 @@ aside ul li a:hover {
     width: 100%;
 }
 .fly-nav-inner button.dropdown-toggle {
-    color: #48494d;
+    color: #000;
     background-color: #eceef2;
     width: 100%;
     font-size: 20px;
@@ -512,7 +512,7 @@ aside ul li a:hover {
     text-transform: capitalize;
 }
 .fly-nav-inner button.dropdown-toggle a {
-    color: #48494d;
+    color: #000;
     background-color: rgba(255, 255, 255, 0);
     font-size: 20px;
 }
@@ -523,7 +523,7 @@ aside ul li a:hover {
 .fly-nav-inner .dropdown-menu ul li a {
     font-size: 18px;
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     border: none;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -1460,7 +1460,7 @@ section.flyout-wrap {
     margin: 9px 0;
 }
 .page-nav-second .second-cartbtn #cartList2 {
-    color: #48494d;
+    color: #000;
     font-size: 17px;
     font-weight: 400;
     -webkit-transition: all 0.3s;
@@ -1656,7 +1656,7 @@ section.flyout-wrap {
     font-size: 15px;
 }
 .navbar .navbar-nav>li>a{
-    color: #48494d;
+    color: #000;
     font-size: 17px;
     font-weight:400;
     -webkit-transition: all 0.3s;
@@ -1698,7 +1698,7 @@ section.flyout-wrap {
     font-size: 30px;
     margin:10px 11px 9px;
     display: block;
-    color: #48494d;
+    color: #000;
 }
 .navbar .headerRight a:hover{
     color: rgba(19, 156, 180, 0.76);
@@ -1742,7 +1742,7 @@ body.nav-expanded .overlay {
 #scrollNav #cartList{
     padding: 10px;
     margin: 10px 20px;
-    color: #48494d;
+    color: #000;
     font-size: 17px;
     font-weight: 400;
     -webkit-transition: all 0.3s;
@@ -1837,7 +1837,7 @@ body.nav-expanded {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link.active:focus {
-    color: #48494d;
+    color: #000;
     border-bottom:2px solid #139cb4;
     background-color: transparent;
     border-top: 0;
@@ -1860,7 +1860,7 @@ body.nav-expanded {
 .nav-tabs .nav-link:hover {
     font-size:18px;
     font-weight:400;
-    color:#48494d;
+    color:#000;
 }
 
 /* #Your Basket / wish List */
@@ -1876,7 +1876,7 @@ body.nav-expanded {
 .basketList td.addItemRecipe,
 .wishList td.addItemRecipe{
     font-size: 13px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     width:135px;
     vertical-align: top;
@@ -1893,7 +1893,7 @@ body.nav-expanded {
 .basketList td.addItemRate,
 .wishList td.addItemRate{
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     vertical-align: bottom;
 }
@@ -1921,7 +1921,7 @@ body.nav-expanded {
     line-height: 0;
     /*  padding: 6px 10px; */
     /* margin: 6px 10px; */
-    color: #48494d;
+    color: #000;
     display: block;
     font-size: 12px;
 }
@@ -1930,14 +1930,14 @@ body.nav-expanded {
     /* line-height: 0;
     padding: 6px 0;
      margin: 0 10px;
-    color: #48494d;
+    color: #000;
     display: block;
     font-size: 12px; */
 
     line-height: 0;
     padding: 6px 0;
     /* margin: 0 10px; */
-    color: #48494d;
+    color: #000;
     display: block;
     font-size: 12px;
     display: block;
@@ -1946,7 +1946,7 @@ body.nav-expanded {
 }
 .wishList .addProBtn a{
     width:85px;
-    color: #48494d;
+    color: #000;
     font-size: 15px;
     padding: 1px 20px;
     display: inline-block;
@@ -1968,7 +1968,7 @@ table tr.borderB td div{
 .wishListOrderTotal td.summaryTitle,
 .OrderDetailTotal td.summaryTitle{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 .basketOrderTotal,
@@ -1983,7 +1983,7 @@ table tr.borderB td div{
 .wishListOrderTotal td.summaryPrice,
 .OrderDetailTotal td.summaryPrice{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
     text-align:right;
 }
@@ -2003,7 +2003,7 @@ table tr.borderB td div{
 
 .walletModalWrap td.summaryPrice{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
     text-align:right;
 }
@@ -2021,7 +2021,7 @@ table tr.borderB td div{
 .basketFooter p,
 .wishListFooter p{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin: 20px 0 15px;
 }
@@ -2113,7 +2113,7 @@ table tr.borderB td div{
     box-shadow: none;
     height: 65px;
     padding: 15px 27px;
-    color:#48494d;
+    color:#000;
     font-size:20px;
     font-weight:400;
     width: 100%;
@@ -2162,7 +2162,7 @@ table tr.borderB td div{
     box-shadow: none;
     height: 50px;
     padding: 10px 15px;
-    color: #48494d;
+    color: #000;
     font-size: 14px;
     font-weight: 400;
     width: 100%;
@@ -2486,7 +2486,7 @@ table tr.borderB td div{
     margin-bottom:30px;
 }
 .viewMore{
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     position: relative;
     text-transform:uppercase;
@@ -2494,7 +2494,7 @@ table tr.borderB td div{
     right:28px;
 }
 .viewMore:hover {
-    color: #48494d;
+    color: #000;
 }
 .viewMore:after {
     left: 120%;
@@ -2508,7 +2508,7 @@ table tr.borderB td div{
     height: 100%;
     font-size: 13px;
     line-height: 12px;
-    color: #48494d;
+    color: #000;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
@@ -2520,7 +2520,7 @@ table tr.borderB td div{
 }
 
 .np-seasons h2{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 .product-detail .addCartWrap{
@@ -2671,7 +2671,7 @@ table tr.borderB td div{
 }
 .product-detail h4,
 .product-detail a{
-    color:#48494d;
+    color:#000;
     line-height: 25px;
     margin-bottom:0px;
     font-weight:300;
@@ -2722,7 +2722,7 @@ p.prise_fordetail.for_strike {
 }
 .product-footer p.prise{
     float:right;
-    color:#48494d;
+    color:#000;
     font-size:18px;
     font-weight:400;
 }
@@ -2732,13 +2732,13 @@ ul.footerCont {
 
 /* #Today Today Essentials  */
 .essentials h2{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 
 /* #Guest Chef Deal  */
 .chefDeal h2{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 .chefDeal .chef-deal-wrap .chef-deal-img{
@@ -2789,7 +2789,7 @@ ul.footerCont {
     padding: 25px 0px 15px;
 }
 .chef-deal-detail h3 {
-    color: #48494d;
+    color: #000;
     line-height: 25px;
     font-weight:300;
     margin-top:16px;
@@ -2815,11 +2815,11 @@ ul.footerCont {
     transition: all 0.4s;
 }
 .popCate h2{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 .popCate-detail h4{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     position: relative;
 }
@@ -2830,7 +2830,7 @@ ul.footerCont {
     height: 100%;
     font-size: 15px;
     line-height: 19px;
-    color: #48494d;
+    color: #000;
     right: 0;
     opacity: 0.8;
     top: 0px;
@@ -2851,7 +2851,7 @@ ul.footerCont {
 
 /* #Testimonial */
 .testimonial h2{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 .testimonial .test-coma {
@@ -2868,11 +2868,11 @@ ul.footerCont {
 .testimonial p{
     font-size:30px;
     font-weight:300;
-    color:#48494d;
+    color:#000;
     margin-bottom:50px;
 }
 .testimonial h4{
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 
@@ -2881,7 +2881,7 @@ ul.footerCont {
     padding:70px 0 60px;
 }
 .footer .footer-top h4{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom:15px;
 }
@@ -2889,7 +2889,7 @@ ul.footerCont {
     color: #139cb4;
 }
 .footer .footer-top p{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     font-size:15px;
     line-height: 24px;
@@ -2913,7 +2913,7 @@ ul.footerCont {
     color: #139cb4;
 }
 .footer .footer-top ul li a{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     font-size:15px;
     line-height: 32px;
@@ -2926,7 +2926,7 @@ ul.footerCont {
     padding: 12px 0;
 }
 .footer .footer-bottom p{
-    color:#48494d;
+    color:#000;
     font-size:15px;
     font-weight:300;
 }
@@ -3000,7 +3000,7 @@ ul.footerCont {
     position: absolute;
     top: 9px;
     left: 15px !important;
-    color: #48494d;
+    color: #000;
     font-size: 15px;
     font-weight: 400;
 }
@@ -3012,7 +3012,7 @@ ul.footerCont {
     width: 100%;
     text-align: center;
     font-size:25px;
-    color:#48494d;
+    color:#000;
 }
 
 /* #Modal */
@@ -3039,7 +3039,7 @@ ul.footerCont {
     top: 10px;
 }
 .modal .modal-content h3 {
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     margin-bottom: 30px;
 }
@@ -3158,21 +3158,21 @@ ul.footerCont {
 
 /* #Sign In Modal */
 .signinModalWrap .modal-content h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom: 30px;
 }
 
 /* #Change Password Modal */
 .chgPassModalWrap .modal-content h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom: 30px;
 }
 
 /* #Review Modal */
 .reviewModalWrap .modal-content h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom: 20px;
 }
@@ -3190,12 +3190,12 @@ ul.footerCont {
 
 /* #Sign Up Modal */
 .signupModalWrap .modal-content h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom: 10px;
 }
 .signupModalWrap .modal-content p.small-brief{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom: 30px;
     font-size:15px;
@@ -3305,18 +3305,18 @@ ul.footerCont {
 
 /* #Phone Verification Modal */
 .PVerifyModalWrap .modal-content h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom: 10px;
 }
 .PVerifyModalWrap .modal-content p.small-brief{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom: 30px;
     font-size:15px;
 }
 .PVerifyModalWrap .modal-content p.small-brief-link{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom: 30px;
     font-size:15px;
@@ -3359,7 +3359,7 @@ ul.footerCont {
     float: left;
 }
 .about-popup-nav ul li .nav-link:hover {
-    border-bottom: 2px solid #48494d;
+    border-bottom: 2px solid #000;
     opacity: 1;
 }
 .about-popup-nav ul li .nav-link.active{
@@ -3369,7 +3369,7 @@ ul.footerCont {
 }
 .about-popup-nav ul li .nav-link {
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     padding: 20px;
     border-bottom: 2px solid transparent;
@@ -3392,24 +3392,24 @@ ul.footerCont {
     padding:40px 40px 60px 40px;
 }
 .aboutUsModalWrap .aboutPopupHeader h2 {
-    color: #48494d;
+    color: #000;
     font-weight: bold;
     margin-bottom:15px;
 }
 .aboutUsModalWrap .aboutPopupHeader p {
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
 }
 .aboutUsModalWrap .aboutPopupBody h4{
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 700;
     margin-bottom: 10px;
 }
 .aboutUsModalWrap .aboutPopupBody p{
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
 }
 
@@ -3427,7 +3427,7 @@ ul.footerCont {
 }
 .vegePanel a {
     font-size:18px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     display: block;
     position: relative;
@@ -3543,18 +3543,18 @@ ul.footerCont {
 }
 .productWholeDetail h2{
     font-weight:300;
-    color:#48494d;
+    color:#000;
     margin-bottom: 15px;
 }
 .productWholeDetail h3{
     font-weight:300;
-    color:#48494d;
+    color:#000;
     margin-bottom: 25px;
     display: inline-block;
 }
 .productWholeDetail p{
     font-weight:300;
-    color:#48494d;
+    color:#000;
     font-size:15px;
     margin-bottom:30px;
     line-height: 22px;
@@ -3600,7 +3600,7 @@ ul.footerCont {
 }
 .share-wishlist-wrap li a {
     font-size:14px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
     text-transform:uppercase;
 }
@@ -3638,12 +3638,12 @@ ul.footerCont {
     margin-top:40px;
 }
 .productHeader .direction h3{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom:15px;
 }
 .productHeader .direction p{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     font-size:15px;
     line-height:25px;
@@ -3678,7 +3678,7 @@ ul.footerCont {
 }
 .recipeWholeDetail .chiefName {
     font-size:18px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom:25px;
 }
@@ -3688,7 +3688,7 @@ ul.footerCont {
 }
 .recipeWholeDetail h2{
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     margin-bottom: 25px;
     line-height: 45px;
 }
@@ -3719,7 +3719,7 @@ ul.footerCont {
 }
 .recipeWholeDetail h3{
     font-weight:300;
-    color:#48494d;
+    color:#000;
 }
 .recipeWholeDetail a.viewIngredients{
     font-weight:400;
@@ -3729,7 +3729,7 @@ ul.footerCont {
 }
 .recipeWholeDetail p{
     font-weight:300;
-    color:#48494d;
+    color:#000;
     font-size:15px;
     margin-bottom:30px;
     line-height: 25px;
@@ -3777,7 +3777,7 @@ ul.footerCont {
 .recipeTabsWrap .recipe-nav-tabs li a{
     font-size: 20px;
     font-weight: 300;
-    color:#48494d;
+    color:#000;
     padding: 15px 30px;
     border-bottom: 2px solid transparent;
     opacity: 0.8;
@@ -3792,20 +3792,20 @@ ul.footerCont {
 .recipeTabsWrap .recipe-nav-tabs li a.active{
     opacity: 1;
     border-bottom: 2px solid #139CB4;
-    color:#48494d;
+    color:#000;
 }
 .recipeTabsWrap .tab-content{
     padding:40px 0 0;
 }
 .tab-content #directions p{
     font-size:18px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom: 30px;
 }
 .tab-content #directions p span{
     font-size:18px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
     display:block;
     margin-bottom: 5px;
@@ -3816,13 +3816,13 @@ ul.footerCont {
     width: 33.33333333%;
     padding:0 15px;
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom:10px;
 }
 #ingredients ul li span{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:700;
     float:right;
 }
@@ -3836,7 +3836,7 @@ ul.footerCont {
     display:inline-block;
     font-size:15px;
     font-weight:300;
-    color:#48494d;
+    color:#000;
 }
 #reviews ul.starRating li span{
     color:#fed269;
@@ -3844,14 +3844,14 @@ ul.footerCont {
 }
 #reviews p {
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     line-height: 25px;
     margin-bottom: 15px;
 }
 #reviews p.reviewGiver {
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
 }
 #reviews p.reviewGiver span{
@@ -3896,23 +3896,23 @@ ul.footerCont {
     font-size: 25px;
     font-weight: 400;
     line-height: 30px;
-    color: #48494d;
+    color: #000;
     margin-bottom: 0;
 }
 .chef-Section .chefInfo h4.chefTitle span{
     font-size:15px;
     font-weight:400;
-    color:#48494d;
+    color:#000;
     display:block;
 }
 .chef-Section .chefInfo h4{
     font-weight:400;
-    color:#48494d;
+    color:#000;
     margin-bottom:15px;
 }
 .chef-Section .chefInfo p {
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     font-size: 18px;
     margin-bottom: 30px;
     line-height: 25px;
@@ -3931,7 +3931,7 @@ ul.footerCont {
 }
 .chef-Section .chefInfo ul.foodExperties li {
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     font-size: 15px;
     line-height: 25px;
 }
@@ -3982,7 +3982,7 @@ ul.footerCont {
 
 /* #RecipieChefFegs */
 .RecipieChefFegs h2 {
-    color: #48494d;
+    color: #000;
     font-weight: 300;
 }
 .recipie-chef-wrap {
@@ -4031,7 +4031,7 @@ ul.footerCont {
 }
 .recipie-chef-detail h4,
 .recipie-chef-detail h4 a{
-    color: #48494d;
+    color: #000;
     line-height: 30px;
     font-weight:300;
     margin-top:16px;
@@ -4062,7 +4062,7 @@ ul.footerCont {
 }
 .checkout-steps li a{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     display:block;
 }
@@ -4101,7 +4101,7 @@ ul.footerCont {
 }
 .recipe-item-wrap h4{
     font-weight:400;
-    color:#48494d;
+    color:#000;
     font-size:20px;
 }
 .recipe-item-wrap .selectBtn {
@@ -4124,7 +4124,7 @@ ul.footerCont {
 }
 .recipe-item-wrap table tr td.checkItemRecipe{
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     width: 50%;
     padding: 0 6% 0 3%;
@@ -4142,7 +4142,7 @@ ul.footerCont {
 .recipe-item-list table th {
     padding:0 0 15px 0;
     font-size:18px;
-    color:#48494d;
+    color:#000;
     font-weight:400;
 }
 .recipe-item-list table td.productImg{
@@ -4174,12 +4174,12 @@ ul.footerCont {
     line-height:0;
 }
 .recipe-item-list .count-input a{
-    color:#48494d;
+    color:#000;
     margin: 9px 10px 6px;
 }
 .recipe-item-list table td.addItemRate{
     font-weight:400;
-    color:#48494d;
+    color:#000;
     font-size:18px;
     width: 15%;
 }
@@ -4228,12 +4228,12 @@ ul.footerCont {
 }
 .checkOrderTotal td.summaryTitle{
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
 }
 .checkOrderTotal td.summaryPrice{
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     text-align: right;
 }
@@ -4320,7 +4320,7 @@ ul.footerCont {
 .delivery-Header h4{
     font-size: 18px;
     font-weight: 400;
-    color:#48494d;
+    color:#000;
 }
 .delivery-Header p{
     font-size: 15px;
@@ -4341,7 +4341,7 @@ ul.footerCont {
 .billingCheckbox label.checkbox-bootstrap p{
     display:inline-block;
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
 }
 
@@ -4353,7 +4353,7 @@ ul.footerCont {
 .address-Header h4{
     font-size: 18px;
     font-weight: 400;
-    color: #48494d;
+    color: #000;
     position: relative;
     display: block;
     width: 100%;
@@ -4398,7 +4398,7 @@ ul.footerCont {
 .addCardWrap h4{
     margin-bottom:15px;
     font-weight:300;
-    color:#48494d;
+    color:#000;
     font-size:15px;
 }
 .addressBookForm form input[type="submit"],
@@ -4434,7 +4434,7 @@ ul.footerCont {
     position: relative;
     padding-left: 5px;
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     margin-bottom:0;
 }
@@ -4511,7 +4511,7 @@ ul.footerCont {
 .payment-Header h4{
     font-size: 18px;
     font-weight: 400;
-    color: #48494d;
+    color: #000;
     position: relative;
     display: block;
     width: 100%;
@@ -4554,7 +4554,7 @@ ul.footerCont {
     position: relative;
     padding-left: 0;
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     margin-bottom: 10px;
 }
@@ -4625,7 +4625,7 @@ ul.footerCont {
 }
 .cryptoCurrencyWrap p{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     width: 72%;
 }
@@ -4668,7 +4668,7 @@ ul.footerCont {
 }
 .addCardWrap p {
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     padding: 9px 0;
 }
@@ -4684,7 +4684,7 @@ ul.footerCont {
 }
 .CashDeliveryWrap p{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     width: 72%;
 }
@@ -4702,7 +4702,7 @@ ul.footerCont {
     margin-bottom:40px;
 }
 .order-Confirm h4{
-    color:#48494d;
+    color:#000;
     font-size:25px;
     font-weight:300;
     margin-bottom:15px;
@@ -4711,7 +4711,7 @@ ul.footerCont {
     font-weight:400;
 }
 .order-Confirm p{
-    color:#48494d;
+    color:#000;
     font-size:18px;
     font-weight:300;
 }
@@ -4771,7 +4771,7 @@ ul.footerCont {
 .faq-left-bar ul li a {
     font-size: 18px;
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     border:none;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -4787,7 +4787,7 @@ ul.footerCont {
     padding: 20px;
 }
 .faq-right-header h4 {
-    color: #48494d;
+    color: #000;
     font-weight: 400;
 }
 .faq-right-accord {
@@ -4821,7 +4821,7 @@ ul.footerCont {
     padding: 15px 40px 15px 0px;
 }
 .faq-right-accord .faq-accord-heading a.collapsed {
-    color: #48494d;
+    color: #000;
 }
 .faq-accord-heading a.collapsed:after {
     content: "\e904";
@@ -4836,7 +4836,7 @@ ul.footerCont {
     content: "\e903";
     position: absolute;
     right:15px;
-    color: #48494d;
+    color: #000;
     font-size: 12px;
     font-family: 'icomoon';
     -webkit-transition: all 0.4s;
@@ -4852,7 +4852,7 @@ ul.footerCont {
 .faq-right-accord .panel-body p {
     width: 100%;
     padding-left: 0px;
-    color: #48494d;
+    color: #000;
     font-size: 15px;
     font-weight: 300;
     margin-bottom: 0px;
@@ -4873,7 +4873,7 @@ ul.footerCont {
 .termandcond-left-bar ul li a {
     font-size: 18px;
     font-weight: 300;
-    color: #48494d;
+    color: #000;
     border:none;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -4893,12 +4893,12 @@ ul.footerCont {
     padding: 20px 20px 30px;
 }
 .termandcond-right-side h4 {
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     /* margin-bottom: 35px; */
 }
 .termandcond-right-side small {
-    color: #48494d;
+    color: #000;
     margin-bottom: 5px;
     font-size: 15px;
     display: block;
@@ -4933,12 +4933,12 @@ ul.footerCont {
     margin:0 auto 40px;
 }
 .error404-Section .error404content h2 {
-    color: #48494d;
+    color: #000;
     margin-bottom: 15px;
     font-weight: 300;
 }
 .error404-Section .error404content p {
-    color: #48494d;
+    color: #000;
     font-size: 18px;
     margin-bottom: 35px;
     font-weight: 300;
@@ -5034,14 +5034,14 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .mobileApp h2{
     font-weight:700;
-    color:#48494d;
+    color:#000;
     line-height: 37px;
     margin-bottom: 25px;
 }
 .mobileApp p{
     font-weight: 400;
     font-size: 16px;
-    color:#48494d;
+    color:#000;
     line-height: 22px;
     margin-bottom: 25px;
 }
@@ -5103,7 +5103,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .editSec ul li,
 .editSec p{
-    color:#48494d;
+    color:#000;
     font-weight:300;
     line-height:25px;
     font-size: 15px;
@@ -5170,7 +5170,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .odrdetail-steps li {
     font-size: 15px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     display: block;
 }
@@ -5227,7 +5227,7 @@ ul.multiselect-container.dropdown-menu li.active a{
     float: left;
 }
 .order-popup-nav ul li .nav-link:hover {
-    border-bottom: 2px solid #48494d;
+    border-bottom: 2px solid #000;
     opacity: 1;
 }
 .order-popup-nav ul li .nav-link.active{
@@ -5237,7 +5237,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .order-popup-nav ul li .nav-link {
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 400;
     padding: 20px;
     border-bottom: 2px solid transparent;
@@ -5247,13 +5247,13 @@ ul.multiselect-container.dropdown-menu li.active a{
     transition: all 0.4s;
 }
 .odrDetailHeader h4{
-    color:#48494d;
+    color:#000;
     font-weight:400;
     margin-bottom:10px;
 }
 .odrDetailHeader p{
     font-size:15px;
-    color:#48494d;
+    color:#000;
     font-weight:300;
     line-height: 24px;
 }
@@ -5268,14 +5268,14 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .orderDetailListView .addItemRecipe{
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     vertical-align: top;
     width: 100%;
 }
 .orderDetailListView .addItemRate{
     font-weight: 400;
-    color: #48494d;
+    color: #000;
     font-size: 18px;
     display: block;
     width: 150px;
@@ -5287,7 +5287,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .orderDetailListView .addItemQty{
     font-weight: 400;
-    color: #48494d;
+    color: #000;
     font-size: 18px;
     vertical-align: top;
 }
@@ -5341,7 +5341,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .item .item-block.ib-info span.checkItemRecipe {
     font-size: 18px;
-    color: #48494d;
+    color: #000;
     font-weight: 300;
     vertical-align: top;
 }
@@ -5386,7 +5386,7 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .item .item-block.ib-total-price span.addItemRate {
     font-weight: 400;
-    color: #48494d;
+    color: #000;
     font-size: 18px;
     display:block;
 }
@@ -5607,7 +5607,7 @@ span.clancelItem a{
         font-size: 30px;
         margin: 21px 11px 7px;
         display: block;
-        color: #48494d;
+        color: #000;
     }
 
     .headerRight {
@@ -5681,7 +5681,7 @@ span.clancelItem a{
 
     .search-toggler {
         font-size: 22px;
-        color: #48494d;
+        color: #000;
         padding: 0;
         position: absolute;
         background: 0 0;
@@ -6376,7 +6376,7 @@ and (orientation: landscape){
     background-color: #e9e9e9;
     font-size: 13px;
     padding: 5px 10px;
-    color: #48494d;
+    color: #000;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -6427,7 +6427,7 @@ and (orientation: landscape){
     padding: 6px 12px;
     margin-left: -1px;
     line-height: 1.42857143;
-    color: #48494d;
+    color: #000;
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -6855,13 +6855,14 @@ input[type=number] {
 .essentials, .browse_brand_sec {
     background-color: #fff;
 }
-.browse_brand_sec .product-wrap .img-responsive,
+.browse_brand_sec .product-wrap,
 .popCate .product-wrap,
 .topCategories .product-wrap,
 .essentials .product-wrap,
 .product-Section .product-wrap{
     border-radius: 15px;
 }
+.browse_brand_sec .product-wrap .img-responsive,
 .popCate .product-wrap .img-responsive,
 .topCategories .product-wrap .img-responsive,
 .essentials .product-wrap .img-responsive,
