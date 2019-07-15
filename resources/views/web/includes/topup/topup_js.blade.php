@@ -4,6 +4,15 @@
             data-complete="{!! url('/') !!}/topup/checkout">
     </script>
 <script>
+    $(document).ready(function () {
+
+        $("#mobileNumber").intlTelInput("setCountry", "ae");
+        setTimeout(
+            function () {
+                $("#mobileNumber").intlTelInput("setCountry", "ae");
+            }, 500
+        )
+    });
 
     function restoreFormFields(fields)
     {
@@ -349,5 +358,10 @@
         console.log('Erorr Payment',error);
         window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
     }
+
+
+
+
+
 
 </script>
