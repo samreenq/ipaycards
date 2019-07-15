@@ -132,8 +132,8 @@
 													<div class="productSideFilter">
 														<p>
 														  <h4 for="amount">Price</h4>
-														  <input type="hidden" id="low_price"  />
-														  <input type="hidden" id="high_price" />
+														  <input type="hidden" id="low_price" value="1" />
+														  <input type="hidden" id="high_price" value="{!! $price !!}" />
 														  <input type="text" id="amount" readonly >
 														</p>
 														<div id="slider-range"></div>
@@ -152,20 +152,18 @@
 													?>
 
 
-													<input id="searchable_tags" name="searchable_tags" type="hidden" value="" />
-													<input id="category_id" name="category_id" type="hidden" value="" />
-													<input id="product_form" name="product_form" type="hidden" value="" />
-													<input id="brand_id" name="brand_id" type="hidden" value="" />
-
 													<div class="productSideFilter">
 														  <h4>Searchable tags</h4>
 														  <ul>
 															<?php
+                                                              $selected_tags = array();
+
 																	if(isset($searchable_tags))
 																		foreach($searchable_tags as $searchable_tags_attributes)
 																		{
+																		    $selected_tags[] = $searchable_tags_attributes['id'];
 															?>
-																				<li><a class="searchable_tags search_filter" data-id="<?php echo $searchable_tags_attributes['id'];?>" data-attr="searchable_tags"><?php echo $searchable_tags_attributes['value'];?></a></li>
+																				<li><a class="searchable_tags search_filter tag" data-id="<?php echo $searchable_tags_attributes['id'];?>" data-attr="searchable_tags"><?php echo $searchable_tags_attributes['value'];?></a></li>
 															<?php
 																		}
 
@@ -177,12 +175,14 @@
 														  <h4>Categories</h4>
 														  <ul>
 															<?php
+                                                              $selected_categories = array();
 																	if(isset($category_id))
 																		foreach($category_id as $category_id_attributes)
 																		{
+																		    $selected_categories[] = $category_id_attributes['category_id'];
 
 															?>
-																				<li><a class="category_id search_filter" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title'];?></a></li>
+																				<li><a class="category_id search_filter tag" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title'];?></a></li>
 															<?php
 																		}
 
@@ -195,18 +195,26 @@
 													<h4>Brands</h4>
 													<ul>
                                                         <?php
+                                                        $selected_brands = array();
+
                                                         if(isset($brand_ids))
-                                                        foreach($brand_ids as $brand_id)
-                                                        {
-															?>
-															<li><a class="brand_id search_filter" data-id="<?php echo $brand_id['id'];?>" data-attr="brand_id"   id="<?php echo $brand_id['id'];?>"><?php echo $brand_id['value'];?></a></li>
-															<?php
-                                                        }
+															foreach($brand_ids as $brand_id)
+															{
+																$selected_brands[] = $brand_id['id'];
+																?>
+																<li><a class="brand_id search_filter tag" data-id="<?php echo $brand_id['id'];?>" data-attr="brand_id"   id="<?php echo $brand_id['id'];?>"><?php echo $brand_id['value'];?></a></li>
+																<?php
+															}
 
                                                         ?>
 
 													</ul>
 												</div>
+
+												<input id="searchable_tags" name="searchable_tags" type="hidden" value="{!! (count($selected_tags)) ?  implode(',',$selected_tags) : '' !!}" />
+												<input id="category_id" name="category_id" type="hidden" value="{!! (count($selected_categories)) ?  implode(',',$selected_categories) : '' !!}" />
+												<input id="product_form" name="product_form" type="hidden" value="" />
+												<input id="brand_id" name="brand_id" type="hidden" value="{!! (count($selected_brands)) ?  implode(',',$selected_brands) : '' !!}" />
 
 													<div class="productResetBtn">
 													<br />
@@ -406,8 +414,8 @@
 		<script>
 			
 		$(document).ready(function() {
-			
-			
+
+
 			
 			$(".advance_search").on("click", function () 
 			{ 
@@ -420,8 +428,8 @@
 				
 				$("#products").empty().append(data);
 				$(".main_categeory").empty();
-				
-				
+
+                searchAdvance();
 				
 				
 			}); 
@@ -449,36 +457,9 @@
 				
 			}); 
 			
-			$(".search").on("click", function () { 
-			
-			
-				
-				category_id = $('#category_id').val();
-				searchable_tags	 = $('#searchable_tags').val();
-                brand_id	 = $('#brand_id').val();
-				
-				if($('#product_form').val().includes(","))
-					product_form=' ';
-				else 
-					product_form = $('#product_form').val();
-				
-				low_price = $('#low_price').val();
-				high_price = $('#high_price').val();
-				
-				//alert(low_price.length); 
-				if( category_id.length !==0 || searchable_tags.length !== 0 || product_form.length  !== 0 || low_price.length !==0 || high_price.length !==0 || brand_id.length !== 0)
-				{
-					//alert('click');
-					limit = 12;
-					page = 1; 
-					offset = (page  * limit) -  limit;
-					
-					
-					product_list2("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,brand_id,offset,limit);
-				
-				
-				
-				}
+			$(".search").on("click", function () {
+                searchAdvance();
+
 			});
 		
 				$(".search_filter").on("click", function () 
@@ -588,7 +569,7 @@
 							}
 							else
 							{
-								alert(category_id);
+								//alert(category_id);
 								product_list1("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,offset,limit);
 							}
 				
@@ -979,7 +960,36 @@
 					e.preventDefault();
 				});
 				*/
-			
+
+				function searchAdvance(){
+
+                    category_id = $('#category_id').val();
+                    searchable_tags	 = $('#searchable_tags').val();
+                    brand_id	 = $('#brand_id').val();
+
+                    if($('#product_form').val().includes(","))
+                        product_form=' ';
+                    else
+                        product_form = $('#product_form').val();
+
+                    low_price = $('#low_price').val();
+                    high_price = $('#high_price').val();
+
+                    //alert(low_price.length);
+                    if( category_id.length !==0 || searchable_tags.length !== 0 || product_form.length  !== 0 || low_price.length !==0 || high_price.length !==0 || brand_id.length !== 0)
+                    {
+                        //alert('click');
+                        limit = 12;
+                        page = 1;
+                        offset = (page  * limit) -  limit;
+
+
+                        product_list2("{{ route('categories') }}","{{ route('total_price') }}","{{ route('add_to_cart') }}","{{ route('show_cart') }}",14,category_id,"{{ route('product_list') }}","{{ route('product_detail') }}","{{ route('add_to_wishlist') }}",product_form,searchable_tags,low_price,high_price,brand_id,offset,limit);
+
+
+
+                    }
+				}
 			
 		</script>
 
