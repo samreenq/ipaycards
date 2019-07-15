@@ -6813,8 +6813,8 @@ input[type=number] {
 .brands_slide.owl-theme .owl-nav [class*='owl-'],
 .game_slide.owl-theme .owl-nav [class*='owl-']{
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 45%;
+    transform: translateY(-45%);
     width: 55px;
     height: 55px;
     margin: 0;
