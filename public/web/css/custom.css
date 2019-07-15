@@ -2323,9 +2323,10 @@ table tr.borderB td div{
     display:none;
 }
 
+.topupMenu .greedy-nav button{color: #000;}
 .greedy-nav button{
     width: 60px;
-    color: #000;
+    color: #fff;
     background-color: transparent;
     border: 0;
     font-size: 18px;
