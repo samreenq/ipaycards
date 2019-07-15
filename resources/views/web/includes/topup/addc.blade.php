@@ -252,6 +252,8 @@
 
     @include("web/includes/topup/service_js")
 <script>
+    menus("{{ route('menus') }}",<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';  ?>) ;
+
     load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
     total("{{ route('total_price') }}");
     add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
