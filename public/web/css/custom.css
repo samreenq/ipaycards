@@ -2519,10 +2519,10 @@ table tr.borderB td div{
 
 }
 
-.np-seasons h2{
+/*.np-seasons h2{
     color:#000;
     font-weight:300;
-}
+}*/
 .product-detail .addCartWrap{
     width:auto;
     height:45px;
@@ -2731,10 +2731,10 @@ ul.footerCont {
 }
 
 /* #Today Today Essentials  */
-.essentials h2{
+/*.essentials h2{
     color:#000;
     font-weight:300;
-}
+}*/
 
 /* #Guest Chef Deal  */
 .chefDeal h2{
@@ -2814,10 +2814,10 @@ ul.footerCont {
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 }
-.popCate h2{
+/*.popCate h2{
     color:#000;
     font-weight:300;
-}
+}*/
 .popCate-detail h4{
     color:#000;
     font-weight:300;
@@ -3475,9 +3475,9 @@ ul.footerCont {
 .product-Section .prod-right-bar .Prod-right-header{
     margin-bottom:15px;
 }
-.product-Section .prod-right-bar h2 {
+/*.product-Section .prod-right-bar h2 {
     font-weight:300;
-}
+}*/
 .product-Section .product-wrap {
     margin-bottom:30px;
 }
@@ -3542,8 +3542,8 @@ ul.footerCont {
     display: inline-block;
 }
 .productWholeDetail h2{
-    font-weight:300;
-    color:#000;
+/*    font-weight:300;
+    color:#000;*/
     margin-bottom: 15px;
 }
 .productWholeDetail h3{
@@ -3687,8 +3687,8 @@ ul.footerCont {
     margin-right: 10px;
 }
 .recipeWholeDetail h2{
-    font-weight: 300;
-    color: #000;
+    /*font-weight: 300;
+    color: #000;*/
     margin-bottom: 25px;
     line-height: 45px;
 }
