@@ -2423,8 +2423,8 @@ table tr.borderB td div{
     position:relative;
     overflow:hidden;
     padding: 28px 32px;
-    width: 100;
-    height: 135px;
+    width: 100%;
+    /*height: 135px;*/
 }
 .three-sm-banner-wrap .sm-banner-2 img{
     position:absolute;
