@@ -43,12 +43,12 @@
 				  <label>Password</label>
 				</div>
 				<div class="d-sm-flex forgotWrap">
-					<p class="mr-auto align-items-start">Not a Member yet? <a class="open_sigupmodal">Register New User</a></p>
+					<p class="mr-auto align-items-start"><a class="open_sigupmodal">Register New User?</a></p>
 					<p class="align-items-end"><a class="open_forPassmodal" >Forgot Password?</a></p>
 				</div>
 				<div class="submitBtnWrap">
 					<div class="btnLoader" > <!-- lodingBtn-->  
-						<input type="submit" value="Start" name="" style="cursor:pointer;" class="signBtn signIn"/>
+						<input type="submit" value="Login" name="" style="cursor:pointer;" class="signBtn signIn"/>
 					</div>
 				</div>
 		
