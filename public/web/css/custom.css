@@ -2323,9 +2323,10 @@ table tr.borderB td div{
     display:none;
 }
 
+.topupMenu .greedy-nav button{color: #000;}
 .greedy-nav button{
     width: 60px;
-    color: #000;
+    color: #fff;
     background-color: transparent;
     border: 0;
     font-size: 18px;
@@ -2519,10 +2520,10 @@ table tr.borderB td div{
 
 }
 
-.np-seasons h2{
+/*.np-seasons h2{
     color:#000;
     font-weight:300;
-}
+}*/
 .product-detail .addCartWrap{
     width:auto;
     height:45px;
@@ -2731,10 +2732,10 @@ ul.footerCont {
 }
 
 /* #Today Today Essentials  */
-.essentials h2{
+/*.essentials h2{
     color:#000;
     font-weight:300;
-}
+}*/
 
 /* #Guest Chef Deal  */
 .chefDeal h2{
@@ -2814,10 +2815,10 @@ ul.footerCont {
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 }
-.popCate h2{
+/*.popCate h2{
     color:#000;
     font-weight:300;
-}
+}*/
 .popCate-detail h4{
     color:#000;
     font-weight:300;
@@ -3475,9 +3476,9 @@ ul.footerCont {
 .product-Section .prod-right-bar .Prod-right-header{
     margin-bottom:15px;
 }
-.product-Section .prod-right-bar h2 {
+/*.product-Section .prod-right-bar h2 {
     font-weight:300;
-}
+}*/
 .product-Section .product-wrap {
     margin-bottom:30px;
 }
@@ -3542,8 +3543,8 @@ ul.footerCont {
     display: inline-block;
 }
 .productWholeDetail h2{
-    font-weight:300;
-    color:#000;
+/*    font-weight:300;
+    color:#000;*/
     margin-bottom: 15px;
 }
 .productWholeDetail h3{
@@ -3687,8 +3688,8 @@ ul.footerCont {
     margin-right: 10px;
 }
 .recipeWholeDetail h2{
-    font-weight: 300;
-    color: #000;
+    /*font-weight: 300;
+    color: #000;*/
     margin-bottom: 25px;
     line-height: 45px;
 }
@@ -6812,8 +6813,8 @@ input[type=number] {
 .brands_slide.owl-theme .owl-nav [class*='owl-'],
 .game_slide.owl-theme .owl-nav [class*='owl-']{
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 45%;
+    transform: translateY(-45%);
     width: 55px;
     height: 55px;
     margin: 0;
@@ -6932,3 +6933,16 @@ input[type=number] {
 
 .hide{ display:none;}
 .show{ display:block;}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
