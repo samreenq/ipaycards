@@ -211,10 +211,10 @@
 													</ul>
 												</div>
 
-												<input id="searchable_tags" name="searchable_tags" type="hidden" value="{!! (count($selected_tags)) ?  implode(',',$selected_tags) : '' !!}" />
-												<input id="category_id" name="category_id" type="hidden" value="{!! (count($selected_categories)) ?  implode(',',$selected_categories) : '' !!}" />
+												<input id="searchable_tags" name="searchable_tags" type="hidden" value="" />
+												<input id="category_id" name="category_id" type="hidden" value="" />
 												<input id="product_form" name="product_form" type="hidden" value="" />
-												<input id="brand_id" name="brand_id" type="hidden" value="{!! (count($selected_brands)) ?  implode(',',$selected_brands) : '' !!}" />
+												<input id="brand_id" name="brand_id" type="hidden" value="" />
 
 													<div class="productResetBtn">
 													<br />
@@ -429,7 +429,11 @@
 				$("#products").empty().append(data);
 				$(".main_categeory").empty();
 
-                searchAdvance();
+				$('#searchable_tags').val("{!! (count($selected_tags)) ?  implode(',',$selected_tags) : '' !!}");
+                $('#category_id').val("{!! (count($selected_categories)) ?  implode(',',$selected_categories) : '' !!}");
+                $('#brand_id').val("{!! (count($selected_brands)) ?  implode(',',$selected_brands) : '' !!}");
+
+               searchAdvance();
 				
 				
 			}); 
