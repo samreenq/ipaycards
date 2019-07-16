@@ -509,10 +509,12 @@ class EntityBackController extends EntityController
 
                     if($this->_entity_controller->identifier == "order"){
 
-                        if($paginated_id->attributes->order_status->id != $status_completed_id){
-                            $options .= '<a id="view_popup" class="btn btn-xs mr5 btn-default" data-order-id="'.$paginated_id->entity_id.'"  data-toggle="modal" title="Update Order Status" data-original-title="Update Order Status"><i class="fa fa-forward"></i></a>';
-
+                        if(isset($paginated_id->attributes->order_status->id)){
+                            if($paginated_id->attributes->order_status->id != $status_completed_id){
+                                $options .= '<a id="view_popup" class="btn btn-xs mr5 btn-default" data-order-id="'.$paginated_id->entity_id.'"  data-toggle="modal" title="Update Order Status" data-original-title="Update Order Status"><i class="fa fa-forward"></i></a>';
+                            }
                         }
+
                         $options .= '<a href="'. \URL::to($this->_panelPath . $this->_assignData['module'] . "/order-history/" . $paginated_id->{$this->_attribute_pk}.$sub_link) .'" id="view_popup" class="btn btn-xs btn-default" data-order-id="'.$paginated_id->entity_id.'"  data-toggle="modal" title="Order History" data-original-title="Order History"><i class="fa fa-history"></i></a>';
                     }
 
@@ -1563,13 +1565,29 @@ class EntityBackController extends EntityController
 
         if($this->_entity_controller->identifier == "order"){
 
+            $general_setting_lib = new GeneralSetting();
+            $currency = $general_setting_lib->getCurrency();
+
+            $list['subtotal'] = $currency.'&nbsp;'.$entity_data->attributes->subtotal;
+            $list['grand_total'] = $currency.'&nbsp;'.$entity_data->attributes->grand_total;
+
             $list['mobile_no'] = '';
-            if(isset($entity_data->attributes->customer_id->detail->auth->mobile_no))
+            if(isset($entity_data->attributes->customer_id->detail->auth->mobile_no)){
                 $list['mobile_no'] = $entity_data->attributes->customer_id->detail->auth->mobile_no;
+            }
+
         }
 
         if($this->_entity_controller->identifier == "item" && $entity_data->attributes->is_other == 1){
             $list['other_item_count'] = $entity_data->attributes->other_item_count;
+        }
+
+        if($this->_entity_controller->identifier == "product"){
+            $general_setting_lib = new GeneralSetting();
+           $currency = $general_setting_lib->getCurrency();
+
+            $list['price'] = $currency.'&nbsp;'.$entity_data->attributes->price;
+            $list['buying_price'] = $currency.'&nbsp;'.$entity_data->attributes->buying_price;
         }
 
 
@@ -2028,10 +2046,10 @@ class EntityBackController extends EntityController
             elseif( $this->_entity_controller->identifier == 'order'){
 
 
-                if(in_array($paginated_id->attributes->order_status->detail->attributes->keyword,array('pending','confirmed','assigned'))){
+                if(isset($paginated_id->attributes->order_status->detail->attributes->keyword) && in_array($paginated_id->attributes->order_status->detail->attributes->keyword,array('pending','confirmed','assigned'))){
                     return true;
                 }
-                else if($paginated_id->attributes->order_status->detail->attributes->keyword == 'accepted'){
+                else if(isset($paginated_id->attributes->order_status->detail->attributes->keyword) && $paginated_id->attributes->order_status->detail->attributes->keyword == 'accepted'){
                     return true;
                 }
                 else{
