@@ -345,7 +345,7 @@ label.checkbox-bootstrap {
 /* #Feature Image
 --------------------------------------------------------------- */
 .feature-bg{
-    background-size: cover !important;
+    background-size: 100% !important;
     background-repeat: no-repeat !important;
     background-position: center top !important;
     height: 400px;

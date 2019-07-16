@@ -54,41 +54,7 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="dashboardLeftBar col-md-12 col-lg-3 col-xl-2">
-						<aside>
-							<ul class="sidebar__inner">
-								<li><a href="{{ route('account_detail') }}">Your Account</a></li>
-								<!--<li><a href="{{ route('payment') }}">Payment</a></li> -->
-								<li ><a href="{{ route('order_history') }}">Order History</a></li>
-							{{--	<li ><a href="{{ route('address_book') }}">Address Book</a></li>--}}
-								<li class="active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
-								<li class="li-active"><a href="{{ route('gift_card') }}">Gift Card</a></li>
-								<?php
-							
-										if (isset($_SESSION['fbUserProfile']) )
-										{
-								?>
-											
-											<li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Logout</a></li>
-								
-								<?php
-										}
-
-										if (Session::has('users')  )
-										{
-									
-								?>
-											
-											<li ><a href="{{ route('signout') }}">Logout</a></li>
-								
-								<?php 
-										}
-										
-
-								?>
-							</ul>
-						</aside>
-					</div>
+					@include("web/includes/account/account_nav")
 
 
 					<div class="col-md-12 col-lg-9 col-xl-10">

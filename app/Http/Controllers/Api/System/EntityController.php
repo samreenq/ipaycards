@@ -1509,7 +1509,7 @@ class EntityController extends Controller
     {
         // validations
         $error_messages = array(
-          'email.unique' => "This email address is already registered with us. Try another email instead"
+          'email.unique' => "This email address is already registered with us. Try another email instead."
         );
 
         $validator = Validator::make($request->all(), array(

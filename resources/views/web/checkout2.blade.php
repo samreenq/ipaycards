@@ -110,7 +110,7 @@
 						<div class="paymentInfo whitebg">
 							<div class="payment-Header clearfix">
 								<h4 class="pull-left collapsed" role="button"  aria-expanded="true" aria-controls="collapseExample">Payment Info</h4>
-							</div>
+
 							
 							
 
@@ -150,13 +150,11 @@
 										
 									</div>
 
-									<div class="payment-page">
-									</div>
 								</div>
 							</div>
-							
-							
-							
+
+
+							</div>
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-4">
@@ -164,7 +162,7 @@
 							<div class="whitebg checkOrderWrap sidebar__inner">
 								<h4>Summary</h4>
 								
-								<p>Organic Oroblanco Grapefruits are the off season citrus great for juicing.</p>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 								<!--<form role="form">
 									<div class="fluid-label">
 									   <span class="icon-tt-cupon-icon"></span>

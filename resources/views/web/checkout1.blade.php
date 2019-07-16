@@ -79,7 +79,7 @@
 							<div class="whitebg checkOrderWrap sidebar__inner">
 								<h4>Summary</h4>
 								
-								<p>Organic Oroblanco Grapefruits are the off season citrus great for juicing.</p>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 								
 								<!--
 										<form role="form">

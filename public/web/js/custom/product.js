@@ -3434,7 +3434,7 @@ function referAFriend(referAFriendUrl)
                     //$(".signinError").css("color", "white");
                     //$(".signinError").css("background-color",'#d4edda');
                     //	$(".signinError").css("border-color",'#d4edda');
-                    $(".signinError").empty().append('Notification has been successfully send to your friend!');
+                    $(".signinError").empty().append("We've sent an invite to your friend.");
                     //$(".signinError").empty();
                     // $(".signinError").removeClassesExceptThese(["signinError"]);
                     $('#refer_email').val('');
