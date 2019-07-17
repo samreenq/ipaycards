@@ -3162,10 +3162,19 @@ function promotionAndDiscount(promotionAndDiscountUrl)
     $.ajax ({
         url: promotionAndDiscountUrl,
         type: 'get',
-        dataType: 'text',
+        dataType: 'json',
         success: function(data)
         {
-            $("#promotionAndDiscountUrl").empty().append(data);
+            $("#promotionAndDiscountUrl").empty().append(data.html);
+
+            if(data.count < 3){
+                //alert(data.count)
+                setTimeout(function() {
+                    $('.bx-has-controls-direction').addClass('hide');
+                }, 200);
+
+            }
+           //
         }
     });
 

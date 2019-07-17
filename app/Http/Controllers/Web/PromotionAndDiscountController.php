@@ -110,7 +110,9 @@ class PromotionAndDiscountController extends WebController
 			$data = [];
 			$data['promotion_discount'] = isset($json['data']['promotion_discount'])? $json['data']['promotion_discount'] : null;
 
-			return View::make('web/includes/main/promotion_and_discount',$data)->__toString();
+			return array(
+			    'count' => isset($json['data']['promotion_discount'])? count($json['data']['promotion_discount']) : 0,
+                    'html' => View::make('web/includes/main/promotion_and_discount',$data)->render());
 		}
 	}
 }
