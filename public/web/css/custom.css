@@ -1404,10 +1404,13 @@ section.flyout-wrap {
 #header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next {margin-right: -45px;}
 #header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev,
 #header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next {
-    background: white;
+   /* background: white;
     width: 30px;
     height: 30px;
-    border-radius: 100px;
+    border-radius: 100px;*/
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1423,19 +1426,27 @@ section.flyout-wrap {
     opacity: .8;
 }
 #header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev:after {
+    font-family: Linearicons-Free;
+    content: "\e879";
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next:after {
+    font-family: Linearicons-Free;
+    content: "\e87a";
+}
+/*#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev:after {
     font-family: 'FontAwesome';
     content: '\f104';
     color: #139CB4;
     font-weight: bold;
     font-size: 18px;
-}
-#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next:after {
+}*/
+/*#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next:after {
     font-family: 'FontAwesome';
     content: '\f105';
     color: #139CB4;
     font-weight: bold;
     font-size: 18px;
-}
+}*/
 
 .three-sm-banner-wrap .bx-wrapper .bx-pager{
     position: absolute;
