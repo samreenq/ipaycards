@@ -1379,13 +1379,62 @@ section.flyout-wrap {
 }
 
 #header .three-sm-banner-wrap .bx-wrapper{
-    position:initial;
+    position:relative;
+    /*position:initial;*/
     width:100%;
     top:0;
     left:0;
     z-index:2;
     height:100%;
     margin:0 auto;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev {margin-left: -45px;}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next {margin-right: -45px;}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev,
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next {
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev:hover,
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next:hover {
+    opacity: .8;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-prev:after {
+    font-family: 'FontAwesome';
+    content: '\f104';
+    color: #139CB4;
+    font-weight: bold;
+    font-size: 18px;
+}
+#header .three-sm-banner-wrap .bx-wrapper .bx-controls .bx-controls-direction .bx-next:after {
+    font-family: 'FontAwesome';
+    content: '\f105';
+    color: #139CB4;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .three-sm-banner-wrap .bx-wrapper .bx-pager{

@@ -66,14 +66,19 @@
             }
         });
 		$('.smBannerSlider').bxSlider({
-			controls: false,
+			controls: true,
+            touchEnabled: false,
 			auto: true,
 			minSlides: 1,
 			maxSlides: 3,
+            moveSlides: 1,
 			slideWidth: 360,
 			slideMargin: 10,
-			captions: true
+			captions: true,
+            autoDelay: 1500
 		});
+		$(".bx-prev").html("");
+		$(".bx-next").html("");
 
 	/* 	$('#animationHover').hoverline(); */
 
