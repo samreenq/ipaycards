@@ -27,7 +27,7 @@
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 <script>
 
-
+var currency = "{!! $general_setting_raw->currency !!}";
 
 
 	$(document).ajaxComplete(function () {

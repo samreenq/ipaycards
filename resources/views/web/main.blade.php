@@ -18,7 +18,6 @@
 @section('header')
     <header id="header">
         <div class="flyout-overlay for_banneroverlay"></div>
-        <a href="javascript:void(0)" class="link_page"></a>
         <div class="fly-nav-inner">
             <div class="container">
                 <button class="dropdown-toggle" data-toggle="dropdown">More <span

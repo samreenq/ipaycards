@@ -1103,7 +1103,7 @@ function discount(Request_url1,Request_url2)
                     if(data['message'] ===undefined )
                     {
                         discount_amount = data['discount_amount'];
-                        $(".discount_amount").empty().append("$ "+ discount_amount);
+                        $(".discount_amount").empty().append(currency+" "+ discount_amount);
 
                         if(typeof(localStorage.coupon_code)!="undefined")
                         {
@@ -2309,7 +2309,7 @@ function total(Request_url)
                 $(".orderNotification").empty().append(data['total_cart_products']);
 
                 $(".subtotal").empty().append(data['currency']+' '+data['subtotal']);
-                //$(".discount_amount").empty().append("$ "+data['discount_amount']);
+                //$(".discount_amount").empty().append(currency+" "+data['discount_amount']);
                 $(".delivery_charge").empty().append(data['currency']+' '+data['delivery_charge']);
                 $(".customer_wallet").empty().append(data['currency']+' '+data['customer_wallet']);
                 $(".calculated_loyalty_points").empty().append(data['calculated_loyalty_points']+" Points");
@@ -2870,7 +2870,7 @@ function deleteCartProduct(Product_code,Request_url1,Request_url2,Request_url3)
 
         if (products.length == 1) {
             localStorage.removeItem("products");
-            $(".subtotal").empty().append("$ 0.00");
+            $(".subtotal").empty().append(currency+" 0.00");
             $(".calculated_loyalty_points").empty().append("0 Points");
 
         }
@@ -2890,7 +2890,7 @@ function deleteCartProduct(Product_code,Request_url1,Request_url2,Request_url3)
         localStorage.setItem("products", JSON.stringify(products));
         if (products.length == 0) {
             localStorage.removeItem("products");
-            $(".subtotal").empty().append("$ 0.00");
+            $(".subtotal").empty().append(currency+" 0.00");
             $(".calculated_loyalty_points").empty().append("0 Points");
 
         }
