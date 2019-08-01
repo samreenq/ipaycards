@@ -304,6 +304,7 @@ Class OrderSendCards {
     private function _processProduct($order_id,$order_item,$item_type,$deal_id = false)
     {
         try {
+            echo "<h5>Order# $order_id</h5>";
             $cat_ids = '';
             $order_item_id = ($deal_id) ? $deal_id : $order_item->entity_id;
 
@@ -319,7 +320,8 @@ Class OrderSendCards {
 
             $mintroute_product_info = json_decode($order_item->product_id->detail->mintroute_product_info);
             $oneprepay_product_info = json_decode($order_item->product_id->detail->oneprepay_product_info);
-
+             echo "<pre>"; print_r($mintroute_product_info);
+            echo "<pre>"; print_r($oneprepay_product_info);
             $mintroute_order = FALSE;
             $prepay_order = FALSE;
 
@@ -338,15 +340,15 @@ Class OrderSendCards {
             } elseif (empty($mintroute_product_id) && !empty($prepay_product_id)) { //Order from One Prepay
                 $prepay_order = TRUE;
             }
-
+//dump($mintroute_order);
                 try {
                     if ($mintroute_order) {
 
-                        $vendor_id = $this->_mVendor->entity_id;
+                        $vendor_id = isset($this->_mVendor->entity_id) ? $this->_mVendor->entity_id : '';
                         //Order from mintroute
                         $order_response = $this->_mLib->purchase(['denomination_id' => $mintroute_product_id]);
                         $this->_vendorOrderLogsModel->add('mintroute', $order_id, $order_item_id,$deal_id, $order_item->product_id->id, ['denomination_id' => $mintroute_product_id], (array)$order_response);
-
+                      //  echo "<pre>"; print_r($order_response);
                         if (isset($order_response->status) && $order_response->status == 1) {
 
                             //echo "<pre>"; print_r($order_response); exit;
@@ -358,7 +360,7 @@ Class OrderSendCards {
 
                     if ($prepay_order) {
 
-                        $vendor_id = $this->_oVendor->entity_id;
+                        $vendor_id = isset($this->_oVendor->entity_id) ? $this->_oVendor->entity_id : '';
                         //Order from One Prepay
                         $order_response = $this->_oLib->purchase(['denomination_id' => $prepay_product_id, 'amount' => $oneprepay_product_info->denomination_value]);
                         $this->_vendorOrderLogsModel->add('oneprepay', $order_id, $order_item_id, $deal_id,$order_item->product_id->id, ['denomination_id' => $mintroute_product_id], (array)$order_response);
@@ -368,7 +370,9 @@ Class OrderSendCards {
                         }
 
                     }
-                   // echo "<pre>"; print_r($order_response);
+                   // echo $voucher_code.'voucherCode';
+                   // exit;
+                    echo "<pre>"; print_r($order_response);
                     // change keys
                     if (isset($voucher_code) && $voucher_code != '') {
 
@@ -429,7 +433,8 @@ Class OrderSendCards {
                     $this->_assignData['message'] .= 'Order# ' . $order_id . ' ' . $order_item->product_id->value . ' is out of stock';
                     $this->_assignData['message'] .= ' - Error: ';
                     $this->_assignData['message'] .= $ee->getMessage();
-                    //  print_r($ee->getMessage()); exit;
+                   // echo  $ee->getTraceAsString();
+                    //  print_r($ee->getMessage());
                     //  throw new \Exception($ee->getMessage());
 
                     $this->_emailContent .= '<br>';
