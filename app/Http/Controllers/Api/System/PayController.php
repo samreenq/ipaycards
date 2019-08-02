@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\System;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\Custom\OrderLib;
 use App\Libraries\Custom\PaymentLib;
 use App\Libraries\Custom\TopupLib;
 use App\Libraries\System\Entity;
@@ -103,6 +104,29 @@ Class PayController extends Controller
 
             $topup_lib = new TopupLib();
             $response = $topup_lib->topupOrder($params);
+
+            return $response;
+        }
+        catch(\Exception $e){
+            $this->_apiData['error'] = 1;
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
+    }
+
+    /**
+     * @param Request $request
+     * @return array|void
+     */
+    public function createOrder(Request $request)
+    {
+        try{
+            $params = $request->all();
+
+            $topup_lib = new OrderLib();
+            $response = $topup_lib->placeOrder($params);
 
             return $response;
         }

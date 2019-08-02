@@ -117,5 +117,65 @@ Class PaymentLib
         }
     }
 
+    public function createPayment($request,$order_type = 'order')
+    {
+        // init params
+        $request = is_array($request) ? (object) $request : $request;
+        // echo '<pre>'; print_r($request); exit;
+        try {
+
+            $params = [
+                "apiOperation" => "PAY",
+                "session" =>[
+                  "id" => $request->session_id
+                ],
+                "order" => [
+                    "currency" => config('service.MASTER_CARD.currency'),
+                    "amount" =>  $request->amount
+                ],
+                "sourceOfFunds" => [
+                    "type" => "CARD"
+                ],
+                "transaction" => [
+                    "source" => "INTERNET",
+                    "frequency" => "SINGLE"
+                ],
+                "3DSecureId" => "dceae03d"
+            ];
+
+            $call = $this->_client->put(
+                config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->transaction_id",
+                [
+                    'headers' => [
+                        'Content-Type' => 'application/json'
+                    ],
+                    'json' => $params
+                ]
+            );
+
+            $response = $call->getBody()->getContents();
+
+            //Save Payment Logs
+            if($order_type == 'order'){
+                $order_payment_logs = new OrderPaymentLogs();
+                $order_payment_logs->add('pay',$request->lead_order_id,$params,json_decode($response));
+            } else{
+                $order_payment_logs = new TopupPaymentLogs();
+                $order_payment_logs->add($request->service_type,'pay',$request->lead_order_id,$params,json_decode($response));
+            }
+
+            return json_decode($response);
+
+
+        } catch ( BadResponseException $e ) {
+            //$response = json_decode($e->getResponse()->getBody()->getContents());
+            $response = $e->getResponse()->getBody()->getContents();
+            $response = strip_tags($response, "<p>");
+            throw new \Exception($response);
+        } catch ( \Exception $e ) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
 
 }

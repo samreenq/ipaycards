@@ -21,6 +21,7 @@ Route::group(['middleware' => ['api.auth'], "prefix" => $api_routes_prefix], fun
     Route::any('/payment/get_session', $ctrl_dir.'PayController@getSessionID')->name('get_session');
     Route::any('/topup/create_session', $ctrl_dir.'PayController@getTopupSession')->name('topup_session');
     Route::any('/topup/create_order', $ctrl_dir.'PayController@createTopupOrder')->name('topup_order');
+
 });
 
 Route::group(['middleware' => ['api.auth'], "prefix" => $routes_prefix], function() use ($ctrl_dir,$routes_prefix) {
@@ -37,6 +38,9 @@ Route::group(['middleware' => ['api.auth'], "prefix" => $routes_prefix], functio
                 Route::$type($uri->uri, $ctrl_dir . $uri->method);
             }
         }
+
+    Route::any('/place_order', $ctrl_dir.'PayController@createOrder')->name('place_order');
+
     //}
 
 /*
