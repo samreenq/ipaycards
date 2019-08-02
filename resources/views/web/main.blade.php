@@ -389,7 +389,7 @@
         mainCategory("{{ route('main_category') }}");
 
         aboutBusiness("{{ route('aboutBusiness') }}");
-        referAFriend("{{ route('refer_a_friend') }}");
+
         topCategoryProducts(14, 2, "{{ route('top_category_products') }}", "{{ route('product_detail') }}", "{{ route('add_to_wishlist') }}", "{{ route('add_to_cart') }}", "{{ route('total_price') }}");
 
         // Auto Adjust Height

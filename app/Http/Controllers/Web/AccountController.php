@@ -112,7 +112,9 @@ class AccountController extends WebController {
                 'entity_type_id'=>'order',
                 'mobile_json'=>1,
                 'hook'=>'order_item',
-                'entity_id'=>$entity_id
+                'entity_id'=>$entity_id,
+               // 'in_detail' => 1,
+                'order_item_detail_key' => 'product_id'
             ];
 
 
@@ -122,7 +124,6 @@ class AccountController extends WebController {
 						),
 						true
 					);
-
 
             $data['order_detail'] = $json['data']['order'];
             $order_helper_lib = new OrderHelper();
