@@ -144,7 +144,7 @@ Class PaymentLib
             ];
 
             $call = $this->_client->put(
-                config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->transaction_id",
+                config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->lead_order_id",
                 [
                     'headers' => [
                         'Content-Type' => 'application/json'

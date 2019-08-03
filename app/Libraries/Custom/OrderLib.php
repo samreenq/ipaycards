@@ -7,14 +7,24 @@
  */
 namespace App\Libraries\Custom;
 
+use App\Http\Models\SYSTableFlat;
 use App\Libraries\EntityHelper;
 use App\Libraries\System\Entity;
 
+/**
+ * Class OrderLib
+ * @package App\Libraries\Custom
+ */
 Class OrderLib
 {
 
     private $_assignData = array();
 
+    /**
+     * @param $request
+     * @return array|mixed
+     * @throws \Exception
+     */
 
     public function placeOrder($request)
     {
@@ -39,20 +49,21 @@ Class OrderLib
             $payment_request['lead_order_id'] = $lead_order_id;
 
             $payment_response = $this->payment($payment_request);
-            echo '<pre>'; print_r($payment_response); exit;
 
-            if($payment_response['error'] == 1){
+          $payment_response = json_decode($payment_response);
+          //echo '<pre>'; print_r($payment_response); exit;
+
+            if(isset($payment_response->error)){
                 return $payment_response;
             }
-
             //Create Order
-            return $this->saveOrder($lead_order);
+            return $this->saveOrder($lead_order,$payment_response);
 
         }
         catch ( \Exception $e ) {
             $this->_assignData['error'] = 1;
             $this->_assignData['message'] =  $e->getMessage();
-            throw new \Exception($e->getMessage());
+           // throw new \Exception($e->getMessage());
         }
 
         return $this->_assignData;
@@ -116,7 +127,7 @@ Class OrderLib
         try{
             $payment_lib = new PaymentLib();
             $payment_response = $payment_lib->createPayment($payment_request,'order');
-
+          // echo '<pre>'; print_r($payment_response); exit;
         }
         catch ( \Exception $ee ) {
             $this->_assignData['error'] = 1;
@@ -124,42 +135,60 @@ Class OrderLib
             // throw new \Exception($e->getMessage());
         }
 
-        if(!isset($payment_response->result)){
+        if(isset($payment_response->gatewayResponse->error)){
             return array(
                 'error' => 1,
-                'message' => "Unable to process request, Please contact to support team"
+                'message' => isset($payment_response->gatewayResponse->error->explanation) ?
+                    $payment_response->gatewayResponse->error->explanation
+                    : "Unable to get response, Please contact to support team"
             );
         }
 
-        if(strtolower($payment_response->result) == 'error'){
-            return array(
-                'error' => 1,
-                'message' => "Unable to get payment status, Please contact to support team",
-                /* 'debug'  => $response->error->explanation*/
-            );
-        }
 
         return $payment_response;
     }
 
-    public function saveOrder($lead_order)
+    public function saveOrder($lead_order,$payment_response)
     {
         try {
+
+            //Get Order Status
+            $flat_table = new SYSTableFlat('order_statuses');
+            $order_status_raw = $flat_table->getColumnByWhere(' keyword = "payment_received"','entity_id');
+            $order_status = $order_status_raw->entity_id;
+
             //Create Order
+            $lead_order_id = $lead_order->data->entity->entity_id;
             $params = json_decode($lead_order->data->entity->attributes->order_detail, true);
             $params['entity_type_id'] = 'order';
             $params['mobile_json'] = 1;
             $params['hook'] = 'order_item';
 
+
+            $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
+           //
+            // $data['transaction_response'] = json_encode($payment_response);
+            $params['card_id'] = $card->nameOnCard;
+            $params['card_type'] = $card->scheme;
+            $params['card_last_digit'] = substr($card->number,-4);
+            $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+            $params['lead_order_id'] = "$lead_order_id";
+            $params['order_status'] = $order_status;
+
+            unset($params['payment']);
+           // echo '<pre>'; print_r($params); exit;
             $entity_lib = new Entity();
             return $entity_lib->apiPost($params);
 
         }
         catch ( \Exception $ee ) {
             $this->_assignData['error'] = 1;
-            $this->_assignData['message'] .=  $ee->getMessage();
+            $this->_assignData['message'] =  $ee->getMessage();
+            $this->_assignData['trace'] = $ee->getTraceAsString();
             // throw new \Exception($e->getMessage());
         }
+
+        return $this->_assignData;
 
     }
 
