@@ -41,9 +41,8 @@
                         if (Session::has('users')  )
                         {
 
-                        ?>
+                        	?>
 						<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
-
 
                         <?php
                         }

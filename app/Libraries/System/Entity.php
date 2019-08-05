@@ -147,10 +147,14 @@ Class Entity extends Base
 
             // get entity gallery (if attached)
             if ((in_array('gallery', $request_parameter) && !empty($request_parameter)) || empty($request_parameter)) {
+                $entityType->show_gallery = 1;
                 if ($entityType->show_gallery == '1') {
                     $data->gallery = [];
+
                     if($is_mobile_request){
                         $data->gallery = $this->_attachmentModel->getAttachmentByEntity($data->{$this->_entityModel->primaryKey});
+
+
                     }else{
                         $data->gallery = $this->_attachmentModel->getAttachmentByEntityID($data->{$this->_entityModel->primaryKey});
                     }

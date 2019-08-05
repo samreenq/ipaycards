@@ -32,6 +32,7 @@ if($general_settings){
 									<table width="100%"> 
 										<tr>
 											<td class="summaryTitle">@lang('web.sidebar_delivery_charges')</td>
+
 											<td class="summaryPrice">$ 5.00</td>
 										</tr>
 										<tr>

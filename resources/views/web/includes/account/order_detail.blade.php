@@ -49,25 +49,28 @@
 						<div class="orderDetailListView">
 								<table width="100%">
 									<tr class="borderB"><td colspan="3"><div></div></td></tr>
-									<?php 
-											
-											foreach ( $order_detail['order_item'] as $products ) 
+									<?php
+											foreach ( $order_detail['order_item']  as $key =>  $products )
 											{
                                                 //Get image of product
                                                 $gallery = isset($products['product_id']['detail']['gallery'][0]) ? json_decode(json_encode($products['product_id']['detail']['gallery'])) : false;
+
                                                 $product_image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
+
 									?>
 												<tr> 
 														<td class="prodImg"><img src="<?php echo $product_image; ?>" width="63"/></td>
-														<td>
+
+													<td>
 															<table width="100%">
 																	<tr>
-																			<td class="addItemRecipe"><?php if(isset($products['product_id']['detail']['title'])) echo $products['product_id']['detail']['title']; ?></td>
+
+																			<td class="addItemRecipe"><?php if(isset($products['product_id'])) echo $products['product_name'];   ?></td>
 																			<td rowspan="2" class="addItemQty" ><?php if(isset($products['quantity'])) echo $products['quantity']; ?></td>
 																			<td class="addItemRate" align="right">{!! $currency !!} <?php if(isset($products['price'])) echo $products['price']; ?></td>
 																	</tr>
 																	<tr>
-																				<td class="addItemWeight"><?php if(isset($products['product_id']['detail']['title'])) echo $products['product_id']['detail']['weight']; ?></td>
+																				<td class="addItemWeight">&nbsp;</td>
 																				<td class="deliveryRate" align="right">{!! $currency !!} each</td>
 																	</tr>
 															</table>
@@ -102,7 +105,7 @@
 											<td class="summaryPrice"><?php //if(isset($order_detail['loyalty_points'])) echo $order_detail['loyalty_points']; ?> Points</td>
 									</tr>-->
 									<tr class="borderB">
-											<td colspan="2">
+											<td colspan="2">getOrderDetail
 												<div></div>
 											</td>
 									</tr>

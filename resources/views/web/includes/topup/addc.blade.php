@@ -41,7 +41,7 @@
                             <input type="hidden" name="request_key" id="request_key" value="" />
                             <input type="hidden" name="amount" id="amount" value="" />
                             <h3>
-                                <span class="title_text">Infomation</span>
+                                <span class="title_text">Information</span>
                             </h3>
                             <fieldset>
                                 <h2 class="mt-4">Enter Your Personal details</h2>
@@ -67,7 +67,7 @@
                             </h3>
                             <fieldset>
 
-                                <h2 class="mt-4">Verification Your Phone</h2>
+                                <h2 class="mt-4">Verify your phone number</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert2 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">

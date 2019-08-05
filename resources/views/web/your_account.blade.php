@@ -17,6 +17,9 @@
 		@include("web/includes/navbar")
 	@endsection
 
+@section("refer_friend")
+	@include("web/includes/models/refer_friend")
+@endsection
 
 	@section("cartbar")
 		@parent
@@ -197,8 +200,9 @@
 			{
 		?>
 				load_wishlist("{{ route('add_to_wishlist') }}");
-			
-		<?php 
+
+		<?php
+
 			}
 		?>
 
@@ -247,6 +251,7 @@
 				});
 					
 			});
+
 
 			// Modal Script
 			$('#myModal').on('shown.bs.modal', function () {
@@ -428,5 +433,6 @@
 				} 
 			
 		</script>
+
 	@endsection
 

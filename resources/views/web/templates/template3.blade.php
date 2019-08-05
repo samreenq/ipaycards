@@ -30,7 +30,7 @@
 		@yield("orderDetailmodal")
 		@yield("basket_and_wish_list")	
 		@yield("about_us")
-			
+		@yield("refer_friend")
 		
 		@yield("foot")
 	</body>

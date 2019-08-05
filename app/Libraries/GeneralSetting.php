@@ -43,8 +43,8 @@ Class GeneralSetting
      */
     public function getPrettyPrice($amount)
     {
-        if($amount > 0) return $this->getCurrency().$amount;
-        return $this->getCurrency().'0.00';
+        if($amount > 0) return $this->getCurrency()." ".$amount;
+        return $this->getCurrency()." ".'0.00';
     }
 
     /**

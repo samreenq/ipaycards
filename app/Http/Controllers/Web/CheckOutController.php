@@ -304,7 +304,7 @@ class CheckOutController extends WebController {
 							else
 							{
 								$data1 = array(); 
-								$data1['message'] = "Coupon codes are past their expiration date";
+								$data1['message'] = "Coupon code is expired.";
 								$data1['currency'] = $this->_object_helper_customer->getCurrency();
 								
 								return $data1; 
@@ -313,7 +313,7 @@ class CheckOutController extends WebController {
 						else
 						{
 							$data1 = array(); 
-							$data1['message'] = "Coupon codes are past their expiration date";
+							$data1['message'] = "Coupon code is expired.";
 							$data1['currency'] = $this->_object_helper_customer->getCurrency();
 							
 							return $data1; 
