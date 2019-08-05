@@ -117,11 +117,18 @@ Class PaymentLib
         }
     }
 
+    /**
+     * @param $request
+     * @param string $order_type
+     * @return mixed
+     * @throws \Exception
+     */
     public function createPayment($request,$order_type = 'order')
     {
+
         // init params
         $request = is_array($request) ? (object) $request : $request;
-        // echo '<pre>'; print_r($request); exit;
+      // echo '<pre>'; print_r($request); exit;
         try {
 
             $params = [
@@ -143,6 +150,8 @@ Class PaymentLib
                 "3DSecureId" => "dceae03d"
             ];
 
+            //echo '<pre>'; print_r($params); exit;
+
             $call = $this->_client->put(
                 config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->lead_order_id",
                 [
@@ -154,17 +163,18 @@ Class PaymentLib
             );
 
             $response = $call->getBody()->getContents();
+            $response = json_decode($response);
 
             //Save Payment Logs
             if($order_type == 'order'){
                 $order_payment_logs = new OrderPaymentLogs();
-                $order_payment_logs->add('pay',$request->lead_order_id,$params,json_decode($response));
+                $order_payment_logs->add('pay',$request->lead_order_id,$params,$response);
             } else{
                 $order_payment_logs = new TopupPaymentLogs();
-                $order_payment_logs->add($request->service_type,'pay',$request->lead_order_id,$params,json_decode($response));
+                $order_payment_logs->add($request->service_type,'pay',$request->lead_order_id,$params,$response);
             }
-
-            return json_decode($response);
+           // echo '<pre>'; print_r($response); exit;
+            return $response;
 
 
         } catch ( BadResponseException $e ) {

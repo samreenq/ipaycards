@@ -48,9 +48,10 @@ Class OrderLib
             $payment_request = $request['payment'];
             $payment_request['lead_order_id'] = $lead_order_id;
 
-            $payment_response = $this->payment($payment_request);
+            $payment_response = $this->payment($payment_request,'order');
+            $payment_response = (object)($payment_response);
 
-          $payment_response = json_decode($payment_response);
+        //  $payment_response = json_decode(json_encode($payment_response));
           //echo '<pre>'; print_r($payment_response); exit;
 
             if(isset($payment_response->error)){
@@ -69,6 +70,10 @@ Class OrderLib
         return $this->_assignData;
     }
 
+    /**
+     * @param $request
+     * @return array
+     */
     public function validateEntity($request)
     {
         $depend_params = $request['depend_entity'];
@@ -122,32 +127,47 @@ Class OrderLib
         }
     }
 
-    public function payment($payment_request)
+    /**
+     * @param $payment_request
+     * @return array|mixed
+     */
+    public function payment($payment_request,$type)
     {
         try{
             $payment_lib = new PaymentLib();
-            $payment_response = $payment_lib->createPayment($payment_request,'order');
-          // echo '<pre>'; print_r($payment_response); exit;
+           $payment_response = $payment_lib->createPayment($payment_request,$type);
+          // $payment_response = '{"apiVersion":"49","gatewayResponse":{"3DSecure":{"acsEci":"05","authenticationToken":"gIGCg4SFhoeIiYqLjI2Oj5CRkpM=","paResStatus":"Y","veResEnrolled":"Y","xid":"8a+tihv2OFyFMDsqSEoP3nrmQxA="},"3DSecureId":"dceae03d","authorizationResponse":{"cardLevelIndicator":"88","commercialCard":"888","commercialCardIndicator":"3","marketSpecificData":"8","posData":"1025100006600","posEntryMode":"812","processingCode":"003000","responseCode":"00","returnAci":"8","stan":"62302","transactionIdentifier":"123456789012345","validationCode":"6789"},"gatewayEntryPoint":"WEB_SERVICES_API","merchant":"TEST222204083001","order":{"amount":10,"chargeback":{"amount":0,"currency":"USD"},"creationTime":"2019-08-03T10:36:08.390Z","currency":"USD","fundingStatus":"NOT_SUPPORTED","id":"8717","merchantCategoryCode":"7399","status":"CAPTURED","totalAuthorizedAmount":10,"totalCapturedAmount":10,"totalRefundedAmount":0},"response":{"acquirerCode":"00","acquirerMessage":"Approved","gatewayCode":"APPROVED"},"result":"SUCCESS","sourceOfFunds":{"provided":{"card":{"brand":"VISA","expiry":{"month":"5","year":"21"},"fundingMethod":"CREDIT","nameOnCard":"Joseph","number":"424242xxxxxx4242","scheme":"VISA","storedOnFile":"NOT_STORED"}},"type":"CARD"},"timeOfRecord":"2019-08-03T10:36:08.390Z","transaction":{"acquirer":{"batch":20190803,"date":"0803","id":"BOAS_S2I","merchantId":"222204083001","settlementDate":"2019-08-03","timeZone":"+0200","transactionId":"123456789012345"},"amount":10,"authorizationCode":"062302","currency":"USD","frequency":"SINGLE","funding":{"status":"NOT_SUPPORTED"},"id":"8717","receipt":"921510062302","source":"INTERNET","terminal":"AUDS2I05","type":"PAYMENT"},"version":"49"}}';
+            $payment_response = json_decode(json_encode($payment_response));
+            //$payment_response = json_decode($payment_response);
+            if(isset($payment_response->gatewayResponse->error)){
+                $return = array(
+                    'error' => 1,
+                    'message' => isset($payment_response->gatewayResponse->error->explanation) ?
+                        $payment_response->gatewayResponse->error->explanation
+                        : "Unable to get response, Please contact to support team"
+                );
+
+                return $return;
+            }
+
+
+            return $payment_response;
         }
         catch ( \Exception $ee ) {
             $this->_assignData['error'] = 1;
-            $this->_assignData['message'] .=  $ee->getMessage();
+            $this->_assignData['message'] =  $ee->getMessage();
             // throw new \Exception($e->getMessage());
-        }
-
-        if(isset($payment_response->gatewayResponse->error)){
-            return array(
-                'error' => 1,
-                'message' => isset($payment_response->gatewayResponse->error->explanation) ?
-                    $payment_response->gatewayResponse->error->explanation
-                    : "Unable to get response, Please contact to support team"
-            );
+            return  $this->_assignData;
         }
 
 
-        return $payment_response;
     }
 
+    /**
+     * @param $lead_order
+     * @param $payment_response
+     * @return array
+     */
     public function saveOrder($lead_order,$payment_response)
     {
         try {

@@ -28,6 +28,11 @@ Class PayController extends Controller
         $this->_mobile_json = intval($request->input('mobile_json', 0)) > 0 ? TRUE : FALSE;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
+
     public function getSessionID(Request $request)
     {
         try{
@@ -46,6 +51,10 @@ Class PayController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function getTopupSession(Request $request)
     {
         try{
@@ -94,6 +103,7 @@ Class PayController extends Controller
     }
 
     /**
+     * Create Topup Order with payment - Web
      * @param Request $request
      * @return array|mixed
      */
@@ -117,6 +127,7 @@ Class PayController extends Controller
     }
 
     /**
+     * Order Cards with payment API
      * @param Request $request
      * @return array|void
      */
@@ -127,8 +138,53 @@ Class PayController extends Controller
 
             $topup_lib = new OrderLib();
             $response = $topup_lib->placeOrder($params);
+            $response = json_decode(json_encode($response));
 
-            return $response;
+            $this->_apiData['error'] = $response->error;
+            $this->_apiData['message'] = $response->message;
+
+            if(isset($response->data)){
+                $this->_apiData['data'] = $response->data;
+            }
+
+            if($this->_apiData['error'] == 1 && isset($response->debug)){
+                $this->_apiData['debug'] = $response->debug;
+            }
+        }
+        catch(\Exception $e){
+            $this->_apiData['error'] = 1;
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
+    }
+
+    /**
+     * Topup Order with payment Api
+     * @param Request $request
+     * @return array
+     */
+    public function createTopupOrderApi(Request $request)
+    {
+        try{
+            $params = $request->all();
+
+            $topup_lib = new TopupLib();
+            $response = $topup_lib->topupOrderApi($params);
+            $response = json_decode(json_encode($response));
+          // echo '<pre>'; print_r($response); exit;
+            $this->_apiData['error'] = $response->error;
+            $this->_apiData['message'] = $response->message;
+
+            if(isset($response->data)){
+                $this->_apiData['data']['topup'] = $response->data;
+            }
+
+            if($this->_apiData['error'] == 1 && isset($response->debug)){
+                $this->_apiData['debug'] = $response->debug;
+            }
+           // echo "<pre>"; print_r($this->_apiData); exit;
         }
         catch(\Exception $e){
             $this->_apiData['error'] = 1;

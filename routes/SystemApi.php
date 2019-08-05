@@ -40,6 +40,7 @@ Route::group(['middleware' => ['api.auth'], "prefix" => $routes_prefix], functio
         }
 
     Route::any('/place_order', $ctrl_dir.'PayController@createOrder')->name('place_order');
+    Route::any('/topup_order', $ctrl_dir.'PayController@createTopupOrderApi')->name('topup_order');
 
     //}
 

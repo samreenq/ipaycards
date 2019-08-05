@@ -29,11 +29,13 @@
 
 var currency = "{!! $general_setting_raw->currency !!}";
 
+    $(document).ready(function(){
+
+        referAFriend("{{ route('refer_a_friend') }}");
+    });
 
 	$(document).ajaxComplete(function () {
 
-
-        referAFriend("{{ route('refer_a_friend') }}");
 
         $('.brands_slide').owlCarousel({
             loop:false,
@@ -47,7 +49,7 @@ var currency = "{!! $general_setting_raw->currency !!}";
                 600:{
                     items:2
                 },
-                1000:{prod
+                1000:{
                     items:4
                 }
             }

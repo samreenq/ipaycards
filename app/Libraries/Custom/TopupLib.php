@@ -195,34 +195,6 @@ Class TopupLib
                 }
 
 
-                //Save Topup History
-               /* $arr = array(
-                    'entity_type_id' => 'topup',
-                    'service_type' => isset($params['service_type']) ? $params['service_type'] : '',
-                    'customer_no' => $params['customer_no'],
-                    'amount' => $params['amount'],
-                    'recharge_type' => isset($params['recharge_type']) ? $params['recharge_type'] : '',
-                    'request_key' => isset($params['request_key']) ? $params['request_key'] : '',
-                    'source' => isset($params['source']) ? $params['source'] : '',
-                    'reference_id' => isset($params['reference_id']) ? $params['reference_id'] : '',
-                    'topup_response' => isset($response) ? json_encode($response) : '',
-                );
-
-                $entity_lib = new Entity();
-                $topup_response = $entity_lib->apiPost($arr);
-                $topup_response = json_decode(json_encode($topup_response));
-
-                //  echo "<pre>"; print_r($inventory_response);
-                if (isset($topup_response->data->entity->entity_id)) {
-                    $param = array(
-                        'entity_type_id' => 'topup',
-                        'entity_id' => $topup_response->data->entity->entity_id,
-                        'topup_no' => 'T'.$topup_response->data->entity->entity_id,
-                    );
-
-                    $entity_lib->apiUpdate($param);
-                }*/
-
                 // assign to output
                 $this->_apiData['data'] = $response;
                 $this->_apiData['response'] = trans('system.success');
@@ -244,6 +216,11 @@ Class TopupLib
         return $this->_apiData;
     }
 
+    /**
+     * Topup Order - WEB
+     * @param $request
+     * @return array|mixed
+     */
     public function topupOrder($request)
     {
 
@@ -355,6 +332,198 @@ Class TopupLib
         return $this->_apiData;
     }
 
+    /**
+     * Topup Order - Mobile
+     * @param $request
+     * @return array|mixed|object
+     */
+    public function topupOrderApi($request)
+    {
+        try{
+
+            //Validate Request
+           $validate = $this->validateRequest($request);
+            if($validate['error'] == 1){
+                return $validate;
+            }
+
+            //Create Lead Order
+            $lead_order = $this->createLead($request);
+            if($lead_order->error == 1){
+                return $lead_order;
+            }
+
+            $lead_order_id = $lead_order->data->entity->entity_id;
+
+            //Payment
+            $payment_request = $request['payment'];
+            $payment_request['lead_order_id'] = $lead_order_id;
+            $payment_request['service_type'] = $request['service_type'];
+
+            try{
+                $payment_lib = new OrderLib();
+                $payment_response = $payment_lib->payment($payment_request,'topup');
+                $payment_response = (object)($payment_response);
+                // echo '<pre>'; print_r($payment_response); exit;
+                if(isset($payment_response->error)){
+                    return $payment_response;
+                }
+
+                // Topup
+                if(in_array($request['service_type'],array('du','etisalat'))){
+                    $send_topup =  $this->mobileTopup($request);
+                }else{
+                    $send_topup = $this->serviceTopup($request);
+                }
+
+
+                if($send_topup['error'] == 1){
+                    return $send_topup;
+                }
+
+                //Save Topup History
+                return $this->saveTopup($lead_order,$send_topup,$payment_response);
+
+            }
+            catch ( \Exception $e ) {
+                // if load credit, let it continue to other API
+                //  throw new \Exception($e->getMessage());
+                $this->_apiData['error'] = 1;
+                $this->_apiData['message'] = $e->getMessage();
+                $this->_apiData['trace'] = $e->getTraceAsString();
+            }
+
+
+        }
+        catch ( \Exception $e ) {
+            // if load credit, let it continue to other API
+            //  throw new \Exception($e->getMessage());
+            $this->_apiData['error'] = 1;
+            $this->_apiData['message'] = $e->getMessage();
+            $this->_apiData['trace'] = $e->getTraceAsString();
+        }
+
+        return $this->_apiData;
+    }
+
+    /**
+     * @param $request
+     * @return array|mixed
+     */
+    public function createLead($request)
+    {
+        $params = array(
+            'entity_type_id' => 'lead_topup',
+            'order_detail' => json_encode($request)
+        );
+
+        $entity_lib = new Entity();
+        $lead_order_response =  $entity_lib->apiPost($params);
+        $lead_order_response = json_decode(json_encode($lead_order_response));
+
+        if (isset($lead_order_response->data->entity->entity_id)) {
+            return $lead_order_response;
+        }else{
+            return array('error'=> 1, 'message' => $lead_order_response->message);
+        }
+    }
+
+    /**
+     * @param $lead_order
+     * @param $send_topup
+     * @param $payment_response
+     * @return array|mixed
+     */
+    public function saveTopup($lead_order,$send_topup,$payment_response)
+    {
+        try{
+
+            //Save Topup History///////////////////////
+
+            //Create Order
+            $lead_order_id = $lead_order->data->entity->entity_id;
+            $params = json_decode($lead_order->data->entity->attributes->order_detail, true);
+            $params['entity_type_id'] = 'topup';
+            $params['mobile_json'] = 1;
+
+
+            $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
+            //
+            // $data['transaction_response'] = json_encode($payment_response);
+            $params['card_id'] = $card->nameOnCard;
+            $params['card_type'] = $card->scheme;
+            $params['card_last_digit'] = substr($card->number,-4);
+            $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+            $params['lead_order_id'] = "$lead_order_id";
+            $params['topup_response'] = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
+
+            unset($params['payment']);
+            // echo '<pre>'; print_r($params); exit;
+
+            $entity_lib = new Entity();
+            $topup_response = $entity_lib->apiPost($params);
+            $topup_response = json_decode(json_encode($topup_response));
+
+           //  echo "<pre>"; print_r($topup_response);
+            if (isset($topup_response->data->topup->entity_id)) {
+                $param = array(
+                    'entity_type_id' => 'topup',
+                    'entity_id' => $topup_response->data->topup->entity_id,
+                    'topup_no' => 'T' . $topup_response->data->topup->entity_id,
+                    'mobile_json' => 1
+                );
+              //  echo "<pre>"; print_r($param);
+               $ret =  $entity_lib->apiUpdate($param);
+               return $ret = json_decode(json_encode($ret));
+
+              //  echo "<pre>"; print_r($ret); exit;
+            }
+
+            return $topup_response;
+
+        }
+        catch ( \Exception $ee ) {
+            $this->_assignData['error'] = 1;
+            $this->_assignData['message'] =  $ee->getMessage();
+            $this->_assignData['trace'] = $ee->getTraceAsString();
+            // throw new \Exception($e->getMessage());
+        }
+
+        return $this->_assignData;
+
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function validateRequest($request)
+    {
+        $rules = [
+            'service_type' => 'required|in:du,etisalat',
+            'customer_no' => 'required|numeric|min:5',
+            'amount' => 'required|numeric|min:5',
+        ];
+
+        if(isset($request['service_type'])){
+            if (in_array($request['service_type'], array('du', 'etisalat'))) {
+                $rules['recharge_type'] ='required_if:service_type,du';
+            }
+            else if (in_array($request['service_type'], array('fly_dubai', 'addc'))) {
+                $rules['request_key'] ='required|string|min:5';
+            }
+        }
+
+        $validation = validator($request, $rules);
+        if ($validation->fails()) {
+            $apiData['error'] = 1;
+            $apiData['message'] = $validation->errors()->first();
+        } else {
+            $apiData['error'] = 0;
+            $apiData['message'] = 'success';
+        }
+        return $apiData;
+    }
 
 
 }
