@@ -500,7 +500,7 @@ Class TopupLib
     public function validateRequest($request)
     {
         $rules = [
-            'service_type' => 'required|in:du,etisalat',
+            'service_type' => 'required|in:du,etisalat,fly_dubai,addc',
             'customer_no' => 'required|numeric|min:5',
             'amount' => 'required|numeric|min:5',
         ];

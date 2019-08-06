@@ -30,6 +30,16 @@ Class OrderLib
     {
 
         try{
+
+            if(isset($request['order_status'])){
+                $flat_table = new SYSTableFlat('order_statuses');
+                $order_status_raw = $flat_table->getColumnByWhere(' keyword = "'.$request['order_status'].'"','entity_id');
+
+               if($order_status_raw){
+                   $request['order_status'] = $order_status_raw->entity_id;
+               }
+            }
+
             //Validate Order
             $validate = $this->validateEntity($request);
             if($validate['error'] == 1){
