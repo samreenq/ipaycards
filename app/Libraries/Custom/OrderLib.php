@@ -86,33 +86,45 @@ Class OrderLib
      */
     public function validateEntity($request)
     {
-        $depend_params = $request['depend_entity'];
-        unset($request['depend_entity']);
+        try{
+            $depend_params = $request['depend_entity'];
+            unset($request['depend_entity']);
 
-        $entity_helper = new EntityHelper();
-        //Validate Order
-        $entity_validate = $entity_helper->validateEntity($request);
-        if($entity_validate['error'] == 1){
-            $assignData['error'] = 1;
-            $assignData['message'] = $entity_validate['message'];
-            return $assignData;
-        }
-        else{
-            //Validate Order Items
-            if(count($depend_params) > 0){
+            $entity_helper = new EntityHelper();
 
-                foreach($depend_params as $depend_param){
+            $entity_lib = new Entity();
+            //Validate Order
+            $entity_validate =  $entity_lib->postValidator($request);
+            // $entity_validate = $entity_helper->validateEntity($request);
+            if($entity_validate['error'] == 1){
+                $assignData['error'] = 1;
+                $assignData['message'] = $entity_validate['message'];
+                return $assignData;
+            }
+            else{
+                //Validate Order Items
+                if(count($depend_params) > 0){
 
-                    $entity_depend_validate = $entity_helper->validateEntity($depend_param);
-                    if($entity_depend_validate['error'] == 1){
-                        $assignData['error'] = 1;
-                        $assignData['message'] = $entity_depend_validate['message'];
-                        return $assignData;
+                    foreach($depend_params as $depend_param){
+
+                        $entity_depend_validate = $entity_lib->postValidator($depend_param);
+                        if($entity_depend_validate['error'] == 1){
+                            $assignData['error'] = 1;
+                            $assignData['message'] = $entity_depend_validate['message'];
+                            return $assignData;
+                        }
                     }
                 }
             }
+            return array('error'=> 0, 'message' => 'success');
         }
-        return array('error'=> 0, 'message' => 'success');
+        catch ( \Exception $ee ) {
+            $assignData['error'] = 1;
+            $assignData['message'] =  $ee->getMessage();
+            // throw new \Exception($e->getMessage());
+            return  $assignData;
+        }
+
     }
 
     /**
