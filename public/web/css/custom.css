@@ -2747,8 +2747,8 @@ table tr.borderB td div{
 .essentials .product-detail .addCartWrap,
 .topCategories .product-detail .addCartWrap,
 .product-Section .product-detail .addCartWrap{
-    right: auto;
-    left: 20px;
+    left: auto;
+    right: 20px;
 }
 .product-footer span.count{
     float:left;
