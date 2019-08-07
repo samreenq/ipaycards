@@ -3059,7 +3059,8 @@ function changeAccountPassword(changeAccountPasswordUrl) {
                     }
 
                     $("#account_change_response").addClass('alert alert-success');
-                    $("#account_change_response").empty().append("Password has been changed successfully");
+
+                    $("#account_change_response").empty().append("Password has been changed successfully.");
 
                     timePass = setInterval(function () {
                         $('.chgPassmodal').modal('hide');
