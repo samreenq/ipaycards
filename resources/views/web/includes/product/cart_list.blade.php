@@ -28,7 +28,7 @@ foreach ( $products  as $productItemsList )
 												<span style="font-size:75%;color:#000;margin-left: 50%;margin-bottom: 57%;" onclick="deleteCartProduct('@if(isset($productItemsList['product_code'])){{$productItemsList['product_code']}}@endif','{{ route('add_to_cart') }}','{{ route('show_cart') }}','{{route('total_price')}}')" > <!--class="clancelItem" --> 
 													<span class="icon-tt-close-icon"></span>
 												</span>					  									
-											<a/>
+											</a>
 										</td>
 								</tr>
 								<tr >
@@ -56,15 +56,27 @@ foreach ( $products  as $productItemsList )
 												<a class="incr-btn incr-btn1 mln text-left" data-action="increase"  href="#">
 													<span class="icon-tt-plus-icon"></span>
 												</a>
+
 											</div>
-											
-											
+
 										</td>
+
+
 									</div>
+
 								</tr>
 							</table>
+
+
+							<span style="display: block;font-weight: 400;color: #c2c5d1;font-size: 13px;"> <?php echo $currency; ?> @if(isset($productItemsList['price'])){{ $productItemsList['price']}}@endif each</span>
+
+
+
+
 					</td>
+
 				</tr>
+
 				<tr class="borderB"><td colspan="3"><div></div></td></tr>
 <?php 
 			$n++;

@@ -448,14 +448,14 @@
 				$('#product_form').val('');
                 $('#brand_id').val('');
 				
-				$('#low_price').val('1');
-				$('#amount').val("{!! $currency !!}"+'1 - $<?php if(isset($price)) echo $currency." ".$price; ?>');
+				$('#low_price').val(' 1 ');
+				$('#amount').val("{!! $currency !!}"+" "+'1 - $<?php if(isset($price)) echo $currency." ".$price; ?>');
 				$('#high_price').val('<?php if(isset($price)) echo $price; ?>');
 				
 				$( "#slider-range" ).slider({
 				  range: true,
 				  min: 1 ,
-				  max:  <?php if(isset($price)) echo $price; ?>  ,
+				  max:  '<?php if(isset($price)) echo $price; ?>'  ,
 				  values: [ 1,<?php if(isset($price)) echo $price; ?> ]
 				});
 				
@@ -528,7 +528,7 @@
 		var low = $( "#slider-range" ).slider( "values", 0 ); 	
 		var high = $( "#slider-range" ).slider( "values", 1 ); 
 		
-		$( "#amount" ).val( "{!! $currency !!} " + low  + " - {!! $currency !!} " + high  );
+		$( "#amount" ).val( "{!! $currency !!} " + low  + " - " + "{!! $currency !!} " + high  );
 		
 		<?php 
 		
