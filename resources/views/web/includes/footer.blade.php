@@ -16,10 +16,10 @@
 					<h4 class="light-heading">#{!! APP_NAME !!}</h4>
 					<p>A product built to provide, an end to end e-commerce solution, sighting the needs of online marketplace requirements. We want to empower each and every shop owner to have their own presence online.</p>
 					<ul class="social-media">
-						<li><a href="{!! $general_setting_raw->facebook_url !!}"><span class="icon-tt-facebook-icon"></span></a></li>
-						<li><a href="{!! $general_setting_raw->twitter_url !!}"><span class="icon-tt-twitter-icon"></span></a></li>
-						<li><a href="{!! $general_setting_raw->instagram_url !!}"><span class="icon-tt-instagram-icon"></span></a></li>
-						<li><a href="{!! $general_setting_raw->youtube_url !!}"><span class="icon-tt-youtube-icon"></span></a></li>
+						<li><a target ="_blank"  href="{!! $general_setting_raw->facebook_url !!}"><span class="icon-tt-facebook-icon"></span></a></li>
+						<li><a target ="_blank" href="{!! $general_setting_raw->twitter_url !!}"><span class="icon-tt-twitter-icon"></span></a></li>
+						<li><a target ="_blank" href="{!! $general_setting_raw->instagram_url !!}"><span class="icon-tt-instagram-icon"></span></a></li>
+						<li><a target ="_blank" href="{!! $general_setting_raw->youtube_url !!}"><span class="icon-tt-youtube-icon"></span></a></li>
 					</ul>
 				</div>
 				<div class="ftrlinks col-sm-4 col-md-3 col-lg-2 ml-lg-auto">

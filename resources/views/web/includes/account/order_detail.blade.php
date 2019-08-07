@@ -105,7 +105,7 @@
 											<td class="summaryPrice"><?php //if(isset($order_detail['loyalty_points'])) echo $order_detail['loyalty_points']; ?> Points</td>
 									</tr>-->
 									<tr class="borderB">
-											<td colspan="2">getOrderDetail
+											<td colspan="2">{{--getOrderDetail--}}
 												<div></div>
 											</td>
 									</tr>
