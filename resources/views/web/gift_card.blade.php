@@ -156,9 +156,9 @@
                         console.log(data);
                         if(data.error == 1){
 
-                            $(".errorDiv").addClass('alert alert-danger');
-                            $(".errorDiv").empty().append(data.message);
-
+                         /*   $(".errorDiv").addClass('alert alert-danger');*/
+                            /*$(".errorDiv").empty().append(data.message);*/
+                                    $(".errorDiv").empty().add("ddd");
                         }
                        else {
                             if ($(".errorDiv").hasClass('alert')) {
