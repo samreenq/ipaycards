@@ -15,7 +15,7 @@
 			<input type="hidden" name="phone_number" id="phone_number" />
 			<input type="hidden" name="entity_id" id="entity_id" />
 			  <input type="hidden" name="url" id="url" value="{!! \URL::current(); !!}" />
-			 <div id="error_msg_phone_verification" class="help-block text-left animated fadeInDown hide" ></div>
+			 <div id="error_msg_phone_verification" class="help-block text-left animated fadeInDown" ></div>
 			<div class="verifyCode">
 				<div class="col-12">
 					<div class="row">
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<div class="forgotWrap">
-					<p class="text-center"><a href="#" class="resend" >Resend Code</a></p>
+					<p class="text-center"><a href="javascript:void(0)" class="resend" >Resend Code</a></p>
 				</div>
 				<div class="submitBtnWrap">
 					<input type="button" value="Done" name="" class="phone_verfication"/>
@@ -46,3 +46,8 @@
 </div>
 
 @show
+
+{{--
+<script>$(".resend").click(function(){
+		alert("The paragraph was clicked.");
+	});</script>--}}

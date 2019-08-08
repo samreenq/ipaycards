@@ -130,7 +130,7 @@
 								  <label class="checkbox-bootstrap">                                        
 									  <input id="term_condition" name="term_condition" required="required"  class="form-control" type="checkbox" />             
 									  <span class="checkbox-placeholder"></span>           
-									  <p>I agree with <a target="_blank" href="<?php echo url('/').'/cms/terms_and_condition' ?>">Terms &amp; Conditions </a></p>
+									  <p>I agree with <a target="_blank" href="<?php echo url('/').'/cms/terms_of_services' ?>">Terms &amp; Conditions </a></p>
 								  </label>
 							 </div>
 						</div>

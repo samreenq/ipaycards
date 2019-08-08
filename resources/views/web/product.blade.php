@@ -449,7 +449,7 @@
                 $('#brand_id').val('');
 				
 				$('#low_price').val(' 1 ');
-				$('#amount').val("{!! $currency !!}"+" "+'1 - $<?php if(isset($price)) echo $currency." ".$price; ?>');
+				$('#amount').val("{!! $currency !!}"+" "+'1 - <?php if(isset($price)) echo $currency." ".$price; ?>');
 				$('#high_price').val('<?php if(isset($price)) echo $price; ?>');
 				
 				$( "#slider-range" ).slider({

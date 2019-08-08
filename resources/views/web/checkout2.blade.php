@@ -178,12 +178,12 @@
 									
 									
 										<tr>
-											<td class="summaryTitle">Order price</td>
+											<td class="summaryTitle">Order Price</td>
 											<td class="summaryPrice subtotal">{!! $currency !!} 0.00</td>
 										</tr>
 										<tr class="borderB"><td colspan="2"><div></div></td></tr>
 										<tr>
-											<td class="summaryTitle">Coupons Discount</td>
+											<td class="summaryTitle">Coupon Discount</td>
 											<td class="summaryPrice discount_amount">{!! $currency !!} 0.00</td>
 										</tr>
 										

@@ -22,7 +22,7 @@
 
             ?>
 
-            <li ><a href="{{ route('signout') }}">Logout</a></li>
+            <li ><a href="{{ route('signout') }}">SIGN OUT</a></li>
 
             <?php
             }

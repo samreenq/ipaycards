@@ -112,7 +112,7 @@
                             </h3>
                             <fieldset>
 
-                                <h2 class="mt-4">Verify your phone number</h2>
+                                <h2 class="mt-4">Verify Your Phone Number</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert2 alert-danger" style="display: none;"></div>
                                     <div class="alert alert-success success-msg2" style="display: none;"></div>
