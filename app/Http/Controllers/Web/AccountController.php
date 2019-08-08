@@ -401,8 +401,7 @@ class AccountController extends WebController {
 			if($validator->fails())
 			{
 				$errors = $validator->errors();
-				$data['message'] = $errors->first('first_name').$errors->first('last_name');
-
+				$data['message'] = $errors->first('first_name')."<br> ".$errors->first('last_name');
 				return $data;
 			}
 			else 

@@ -67,7 +67,7 @@
                             </h3>
                             <fieldset>
 
-                                <h2 class="mt-4">Verify your phone number</h2>
+                                <h2 class="mt-4">Verify Your Information</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert2 alert-danger" style="display: none;"></div>
                                     <div class="form-group row align-items-center">

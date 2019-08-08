@@ -332,6 +332,9 @@ var currency = "{!! $general_setting_raw->currency !!}";
         $(".resend").on("click", function (e)
         {
 
+
+           /* alert("The verification has been resend to your phone.");*/
+
             $("#error_msg_phone_verification").removeClass('alert alert-danger');
             $("#error_msg_phone_verification").addClass('alert alert-success');
 
@@ -365,7 +368,7 @@ var currency = "{!! $general_setting_raw->currency !!}";
                         //$("#error_msg_phone_verification").css("color", "white");
                         //$("#error_msg_phone_verification").css("background-color",'#d4edda');
                         //$("#error_msg_phone_verification").css("border-color",'#d4edda');
-                        $("#error_msg_phone_verification").empty().append('The verification code has been sent to you phone');
+                        $("#error_msg_phone_verification").empty().append('The verification code has been resend to your phone.');
                     }
 
 
