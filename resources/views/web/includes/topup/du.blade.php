@@ -213,7 +213,7 @@
                             </fieldset>
 
                             <h3>
-                                <span class="title_text">Checkout</span>
+                                <span class="title_text">Confirmation</span>
                             </h3>
                             <fieldset>
                                 <div class="fieldset-content">

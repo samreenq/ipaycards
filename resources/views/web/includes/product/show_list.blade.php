@@ -59,7 +59,7 @@
 					
 					<div class="item-block ib-total-price">
 						<span class="addItemRate">
-							<div class="price"><?php echo $currency; ?><div class="cartPrice price{{ $n }}" >  @if(isset($productItems['price']) && isset($productItems['product_quantity']) ){{$productItems['price']*$productItems['product_quantity']}}@endif </div>
+							<div class="price"><?php echo $currency; echo " " ; ?><div class="cartPrice price{{ $n }}" >  @if(isset($productItems['price']) && isset($productItems['product_quantity']) ){{$productItems['price']*$productItems['product_quantity']}}@endif </div>
 								</div>
 							<span><?php echo $currency; ?> @if(isset($productItems['price'])){{$productItems['price']}}@endif each</span>
 						

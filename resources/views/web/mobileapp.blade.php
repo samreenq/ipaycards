@@ -33,11 +33,11 @@
 					<div class="col-md-12 m-md-auto col-lg-9 m-lg-auto d-md-flex align-items-center">
 						<div class="col-sm-12 col-md-7 col-lg-7">
 							<h2>The easiest way to shop on {!! APP_NAME !!}.</h2>
-							<div class="toolbar-small-search">
+						{{--	<div class="toolbar-small-search">
 								<input class="search-bar"  name="search" placeholder="Mobile Number" type="search" value="">
 								<button class="search-btn" name="button" type="submit"><span class="icon-tt-right-arrow"></span></button>
 							</div>
-							<p>Text yourself the download link. Standard text messaging and data rates may apply.</p>
+							<p>Text yourself the download link. Standard text messaging and data rates may apply.</p>--}}
 							<ul class="download-btn">
 								<li><a href="#"><img src="<?php echo url('/').'/public/web/img/ios-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
 								<li><a href="#"><img src="<?php echo url('/').'/public/web/img/play-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
