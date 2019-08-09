@@ -112,7 +112,13 @@
 
 						@if(!empty($cat_id))
 
-										<div class="main_categeory"><h4><a  style=""  href=" {{ url('/').'/product?entity_type_id=14&category_id='.$categories->category_id  }}" onclick="return false" ;  ><?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?></a></h4></div>
+										<div class="main_categeory" style="color:#0000A0">
+											<h4>
+
+													<?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?>
+
+											</h4>
+										</div>
 									@if($categories->child && count($categories->child)>0)
 											<ul class="categories vegeListWrap pl15" id="accordion">
 												@foreach($categories->child as $category_raw)
