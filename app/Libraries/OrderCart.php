@@ -234,6 +234,7 @@ Class OrderCart
                             'entity_id' => $item->product_id,
                             'status' => 1,
                             'mobile_json' => 1,
+                            'show_gallery' => 1
                         );
 
                    // echo "<pre>"; print_r($params); exit;
@@ -318,7 +319,7 @@ Class OrderCart
                         else{
                             $this->saveCart($customer_id);
                         }
-                    //echo "<pre>"; print_r($save_cart); exit;
+                  //  echo "<pre>"; print_r($save_cart); exit;
 
                 }
             }
