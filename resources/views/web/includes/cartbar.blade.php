@@ -11,9 +11,11 @@ if($general_settings){
 
 ?>
 		<!--Your Basket & Wish List -->
-		<div class="cart-list">
+		<div class="cart-list"  >
+
 			<div class="cart-tabs">
 				<div class="cartTabHeader">
+
 					<a href="#" id="nav-close"><span class="icon-tt-close-icon"></span></a>
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
@@ -24,10 +26,10 @@ if($general_settings){
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane in active" id="yourbasket">
-						<div class="basketList" id="cart" >
-							
+						<div class="basketList" id="cart"   >
+
 						</div>
-							<div class="cartTabFooterlandscape">
+							<div class="cartTabFooterlandscape" >
 								<div class="basketOrderTotal">
 									<table width="100%"> 
 										<tr>

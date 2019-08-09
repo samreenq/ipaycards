@@ -112,7 +112,7 @@
 
 						@if(!empty($cat_id))
 
-										<div class="main_categeory" style="color:#0000A0">
+										<div class="main_categeory" style="color:black">
 											<h4>
 
 													<?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?>
