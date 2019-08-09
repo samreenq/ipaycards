@@ -79,7 +79,7 @@
 							<div class="whitebg checkOrderWrap sidebar__inner">
 								<h4>Summary</h4>
 								
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								<p>You will recieve your voucher codes after payment via email.</p>
 								
 								<!--
 										<form role="form">

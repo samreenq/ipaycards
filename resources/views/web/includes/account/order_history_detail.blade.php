@@ -26,7 +26,7 @@
 						<td><?php if(isset($raw['created_at'])) echo  $created_at; ?></td>
 						<td><?php if(isset($orderAttributes['order_number'])) echo $orderAttributes['order_number'] ?></td>
 						<td><?php if(isset($orderAttributes['order_status']['value']) ) echo $orderAttributes['order_status']['value'] ; ?></td>
-						<td><?php if(isset($orderAttributes['grand_total']) ) echo $orderAttributes['grand_total']?></td>
+						<td><?php if(isset($orderAttributes['grand_total']) ) echo "AED ";echo $orderAttributes['grand_total']?></td>
 
 
 						<td align="center">
