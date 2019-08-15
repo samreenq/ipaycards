@@ -1570,6 +1570,7 @@ section.flyout-wrap {
 }
 #scrollHeader .page-nav-second ul li a:hover {
     opacity:1;
+    color: #0f738d;
 }
 #scrollHeader .page-nav-second ul li.active a {
     border-bottom:2px solid #000;
