@@ -95,7 +95,10 @@ Class OrderCart
         } catch (\Exception $e) {
             $return['error'] = 1;
             $return['message'] = $e->getMessage();
+            $return['debug'] = $e->getTraceAsString();
         }
+
+        return $return;
 
     }
 

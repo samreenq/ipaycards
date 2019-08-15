@@ -917,7 +917,7 @@ class ProductController extends WebController
 		
     }
 	
-	public function addToCart(Request $request) 
+	public function _addToCart(Request $request)
 	{
 		$rules  =  array(	'data' =>  'required'		); 
 		$validator = Validator::make($request->all(),$rules);		
@@ -931,13 +931,21 @@ class ProductController extends WebController
             $cart_product = array();
             if (isset($this->_customerId) && $this->_customerId > 0){
 
+                $products = $request->input('data');
+                if(count($products)>0){
+                    $products = json_decode(json_encode($products));
+                }
 
                 $order_cart = new OrderCart();
-                $cust_cart = $order_cart->getOrderCart($this->_customerId);
+               $ret =  $order_cart->mergeWebCart($this->_customerId,$products);
+               if($ret['error'] == 0){
+                   $data['products'] = $ret['data']['products'];
+               }
 
-                // echo '<pre>'; print_r($cust_cart['data']['order_cart'][0]); exit;
+                // echo '<pre>'; print_r($ret); exit;
 
-                $new_arr = array();
+                // $cust_cart = $order_cart->getOrderCart($this->_customerId);
+                /*$new_arr = array();
                 if(isset($cust_cart['data']['order_cart'][0]->cart_item)){
 
                     foreach($cust_cart['data']['order_cart'][0]->cart_item as $prod){
@@ -989,7 +997,7 @@ class ProductController extends WebController
                     $data['products'] = $cart_product;
                     unset($product_id); unset($quantity);
 
-                }
+                }*/
 
             }
             else{
@@ -1000,7 +1008,7 @@ class ProductController extends WebController
 			return  View::make('web/includes/product/cart_list',$data)->__toString();
 		}  
     }
-    public function _addToCart(Request $request)
+    public function addToCart(Request $request)
     {
         $rules  =  array(	'data' =>  'required'		);
         $validator = Validator::make($request->all(),$rules);
@@ -1010,82 +1018,7 @@ class ProductController extends WebController
         }
         else
         {
-            $order_cart = [];
-            $requested_products = [];
-            $final_cart = [];
-            $product = $request->input('data');
-
-
-            if (isset($product)){
-
-                foreach($product as $p){
-                    $entity_ids[] = $p['entity_id'];
-                    $requested_products[$p['entity_id']] = $p['product_quantity'];
-
-                }
-
-                $product_ids = implode(',',$entity_ids);
-
-                $params = array(
-                    'entity_type_id' => 'product',
-                    'entity_id' => $product_ids,
-                    'mobile_json' => 1,
-                    'in_detail' => 1,
-                    'limit' => -1
-                );
-
-                $response = $this->_object_library_entity->apiList($params);
-                $response = json_decode(json_encode($response));
-
-                // echo "<pre>"; print_r($response); exit;
-                if($response->error == 0 && isset($response->data->product)){
-
-                    foreach($response->data->product as $productAtrributes){
-
-                        if ($productAtrributes->status->value == 1) {
-
-                            if(!empty($productAtrributes->promotion_discount_amount)){
-                                $price = $productAtrributes->promotion_discount_amount;
-                            }else{
-                                $price = $productAtrributes->price;
-                            }
-
-                            $quantity = $requested_products[$productAtrributes->entity_id];
-
-                            //  $subtotal = $subtotal + ($quantity * $price);
-                            // $total_cart_products++;
-
-                            $order_cart[] = [
-                                'product_id' => $productAtrributes->entity_id,
-                                'quantity' =>$quantity,
-                            ];
-
-                            $gallery = isset($productAtrributes->gallery[0]) ? $productAtrributes->gallery : false;
-                            $image = Fields::getGalleryImage($gallery,'product','thumb');
-
-                            $final_cart[] = array(
-                                'entity_id' => $productAtrributes->entity_id,
-                                'product_code' => $productAtrributes->product_code,
-                                'title' => $productAtrributes->product_code,
-                                'thumb' => $image,
-                                'price' => $price,
-                                'product_quantity' => $quantity,
-                                'item_type' => $productAtrributes->item_type->value,
-                            );
-
-                        }
-                    }
-
-                }
-            }
-
-            //Save Cart
-            if (isset($this->_customerId) && $this->_customerId > 0){
-                $order_cart_lib = new OrderCart();
-                $order_cart_lib->saveCart($this->_customerId,json_encode($order_cart));
-            }
-
-            $data['products'] = $final_cart;
+            $data['products'] = $request->input('data');
             $data['currency'] = $this->_object_library_general_setting->getCurrency();
             return  View::make('web/includes/product/cart_list',$data)->__toString();
         }
