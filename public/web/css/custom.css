@@ -2107,7 +2107,13 @@ table tr.borderB td div{
     padding:20px 0;
 }
 
-
+.basketList img,
+.wishList img {
+    border-radius: 5px;
+    width: 62px;
+    height: 36px;
+    object-fit: cover;
+}
 .basketList,
 .wishList {
     width: 100% !important;
