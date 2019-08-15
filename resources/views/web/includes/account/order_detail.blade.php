@@ -71,7 +71,7 @@
 																	</tr>
 																	<tr>
 																				<td class="addItemWeight">&nbsp;</td>
-																				<td class="deliveryRate" align="right">{!! $currency !!} each</td>
+																				<td class="deliveryRate" align="right">{!! $currency !!} <?php echo ($products['price']/$products['quantity']) ?>  each</td>
 																	</tr>
 															</table>
 														</td>

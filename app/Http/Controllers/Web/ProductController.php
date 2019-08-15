@@ -1023,6 +1023,156 @@ class ProductController extends WebController
             return  View::make('web/includes/product/cart_list',$data)->__toString();
         }
     }
+
+    public function addToWishlist(Request $request)
+    {
+
+        $users=array();
+        if ($request->session()->has('users'))
+        {
+            $users = $request->session()->get('users');
+        }
+        else
+        {
+            if(isset($_SESSION['fbUserProfile']))
+            {
+
+                $data = array(
+                    'entity_type_id'	=> "11",
+                    'name'				=> $_SESSION['fbUserProfile']['name'],
+                    'first_name'		=> $_SESSION['fbUserProfile']['first_name'],
+                    'last_name'			=> $_SESSION['fbUserProfile']['last_name'],
+                    'platform_type'		=> 'facebook',
+                    'device_type'		=> 'none',
+                    'platform_id'		=> $_SESSION['fbUserProfile']['id'],
+                    'email'				=> $_SESSION['fbUserProfile']['email'],
+                    'status'			=> 1,
+                    'mobile_json'		=> 1,
+                );
+
+                /**-------- Cubix panel Internal call Problem solver------- */
+                $post_param = $request->all();
+                $request->replace($post_param);
+                $post_param = $request->all();
+                /**-------- Cubix panel Internal call Problem solver------- */
+
+                $response = json_encode(CustomHelper::internalCall($request,"api/entity_auth/social_login", 'POST',$data,false));
+                $json = json_decode($response,true);
+                $users[0]['entity_id'] =	$json['data']['customer']['entity_id'];
+
+
+                /**-------- Cubix panel Internal call Problem solver------- */
+                $request->replace($post_param);
+                /**-------- Cubix panel Internal call Problem solver------- */
+            }
+        }
+
+        if(isset($users[0]['entity_id']))
+        {
+            $rules  =  array( 	'product_id' =>  'required'	);
+            $validator = Validator::make($request->all(),$rules);
+            if($validator->fails())
+            {
+                $data = array();
+                $data['actor_entity_id'] 			= $users[0]['entity_id'];
+                $data['target_entity_type_id']		= 14;
+                $data['actor_entity_type_id']		= 11;
+                $data['type']					= "private";
+                $data['mobile_json']	= 1;
+
+                $response = json_encode(CustomHelper::internalCall($request,"api/extension/social/package/like/listing", 'GET',$data,false));
+                $json 	  = json_decode($response,true);
+
+                $wishlist = isset($json['data']['like_listing']) ? $json['data']['like_listing'] : [] ;
+
+                $data = array();
+                $p=0;
+
+                foreach( $wishlist as $wishlist_attribute  )
+                {
+
+
+                    $data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
+                    $data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
+                    $data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
+                    $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
+                    $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
+                    $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
+                    $data[$p]['item_type'] 			= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                    /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                    $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
+                    $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
+                    */$p++;
+                }
+                $data['wishlist'] = $data;
+
+                $general = new GeneralSetting();
+                $data['currency'] = $general->getCurrency();
+                return  View::make('web/includes/product/wish_list',$data)->__toString();
+
+            }
+            else
+            {
+
+                $data = array();
+                $data['actor_entity_id'] 		= $users[0]['entity_id'];
+                $data['target_entity_id'] 		= $request->input('product_id');
+                $data['target_entity_type_id']	= 14;
+                $data['actor_entity_type_id']	= 11;
+                $data['switch']					= 1;
+                $data['type']					= "private";
+                $data['mobile_json']			= 1;
+
+                $response = json_encode(CustomHelper::appCall($request,"api/extension/social/package/like", 'POST',$data,false));
+                $json 	  = json_decode($response,true);
+
+
+                $data = array();
+                $data['actor_entity_id'] 			= $users[0]['entity_id'];
+                $data['target_entity_type_id']		= 14;
+                $data['actor_entity_type_id']		= 11;
+                $data['type']					= "private";
+                $data['mobile_json']	= 1;
+
+                $response = json_encode(CustomHelper::internalCall($request,"api/extension/social/package/like/listing", 'GET',$data,false));
+                $json 	  = json_decode($response,true);
+
+
+                $wishlist = $json['data']['like_listing'];
+
+                $data = array();
+                $p=0;
+
+                foreach( $wishlist as $wishlist_attribute  )
+                {
+                    $data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
+                    $data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
+                    $data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
+                    $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
+                    $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
+                    $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
+                    $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                    /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
+                    $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
+                    $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
+                    */$p++;
+
+                }
+
+                return $data;
+            }
+
+        }
+        else
+        {
+            return "<div class='wishlist_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  >Wishlist is empty</div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'> Please Sign In to add Items in Wishlist</div></div>";;
+        }
+
+
+
+
+    }
+
 	public function deleteToWishlist(Request $request) 
 	{
 		$rules  	=  array( 	'entity_id' =>  'required'	); 
@@ -1112,153 +1262,7 @@ class ProductController extends WebController
 			
 		}
 	}
-	public function addToWishlist(Request $request) 
-	{
-		$users=array();
-		if ($request->session()->has('users')) 
-		{
-				$users = $request->session()->get('users');
-		}
-		else
-		{
-			if(isset($_SESSION['fbUserProfile']))
-			{
-				
-				$data = array(
-							'entity_type_id'	=> "11",
-							'name'				=> $_SESSION['fbUserProfile']['name'],
-							'first_name'		=> $_SESSION['fbUserProfile']['first_name'],
-							'last_name'			=> $_SESSION['fbUserProfile']['last_name'],
-							'platform_type'		=> 'facebook',
-							'device_type'		=> 'none',
-							'platform_id'		=> $_SESSION['fbUserProfile']['id'],
-							'email'				=> $_SESSION['fbUserProfile']['email'],
-							'status'			=> 1,
-							'mobile_json'		=> 1,
-					  ); 
-				
-				/**-------- Cubix panel Internal call Problem solver------- */
-				$post_param = $request->all();
-				$request->replace($post_param);
-				$post_param = $request->all();
-				/**-------- Cubix panel Internal call Problem solver------- */
-				
-				$response = json_encode(CustomHelper::internalCall($request,"api/entity_auth/social_login", 'POST',$data,false));
-				$json = json_decode($response,true); 
-				$users[0]['entity_id'] =	$json['data']['customer']['entity_id'];
-				
-				
-				/**-------- Cubix panel Internal call Problem solver------- */
-				$request->replace($post_param);
-				/**-------- Cubix panel Internal call Problem solver------- */
-			}
-		}
-		if(isset($users[0]['entity_id']))
-		{
-			$rules  =  array( 	'product_id' =>  'required'	); 
-			$validator = Validator::make($request->all(),$rules);		
-			if($validator->fails())
-			{
-						$data = array(); 
-						$data['actor_entity_id'] 			= $users[0]['entity_id'];
-						$data['target_entity_type_id']		= 14;
-						$data['actor_entity_type_id']		= 11;
-						$data['type']					= "private";
-						$data['mobile_json']	= 1;
-						
-						$response = json_encode(CustomHelper::internalCall($request,"api/extension/social/package/like/listing", 'GET',$data,false));
-						$json 	  = json_decode($response,true);
-						
-						$wishlist = isset($json['data']['like_listing']) ? $json['data']['like_listing'] : [] ;
-						
-						$data = array(); 
-						$p=0;
-						
-						foreach( $wishlist as $wishlist_attribute  ) 
-						{
-							
-								
-							$data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
-							$data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
-							$data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
-							$data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
-							$data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
-							$data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-                            $data[$p]['item_type'] 			= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
-                            /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
-                            $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
-                            $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
-                            */$p++;
-							
-						}
-						$data['wishlist'] = $data; 
-						$general = new GeneralSetting();
-						$data['currency'] = $general->getCurrency();
-				
-						return  View::make('web/includes/product/wish_list',$data)->__toString();
-					
-			}
-			else 
-			{		
-				
-				$data = array(); 
-				$data['actor_entity_id'] 		= $users[0]['entity_id'];
-				$data['target_entity_id'] 		= $request->input('product_id');
-				$data['target_entity_type_id']	= 14;
-				$data['actor_entity_type_id']	= 11; 
-				$data['switch']					= 1;
-				$data['type']					= "private";
-				$data['mobile_json']			= 1;
-			
-				$response = json_encode(CustomHelper::appCall($request,"api/extension/social/package/like", 'POST',$data,false));
-				$json 	  = json_decode($response,true);
 
-
-				$data = array(); 
-				$data['actor_entity_id'] 			= $users[0]['entity_id'];
-				$data['target_entity_type_id']		= 14;
-				$data['actor_entity_type_id']		= 11;
-				$data['type']					= "private";
-				$data['mobile_json']	= 1;
-	
-				$response = json_encode(CustomHelper::internalCall($request,"api/extension/social/package/like/listing", 'GET',$data,false));
-				$json 	  = json_decode($response,true);
-				
-				
-				$wishlist = $json['data']['like_listing'];
-				
-				$data = array(); 
-				$p=0;
-					
-				foreach( $wishlist as $wishlist_attribute  ) 
-				{
-					$data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
-					$data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
-					$data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
-					$data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
-					$data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
-					$data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-                    $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
-                    /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
-                    $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
-                    $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
-                    */$p++;
-					
-				}
-				
-				return $data; 
-			}  
-		
-		}
-		else 
-		{
-			return "<div class='wishlist_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  >Wishlist is empty</div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'> Please Sign In to add Items in Wishlist</div></div>";;
-		}
-		
-		
-		
-		
-    }
 	
 	public function menus(Request $request)
 	{
