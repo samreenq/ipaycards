@@ -80,7 +80,7 @@
 												<div class="f_circleG frotateG_07"></div>
 												<div class="f_circleG frotateG_08"></div>
 											</div>
-											  
+
 										</div>
 						</ul>
 						<ul class='hidden-links hidden'></ul>
@@ -96,18 +96,18 @@
 											<div class="toolbar-search" >
 												<input class="search-bar" required="required" class="form-control" name="title" placeholder="I’m looking for…" type="text" value="">
 												<button class="search-btn"  type="submit"><span class="icon-tt-right-arrow"></span></button>
-												
+
 											</div>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="three-sm-banner-wrap">
 					<div class="container">
 						<div class="row" id="promotionAndDiscountUrl">
-							
+
 						</div>
 					</div>
 				</div>
@@ -371,7 +371,7 @@
 
     <script>
         menus("{{ route('menus') }}",<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';  ?>) ;
-		
+
         load_cart("{{ route('add_to_cart') }}", "{{ route('total_price') }}");
         total("{{ route('total_price') }}");
         add_to_Cart("{{ route('total_price') }}", "{{ route('add_to_cart') }}");
@@ -425,12 +425,12 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()
         });
-	
-	
-	
-		
-		
-		
+
+
+
+
+
+
         //$('.addtocart').click(function(){
         //	var count=$('#pro-inc-wrap').val();
         //	$(this).animate({width:'110px'},'slow');
@@ -476,6 +476,10 @@
                 e.preventDefault();
                 $('body').toggleClass('nav-expanded');
             });
+            $('.overlay').on('click', function (e) {
+                e.preventDefault();
+                $('body').toggleClass('nav-expanded');
+            });
             $('#nav-close').on('click', function (e) {
                 e.preventDefault();
                 $('body').removeClass('nav-expanded');
@@ -514,7 +518,7 @@
 
             // Wizard Form
             // Wizard Form
-         
+
 
 
         });
