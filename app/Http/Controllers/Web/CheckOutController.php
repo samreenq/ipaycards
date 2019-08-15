@@ -168,7 +168,7 @@ class CheckOutController extends WebController {
 		if($validator->fails())
 		{
 			$data = []; 
-			$data['message'] = "Coupon Not available";
+			$data['message'] = "Please enter coupon code.";
 			
 			return $data; 
 		}
@@ -234,7 +234,7 @@ class CheckOutController extends WebController {
 										else 
 										{
 											$data1 = []; 
-											$data1['message'] = "Coupon Discount Amount is not Defined!";
+											$data1['message'] = "Coupon discount amount is not defined!";
 											$data1['currency'] = $this->_object_helper_customer->getCurrency();
 											
 											return $data1; 
@@ -250,7 +250,7 @@ class CheckOutController extends WebController {
 										else 
 										{
 											$data1 = []; 
-											$data1['message'] = "Coupon Discount Amount is not Defined!";
+											$data1['message'] = "Coupon discount amount is not defined!";
 											$data1['currency'] = $this->_object_helper_customer->getCurrency();
 											
 											return $data1; 
@@ -322,7 +322,7 @@ class CheckOutController extends WebController {
 				else
 				{
 					$data1 = array(); 
-					$data1['message'] = "Coupon codes no longer exists";
+					$data1['message'] = "Coupon code no longer exists";
 					$data1['currency'] = $this->_object_helper_customer->getCurrency();
 					
 					return $data1; 
@@ -332,7 +332,7 @@ class CheckOutController extends WebController {
 			else
 			{
 				$data1 = array(); 
-				$data1['message'] = "Coupon codes no longer exists";
+				$data1['message'] = "Coupon code no longer exists";
 				$data1['currency'] = $this->_object_helper_customer->getCurrency();
 				
 				return $data1; 
@@ -358,7 +358,7 @@ class CheckOutController extends WebController {
 			
 			return array(
 			    'error' => 0,
-                'message' => 'No Items are found in cart'
+                'message' => 'No items are found in cart'
             );
 		}
 		else 
@@ -493,7 +493,7 @@ class CheckOutController extends WebController {
 
            // echo "<pre>"; print_r($request->products);exit;
             //Save Cart
-            if (isset($this->_customerId) && $this->_customerId > 0){
+            if (isset($this->_customerId) && $this->_customerId > 1){
                 $order_cart_lib = new OrderCart();
                return $order_cart_lib->saveCart($this->_customerId);
             }
