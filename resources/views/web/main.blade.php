@@ -56,6 +56,7 @@
         </div>
 
         <div class="container pageNavWrap">
+            <div class="greedy-overflow"></div>
             <div class="greedy-nav page-nav" id="animationHover">
                 <button type="button" class="pull-right">More</button>
                 <ul class=" menus visible-links">
@@ -405,7 +406,7 @@
                 }
 
                 $('.tab-content ' + selector).css("height", docheight);
-                $('.tab-content ' + selector).css("min-height", '220px'); // i have given minimum height
+                $('.tab-content ' + selector).css("min-height", '569px'); // i have given minimum height
             }
 
             $(document).ready(function () {
@@ -479,11 +480,11 @@
                 e.preventDefault();
                 $('body').removeClass('nav-expanded');
             });
-            /*$('.basketList').enscroll({
+            $('.basketList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',
                 verticalHandleClass: 'handle3'
-            });*/
+            });
             $('.wishList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',

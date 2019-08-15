@@ -162,7 +162,7 @@
 							<div class="whitebg checkOrderWrap sidebar__inner">
 								<h4>Summary</h4>
 								
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								<p>You will recieve your voucher codes after payment via email.</p>
 								<!--<form role="form">
 									<div class="fluid-label">
 									   <span class="icon-tt-cupon-icon"></span>
@@ -400,6 +400,7 @@
                 var amt = $("#paid_amount").val();
                 var amount = parseFloat(amt / 100);
 
+
                 localStorage.setItem('charge_type','master_card');
 
                 $.ajax({
@@ -427,9 +428,12 @@
                             interaction: {
                                 merchant: {
                                     name: 'iPayCards - Transaction Order ID: '+$("#entity_id").val(),
+
                                 }
+
                             }
                         });
+
 
                         setTimeout(
                             function () {

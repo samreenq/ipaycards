@@ -21,7 +21,7 @@ foreach ( $products  as $productItemsList )
 							<table width="100%">
 								<tr>
 										<td class="addItemRecipe">{{ $productItemsList['title'] }}</td>
-										<td class="addItemWeight" align="right">{!! $productItemsList['product_code'] !!}
+										{{--<td class="addItemWeight" align="right">{!! $productItemsList['product_code'] !!}--}}
 										</td>
 										<td>
 											<a href="#" >

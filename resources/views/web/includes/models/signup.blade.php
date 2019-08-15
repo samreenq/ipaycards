@@ -31,6 +31,15 @@
 					    <h3>Account</h3>
 					    <p class="small-brief">Sign up to {!! APP_NAME !!} with your favourite social media account or using your email ID. </p>
 						<div class="fbBtnWrap">
+
+							{{--<a href="javascript:void(0);" class="contFb" onclick="onSignIn()">Connect With Google</a>--}}
+
+						<?php
+
+
+
+							?>
+
 							<?php
 									if(Session::has('message1'))
 									{
@@ -96,7 +105,7 @@
 							?>
 							
 						</div>
-						
+
 						<div class="signupError" style="" >  </div>
 					
 					    <div class="row">
