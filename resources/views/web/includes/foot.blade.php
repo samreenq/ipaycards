@@ -26,7 +26,7 @@
 
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 
 var currency = "{!! $general_setting_raw->currency !!}";
@@ -213,27 +213,8 @@ var currency = "{!! $general_setting_raw->currency !!}";
         });
     }
 
-function onSuccess(googleUser) {
-    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-}
-function onFailure(error) {
-    console.log(error);
-}
-
-function renderButton() {
-    gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 440,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-      //  'onsuccess': onSignIn,
-        'onfailure': onFailure
-    });
-}
-
 function onSignIn(googleUser) {
-
+//alert('Hiii')
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());

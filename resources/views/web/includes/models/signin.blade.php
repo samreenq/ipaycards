@@ -32,7 +32,7 @@
 							
 							
 			</div>
-			  <div id="my-signin2"></div>
+			  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 				<div class="signinError" >  </div>
 				<div class="fluid-label">
 				  <input id="login_id" name="login_id" type="email" placeholder="Email" />

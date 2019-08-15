@@ -327,7 +327,7 @@ class Base extends Model
             $headers[] = "Content-type: text/html; charset=" . $charset;
         }
 
-        echo $msg;
+       // echo $msg;
         //die($msg);
        // return @mail($to_email, $data["subject"], $message, implode("\r\n", $headers));
         $data['send_to_mail'] = $to_email;
