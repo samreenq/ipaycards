@@ -10,8 +10,11 @@ if($general_settings){
 }
 
 ?>
+
+
 		<!--Your Basket & Wish List -->
-		<div class="cart-list"  >
+		<div class="cart-list">
+
 
 			<div class="cart-tabs">
 				<div class="cartTabHeader">
@@ -26,7 +29,8 @@ if($general_settings){
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane in active" id="yourbasket">
-						<div class="basketList" id="cart"   >
+						<div class="basketList" id="cart">
+
 
 						</div>
 							<div class="cartTabFooterlandscape" >

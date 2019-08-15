@@ -181,7 +181,11 @@ class AuthenticationController extends WebController {
             'mobile_no' => 'required|mobile',
             'term_condition' => 'required',
             );
-		$validator = Validator::make($request->all(),$rules);		
+
+		$msgs = [
+		    'term_condition.required' => 'Please tick the checkbox if you want to proceed.'
+        ];
+		$validator = Validator::make($request->all(),$rules,$msgs);
 		if($validator->fails())
 		{
             return array(

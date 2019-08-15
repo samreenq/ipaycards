@@ -1051,7 +1051,7 @@ class OrderController extends WebController {
         if($json['error'] == 1){
             return array(
                 'error' => 1,
-                'message' => $json['message']
+                'message' => $json["message"]
             );
         }
 
