@@ -56,6 +56,7 @@
         </div>
 
         <div class="container pageNavWrap">
+            <div class="greedy-overflow"></div>
             <div class="greedy-nav page-nav" id="animationHover">
                 <button type="button" class="pull-right">More</button>
                 <ul class=" menus visible-links">
