@@ -1147,7 +1147,7 @@ var Common = function (options) {
                                 }
                                 else{
                                     if(data_reponse.redirect){
-                                        showSuccessAlert(data_reponse.message);{!! config('service.MASTER_CARD.currency') !!}
+                                        showSuccessAlert(data_reponse.message);
                                         window.location.href =  data_reponse.redirect;
                                     }
                                     showSuccessAlert(data_reponse.message);
