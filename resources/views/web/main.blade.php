@@ -55,36 +55,7 @@
             </div>
         </div>
 
-        <div class="container pageNavWrap">
-            <div class="greedy-nav page-nav" id="animationHover">
-                <button type="button" class="pull-right">More</button>
-                <ul class=" menus visible-links">
-                    <div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingImage" align="center" style="display: none">
-											  <div class="floatingCirclesG">
-												<div class="f_circleG frotateG_01"></div>
-												<div class="f_circleG frotateG_02"></div>
-												<div class="f_circleG frotateG_03"></div>
-												<div class="f_circleG frotateG_04"></div>
-												<div class="f_circleG frotateG_05"></div>
-												<div class="f_circleG frotateG_06"></div>
-												<div class="f_circleG frotateG_07"></div>
-												<div class="f_circleG frotateG_08"></div>
-											</div>
-											  
-										</div>
-						</ul>
-						<ul class='hidden-links hidden'></ul>
-					</div>
-				</div>
+        @include("web/includes/secondry_header")
 				<div class="main-banner">
 					<div class="container">
 						<div class="row">
@@ -95,18 +66,18 @@
 											<div class="toolbar-search" >
 												<input class="search-bar" required="required" class="form-control" name="title" placeholder="I’m looking for…" type="text" value="">
 												<button class="search-btn"  type="submit"><span class="icon-tt-right-arrow"></span></button>
-												
+
 											</div>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="three-sm-banner-wrap">
 					<div class="container">
 						<div class="row" id="promotionAndDiscountUrl">
-							
+
 						</div>
 					</div>
 				</div>
@@ -370,7 +341,7 @@
 
     <script>
         menus("{{ route('menus') }}",<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';  ?>) ;
-		
+
         load_cart("{{ route('add_to_cart') }}", "{{ route('total_price') }}");
         total("{{ route('total_price') }}");
         add_to_Cart("{{ route('total_price') }}", "{{ route('add_to_cart') }}");
@@ -405,7 +376,7 @@
                 }
 
                 $('.tab-content ' + selector).css("height", docheight);
-                $('.tab-content ' + selector).css("min-height", '220px'); // i have given minimum height
+                $('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
             }
 
             $(document).ready(function () {
@@ -424,12 +395,12 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()
         });
-	
-	
-	
-		
-		
-		
+
+
+
+
+
+
         //$('.addtocart').click(function(){
         //	var count=$('#pro-inc-wrap').val();
         //	$(this).animate({width:'110px'},'slow');
@@ -475,15 +446,19 @@
                 e.preventDefault();
                 $('body').toggleClass('nav-expanded');
             });
+            $('.overlay').on('click', function (e) {
+                e.preventDefault();
+                $('body').toggleClass('nav-expanded');
+            });
             $('#nav-close').on('click', function (e) {
                 e.preventDefault();
                 $('body').removeClass('nav-expanded');
             });
-            /*$('.basketList').enscroll({
+            $('.basketList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',
                 verticalHandleClass: 'handle3'
-            });*/
+            });
             $('.wishList').enscroll({
                 showOnHover: true,
                 verticalTrackClass: 'track3',
@@ -513,7 +488,7 @@
 
             // Wizard Form
             // Wizard Form
-         
+
 
 
         });

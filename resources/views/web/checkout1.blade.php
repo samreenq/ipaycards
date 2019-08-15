@@ -302,7 +302,7 @@
 						}			
 									
 						$('.tab-content ' + selector).css("height", docheight);		
-						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
 					
 					$(document).ready(function() {
@@ -357,6 +357,10 @@
 						e.preventDefault();
 						$('body').toggleClass('nav-expanded');
 					});
+                    $('.overlay').on('click', function (e) {
+                        e.preventDefault();
+                        $('body').toggleClass('nav-expanded');
+                    });
 					$('#nav-close').on('click',function(e){
 						e.preventDefault();
 						$('body').removeClass('nav-expanded');

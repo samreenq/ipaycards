@@ -6,6 +6,7 @@ use App\Http\Models\FlatTable;
 use App\Http\Models\SYSCategory;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\CustomHelper;
+use App\Libraries\Fields;
 use App\Libraries\GeneralSetting;
 use App\Libraries\OrderCart;
 use App\Libraries\System\Entity;
@@ -571,6 +572,68 @@ class ProductController extends WebController
 		else 
 		{	
 			$data['products'] = $request->input('data');
+			$cust_cart = $request->input('data');
+            $cart_product = array();
+          if (isset($this->_customerId) && $this->_customerId > 0){
+
+
+                $order_cart = new OrderCart();
+                $cust_cart = $order_cart->getOrderCart($this->_customerId);
+
+              // echo '<pre>'; print_r($cust_cart['data']['order_cart'][0]); exit;
+
+                $new_arr = array();
+                if(isset($cust_cart['data']['order_cart'][0]->cart_item)){
+
+                    foreach($cust_cart['data']['order_cart'][0]->cart_item as $prod){
+
+                        //echo '<pre>'; print_r($product); exit;
+                        $product = $prod->detail;
+
+                        $thumb = Fields::getGalleryImageFile($product->gallery,'product','file');
+                        $price = $product->price;
+
+                        if(isset($product->product_promotion_id) && $product->product_promotion_id >0)
+                        {
+                            if((isset($product->promotion_start_date) && !empty($product->promotion_start_date)) &&
+                                (isset($product->promotion_end_date) && !empty($product->promotion_end_date))) {
+
+                                $current_date = date("Y-m-d H:i:s");
+
+                                if (strtotime($current_date) >= strtotime($product->promotion_start_date) &&
+                                    strtotime($current_date) <= strtotime($product->promotion_end_date)) {
+
+                                    if (isset($product->promotion_discount_amount)) {
+                                        $price = $product->promotion_discount_amount;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        $cart_product[] = array(
+                            'entity_id' => $prod->product_id,
+                            'product_code' => $product->product_code,
+                            'title' => $product->title,
+                            'thumb' => $thumb,
+                            'price' => $price,
+                            // 'weight' => $product->weight,
+                            //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
+                            // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
+                            'product_quantity' => $prod->quantity,
+                            'item_type' => $product->item_type->value,
+
+                        );
+
+                    }
+
+                    $data['products'] = $cart_product;
+
+                }
+
+            }
+
+
 
             if($data['products'] && count($data['products']) > 0){
 
@@ -632,10 +695,18 @@ class ProductController extends WebController
 		}
 		else
 		{
-			
+            $subtotal=0;$total_cart_products=0; $order_cart = array();
 			$discount_amount = $request->input('discount'); 
 			$product = $request->input('data');
-			
+
+           /* if (isset($this->_customerId) && $this->_customerId > 0){
+                $order_cart_lib = new OrderCart();
+                $merge_cart =  $order_cart_lib->mergeWebCart($this->_customerId,$product);
+
+                if($merge_cart['error'] == 0){
+                    $product = $merge_cart['products'];
+                }
+            }*/
 			
 
 		   /*---------------------------------- User Verification ------------------------------*/
@@ -643,26 +714,29 @@ class ProductController extends WebController
 			/*---------------------------------- User Verification ------------------------------*/
 			
 			
-			$subtotal=0;$total_cart_products=0; $order_cart = array();
-			if(isset($product))
-				foreach ( $product  as $productAtrributes ) 
-				{
+
+			if(isset($product)){
+
+                foreach ( $product  as $productAtrributes )
+                {
                     if(isset($productAtrributes['price']))
-                    $subtotal = $subtotal + ($productAtrributes['product_quantity'] * $productAtrributes['price'] );
-					$total_cart_products++;
+                        $subtotal = $subtotal + ($productAtrributes['product_quantity'] * $productAtrributes['price'] );
+                    $total_cart_products++;
 
                     $order_cart[] = array(
                         'product_id' => $productAtrributes['entity_id'],
                         'quantity' => $productAtrributes['product_quantity'],
                     );
-				}
+                }
 
-				//Save Cart
-           if (isset($this->_customerId) && $this->_customerId > 0){
-			    $order_cart_lib = new OrderCart();
-                $order_cart_lib->saveCart($this->_customerId,json_encode($order_cart));
+                //Save Cart
+                if (isset($this->_customerId) && $this->_customerId > 0){
+                    $order_cart_lib = new OrderCart();
+                    $order_cart_lib->saveCart($this->_customerId,json_encode($order_cart));
+                }
             }
-			
+
+
 
 				/*--------------------------------- Total After Subtraction of Delivery Charges  ------------------------------------*/
 		/*	$data = array();
@@ -843,7 +917,7 @@ class ProductController extends WebController
 		
     }
 	
-	public function addToCart(Request $request) 
+	public function _addToCart(Request $request)
 	{
 		$rules  =  array(	'data' =>  'required'		); 
 		$validator = Validator::make($request->all(),$rules);		
@@ -853,12 +927,88 @@ class ProductController extends WebController
 		}
 		else 
 		{		
-			$data['products'] = $request->input('data'); 	
+			//
+            $cart_product = array();
+            if (isset($this->_customerId) && $this->_customerId > 0){
+
+                $products = $request->input('data');
+                if(count($products)>0){
+                    $products = json_decode(json_encode($products));
+                }
+
+                $order_cart = new OrderCart();
+               $ret =  $order_cart->mergeWebCart($this->_customerId,$products);
+               if($ret['error'] == 0){
+                   $data['products'] = $ret['data']['products'];
+               }
+
+                // echo '<pre>'; print_r($ret); exit;
+
+                // $cust_cart = $order_cart->getOrderCart($this->_customerId);
+                /*$new_arr = array();
+                if(isset($cust_cart['data']['order_cart'][0]->cart_item)){
+
+                    foreach($cust_cart['data']['order_cart'][0]->cart_item as $prod){
+
+                        //echo '<pre>'; print_r($product); exit;
+                        $product = $prod->detail;
+
+                        $thumb = Fields::getGalleryImageFile($product->gallery,'product','file');
+                        $price = $product->price;
+
+                        if(isset($product->product_promotion_id) && $product->product_promotion_id >0)
+                        {
+                            if((isset($product->promotion_start_date) && !empty($product->promotion_start_date)) &&
+                                (isset($product->promotion_end_date) && !empty($product->promotion_end_date))) {
+
+                                $current_date = date("Y-m-d H:i:s");
+
+                                if (strtotime($current_date) >= strtotime($product->promotion_start_date) &&
+                                    strtotime($current_date) <= strtotime($product->promotion_end_date)) {
+
+                                    if (isset($product->promotion_discount_amount)) {
+                                        $price = $product->promotion_discount_amount;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        $product_id = isset($prod->product_id) ? $prod->product_id : (isset($prod->entity_id) ? $prod->entity_id : "");
+                        $quantity = isset($prod->quantity) ? $prod->quantity : (isset($prod->product_quantity) ? $prod->product_quantity : "");
+
+
+                        $cart_product[] = array(
+                            'entity_id' => $product_id,
+                            'product_code' => $product->product_code,
+                            'title' => $product->title,
+                            'thumb' => $thumb,
+                            'price' => $price,
+                            // 'weight' => $product->weight,
+                            //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
+                            // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
+                            'product_quantity' => $quantity,
+                            'item_type' => $product->item_type->value,
+
+                        );
+
+                    }
+
+                    $data['products'] = $cart_product;
+                    unset($product_id); unset($quantity);
+
+                }*/
+
+            }
+            else{
+                $data['products'] = $request->input('data');
+            }
+
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
 			return  View::make('web/includes/product/cart_list',$data)->__toString();
 		}  
     }
-    public function _addToCart(Request $request)
+    public function addToCart(Request $request)
     {
         $rules  =  array(	'data' =>  'required'		);
         $validator = Validator::make($request->all(),$rules);
@@ -868,82 +1018,7 @@ class ProductController extends WebController
         }
         else
         {
-            $order_cart = [];
-            $requested_products = [];
-            $final_cart = [];
-            $product = $request->input('data');
-
-
-            if (isset($product)){
-
-                foreach($product as $p){
-                    $entity_ids[] = $p['entity_id'];
-                    $requested_products[$p['entity_id']] = $p['product_quantity'];
-
-                }
-
-                $product_ids = implode(',',$entity_ids);
-
-                $params = array(
-                    'entity_type_id' => 'product',
-                    'entity_id' => $product_ids,
-                    'mobile_json' => 1,
-                    'in_detail' => 1,
-                    'limit' => -1
-                );
-
-                $response = $this->_object_library_entity->apiList($params);
-                $response = json_decode(json_encode($response));
-
-                // echo "<pre>"; print_r($response); exit;
-                if($response->error == 0 && isset($response->data->product)){
-
-                    foreach($response->data->product as $productAtrributes){
-
-                        if ($productAtrributes->status->value == 1) {
-
-                            if(!empty($productAtrributes->promotion_discount_amount)){
-                                $price = $productAtrributes->promotion_discount_amount;
-                            }else{
-                                $price = $productAtrributes->price;
-                            }
-
-                            $quantity = $requested_products[$productAtrributes->entity_id];
-
-                            //  $subtotal = $subtotal + ($quantity * $price);
-                            // $total_cart_products++;
-
-                            $order_cart[] = [
-                                'product_id' => $productAtrributes->entity_id,
-                                'quantity' =>$quantity,
-                            ];
-
-                            $gallery = isset($productAtrributes->gallery[0]) ? $productAtrributes->gallery : false;
-                            $image = Fields::getGalleryImage($gallery,'product','thumb');
-
-                            $final_cart[] = array(
-                                'entity_id' => $productAtrributes->entity_id,
-                                'product_code' => $productAtrributes->product_code,
-                                'title' => $productAtrributes->product_code,
-                                'thumb' => $image,
-                                'price' => $price,
-                                'product_quantity' => $quantity,
-                                'item_type' => $productAtrributes->item_type->value,
-                            );
-
-                        }
-                    }
-
-                }
-            }
-
-            //Save Cart
-            if (isset($this->_customerId) && $this->_customerId > 0){
-                $order_cart_lib = new OrderCart();
-                $order_cart_lib->saveCart($this->_customerId,json_encode($order_cart));
-            }
-
-            $data['products'] = $final_cart;
+            $data['products'] = $request->input('data');
             $data['currency'] = $this->_object_library_general_setting->getCurrency();
             return  View::make('web/includes/product/cart_list',$data)->__toString();
         }
