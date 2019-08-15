@@ -229,9 +229,11 @@ Class OrderCart
 
                 foreach($cart_items as $item){
 
+                    $product_id = isset($item->product_id) ? $item->product_id : (isset($item->entity_id) ? $item->entity_id : "");
+
                         $params = array(
                             'entity_type_id' => 'product',
-                            'entity_id' => $item->product_id,
+                            'entity_id' => $product_id,
                             'status' => 1,
                             'mobile_json' => 1,
                             'show_gallery' => 1
@@ -249,6 +251,7 @@ Class OrderCart
                     if(isset($item->detail))
                         $update_item[] = $item;
                     unset($item);
+                    unset($product_id);
 
                 }
             }

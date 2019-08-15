@@ -966,8 +966,12 @@ class ProductController extends WebController
                             }
                         }
 
+                        $product_id = isset($prod->product_id) ? $prod->product_id : (isset($prod->entity_id) ? $prod->entity_id : "");
+                        $quantity = isset($prod->quantity) ? $prod->quantity : (isset($prod->product_quantity) ? $prod->product_quantity : "");
+
+
                         $cart_product[] = array(
-                            'entity_id' => $prod->product_id,
+                            'entity_id' => $product_id,
                             'product_code' => $product->product_code,
                             'title' => $product->title,
                             'thumb' => $thumb,
@@ -975,7 +979,7 @@ class ProductController extends WebController
                             // 'weight' => $product->weight,
                             //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
                             // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
-                            'product_quantity' => $prod->quantity,
+                            'product_quantity' => $quantity,
                             'item_type' => $product->item_type->value,
 
                         );
@@ -983,6 +987,7 @@ class ProductController extends WebController
                     }
 
                     $data['products'] = $cart_product;
+                    unset($product_id); unset($quantity);
 
                 }
 
