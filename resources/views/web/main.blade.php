@@ -124,8 +124,8 @@
                         <ul class='hidden-links hidden'></ul>
                     </div>
                     <div class="headerRight">
-                        <a href="#" id="cartList"><span class="icon-tt-cart-Icon"></span>{{--<span
-                                    class="orderNotification"></span>--}}</a>
+                        <a href="#" id="cartList"><span class="icon-tt-cart-Icon"></span><span
+                                    class="orderNotification"></span></a>
                     </div>
                 </div>
             </div>
