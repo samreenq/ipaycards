@@ -2037,6 +2037,7 @@ table tr.borderB td div{
     bottom: 0px;
     width: 100%;
     background-color: #fff;
+    padding-top: 0;
 }
 
 .basketOrderTotal td.summaryPrice,
@@ -2055,7 +2056,7 @@ table tr.borderB td div{
     font-weight:400;
     text-align:right;
 }
-.basketOrderTotal tr,
+/*.basketOrderTotal tr,*/
 .wishListOrderTotal tr,
 .OrderDetailTotal tr {
     line-height: 25px;
