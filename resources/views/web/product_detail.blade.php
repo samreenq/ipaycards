@@ -80,7 +80,7 @@
 						<div class="row align-items-baseline no-gutters mb20">
 							<div class="align-items-start mr-auto">
 								<div class="breadcrumb">
-								  <a class="breadcrumb-item" href="">Home</a>
+								  <a class="breadcrumb-item" href="{{ route('main') }}">Home</a>
 								   <?php 
 											
 												foreach( $categories_all as $row ) 
@@ -223,8 +223,10 @@
 												<li class="wishlist" >
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;" <?php } ?>  ></span>
+
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;"  <?php }  ?> ></span>
 													@else
+
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
 													@endif
 													Add to Wishlist</li>
