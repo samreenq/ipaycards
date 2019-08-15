@@ -560,6 +560,73 @@ class AuthenticationController extends WebController {
 
     }
 
+    public function gmailLogin(Request $request)
+    {
+        if((isset($request->platform) && $request->platform == 'gplus')
+            && isset($request->data['id'])) {
+
+            $cart_item = !empty($request->cart_item) ? json_decode($request->cart_item) : false;
+
+            $user = (object)$request->data;
+
+            $username = explode(' ',$user->name);
+            $first_name = $username[0];
+            $last_name = isset($username[1]) ? $username[1] : '';
+
+            $json = json_decode(
+                json_encode(
+                    CustomHelper::internalCall(
+                        $request,
+                        'api/entity_auth/social_login',
+                        'POST',
+                        [
+                            'entity_type_id' => 11,
+                            'name' => $user->name,
+                            'first_name' => $first_name,
+                            'last_name' => $last_name,
+                            'platform_type' => $request->platform,
+                            'device_type' => 'none',
+                            'platform_id' => $user->id,
+                            'email' => $user->email,
+                            'status' => 1,
+                            //'mobile_json' => 1,
+                        ],
+                        FALSE
+                    )
+                ),
+                TRUE
+            );
+            // echo "<pre>"; print_r( $json);exit;
+
+            $json_auth = $json;
+            if (isset($json['data']['entity_auth'])) {
+                session_unset();
+                $json = $json['data']['entity_auth'];
+                $data['entity_auth'] = $json;
+
+
+                if ($request->session()->has('users')) {
+                    $request->session()->forget('users');
+                    $request->session()->push('users', $json);
+                } else {
+                    $request->session()->push('users', $json);
+                }
+
+                //Get customer cart
+                $order_cart_lib = new OrderCart();
+                return $order_cart_lib->mergeWebCart($json_auth['data']['entity_auth']['entity_id'],$cart_item);
+
+            }
+            return $json_auth;
+        }
+
+        return array(
+            'error' => 1,
+            'message' => 'Platform and gmail id is required'
+        );
+
+    }
+
     /**
      * @param Request $request
      * @return array|mixed

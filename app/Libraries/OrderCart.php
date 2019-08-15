@@ -95,7 +95,10 @@ Class OrderCart
         } catch (\Exception $e) {
             $return['error'] = 1;
             $return['message'] = $e->getMessage();
+            $return['debug'] = $e->getTraceAsString();
         }
+
+        return $return;
 
     }
 
@@ -229,11 +232,14 @@ Class OrderCart
 
                 foreach($cart_items as $item){
 
+                    $product_id = isset($item->product_id) ? $item->product_id : (isset($item->entity_id) ? $item->entity_id : "");
+
                         $params = array(
                             'entity_type_id' => 'product',
-                            'entity_id' => $item->product_id,
+                            'entity_id' => $product_id,
                             'status' => 1,
                             'mobile_json' => 1,
+                            'show_gallery' => 1
                         );
 
                    // echo "<pre>"; print_r($params); exit;
@@ -248,6 +254,7 @@ Class OrderCart
                     if(isset($item->detail))
                         $update_item[] = $item;
                     unset($item);
+                    unset($product_id);
 
                 }
             }
@@ -318,7 +325,7 @@ Class OrderCart
                         else{
                             $this->saveCart($customer_id);
                         }
-                    //echo "<pre>"; print_r($save_cart); exit;
+                  //  echo "<pre>"; print_r($save_cart); exit;
 
                 }
             }

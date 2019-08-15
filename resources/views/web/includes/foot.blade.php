@@ -26,7 +26,7 @@
 
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script>
 
 var currency = "{!! $general_setting_raw->currency !!}";
@@ -213,13 +213,77 @@ var currency = "{!! $general_setting_raw->currency !!}";
         });
     }
 
+function onSuccess(googleUser) {
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+function onFailure(error) {
+    console.log(error);
+}
+
+function renderButton() {
+    gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 440,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+      //  'onsuccess': onSignIn,
+        'onfailure': onFailure
+    });
+}
 
 function onSignIn(googleUser) {
+
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+ // This is null if the 'email' scope is not present.
+
+    $.ajax ({
+        url: "{{ route('gmailLogin') }}",
+        type: 'post',
+        data:   {
+            _token: crsf_token,
+            platform: 	'gplus',
+            cart_item    : localStorage.products,
+            data: {id:profile.getId(),name:profile.getName(),email:profile.getEmail()},
+        },
+        dataType: 'json',
+        success: function(data)
+        {
+            if(data.error == 0){
+
+
+                if(data.data.total > 0){
+                    //console.log(JSON.stringify(data.data.products));
+                    var cart_product = [];
+
+                    $.each(data.data.products,function(k,v){
+                        //console.log(v);
+                        var string = v;
+                        string.product_quantity = parseInt(v.product_quantity)
+                        cart_product.push(string);
+
+                    });
+
+                    //console.log(cart_product);
+                    localStorage.setItem("products", JSON.stringify(cart_product));
+                }
+                else{
+                    localStorage.removeItem('products');
+                }
+
+               // window.location = site_url;
+            }
+            else{
+                $(".signinError").addClass('alert alert-danger');
+                $(".signinError").empty().append(data['message']);
+            }
+        }
+
+    });
 }
 
 

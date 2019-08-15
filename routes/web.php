@@ -274,6 +274,7 @@ Route::get('/mobileapp', "Web\FaqController@mobileapp")->name('mobileapp');
 
 
 Route::post('/facebookLogin', "Web\AuthenticationController@facebookLogin")->name('facebookLogin');
+    Route::post('/gmailLogin', "Web\AuthenticationController@gmailLogin")->name('gmailLogin');
 Route::get('/faq', "Web\FaqController@index")->name('faq');
 Route::get('/cms/{slug}', "Web\FaqController@cms")->name('cms');
 });
