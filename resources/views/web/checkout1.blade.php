@@ -357,6 +357,10 @@
 						e.preventDefault();
 						$('body').toggleClass('nav-expanded');
 					});
+                    $('.overlay').on('click', function (e) {
+                        e.preventDefault();
+                        $('body').toggleClass('nav-expanded');
+                    });
 					$('#nav-close').on('click',function(e){
 						e.preventDefault();
 						$('body').removeClass('nav-expanded');
