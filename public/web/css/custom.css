@@ -2291,7 +2291,7 @@ table tr.borderB td div{
     color:#fff;
     font-weight: 400;
     padding: 14px 15px;
-    border-bottom:2px solid transparent;
+    /*border-bottom:2px solid transparent;*/
     opacity: 0.8;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -2310,11 +2310,11 @@ table tr.borderB td div{
 .greedy-overflow {
     position: absolute;
     width: 100%;
-    height: 53px;
+    height: 50px;
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.25);
-    border-bottom:1px solid rgba(0, 0, 0, 0.35);
+    /*border-bottom:1px solid rgba(0, 0, 0, 0.35);*/
 }
 .greedy-nav {
     width: 100%;
