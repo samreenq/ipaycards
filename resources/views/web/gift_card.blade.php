@@ -66,7 +66,7 @@
                             <label>Gift Code</label>
                         </div>
                         <div class="submitBtnWrap">
-                            <input style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
+                            <input style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" id="redeem_gift" type="button" value="Submit" name="" class="signBtn"/>
                         </div>
                     </form>
                     </div>
@@ -215,7 +215,7 @@
                 }
 
                 $('.tab-content ' + selector).css("height", docheight);
-                $('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height
+                $('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
             }
 
             $(document).ready(function() {

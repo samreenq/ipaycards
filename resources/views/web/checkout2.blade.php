@@ -52,14 +52,14 @@
 								<form>
 									<div class="discount" ></div>
 									<div class="row">
-										<div class="col-md-10 cuspad" >
+										<div class="col-md-9 cuspad" >
 											<div class="fluid-label">
 												<input type="text" id="coupon_code" name="coupon_code"  placeholder="Coupon Code" />
 												{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
-										<div class="col-md-2 cuspad" >
-											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+										<div class="col-md-3 cuspad" >
+											<input  type="button" name="" role="button" data-toggle="collapse"  value="Apply" class="d-flex ml-auto calculateDiscount" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 
                                         <?php  if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type == 'facebook' && $login_customer->auth->mobile_no == ''){ ?>
@@ -98,8 +98,8 @@
 											</div>
 										</div>
 										<div class="col-md-12 addAddressWrap">
-												{{--<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
-											<input  type="button" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #139CB4; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+												{{--<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
+											<input  type="button" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 										
 									</div>
@@ -624,7 +624,7 @@
 							$('#myform').attr('action', "confirmation");*/
 
 						$('.add-to-cart').prop("disabled", false); // Element(s) are now enabled.
-					//	$('.add-to-cart').css('background-color','#139CB4');
+					//	$('.add-to-cart').css('background-color','#0f738d');
 					});
 
 
@@ -652,7 +652,7 @@
 						}			
 									
 						$('.tab-content ' + selector).css("height", docheight);		
-						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
 					
 					$(document).ready(function() {

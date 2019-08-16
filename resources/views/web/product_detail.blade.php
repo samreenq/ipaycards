@@ -195,7 +195,7 @@
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
 
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;"  <?php }  ?> ></span>
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php }  ?> ></span>
 													@else
 
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
@@ -418,7 +418,7 @@
 						}			
 									
 						$('.tab-content ' + selector).css("height", docheight);		
-						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
 					
 					$(document).ready(function() {
@@ -481,7 +481,7 @@
 					});
 					
 					$('.wishlist').on('click',function(e){
-						$('.add_to_wishlist_button').css('color','#139CB4');
+						$('.add_to_wishlist_button').css('color','#0f738d');
 					});
 					
 					$('.basketList').enscroll({
