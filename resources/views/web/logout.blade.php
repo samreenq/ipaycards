@@ -165,6 +165,8 @@
 
 
 	@section("foot")
+
+
 		@include("web/includes/foot")
 		
 		<script src="<?php echo url('/').'/public/web/js/enscroll.min.js';?>"></script>
@@ -386,5 +388,6 @@
 				} 
 			
 		</script>
+
 	@endsection
 

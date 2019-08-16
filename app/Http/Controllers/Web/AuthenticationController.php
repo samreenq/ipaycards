@@ -61,6 +61,7 @@ class AuthenticationController extends WebController {
 
 	public function signin_step1(Request $request) 
 	{
+
 		$rules  =  array(	
 							'entity_type_id'	=>	'required'		,
 							'email' 			=>  'required'		,
@@ -87,7 +88,6 @@ class AuthenticationController extends WebController {
      */
     public function signin(Request $request)
     {
-
         $rules  =  array(	'login_id' 	=>  'required|email',
             'password' 	=>  'required'
         );
@@ -168,7 +168,10 @@ class AuthenticationController extends WebController {
 		 }
 		 $url = url('/'); 
 		 return redirect($url);
-	}
+
+      /*  Session::flash('Signed-out', true);*/
+
+    }
 	
 	
 	public function signup(Request $request) 
@@ -562,6 +565,7 @@ class AuthenticationController extends WebController {
 
     public function gmailLogin(Request $request)
     {
+
         if((isset($request->platform) && $request->platform == 'gplus')
             && isset($request->data['id'])) {
 
