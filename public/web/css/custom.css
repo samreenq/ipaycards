@@ -4996,7 +4996,8 @@ ul.footerCont {
     background-color: transparent;
 }
 .termandcond-right-header {
-    background-color: #eceef2;
+    background-color: #0f738d;
+    color: #ffffff;
     padding: 20px;
 }
 .termandcond-right-txt-bg {
@@ -5004,7 +5005,7 @@ ul.footerCont {
     padding: 20px 20px 30px;
 }
 .termandcond-right-side h4 {
-    color: #000;
+    /*color: #000;*/
     font-weight: 400;
     /* margin-bottom: 35px; */
 }
