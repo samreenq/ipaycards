@@ -27,16 +27,7 @@
 							<ul class="row">
 								<li class="col-sm-12">
 									<ul class=" menus sidebar__inner" role="tablist">
-										<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingImage1" align="center" style="display: none">
+										<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImage1" align="center" style="display: none">
 											  <div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>
@@ -99,26 +90,17 @@
 							<div class="greedy-nav-second">
 								<button type="button" class="pull-right">More</button> 
 								<ul class=" menus visible-links">
-									<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingImage" align="center" style="display: none">
+									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImage" align="center" style="display: none">
 										<div class="floatingCirclesG">
-													<div class="f_circleG frotateG_01"></div>
-													<div class="f_circleG frotateG_02"></div>
-													<div class="f_circleG frotateG_03"></div>
-													<div class="f_circleG frotateG_04"></div>
-													<div class="f_circleG frotateG_05"></div>
-													<div class="f_circleG frotateG_06"></div>
-													<div class="f_circleG frotateG_07"></div>
-													<div class="f_circleG frotateG_08"></div>
-												</div>
+											<div class="f_circleG frotateG_01"></div>
+											<div class="f_circleG frotateG_02"></div>
+											<div class="f_circleG frotateG_03"></div>
+											<div class="f_circleG frotateG_04"></div>
+											<div class="f_circleG frotateG_05"></div>
+											<div class="f_circleG frotateG_06"></div>
+											<div class="f_circleG frotateG_07"></div>
+											<div class="f_circleG frotateG_08"></div>
+										</div>
 									</div>
 								</ul>
 								<ul class='hidden-links hidden'></ul>
@@ -149,16 +131,7 @@
 					   class="align-items-end viewMore">See More</a>
 				</div>
 				<div class="row brandList">
-					<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-						 id="LoadingbrandListImage" align="center" style="display: none">
+					<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingbrandListImage" align="center" style="display: none">
 						<div class="floatingCirclesG">
 							<div class="f_circleG frotateG_01"></div>
 							<div class="f_circleG frotateG_02"></div>
@@ -185,16 +158,7 @@
 								<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=1'; ?>" class="align-items-end viewMore" >See More</a>
 							</div>
 							<div class="row newsAndPeakSeasons">
-									<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
+									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
 												<div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>
@@ -221,16 +185,7 @@
 				<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=2'; ?>" class="align-items-end viewMore" >See More</a>
 			</div>
 			<div class="row todayTodayEssentials">
-				<div style="
-												position: absolute;
-												top: 50%;
-												left: 50%;
-												margin-top: -50px;
-												margin-left: -50px;
-												width: 100px;
-												height: 100px;
-											"
-					 id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
+				<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
 					<div class="floatingCirclesG">
 						<div class="f_circleG frotateG_01"></div>
 						<div class="f_circleG frotateG_02"></div>
@@ -256,16 +211,7 @@
 							<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=2'; ?>" class="align-items-end viewMore" >See More</a>
 						</div>
 						<div class="row todayTodayEssentials">
-								<div style="
-												position: absolute;
-												top: 50%;
-												left: 50%;
-												margin-top: -50px;
-												margin-left: -50px;
-												width: 100px;
-												height: 100px;
-											"
-											id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
+								<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingtodayTodayEssentialsImage" align="center" style="display: none">
 										<div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>
@@ -296,28 +242,18 @@
 							<h2 class="mr-auto align-items-start">Popular Categories</h2>
 						</div>
 						<div class="row popularCategories">
-								<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingPopularCategoriesImage" align="center" style="display: none">
-											  <div class="floatingCirclesG">
-													<div class="f_circleG frotateG_01"></div>
-													<div class="f_circleG frotateG_02"></div>
-													<div class="f_circleG frotateG_03"></div>
-													<div class="f_circleG frotateG_04"></div>
-													<div class="f_circleG frotateG_05"></div>
-													<div class="f_circleG frotateG_06"></div>
-													<div class="f_circleG frotateG_07"></div>
-													<div class="f_circleG frotateG_08"></div>
-												</div>
-											  
-								</div>	
+							<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingPopularCategoriesImage" align="center" style="display: none">
+						  		<div class="floatingCirclesG">
+									<div class="f_circleG frotateG_01"></div>
+									<div class="f_circleG frotateG_02"></div>
+									<div class="f_circleG frotateG_03"></div>
+									<div class="f_circleG frotateG_04"></div>
+									<div class="f_circleG frotateG_05"></div>
+									<div class="f_circleG frotateG_06"></div>
+									<div class="f_circleG frotateG_07"></div>
+									<div class="f_circleG frotateG_08"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>

@@ -144,28 +144,18 @@
 													
 												<ul class="categories vegeListWrap pl15" id="accordion">
 													
-																	<div style="
-																					position: absolute;
-																					top: 50%;
-																					left: 50%;
-																					margin-top: -50px;
-																					margin-left: -50px;
-																					width: 100px;
-																					height: 100px;
-																				"
-																				id="LoadingImageCategories" align="center" style="display: none">
-																		  <div class="floatingCirclesG">
-																				<div class="f_circleG frotateG_01"></div>
-																				<div class="f_circleG frotateG_02"></div>
-																				<div class="f_circleG frotateG_03"></div>
-																				<div class="f_circleG frotateG_04"></div>
-																				<div class="f_circleG frotateG_05"></div>
-																				<div class="f_circleG frotateG_06"></div>
-																				<div class="f_circleG frotateG_07"></div>
-																				<div class="f_circleG frotateG_08"></div>
-																			</div>
-																		  
-																	</div>
+													<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageCategories" align="center" style="display: none">
+														<div class="floatingCirclesG">
+															<div class="f_circleG frotateG_01"></div>
+															<div class="f_circleG frotateG_02"></div>
+															<div class="f_circleG frotateG_03"></div>
+															<div class="f_circleG frotateG_04"></div>
+															<div class="f_circleG frotateG_05"></div>
+															<div class="f_circleG frotateG_06"></div>
+															<div class="f_circleG frotateG_07"></div>
+															<div class="f_circleG frotateG_08"></div>
+														</div>
+													</div>
 														
 												</ul>
 												<div class="productFiltSide" style="display:none">
@@ -236,23 +226,21 @@
 													<br />
 																<input type="button" class="reset" style="cursor: pointer;" value="Reset" />
 																<input type="button" class="search" style="cursor: pointer;" value="Search" />
-																<div 	style="
+																<div style="
 																					position: absolute;
 																					margin: -32px 0px 0px 142px;
 																
-																			"
-																		id="LoadingImageSearchProducts" align="center" style="display: none"
-																>
-																		<div class="floatingCirclesG">
-																				<div class="f_circleG frotateG_01"></div>
-																				<div class="f_circleG frotateG_02"></div>
-																				<div class="f_circleG frotateG_03"></div>
-																				<div class="f_circleG frotateG_04"></div>
-																				<div class="f_circleG frotateG_05"></div>
-																				<div class="f_circleG frotateG_06"></div>
-																				<div class="f_circleG frotateG_07"></div>
-																				<div class="f_circleG frotateG_08"></div>
-																			</div>
+																			" id="LoadingImageSearchProducts" align="center" style="display: none">
+																	<div class="floatingCirclesG">
+																		<div class="f_circleG frotateG_01"></div>
+																		<div class="f_circleG frotateG_02"></div>
+																		<div class="f_circleG frotateG_03"></div>
+																		<div class="f_circleG frotateG_04"></div>
+																		<div class="f_circleG frotateG_05"></div>
+																		<div class="f_circleG frotateG_06"></div>
+																		<div class="f_circleG frotateG_07"></div>
+																		<div class="f_circleG frotateG_08"></div>
+																	</div>
 																</div>
 													</div>
 													
@@ -307,29 +295,17 @@
 								?>
 								<div id="brands"  class="row">
 									
-									<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-									
-												"
-
-											id="LoadingImageProducts" align="center" style="display: none"
-									>
-											<div class="floatingCirclesG">
-													<div class="f_circleG frotateG_01"></div>
-													<div class="f_circleG frotateG_02"></div>
-													<div class="f_circleG frotateG_03"></div>
-													<div class="f_circleG frotateG_04"></div>
-													<div class="f_circleG frotateG_05"></div>
-													<div class="f_circleG frotateG_06"></div>
-													<div class="f_circleG frotateG_07"></div>
-													<div class="f_circleG frotateG_08"></div>
-												</div>
+									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageProducts" align="center" style="display: none">
+										<div class="floatingCirclesG">
+											<div class="f_circleG frotateG_01"></div>
+											<div class="f_circleG frotateG_02"></div>
+											<div class="f_circleG frotateG_03"></div>
+											<div class="f_circleG frotateG_04"></div>
+											<div class="f_circleG frotateG_05"></div>
+											<div class="f_circleG frotateG_06"></div>
+											<div class="f_circleG frotateG_07"></div>
+											<div class="f_circleG frotateG_08"></div>
+										</div>
 									</div>
 								</div>
 								
