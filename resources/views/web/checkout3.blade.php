@@ -33,9 +33,9 @@
 		<div class="container">
 			<div class="checkout-header">
 				<ul class="checkout-steps">
-					<li class="active"><a href="#"><span>1</span> Review your Order</a></li>
-					<li class="active"><a href="#"><span>2</span> Delivery Info</a></li>
-					<li class="active"><a href="#"><span>3</span> Order Confirm</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>1</span> Review your Order</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>2</span> Delivery Info</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>3</span> Order Confirm</a></li>
 				</ul>
 			</div>
 			<div class="row">

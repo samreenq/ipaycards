@@ -39,8 +39,8 @@
 							</div>
 							<p>Text yourself the download link. Standard text messaging and data rates may apply.</p>--}}
 							<ul class="download-btn">
-								<li><a href="#"><img src="<?php echo url('/').'/public/web/img/ios-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
-								<li><a href="#"><img src="<?php echo url('/').'/public/web/img/play-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
+								<li><a href="javascript:void(0)"><img src="<?php echo url('/').'/public/web/img/ios-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
+								<li><a href="javascript:void(0)"><img src="<?php echo url('/').'/public/web/img/play-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
 							</ul>
 						</div>
 						<div class="col-sm-12 col-md-5 col-lg-5 mobileAppImgWrap">

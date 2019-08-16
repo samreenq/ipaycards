@@ -151,7 +151,7 @@
 										<div class="cartShareWrap">
 											<div class="d-sm-flex align-items-center mb30">
 												<div class="count-input">
-													<a class="incr-btn prn text-right" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
+													<a class="incr-btn prn text-right" data-action="decrease" href="javascript:void(0)"><span class="icon-tt-minus-icon"></span></a>
 													<input type="hidden" name="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />
 													<input type="hidden" name="product_code" value="<?php if(isset($product["attributes"]['product_code'])) echo $product["attributes"]['product_code'] ?>" />
 													<input type="hidden" name="title" value="<?php if(isset($product["attributes"]['title'])) echo $product["attributes"]['title']; ?>" />
@@ -171,7 +171,7 @@
 
 
 
-													<a class="incr-btn pln text-left" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
+													<a class="incr-btn pln text-left" data-action="increase" href="javascript:void(0)"><span class="icon-tt-plus-icon"></span></a>
 												</div>
 												<button type="submit"  class="add add-to-cart">Add to cart</button>
 
@@ -179,7 +179,7 @@
 
 
 											<ul class="share-wishlist-wrap d-sm-flex ">
-												<li><a href="#" data-toggle="modal" data-target=".socialmedia" ><span class="icon-tt-share-icon"></span> Share</a></li>
+												<li><a href="javascript:void(0)" data-toggle="modal" data-target=".socialmedia" ><span class="icon-tt-share-icon"></span> Share</a></li>
 
 
 												<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />

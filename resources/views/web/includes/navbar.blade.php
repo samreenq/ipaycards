@@ -101,7 +101,7 @@
 					?>
 								<ul class="nav navbar-nav navbar-right header-cart">
 									<li class="dropdown">
-										<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<a class="dropdown-toggle p-0" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Recharge
 										</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -123,7 +123,7 @@
 					?>
 								<ul class="nav navbar-nav navbar-right header-cart">
 									<li class="dropdown">
-										<a class="dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<a class="dropdown-toggle p-0" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Recharge
 										</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -133,8 +133,8 @@
 											<a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
 										</div>
 									</li>
-									<li><a href="#" data-toggle="modal" data-target=".siginmodal">@lang('web.navbar_menu_sign_in')</a></li>
-									<li><a href="#" data-toggle="modal" data-target=".signupmodal">@lang('web.navbar_menu_sign_up')</a></li>
+									<li><a href="javascript:void(0)" class="signinbtn" data-toggle="modal" data-target=".siginmodal">@lang('web.navbar_menu_sign_in')</a></li>
+									<li><a href="javascript:void(0)" class="signupbtn"  data-toggle="modal" data-target=".signupmodal">@lang('web.navbar_menu_sign_up')</a></li>
 								</ul>
 					<?php 
 							}
@@ -145,7 +145,7 @@
 				  <!-- navbar toggle menu end -->
 				  
 				  <div class="pull-right headerRight">
-					<a href="#" id="cartList"><span class="icon-tt-cart-Icon"></span><span class="orderNotification" style="display:none"></span></a></li>
+					<a href="javascript:void(0)" id="cartList"><span class="icon-tt-cart-Icon"></span><span class="orderNotification" style="display:none"></span></a></li>
 				  </div>
 			  </div>
 			</nav>

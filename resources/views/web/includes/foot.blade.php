@@ -29,7 +29,42 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 
-var currency = "{!! $general_setting_raw->currency !!}";
+
+    $(document).on('click', function(divclose){
+
+            if($(divclose.target).closest("cart-list").length == 0){
+
+                $("cart-list").hide();
+
+            }
+
+        }
+    );
+
+    $('#signupmodal').on('hide.bs.modal', function(){
+        console.log('HELLO');
+        $('.signupbtn').css("color","black");
+    });
+
+    $(".signupbtn").hover(function() {
+        $(this).css("color", "#007bff");
+    }, function() {
+        $(this).css("color", "black");
+    });
+
+    $('#signinmodal').on('hide.bs.modal', function(){
+        console.log('HELLO');
+        $('.signinbtn').css("color","black");
+    });
+
+    $(".signinbtn").hover(function() {
+        $(this).css("color", "#007bff");
+    }, function() {
+        $(this).css("color", "black");
+    });
+
+
+    var currency = "{!! $general_setting_raw->currency !!}";
 
     $(document).ready(function(){
 

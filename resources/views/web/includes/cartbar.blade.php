@@ -11,7 +11,6 @@ if($general_settings){
 
 ?>
 
-
 		<!--Your Basket & Wish List -->
 		<div class="cart-list">
 
@@ -19,7 +18,7 @@ if($general_settings){
 			<div class="cart-tabs">
 				<div class="cartTabHeader">
 
-					<a href="#" id="nav-close"><span class="icon-tt-close-icon"></span></a>
+					<a href="javascript:void(0)" id="nav-close"><span class="icon-tt-close-icon"></span></a>
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
 					<li role="presentation"><a href="#yourbasket" class="nav-link active" aria-controls="yourbasket" role="tab" data-toggle="tab">@lang('web.sidebar_tab_1')</a></li>

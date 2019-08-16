@@ -32,7 +32,7 @@
 						<td align="center">
 								<input type="hidden" class="order_id" value="<?php if(isset($raw['entity_id'])) echo $raw['entity_id'] ?>" />
 								
-								<a href="#" class="reorder" data-toggle="modal" data-target=".orderDetailmodal"  ><span class="icon-tt-more-menu-icon"></span></a>
+								<a href="javascript:void(0)" class="reorder" data-toggle="modal" data-target=".orderDetailmodal"  ><span class="icon-tt-more-menu-icon"></span></a>
 								<!--<a href="#"><span class="icon-tt-delet-icon"></span></a>-->
 						</td>
 					</tr>

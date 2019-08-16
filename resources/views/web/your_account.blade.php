@@ -63,7 +63,7 @@
 						</div>
 						<div class="dashboard-content panelled whitebg">
 							<div class="editSec">
-								<h4>Personal Details <a href="#" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
+								<h4>Personal Details <a href="javascript:void(0)" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
 								<ul>
 									<li><?php if(isset($user['attributes']['first_name']) && isset($user['attributes']['last_name']))echo $user['attributes']['first_name'].' '.$user['attributes']['last_name']; ?></li>
 									<li><?php if(isset($user['auth']['email'])) echo $user['auth']['email']; ?></li>
@@ -77,7 +77,7 @@
 
 							?>
 										<div class="editSec">
-											<h4>Password <a href="#" data-toggle="modal" data-target=".chgPassmodal"><span class="icon-tt-edit-icon"></span></a></h4>
+											<h4>Password <a href="javascript:void(0)" data-toggle="modal" data-target=".chgPassmodal"><span class="icon-tt-edit-icon"></span></a></h4>
 											<p>Change your current password</p>
 										</div>
 							<?php 

@@ -92,7 +92,7 @@
 				<div id="scrollHeader" class="ha-header ha-header-hide">
 					<div class="page-nav-second">
 						<div class="d-flex container">	
-							<a class="navbar-brand logo" href="#">
+							<a class="navbar-brand logo" href="javascript:void(0)">
 								<!-- <img src="<?php // echo url('/').'/public/web/img/logo.png';?>" width="172"/> -->
 								<h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">{!! APP_NAME !!}</h4>
 							</a>
@@ -124,7 +124,7 @@
 								<ul class='hidden-links hidden'></ul>
 							</div>
 							<div class="headerRight">
-								<a href="#" id="cartList"><span class="icon-tt-cart-Icon"></span><span class="orderNotification"></span></a></li>
+								<a href="javascript:void(0)" id="cartList"><span class="icon-tt-cart-Icon"></span><span class="orderNotification"></span></a></li>
 							</div>
 						</div>
 					</div>

@@ -67,7 +67,7 @@
 									</button>
 									<div class="pro-inc-wrap">
 										<div class="count-input">
-											<a class="incr-btn incr-btn55 text-right prn" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
+											<a class="incr-btn incr-btn55 text-right prn" data-action="decrease" href="javascript:void(0)"><span class="icon-tt-minus-icon"></span></a>
 											
 											
 											<input type="hidden" class="entity_id" value="<?php if(isset($attributes['entity_id'])) echo $attributes['entity_id']; ?>" />
@@ -77,7 +77,7 @@
 											<input class="quantity" type="number" name="product_quantity" value="1" readonly/>
 											<input type="hidden" class="item_type" value="<?php if(isset($attributes["attributes"]['item_type']['value'])) echo $attributes["attributes"]['item_type']['value'] ?>" />
 
-											<a class="incr-btn incr-btn55 text-left pln" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
+											<a class="incr-btn incr-btn55 text-left pln" data-action="increase" href="javascript:void(0)"><span class="icon-tt-plus-icon"></span></a>
 										</div>
 									</div>
 								</div>

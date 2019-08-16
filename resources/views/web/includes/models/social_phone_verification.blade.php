@@ -40,7 +40,7 @@
 				</div>
 				
 				<div class="forgotWrap">
-					<p class="text-center"><a href="#" class="sendcode" >Send Code</a></p>
+					<p class="text-center"><a href="javascript:void(0)" class="sendcode" >Send Code</a></p>
 				</div>
 				
 			<p class="small-brief-link">4 digit code sent to your phone number <span class="social_phone_number"></span></p>

@@ -80,12 +80,12 @@ buildTree($categories);
 						
 						<li class="vegePanel panel"> <a data-toggle="collapse" class="collapsed" data-parent="#accordion1" href="#flowers">Flowers<span> (25)</span></a>
 							<ul id="flowers" class="collapse">
-								<li class="li-active"><a href="#">Cucumbers & Zucchini</a></li>
-								<li class="li-active"><a href="#">Tomatoes & Peppers</a></li>
-								<li class="li-active"><a href="#">Broccoli & Celery</a></li>
-								<li class="li-active"><a href="#">Spring Vegetables</a></li>
-								<li class="li-active"><a href="#">Potatoes & Beets</a></li>
-								<li class="li-active"><a href="#">Squash</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Cucumbers & Zucchini</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Tomatoes & Peppers</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Broccoli & Celery</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Spring Vegetables</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Potatoes & Beets</a></li>
+								<li class="li-active"><a href="javascript:void(0)">Squash</a></li>
 							</ul>
 						</li>
 						

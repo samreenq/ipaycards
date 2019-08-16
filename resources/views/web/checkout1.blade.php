@@ -29,7 +29,7 @@
 			<div class="container">
 				<div class="checkout-header">
 					<ul class="checkout-steps">
-						<li class="active"><a href="#"><span>1</span> Review your Order</a></li>
+						<li class="active"><a href="javascript:void(0)"><span>1</span> Review your Order</a></li>
 						<li><a ><span>2</span> Delivery Info</a></li>
 						<li><a ><span>3</span> Order Confirm</a></li>
 					</ul>
@@ -161,7 +161,7 @@
 
 									?>
 													<div class="checkFooter text-center">
-																	<a href="#" data-toggle="modal" data-target=".siginmodal" >Check Out</a>
+																	<a href="javascript:void(0)" data-toggle="modal" data-target=".siginmodal" >Check Out</a>
 																	<p class="text-center"><span class="icon-tt-lock-icon"></span> Secure SSL Checkout</p>
 													</div>
 									<?php 

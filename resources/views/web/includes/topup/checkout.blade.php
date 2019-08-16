@@ -33,10 +33,10 @@
 		<div class="container">
 			<div class="checkout-header">
 				<ul class="checkout-steps">
-					<li class="active"><a href="#"><span>1</span> Information</a></li>
-					<li class="active"><a href="#"><span>2</span> Verification</a></li>
-					<li class="active"><a href="#"><span>3</span> Payment</a></li>
-					<li class="active"><a href="#"><span>4</span> Checkout</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>1</span> Information</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>2</span> Verification</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>3</span> Payment</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>4</span> Checkout</a></li>
 				</ul>
 			</div>
 			<div class="row">

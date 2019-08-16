@@ -33,7 +33,7 @@
                         if (isset($_SESSION['fbUserProfile']) )
                         {
                         ?>
-						<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
 
                         <?php
                         }
@@ -42,7 +42,7 @@
                         {
 
                         	?>
-						<li><a href="#" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target=".referfriendmodal" >@lang('web.navbar_menu_name_3')</a></li>
 
                         <?php
                         }
@@ -51,7 +51,7 @@
 
                         ?>
 
-						<li><a href="#" data-toggle="modal" data-target=".siginmodal" class="tooltip1" >@lang('web.navbar_menu_name_3')</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target=".siginmodal" class="tooltip1" >@lang('web.navbar_menu_name_3')</a></li>
 
                         <?php
                         }

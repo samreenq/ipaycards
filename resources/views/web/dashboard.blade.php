@@ -79,7 +79,7 @@
 									</div>
 									<div class="panelled whitebg">
 										<div class="editSec">
-											<h4>Your Account <a href="#" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
+											<h4>Your Account <a href="javascript:void(0)" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
 											<ul>
 												<li>Adam Johnson</li>
 												<li>Adam.johnson@gmail.com</li>
@@ -88,11 +88,11 @@
 											</ul>
 										</div>
 										<div class="editSec">
-											<h4>Password <a href="#" data-toggle="modal" data-target=".chgPassmodal"><span class="icon-tt-edit-icon"></span></a></h4>
+											<h4>Password <a href="javascript:void(0)" data-toggle="modal" data-target=".chgPassmodal"><span class="icon-tt-edit-icon"></span></a></h4>
 											<p>Change your current password</p>
 										</div>
 										<div class="editSec">
-											<h4>Payment <a href="#" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
+											<h4>Payment <a href="javascript:void(0)" data-toggle="modal" data-target=".editYourDetailmodal"><span class="icon-tt-edit-icon"></span></a></h4>
 											<p>You don't have a payment method yet.</p>
 										</div>
 										<div class="editSec">
@@ -227,40 +227,40 @@
 											<td>562548</td>
 											<td>$50.90</td>
 											<td>Pending</td>
-											<td><a href="#" class="reorder">Reorder</a></td>
-											<td align="center"><a href="#"><span class="icon-tt-delet-icon"></span></a></td>
+											<td><a href="javascript:void(0)" class="reorder">Reorder</a></td>
+											<td align="center"><a href="javascript:void(0)"><span class="icon-tt-delet-icon"></span></a></td>
 										</tr>
 										<tr class="panelled whitebg">
 											<td>4-3-2017</td>
 											<td>562548</td>
 											<td>$50.90</td>
 											<td>Received</td>
-											<td><a href="#" class="reorder">Reorder</a></td>
-											<td align="center"><a href="#"><span class="icon-tt-delet-icon"></span></a></td>
+											<td><a href="javascript:void(0)" class="reorder">Reorder</a></td>
+											<td align="center"><a href="javascript:void(0)"><span class="icon-tt-delet-icon"></span></a></td>
 										</tr>
 										<tr class="panelled whitebg">
 											<td>4-3-2017</td>
 											<td>562548</td>
 											<td>$50.90</td>
 											<td>Pending</td>
-											<td><a href="#" class="reorder">Reorder</a></td>
-											<td align="center"><a href="#"><span class="icon-tt-delet-icon"></span></a></td>
+											<td><a href="javascript:void(0)" class="reorder">Reorder</a></td>
+											<td align="center"><a href="javascript:void(0)"><span class="icon-tt-delet-icon"></span></a></td>
 										</tr>
 										<tr class="panelled whitebg">
 											<td>4-3-2017</td>
 											<td>562548</td>
 											<td>$50.90</td>
 											<td>Cancelled</td>
-											<td><a href="#" class="reorder">Reorder</a></td>
-											<td align="center"><a href="#"><span class="icon-tt-delet-icon"></span></a></td>
+											<td><a href="javascript:void(0)" class="reorder">Reorder</a></td>
+											<td align="center"><a href="javascript:void(0)"><span class="icon-tt-delet-icon"></span></a></td>
 										</tr>
 										<tr class="panelled whitebg">
 											<td>4-3-2017</td>
 											<td>562548</td>
 											<td>$50.90</td>
 											<td>Received</td>
-											<td><a href="#" class="reorder">Reorder</a></td>
-											<td align="center"><a href="#"><span class="icon-tt-delet-icon"></span></a></td>
+											<td><a href="javascript:void(0)" class="reorder">Reorder</a></td>
+											<td align="center"><a href="javascript:void(0)"><span class="icon-tt-delet-icon"></span></a></td>
 										</tr>
 									</table>
 								</div>
@@ -307,25 +307,25 @@
 												<td>4-3-2017</td>
 												<td>562548</td>
 												<td>$50.90</td>
-												<td align="center"><a href="#" class="btn-theme btn-sm">View</a></td>
+												<td align="center"><a href="javascript:void(0)" class="btn-theme btn-sm">View</a></td>
 											</tr>
 											<tr class="panelled whitebg">
 												<td>4-3-2017</td>
 												<td>562548</td>
 												<td>$50.90</td>
-												<td align="center"><a href="#" class="btn-theme btn-sm">View</a></td>
+												<td align="center"><a href="javascript:void(0)" class="btn-theme btn-sm">View</a></td>
 											</tr>
 											<tr class="panelled whitebg">
 												<td>4-3-2017</td>
 												<td>562548</td>
 												<td>$50.90</td>
-												<td align="center"><a href="#" class="btn-theme btn-sm">View</a></td>
+												<td align="center"><a href="javascript:void(0)" class="btn-theme btn-sm">View</a></td>
 											</tr>
 											<tr class="panelled whitebg">
 												<td>4-3-2017</td>
 												<td>562548</td>
 												<td>$50.90</td>
-												<td align="center"><a href="#" class="btn-theme btn-sm">View</a></td>
+												<td align="center"><a href="javascript:void(0)" class="btn-theme btn-sm">View</a></td>
 											</tr>
 											<tr class="panelled whitebg">
 												<td>4-3-2017</td>

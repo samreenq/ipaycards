@@ -10,7 +10,7 @@
 <div class="modal fade signupmodal signupModalWrap" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button id="sigupbtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="icon-tt-close-icon"></span>
         </button>
 		  <div class="modal-body">

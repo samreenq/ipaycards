@@ -120,7 +120,7 @@
 										<p><?php if(isset($recipe['description'])) echo $recipe['description']; ?></p>
 										<div class="d-sm-flex align-items-center mb50">
 											<div class="count-input">
-												<a class="incr-btn prn text-right" data-action="decrease" href="#"><span class="icon-tt-minus-icon"></span></a>
+												<a class="incr-btn prn text-right" data-action="decrease" href="javascript:void(0)"><span class="icon-tt-minus-icon"></span></a>
 												<input type="hidden" name="entity_id" value="<?php if(isset($recipe['entity_id'])) echo $recipe['entity_id']; ?>" />
 												<input type="hidden" name="product_code" value="<?php if(isset($recipe['product_code'])) echo $recipe['product_code'] ?>" />
 												<input type="hidden" name="title" value="<?php if(isset($recipe['title'])) echo $recipe['title']; ?>" />
@@ -131,12 +131,12 @@
 												<input type="hidden" name="unit_value" value="<?php if(isset($recipe['item_unit']['value'])) echo $recipe['item_unit']['value']; ?>" />
 												<input class="quantity"  name="product_quantity"  type="text"  value="1"/>
 												
-												<a class="incr-btn pln text-left" data-action="increase" href="#"><span class="icon-tt-plus-icon"></span></a>
+												<a class="incr-btn pln text-left" data-action="increase" href="javascript:void(0)"><span class="icon-tt-plus-icon"></span></a>
 											</div>
 											<button type="submit"  class="add add-to-cart">Add to cart</button>
 										</div>
 										<ul class="share-wishlist-wrap d-sm-flex">
-											<li><a href="#" data-toggle="modal" data-target=".socialmedia"><span class="icon-tt-share-icon"></span> Share</a></li>
+											<li><a href="javascript:void(0)" data-toggle="modal" data-target=".socialmedia"><span class="icon-tt-share-icon"></span> Share</a></li>
 											
 											
 													<input type="hidden" class="entity_id" value="<?php if(isset($recipe['entity_id'])) echo $recipe['entity_id']; ?>" />
@@ -326,9 +326,9 @@
 													
 														@if( $check==0  ) 
 															@if(  (isset($_SESSION['fbUserProfile']) || Session::has('users')) )
-																	<a href="#" data-toggle="modal" data-target=".reviewmodal" class="reviewMore">Write a review</a>
+																	<a href="javascript:void(0)" data-toggle="modal" data-target=".reviewmodal" class="reviewMore">Write a review</a>
 															@else 
-																	<a href="#" data-toggle="modal" data-target=".siginmodal" class="reviewMore">Write a review</a>
+																	<a href="javascript:void(0)" data-toggle="modal" data-target=".siginmodal" class="reviewMore">Write a review</a>
 															@endif
 														@endif
 													</div>

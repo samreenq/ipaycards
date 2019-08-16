@@ -3537,12 +3537,12 @@ function clearAlert() {
 }
 
 function addErrorMsg(message) {
-    $('.alert-message').append('<div class="alert alert-danger"> <a href="#" class="close" data-dismiss="alert">&times;</a>' + message + '</div>');
+    $('.alert-message').append('<div class="alert alert-danger"> <a href="javascript:void(0)" class="close" data-dismiss="alert">&times;</a>' + message + '</div>');
     $(".alert-danger").focus();
 }
 
 function addSuccessMsg(message) {
-    $('.alert-message').append('<div class="alert alert-success"> <a href="#" class="close" data-dismiss="alert">&times;</a>' + message + '</div>');
+    $('.alert-message').append('<div class="alert alert-success"> <a href="javascript:void(0)" class="close" data-dismiss="alert">&times;</a>' + message + '</div>');
     $(".alert-success").focus();
 }
 

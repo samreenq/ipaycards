@@ -1,7 +1,4 @@
-
 <?php
-
-
 
 
 if(isset($products))
@@ -26,7 +23,7 @@ foreach ( $products  as $productItemsList )
 										{{--<td class="addItemWeight" align="right">{!! $productItemsList['product_code'] !!}--}}
 										</td>
 										<td>
-											<a href="#" >
+											<a href="javascript:void(0)" >
 												<span style="font-size:75%;color:#000;margin-left: 50%;margin-bottom: 57%;" onclick="deleteCartProduct('@if(isset($productItemsList['product_code'])){{$productItemsList['product_code']}}@endif','{{ route('add_to_cart') }}','{{ route('show_cart') }}','{{route('total_price')}}')" > <!--class="clancelItem" --> 
 													<span class="icon-tt-close-icon"></span>
 												</span>					  									
@@ -43,7 +40,7 @@ foreach ( $products  as $productItemsList )
 											
 											<div class="count-input space-bottom">		
 										
-												<a class="incr-btn incr-btn1  mrn text-right" data-action="decrease" href="#">
+												<a class="incr-btn incr-btn1  mrn text-right" data-action="decrease" href="javascript:void(0)">
 													<span class="icon-tt-minus-icon"></span>
 												</a>
 												
@@ -55,7 +52,7 @@ foreach ( $products  as $productItemsList )
 											
 											
 											
-												<a class="incr-btn incr-btn1 mln text-left" data-action="increase"  href="#">
+												<a class="incr-btn incr-btn1 mln text-left" data-action="increase"  href="javascript:void(0)">
 													<span class="icon-tt-plus-icon"></span>
 												</a>
 
