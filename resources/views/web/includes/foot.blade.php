@@ -213,60 +213,76 @@ var currency = "{!! $general_setting_raw->currency !!}";
         });
     }
 
-function onSignIn(googleUser) {
-//alert('Hiii')
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
- // This is null if the 'email' scope is not present.
 
-    $.ajax ({
-        url: "{{ route('gmailLogin') }}",
-        type: 'post',
-        data:   {
-            _token: crsf_token,
-            platform: 	'gplus',
-            cart_item    : localStorage.products,
-            data: {id:profile.getId(),name:profile.getName(),email:profile.getEmail()},
+function gmailLogin()
+{
+    gapi.auth2.getAuthInstance().signIn().then(
+        function(success) {
+            // Login API call is successful
+            var profile = success.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+          //  console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            // This is null if the 'email' scope is not present.
+
+            $.ajax ({
+                url: "{{ route('gmailLogin') }}",
+                type: 'post',
+                data:   {
+                    _token: crsf_token,
+                    platform: 	'gplus',
+                    cart_item    : localStorage.products,
+                    data: {id:profile.getId(),name:profile.getName(),email:profile.getEmail()},
+                },
+                dataType: 'json',
+                success: function(data)
+                {
+                    if(data.error == 0){
+
+
+                        if(data.data.total > 0){
+                            //console.log(JSON.stringify(data.data.products));
+                            var cart_product = [];
+
+                            $.each(data.data.products,function(k,v){
+                                //console.log(v);
+                                var string = v;
+                                string.product_quantity = parseInt(v.product_quantity)
+                                cart_product.push(string);
+
+                            });
+
+                            //console.log(cart_product);
+                            localStorage.setItem("products", JSON.stringify(cart_product));
+                        }
+                        else{
+                            localStorage.removeItem('products');
+                        }
+
+                         window.location = site_url;
+                    }
+                    else{
+                        $(".signinError").addClass('alert alert-danger');
+                        $(".signinError").empty().append(data['message']);
+                    }
+                }
+
+            });
+
+
+
         },
-        dataType: 'json',
-        success: function(data)
-        {
-            if(data.error == 0){
+        function(error) {
 
-
-                if(data.data.total > 0){
-                    //console.log(JSON.stringify(data.data.products));
-                    var cart_product = [];
-
-                    $.each(data.data.products,function(k,v){
-                        //console.log(v);
-                        var string = v;
-                        string.product_quantity = parseInt(v.product_quantity)
-                        cart_product.push(string);
-
-                    });
-
-                    //console.log(cart_product);
-                    localStorage.setItem("products", JSON.stringify(cart_product));
-                }
-                else{
-                    localStorage.removeItem('products');
-                }
-
-               // window.location = site_url;
-            }
-            else{
-                $(".signinError").addClass('alert alert-danger');
-                $(".signinError").empty().append(data['message']);
-            }
+            //var message = 'Please use correct credential to sign in.';
+           // $(".signinError").addClass('alert alert-danger');
+           // $(".signinError").empty().append(message);
+            // Error occurred
+            console.log(error.error) //to find the reason
         }
-
-    });
+    );
 }
-
 
 
     $(document).ready(function(){
