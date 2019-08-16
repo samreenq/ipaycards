@@ -141,7 +141,7 @@
 											@if(empty($price))
 												<h3>{!! $currency.$product_price !!}</h3>
 											@else
-												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo '$'.$product_price; ?></strike></p>
+												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo $currency.' '.$product_price; ?></strike></p>
 												<h3>&nbsp;{!! $currency.$price !!}</h3>
 
 												@endif
