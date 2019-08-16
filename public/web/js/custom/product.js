@@ -1359,14 +1359,16 @@ function add_to_wishlist(Request_url1) {
     $(".add_to_wishlist_button").on("click", function (e) {
 
         var $button = $(this);
+        var wrap_class = 'ul.share-wishlist-wrap';
+        console.log($button);
         //var wishlist_entity_id  = $button.parent().find('.wishlist_entity_id').val();
-        var wishlist_entity_id = $button.parent().find('.entity_id').val();
-        var entity_id = $button.parent().find('.entity_id').val();
-        var product_code = $button.parent().find('.product_code').val();
-        var title = $button.parent().find('.title').val();
-        var thumb = $button.parent().find('.thumb').val();
-        var price = $button.parent().find('.price').val();
-        var item_type = $button.parent().find('.item_type').val();
+        var wishlist_entity_id = $button.parents(wrap_class).find('.entity_id').val();
+        var entity_id = $button.parents(wrap_class).find('.entity_id').val();
+        var product_code = $button.parents(wrap_class).find('.product_code').val();
+        var title = $button.parents(wrap_class).find('.title').val();
+        var thumb = $button.parents(wrap_class).find('.thumb').val();
+        var price = $button.parents(wrap_class).find('.price').val();
+        var item_type = $button.parents(wrap_class).find('.item_type').val();
         /*	var weight  = $button.parent().find('.weight').val();
             var unit_option  = $button.parent().find('.unit_option').val();
             var unit_value  = $button.parent().find('.unit_value').val(); */
@@ -1374,7 +1376,7 @@ function add_to_wishlist(Request_url1) {
 
         $.ajax({
             url: Request_url1,
-            type: 'get',
+            type: 'GET',
             data: {
                 product_id: entity_id
             },

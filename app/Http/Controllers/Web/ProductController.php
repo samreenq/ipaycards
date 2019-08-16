@@ -1069,7 +1069,7 @@ class ProductController extends WebController
 
         if(isset($users[0]['entity_id']))
         {
-            $rules  =  array( 	'product_id' =>  'required'	);
+            $rules  =  array('product_id' =>  'required'	);
             $validator = Validator::make($request->all(),$rules);
             if($validator->fails())
             {
@@ -1079,7 +1079,7 @@ class ProductController extends WebController
                 $data['actor_entity_type_id']		= 11;
                 $data['type']					= "private";
                 $data['mobile_json']	= 1;
-
+               // echo '<pre>'; print_r($data);
                 $response = json_encode(CustomHelper::internalCall($request,"api/extension/social/package/like/listing", 'GET',$data,false));
                 $json 	  = json_decode($response,true);
 
@@ -1098,7 +1098,7 @@ class ProductController extends WebController
                     $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
                     $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
                     $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-                    $data[$p]['item_type'] 			= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                    $data[$p]['item_type'] 			= isset($wishlist_attribute['product']['item_type']['value']) ? $wishlist_attribute['product']['item_type']['value'] : null;
                     /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
                     $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
                     $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;
@@ -1113,6 +1113,7 @@ class ProductController extends WebController
             }
             else
             {
+
 
                 $data = array();
                 $data['actor_entity_id'] 		= $users[0]['entity_id'];
@@ -1151,7 +1152,7 @@ class ProductController extends WebController
                     $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
                     $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
                     $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
-                    $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']) ? $wishlist_attribute['product']['item_type'] : null;
+                    $data[$p]['item_type'] 				= isset($wishlist_attribute['product']['item_type']['value']) ? $wishlist_attribute['product']['item_type']['value'] : null;
                     /*$data[$p]['weight'] 			= isset($wishlist_attribute['product']['weight']) ? $wishlist_attribute['product']['weight'] : null;
                     $data[$p]['unit_value'] 		= isset($wishlist_attribute['product']['item_unit']['value']) ? $wishlist_attribute['product']['item_unit']['value'] : null;
                     $data[$p]['unit_option'] 		= isset($wishlist_attribute['product']['item_unit']['option']) ? $wishlist_attribute['product']['item_unit']['option']: null;

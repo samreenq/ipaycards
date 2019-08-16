@@ -388,9 +388,9 @@
 			//topChefDeal("{{ route('top_chef_deals_list') }}");
 			referAFriend("{{ route('refer_a_friend') }}");
 			aboutBusiness("{{ route('aboutBusiness') }}")	;
-			
-			
-			
+
+
+       // add_to_wishlist("{{ route('add_to_wishlist') }}");
 			load_wishlist("{{ route('add_to_wishlist') }}");
 			
 			
