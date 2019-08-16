@@ -3196,6 +3196,10 @@ ul.footerCont {
     border: 2px solid #3d5b97;
     color:#fff;
 }
+
+.g-signin2, .abcRioButton {margin-bottom: 15px;box-shadow: none !important;border: 0;}
+.g-signin2 .abcRioButton:hover, .g-signin2 .abcRioButton:focus {box-shadow: none !important;border: 0;}
+
 .modal .submitBtnWrap .signBtn,
 .modal .submitBtnWrap .referBtn,
 .modal .submitBtnWrap .phone_verfication,
@@ -3210,6 +3214,7 @@ ul.footerCont {
     border: none;
     width: 100%;
     transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 .modal .submitBtnWrap .reviewBtn{
     background-color: #0f738d;
