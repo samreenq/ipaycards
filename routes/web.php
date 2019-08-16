@@ -192,7 +192,7 @@ Route::post('/checkout_order', "Web\OrderController@checkoutOrder")->name('check
 
 
 Route::get('/cart/add', "Web\ProductController@addToCart")->name('add_to_cart');
-Route::get('/wishlist/add', "Web\ProductController@addToWishlist")->name('add_to_wishlist');
+Route::any('/wishlist/add', "Web\ProductController@addToWishlist")->name('add_to_wishlist');
 Route::get('/wishlist/delete', "Web\ProductController@DeleteToWishlist")->name('delete_to_wishlist');
 Route::get('/cart/show', "Web\ProductController@showCart")->name('show_cart');
 Route::get('/total_price', "Web\ProductController@totalPrice")->name('total_price');

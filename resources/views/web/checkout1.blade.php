@@ -50,17 +50,7 @@
 							</div>--}}
 						</div>
 						<div id="show_list" class="whitebg recipe-item-list">
-									<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-												"
-												
-									id="LoadingImageCart" align="center" style="display: none">
+									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageCart" align="center" style="display: none">
 									  <div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>

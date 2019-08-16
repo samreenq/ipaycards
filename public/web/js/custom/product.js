@@ -107,7 +107,7 @@ if (typeof (localStorage.products) !== "undefined") {
     var products = JSON.parse(localStorage.products);
     if (products.length >= 1) {
 
-        $(".check_out").css({'background-color': "#139CB4"});
+        $(".check_out").css({'background-color': "#0f738d"});
         $(".check_out").css({'display': "block"});
     } else {
         $(".check_out").css({'background-color': "#8080808f"});
@@ -1359,14 +1359,16 @@ function add_to_wishlist(Request_url1) {
     $(".add_to_wishlist_button").on("click", function (e) {
 
         var $button = $(this);
+        var wrap_class = 'ul.share-wishlist-wrap';
+        console.log($button);
         //var wishlist_entity_id  = $button.parent().find('.wishlist_entity_id').val();
-        var wishlist_entity_id = $button.parent().find('.entity_id').val();
-        var entity_id = $button.parent().find('.entity_id').val();
-        var product_code = $button.parent().find('.product_code').val();
-        var title = $button.parent().find('.title').val();
-        var thumb = $button.parent().find('.thumb').val();
-        var price = $button.parent().find('.price').val();
-        var item_type = $button.parent().find('.item_type').val();
+        var wishlist_entity_id = $button.parents(wrap_class).find('.entity_id').val();
+        var entity_id = $button.parents(wrap_class).find('.entity_id').val();
+        var product_code = $button.parents(wrap_class).find('.product_code').val();
+        var title = $button.parents(wrap_class).find('.title').val();
+        var thumb = $button.parents(wrap_class).find('.thumb').val();
+        var price = $button.parents(wrap_class).find('.price').val();
+        var item_type = $button.parents(wrap_class).find('.item_type').val();
         /*	var weight  = $button.parent().find('.weight').val();
             var unit_option  = $button.parent().find('.unit_option').val();
             var unit_value  = $button.parent().find('.unit_value').val(); */
@@ -1374,7 +1376,7 @@ function add_to_wishlist(Request_url1) {
 
         $.ajax({
             url: Request_url1,
-            type: 'get',
+            type: 'GET',
             data: {
                 product_id: entity_id
             },
@@ -1934,7 +1936,7 @@ function load_cart(Request_url1, Request_url2) {
 
                     });
                     total(Request_url2);
-                    $(".check_out").css({'background-color': "#139CB4"});
+                    $(".check_out").css({'background-color': "#0f738d"});
                     $(".check_out").css({'display': "block"});
 
 
@@ -2220,7 +2222,7 @@ function add_to_Cart(Request_url1, Request_url2) {
             total(Request_url1);
             var products = JSON.parse(localStorage.products);
             if (products.length >= 1) {
-                $(".check_out").css({'background-color': "#139CB4"});
+                $(".check_out").css({'background-color': "#0f738d"});
                 $(".check_out").css({'display': "block"});
                 $.ajax({
                     url: Request_url2,
@@ -2421,7 +2423,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                          $("#hash").val(lead_order['hash']);*/
 
                         $(".add-to-cart").removeAttr("disabled");
-                        $(".add-to-cart").css("background-color", "#139CB4");
+                        $(".add-to-cart").css("background-color", "#0f738d");
 
 
                         //Payment method work

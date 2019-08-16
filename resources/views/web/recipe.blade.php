@@ -32,16 +32,7 @@
 						<li class="col-sm-12">
 							
 							<ul class=" menus sidebar__inner" role="tablist">
-										<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingImage" align="center" style="display: none">
+										<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImage" align="center" style="display: none">
 											  <div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>
@@ -162,19 +153,7 @@
 							
 								<div id="recipes"  class="row">
 										
-											<div 	style="
-																position: absolute;
-																top: 50%;
-																left: 50%;
-																margin-top: -50px;
-																margin-left: -50px;
-																width: 100px;
-																height: 100px;
-											
-														"
-
-													id="LoadingImageRecipes" align="center" style="display: none"
-											>
+											<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageRecipes" align="center" style="display: none">
 													<div class="floatingCirclesG">
 														<div class="f_circleG frotateG_01"></div>
 														<div class="f_circleG frotateG_02"></div>
@@ -486,7 +465,7 @@
 					}			
 								
 					$('.tab-content ' + selector).css("height", docheight);		
-					$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+					$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 				}
 				
 				$(document).ready(function() {

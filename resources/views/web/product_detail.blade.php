@@ -141,7 +141,7 @@
 											@if(empty($price))
 												<h3>{!! $currency.$product_price !!}</h3>
 											@else
-												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo '$'.$product_price; ?></strike></p>
+												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo $currency.' '.$product_price; ?></strike></p>
 												<h3>&nbsp;{!! $currency.$price !!}</h3>
 
 												@endif
@@ -195,7 +195,7 @@
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
 
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;"  <?php }  ?> ></span>
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php }  ?> ></span>
 													@else
 
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
@@ -237,16 +237,7 @@
 								<a href="<?php echo url('/').'/product?entity_type_id=14&featured_type=1'; ?>" class="align-items-end viewMore" >See More</a>
 							</div>
 							<div class="row newsAndPeakSeasons">
-									<div style="
-														position: absolute;
-														top: 50%;
-														left: 50%;
-														margin-top: -50px;
-														margin-left: -50px;
-														width: 100px;
-														height: 100px;
-													"
-													id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
+									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingnewsAndPeakSeasonsImage" align="center" style="display: none">
 												<div class="floatingCirclesG">
 													<div class="f_circleG frotateG_01"></div>
 													<div class="f_circleG frotateG_02"></div>
@@ -388,9 +379,9 @@
 			//topChefDeal("{{ route('top_chef_deals_list') }}");
 			referAFriend("{{ route('refer_a_friend') }}");
 			aboutBusiness("{{ route('aboutBusiness') }}")	;
-			
-			
-			
+
+
+       // add_to_wishlist("{{ route('add_to_wishlist') }}");
 			load_wishlist("{{ route('add_to_wishlist') }}");
 			
 			
@@ -418,7 +409,7 @@
 						}			
 									
 						$('.tab-content ' + selector).css("height", docheight);		
-						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
 					
 					$(document).ready(function() {
@@ -481,7 +472,7 @@
 					});
 					
 					$('.wishlist').on('click',function(e){
-						$('.add_to_wishlist_button').css('color','#139CB4');
+						$('.add_to_wishlist_button').css('color','#0f738d');
 					});
 					
 					$('.basketList').enscroll({
