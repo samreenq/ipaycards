@@ -213,8 +213,9 @@ var currency = "{!! $general_setting_raw->currency !!}";
         });
     }
 
+
 function onSignIn(googleUser) {
-//alert('Hiii')
+
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
@@ -251,6 +252,8 @@ function onSignIn(googleUser) {
 
                     //console.log(cart_product);
                     localStorage.setItem("products", JSON.stringify(cart_product));
+
+                    location.reload();
                 }
                 else{
                     localStorage.removeItem('products');
@@ -267,7 +270,12 @@ function onSignIn(googleUser) {
     });
 }
 
-
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
 
     $(document).ready(function(){
 

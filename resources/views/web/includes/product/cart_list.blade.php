@@ -1,6 +1,8 @@
 
-<?php 								
-			
+<?php
+
+
+
 
 if(isset($products))
 {
@@ -107,7 +109,11 @@ else
 			</div>
 		</div>
 <?php
+
 }
+
+
+
 
 ?>
 
