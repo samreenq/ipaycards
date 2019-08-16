@@ -10,6 +10,7 @@
         </button>
 		  <div class="modal-body">
 			<h3>Sign In</h3>
+			  <div class="signinError" >  </div>
 			<div class="fbBtnWrap">
 					<?php
 							if(Session::has('message2'))
@@ -32,8 +33,9 @@
 							
 							
 			</div>
-			  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-				<div class="signinError" >  </div>
+
+			  <div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
+
 				<div class="fluid-label">
 				  <input id="login_id" name="login_id" type="email" placeholder="Email" />
 				  <input id="url"	 name="url"	type="hidden" value="<?php  echo url()->full(); ?>">
