@@ -4372,7 +4372,8 @@ ul.footerCont {
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
-.checkFooter button:hover {background-color: rgb(9, 103, 128);}
+.deliveryInfo input[type="button"] {transition: all .2s ease-in-out;}
+.deliveryInfo input[type="button"]:hover, .checkFooter button:hover {background-color: rgb(9, 103, 128) !important;}
 
 
 .checkOrderWrap form{

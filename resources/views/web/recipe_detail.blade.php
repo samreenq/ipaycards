@@ -151,7 +151,7 @@
 													
 												<li class="wishlist">
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #139CB4;" <?php } ?>  ></span>
+														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #0f738d;" <?php } ?>  ></span>
 													@else
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
 													@endif
@@ -588,7 +588,7 @@
 					});
 					
 					$('.wishlist').on('click',function(e){
-						$('.add_to_wishlist_button').css('color','#139CB4');
+						$('.add_to_wishlist_button').css('color','#0f738d');
 					});
 					
 					//Header Slider

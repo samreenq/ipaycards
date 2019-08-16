@@ -1863,9 +1863,9 @@ var bgPrimary = '#4a89dc',
 $('.gradient-overlay').each(function () {
 
     // First random color
-    var rand1 = '#139cb4';
+    var rand1 = '#0f738d';
     // Second random color
-    var rand2 = '#139cb4';
+    var rand2 = '#0f738d';
 
     var grad = $(this);
 

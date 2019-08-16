@@ -22188,14 +22188,14 @@ fieldset[disabled] .btn-dark.active {
 }
 .radio-custom.radio-system label:before,
 .checkbox-custom.checkbox-system label:before {
-  border-color: #139cb4;
+  border-color: #0f738d;
 }
 .radio-custom.radio-system input[type=radio]:checked + label:after,
 .radio-custom.radio-system input[type=checkbox]:checked + label:after,
 .checkbox-custom.checkbox-system input[type=checkbox]:checked + label:after,
 .checkbox-custom.checkbox-system input[type=radio]:checked + label:after {
-  background-color: #139cb4;
-  color: #139cb4;
+  background-color: #0f738d;
+  color: #0f738d;
 }
 .checkbox-custom.fill.checkbox-system label:before {
   background-color: #48c9a9;

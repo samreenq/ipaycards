@@ -107,7 +107,7 @@ if (typeof (localStorage.products) !== "undefined") {
     var products = JSON.parse(localStorage.products);
     if (products.length >= 1) {
 
-        $(".check_out").css({'background-color': "#139CB4"});
+        $(".check_out").css({'background-color': "#0f738d"});
         $(".check_out").css({'display': "block"});
     } else {
         $(".check_out").css({'background-color': "#8080808f"});
@@ -1936,7 +1936,7 @@ function load_cart(Request_url1, Request_url2) {
 
                     });
                     total(Request_url2);
-                    $(".check_out").css({'background-color': "#139CB4"});
+                    $(".check_out").css({'background-color': "#0f738d"});
                     $(".check_out").css({'display': "block"});
 
 
@@ -2222,7 +2222,7 @@ function add_to_Cart(Request_url1, Request_url2) {
             total(Request_url1);
             var products = JSON.parse(localStorage.products);
             if (products.length >= 1) {
-                $(".check_out").css({'background-color': "#139CB4"});
+                $(".check_out").css({'background-color': "#0f738d"});
                 $(".check_out").css({'display': "block"});
                 $.ajax({
                     url: Request_url2,
@@ -2423,7 +2423,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                          $("#hash").val(lead_order['hash']);*/
 
                         $(".add-to-cart").removeAttr("disabled");
-                        $(".add-to-cart").css("background-color", "#139CB4");
+                        $(".add-to-cart").css("background-color", "#0f738d");
 
 
                         //Payment method work
