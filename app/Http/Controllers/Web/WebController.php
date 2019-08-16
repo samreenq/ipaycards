@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 
 use App\Http\Models\Conf;
+use App\Http\Models\Setting;
 use App\Libraries\GeneralSetting;
 use View;
 use Illuminate\Http\Request;
@@ -58,12 +59,18 @@ class WebController extends Controller
         $fb_raw = $conf_model->getBy("key","facebook");
         $fb_config = json_decode($fb_raw->value);
 
+        $setting_model = new Setting();
+        $google_key = $setting_model->getBy('key','google_client_key');
+        $google_client_key = (isset($google_key->value)) ? $google_key->value : "";
+
+
         $general_setting_lib = new GeneralSetting();
         $general_setting_raw = $general_setting_lib->getSetting();
 
         View::share('login_customer',  json_decode(json_encode($this->_customer)));
         View::share('fb_config', $fb_config);
         View::share('general_setting_raw', $general_setting_raw);
+        View::share('google_client_key', $google_client_key);
 
     }
 }

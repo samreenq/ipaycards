@@ -5,7 +5,9 @@
 				 <meta name="description" content="">
 				 <meta name="author" content="">
 				 <link rel="icon" href="<?php echo url('/').'/public/web/img/favicon.png';?>">
-				<meta name="google-signin-client_id" content="812606195787-0b51kpjo3m57ehqge2eeq29ftsmivv4j.apps.googleusercontent.com">
+
+				<!-- Localhost -->
+				<meta name="google-signin-client_id" content="{!! $google_client_key !!}.apps.googleusercontent.com">
 
 				 <title>{!! APP_NAME !!}</title>
 
