@@ -652,7 +652,7 @@
 						}			
 									
 						$('.tab-content ' + selector).css("height", docheight);		
-						$('.tab-content ' + selector).css("min-height", '300px'); // i have given minimum height 
+						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
 					
 					$(document).ready(function() {
