@@ -694,8 +694,27 @@ function gmailLogin()
 
         });
 
+        $("#signout").on('click',function(){
+            signout();
+        });
+
     });
 
+    function signout(){
+        $.ajax ({
+            url: site_url+'/signout',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+
+                if(data.error == 0){
+                    localStorage.removeItem('products');
+                    window.location = site_url;
+                }
+            }
+
+        });
+    }
 </script>
 
 
