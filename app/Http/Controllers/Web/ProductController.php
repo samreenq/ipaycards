@@ -561,7 +561,7 @@ class ProductController extends WebController
        
     }
 	
-	public function showCart(Request $request) 
+	public function _showCart(Request $request)
 	{
 		$rules  =  array(	'data' =>  'required'		); 
 		$validator = Validator::make($request->all(),$rules);		
@@ -683,6 +683,68 @@ class ProductController extends WebController
 
 		}
 		
+    }
+
+    public function showCart(Request $request)
+    {
+        $rules  =  array(	'data' =>  'required'		);
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails())
+        {
+            return trans('web.productError');
+        }
+        else
+        {
+            $data['products'] = $request->input('data');
+
+            if($data['products'] && count($data['products']) > 0){
+
+                $available_products = array();
+                $not_available_products = '';
+
+                foreach($data['products'] as $cart_product){
+
+                    $product_flat = new SYSTableFlat('product');
+                    $where_condition = 'entity_id = '.$cart_product['entity_id'];
+                    $product_raw = $product_flat->getDataByWhere($where_condition,array('status'));
+                    // echo "<pre>"; print_r($product_raw); exit;
+                    if($product_raw && isset($product_raw[0])){
+
+                        $product = $product_raw[0];
+                        if($product->status == 1){
+
+                            $available_products[] = $cart_product;
+                        }
+                        else{
+                            if($not_available_products != ''){
+                                $not_available_products .= ', ';
+                            }
+                            $not_available_products .= $cart_product['title'];
+                        }
+                    }
+
+                }
+            }
+
+            $data['message'] = '';
+            if(count( $data['products']) > count($available_products)){
+                $data['message'] = $not_available_products.' currently not available';
+            }
+
+            $data['products'] = count($available_products)>0 ? $available_products : array();
+            $data['currency'] = $this->_object_library_general_setting->getCurrency();
+
+            $view_file = 'web/includes/product/show_list';
+            $view =  view($view_file,$data)->render();
+
+            return array(
+                'products' => $available_products,
+                'view' => $view,
+                'total_count' => count($available_products)
+            );
+
+        }
+
     }
 	
 	public function totalPrice(Request $request) 

@@ -489,7 +489,9 @@ class CheckOutController extends WebController {
      */
 	public function updateCart(Request $request)
     {
-	    if(isset($request->products)){
+      //  echo 'Hiiiii';
+       //echo "<pre>"; print_r($request->products);exit;
+	    if(isset($request->products) || empty($request->products)){
 
            // echo "<pre>"; print_r($request->products);exit;
             //Save Cart
