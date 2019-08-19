@@ -1367,8 +1367,8 @@ section.flyout-wrap {
 }
 .logoIcon{
     display:inline-block;
-    width: 100%;
-    height: 100%;
+    /*width: 100%;
+    height: 100%;*/
 }
 .logoWoIcon {
     display:none;
@@ -1692,12 +1692,10 @@ section.flyout-wrap {
     border:0;
     margin-bottom: 0;
     z-index:1000;
-    padding: 12px 0;
+    padding: 0;
 }
 .navbar .navbar-brand {
-    padding: 0;
-    width: 74px;
-    height: 50px;
+    padding: 15px;
 }
 
 .navbar .headerLeft{
@@ -5793,6 +5791,9 @@ span.clancelItem a{
 }
 @media only screen and (max-width: 991px) {
 
+    .toolbar-search .search-bar {font-size: 16px;}
+    section {padding: 50px 0;}
+    
     /* new mobile dropdown - rafay */
     body.nav-expanded {
         padding-right: 0px;
@@ -5840,7 +5841,7 @@ span.clancelItem a{
     .headerRight {
         position: absolute;
         top: 0;
-        right: 65px;
+        right: 48px;
     }
 
     .page-nav-second .headerRight {
@@ -5855,30 +5856,16 @@ span.clancelItem a{
 
     .bg-search {
         background-color: #f8f9fb;
+        padding: 15px;
     }
-
-    .mobile-search {
-        padding: 10px 0;
-    }
-
     .toolbar-search.mobile-search .search-bar {
         padding: 12px 12px;
         height: 50px;
         border: 1px solid #ccc;
-        border-radius: 0px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
     }
 
-    .mobile-search  .search-btn {
-        background-color: #72cbb1;
-        border: none;
-        box-shadow: none;
-        color: #fff;
-        font-size: 25px;
-        padding: 15px 20px;
-        overflow: hidden;
-        position: relative;
-        width: 70px;
-    }
 
     .mobile-search .search-btn>span {
         position: absolute;
@@ -5913,12 +5900,13 @@ span.clancelItem a{
         position: absolute;
         background: 0 0;
         border: 0px solid transparent;
-        right: 124px;
-        top: 9px;
+        right: 103px;
+        top: 0px;
+        transition: all .3s ease-in-out;
     }
 
     .navbar .search-toggler:hover {
-        color: #e76354;
+        color: #0f738d;
     }
 
     .search-toggler-icon {
@@ -6012,7 +6000,7 @@ span.clancelItem a{
     }
     .navbar-nav.header-cart{
         flex-direction: initial;
-        margin-bottom: 15px;
+        padding: 15px;
     }
     .navbar-nav.header-cart>li:first-child{
         margin-right:5px!important;
