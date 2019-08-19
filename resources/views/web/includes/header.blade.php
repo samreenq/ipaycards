@@ -5,6 +5,7 @@
 <!-- Header -->	
 	<header id="inner-header">
 		<div class="container pageNavWrap">
+			<div class="greedy-overflow"></div>
 			<div class="greedy-nav page-nav animationHover">
 				<button type="buttonpull-right">More</button> 
 				<ul class=" menus visible-links">
