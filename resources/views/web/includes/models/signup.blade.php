@@ -29,6 +29,7 @@
 				<div class="row setup-content" id="step-1">
 					<div class="col-md-12">
 					    <h3>Account</h3>
+						<div class="signup_error" style=""></div>
 					    <p class="small-brief">Sign up to {!! APP_NAME !!} with your favourite social media account or using your email ID. </p>
 						<div class="fbBtnWrap">
 
@@ -60,8 +61,8 @@
 							?>
 							
 						</div>
-						<div class="signup_error" style="">  </div>
-						<div class="g-signin2"  data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
+
+						<div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
 						<div class="fluid-label">
 						  <input id="email" name="email" type="email" required="required" class="form-control" placeholder="Email" />
 						   <input id="url"  name="url"	type="hidden" value="<?php  echo url()->current(); ?>">

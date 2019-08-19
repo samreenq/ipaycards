@@ -166,9 +166,12 @@ class AuthenticationController extends WebController {
 
 			session_destroy();
 		 }
-		 $url = url('/'); 
-		 return redirect($url);
-
+		// $url = url('/');
+		// return redirect($url);
+        return array(
+          'error' => 0,
+          'message' => 'Success'
+        );
       /*  Session::flash('Signed-out', true);*/
 
     }

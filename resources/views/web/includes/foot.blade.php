@@ -26,7 +26,7 @@
 
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
 <script>
 
 
@@ -248,6 +248,9 @@
         });
     }
 
+    function onLoadCallback() {
+        $('span[id^="not_signed_"]').html('CONNECT WITH GOOGLE');
+    }
 
 function gmailLogin()
 {
@@ -694,8 +697,27 @@ function gmailLogin()
 
         });
 
+        $("#signout").on('click',function(){
+            signout();
+        });
+
     });
 
+    function signout(){
+        $.ajax ({
+            url: site_url+'/signout',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+
+                if(data.error == 0){
+                    localStorage.removeItem('products');
+                    window.location = site_url;
+                }
+            }
+
+        });
+    }
 </script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

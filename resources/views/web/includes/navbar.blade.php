@@ -112,7 +112,7 @@
 										</div>
 									</li>
 									<li><a href="{{ route('account_detail') }}" >@lang('web.navbar_menu_account')</a></li>
-									<li><a href="{{ route('signout') }}" >@lang('web.navbar_menu_sign_Out')</a></li>
+									<li><a href="javascript:void(0)" id="signout" >@lang('web.navbar_menu_sign_Out')</a></li>
 								</ul>
 					
 					<?php 
