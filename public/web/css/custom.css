@@ -1731,7 +1731,7 @@ section.flyout-wrap {
 }
 .navbar .navbar-nav>li>a:hover,
 .navbar .navbar-nav>li>a:focus{
-    color: #0f738d;
+    color: #0f738d !important;
     background-color: transparent;
     opacity: 1;
 }
