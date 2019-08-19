@@ -84,14 +84,18 @@
 
 							@if(!empty($cat_id))
 
-								<div class="main_categeory"><h4><a  style=""  href=" {{ url('/').'/product?entity_type_id=14&category_id='.$categories->category_id  }}" onclick="return false" ;  ><?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?></a></h4></div>
+                                <div class="main_categeory"><h4><a style="color: #000000; cursor: default"  href=" {{ url('/').'/product?entity_type_id=14&category_id='.$categories->category_id  }}"
+                                                                   onclick="return false" ;  ><?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?>
+                                        </a>
+                                    </h4>
+                                </div>
 								@if($categories->child && count($categories->child)>0)
 									<ul class="categories vegeListWrap pl15" id="accordion">
 										@foreach($categories->child as $category_raw)
                                             <?php
                                             $text_color = '#48494d';
                                             if($cat_id == $category_raw->category_id){
-                                            $text_color = '#EF9B9B';
+                                            $text_color = '#000000';
                                             }
                                             ?>
 											<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id }}" ><?php if(isset($category_raw->title)) echo $category_raw->title; if(isset($category_raw->product_count)) echo '('.$category_raw->product_count.')'; ?></a></li>

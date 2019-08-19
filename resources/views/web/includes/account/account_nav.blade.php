@@ -13,7 +13,7 @@
             {
             ?>
 
-            <li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Logout</a></li>
+            <li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Sign Out</a></li>
 
             <?php
             }
@@ -22,7 +22,7 @@
 
             ?>
 
-            <li ><a href="{{ route('signout') }}">SIGN OUT</a></li>
+            <li ><a href="javascript:void(0)" onclick="signout()" id="signout">Sign Out</a></li>
 
             <?php
             }

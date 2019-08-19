@@ -3248,6 +3248,10 @@ ul.footerCont {
 .g-signin2, .abcRioButton {margin-bottom: 15px;box-shadow: none !important;border: 0;}
 .g-signin2 .abcRioButton:hover, .g-signin2 .abcRioButton:focus {box-shadow: none !important;border: 0;}
 .g-signin2 .abcRioButtonBlue {-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;}
+
+/*.g-signin3, .abcRioButton {color: #0a5228; margin-bottom: 15px;box-shadow: none !important;border: 0;}
+.g-signin3 .abcRioButton:hover, .g-signin3 .abcRioButton:focus {box-shadow: none !important;border: 0;}*/
+
 .modal .submitBtnWrap .signBtn,
 .modal .submitBtnWrap .referBtn,
 .modal .submitBtnWrap .phone_verfication,
