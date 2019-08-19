@@ -250,6 +250,7 @@
 
     function onLoadCallback() {
         $('span[id^="not_signed_"]').html('CONNECT WITH GOOGLE');
+        $('span[id^="connected"]').html('CONNECT WITH GOOGLE');
     }
 
 function gmailLogin()
