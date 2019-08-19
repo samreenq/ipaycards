@@ -139,7 +139,7 @@
                                         ?>
 										<h2><?php if(isset($product['attributes']['title'])) echo $product['attributes']['title'];  ?></h2>
 											@if(empty($price))
-												<h3>{!! $currency.$product_price !!}</h3>
+												<h3>{!! $currency.' '.$product_price !!}</h3>
 											@else
 												<p class="prise_fordetail for_strike"><strike><?php if(isset($product["attributes"]['price'])) echo $currency.' '.$product_price; ?></strike></p>
 												<h3>&nbsp;{!! $currency.$price !!}</h3>
@@ -163,7 +163,7 @@
 
 													<input type="hidden" class="item_type" value="<?php if(isset($product["attributes"]['item_type']['value'])) echo $product["attributes"]['item_type']['value'] ?>" />
 
-													<input class="quantity"  name="product_quantity"  type="text"  value="1"/>
+													<input class="quantity"  name="product_quantity"  type="text" readonly="readonly" value="1"/>
 
 
 
@@ -195,12 +195,18 @@
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
 
-														<span class="icon-tt-like-icon add_to_wishlist_button "  <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php }  ?> ></span>
+														<span class="icon-tt-like-icon add_to_wishlist_button" <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php }  ?> ></span>
 													@else
 
 														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
 													@endif
-													Add to Wishlist</li>
+													@if($wishlist==1)
+															Added to Wishlist
+
+													@else
+													Add to Wishlist
+												@endif
+												</li>
 											</ul>
 										</div>
 									</div>

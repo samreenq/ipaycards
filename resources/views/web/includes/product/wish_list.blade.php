@@ -38,7 +38,7 @@ if(isset($wishlist))
 						<table width="100%">
 								<tr>
 									<td class="addItemRecipe"><?php echo $wishlistItems['title'];?></td>
-									<td class="addItemWeight" align="right">
+									{{--<td class="addItemWeight" align="right">--}}
 											<?php 
 												// if(isset( $wishlistItems["product_code"])  && isset( $wishlistItems["product_code"]))
 												//	echo $wishlistItems["product_code"];
@@ -52,7 +52,7 @@ if(isset($wishlist))
 											<span style="font-size:75%;color:#000;margin-left: 50%;margin-bottom: 57%;" onclick="deleteWishlistProduct(<?php if(isset($wishlistItems['entity_id']))echo $wishlistItems['entity_id']; ?>,'{{ route('add_to_cart') }}','{{ route('show_cart') }}','{{route('total_price')}}','{{route('add_to_wishlist')}}','{{route('delete_to_wishlist')}}' )" > <!--class="clancelItem" --> 
 												<span class="icon-tt-close-icon"></span>
 											</span>					  									
-										<a/>
+										</a>
 									</td>
 								</tr>
 								
