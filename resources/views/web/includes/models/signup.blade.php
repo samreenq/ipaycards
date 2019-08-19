@@ -61,6 +61,7 @@
 							
 						</div>
 						<div class="signup_error" style="">  </div>
+						<div class="g-signin2"  data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
 						<div class="fluid-label">
 						  <input id="email" name="email" type="email" required="required" class="form-control" placeholder="Email" />
 						   <input id="url"  name="url"	type="hidden" value="<?php  echo url()->current(); ?>">

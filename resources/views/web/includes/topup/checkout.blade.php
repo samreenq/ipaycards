@@ -36,7 +36,7 @@
 					<li class="active"><a href="javascript:void(0)"><span>1</span> Information</a></li>
 					<li class="active"><a href="javascript:void(0)"><span>2</span> Verification</a></li>
 					<li class="active"><a href="javascript:void(0)"><span>3</span> Payment</a></li>
-					<li class="active"><a href="javascript:void(0)"><span>4</span> Checkout</a></li>
+					<li class="active"><a href="javascript:void(0)"><span>4</span> Confirmation</a></li>
 				</ul>
 			</div>
 			<div class="row">
