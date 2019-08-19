@@ -1146,17 +1146,19 @@ class ProductController extends WebController
                 $json 	  = json_decode($response,true);
 
                 $wishlist = isset($json['data']['like_listing']) ? $json['data']['like_listing'] : [] ;
-
+              //  echo '<pre>'; print_r($wishlist); exit;
                 $data = array();
                 $p=0;
 
                 foreach( $wishlist as $wishlist_attribute  )
                 {
-
+                    //Get image of product
+                    $gallery = isset($wishlist_attribute['product']['gallery'][0]) ? json_decode(json_encode($wishlist_attribute['product']['gallery'])) : false;
+                    $image = Fields::getGalleryImage($gallery,'product','compressed_file');
 
                     $data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
                     $data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
-                    $data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
+                    $data[$p]['thumb'] 				= $image;
                     $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
                     $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
                     $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
@@ -1208,9 +1210,14 @@ class ProductController extends WebController
 
                 foreach( $wishlist as $wishlist_attribute  )
                 {
+                    //Get image of product
+                    $gallery = isset($wishlist_attribute['product']['gallery'][0]) ? json_decode(json_encode($wishlist_attribute['product']['gallery'])) : false;
+                    $image = Fields::getGalleryImage($gallery,'product','compressed_file');
+
+
                     $data[$p]['entity_id'] 			= isset($wishlist_attribute['product']['entity_id']) ? $wishlist_attribute['product']['entity_id'] : null;
                     $data[$p]['wishlist_entity_id'] = isset($wishlist_attribute['package_like_id']) ? $wishlist_attribute['package_like_id'] : null;
-                    $data[$p]['thumb'] 				= isset($wishlist_attribute['product']['gallery'][0]['thumb'])?  $wishlist_attribute['product']['gallery'][0]['thumb'] : null ;
+                    $data[$p]['thumb'] 				= $image;
                     $data[$p]['title'] 				= isset($wishlist_attribute['product']['title']) ? $wishlist_attribute['product']['title'] : null;
                     $data[$p]['product_code'] 		= isset($wishlist_attribute['product']['product_code']) ? $wishlist_attribute['product']['product_code'] : null;
                     $data[$p]['price'] 				= isset($wishlist_attribute['product']['price']) ? $wishlist_attribute['product']['price'] : null;
