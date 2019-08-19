@@ -3161,6 +3161,7 @@ function referAFriend(referAFriendUrl) {
 
                 }
                 if (data['error'] == 0) {
+
                     if ($(".signinError").hasClass('alert-danger')) {
                         $(".signinError").removeClass('alert-danger')
                     }
@@ -3176,7 +3177,9 @@ function referAFriend(referAFriendUrl) {
                     timeRefer = setInterval(function () {
                         $('.referfriendmodal').modal('hide');
                         clearInterval(timeRefer);
-                    }, 2000);
+                        $(".signinError").empty().append("");
+                        $(".signinError").removeClass('alert alert-success');
+                        }, 2000);
 
                 }
             }
