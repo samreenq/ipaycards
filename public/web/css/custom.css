@@ -5781,6 +5781,13 @@ span.clancelItem a{
     body .brands_slide.owl-theme .owl-nav .owl-prev, body .game_slide.owl-theme .owl-nav .owl-prev {left: -20px;}
     body .brands_slide.owl-theme .owl-nav .owl-next, body .game_slide.owl-theme .owl-nav .owl-next {right: -20px;}
     body .brands_slide.owl-theme .owl-nav [class*='owl-'] span.ic, body .game_slide.owl-theme .owl-nav [class*='owl-'] span.ic {font-size: 24px;}
+}
+@media only screen and (max-width: 1023px) {
+    .main-banner h1 {font-size: 32px !important;}
+    body .brands_slide.owl-theme .owl-nav [class*='owl-'], body .game_slide.owl-theme .owl-nav [class*='owl-'] {width: 20px;height: 20px;}
+    body .brands_slide.owl-theme .owl-nav .owl-prev, body .game_slide.owl-theme .owl-nav .owl-prev {left: -10px;}
+    body .brands_slide.owl-theme .owl-nav .owl-next, body .game_slide.owl-theme .owl-nav .owl-next {right: -10px;}
+    body .brands_slide.owl-theme .owl-nav [class*='owl-'] span.ic, body .game_slide.owl-theme .owl-nav [class*='owl-'] span.ic {font-size: 20px;}
     .product-detail a {font-size: 18px;}
     .product-footer p.prise {font-size: 16px;}
 }
