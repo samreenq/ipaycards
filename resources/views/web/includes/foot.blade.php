@@ -26,7 +26,7 @@
 
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
 <script>
 
 
@@ -248,6 +248,9 @@
         });
     }
 
+    function onLoadCallback() {
+        $('span[id^="not_signed_"]').html('CONNECT WITH GMAIL');
+    }
 
 function gmailLogin()
 {
