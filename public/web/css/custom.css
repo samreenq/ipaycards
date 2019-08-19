@@ -5151,8 +5151,11 @@ ul.multiselect-container.dropdown-menu li.active a{
 /* #Mobile App Page
 --------------------------------------------------------------- */
 .mobileApp {
-    background:url(../img/mobile-app-bg.png) no-repeat center bottom, #f8f9fb;
+    background:url(../img/mobile-app-bg.jpeg) no-repeat center;
+    height: calc(100vh - 9.5vh);
     background-size:cover;
+    display: flex;
+    align-items: center;
 }
 .mobileApp h2{
     font-weight:700;
