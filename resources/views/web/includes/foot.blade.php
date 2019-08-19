@@ -249,7 +249,7 @@
     }
 
     function onLoadCallback() {
-        $('span[id^="not_signed_"]').html('CONNECT WITH GMAIL');
+        $('span[id^="not_signed_"]').html('CONNECT WITH GOOGLE');
     }
 
 function gmailLogin()
