@@ -19,6 +19,7 @@
 
 				 <!-- Custom styles for this template -->
 					<link href="<?php echo url('/').'/public/web/css/custom.css'; ?>" rel="stylesheet">
+					<link href="<?php echo url('/').'/public/web/css/hamburgers.css'; ?>" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/css/price_range.css'; ?>" rel="stylesheet">
 					{{--FontAwesome--}}
 					<link href="<?php echo url('/').'/public/web/css/font-awesome.css'; ?>" rel="stylesheet">
