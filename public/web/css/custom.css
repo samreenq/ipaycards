@@ -5776,6 +5776,14 @@ span.clancelItem a{
         width:95%;
     }
 }
+@media only screen and (max-width: 1099px) {
+    body .brands_slide.owl-theme .owl-nav [class*='owl-'], body .game_slide.owl-theme .owl-nav [class*='owl-'] {width: 25px;height: 25px;}
+    body .brands_slide.owl-theme .owl-nav .owl-prev, body .game_slide.owl-theme .owl-nav .owl-prev {left: -20px;}
+    body .brands_slide.owl-theme .owl-nav .owl-next, body .game_slide.owl-theme .owl-nav .owl-next {right: -20px;}
+    body .brands_slide.owl-theme .owl-nav [class*='owl-'] span.ic, body .game_slide.owl-theme .owl-nav [class*='owl-'] span.ic {font-size: 24px;}
+    .product-detail a {font-size: 18px;}
+    .product-footer p.prise {font-size: 16px;}
+}
 @media only screen and (max-width: 991px) {
 
     /* new mobile dropdown - rafay */
@@ -6046,7 +6054,6 @@ span.clancelItem a{
     }
 
 }
-
 @media only screen and (max-width: 723px) {
     .greedy-nav-second {
         width: 65%;
@@ -7111,6 +7118,7 @@ input[type=number] {
 }
 .product-wrap .img-responsive {
     height: 159px;
+    object-fit: cover;
 }
 /*End AS CSS*/
 
