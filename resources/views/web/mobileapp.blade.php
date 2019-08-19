@@ -30,8 +30,8 @@
 		<section class="mobileApp lightgreybg">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12 m-md-auto col-lg-9 m-lg-auto d-md-flex align-items-center">
-						<div class="col-sm-12 col-md-7 col-lg-7">
+					<div class="col-md-12 col-lg-12">
+						<div class="col-sm-12 offset-md-6 col-md-6">
 							<h2>The easiest way to shop on {!! APP_NAME !!}.</h2>
 						{{--	<div class="toolbar-small-search">
 								<input class="search-bar"  name="search" placeholder="Mobile Number" type="search" value="">
@@ -42,9 +42,6 @@
 								<li><a href="javascript:void(0)"><img src="<?php echo url('/').'/public/web/img/ios-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
 								<li><a href="javascript:void(0)"><img src="<?php echo url('/').'/public/web/img/play-btn-app.jpg';?>" alt="app btn" width="168"/></a></li>
 							</ul>
-						</div>
-						<div class="col-sm-12 col-md-5 col-lg-5 mobileAppImgWrap">
-							<img src="<?php echo url('/').'/public/web/img/mobile-app.png';?>" alt="img" width="315"/>
 						</div>
 					</div>
 				</div>
