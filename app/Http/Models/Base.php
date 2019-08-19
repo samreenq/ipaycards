@@ -330,12 +330,12 @@ class Base extends Model
        // echo $msg;
         //die($msg);
        // return @mail($to_email, $data["subject"], $message, implode("\r\n", $headers));
-        $data['send_to_mail'] = $to_email;
+       /* $data['send_to_mail'] = $to_email;
        \Mail::send('emails.mail', ['data' => $msg], function ($mail) use ($data) {
             $mail->to($data['send_to_mail'])
                 ->subject($data['subject'])
                 ->from($data['from']);
-        });
+        });*/
         return;
     }
 
