@@ -14,25 +14,25 @@ if(isset($wishlist))
 ?>
 			
 			<tr> 
-				<td colspan="2"><img src='<?php 
+				<td colspan="2"><img src='<?php
 														if(isset($wishlistItems['thumb']))
-															{ 
+															{
 																	$handle = @fopen($wishlistItems['thumb'], "r");
 																	if(strpos("$handle", "Resource id") !== false)
 																	{
-																			 
-																			echo $wishlistItems['thumb']; 
-																	} 
-																	else 
-																	{ 
+
+																			echo $wishlistItems['thumb'];
+																	}
+																	else
+																	{
 																			echo url("/")."/public/web/img/image_not_found_all.jpg";
-																	} 
-															}  
+																	}
+															}
 															else
 															{
-																	echo url("/")."/public/web/img/image_not_found_all.jpg"; 
+																	echo url("/")."/public/web/img/image_not_found_all.jpg";
 															}
-				
+
 										?>' width="63px" height="63px"/></td>
 				<td>
 						<table width="100%">
@@ -40,8 +40,8 @@ if(isset($wishlist))
 									<td class="addItemRecipe"><?php echo $wishlistItems['title'];?></td>
 									{{--<td class="addItemWeight" align="right">--}}
 											<?php 
-												 if(isset( $wishlistItems["product_code"])  && isset( $wishlistItems["product_code"]))
-													echo $wishlistItems["product_code"];
+												// if(isset( $wishlistItems["product_code"])  && isset( $wishlistItems["product_code"]))
+												//	echo $wishlistItems["product_code"];
 											?>
 									</td>	
 								</tr>
