@@ -35,6 +35,13 @@ $(".open_forPassmodal").on("click", function (e) {
     $('.forPassmodal').modal('show');
 });
 
+$('#giftForm').on('keyup keypress', function(e) {
+    var keyCode = e.keyCode || e.which;
+    if (keyCode === 13) {
+        e.preventDefault();
+        return false;
+    }
+});
 
 $(".nextBtn5").on("click", function (e) {
 
