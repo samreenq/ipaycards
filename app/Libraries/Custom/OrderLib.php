@@ -54,19 +54,23 @@ Class OrderLib
 
             $lead_order_id = $lead_order->data->entity->entity_id;
 
-            //Payment
-            $payment_request = $request['payment'];
-            $payment_request['lead_order_id'] = $lead_order_id;
+            $payment_response = false;
+            if(isset($request['paid_amount']) && $request['paid_amount'] > 0){
+                //Payment
+                $payment_request = $request['payment'];
+                $payment_request['lead_order_id'] = $lead_order_id;
 
-            $payment_response = $this->payment($payment_request,'order');
-            $payment_response = (object)($payment_response);
+                $payment_response = $this->payment($payment_request,'order');
+                $payment_response = (object)($payment_response);
 
-        //  $payment_response = json_decode(json_encode($payment_response));
-          //echo '<pre>'; print_r($payment_response); exit;
+                //  $payment_response = json_decode(json_encode($payment_response));
+                //echo '<pre>'; print_r($payment_response); exit;
 
-            if(isset($payment_response->error)){
-                return $payment_response;
+                if(isset($payment_response->error)){
+                    return $payment_response;
+                }
             }
+
             //Create Order
             return $this->saveOrder($lead_order,$payment_response);
 
@@ -190,7 +194,7 @@ Class OrderLib
      * @param $payment_response
      * @return array
      */
-    public function saveOrder($lead_order,$payment_response)
+    public function saveOrder($lead_order,$payment_response = false)
     {
         try {
 
@@ -206,18 +210,22 @@ Class OrderLib
             $params['mobile_json'] = 1;
             $params['hook'] = 'order_item';
 
+            if($payment_response){
 
-            $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
-           //
-            // $data['transaction_response'] = json_encode($payment_response);
-            $params['card_id'] = $card->nameOnCard;
-            $params['card_type'] = $card->scheme;
-            $params['card_last_digit'] = substr($card->number,-4);
-            $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+                $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
+                //
+                // $data['transaction_response'] = json_encode($payment_response);
+                $params['card_id'] = $card->nameOnCard;
+                $params['card_type'] = $card->scheme;
+                $params['card_last_digit'] = substr($card->number,-4);
+                $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+
+                unset($params['payment']);
+            }
+
             $params['lead_order_id'] = "$lead_order_id";
             $params['order_status'] = $order_status;
 
-            unset($params['payment']);
            // echo '<pre>'; print_r($params); exit;
             $entity_lib = new Entity();
             return $entity_lib->apiPost($params);
