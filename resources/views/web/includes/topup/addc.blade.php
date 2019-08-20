@@ -242,7 +242,6 @@
     <script src="<?php echo url('/').'/public/web/js/enscroll.min.js';?>"></script>
     <script src="<?php echo url('/').'/public/web/js/select2.min.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js'?>"></script>
-    <script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
     <script src="<?php echo url('/').'/public/web/js/jquery.validate.min.js'?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js'></script>
     <script src="<?php echo url('/').'/public/web/js/verification-code.js'?>"></script>

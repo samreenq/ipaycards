@@ -1639,4 +1639,74 @@ class ProductController extends WebController
         return $data1;
     }
 
+    /**
+     * @return array
+     */
+    public function getCart()
+    {
+        $cart_product = array();
+
+        if (isset($this->_customerId) && $this->_customerId > 0){
+
+
+            $order_cart = new OrderCart();
+            $cust_cart = $order_cart->getOrderCart($this->_customerId);
+
+            // echo '<pre>'; print_r($cust_cart['data']['order_cart'][0]); exit;
+
+            $new_arr = array();
+            if(isset($cust_cart['data']['order_cart'][0]->cart_item)){
+
+                foreach($cust_cart['data']['order_cart'][0]->cart_item as $prod){
+
+                    //echo '<pre>'; print_r($product); exit;
+                    $product = $prod->detail;
+
+                    $thumb = Fields::getGalleryImageFile($product->gallery,'product','file');
+                    $price = $product->price;
+
+                    if(isset($product->product_promotion_id) && $product->product_promotion_id >0)
+                    {
+                        if((isset($product->promotion_start_date) && !empty($product->promotion_start_date)) &&
+                            (isset($product->promotion_end_date) && !empty($product->promotion_end_date))) {
+
+                            $current_date = date("Y-m-d H:i:s");
+
+                            if (strtotime($current_date) >= strtotime($product->promotion_start_date) &&
+                                strtotime($current_date) <= strtotime($product->promotion_end_date)) {
+
+                                if (isset($product->promotion_discount_amount)) {
+                                    $price = $product->promotion_discount_amount;
+                                }
+                            }
+
+                        }
+                    }
+
+                    $cart_product[] = array(
+                        'entity_id' => $prod->product_id,
+                        'product_code' => $product->product_code,
+                        'title' => $product->title,
+                        'thumb' => $thumb,
+                        'price' => $price,
+                        // 'weight' => $product->weight,
+                        //'unit_option' => isset($product->item_unit->option) ? $product->item_unit->option : "",
+                        // 'unit_value'  => isset($product->item_unit->value) ? $product->item_unit->value : "",
+                        'product_quantity' => $prod->quantity,
+                        'item_type' => $product->item_type->value,
+
+                    );
+
+                }
+
+            }
+
+        }
+
+        return array(
+            'products' => $cart_product,
+            'total_count' => count($cart_product)
+        );
+    }
+
 }

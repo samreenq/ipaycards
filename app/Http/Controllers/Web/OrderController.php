@@ -669,7 +669,7 @@ class OrderController extends WebController {
                     //enpty Cart
                     if (isset($this->_customerId) && $this->_customerId > 0) {
                         $order_cart_lib = new OrderCart();
-                        $order_cart_lib->saveCart($this->_customerId, []);
+                        $order_cart_lib->saveCart($this->_customerId);
                     }
 
                     return [
