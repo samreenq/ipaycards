@@ -10,7 +10,7 @@
         </button>
 		  <div class="modal-body">
 			<h3>Forgot Password</h3>	
-			<div class="row" id="account_forget_response"></div>
+			<div class="" id="account_forget_response"></div>
 			<form role="form">
 				
 				<div class="fluid-label">
