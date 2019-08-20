@@ -67,6 +67,7 @@ class WebController extends Controller
         $general_setting_lib = new GeneralSetting();
         $general_setting_raw = $general_setting_lib->getSetting();
 
+        View::share('customerId',  $this->_customerId);
         View::share('login_customer',  json_decode(json_encode($this->_customer)));
         View::share('fb_config', $fb_config);
         View::share('general_setting_raw', $general_setting_raw);

@@ -190,7 +190,7 @@ Route::get('/saveorder', "Web\OrderController@saveOrder")->name('saveorder');
 Route::post('/confirmation', "Web\OrderController@confirmation")->name('confirmation');
 Route::post('/checkout_order', "Web\OrderController@checkoutOrder")->name('checkout_order');
 
-
+    Route::get('/cart/get', "Web\ProductController@getCart")->name('get_cart');
 Route::get('/cart/add', "Web\ProductController@addToCart")->name('add_to_cart');
 Route::any('/wishlist/add', "Web\ProductController@addToWishlist")->name('add_to_wishlist');
 Route::get('/wishlist/delete', "Web\ProductController@DeleteToWishlist")->name('delete_to_wishlist');

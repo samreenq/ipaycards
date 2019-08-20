@@ -301,10 +301,10 @@
 
     <script src="<?php echo url('/') . '/public/web/js/enscroll.min.js';?>"></script>
     <script src="<?php echo url('/') . '/public/web/js/waypoints.min.js';?>"></script>
-    <script src="<?php echo url('/') . '/public/web/js/custom/product.js'?>"></script>
 
     <script>
         menus("{{ route('menus') }}",<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';  ?>) ;
+
 
         load_cart("{{ route('add_to_cart') }}", "{{ route('total_price') }}");
         total("{{ route('total_price') }}");
@@ -387,6 +387,12 @@
             $el.waypoint(function (direction) {
                 if (direction === 'down' && animClassDown) {
                     $head.attr('class', 'ha-header ' + animClassDown);
+
+                    //Check order notification
+                    var order_notify = $('.orderNotification').text();
+                    if(order_notify == ''){
+                        $('.orderNotification').hide();
+                    }
                 }
                 else if (direction === 'up' && animClassUp) {
                     $head.attr('class', 'ha-header ' + animClassUp);

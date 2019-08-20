@@ -1888,6 +1888,48 @@ function product_categories(Request_url1, Request_url2, Request_url3, Request_ur
     });
 }
 
+/**
+ *
+ * @param route_url
+ */
+function getCustomerCart(route_url)
+{
+    console.log('getCustomerCart');
+    $.ajax ({
+        url: route_url,
+        type: 'get',
+        data:   {
+        },
+        dataType: 'json',
+        async:false,
+        success: function(data)
+        {
+
+            if(data.total_count > 0){
+                //console.log(JSON.stringify(data.data.products));
+                var cart_product = [];
+
+                $.each(data.products,function(k,v){
+                    //console.log(v);
+                    var string = v;
+                    string.product_quantity = parseInt(v.product_quantity)
+                    cart_product.push(string);
+
+                });
+
+                //console.log(cart_product);
+                localStorage.setItem("products", JSON.stringify(cart_product));
+            }
+            else{
+                localStorage.removeItem('products');
+            }
+        }
+
+    });
+
+}
+
+
 function load_cart(Request_url1, Request_url2) {
     if (typeof (localStorage.products) !== "undefined") {
         var products = JSON.parse(localStorage.products);
@@ -3559,6 +3601,8 @@ function addSuccessMsg(message) {
     $('.alert-message').append('<div class="alert alert-success"> <a href="javascript:void(0)" class="close" data-dismiss="alert">&times;</a>' + message + '</div>');
     $(".alert-success").focus();
 }
+
+
 
 
 $('.custom-close').on('click', function () {

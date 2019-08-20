@@ -28,8 +28,14 @@
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
 <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+
+
+<script src="<?php echo url('/') . '/public/web/js/custom/product.js'?>"></script>
 <script>
 
+    <?php if(!empty($customerId)){  ?>
+    getCustomerCart("{{ route('get_cart') }}");
+    <?php } ?>
 
     $(document).on('click', function(divclose){
 

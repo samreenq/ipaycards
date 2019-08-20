@@ -138,7 +138,6 @@
 		<script src="<?php echo url('/').'/public/web/js/enscroll.min.js'?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/select2.min.js'?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/sticky-sidebar.js';?>"></script>
-		<script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/ayoshare.js';?>"></script>		
 		<script>
 		$(function() {

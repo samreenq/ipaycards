@@ -411,7 +411,6 @@
 		
 		<script src="<?php echo url('/').'/public/web/js/enscroll.min.js';?>"></script>
 		<script src="<?php echo url('/').'/public/web/js/waypoints.min.js';?>"></script>
-		<script src="<?php echo url('/').'/public/web/js/custom/product.js'?>"></script>
 		<script>
 					
 				load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
