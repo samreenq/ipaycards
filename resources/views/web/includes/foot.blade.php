@@ -18,6 +18,7 @@
 
 <script src="<?php echo url('/').'/public/web/js/popper.min.js';?>"></script>
 <script src="<?php echo url('/').'/public/web/js/bootstrap.min.js';?>"></script>
+<script src="<?php echo url('/').'/public/web/js/hamburgers.js';?>"></script>
 <script type="text/javascript" src="<?php echo url('/').'/public/web/js/retina.min.js';?>"></script>
 <script src="<?php echo url('/').'/public/web/js/hoverline.js';?>"></script>
 <script src="<?php echo url('/').'/public/web/js/jquery.bxslider.min.js';?>"></script>

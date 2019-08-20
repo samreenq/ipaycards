@@ -331,6 +331,7 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/payment_page', "Web\PaymentController@paymentPage")->name('payment_page');
 });
 
+Route::get('/chat', "Web\AboutBusinessController@chat")->name('zendesk_chat');
 ///
 
 // - thumbnail

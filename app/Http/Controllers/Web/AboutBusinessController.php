@@ -119,6 +119,11 @@ class AboutBusinessController extends WebController
 			return View::make('web/includes/cms/about_us', ['about_business' => $about_business ])->__toString();
 		}
 	}
+
+	public function chat(Request $request)
+    {
+        return View::make('web/chat');
+    }
 	
 
 }
