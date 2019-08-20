@@ -41,7 +41,7 @@
         }
     );
 
-    $('#signupmodal').on('hide.bs.modal', function(){
+    $('.signupmodal').on('hide.bs.modal', function(){
         console.log('HELLO');
         $('.signupbtn').css("color","black");
     });
@@ -52,7 +52,7 @@
         $(this).css("color", "black");
     });
 
-    $('#signinmodal').on('hide.bs.modal', function(){
+    $('.signinmodal').on('hide.bs.modal', function(){
         console.log('HELLO');
         $('.signinbtn').css("color","black");
     });

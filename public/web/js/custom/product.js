@@ -43,6 +43,8 @@ $('#giftForm').on('keyup keypress', function(e) {
     }
 });
 
+
+
 $(".nextBtn5").on("click", function (e) {
 
     allNextBtn = $('.nextBtn1');
