@@ -389,6 +389,10 @@
                     $head.attr('class', 'ha-header ' + animClassDown);
 
                     //Check order notification
+                    var order_notify = $('.orderNotification').text();
+                    if(order_notify == ''){
+                        $('.orderNotification').hide();
+                    }
                 }
                 else if (direction === 'up' && animClassUp) {
                     $head.attr('class', 'ha-header ' + animClassUp);
