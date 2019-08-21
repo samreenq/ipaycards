@@ -2638,7 +2638,7 @@ table tr.borderB td div{
     box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.25);
 }
 .product-detail .pro-inc-wrap{
-    background-color: #0c90a7;
+    background-color: #0f738d;
 }
 .product-detail {
     position: relative;
@@ -2660,9 +2660,9 @@ table tr.borderB td div{
     overflow: hidden;
     display: block;
     padding: 0;
-    -webkit-border-radius: 8px;
+/*    -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    border-radius: 8px;
+    border-radius: 8px;*/
 }
 .product-detail button:before {
     left: 0;
@@ -2759,9 +2759,9 @@ table tr.borderB td div{
 .product-detail .pro-inc-wrap{
     display:none;
     text-align: center;
-    -webkit-border-radius: 8px;
+/*    -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    border-radius: 8px;
+    border-radius: 8px;*/
 }
 .product-detail .perishable{
     font-size:13px;
