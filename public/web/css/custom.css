@@ -173,7 +173,7 @@
 
 /* #General
 --------------------------------------------------------------- */
-body,h1,h2,h3,h4,h5,h6,p,a,span{
+body,h1,h2,h3,h4,h5,h6,p,a,span,b{
     font-family: 'Roboto', sans-serif;
     margin:0;
 }
@@ -3760,12 +3760,16 @@ ul.footerCont {
 .share-wishlist-wrap li:last-child {
     margin-right: 0px;
 }
+.share-wishlist-wrap li span b,
 .share-wishlist-wrap li a {
     font-size:14px;
     color:#000;
     font-weight:400;
     text-transform:uppercase;
+    display: flex;
+    align-items: center;
 }
+.share-wishlist-wrap li a span {margin-right: 5px}
 .share-wishlist-wrap li span {
     color: #ced2d8;
     -webkit-transition: all .3s;
@@ -3774,7 +3778,9 @@ ul.footerCont {
     font-size: 20px;
     vertical-align: -3px;
 }
-.share-wishlist-wrap li a:hover span {
+.add_to_wishlist_button {display: flex;align-items: center;}
+.add_to_wishlist_button b {margin-left: 5px}
+.share-wishlist-wrap li span:hover, .share-wishlist-wrap li a:hover span {
     color:#0f738d;
 }
 .cartShareWrap{

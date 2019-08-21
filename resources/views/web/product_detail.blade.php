@@ -199,14 +199,14 @@
 
 														<span class="icon-tt-like-icon add_to_wishlist_button" <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php } ?>>
 																@if($wishlist==1)
-																Added to Wishlist
+																<b>Added to Wishlist</b>
 																@else
-																Add to Wishlist
+																<b>Add to Wishlist</b>
 																@endif
 														</span>
 													@else
 
-														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" >Add to Wishlist</span>
+														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" > <b>Add to Wishlist</b></span>
 													@endif
 												</li>
 											</ul>
