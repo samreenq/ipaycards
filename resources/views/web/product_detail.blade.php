@@ -195,17 +195,19 @@
 
 													@if(isset($_SESSION['fbUserProfile']) || Session::has('users') )
 
-														<span class="icon-tt-like-icon add_to_wishlist_button" <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php }  ?> ></span>
+
+
+														<span class="icon-tt-like-icon add_to_wishlist_button" <?php if($wishlist==1){ ?>style="color: #0f738d;"  <?php } ?>>
+																@if($wishlist==1)
+																Added to Wishlist
+																@else
+																Add to Wishlist
+																@endif
+														</span>
 													@else
 
-														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" ></span>
+														<span class="icon-tt-like-icon add_to_wishlist_button" data-toggle="modal" data-target=".siginmodal" >Add to Wishlist</span>
 													@endif
-													@if($wishlist==1)
-															Added to Wishlist
-
-													@else
-													Add to Wishlist
-												@endif
 												</li>
 											</ul>
 										</div>
