@@ -7045,6 +7045,11 @@ input[type=number] {
     position: relative;
     z-index: 2;
 }
+.game_slide.owl-carousel.owl-drag .product-wrap, .game_slide.owl-carousel.owl-drag .owl-item {
+    height: 100%;
+}
+.game_slide.owl-carousel .owl-stage-outer{display: flex;height: 100%;flex-direction: column;}
+
 .brands_slide.owl-theme .owl-nav,
 .game_slide.owl-theme .owl-nav{
     display: block !important;
