@@ -428,6 +428,10 @@
                                 merchant: {
                                     name: 'iPayCards - Transaction Order ID: '+$("#entity_id").val(),
 
+                                },
+                                displayControl: {
+                                    billingAddress  : 'HIDE',
+                                    shipping        : 'HIDE'
                                 }
 
                             }

@@ -193,6 +193,10 @@
                                         interaction: {
                                             merchant: {
                                                 name: 'iPayCards - Transaction Order ID: '+data.lead_topup_id,
+                                            },
+                                            displayControl: {
+                                                billingAddress  : 'HIDE',
+                                                shipping        : 'HIDE'
                                             }
                                         }
                                     });
