@@ -52,6 +52,7 @@
 
                 $('.alert1').hide();
 
+
                 if($('#mobileNumber').val() == ''){
                     $('.alert1').show();
                     $('.alert1').text('');
@@ -59,12 +60,22 @@
                     return false;
                 }
 
-                if($('#customerAmount').val() == ''){
+
+                if($('#mobileNumber').val().substr(0, 1) == '0'){
+                    $('.alert1').show();
+                    $('.alert1').text('');
+                    $('.alert1').text('Phone number cannot start with 0.');
+                    return false;
+                }
+
+
+                if($('#customerAmount').val() == '') {
                     $('.alert1').show();
                     $('.alert1').text('');
                     $('.alert1').text('The amount field is required.');
                     return false;
                 }
+
 
                 if(service_type == 'du'){
                     if($('input[name="chargeType"]:checked').length == 0){
