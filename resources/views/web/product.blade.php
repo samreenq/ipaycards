@@ -95,7 +95,7 @@
                                             <?php
                                             $text_color = '#48494d';
                                             if($cat_id == $category_raw->category_id){
-                                            $text_color = '#000000';
+                                            $text_color = '#0f738d';
                                             }
                                             ?>
 											<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id }}" ><?php if(isset($category_raw->title)) echo $category_raw->title; if(isset($category_raw->product_count)) echo '('.$category_raw->product_count.')'; ?></a></li>

@@ -73,13 +73,13 @@
 
                                         <div class="col-md-6 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
-                                                <input type="text" id="recipient_name" name="recipient_name"  placeholder="Recipient Name" />
+                                                <input type="text" id="recipient_name" name="recipient_name" value="{!! isset($login_customer->auth->name) ? $login_customer->auth->name : "" !!}"  placeholder="Recipient Name" />
                                                 {{--  <label>Add Note*</label>--}}
                                             </div>
                                         </div>
 										<div class="col-md-6 cuspad recipient" style="display: none;">
 											<div class="fluid-label">
-												<input type="text" id="recipient_email" name="recipient_email"  placeholder="Recipient Email" />
+												<input type="text" id="recipient_email" name="recipient_email" value="{!! isset($login_customer->auth->email) ? $login_customer->auth->email : "" !!}"  placeholder="Recipient Email" />
 												{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
@@ -428,6 +428,10 @@
                                 merchant: {
                                     name: 'iPayCards - Transaction Order ID: '+$("#entity_id").val(),
 
+                                },
+                                displayControl: {
+                                    billingAddress  : 'HIDE',
+                                    shipping        : 'HIDE'
                                 }
 
                             }

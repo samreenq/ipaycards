@@ -44,6 +44,8 @@ Class OrderSendCards {
             $order_history = new OrderHistory();
 
             if($this->_emailContentGift != ''){
+
+                $this->_emailContent .= $this->_emailContentGift;
                 $email_lib->sendGiftEmail($order,$this->_emailContentGift);
             }
 
@@ -139,9 +141,9 @@ Class OrderSendCards {
 
                     }
 
-                     $this->_emailContentGift = $email_cont;
+                     $this->_emailContentGift .= $email_cont;
                      unset($email_cont);
-                    $this->_emailContent .= $this->_emailContentGift;
+                   // $this->_emailContent .= $this->_emailContentGift;
                 }
             }
             else{
@@ -340,6 +342,9 @@ Class OrderSendCards {
             } elseif (empty($mintroute_product_id) && !empty($prepay_product_id)) { //Order from One Prepay
                 $prepay_order = TRUE;
             }
+            else{
+                echo '<br>'.$order_item->product_id->detail->title. ' not integrated with vendors<br>';
+            }
 //dump($mintroute_order);
                 try {
                     if ($mintroute_order) {
@@ -372,9 +377,12 @@ Class OrderSendCards {
                     }
                    // echo $voucher_code.'voucherCode';
                    // exit;
-                    echo "<pre>"; print_r($order_response);
+                    if(isset($order_response)){
+                        echo "<pre>"; print_r($order_response);
+                    }
+
                     // change keys
-                    if (isset($voucher_code) && $voucher_code != '') {
+                    if (isset($order_response) && (isset($voucher_code) && $voucher_code != '')) {
 
                         //Add Inventory
                         $params = [
@@ -463,14 +471,18 @@ Class OrderSendCards {
                         ];
                     }*/
 
-                    $this->_pLib->apiUpdate($params);
+                    $ret = $this->_pLib->apiUpdate($params);
+                    $ret = json_decode(json_encode($ret));
+                    $this->_assignData['message'] .= $ret->message;
 
+                    echo "<pre>"; print_r($ret);
                 }
 
 
         } catch ( \Exception $e ) {
                 $this->_assignData['error'] = 1;
                 $this->_assignData['message'] .=  $e->getMessage();
+                $this->_assignData['debug']  =  $e->getTraceAsString();
                 // throw new \Exception($e->getMessage());
             }
 

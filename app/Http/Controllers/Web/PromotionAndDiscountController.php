@@ -28,6 +28,7 @@ use App\Http\Controllers\Controller;
 
 use App\Libraries\CustomHelper;
 
+use App\Libraries\ProductHelper;
 use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 use Illuminate\Http\Input;
@@ -108,8 +109,26 @@ class PromotionAndDiscountController extends WebController
 			$json = json_decode(json_encode($json),true);
 
 			$data = [];
-			$data['promotion_discount'] = isset($json['data']['promotion_discount'])? $json['data']['promotion_discount'] : null;
+			//$data['promotion_discount'] = isset($json['data']['promotion_discount'])? $json['data']['promotion_discount'] : null;
 
+            //echo '<pre>'; print_r($json['data']['promotion_discount']); exit;
+            $promotions = array();
+            if(isset($json['data']['promotion_discount'])){
+
+                $product_helper = new ProductHelper();
+
+                if(count($json['data']['promotion_discount'])>0){
+                    foreach($json['data']['promotion_discount'] as $promotion){
+
+                        //check if promotion id exist in product table id yes
+                        $products_exist =  $product_helper->checkPromotionExist($promotion['entity_id']);
+                       if($products_exist > 0)
+                            $promotions[] = $promotion;
+                    }
+                }
+            }
+
+            $data['promotion_discount'] = $promotions;
 			return array(
 			    'count' => isset($json['data']['promotion_discount'])? count($json['data']['promotion_discount']) : 0,
                     'html' => View::make('web/includes/main/promotion_and_discount',$data)->render());

@@ -34,21 +34,22 @@
 						<li><a ><span>3</span> Order Confirm</a></li>
 					</ul>
 				</div>
+				<div class="mb-3">
+					<h4 class="mr-auto align-items-start">Your Basket</h4>
+					{{--<div class="align-items-start selectDayWrap">
+						<!--<select class="day js-example-basic-single ">-->
+
+						<!--</select>-->
+					</div>--}}
+					{{--<div class="align-items-start selectTimeWrap pl-sm-2">
+                        <select class="time js-example-basic-single ">
+                            <option value="">NA</option>
+                        </select>
+                    </div>--}}
+				</div>
 				<div class="row clearfix recipeFixed">
 					<div class="col-md-12 col-lg-8 recipe-item-wrap">
-						<div class="greybg clearfix align-items-center d-sm-flex">
-							<h4 class="mr-auto align-items-start">Your Basket</h4>
-							<div class="align-items-start selectDayWrap">
-								<!--<select class="day js-example-basic-single ">-->
 
-								<!--</select>-->
-							</div>
-							{{--<div class="align-items-start selectTimeWrap pl-sm-2">
-								<select class="time js-example-basic-single ">
-									<option value="">NA</option>
-								</select>
-							</div>--}}
-						</div>
 						<div id="show_list" class="whitebg recipe-item-list">
 									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageCart" align="center" style="display: none">
 									  <div class="floatingCirclesG">

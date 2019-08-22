@@ -28,11 +28,11 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 
 
 // mail server configuration
-    define('MAIL_DRIVER', 'mail'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
-    define('MAIL_HOST', '');
-    define('MAIL_PORT', NULL);
-    define('MAIL_USERNAME', "");
-    define('MAIL_PASSWORD', "");
+    define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
+    define('MAIL_HOST', 'smtp.gmail.com');
+    define('MAIL_PORT', 587);
+    define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
+    define('MAIL_PASSWORD', "smtp@123");
 
 } else {
 
