@@ -48,6 +48,7 @@
         }
     );
 
+
     $('.signupmodal').on('hide.bs.modal', function(){
         console.log('HELLO');
         $('.signupbtn').css("color","black");
