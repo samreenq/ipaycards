@@ -3,13 +3,14 @@
 <head>
     <?php
     $customer = (isset($data['customer_id']->value)) ? $data['customer_id']->value : "Customer";
-    $meta_description = $customer." has ordered on ".$app_name;
+    //$meta_description = $customer." has ordered on ".$app_name;
+
     ?>
 
     <meta property="og:title" content="{{ $app_name }}" />
     <meta property="og:image" content="{{ $app_logo  }}" />
     <meta property="og:description" content="{{ $meta_description }}" />
-    <meta property="og:url" content="{{ \Request::fullUrl() }}">
+    <meta property="og:url" content="{{ url('/') }}">
     <meta property="description" content ="{{ $meta_description }}">
 
     <!-- Deeplinking Android -->
