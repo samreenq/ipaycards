@@ -145,5 +145,12 @@ Class ProductHelper
         return $form_heading;
     }
 
+    public function checkPromotionExist($promotion_id)
+    {
+        $where_condition = " product_promotion_id = $promotion_id";
+        $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) as total_count');
+        return $return->total_count;
+    }
+
 
 }

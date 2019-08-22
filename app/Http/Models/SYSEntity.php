@@ -2,6 +2,7 @@
 
 use App\Libraries\CustomHelper;
 use App\Libraries\EntityHelper;
+use App\Libraries\ProductHelper;
 use App\Libraries\System\Entity;
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -1336,6 +1337,7 @@ class SYSEntity extends Base
      */
     public function listHookData($request,$hook,$limit = 5)
     {
+
            if($hook == 'promotion_discount'){
                 $search_columns['entity_type_id'] = $response_key = $hook;
                 $date = date('Y-m-d');
@@ -1384,6 +1386,27 @@ class SYSEntity extends Base
                 if (isset($hook_data->data->page->total_records) && $hook_data->data->page->total_records > 0) {
                     //print_r($hook_data->data->{$response_key}); exit;
                     if(isset($hook_data->data->{$response_key})){
+
+                        if($hook == 'promotion_discount'){
+
+                          //  print_r($hook_data->data->{$response_key});
+                            $product_helper = new ProductHelper();
+                            if(count($hook_data->data->{$response_key})>0){
+                                $promotions = array();
+                                foreach($hook_data->data->{$response_key} as $promotion){
+
+                                    //check if promotion id exist in product table id yes
+                                    $products_exist =  $product_helper->checkPromotionExist($promotion->entity_id);
+                                    if($products_exist > 0)
+                                        $promotions[] = $promotion;
+                                }
+
+                                $hook_data->data->{$response_key} = $promotions;
+                            }
+                            //print_r($promotions); exit;
+
+                        }
+
                         return $hook_data->data->{$response_key};
                     }
                 }
