@@ -43,12 +43,15 @@ Class OrderSendCards {
             $email_lib = new EmailLib();
             $order_history = new OrderHistory();
 
-            if($this->_emailContentGift != ''){
+           /* if($this->_emailContentGift != ''){
                 $this->_emailContent .= $this->_emailContentGift;
                 $email_lib->sendGiftEmail($order,$this->_emailContentGift);
-            }
+            }*/
 
             if($this->_emailContent != ''){
+                if($this->_emailContentGift != '') {
+                    $this->_emailContent .= $this->_emailContentGift;
+                }
                 $email_lib->sendOrderEmail($order,$this->_emailContent);
             }
            $order_history->updateOrderDelivered($order_id);

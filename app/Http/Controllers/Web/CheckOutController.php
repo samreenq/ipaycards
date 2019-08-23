@@ -514,8 +514,8 @@ class CheckOutController extends WebController {
         }*/
 
        // $data = ['order_number' => $order_number];
-
-        return View::make('web/checkout3');
+        $data['social_media_url']	= url('/');
+        return View::make('web/checkout3',$data);
     }
 
     public function checkoutOrder(Request $request)
