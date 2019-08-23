@@ -48,6 +48,7 @@
         }
     );
 
+    $(".checknext").on("click", function () {
 
     $('.signupmodal').on('hide.bs.modal', function(){
         console.log('HELLO');

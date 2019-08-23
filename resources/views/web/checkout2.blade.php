@@ -86,7 +86,7 @@
 
                                         <div class="col-md-12 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
-                                                <textarea id="recipient_message" name="recipient_message" required="required" placeholder="Recipient Message*"></textarea>
+                                                <textarea id="recipient_message" name="recipient_message" required placeholder="Recipient Message*" ></textarea>
                                                 {{--  <label>Add Note*</label>--}}
                                             </div>
                                         </div>
@@ -99,7 +99,7 @@
 										</div>
 										<div class="col-md-12 addAddressWrap">
 												{{--<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
-											<input  type="button" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+											<input  type="button" id="checknext" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
 										</div>
 										
 									</div>

@@ -145,6 +145,14 @@ function deliverytime(getAllTimeSlotsUrl) {
     });
 }
 
+/*$(".checknext").on("click", function () {
+console.log("in");
+    if($(".recipient_message") == ""){
+    $(".recipient_message").addClass('alert alert-danger');
+    $(".recipient_message").empty().append('Recipient message field is empty.');
+}
+})*/
+
 function termAndCondition(termAndConditionUrl) {
     $("#LoadingTermAndConditionImage").show();
     $.ajax({
@@ -2397,6 +2405,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
 
     $(".process_order").on("click", function (e) {
 
+
         if ($('#checkout_mobile_number').length > 0) {
 
             if ($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() == '') {
@@ -2435,6 +2444,12 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 checkout_mobile = $('#checkout_mobile').val();
             }
 
+             if ($('#recipient_message').val() == ""){
+
+                        $('.error-message').append('<div class="alert alert-danger">Recipient message is required to process order.</div>');
+                        return false;
+                    }
+
             $.ajax({
 
                 url: Request_url1,
@@ -2452,6 +2467,9 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 },
                 dataType: 'json',
                 success: function (data) {
+
+
+
                     if (data.error == 0) {
 
                         var lead_order = data.data;
