@@ -121,7 +121,7 @@
                                             <label for="mobileNumber" class="form-label m-0"><b>Mobile number:</b></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span><b id="selectedMobile">+0012258888</b></span>
+                                            <span>+<b id="selectedMobile">+0012258888</b></span>
                                         </div>
                                     </div>
                                     <div class="form-group row align-items-center">
