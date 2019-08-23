@@ -478,9 +478,9 @@
 						$('body').removeClass('nav-expanded');
 					});
 					
-					$('.wishlist').on('click',function(e){
+					/*$('.wishlist').on('click',function(e){
 						$('.add_to_wishlist_button').css('color','#0f738d');
-					});
+					});*/
 					
 					$('.basketList').enscroll({
 						showOnHover: true,

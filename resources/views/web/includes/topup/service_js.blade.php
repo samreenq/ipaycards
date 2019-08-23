@@ -9,7 +9,7 @@
     $("a[href$='previous']").hide();
 
     var form = $("#topup-form");
-    $("a[href$='previous']").hide();
+  /*  $("a[href$='previous']").hide();*/
     form.steps({
         headerTag: "h3",
         bodyTag: "fieldset",

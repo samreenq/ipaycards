@@ -1401,7 +1401,7 @@ function add_to_wishlist(Request_url1) {
                     localStorage["wishlist"] = string;
                     var wishlist = JSON.parse(localStorage.wishlist);
                     console.log(wishlist);
-
+                    $('.add_to_wishlist_button').css('color','#0f738d');
                     for (var i = 1; i < data.length; i++) {
 
                         var entity_id = data[i]['entity_id'];
@@ -1441,7 +1441,7 @@ function add_to_wishlist(Request_url1) {
                     localStorage["wishlist"] = string;
                     var wishlist = JSON.parse(localStorage.wishlist);
                     console.log(wishlist);
-
+                    $('.add_to_wishlist_button').css('color','#0f738d');
                     for (var i = 1; i < data.length; i++) {
                         var wishlist_entity_id = data[i]['wishlist_entity_id'];
                         var entity_id = data[i]['entity_id'];

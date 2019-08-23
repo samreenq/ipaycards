@@ -67,7 +67,7 @@
 						  <input id="email" name="email" type="email" required="required" class="form-control" placeholder="Email" />
 						   <input id="url"  name="url"	type="hidden" value="<?php  echo url()->current(); ?>">
 							<input id="url1"  name="url1"	type="hidden" value="<?php echo url('/').'/signin_step1'; ?>">
-						 
+
 						 <label>Email</label>
 						</div>
 						<div class="fluid-label">
