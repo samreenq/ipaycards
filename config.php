@@ -27,15 +27,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('MASTER_DB_PREFIX', '');
 
 
-// mail server configuration
-    define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
-    define('MAIL_HOST', 'smtp.gmail.com');
-    define('MAIL_PORT', 587);
-    define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
-    define('MAIL_PASSWORD', "smtp@123");
-
-} else {
-
+} elseif (preg_match('/staging/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
     // app dir details
     define('APP_ALIAS', ''); // app dir name
     define('ADD_PATH', 'staging/ipay-cards/'); // preceding path to app dir
@@ -46,13 +38,29 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('MASTER_DB_PASS', '6S*wy26c');
     define('MASTER_DB_NAME', 'db_ipaycards');
     define('MASTER_DB_PREFIX', '');
-
-    define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
-    define('MAIL_HOST', 'smtp.gmail.com');
-    define('MAIL_PORT', 587);
-    define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
-    define('MAIL_PASSWORD', "smtp@123");
 }
+else {
+
+    // app dir details
+    define('APP_ALIAS', ''); // app dir name
+    define('ADD_PATH', 'project/ipay-cards/'); // preceding path to app dir
+    define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
+    // db details
+    define('MASTER_DB_HOST', 'sandbox4.cubix.co');
+    define('MASTER_DB_USER', 'ucl_ipay');
+    define('MASTER_DB_PASS', 'i7k4Zm1~');
+    define('MASTER_DB_NAME', 'cl_ipay');
+    define('MASTER_DB_PREFIX', '');
+
+}
+
+
+define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
+define('MAIL_HOST', 'smtp.gmail.com');
+define('MAIL_PORT', 587);
+define('MAIL_USERNAME', "testsmtp@cubixlabs.com");
+define('MAIL_PASSWORD', "smtp@123");
+
 // Slave Database Constants
 define('SLAVE_DB_HOST', MASTER_DB_HOST);
 define('MYSQL_PORT', 3306);
