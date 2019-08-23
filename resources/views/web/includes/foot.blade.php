@@ -307,7 +307,8 @@ function gmailLogin()
                             localStorage.removeItem('products');
                         }
 
-                         window.location = site_url;
+                             $('.siginmodal').toggle();
+                                window.location = site_url;
                     }
                     else{
                         $(".signinError").addClass('alert alert-danger');

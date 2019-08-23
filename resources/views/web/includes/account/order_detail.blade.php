@@ -16,6 +16,7 @@
 							<li <?php if(isset($order_detail['order_status']['value']) && $order_detail['order_status']['value'] == $display_order_status ) echo 'class="active"' ; ?> ><span>{!! $i !!}</span> {!! $display_order_status !!}</li>
                         <?php  $i++; }
                          }
+                        
                         ?>
 				</ul>
 				
@@ -40,9 +41,13 @@
 											
 									</div>
 									<div class="odcont col-sm-6 col-md-6 col-lg-3">
-											<h4>Time and Date</h4>
+											@if($order_detail['order_status']['value'] == 'Delivered')
+											<h4>Delivery Date</h4>
 											<p><?php if(isset($order_detail['delivery_date']) && !empty($order_detail['delivery_date'])) echo date("M d, Y",strtotime($order_detail['delivery_date'])); ?></p>
-
+											@else
+											<h4>Order Date</h4>
+											<p><?php if(isset($order_detail['created_at']) && !empty($order_detail['created_at'])) echo date("M d, Y",strtotime($order_detail['created_at'])); ?></p>
+											@endif
 									</div>
 								</div>
 						</div>

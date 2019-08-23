@@ -93,7 +93,7 @@
 
 										<div class="col-md-12 cuspad">
 											<div class="fluid-label">
-											  <textarea id="order_notes" name="order_notes" required="required" placeholder="Add Note*"></textarea>
+											  <textarea id="order_notes" name="order_notes" required="required" placeholder="Add Note"></textarea>
 											{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>

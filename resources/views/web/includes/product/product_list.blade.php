@@ -127,7 +127,7 @@
 										<input type="hidden" class="weight" value="<?php if(isset($productItemsList["attributes"]['weight'])) echo $productItemsList["attributes"]['weight']; ?>" />
 										<input type="hidden" class="unit_option" value="<?php if(isset($productItemsList["attributes"]['item_unit']['option'])) echo $productItemsList["attributes"]['item_unit']['option']; ?>" />
 										<input type="hidden" class="unit_value" value="<?php if(isset($productItemsList["attributes"]['item_unit']['value'])) echo $productItemsList["attributes"]['item_unit']['value']; ?>" />
-										<input class="quantity" type="number" name="product_quantity" value="1"/>
+										<input class="quantity" type="number" readonly="readonly" name="product_quantity" value="1"/>
 										<input type="hidden" class="item_type" value="<?php if(isset($productItemsList["attributes"]['item_type']['value'])) echo $productItemsList["attributes"]['item_type']['value'] ?>" />
 
 
