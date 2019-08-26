@@ -4,7 +4,14 @@
 	{
 		if($row['parent_id']==0)
 		{
-			
+
+		    //request category is parent leave existing condition
+
+
+		//if request category is not prent then match row category id with request category parent
+
+
+
 ?>
 						
 			<li <?php if(isset($category_id))  if($row['category_id']==$category_id ) echo 'class="active"'; else echo "asas"; ?>
