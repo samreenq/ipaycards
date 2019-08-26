@@ -196,7 +196,7 @@
 									<br />
 									<input type="button" class="reset" style="cursor: pointer;" value="Reset" />
 									<input type="button" class="search" style="cursor: pointer;" value="Search" />
-                                    <input type="button" id="adv_close" style="cursor: pointer;" value="Close" />
+                                    <a href="{!! url()->full() !!}"><input type="button" id="adv_close" style="cursor: pointer;" value="Close" /></a>
 
 
 
