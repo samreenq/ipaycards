@@ -1346,7 +1346,14 @@ class ProductController extends WebController
 		$data['category_id']= isset($_REQUEST['category_id']) ?  $_REQUEST['category_id'] : null ;
 
 		//information get
+        if($data['category_id'] != null){
 
+            $sys_category = new SYSCategory();
+            $data['requested_category'] =  $sys_category->where('category_id',$data['category_id'])->first();
+        }
+
+
+        //echo '<pre>'; print_r( $data['requested_category']); exit;
 
 		return View::make('web/includes/menus/menus',$data)->__toString();
 	}	
