@@ -196,6 +196,11 @@
 									<br />
 									<input type="button" class="reset" style="cursor: pointer;" value="Reset" />
 									<input type="button" class="search" style="cursor: pointer;" value="Search" />
+                                    <input type="button" id="adv_close" style="cursor: pointer;" value="Close" />
+
+
+
+
 									<div style="position: absolute;margin: -32px 0px 0px 142px;" id="LoadingImageSearchProducts" align="center" style="display: none">
 										<div class="floatingCirclesG">
 											<div class="f_circleG frotateG_01"></div>
@@ -209,9 +214,7 @@
 										</div>
 									</div>
 								</div>
-
-
-							</div>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -371,20 +374,22 @@
 	<script>
 
         $(document).ready(function() {
-
-
-
+            $(".adv_close").on("click", function(){
+               
+            });
             $(".advance_search").on("click", function ()
             {
 
                 $('.categories').css('display','none');
+
                 $('.productFiltSide').css('display','block');
 
                 data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"></div><div class="error404content text-center"><h2>No Product Found</h2><p>The product you are looking for doesn\'t exist. Try another keyword or return to <a href="<?php echo url('/');?>">home</a></p></div></div>';
 
 
                 $("#products").empty().append(data);
-                $(".main_categeory").empty();
+
+                $(".main_categeory").hide();
 
                 $('#searchable_tags').val("{!! (count($selected_tags)) ?  implode(',',$selected_tags) : '' !!}");
                 $('#category_id').val("{!! (count($selected_categories)) ?  implode(',',$selected_categories) : '' !!}");
@@ -801,7 +806,7 @@
             }
 
             $(document).ready(function() {
-                resize('.basketList',false); //basketList
+                resize('.bask   etList',false); //basketList
                 resize('.wishList',false); //wishList
             });
 

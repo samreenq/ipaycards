@@ -12,6 +12,9 @@
     });
 
 */
+
+
+
 $('.signupmodal').modal('hide');
 $('.pVerfymodal').modal('hide');
 $('.siginmodal').modal('hide');
@@ -1292,6 +1295,8 @@ function feature_product_list(Entity_type_id, Featured_type, Request_url, Reques
 }
 
 
+
+
 function brand_product_list(Entity_type_id, brand_id, Request_url, Request_url2, Request_url3, Request_url4, Product_detail_url, Request_url5, Offset, Limit) {
     $("#LoadingImageProducts").show();
     $.ajax({
@@ -1319,6 +1324,8 @@ function brand_product_list(Entity_type_id, brand_id, Request_url, Request_url2,
         }
     });
 }
+
+
 
 function order_history_list(Entity_type_id, Order_history_url, Order_detail_url, Order_review_url, Offset, Limit) {
     $("#LoadingImageOrders").show();

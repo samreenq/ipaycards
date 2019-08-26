@@ -12,7 +12,7 @@
 					<div class="bannerContWrap">
 						<form class="form-horizontal" role="form" method="GET" action="{{ url('/product') }}">
 							<div class=" toolbar-search">
-								<input class="search-bar" required="requiredform-control"  name="title" placeholder="Search healthy food and more" type="text" value="">
+								<input class="search-bar" required="required" class="form-control" name="title" placeholder="I’m looking for…" type="text" value="">
 								<button class="search-btn"  type="submit"><span class="icon-tt-right-arrow"></span></button>
 							</div>
 						</form>
