@@ -133,7 +133,7 @@
                                     <div id="credit">
                                         <h5>Master Card</h5>
                                         <p>Please wait while payment process is starting</p><br>
-                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" />Please wait while payment process is starting</p>
+                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" /></p>
                                     </div>
                                    {{-- <div id="credit">
                                         <div class="form-group row align-items-center">
