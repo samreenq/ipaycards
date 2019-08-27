@@ -327,6 +327,7 @@
 
 
             }else{
+                $('.alert2').hide();
                 $('.success-msg2').show();
                 $('.success-msg2').text('');
                 $('.success-msg2').text('Code successfully sent');

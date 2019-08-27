@@ -9,6 +9,8 @@
 				<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 				<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
 				<script src="http://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+
+		//meta  k tag
 			
 	@endsection
 

@@ -163,7 +163,7 @@
 
 													<input type="hidden" class="item_type" value="<?php if(isset($product["attributes"]['item_type']['value'])) echo $product["attributes"]['item_type']['value'] ?>" />
 
-													<input class="quantity"  name="product_quantity"  type="text" readonly="readonly" value="1"/>
+														<input class="quantity"  name="product_quantity"  type="text" readonly="readonly" value="1"/>
 
 
 

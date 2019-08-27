@@ -37,9 +37,18 @@ class OrderController extends WebController {
 
 	public function saveOrder(Request $request)
 	{// echo '<pre>'; print_r($request->all()); exit;
-
+        $email = $request->recipient_email ;
         if(isset($request->is_gift_card)){
             if($request->is_gift_card == 1){
+
+
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Enter a valid email address'
+                    );
+                }
+
 
                 if($request->recipient_name == ''){
                     return array(
@@ -710,6 +719,7 @@ class OrderController extends WebController {
 
         if(isset($request->is_gift_card)){
             if($request->is_gift_card == 1){
+
 
                 if($request->recipient_name == ''){
                     return array(

@@ -156,6 +156,8 @@ console.log("in");
 }
 })*/
 
+
+
 function termAndCondition(termAndConditionUrl) {
     $("#LoadingTermAndConditionImage").show();
     $.ajax({
@@ -2456,6 +2458,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 checkout_mobile = $('#checkout_mobile').val();
             }
 
+
              /*if ($('#recipient_message').val() == ""){
 
                         $('.error-message').append('<div class="alert alert-danger">Recipient message is required to process order.</div>');
@@ -2478,9 +2481,9 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                     auth_platform_type: auth_platform_type,
                     checkout_mobile: checkout_mobile,
                 },
+
                 dataType: 'json',
                 success: function (data) {
-
 
 
                     if (data.error == 0) {
@@ -2524,6 +2527,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
         }
     });
 }
+
 
 function menus(Request_url, Category_id) {
     $("#LoadingImageMenu").show();
