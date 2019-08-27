@@ -10,21 +10,21 @@
          //Get image of product
          $gallery = isset($product['gallery'][0]) ? json_decode(json_encode($product['gallery'])) : false;
          $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
-         $meta_description = isset($product["attributes"]['meta_description']) ? $product["attributes"]['meta_description'] :  $product["attributes"]['description'];
+         $meta_description = (isset($product["attributes"]['meta_description']) && !empty($product["attributes"]['meta_description'])) ? $product["attributes"]['meta_description'] :  $product["attributes"]['description'];
 		 ?>
+		 <meta property="og:type" content="website" />
 		 <meta name="description" content="{{ $meta_description  }}">
 		 <meta property="og:title" content="{!! $app_name !!}" />
 		 <meta property="og:image" content="{{ $image  }}" />
 		 <meta property="og:description" content="{{ $meta_description }}" />
-		 <meta property="og:url" content="{{ url()->full() }}">
-		 <meta property="description" content ="{{ $meta_description }}">
+		 <meta property="og:url" content="<?php echo (isset($social_media_url)) ?  urldecode($social_media_url): '' ?>">
+		 <meta property="fb:app_id" content="{!! $fb_config->app_id !!}" />
 
 					<link href="<?php echo url('/').'/public/web/css/select2.css';?>" rel="stylesheet"/>
 					<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
 					<script src="http://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
-			
-			
+
 	@endsection
 
 
@@ -190,7 +190,12 @@
 
 
 											<ul class="share-wishlist-wrap d-sm-flex ">
-												<li><a href="javascript:void(0)" data-toggle="modal" data-target=".socialmedia" ><span class="icon-tt-share-icon"></span> Share</a></li>
+												<li>{{--<a href="javascript:void(0)" data-toggle="modal" data-target=".socialmedia" >
+														<span class="icon-tt-share-icon"></span> Share</a>--}}
+													<div class="sharethis-inline-share-buttons"></div>
+
+
+												</li>
 
 
 												<input type="hidden" class="entity_id" value="<?php if(isset($product['entity_id'])) echo $product['entity_id']; ?>" />

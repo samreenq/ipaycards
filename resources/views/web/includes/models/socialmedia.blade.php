@@ -10,7 +10,8 @@
             </button>
             <div class="modal-body">
                 <h3>Share</h3>
-                <div id="unik" data-ayoshare="<?php if(isset($social_media_url)) echo $social_media_url; ?>"></div>
+                <div id="unik" data-ayoshare="<?php if(isset($social_media_url)) echo urldecode($social_media_url); ?>"></div>
+                <div id="my-inline-buttons"></div>
             </div>
         </div>
     </div>

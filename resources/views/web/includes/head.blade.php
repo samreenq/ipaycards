@@ -28,3 +28,6 @@
 					<link href="<?php echo url('/').'/public/web/lib/owl-carousel/css/owl.carousel.css'; ?>" rel="stylesheet">
 					{{--Linear Icon--}}
 					<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+
+				<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d652dfed8f61d0012dc7d85&product=sticky-share-buttons"></script>
