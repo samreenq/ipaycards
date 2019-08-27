@@ -424,7 +424,10 @@
             });
 
             $(".search").on("click", function () {
+                $(".search").attr("disabled", true);
                 searchAdvance();
+
+
 
             });
 
