@@ -54,6 +54,12 @@ class OrderController extends WebController {
                         'message' => 'Recipient Email is required'
                     );
                 }
+                if($request->recipient_message == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient messsage is required'
+                    );
+                }
 
             }
         }
@@ -716,6 +722,12 @@ class OrderController extends WebController {
                     return array(
                         'error' => 1,
                         'message' => 'Recipient Email is required'
+                    );
+                }
+                if($request->recipient_message == ''){
+                    return array(
+                        'error' => 1,
+                        'message' => 'Recipient messsage is required'
                     );
                 }
 

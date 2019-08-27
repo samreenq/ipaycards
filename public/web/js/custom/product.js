@@ -1168,8 +1168,8 @@ function product_list1(Request_url1, Request_url2, Request_url3, Request_url4, E
     $("#LoadingImageSearchProducts").show();
 
     console.log(Request_url);
-    $.ajax({
 
+    $.ajax({
         url: Request_url,
         type: 'get',
         data: {
@@ -1198,13 +1198,13 @@ function product_list1(Request_url1, Request_url2, Request_url3, Request_url4, E
 
         }
     });
-
 }
 
 function product_list2(Request_url1, Request_url2, Request_url3, Request_url4, Entity_type_id, Category_id, Request_url, Product_detail_url, Request_url5, Product_form, Searchable_tags, Low_price, High_price, brand_id, Offset, Limit) {
     $("#LoadingImageProducts").show();
     $("#LoadingImageSearchProducts").show();
 
+    $(".search").attr("disabled", true);
     $.ajax({
 
         url: Request_url,
@@ -1223,10 +1223,14 @@ function product_list2(Request_url1, Request_url2, Request_url3, Request_url4, E
         },
         dataType: 'json',
         success: function (data) {
+            if($(".search").length == 1) {
+
+                $(".search").attr("disabled", false);
+
+            }
             if (data['items'] > 0) {
                 $(".page_showcase").css({'display': "block"});
             }
-
             $("#products").empty().append(data['products']);
             $("#LoadingImageProducts").hide();
             $("#LoadingImageSearchProducts").hide();
@@ -1559,6 +1563,7 @@ function add_to_wishlist(Request_url1) {
 function product_list_by_title(Entity_type_id, Title, Request_url, Request_url2, Request_url3, Request_url4, Product_detail_url, Request_url5, offset, limit) {
 
     $("#LoadingImageProducts").show();
+
     $.ajax({
 
         url: Request_url,
@@ -2451,13 +2456,14 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 checkout_mobile = $('#checkout_mobile').val();
             }
 
-             if ($('#recipient_message').val() == ""){
+             /*if ($('#recipient_message').val() == ""){
 
                         $('.error-message').append('<div class="alert alert-danger">Recipient message is required to process order.</div>');
                         return false;
                     }
+*/
 
-            $.ajax({
+             $.ajax({
 
                 url: Request_url1,
                 type: 'get',

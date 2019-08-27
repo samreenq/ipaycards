@@ -76,6 +76,13 @@
                     return false;
                 }
 
+                if($('#customerAmount').val() < 5){
+                    $('.alert1').show();
+                    $('.alert1').text('');
+                    $('.alert1').text('Minimum ammount of 5 AED is required.');
+                    return false;
+                }
+
 
                 if(service_type == 'du'){
                     if($('input[name="chargeType"]:checked').length == 0){
@@ -98,7 +105,7 @@
                 $('#dial_code').val(dial_code);
 
 
-                $('#selectedMobile').text(''); $('#selectedMobile').text('+'+dial_code+$('#mobileNumber').val());
+                $('#selectedMobile').text(''); $('#selectedMobile').text(dial_code+$('#mobileNumber').val());
                 $('#selectedAmount').text(''); $('#selectedAmount').text($('#customerAmount').val());
 
 
