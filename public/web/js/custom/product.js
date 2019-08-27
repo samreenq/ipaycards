@@ -2456,13 +2456,14 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 checkout_mobile = $('#checkout_mobile').val();
             }
 
-             if ($('#recipient_message').val() == ""){
+             /*if ($('#recipient_message').val() == ""){
 
                         $('.error-message').append('<div class="alert alert-danger">Recipient message is required to process order.</div>');
                         return false;
                     }
+*/
 
-            $.ajax({
+             $.ajax({
 
                 url: Request_url1,
                 type: 'get',
