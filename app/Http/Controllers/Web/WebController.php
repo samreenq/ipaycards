@@ -59,6 +59,10 @@ class WebController extends Controller
         $fb_raw = $conf_model->getBy("key","facebook");
         $fb_config = json_decode($fb_raw->value);
 
+        // get site data
+        $config_raw = $conf_model->getBy("key","site");
+        $config = json_decode($config_raw->value,false);
+
         $setting_model = new Setting();
         $google_key = $setting_model->getBy('key','google_client_key');
         $google_client_key = (isset($google_key->value)) ? $google_key->value : "";
@@ -67,6 +71,7 @@ class WebController extends Controller
         $general_setting_lib = new GeneralSetting();
         $general_setting_raw = $general_setting_lib->getSetting();
 
+        View::share('app_name',  $config->site_name);
         View::share('customerId',  $this->_customerId);
         View::share('login_customer',  json_decode(json_encode($this->_customer)));
         View::share('fb_config', $fb_config);

@@ -8,7 +8,7 @@
     ?>
 
     <meta property="og:title" content="{{ $app_name }}" />
-    <meta property="og:image" content="{{ $app_logo  }}" />
+    <meta property="og:image" content="{{ $meta_image  }}" />
     <meta property="og:description" content="{{ $meta_description }}" />
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="description" content ="{{ $meta_description }}">
@@ -44,7 +44,7 @@
         window.location = '<?php echo $playstore_url2;?>';
     },500);
     <?php else: ?>
-            window.location = "{{ url('/') }}"
+          //  window.location = "{{ url('/') }}"
 
     <?php endif; ?>
 

@@ -442,7 +442,7 @@ class ProductController extends WebController
 				
 			
 			$data['categories_all'] =  isset($json2["data"]['category_listing']) ? $json2["data"]["category_listing"]: null ;
-			
+            $data['social_media_url']	= $request->fullUrl();
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
 			return View::make('web/product_detail',$data);
 		}
