@@ -16,6 +16,7 @@ Class OrderSendCards {
     private $_orderID;
     private $_pLib;
     private $_assignData;
+    private $_emailContentGift = '';
 
     public function __construct()
     {
@@ -43,15 +44,12 @@ Class OrderSendCards {
             $email_lib = new EmailLib();
             $order_history = new OrderHistory();
 
-           /* if($this->_emailContentGift != ''){
+            if($this->_emailContentGift != ''){
                 $this->_emailContent .= $this->_emailContentGift;
                 $email_lib->sendGiftEmail($order,$this->_emailContentGift);
-            }*/
+            }
 
             if($this->_emailContent != ''){
-                if($this->_emailContentGift != '') {
-                    $this->_emailContent .= $this->_emailContentGift;
-                }
                 $email_lib->sendOrderEmail($order,$this->_emailContent);
             }
            $order_history->updateOrderDelivered($order_id);
@@ -244,6 +242,7 @@ Class OrderSendCards {
         catch ( \Exception $e ) {
             $this->_assignData['error'] = 1;
             $this->_assignData['message'] .=  $e->getMessage();
+            echo $e->getTraceAsString();
             // throw new \Exception($e->getMessage());
         }
 
@@ -484,7 +483,7 @@ Class OrderSendCards {
                     $ret = json_decode(json_encode($ret));
                     $this->_assignData['message'] .= $ret->message;
 
-                    echo "<pre>"; print_r($ret);
+                    //echo "<pre>"; print_r($ret);
                 }
 
 
