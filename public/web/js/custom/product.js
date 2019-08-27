@@ -2419,7 +2419,6 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
 
     $(".process_order").on("click", function (e) {
 
-
         if ($('#checkout_mobile_number').length > 0) {
 
             if ($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() == '') {
@@ -2485,7 +2484,7 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 dataType: 'json',
                 success: function (data) {
 
-
+                    $('.error-message').html('');
                     if (data.error == 0) {
 
                         var lead_order = data.data;
