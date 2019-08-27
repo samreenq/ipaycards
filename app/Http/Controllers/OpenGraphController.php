@@ -183,6 +183,7 @@ class OpenGraphController extends Controller {
 		$this->_assign_data['playstore_url2']   = "market://details?id=".$playstore_keystore;
 
         $this->_assign_data['meta_description'] = 'I have purchased Vouchers from this amazing website. Check it out.';
+        $this->_assign_data['meta_image'] =  url('/').'/public/web/img/header-bg02.jpg';
 
 		// mobile schema
 		$this->_assign_data['schema']  = $og_schema_share ? $og_schema_share : "";

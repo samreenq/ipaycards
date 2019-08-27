@@ -5,6 +5,20 @@
 	@section("head")
 		 @include("web/includes/head")
 
+
+		 <?php
+         //Get image of product
+         $gallery = isset($product['gallery'][0]) ? json_decode(json_encode($product['gallery'])) : false;
+         $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
+         $meta_description = isset($product["attributes"]['meta_description']) ? $product["attributes"]['meta_description'] :  $product["attributes"]['description'];
+		 ?>
+		 <meta name="description" content="{{ $meta_description  }}">
+		 <meta property="og:title" content="{!! $app_name !!}" />
+		 <meta property="og:image" content="{{ $image  }}" />
+		 <meta property="og:description" content="{{ $meta_description }}" />
+		 <meta property="og:url" content="{{ url()->full() }}">
+		 <meta property="description" content ="{{ $meta_description }}">
+
 					<link href="<?php echo url('/').'/public/web/css/select2.css';?>" rel="stylesheet"/>
 					<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
@@ -38,9 +52,6 @@
 					if(isset($product['attributes']['category_id'][0]))
 						$categories = $product['attributes']['category_id'][0];
 
-                //Get image of product
-                $gallery = isset($product['gallery'][0]) ? json_decode(json_encode($product['gallery'])) : false;
-                $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_file');
 
 
 				?>
