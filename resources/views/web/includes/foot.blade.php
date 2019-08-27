@@ -82,7 +82,6 @@
         var currency = "{!! $general_setting_raw->currency !!}";
 
         $(document).ready(function () {
-            stButtons.locateElements();
             referAFriend("{{ route('refer_a_friend') }}");
         });
 

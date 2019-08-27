@@ -10,8 +10,7 @@
 				<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
 				<script src="http://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
 
-		//meta  k tag
-			
+
 	@endsection
 
 
