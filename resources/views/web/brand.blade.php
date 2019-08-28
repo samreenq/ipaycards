@@ -319,7 +319,7 @@
 				
 				<div class="container page_showcase" style="display:none">
 					<nav aria-label="Page navigation" class="clearfix">
-						<ul class="pagination cusPagination pt-3 float-right" id="pagination"></ul>
+						<ul class="pagination cusPagination float-right" id="pagination"></ul>
 					</nav>
 				</div>
 				
