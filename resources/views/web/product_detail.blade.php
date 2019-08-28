@@ -20,6 +20,12 @@
 		 <meta property="og:url" content="<?php echo (isset($social_media_url)) ?  urldecode($social_media_url): '' ?>">
 		 <meta property="fb:app_id" content="{!! $fb_config->app_id !!}" />
 
+		 <meta name="twitter:title" content="{!! $app_name !!}">
+		 <meta name="twitter:description" content="{{ $meta_description }}">
+		 <meta name="twitter:url" content="<?php echo (isset($social_media_url)) ?  urldecode($social_media_url): '' ?>">
+		 <meta name="twitter:image" content="{{ $image  }}">
+		 <meta name="twitter:card" content="summary_large_image">
+
 					<link href="<?php echo url('/').'/public/web/css/select2.css';?>" rel="stylesheet"/>
 					<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 					<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
