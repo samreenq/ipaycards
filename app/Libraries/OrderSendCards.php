@@ -55,8 +55,9 @@ Class OrderSendCards {
            $order_history->updateOrderDelivered($order_id);
         }
 
-        unset($this->_emailContent);
-        unset($this->_emailContentGift);
+       // unset($this->_emailContent);
+       // unset($this->_emailContentGift);
+        $this->_emailContent = $this->_emailContentGift = '';
 
     }
 
@@ -141,7 +142,12 @@ Class OrderSendCards {
 
                     }
 
-                     $this->_emailContentGift .= $email_cont;
+                    if(!empty($this->_emailContentGift)){
+                        $this->_emailContentGift .= $email_cont;
+                    }else{
+                        $this->_emailContentGift = $email_cont;
+                    }
+
                      unset($email_cont);
                     //$this->_emailContent .= $this->_emailContentGift;
                 }
@@ -226,9 +232,11 @@ Class OrderSendCards {
             $email_lib = new EmailLib();
             $order_history = new OrderHistory();
 
-            if($this->_emailContentGift != ''){
-                 $this->_emailContent .= $this->_emailContentGift;
-                $email_lib->sendGiftEmail($order,$this->_emailContentGift);
+            if(isset($this->_emailContentGift)){
+                if($this->_emailContentGift != ''){
+                    $this->_emailContent .= $this->_emailContentGift;
+                    $email_lib->sendGiftEmail($order,$this->_emailContentGift);
+                }
             }
 
 
@@ -246,8 +254,9 @@ Class OrderSendCards {
             // throw new \Exception($e->getMessage());
         }
 
-        unset($this->_emailContent);
-        unset($this->_emailContentGift);
+        //unset($this->_emailContent);
+       // unset($this->_emailContentGift);
+        $this->_emailContent = $this->_emailContentGift = '';
         $this->_assignData['message'] = empty($this->_assignData['message']) ? trans('system.success') : $this->_assignData['message'];
         return $this->_assignData;
     }
