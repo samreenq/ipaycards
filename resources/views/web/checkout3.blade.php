@@ -62,7 +62,6 @@
 						<div class="error-message"></div>
 
 						<div class="order-pending">
-							<div class="sharethis-inline-share-buttons"></div>
 							<h2>Wait...</h2>
 							<p>Please Wait While order is processing for Transaction Order ID : <span id="lead_order_id"></span></p>
 						</div>
@@ -81,8 +80,8 @@
 										</ul>
 									</div>
 							-->
-							{{--<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">--}}
-
+							<!--<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">-->
+							<div class="sharethis-inline-share-buttons"></div>
 							</div>
 						</div>
 				</div>
