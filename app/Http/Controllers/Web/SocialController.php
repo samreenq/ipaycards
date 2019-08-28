@@ -96,4 +96,75 @@ class SocialController extends WebController
         return redirect()->back();
 
     }
+
+    public function gooleProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleGooleCallback(Request $request)
+    {
+        $row = Socialite::driver('google')->user();
+        //echo '<pre>'; print_r($row); exit;
+
+        if(isset($row->user)){
+
+            $user = (object)$row->user;
+           // echo '<pre>'; print_r($user); exit;
+            $username = explode(' ',$user->name);
+            $first_name = $username[0];
+            $last_name = isset($username[1]) ? $username[1] : '';
+
+
+            $json = json_decode(
+                json_encode(
+                    CustomHelper::internalCall(
+                        $request,
+                        'api/entity_auth/social_login',
+                        'POST',
+                        [
+                            'entity_type_id' => 11,
+                            'name' => $user->name,
+                            'first_name' => $first_name,
+                            'last_name' => $last_name,
+                            'platform_type' => 'google',
+                            'device_type' => 'none',
+                            'platform_id' => $user->id,
+                            'email' => $user->email,
+                            'status' => 1,
+                            //'mobile_json' => 1,
+                        ],
+                        FALSE
+                    )
+                ),
+                TRUE
+            );
+            // echo "<pre>"; print_r( $json);exit;
+
+            $json_auth = $json;
+            if (isset($json['data']['entity_auth'])) {
+                session_unset();
+                $json = $json['data']['entity_auth'];
+                $data['entity_auth'] = $json;
+
+
+                if ($request->session()->has('users')) {
+                    $request->session()->forget('users');
+                    $request->session()->push('users', $json);
+                } else {
+                    $request->session()->push('users', $json);
+                }
+
+
+            }
+        }
+
+        return redirect()->back();
+
+    }
 }
