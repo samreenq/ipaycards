@@ -24,7 +24,8 @@
 								//if(isset($_SESSION['loginurl']))
 								//{
 					?>
-						<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>
+						{{--<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>--}}
+                        <a href="{!! url('/').'/login/facebook' !!}" class="contFb" >Connect With Facebook</a>
 					<?php
 								//}
 							}
