@@ -514,7 +514,10 @@ class CheckOutController extends WebController {
         }*/
 
        // $data = ['order_number' => $order_number];
-        $data['social_media_url']	= url('/');
+        $data['social_media_url']	= $request->fullUrl();
+        $data['meta_description'] = 'I have purchased Vouchers from this amazing website. Check it out.';
+        $data['meta_image'] =  url('/').'/public/images/logo.png';
+
         return View::make('web/checkout3',$data);
     }
 

@@ -4,11 +4,20 @@
 
 	@section("head")
 		 @include("web/includes/head")
-					<link href="<?php echo url('/').'/public/web/css/select2.css';?>" rel="stylesheet"/>
+
+		 <meta property="og:type" content="website" />
+		 <meta name="description" content="{{ $meta_description  }}">
+		 <meta property="og:title" content="{!! $app_name !!}" />
+		 <meta property="og:image" content="{{ $meta_image  }}" />
+		 <meta property="og:description" content="{{ $meta_description }}" />
+		 <meta property="og:url" content="<?php echo (isset($social_media_url)) ?  urldecode($social_media_url): '' ?>">
+		 <meta property="fb:app_id" content="{!! $fb_config->app_id !!}" />
+
+			<link href="<?php echo url('/').'/public/web/css/select2.css';?>" rel="stylesheet"/>
 				
-				<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-				<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
-				<script src="http://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+			<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+			<link href="<?php echo url('/').'/public/web/css/ayoshare.css';?>" rel="stylesheet">
+			<script src="http://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
 
 
 	@endsection
@@ -47,6 +56,7 @@
 						<div class="error-message"></div>
 
 						<div class="order-pending">
+							<div class="sharethis-inline-share-buttons"></div>
 							<h2>Wait...</h2>
 							<p>Please Wait While order is processing for Transaction Order ID : <span id="lead_order_id"></span></p>
 						</div>
@@ -65,7 +75,8 @@
 										</ul>
 									</div>
 							-->
-							<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">
+							{{--<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">--}}
+
 							</div>
 						</div>
 				</div>
@@ -226,7 +237,7 @@
                                });
                            }
                            else{
-                               window.location.href = "{!! url('/') !!}";
+                              // window.location.href = "{!! url('/') !!}";
 						   }
 
 
