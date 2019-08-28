@@ -3776,6 +3776,9 @@ ul.footerCont {
     display: flex;
     align-items: center;
 }
+li.wishlist {
+    display: flex;
+}
 .share-wishlist-wrap li a span {margin-right: 5px}
 .share-wishlist-wrap li span {
     color: #ced2d8;
@@ -7225,3 +7228,4 @@ select:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px #fff inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+.congrats_wrap {display: flex;justify-content: space-between}
