@@ -66,11 +66,13 @@
 							<p>Please Wait While order is processing for Transaction Order ID : <span id="lead_order_id"></span></p>
 						</div>
 						<div class="order-done hide">
-							<h2>Congratulations!</h2>
+
+							<div class="congrats_wrap">
+								<h2>Congratulations!</h2>
+								<div class="sharethis-inline-share-buttons"></div>
+							</div>
 							<h4>Order <span id="final_order_id"></span> is confirmed</h4>
 							<p>It will be delivered soon to your desired location</p>
-
-							<br /><br />
 							<!--
 									<div class="orderConfirnmSm">
 										<p>Share to</p>
@@ -81,7 +83,6 @@
 									</div>
 							-->
 							<!--<input data-toggle="modal" data-target=".socialmedia" type="submit" name="" value="Share" class="add add-to-cart">-->
-							<div class="sharethis-inline-share-buttons"></div>
 							</div>
 						</div>
 				</div>
