@@ -179,8 +179,6 @@ class AuthenticationController extends WebController {
 	
 	public function signup(Request $request) 
 	{
-		
-		
 		$rules  =  array(
 		    'first_name' => 'required',
 		    'email' =>  'required',

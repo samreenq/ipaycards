@@ -347,6 +347,7 @@
             $("#signup").on("click", function (e) {
                 var terms_condition = '';
 
+
                 if ($('#term_condition').is(":checked")) {
                     terms_condition = 1;
                 }
@@ -369,6 +370,7 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+
                         if (data['error'] == 1) {
                             $(".signupError").addClass('alert alert-danger');
                             //$("#error_msg_phone_verification").css("color", "red");

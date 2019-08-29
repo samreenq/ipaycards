@@ -69,6 +69,7 @@ Class EntityCustomer
         }
 
         return $assignData;
+
     }
 
     /**
