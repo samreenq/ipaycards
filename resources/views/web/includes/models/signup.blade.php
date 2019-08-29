@@ -33,36 +33,12 @@
 					    <p class="small-brief">Sign up to {!! APP_NAME !!} with your favourite social media account or using your email ID. </p>
 						<div class="fbBtnWrap">
 
-							{{--<a href="javascript:void(0);" class="contFb" onclick="onSignIn()">Connect With Google</a>--}}
-
-						<?php
-
-
-
-							?>
-
-							<?php
-									if(Session::has('message1'))
-									{
-										//$message = Session::get('message1'); 
-										//echo "<center>".$message[0]."</center>";
-									}
-									else
-									{
-										
-										/*if(isset($_SESSION['loginurl']))
-											{*/
-
-							?>
-										<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>
-							<?php
-											//}
-									}
-							?>
-							
 						</div>
 
-						<div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
+						<a href="javascript:void(0);"  data-id="facebook" class="contFb socialBtn" >Connect With Facebook</a>
+						<a href="javascript:void(0);"  data-id="google" class="contGM socialBtn" >Connect With Google</a>
+
+						{{--<div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>--}}
 						<div class="fluid-label">
 						  <input id="email" name="email" type="email" required="required" class="form-control" placeholder="Email" />
 						   <input id="url"  name="url"	type="hidden" value="<?php  echo url()->current(); ?>">

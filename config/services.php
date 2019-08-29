@@ -47,7 +47,7 @@ return [
     ],
 
     'google' => [
-        'client_id' => '812606195787-0b51kpjo3m57ehqge2eeq29ftsmivv4j',         // Your GitHub Client ID
+        'client_id' => '812606195787-0b51kpjo3m57ehqge2eeq29ftsmivv4j.apps.googleusercontent.com',         // Your GitHub Client ID
         'client_secret' => '0FRtglcanl1N5YX6z0QFNyI5', // Your GitHub Client Secret
         'redirect' => url('/').'/login/google/callback',
     ],

@@ -27,7 +27,7 @@
 
 <script src="{!! URL::to(config('panel.DIR_PANEL_RESOURCE').'assets/js/bootbox.js') !!}"></script>
 
-<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+{{--<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>--}}
 <script>
 
     var user_loggedin = false;
@@ -38,7 +38,6 @@
 
 <script src="<?php echo url('/') . '/public/web/js/custom/product.js'?>"></script>
 <script>
-
 
 
     <?php if(!empty($customerId)){  ?>
@@ -152,10 +151,10 @@
 
         var crsf_token = "{{ csrf_token() }}";
         var site_url = "{!! url('/') !!}";
-        console.log(site_url);
+       // console.log(site_url);
 
 
-
+/*
             window.fbAsyncInit = function () {
             FB.init({
                 appId: "{!! $fb_config->app_id !!}",
@@ -174,11 +173,11 @@
             js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        }(document, 'script', 'facebook-jssdk'));*/
 
 
         // Only works after `FB.init` is called
-        function facebookLogin() {
+       /* function facebookLogin() {
 
             FB.getLoginStatus(function (fbResponse) {
 
@@ -205,9 +204,9 @@
             });
 
 
-        }
+        }*/
 
-        function fbSocialLogin() {
+       /* function fbSocialLogin() {
 
             if ($(".signinError").hasClass('alert-danger')) {
                 $(".signinError").removeClass('alert-danger')
@@ -330,7 +329,7 @@
                     console.log(error.error) //to find the reason
                 }
             );
-        }
+        }*/
 
         function fbLogin()
         {
@@ -692,6 +691,28 @@
 
             $("#signout").on('click', function () {
                 signout();
+            });
+
+
+            $('.socialBtn').on('click',function(){
+
+                var platform_id = $(this).data('id');
+                $.ajax({
+                    url: site_url + '/social/login',
+                    type: 'POST',
+                    dataType: 'json',
+                    data:{
+                        _token: crsf_token,
+                        platform: $(this).data('id'),
+                        cart_item: localStorage.products,
+                        redirect_to: "{!! url()->full() !!}"
+                    },
+                    success: function (data) {
+
+                        window.location.href = "{!! url('/').'/login/' !!}"+platform_id;
+                    }
+                });
+
             });
 
         });

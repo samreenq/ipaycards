@@ -676,4 +676,24 @@ class AuthenticationController extends WebController {
         }
     }
 
+    public function socialLogin(Request $request)
+    {
+      //  echo '<pre>'; print_r($request->all()); exit;
+
+        if(isset($request->cart_item) && !empty($request->cart_item)){
+
+            if ($request->session()->has('guest_cart_item')) {
+                $request->session()->forget('guest_cart_item');
+                $request->session()->push('guest_cart_item', $request->cart_item);
+            } else {
+                $request->session()->push('guest_cart_item', $request->cart_item);
+            }
+        }
+
+        return array(
+            'error' => 0,
+            'message' => 'Success'
+        );
+    }
+
 }

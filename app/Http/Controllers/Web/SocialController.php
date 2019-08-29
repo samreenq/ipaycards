@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Libraries\CustomHelper;
+use App\Libraries\OrderCart;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
@@ -89,6 +90,22 @@ class SocialController extends WebController
                     $request->session()->push('users', $json);
                 }
 
+                if ($request->session()->has('guest_cart_item')) {
+                    $cart_item  = $request->session()->get('guest_cart_item');
+
+                    // echo '<pre>'; print_r($cart_item); exit;
+                    $cart_items = !empty($cart_item[0]) ? json_decode($cart_item[0]) : false;
+
+                    //Get customer cart
+                    if(!empty($cart_item[0])){
+                        $order_cart_lib = new OrderCart();
+                        $order_cart_lib->mergeWebCart($json_auth['data']['entity_auth']['entity_id'],$cart_items);
+                    }
+
+                    $request->session()->forget('guest_cart_item');
+
+                }
+
 
             }
         }
@@ -97,7 +114,7 @@ class SocialController extends WebController
 
     }
 
-    public function gooleProvider()
+    public function googleProvider()
     {
         return Socialite::driver('google')->redirect();
     }
@@ -107,7 +124,7 @@ class SocialController extends WebController
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleGooleCallback(Request $request)
+    public function handleGoogleCallback(Request $request)
     {
         $row = Socialite::driver('google')->user();
         //echo '<pre>'; print_r($row); exit;
@@ -120,7 +137,6 @@ class SocialController extends WebController
             $first_name = $username[0];
             $last_name = isset($username[1]) ? $username[1] : '';
 
-
             $json = json_decode(
                 json_encode(
                     CustomHelper::internalCall(
@@ -132,7 +148,7 @@ class SocialController extends WebController
                             'name' => $user->name,
                             'first_name' => $first_name,
                             'last_name' => $last_name,
-                            'platform_type' => 'google',
+                            'platform_type' => 'gplus',
                             'device_type' => 'none',
                             'platform_id' => $user->id,
                             'email' => $user->email,
@@ -144,7 +160,6 @@ class SocialController extends WebController
                 ),
                 TRUE
             );
-            // echo "<pre>"; print_r( $json);exit;
 
             $json_auth = $json;
             if (isset($json['data']['entity_auth'])) {
@@ -161,10 +176,29 @@ class SocialController extends WebController
                 }
 
 
+                if ($request->session()->has('guest_cart_item')) {
+                    $cart_item  = $request->session()->get('guest_cart_item');
+
+                   // echo '<pre>'; print_r($cart_item); exit;
+                    $cart_items = !empty($cart_item[0]) ? json_decode($cart_item[0]) : false;
+
+                    //Get customer cart
+                    if(!empty($cart_item[0])){
+                        $order_cart_lib = new OrderCart();
+                        $order_cart_lib->mergeWebCart($json_auth['data']['entity_auth']['entity_id'],$cart_items);
+                    }
+
+                    $request->session()->forget('guest_cart_item');
+
+                }
+
+
             }
         }
 
         return redirect()->back();
 
     }
+
+
 }
