@@ -40,7 +40,6 @@
 <script>
 
 
-
     <?php if(!empty($customerId)){  ?>
     getCustomerCart("{{ route('get_cart') }}");
     <?php } ?>
@@ -690,6 +689,28 @@
 
             $("#signout").on('click', function () {
                 signout();
+            });
+
+
+            $('.socialBtn').on('click',function(){
+
+                var platform_id = $(this).data('id');
+                $.ajax({
+                    url: site_url + '/social/login',
+                    type: 'POST',
+                    dataType: 'json',
+                    data:{
+                        _token: crsf_token,
+                        platform: $(this).data('id'),
+                        cart_item: localStorage.products,
+                        redirect_to: "{!! url()->full() !!}"
+                    },
+                    success: function (data) {
+
+                        window.location.href = "{!! url('/').'/login/' !!}"+platform_id;
+                    }
+                });
+
             });
 
         });

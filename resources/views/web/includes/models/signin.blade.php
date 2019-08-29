@@ -24,20 +24,21 @@
 								//if(isset($_SESSION['loginurl']))
 								//{
 					?>
-						<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>
-						<a href="{!! url('/').'/login/facebook' !!}" class="contFb" >Connect With Facebook</a>
-						<a href="{!! url('/').'/login/google' !!}" class="contFb" >Connect With Google</a>
+						{{--<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>--}}
+
+						<a href="javascript:void(0);"  data-id="facebook" class="contFb socialBtn" >Connect With Facebook</a>
+						<a href="javascript:void(0);"  data-id="google" class="contFb socialBtn" >Connect With Google</a>
 
 					<?php
 								//}
 							}
-							//print_r($_SERVER);								
+							//print_r($_SERVER);
 					?>
 							
 							
 			</div>
 
-			  <div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>
+			 {{-- <div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>--}}
 
 				<div class="fluid-label">
 				  <input id="login_id" name="login_id" type="email" placeholder="Email" />

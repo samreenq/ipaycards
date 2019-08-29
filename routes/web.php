@@ -336,9 +336,9 @@ Route::get('/chat', "Web\AboutBusinessController@chat")->name('zendesk_chat');
 Route::get('login/facebook', 'Web\SocialController@redirectToProvider')->name('fb_login');
 Route::get('login/facebook/callback', 'Web\SocialController@handleProviderCallback');
 
-Route::get('login/google', 'Web\SocialController@gooleProvider')->name('fb_login');
-Route::get('login/google/callback', 'Web\SocialController@handleGooleCallback');
-
+Route::get('login/google', 'Web\SocialController@googleProvider')->name('google_login');
+Route::get('login/google/callback', 'Web\SocialController@handleGoogleCallback');
+Route::any('social/login', 'Web\AuthenticationController@socialLogin');
 
 ///
 
