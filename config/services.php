@@ -40,4 +40,16 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => '456015911874179',         // Your GitHub Client ID
+        'client_secret' => 'e4435c1a490af46ec9357c6c0c1a20fb', // Your GitHub Client Secret
+        'redirect' => url('/').'/login/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id' => '812606195787-0b51kpjo3m57ehqge2eeq29ftsmivv4j',         // Your GitHub Client ID
+        'client_secret' => '0FRtglcanl1N5YX6z0QFNyI5', // Your GitHub Client Secret
+        'redirect' => url('/').'/login/google/callback',
+    ],
+
 ];

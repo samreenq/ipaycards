@@ -332,6 +332,22 @@
             );
         }
 
+        function fbLogin()
+        {
+            $.ajax
+            ({
+
+                url: "{{ route('fb_login') }}",
+                type: 'get',
+                data: {
+                },
+                dataType: 'json',
+                success: function (data) {
+
+                }
+            });
+        }
+
 
         $(document).ready(function () {
 

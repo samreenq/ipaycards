@@ -438,7 +438,7 @@ class AuthenticationController extends WebController {
 						),
 						true
 					);
-			return $json; 
+			return $json;
 			
 		}  
     }
@@ -488,6 +488,10 @@ class AuthenticationController extends WebController {
 	public function main(Request $request)
     {
         $data['users'] = $this->_customer;
+        $data['social_media_url']	= $request->fullUrl();
+        $data['meta_description'] = 'I have purchased Vouchers from this amazing website. Check it out.';
+        $data['meta_image'] =  url('/').'/public/images/logo.png';
+
         return View::make('web/main',$data);
     }
 
