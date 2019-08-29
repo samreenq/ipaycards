@@ -12,32 +12,11 @@
 			<h3>Sign In</h3>
 			  <div class="signinError" >  </div>
 			<div class="fbBtnWrap">
-					<?php
-							if(Session::has('message2'))
-							{
-								//$message = Session::get('message2'); 
-								//echo "<center>".$message[0]."</center>";
-								
-							}
-							else
-							{
-								//if(isset($_SESSION['loginurl']))
-								//{
-					?>
-						{{--<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>--}}
 
-						<a href="javascript:void(0);"  data-id="facebook" class="contFb socialBtn" >Connect With Facebook</a>
-						<a href="javascript:void(0);"  data-id="google" class="contFb socialBtn" >Connect With Google</a>
-
-					<?php
-								//}
-							}
-							//print_r($_SERVER);
-					?>
-							
-							
 			</div>
-
+              <a href="javascript:void(0);"  data-id="facebook" class="contFb socialBtn" >Connect With Facebook</a>
+              <a href="javascript:void(0);"  data-id="google" class="contFb socialBtn" >Connect With Google</a>
+			  {{--<a href="javascript:void(0);" class="contFb" onclick="facebookLogin()">Connect With Facebook</a>--}}
 			 {{-- <div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>--}}
 
 				<div class="fluid-label">
