@@ -3238,10 +3238,34 @@ ul.footerCont {
     -moz-border-radius: 8px;
     border-radius: 8px;*/
 }
+.modal .contGM{
+    border: 1px solid #007bff;
+    background-color: transparent;
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #007bff;
+    padding: 12px 13px;
+    display: block;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
 .modal .contFb:hover{
     color:#fff;
     background-color:#3d5b97;
 }
+.modal .contGM:hover{
+    color:#fff;
+    background-color:#007bff;
+}
+/*.modal .contGM:hover{
+    color:#fff;
+    background-color:#3d5b97;
+}*/
 .modal .contFb:focus{
     background-color:#3d5b97;
     border: 2px solid #3d5b97;

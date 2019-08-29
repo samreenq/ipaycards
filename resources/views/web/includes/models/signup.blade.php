@@ -36,7 +36,7 @@
 						</div>
 
 						<a href="javascript:void(0);"  data-id="facebook" class="contFb socialBtn" >Connect With Facebook</a>
-						<a href="javascript:void(0);"  data-id="google" class="contFb socialBtn" >Connect With Google</a>
+						<a href="javascript:void(0);"  data-id="google" class="contGM" >Connect With Google</a>
 
 						{{--<div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>--}}
 						<div class="fluid-label">
