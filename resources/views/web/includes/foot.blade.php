@@ -644,7 +644,7 @@
 
             @endif
 
-            console.log('loggedin' + user_loggedin);
+            //console.log('loggedin' + user_loggedin);
 
             $("#forget_your_account_password").click(function () {
 
