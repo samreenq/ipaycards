@@ -717,6 +717,8 @@
 
         });
 
+
+
         function signout() {
             $.ajax({
                 url: site_url + '/signout',
