@@ -23,7 +23,7 @@ foreach ( $products  as $productItemsList )
 										{{--<td class="addItemWeight" align="right">{!! $productItemsList['product_code'] !!}--}}
 										</td>
 										<td>
-											<a href="javascript:void(0)" >
+											<a class="cross_wrap" href="javascript:void(0)" >
 												<span style="font-size:75%;color:#000;margin-left: 50%;margin-bottom: 57%;" onclick="deleteCartProduct('@if(isset($productItemsList['product_code'])){{$productItemsList['product_code']}}@endif','{{ route('add_to_cart') }}','{{ route('show_cart') }}','{{route('total_price')}}')" > <!--class="clancelItem" --> 
 													<span class="icon-tt-close-icon"></span>
 												</span>					  									
