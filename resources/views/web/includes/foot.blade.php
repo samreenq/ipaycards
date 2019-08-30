@@ -331,6 +331,22 @@
             );
         }*/
 
+/*    function fbLogin()
+    {
+        $.ajax
+        ({
+
+            url: "",
+            type: 'get',
+            data: {
+            },
+            dataType: 'json',
+            success: function (data) {
+
+            }
+        });
+    }*/
+
 
     $(document).ready(function () {
 
