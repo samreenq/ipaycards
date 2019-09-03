@@ -543,7 +543,7 @@ class CategoryController extends Controller
                                 ];
 
                                 if(!empty($and)){
-                                    $params['where_condition'] = $and;
+                                    $params['where_condition'] = "(".$and.")";
                                 }
                                // echo "<pre>"; print_r($params); exit;
                                 $products_list = $entity_lib->apiList($params);
