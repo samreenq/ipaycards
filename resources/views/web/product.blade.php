@@ -92,6 +92,7 @@
 								@if($categories->child && count($categories->child)>0)
 									<ul class="categories vegeListWrap pl15" id="accordion">
 										@foreach($categories->child as $category_raw)
+                                           @if($category_raw->status == 1)
                                             <?php
                                             $text_color = '#48494d';
                                             if($cat_id == $category_raw->category_id){
@@ -99,7 +100,8 @@
                                             }
                                             ?>
 											<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id }}" ><?php if(isset($category_raw->title)) echo $category_raw->title; if(isset($category_raw->product_count)) echo '('.$category_raw->product_count.')'; ?></a></li>
-										@endforeach
+										    @endif
+                                        @endforeach
 									</ul>
 								@endif
 							@endif
