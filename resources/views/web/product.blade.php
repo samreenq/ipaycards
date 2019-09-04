@@ -96,10 +96,30 @@
                                             <?php
                                             $text_color = '#48494d';
                                             if($cat_id == $category_raw->category_id){
-                                            $text_color = '#0f738d';
+                                                $text_color = '#0f738d';
                                             }
+
+                                             $url = url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id;
+
+                                            if(in_array($category_raw->slug,array('du','etisalat'))){
+                                                $url = url('/').'/topup/'.$category_raw->slug;
+                                            }
+
+
                                             ?>
-											<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;" href=" {{ url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id }}" ><?php if(isset($category_raw->title)) echo $category_raw->title; if(isset($category_raw->product_count)) echo '('.$category_raw->product_count.')'; ?></a></li>
+											<li class="vegePanel panel"><a style="color: {!! $text_color !!} !important;
+                                                        " href=" {{ $url }}" >
+                                                    <?php if(isset($category_raw->title))
+                                                        echo $category_raw->title;
+                                                    if(isset($category_raw->product_count)){
+
+                                                        if($category_raw->title != 'du' && $category_raw->title != 'etisalat') {
+                                                            echo '('.$category_raw->product_count.')';
+                                                        }
+                                                }
+                                                        ?>
+                                                </a>
+                                            </li>
 										    @endif
                                         @endforeach
 									</ul>

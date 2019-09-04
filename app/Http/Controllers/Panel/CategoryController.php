@@ -224,7 +224,10 @@ class CategoryController extends EntityController
                 // manage options
                 // - update
                 $options .= '<a class="btn btn-sm btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/update/' . $paginated_id->{$this->_object_identifier . '_id'}) . '" data-toggle="tooltip" title="Update" data-original-title="Update"><i class="fa fa-pencil"></i></a>';
-                $options .= '<a data-module_url="delete" class="btn btn-sm btn-default grid_action_del delete_action" type="button" data-toggle="tooltip" title="" data-original-title="Delete"><i class="fa fa-times"></i></a>';
+
+                if(!in_array($paginated_id->slug,array('du','etisalat'))){
+                    $options .= '<a data-module_url="delete" class="btn btn-sm btn-default grid_action_del delete_action" type="button" data-toggle="tooltip" title="" data-original-title="Delete"><i class="fa fa-times"></i></a>';
+                }
                 $options .= '<a class="btn btn-sm btn-default mr5" type="button" href="' . \URL::to($this->_panelPath . $this->_assignData['module'] . '/view/' . $paginated_id->{$this->_object_identifier . '_id'}) . '" data-toggle="tooltip" title="Update" data-original-title="View"><i class="fa fa-eye"></i></a>';
 
                 $checkbox .= '<input type="checkbox" id="check_id_' . $paginated_id->{$this->_object_identifier . '_id'} . '" name="check_ids[]" value="' . $paginated_id->{$this->_object_identifier . '_id'} . '" />';
