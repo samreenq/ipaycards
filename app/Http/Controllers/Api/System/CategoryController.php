@@ -531,7 +531,7 @@ class CategoryController extends Controller
                             if (!empty($category_ids)) {
                                 $and = '';
                                 foreach(explode(',',$category_ids) as $cat_id){
-                                    $and .= ($and == '') ? " AND " : " OR ";
+                                    $and .= ($and == '') ? " AND ( " : " OR ";
                                     $and .= " FIND_IN_SET('".$cat_id."',category_id)";
                                 }
 
@@ -543,7 +543,7 @@ class CategoryController extends Controller
                                 ];
 
                                 if(!empty($and)){
-                                    $params['where_condition'] = $and;
+                                    $params['where_condition'] = $and.")";
                                 }
                                // echo "<pre>"; print_r($params); exit;
                                 $products_list = $entity_lib->apiList($params);

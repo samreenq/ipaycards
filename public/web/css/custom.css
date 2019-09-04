@@ -1962,6 +1962,7 @@ body.nav-expanded {
     display: flex;
     border: 1px solid #a5a8af;
     align-items: center;
+    margin: 0 0 0 auto;
 }
 .basketList .count-input input{
     width: 38px;
@@ -2001,6 +2002,11 @@ body.nav-expanded {
     display: block;
     width: 21px;
 
+}
+.basketList a.cross_wrap,
+.wishList a.cross_wrap {
+    display: block;
+    text-align: right;
 }
 .wishList .addProBtn a{
     width:85px;
@@ -2790,9 +2796,9 @@ table tr.borderB td div{
 .product-detail a{
     color:#000;
     line-height: 25px;
-    margin-bottom:12px;
     font-weight:300;
 }
+.product-detail h4 {margin-bottom:12px;}
 .product-detail a {
     font-size: 20px;
 }
@@ -5378,6 +5384,9 @@ ul.multiselect-container.dropdown-menu li.active a{
 }
 .orderHistory .dashboard-header th{
     font-weight:400;
+}
+.orderHistory .dashboard-header th:last-child {
+    text-align: center;
 }
 .table-striped tbody tr:nth-of-type(odd) {background-color: rgb(237, 238, 242);}
 .refund th{

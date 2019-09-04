@@ -1587,10 +1587,10 @@ class ProductController extends WebController
                     $where_condition .= ' FIND_IN_SET("'.$cat_id.'",category_id)';
                 }
 
-               // echo $where_condition; exit;
+             // echo $where_condition; exit;
                 $params = array(
                     'entity_type_id' =>  'product',
-                    'where_condition' => "AND ".$where_condition,
+                    'where_condition' => "AND (".$where_condition.")",
                     'status' => 1,
                 );
 

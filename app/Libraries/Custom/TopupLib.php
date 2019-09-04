@@ -268,7 +268,11 @@ Class TopupLib
                 if(in_array($data['service_type'],array('du','etisalat'))){
                     $send_topup =  $this->mobileTopup($data);
                 }else{
+
+                   // echo "<pre>"; print_r($data);
                     $send_topup = $this->serviceTopup($data);
+
+                  //  echo "<pre>"; print_r($send_topup); exit;
                 }
 
                // echo "<pre>"; print_r($send_topup);
@@ -277,9 +281,10 @@ Class TopupLib
                 }
 
                 //Save Topup History///////////////////////
-
+              //  echo "<pre>"; print_r($send_topup);
                 $data['entity_type_id'] = 'topup';
-                $data['topup_response'] = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
+                $t_response = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
+                $data['topup_response'] = "$t_response";
 
                 $card = $payment_response->sourceOfFunds->provided->card;
 
@@ -291,12 +296,12 @@ Class TopupLib
                 $data['card_last_digit'] = substr($card->number,-4);
                 $data['transaction_id'] = $payment_response->transaction[0]->authorizationResponse->transactionIdentifier;
 
-                //echo "<pre>"; print_r($data);
+
                 $entity_lib = new Entity();
                 $topup_response = $entity_lib->apiPost($data);
                 $topup_response = json_decode(json_encode($topup_response));
 
-               // echo "<pre>"; print_r($topup_response);
+             //  echo "<pre>"; print_r($topup_response); exit;
                 if (isset($topup_response->data->entity->entity_id)) {
                     $param = array(
                         'entity_type_id' => 'topup',

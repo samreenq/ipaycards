@@ -201,7 +201,7 @@
                                $('#lead_order_id').text(entity_id);
 
                                $.ajax({
-                                   url: "{{ route('topup_order') }}",
+                                   url: "{{ route('topup_order_web') }}",
                                    type: 'post',
                                    data: {_token: "{!! csrf_token() !!}", lead_topup_id: entity_id},
                                    dataType: 'json',
@@ -223,7 +223,7 @@
                                });
                            }
                            else{
-                               window.location.href = "{!! url('/') !!}";
+                              // window.location.href = "{!! url('/') !!}";
 						   }
 
 
