@@ -97,7 +97,7 @@ class ProductController extends WebController
 								'entity_type_id'	=>	'product',
 								//'product_type'		=>	1,
 								'category_id'		=>	$request->input('category_id'),
-							//	'category_form'		=>	$request->input('category_form'),
+								//'category_form'		=>	$request->input('category_form'),
 								'searchable_tags'	=>	$request->input('searchable_tags'),
                                 'brand_id'	=>	$request->input('brand_id'),
 								'range_fields'		=>	'price',
@@ -108,10 +108,13 @@ class ProductController extends WebController
                                 'order_by'          => 'entity_id',
                                 'sorting'           => 'DESC'
 							];
-		
+
+
+
 			if(	($request->has('low_price') && $request->has('high_price')) && ($request->low_price > 0 &&  $request->high_price > 0)) {
                 $data['price'] = $request->input('low_price') . ',' . $request->input('high_price');
             }
+
 
 				
 			//print_r($data);
@@ -120,12 +123,21 @@ class ProductController extends WebController
 		//	print_r($json); exit;
 			$data['products'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
-			$data['product_detail_url'] = $product_detail_url; 
+			$data['product_detail_url'] = $product_detail_url;
+            if(isset($request->category_id)){
+
+                $sys_category = new SYSCategory();
+                $data['category'] = $sys_category->where('category_id',$request->category_id)->first();
+
+                //dd($data['category']);
+            }
+
 			$data = [
 						'products'	=> View::make('web/includes/product/product_list',$data)->__toString(),
 						'items'		=> isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/$limit) : null
 					];
-			return $data;
+
+            return $data;
 		}
 	}
 	
@@ -146,7 +158,7 @@ class ProductController extends WebController
 		else 
 		{	
 		
-							
+
 			$data['product_detail_url'] = $request->input('product_detail_url');
 			$limit  = 	$request->input('limit'); 
 		/*	$json 	= 	json_decode(

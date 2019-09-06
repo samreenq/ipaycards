@@ -85,7 +85,10 @@
 							@if(!empty($cat_id))
 
                                 <div class="main_categeory"><h4><a style="color: #000000; cursor: default"  href=" {{ url('/').'/product?entity_type_id=14&category_id='.$categories->category_id  }}"
-                                                                   onclick="return false" ;  ><?php if(isset($categories->title)) echo $categories->title; if(isset($categories->product_count)) echo '('.$categories->product_count.')'; ?>
+                                                                   onclick="return false" ;  >
+                                            <?php if(isset($categories->title)) echo $categories->title;
+                                            if(isset($categories->product_count)) echo '('.$categories->product_count.')';
+                                            ?>
                                         </a>
                                     </h4>
                                 </div>
@@ -101,9 +104,10 @@
 
                                              $url = url('/').'/product?entity_type_id=14&category_id='.$category_raw->category_id;
 
-                                            if(in_array($category_raw->slug,array('du','etisalat'))){
+                                           /* if(in_array($category_raw->slug,array('du','etisalat'))){
                                                 $url = url('/').'/topup/'.$category_raw->slug;
-                                            }
+                                            }*/
+
 
 
                                             ?>
@@ -161,7 +165,16 @@
                                         {
                                         $selected_tags[] = $searchable_tags_attributes['id'];
                                         ?>
-										<li><a class="searchable_tags search_filter tag" data-id="<?php echo $searchable_tags_attributes['id'];?>" data-attr="searchable_tags"><?php echo $searchable_tags_attributes['value'];?></a></li>
+										<li><a class="searchable_tags search_filter tag" data-id="
+										<?php
+                                            echo $searchable_tags_attributes['id'];
+                                            ?>
+                                               "data-attr="searchable_tags">
+                                                <?php
+                                                echo $searchable_tags_attributes['value'];
+                                                ?>
+                                            </a>
+                                        </li>
                                         <?php
                                         }
 
@@ -180,7 +193,7 @@
                                         $selected_categories[] = $category_id_attributes['category_id'];
 
                                         ?>
-										<li><a class="category_id search_filter tag" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title'];?></a></li>
+										<li><a class="category_id search_filter tag" data-id="<?php echo $category_id_attributes['category_id'];?>" data-attr="category_id"   id="<?php echo $category_id_attributes['category_id'];?>"><?php echo $category_id_attributes['title']; ?></a></li>
                                         <?php
                                         }
 
@@ -218,7 +231,10 @@
 									<br />
 									<input type="button" class="reset" style="cursor: pointer;" value="Reset" />
 									<input type="button" class="search" style="cursor: pointer;" value="Search" />
-                                    <a href="{!! url()->full() !!}"><input type="button" id="adv_close" style="cursor: pointer;" value="Close" /></a>
+                                    <a href="{!! url()->full() !!}">
+                                        <input type="button" id="adv_close" style="cursor: pointer;" value="Close"
+                                        />
+                                    </a>
 
 
 
@@ -406,7 +422,12 @@
 
                 $('.productFiltSide').css('display','block');
 
-                data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	<div class="error404img mt50 mb50"></div><div class="error404content text-center"><h2>No Product Found</h2><p>The product you are looking for doesn\'t exist. Try another keyword or return to <a href="<?php echo url('/');?>">home</a></p></div></div>';
+                data = '<div class="error404Wrap ml-auto mr-auto mt70 mb70">	' +
+                    '<div class="error404img mt50 mb50">' +
+                    '</div>' +
+                    '<div class="error404content text-center">' +
+                    '<h2>No Product Found</h2>' +
+                    '<p>The product you are looking for doesn\'t exist. Try another keyword or return to <a href="<?php echo url('/');?>">home</a></p></div></div>';
 
 
                 $("#products").empty().append(data);

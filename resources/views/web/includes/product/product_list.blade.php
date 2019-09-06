@@ -68,8 +68,17 @@
 									else 
 										$price = '';
 								}
-								
-							
+
+							$url = $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code'];
+
+							$hide_class = '';
+							if(isset($category->slug)){
+								if(in_array($category->slug,array('du','etisalat')) ){
+									$url = url('/').'/topup/'.$category->slug;
+									$hide_class = 'hide';
+								}
+							}
+
 						?>
 
 				<div  class="col-sm-6 <?php if(!isset($_REQUEST['category_id'])){ ?>col-md-3 <?php }else { ?> col-md-4<?php } ?> d-flex" >
@@ -94,11 +103,11 @@
 									{{--<button 	data-toggle="modal" data-target=".siginmodal" class="like-btn "><span class="icon-tt-like-icon"></span></button>--}}
 								
 							@endif
-						<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code'];  ?>" >
+						<a href="{!! $url !!}" >
 							<img class="lazyload img-responsive" src='<?php echo $image; ?>' class="img-responsive" width="268px" height="180px"/>
 						</a>
 						<div class="product-detail" id="product-{!! $productItemsList['entity_id'] !!}">
-							<div class="addCartWrap">	
+							<div class="addCartWrap {!! $hide_class !!}">
 							
 									<input type="hidden" class="entity_id" value="<?php if(isset($productItemsList['entity_id'])) echo $productItemsList['entity_id']; ?>" />
 									<input type="hidden" class="product_code" value="<?php if(isset($productItemsList["attributes"]['product_code'])) echo $productItemsList["attributes"]['product_code'] ?>" />
@@ -139,10 +148,10 @@
 							</div>
 							{{--<a href="{!! url('/') !!}/product_detail?entity_type_id=14&product_code={!! $productItemsList['attributes']['product_code'] !!}" class="perishable">{!! $productItemsList['attributes']['product_code'] !!}</a>--}}
 							<h4>
-								<a href="<?php if(isset($productItemsList['attributes']['product_code'])) echo $product_detail_url.'?entity_type_id='.$productItemsList['entity_type_id'].'&product_code='.$productItemsList['attributes']['product_code']; ?>" >
+								<a href="{!! $url !!}" >
 								@if(isset($productItemsList["attributes"]['title'])) {{ $productItemsList["attributes"]['title'] }} @endif</a>
 							</h4>										
-							<div class="product-footer clearfix">
+							<div class="product-footer clearfix {!! $hide_class !!}">
 								<span class="count">
 													
 																    
@@ -157,8 +166,8 @@
 															
 								</span>
 								
-								<?php 
-								
+								<?php
+
 										if(isset($productItemsList["attributes"]['product_promotion_id'])) 
 										{
 											if($productItemsList["attributes"]['product_promotion_id']>0) 
@@ -215,7 +224,7 @@
 											}
 										
 								?>
-								
+
 							</div>
 						</div>
 					</div>
