@@ -480,8 +480,15 @@ class CheckOutController extends WebController {
         $data = [];
         $data['address'] =  null;
         $data['currency'] = $this->_object_helper_customer->getCurrency();
-		return View::make('web/checkout2',$data);
+        $data['currency_conversion'] = $this->_object_helper_customer->getConversionRate();
+
+        return View::make('web/checkout2',$data);
+
+
+
 	}
+
+
 
     /**
      * @param Request $request

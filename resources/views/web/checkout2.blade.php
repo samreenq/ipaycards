@@ -118,6 +118,7 @@
 								<div class="paymentInfoForm">
 									<div class="payment-method">
 
+										<input type="hidden" name="currency_conversion" id="currency_conversion" value="" />
 										<input type="hidden" name="paid_amount" id="paid_amount" value="" />
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
@@ -394,11 +395,11 @@
 
         $('.add-to-cart').on('click',function(){
 
+        	var conversion_rate = "{{ $currency_conversion }}";
             if($('#paid_amount').val() > 0) {
 
-                var amt = $("#paid_amount").val();
+                var amt = $("#paid_amount").val()*conversion_rate;
                 var amount = parseFloat(amt / 100);
-
 
                 localStorage.setItem('charge_type','master_card');
 
@@ -408,7 +409,7 @@
                     data: {
                         _token: "{!! csrf_token() !!}",
                         "lead_order_id": $("#entity_id").val(),
-                        "amount": parseFloat($('#paid_amount').val())
+                        "amount": parseFloat($('#paid_amount').val()*conversion_rate).toFixed(2),
                     },
                     dataType: 'json',
                     success: function (data) {
@@ -416,7 +417,7 @@
                         Checkout.configure({
                             merchant: payment_merchant,
                             order: {
-                                amount: parseFloat($('#paid_amount').val()),
+                                amount: parseFloat($('#paid_amount').val()*conversion_rate).toFixed(2),
                                 currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                 description: 'iPayCards Gift Cards',
                                 id: $("#entity_id").val()

@@ -32,6 +32,15 @@ Class GeneralSetting
      * Get Currency
      * @return bool
      */
+
+    /**
+     * @return SYSTableFlat|string
+     */
+    public function getConversionRate()
+    {
+        return $this->_SYSTableFlatModel->getColumn('currency_conversion');
+    }
+
     public function getCurrency()
     {
        return $this->_SYSTableFlatModel->getColumn('currency');
