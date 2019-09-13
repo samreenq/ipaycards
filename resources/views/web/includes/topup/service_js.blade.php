@@ -86,6 +86,7 @@
             if (currentIndex == 1) {
 
                 $('.alert2').hide();
+                var conversion_rate = "{{ $currency_conversion }}";
 
                 if ($('#amount').val() == '' || $('#customer_no').val() == '' || $('#request_key').val() == '' || $('#service_type').val() == '') {
                     move = false;
@@ -103,7 +104,7 @@
                         type: 'POST',
                         data: {
                             _token: "{!! csrf_token() !!}",
-                            "amount": $('#amount').val(),
+                            "amount": parseFloat($('#amount').val()*conversion_rate).toFixed(2),
                             "data" :{
                                 "service_type": $('#service_type').val(),
                                 "customer_no": $('#customer_no').val(),
@@ -123,7 +124,7 @@
                                 Checkout.configure({
                                     merchant: payment_merchant,
                                     order: {
-                                        amount: $('#amount').val(),
+                                        amount: parseFloat($('#amount').val()*conversion_rate).toFixed(2),
                                         currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                         description: 'Recharge '+$('#service_type').val(),
                                         id: data.lead_topup_id

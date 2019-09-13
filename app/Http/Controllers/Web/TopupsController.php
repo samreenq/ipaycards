@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Libraries\Custom\TopupLib;
+use App\Libraries\GeneralSetting;
 use App\Libraries\System\Entity;
 
 use View;
@@ -22,6 +23,8 @@ Class TopupsController extends WebController
     private $_object_library_entity;
 
     private $_apiData = array();
+    private $_object_helper_customer;
+
 
     /**
      * Sets the $_customer_wallet with wallet Transaction Helper object and
@@ -35,30 +38,37 @@ Class TopupsController extends WebController
     {
         parent::__construct($request);
         $this->_object_library_entity = new Entity();
+        $this->_object_helper_customer = new GeneralSetting();
+        $this->currency_conversion = $this->_object_helper_customer->getConversionRate();
 
     }
 
     public function du(Request $request)
     {
         $data = [];
+        $data['currency_conversion'] = $this->currency_conversion;
         return View::make('web/includes/topup/du',$data);
+
     }
 
     public function etisalat(Request $request)
     {
         $data = [];
+        $data['currency_conversion'] = $this->currency_conversion;
         return View::make('web/includes/topup/etisalat',$data);
     }
 
     public function flyDubai(Request $request)
     {
         $data = [];
+        $data['currency_conversion'] = $this->currency_conversion;
         return View::make('web/includes/topup/fly_dubai',$data);
     }
 
     public function addc(Request $request)
     {
         $data = [];
+        $data['currency_conversion'] = $this->currency_conversion;
         return View::make('web/includes/topup/addc',$data);
     }
 

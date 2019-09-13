@@ -141,7 +141,7 @@
             if (currentIndex == 1) {
 
                 $('.alert2').hide();
-
+                var conversion_rate = "{{ $currency_conversion }}";
                 var otp = '';
                 $('input[name^="otp"]').each(function() {
                     // alert($(this).val());
@@ -180,7 +180,7 @@
                             type: 'POST',
                             data: {
                                 _token: "{!! csrf_token() !!}",
-                                "amount": $('#amount').val(),
+                                "amount": parseFloat($('#amount').val()*conversion_rate).toFixed(2),
                                 "data" :{
                                     "service_type": $('#service_type').val(),
                                     "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
@@ -200,7 +200,7 @@
                                     Checkout.configure({
                                         merchant: payment_merchant,
                                         order: {
-                                            amount: $('#amount').val(),
+                                            amount: parseFloat($('#amount').val()*conversion_rate).toFixed(2),
                                             currency: "{!! config('service.MASTER_CARD.currency') !!}",
                                             description: 'Recharge '+$('#service_type').val(),
                                             id: data.lead_topup_id
