@@ -1482,7 +1482,8 @@ class ProductController extends WebController
         $data = array("entity_type_id"=>'brand',
             'status' => 1,
             'limit'=>10,
-            'order_by' => 'sorting_order');
+            'order_by' => 'sorting_order',
+            'sorting' => 'ASC');
 
         $data['product_detail_url'] = '';
         //$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
