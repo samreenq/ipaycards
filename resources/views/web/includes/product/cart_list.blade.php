@@ -87,7 +87,10 @@ foreach ( $products  as $productItemsList )
 	{
 ?>
 		<div class="cart_empty nav nav-tabs" style="padding-top: 50%;">
-			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  ><img src="{!! url('/').'/public/web/img/Cart-Empty.png' !!}" /></div>
+            <img src="{!! url('/').'/public/web/img/Cart-Empty.png' !!}" />
+			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  >
+
+			</div>
 			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;">
 
 			</div>
