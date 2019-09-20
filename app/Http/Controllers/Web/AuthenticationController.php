@@ -671,7 +671,19 @@ class AuthenticationController extends WebController {
                 TRUE
             );
 
-            return $json;
+            if(isset($json['data']['entity_auth']['platform_type'])) {
+                if ($json['data']['entity_auth']['platform_type'] == 'custom') {
+                    return $json;
+                }
+                else{
+                    return [
+                        'error' => 1,
+                        'message' => 'This feature is not valid for social media login',
+                    ];
+                }
+            }
+
+
 
         }
     }
