@@ -683,7 +683,7 @@ class AuthenticationController extends WebController {
                 }
             }
 
-
+            return $json;
 
         }
     }
