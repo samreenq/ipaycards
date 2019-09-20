@@ -45,7 +45,7 @@ return [
 		// credentials
 		'port' => 2,
 		'sim_id' => '102762',
-		'pin_id' => '3152',
+		'pin_id' => '6171',
 		// recharge type
 		'recharge_type' => [
 			1, // more time

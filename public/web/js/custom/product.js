@@ -2019,7 +2019,7 @@ function load_cart(Request_url1, Request_url2) {
         }
     } else {
 
-        var a = "<div class='cart_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  >Cart is empty!</div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'> You don't have any Cart items</div></div>";
+        var a = "<div class='cart_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  ><img src='"+cart_empty_img+"' /></div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'></div></div>";
         $("#cart").empty().append(a);
 
         if (user_loggedin) {

@@ -1350,6 +1350,13 @@ class SYSEntity extends Base
             $search_columns['status'] = 1;
 
         }
+
+        if($hook == 'brand'){
+            $search_columns['entity_type_id'] = $response_key = $hook;
+            $search_columns['order_by'] = "sorting_order";
+            $search_columns['sorting'] = "ASC";
+
+        }
             else{
                  $search_columns['entity_type_id'] = $response_key = $hook;
             }

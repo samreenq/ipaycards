@@ -10,7 +10,6 @@
 <!-- <script src="js/jquery-3.1.1.min.js" ></script> -->
 <script src='<?php echo url("/")."/public/web/js/jquery.min.js" ?>'></script>
 
-
 <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
 
 
@@ -30,9 +29,11 @@
 {{--<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>--}}
 <script>
 
+    var cart_empty_img = "{!! url('/').'/public/web/img/Cart-Empty.png' !!}";
     var user_loggedin = false;
             @if(Session::has('users')) var user_loggedin = true; @endif
     console.log(user_loggedin);
+
 
 </script>
 

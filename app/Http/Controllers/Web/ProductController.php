@@ -1247,7 +1247,8 @@ class ProductController extends WebController
         }
         else
         {
-            return "<div class='wishlist_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  >Wishlist is empty</div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'> Please Sign In to add Items in Wishlist</div></div>";;
+            $cart_img_url = url('/').'/public/web/img/Wishlist-Empty.png';
+            return "<div class='wishlist_empty nav nav-tabs' style='padding-top: 50%;'><div class='nav-link' style='padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;'  ><img src=".$cart_img_url." /></div><div style='padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;'> Please Sign In to add Items in Wishlist</div></div>";;
         }
 
 

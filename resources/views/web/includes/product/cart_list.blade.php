@@ -87,9 +87,9 @@ foreach ( $products  as $productItemsList )
 	{
 ?>
 		<div class="cart_empty nav nav-tabs" style="padding-top: 50%;">
-			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  >Cart is empty</div>
-			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;"> 
-				You don't have any Cart items
+			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  ><img src="{!! url('/').'/public/web/img/Cart-Empty.png' !!}" /></div>
+			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;">
+
 			</div>
 		</div>
 <?php
@@ -100,9 +100,10 @@ else
 {
 ?>
 		<div class="cart_empty nav nav-tabs" style="padding-top: 50%;">
-			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  >Cart is empty</div>
-			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;"> 
-				You don't have any Cart items
+			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  ><img src="{!! url('/').'/public/web/img/Cart-Empty.png' !!}" /></div>
+			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;">
+				{{--You don't have any Cart items--}}
+
 			</div>
 		</div>
 <?php

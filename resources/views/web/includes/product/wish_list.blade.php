@@ -73,9 +73,9 @@ if(isset($wishlist))
 	{
 ?>		
 		<div class="wishlist_empty nav nav-tabs" style="padding-top: 50%;">
-			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  >Wishlist is empty</div>
+			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  ><img src="{!! url('/').'/public/web/img/Wishlist-Empty.png' !!}" /></div>
 			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;"> 
-				You don't have any Wishlist items
+				{{--You don't have any Wishlist items--}}
 			</div>
 		</div>
 <?php
@@ -86,9 +86,9 @@ else
 {
 ?>
 		<div class="wishlist_empty nav nav-tabs" style="padding-top: 50%;">
-			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  >Wishlist is empty</div>
+			<div class="nav-link" style="padding-left: 30%;font-size: 18px; font-weight: 300; color: #48494d;"  ><img src="{!! url('/').'/public/web/img/Wishlist-Empty.png' !!}" /></div>
 			<div style="padding-left: 15%;font-size: 15px; font-weight: 300; color: #c2c5d1;"> 
-				You don't have any Wishlist items
+				{{--You don't have any Wishlist items--}}
 			</div>
 		</div>
 		
