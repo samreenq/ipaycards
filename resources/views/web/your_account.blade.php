@@ -73,7 +73,7 @@
 							</div>
 							<?php
 
-                            	if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type = 'custom')
+                            	if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type == 'custom')
 									{
 
 							?>
