@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\SYSEntity;
+use App\Http\Models\SYSEntityAuth;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\CustomHelper;
 use App\Libraries\GeneralSetting;
@@ -655,6 +657,23 @@ class AuthenticationController extends WebController {
                 'message' => $validator->errors()->first()
             ];
         } else {
+
+           $sys_entity_auth = new SYSEntityAuth();
+           $entity_auth =  $sys_entity_auth->where('email',$request->email)->first();
+
+           $sys_entity = new SYSEntity();
+            $entity =  $sys_entity->where('entity_auth_id',$entity_auth['entity_auth_id'])->first();
+
+
+            if((isset($entity->entity_id) && $entity->entity_type_id = 11) && isset($entity_auth['platform_type'])) {
+                if ($entity_auth['platform_type'] != 'custom') {
+                    return [
+                        'error' => 1,
+                        'message' => 'This feature is not valid for social media login',
+                    ];
+                }
+            }
+
             $json = json_decode(
                 json_encode(
                     CustomHelper::internalCall(
@@ -671,17 +690,6 @@ class AuthenticationController extends WebController {
                 TRUE
             );
 
-            if(isset($json['data']['entity_auth']['platform_type'])) {
-                if ($json['data']['entity_auth']['platform_type'] == 'custom') {
-                    return $json;
-                }
-                else{
-                    return [
-                        'error' => 1,
-                        'message' => 'This feature is not valid for social media login',
-                    ];
-                }
-            }
 
 
 
