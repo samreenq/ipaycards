@@ -72,7 +72,8 @@
 								</ul>
 							</div>
 							<?php
-                            	if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type != 'facebook')
+
+                            	if(isset($login_customer->auth->platform_type) && $login_customer->auth->platform_type = 'custom')
 									{
 
 							?>
