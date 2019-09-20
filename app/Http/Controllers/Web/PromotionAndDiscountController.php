@@ -117,20 +117,24 @@ class PromotionAndDiscountController extends WebController
 
                 $product_helper = new ProductHelper();
 
-                if(count($json['data']['promotion_discount'])>0){
-                    foreach($json['data']['promotion_discount'] as $promotion){
+                if(isset($json['data']['promotion_discount'][0])){
 
-                        //check if promotion id exist in product table id yes
-                        $products_exist =  $product_helper->checkPromotionExist($promotion['entity_id']);
-                       if($products_exist > 0)
-                            $promotions[] = $promotion;
+                    if(count($json['data']['promotion_discount'])>0){
+                        foreach($json['data']['promotion_discount'] as $promotion){
+
+                            //check if promotion id exist in product table id yes
+                            $products_exist =  $product_helper->checkPromotionExist($promotion['entity_id']);
+                            if($products_exist > 0)
+                                $promotions[] = $promotion;
+                        }
                     }
                 }
+
             }
 
             $data['promotion_discount'] = $promotions;
 			return array(
-			    'count' => isset($json['data']['promotion_discount'])? count($json['data']['promotion_discount']) : 0,
+			    'count' => isset($json['data']['promotion_discount'][0])? count($json['data']['promotion_discount']) : 0,
                     'html' => View::make('web/includes/main/promotion_and_discount',$data)->render());
 		}
 	}
