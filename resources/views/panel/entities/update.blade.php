@@ -26,7 +26,7 @@ $fields = new $fields();
                                 <div class="alert-message"></div>
 
                                 @if(isset($entity_data->show_gallery) && $entity_data->show_gallery == 1)
-                                    @include(config('panel.DIR').'entities/'.$form_template_dir.'update_gallery')
+                                    @include(config('panel.DIR').'entities/'.$form_template_dir.'/update_gallery')
                                 @else
                                     @include(config('panel.DIR').'entities/'.$form_template_dir.'/update_basic')
                                 @endif
