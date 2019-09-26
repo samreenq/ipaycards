@@ -131,4 +131,6 @@ return array (
   'invalid_entity' => 'Invalid entity id',
   'no_attribute_defined' => 'No attributes defined',
     'product_code_redeem' => 'Invalid gift code / It is already redeem',
+    'ipay_wallet'  => 'iPay Wallet',
+
 );

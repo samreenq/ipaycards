@@ -1034,7 +1034,7 @@ Class EntityTrigger
 		    $sys_category_model = new SYSCategory();
 		    $category = $sys_category_model->where('slug','deal')->first();
 
-			$return['category_id'] = isset($category->category_id) ? $category->category_id : '';
+			$return['category_id'] = isset($category->category_id) ? "$category->category_id" : '';
 		}
 		
 		if ( isset($return) ) {

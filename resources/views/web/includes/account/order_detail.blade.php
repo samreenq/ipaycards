@@ -36,7 +36,9 @@
 
 									<div class="odcont col-sm-6 col-md-6 col-lg-3">
 											<h4>Payment</h4>
-											<p><?php if(isset($order_detail['payment_method_type']['option'])) echo $order_detail['payment_method_type']['option']; ?></p>
+											<p><?php if(isset($order_detail['payment_method_type']['option'])) echo $order_detail['payment_method_type']['option'];?></p>
+
+											<p><?php if($order_detail['wallet'] > 0)  echo trans('system.ipay_wallet'); ?></p>
 									
 											
 									</div>
@@ -119,11 +121,11 @@
 											<td class="totalPrice">{!!  $general_setting->getPrettyPrice($order_detail['grand_total']) !!}</td>
 									</tr>
 									<tr>
-										<td class="summaryTitle">Wallet</td>
+										<td class="summaryTitle">Payment via iPay Wallet</td>
 										<td class="summaryPrice">{!!  $general_setting->getPrettyPrice($order_detail['wallet']) !!}</td>
 									</tr>
 									<tr>
-										<td class="summaryTitle">Paid Remaining Amount</td>
+										<td class="summaryTitle">Payment via Master Card</td>
 										<td class="summaryPrice">{!!  $general_setting->getPrettyPrice($order_detail['paid_amount']) !!}</td>
 									</tr>
 									<tr>

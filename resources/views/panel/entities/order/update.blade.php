@@ -77,8 +77,8 @@ if($update){
 
                                 <input type="hidden" id="entity_type_identifier" name="entity_type_identifier" value="{!! $entity_data->identifier !!}"/>
 
-                                @if(isset($entity_data->show_gallery) && $entity_data->show_gallery == 1)
-                                    @include(config('panel.DIR').'entities/'.$form_template_dir.'update_gallery')
+                                @if(isset($entity_data->show_gallery) && $entity_data->show_gallery == 1 && (View::exists(config('panel.DIR').'entities/'.$form_template_dir.'/update_gallery')))
+                                    @include(config('panel.DIR').'entities/'.$form_template_dir.'/update_gallery')
                                 @else
                                     @include(config('panel.DIR').'entities/'.$form_template_dir.'/update_basic')
                                 @endif
