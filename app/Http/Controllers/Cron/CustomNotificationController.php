@@ -39,26 +39,30 @@ Class CustomNotificationController extends Controller {
         );
         $entity_lib = new Entity();
         $getData = $entity_lib->apiList($params);
-        if(count($getData['data']['entity_listing']) && !empty($getData['data']['entity_listing'])){
-            foreach($getData['data']['entity_listing'] as $results){
-                $identifier          = $results->attributes->notify_to->value;
-                $notificationSubject = $results->attributes->subject;
-                $notificationMessage = $results->attributes->message;
-                $notificationStatus  = $results->attributes->notification_status;
-                if($notificationStatus != 1){
-                    if($identifier == 'customer' || $identifier == 'driver'){
-                        self::sendNotificationToTargetUsers($results,$notificationSubject,$notificationMessage,$identifier);
-                    }else{
-                        self::sendNotificationToAllTargetUsers($results,$notificationSubject,$notificationMessage,$identifier);
+       // echo '<pre>'; print_r($getData); exit;
+        if(!empty($getData['data']['entity_listing'])){
+            if(count($getData['data']['entity_listing'])) {
+                foreach ($getData['data']['entity_listing'] as $results) {
+                    $identifier = $results->attributes->notify_to->value;
+                    $notificationSubject = $results->attributes->subject;
+                    $notificationMessage = $results->attributes->message;
+                    $notificationStatus = $results->attributes->notification_status;
+                    if ($notificationStatus != 1) {
+                        if ($identifier == 'customer' || $identifier == 'driver') {
+                            self::sendNotificationToTargetUsers($results, $notificationSubject, $notificationMessage, $identifier);
+                        } else {
+                            self::sendNotificationToAllTargetUsers($results, $notificationSubject, $notificationMessage, $identifier);
+                        }
+                        //update notification flag
+                        $entity_lib = new Entity();
+                        $post_arr['entity_type_id'] = 44;
+                        $post_arr['entity_id'] = $results->entity_id;
+                        $post_arr['notification_status'] = '1';
+                        $data = $entity_lib->doUpdate($post_arr);
+                    } else {
+                        echo 'No record found';
+                        exit;
                     }
-                    //update notification flag
-                    $entity_lib = new Entity();
-                    $post_arr['entity_type_id']      = 44;
-                    $post_arr['entity_id']           = $results->entity_id;
-                    $post_arr['notification_status'] = '1';
-                    $data = $entity_lib->doUpdate($post_arr);
-                }else{
-                    echo 'No record found'; exit;
                 }
             }
        }else{
