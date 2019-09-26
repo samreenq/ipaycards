@@ -107,15 +107,18 @@ Class CustomNotificationController extends Controller {
 
     public function sendNotificationInChunk($identifier,$getData,$notificationSubject,$notificationMessage)
     {
-        if(count($getData['data']['entity_listing']) && !empty($getData['data']['entity_listing']))
+        if(!empty($getData['data']['entity_listing']))
         {
-            foreach($getData['data']['entity_listing'] as $entity)
-            {
-                $entityNotification =  new EntityNotification();
-                $entityNotification->sendNotification($entity,$notificationSubject,$notificationMessage,$identifier);
+            if(count($getData['data']['entity_listing'])>0){
+                foreach($getData['data']['entity_listing'] as $entity)
+                {
+                    $entityNotification =  new EntityNotification();
+                    $entityNotification->sendNotification($entity,$notificationSubject,$notificationMessage,$identifier);
+                }
+                $offset  = $getData['data']['page']['next_offset'];
+                self::getEntityRecordInChunk($identifier,$notificationSubject,$notificationMessage,$offset);
             }
-            $offset  = $getData['data']['page']['next_offset'];
-            self::getEntityRecordInChunk($identifier,$notificationSubject,$notificationMessage,$offset);
+
         }
     }
 
