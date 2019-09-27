@@ -659,21 +659,18 @@ class AuthenticationController extends WebController {
         } else {
 
            $sys_entity_auth = new SYSEntityAuth();
-           $entity_auth =  $sys_entity_auth->where('email',$request->email)->first();
+           $entity_auth =  $sys_entity_auth->where('email',$request->current_email)->first();
 
            if(isset($entity_auth['entity_auth_id'])){
 
                $sys_entity = new SYSEntity();
-               $entity =  $sys_entity->where('entity_auth_id',$entity_auth['entity_auth_id'])->first();
+               $entity =  $sys_entity->where('entity_auth_id',$entity_auth['entity_auth_id'])->where('entity_type_id',11)->first();
 
-
-               if((isset($entity->entity_id) && $entity->entity_type_id = 11) && isset($entity_auth['platform_type'])) {
-                   if ($entity_auth['platform_type'] != 'custom') {
+               if(isset($entity->entity_id) && $entity_auth['platform_type'] != 'custom') {
                        return [
                            'error' => 1,
                            'message' => 'This feature is not valid for social media login',
                        ];
-                   }
                }
            }
            else{

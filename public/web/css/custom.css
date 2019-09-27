@@ -7267,3 +7267,5 @@ select:-webkit-autofill:focus {
     width: 138px;
     height: 125px;
 }
+.termandcond-right-txt-bg ul {padding-left: 40px;}
+.termandcond-right-txt-bg li {list-style: disc;font-size: 15px;margin-bottom: 15px;font-weight: 300;}
