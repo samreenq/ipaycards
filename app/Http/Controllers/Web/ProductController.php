@@ -462,6 +462,7 @@ class ProductController extends WebController
 	
 	public function getAllProduct(Request $request) 
 	{
+
         $data['cat_id'] = isset($request->category_id) ? $request->category_id : '';
 
         if(isset($request->category_id)){
@@ -477,6 +478,8 @@ class ProductController extends WebController
             else{
                 $categories = $sys_category->getData($category_raw->parent_id);
             }
+
+
            // echo "<pre>"; print_r($categories); exit;
         }
 

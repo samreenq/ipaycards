@@ -89,6 +89,7 @@ class CategoryController extends Controller
             'parent_id' => 'required_if:is_parent,0',
             'is_featured' => 'required_if:is_parent,1',
             'is_gift_card' => 'required_if:is_parent,1',
+
            // 'featured_type' => 'required_if:is_featured,1'
          );
 
@@ -144,6 +145,7 @@ class CategoryController extends Controller
             $entity["top_category"] = $request->input('top_category', 0);
             $entity["is_gift_card"] = $request->input('is_gift_card', 0);
             $entity["created_at"] = date("Y-m-d H:i:s");
+            $entity["slug"] = str_slug($request->title, '-');
 
             $entity_id = $this->_entity_model->put($entity);
           // $this->_entity_model->addParentList($entity_id);
@@ -319,6 +321,9 @@ class CategoryController extends Controller
             $entity["top_category"] = $request->input('top_category', 0);
             $entity["is_gift_card"] = $request->input('is_gift_card', 0);
             $entity["updated_at"] = date("Y-m-d H:i:s");
+            if($entity["slug"] == ""){
+                $entity["slug"] = str_slug($request->title, '-');
+            }
            // echo "<pre>"; print_r($entity); exit;
 
             $entity_id = $this->_entity_model->set($entity[$this->_entity_pk], $entity);
