@@ -107,17 +107,17 @@
 
                 ?>
                 <ul class="nav navbar-nav navbar-right header-cart">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle p-0" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Recharge
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>
-                            <a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>
-                            <a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>
-                            <a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>
-                        </div>
-                    </li>
+{{--                    <li class="dropdown">--}}
+{{--                        <a class="dropdown-toggle p-0" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                            Recharge--}}
+{{--                        </a>--}}
+{{--                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--}}
+{{--                            <a class="dropdown-item" href="{!! url('/').'/topup/du' !!}">Du</a>--}}
+{{--                            <a class="dropdown-item" href="{!! url('/').'/topup/etisalat' !!}">Etisalat</a>--}}
+{{--                            <a class="dropdown-item" href="{!! url('/').'/fly_dubai' !!}">Fly Dubai</a>--}}
+{{--                            <a class="dropdown-item" href="{!! url('/').'/addc' !!}">Addc</a>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li><a href="{{ route('account_detail') }}" >@lang('web.navbar_menu_account')</a></li>
                     <li><a href="javascript:void(0)" id="signout" >@lang('web.navbar_menu_sign_Out')</a></li>
                 </ul>

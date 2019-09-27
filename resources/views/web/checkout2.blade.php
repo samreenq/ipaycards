@@ -176,7 +176,7 @@
 								<div class="checkOrderTotal">
 
 									<table width="100%"> 
-									
+
 									
 										<tr>
 											<td class="summaryTitle">Order Price</td>
@@ -193,8 +193,12 @@
 											<td class="summaryPrice delivery_charge">{!! $currency !!} 0.00</td>
 										</tr>--}}
 										<tr>
-											<td class="summaryTitle">Wallet Amount</td>
+											<td class="summaryTitle">Amount in iPay Wallet</td>
 											<td class="summaryPrice customer_wallet">{!! $currency !!} 0.00</td>
+										</tr>
+										<tr>
+											<td class="summaryTitle">Amount from Master Card</td>
+											<td class="summaryPrice paid_amount">{!! $currency !!} 0.00</td>
 										</tr>
 										{{--<tr>
 											<td class="summaryTitle">Loyalty Points</td>
