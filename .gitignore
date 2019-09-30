@@ -19,7 +19,7 @@ resources.rar
 /public/import/
 /public/system/
 /composer.lock
-vendor/
+vendor/*
 config.php
 /storage/logs/*
 /public/files/*
