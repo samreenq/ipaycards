@@ -38,7 +38,7 @@
 											<h4>Payment</h4>
 											<p><?php if(isset($order_detail['payment_method_type']['option'])) echo $order_detail['payment_method_type']['option'];?></p>
 
-											<p><?php if($order_detail['wallet'] > 0)  echo trans('system.ipay_wallet'); ?></p>
+											<p><?php if($order_detail['wallet'] > 0 && $order_detail['payment_method_type']['value'] != 'cod')  echo trans('system.ipay_wallet'); ?></p>
 									
 											
 									</div>

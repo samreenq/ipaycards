@@ -4,12 +4,13 @@
  *  Custom Constants
  * ---------------------------------------------------------------
  */
+
 set_time_limit(0);
 // App constants
 define('APP_NAME', 'iPayCards'); // app name
 // HTTP Protocol
 define('HTTP_TYPE', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://');
-
+define('APP_URL', HTTP_TYPE . $_SERVER['HTTP_HOST'].'/');
 // Master Database Constants
 if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
 
@@ -30,7 +31,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
 } elseif (preg_match('/staging/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'staging/ipay-cards/'); // preceding path to app dir
+    define('ADD_PATH', 'staging/ipaycards/'); // preceding path to app dir
     define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
     // db details
     define('MASTER_DB_HOST', 'sandbox4.cubix.co');
@@ -43,7 +44,7 @@ else {
 
     // app dir details
     define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'project/ipay-cards/'); // preceding path to app dir
+    define('ADD_PATH', 'project/ipaycards/'); // preceding path to app dir
     define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
     // db details
     define('MASTER_DB_HOST', 'sandbox4.cubix.co');
@@ -54,7 +55,7 @@ else {
 
 }
 
-
+define('APP_FULL_URL',APP_URL.ADD_PATH);
 define('MAIL_DRIVER', 'smtp'); // "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
 define('MAIL_HOST', 'smtp.gmail.com');
 define('MAIL_PORT', 587);
