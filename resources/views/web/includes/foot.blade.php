@@ -569,7 +569,7 @@
                         console.log(data.error);
                         if (data.error == 1) {
                             $(".signup_error").addClass('alert alert-danger');
-                            $(".signup_error").empty().append("Please fill all fields");
+                            $(".signup_error").empty().append("");
                         } else {
                             $(".signup_error").empty();
                             $('.stepwizard-step a[href="#step-1"]').attr('disabled', 'disabled');

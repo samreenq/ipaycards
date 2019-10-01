@@ -152,7 +152,7 @@
                     data:{gift_code:$('#gift_code').val(), _token:'{{ csrf_token() }}' },
                     success: function(data){
                         //var obj = JSON.parse(data);
-                        console.log(data);
+
                         if(data.error == 1){
 
                             $(".errorDiv").addClass('alert alert-danger');
@@ -166,7 +166,9 @@
 
                             $(".errorDiv").addClass('alert alert-success');
                             $(".errorDiv").empty().append(data.message);
-                            $(".gift_code").empty().append("");mydatatable_wrapper
+                            $(".gift_code").empty().append("");
+                            $('#gift_code').val("");
+
                         }
                     }
                 });

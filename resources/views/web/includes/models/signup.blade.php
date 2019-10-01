@@ -24,8 +24,8 @@
 				  </div>
 				</div>
 			 </div>
-			  
-			
+
+
 				<div class="row setup-content" id="step-1">
 					<div class="col-md-12">
 					    <h3>Account</h3>
@@ -40,14 +40,14 @@
 
 						{{--<div class="g-signin2" data-theme="dark" data-width="445px" data-height="50px" onclick="gmailLogin()"></div>--}}
 						<div class="fluid-label">
-						  <input id="email" name="email" type="email" required="required" class="form-control" placeholder="Email" />
+						  <input id="email" name="email" type="email"  class="form-control" placeholder="Email" />
 						   <input id="url"  name="url"	type="hidden" value="<?php  echo url()->current(); ?>">
 							<input id="url1"  name="url1"	type="hidden" value="<?php echo url('/').'/signin_step1'; ?>">
 
 						 <label>Email</label>
 						</div>
 						<div class="fluid-label">
-						  <input id="password2" name="password" type="password" required="required" class="form-control" placeholder="Password" />
+						  <input id="password2" name="password" type="password"  class="form-control" placeholder="Password" />
 						  <label>Password</label>
 						</div>
 						<div class="clearfix forgotWrap">
@@ -125,7 +125,7 @@
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<button id="signup"  class="nextBtn" type="submit" >Sign Up</button>
 						</div>
-					  
+
 					</div>
 				</div>
 				

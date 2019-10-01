@@ -276,6 +276,7 @@ class WalletController extends WebController
                         'error' => 0,
                         'message'=> 'Gift Card redeemed successfully, please check your wallet.'
                     );
+
                 }
                 else{
                     return array(
