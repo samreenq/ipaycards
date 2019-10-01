@@ -339,6 +339,7 @@ Route::get('/chat', "Web\AboutBusinessController@chat")->name('zendesk_chat');
 Route::any('social/login', 'Web\AuthenticationController@socialLogin');
 Route::get('login/{provider}', 'Web\SocialController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Web\SocialController@handleProviderCallback');
+Route::get('test-mail', 'Web\AboutBusinessController@testEmail');
 
 ////end//////////
 

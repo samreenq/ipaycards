@@ -248,7 +248,7 @@ class Base extends Model
      * @param : $data (array of data)
      * @return bool
      */
-    function sendMail($to, $msg, $data = array(), $files = array(), $ex_headers = array())
+    function sendMail($to, $msg, $data = array(), $files = array(), $ex_headers = array(),$template = 'mail')
     {
         // init vars
         $charset = "utf-8";
@@ -331,7 +331,7 @@ class Base extends Model
         //die($msg);
        // return @mail($to_email, $data["subject"], $message, implode("\r\n", $headers));
         $data['send_to_mail'] = $to_email;
-       \Mail::send('emails.mail', ['data' => $msg], function ($mail) use ($data) {
+       \Mail::send('emails.'.$template, ['data' => $msg], function ($mail) use ($data) {
             $mail->to($data['send_to_mail'])
                 ->subject($data['subject'])
                 ->from($data['from']);

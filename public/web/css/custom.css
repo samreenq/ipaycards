@@ -2418,7 +2418,7 @@ table tr.borderB td div{
     display: block;
 }
 .greedy-nav .hidden{
-    display:none;
+   display:none;
 }
 
 .topupMenu .greedy-nav button{color: #000;}
@@ -5138,7 +5138,7 @@ li.wishlist {
     /* width: 80%; */
     font-weight: 300;
     line-height: 27px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 .termandcond-right-side p.date-update {
     font-size: 15px;

@@ -65,7 +65,6 @@ class SocialController extends WebController
                     return redirect('/');
                 }
 
-                // echo '<pre>'; print_r($user); exit;
                 $username = explode(' ', $user->name);
                 $first_name = $username[0];
                 $last_name = isset($username[1]) ? $username[1] : '';

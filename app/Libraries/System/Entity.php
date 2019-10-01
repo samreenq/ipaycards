@@ -650,7 +650,7 @@ Class Entity extends Base
             $this->_apiData['message'] = trans($this->_langIdentifier.".success");
 
         } catch (\Exception $e) {
-            //  echo $e->getTraceAsString(); exit;
+            // echo $e->getTraceAsString(); exit;
             $this->_apiData['message'] = $e->getMessage();
           $this->_apiData['debug'] = 'File : ' . $e->getFile() . ' : Line ' . $e->getLine() . " : Stack " . $e->getTraceAsString();
         }

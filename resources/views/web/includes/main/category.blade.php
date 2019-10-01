@@ -6,8 +6,7 @@
                     @foreach($categories as $category)
 
                      <?php
-                          if($category->slug == 'deal')
-                                continue;
+
 
                        // echo "<pre>"; print_r($category);
                         //Get image of product
@@ -16,7 +15,7 @@
 
                        ?>
 
-                    <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="col-sm-6 col-md-6 col-lg-3">More
                         <div class="product-wrap whitebg">
                             <a href="{!! url('/').'/product?category_id='.$category->category_id !!}" >
                             <img width="268px" height="180px"    src='<?php echo $image; ?>' class="img-responsive" />

@@ -1032,7 +1032,7 @@ Class EntityTrigger
 		
 		if ( $request->item_type == 'deal' ) {
 		    $sys_category_model = new SYSCategory();
-		    $category = $sys_category_model->where('slug','deal')->first();
+		    $category = $sys_category_model->where('slug','deal')->where('deleted_at',null)->first();
 
 			$return['category_id'] = isset($category->category_id) ? "$category->category_id" : '';
 		}
@@ -1064,7 +1064,7 @@ Class EntityTrigger
 		
 		if ( $request->item_type == 'deal' ) {
             $sys_category_model = new SYSCategory();
-            $category = $sys_category_model->where('slug','deal')->first();
+            $category = $sys_category_model->where('slug','deal')->where('deleted_at',null)->first();
 
             $return['category_id'] = isset($category->category_id) ? $category->category_id : '';
 		}
