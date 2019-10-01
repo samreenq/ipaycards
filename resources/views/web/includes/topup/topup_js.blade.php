@@ -26,6 +26,7 @@
     $("a[href$='previous']").hide();
 
 
+
     form.steps({
         headerTag: "h3",
         bodyTag: "fieldset",

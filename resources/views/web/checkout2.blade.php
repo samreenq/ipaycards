@@ -193,7 +193,7 @@
 											<td class="summaryPrice delivery_charge">{!! $currency !!} 0.00</td>
 										</tr>--}}
 										<tr>
-											<td class="summaryTitle">Amount in iPay Wallet</td>
+											<td class="summaryTitle">Amount from iPay Wallet</td>
 											<td class="summaryPrice customer_wallet">{!! $currency !!} 0.00</td>
 										</tr>
 										<tr>
@@ -220,7 +220,7 @@
 										<tr class="borderB"><td colspan="2"><div></div></td></tr>
 										<tr>
 											<td class="summaryTitle">Order Total</td>
-											<td class="paid_amount totalPrice">{!! $currency !!}</td>
+											<td class="subtotal totalPrice">{!! $currency !!} 0.00</td>
 										</tr>
 										<tr>
 											<td colspan="2"  align="center"></td>

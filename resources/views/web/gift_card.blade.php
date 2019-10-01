@@ -166,6 +166,7 @@
 
                             $(".errorDiv").addClass('alert alert-success');
                             $(".errorDiv").empty().append(data.message);
+                            $(".gift_code").empty().append("");mydatatable_wrapper
                         }
                     }
                 });
