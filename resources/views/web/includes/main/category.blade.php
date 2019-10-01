@@ -7,7 +7,6 @@
 
                      <?php
 
-
                        // echo "<pre>"; print_r($category);
                         //Get image of product
                         $gallery = isset($category->image) ? json_decode(json_encode($category->image)) : false;
@@ -15,7 +14,7 @@
 
                        ?>
 
-                    <div class="col-sm-6 col-md-6 col-lg-3">More
+                    <div class="col-sm-6 col-md-6 col-lg-3">
                         <div class="product-wrap whitebg">
                             <a href="{!! url('/').'/product?category_id='.$category->category_id !!}" >
                             <img width="268px" height="180px"    src='<?php echo $image; ?>' class="img-responsive" />
