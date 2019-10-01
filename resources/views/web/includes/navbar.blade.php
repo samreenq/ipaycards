@@ -155,5 +155,11 @@
                 <a href="javascript:void(0)" id="cartList"><span class="icon-tt-cart-Icon"></span><span class="orderNotification" style="display:none"></span></a></li>
             </div>
         </div>
+
     </nav>
+    @if (Session::has('social_message'))
+        <div class="alert alert-danger fb-error" style="width: 50%;margin-left: 25%;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{!! Session::get('social_message') !!}</div>
+        {{ Session::forget('social_message') }}
+    @endif
 @show

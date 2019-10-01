@@ -48,7 +48,8 @@ class SocialController extends WebController
             try {
                 $row = Socialite::driver($provider)->stateless()->user();
             } catch (InvalidStateException $e) {
-                return redirect('/')->with('message', $e->getMessage());
+                \Session::put('social_message',  $e->getMessage());
+                return redirect('/');
             }
 
             $platform = ($provider == 'google') ? 'gplus' : $provider;
@@ -58,6 +59,12 @@ class SocialController extends WebController
             if (isset($row->user)) {
 
                 $user = (object)$row->user;
+
+                if(!isset($user->email) || (isset($user->email) && empty($user->email))) {
+                    \Session::put('social_message', "Social Login: You cannot login without email, Please use another account.");
+                    return redirect('/');
+                }
+
                 // echo '<pre>'; print_r($user); exit;
                 $username = explode(' ', $user->name);
                 $first_name = $username[0];
@@ -71,7 +78,7 @@ class SocialController extends WebController
                             'POST',
                             [
                                 'entity_type_id' => 11,
-                                'name' => $user->name,
+                                'name' => isset($user->name) ? $user->name : '',
                                 'first_name' => $first_name,
                                 'last_name' => $last_name,
                                 'platform_type' => $platform,
@@ -125,6 +132,7 @@ class SocialController extends WebController
             return redirect('/');
         }
         catch (\Exception $ee){
+            \Session::put('social_message',  $ee->getMessage());
             return redirect('/')->with('message',$ee->getMessage());
         }
 
