@@ -19,7 +19,8 @@
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "~2.1.0",
         "nesbot/carbon": "^1.19",
-        "stripe/stripe-php": "^4.12"
+        "stripe/stripe-php": "^4.12",
+        "authy/php": "3.0.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
