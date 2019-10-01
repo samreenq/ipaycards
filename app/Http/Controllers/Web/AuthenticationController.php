@@ -182,11 +182,11 @@ class AuthenticationController extends WebController {
 	public function signup(Request $request) 
 	{
 		$rules  =  array(
-		    'first_name' => 'required',
+		    'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
 		    'email' =>  'required|email',
             'mobile_no' => 'required|mobile',
             'term_condition' => 'required',
-            'last_name' => 'required',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
             );
 
 		$msgs = [
