@@ -3090,7 +3090,7 @@ function changeYourAccountDetail(changeYourAccountDetailUrl) {
                         clearInterval(timerA);
                     }, 2000);
 
-
+                    location.reload();
                     /*$("#account_response").css("color", "white");
                     $("#account_response").css("background-color",'#d4edda');
                     $("#account_response").css("border-color",'#d4edda');*/

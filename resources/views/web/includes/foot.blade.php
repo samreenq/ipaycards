@@ -361,6 +361,7 @@
         });
 
         $("#signup").on("click", function (e) {
+
             var terms_condition = '';
 
             if ($('#term_condition').is(":checked")) {
@@ -516,6 +517,7 @@
         });
 
         allNextBtn.click(function () {
+
             var curStep = $(this).closest(".setup-content"),
                 curStepBtn = curStep.attr("id"),
                 nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
@@ -532,11 +534,25 @@
 
             if (isValid) {
 
-
-                if ($(".signup_error").hasClass('alert')) {
-                    $(".signup_error").text('');
-                    $(".signup_error").removeClass('alert alert-danger');
+                if($(".signup_error").hasClass('alert')){
+                    $(".signup_error").removeClass('alert alert-danger')
                 }
+
+                //if email is empty
+                if($('#step-1 input[name="email"]').val() == ''){
+                    $(".signup_error").addClass('alert alert-danger');
+                    $(".signup_error").empty().append("Email field is required");
+                    return false;
+                }
+
+
+                //if password is empty
+                if($('#step-1 input[name="password"]').val() == ''){
+                    $(".signup_error").addClass('alert alert-danger');
+                    $(".signup_error").empty().append("Password field is required");
+                    return false;
+                }
+
 
                 //var token = "{{ csrf_token() }}";
                 $.ajax({
@@ -553,7 +569,7 @@
                         console.log(data.error);
                         if (data.error == 1) {
                             $(".signup_error").addClass('alert alert-danger');
-                            $(".signup_error").empty().append(data.message);
+                            $(".signup_error").empty().append("");
                         } else {
                             $(".signup_error").empty();
                             $('.stepwizard-step a[href="#step-1"]').attr('disabled', 'disabled');

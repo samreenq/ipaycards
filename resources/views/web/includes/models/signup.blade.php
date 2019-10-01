@@ -24,8 +24,8 @@
 				  </div>
 				</div>
 			 </div>
-			  
-			
+
+
 				<div class="row setup-content" id="step-1">
 					<div class="col-md-12">
 					    <h3>Account</h3>
@@ -125,7 +125,7 @@
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 							<button id="signup"  class="nextBtn" type="submit" >Sign Up</button>
 						</div>
-					  
+
 					</div>
 				</div>
 				

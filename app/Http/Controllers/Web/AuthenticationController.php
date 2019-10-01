@@ -183,9 +183,10 @@ class AuthenticationController extends WebController {
 	{
 		$rules  =  array(
 		    'first_name' => 'required',
-		    'email' =>  'required',
+		    'email' =>  'required|email',
             'mobile_no' => 'required|mobile',
             'term_condition' => 'required',
+            'last_name' => 'required',
             );
 
 		$msgs = [

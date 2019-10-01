@@ -82,9 +82,9 @@
 					</div>
 				</div>
 				<div class="container">
-					<div class="proAdvSearchcBtn text-right">
-						<input type="button" class="advance_search" value="Advance Search" />
-					</div>	
+{{--					<div class="proAdvSearchcBtn text-right">--}}
+{{--						<input type="button" class="advance_search" value="Advance Search" />--}}
+{{--					</div>	--}}
 					<div class="row">
 						
 						
