@@ -6,8 +6,6 @@
                     @foreach($categories as $category)
 
                      <?php
-//                          if($category->slug == 'deal')
-//                                continue;
 
                        // echo "<pre>"; print_r($category);
                         //Get image of product

@@ -449,6 +449,7 @@ class SYSEntityAuth extends Base
             if(trim($entity_type_identifier) == 'customer'){
                 $login_link =  '+'.$data->mobile_no;
                 $email_template_slug = '_signup_customer';
+                $template = 'welcome';
             }
             elseif(trim($entity_type_identifier) == 'driver'){
                 $setting = $setting_model->getBy('key', 'driver_app_url');
@@ -457,6 +458,7 @@ class SYSEntityAuth extends Base
             }else{
                 $login_link =  \URL::to($dir_path . "login/");
                 $email_template_slug = '_signup_confirmation';
+                $template = 'mail';
             }
 
             # load email template
@@ -489,11 +491,20 @@ class SYSEntityAuth extends Base
 
             # subject
             $data->subject = str_replace($wildcard['key'], $wildcard['replace'], $email_template->subject);
+
+            if(trim($entity_type_identifier) == 'customer'){
+              $msg_body =  ['name'=> $data->name, 'body'=> $body];
+            }else{
+                $msg_body = $body;
+            }
             # send email
             $this->sendMail(
                 array($data->email, $data->name),
-                $body,
-                (array)$data
+                $msg_body,
+                (array)$data,
+                array(),
+                false,
+                $template
             );
             // unset non-column data
             unset($data->from, $data->from_name, $data->subject);

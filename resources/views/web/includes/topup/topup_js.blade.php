@@ -23,8 +23,8 @@
 
     var form = $("#topup-form");
 
-    $("a[href$='previous']").hide();
-
+   // $("a[href$='previous']").hide();
+    $("a[href='previous']").hide();
 
 
     form.steps({
@@ -32,7 +32,7 @@
         bodyTag: "fieldset",
         transitionEffect: "slideLeft",
         labels: {
-            previous: 'Previous',
+            previous: '',
             next: 'Next',
             finish: 'Submit',
             current: ''

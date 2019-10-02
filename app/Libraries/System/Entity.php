@@ -650,7 +650,7 @@ Class Entity extends Base
             $this->_apiData['message'] = trans($this->_langIdentifier.".success");
 
         } catch (\Exception $e) {
-            //  echo $e->getTraceAsString(); exit;
+            // echo $e->getTraceAsString(); exit;
             $this->_apiData['message'] = $e->getMessage();
           $this->_apiData['debug'] = 'File : ' . $e->getFile() . ' : Line ' . $e->getLine() . " : Stack " . $e->getTraceAsString();
         }
@@ -1728,7 +1728,7 @@ Class Entity extends Base
             $record = $this->_entityModel->get($request->{$this->_entityModel->primaryKey});
             // delete data to sys_entity_auth table
             if (isset($record->entity_auth_id) && $record->entity_auth_id > 0) {
-                $this->_entityAuthModel->remove($record->{$this->_entityModel->primaryKey});
+                $this->_entityAuthModel->remove($record->{$this->_entityAuthModel->primaryKey});
             }
             // delete data to sys_entity table
             $this->_entityModel->remove($request->{$this->_entityModel->primaryKey});

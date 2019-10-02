@@ -6,7 +6,8 @@
 <script>
 
 
-    $("a[href$='previous']").hide();
+   // $("a[href$='previous']").hide();
+    $("a[href='previous']").hide();
 
     var form = $("#topup-form");
   /*  $("a[href$='previous']").hide();*/

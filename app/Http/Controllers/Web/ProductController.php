@@ -519,7 +519,7 @@ class ProductController extends WebController
 					json_encode(
 						$this->_object_library_entity->apiList(
 							[
-								'entity_type_id'=>41, 
+								'entity_type_id'=> 'product_tags',
 								'mobile_json'=>1, 
 								'limit'=>1000,
 								'entity_id'=> ''
@@ -528,8 +528,68 @@ class ProductController extends WebController
 					),
 					true
 				);
-		//echo "<pre>"; print_r($json2); exit;
 
+       // echo "<pre>"; print_r($json2); exit;
+            if(isset($json2['data']['product_tags'][0]['category_id'][0])){
+
+                $sys_category = new SYSCategory();
+                $arr = [];
+
+                foreach($json2['data']['product_tags'][0]['category_id'] as $search_cat){
+
+                   // echo "<pre>"; print_r($search_cat);
+                    $cat_count = $sys_category->where('category_id',$search_cat['category_id'])->where('status',1)
+                        ->where('deleted_at',null)
+                        ->first();
+                   // echo "<pre>"; print_r($cat_count);
+                    if(isset($cat_count->category_id)){
+                        $arr[] = $search_cat;
+                    }
+                }
+
+                unset( $json2['data']['product_tags'][0]['category_id']);
+               $json2['data']['product_tags'][0]['category_id'] = $arr;
+            }
+       // echo "<pre>"; print_r($json2['data']['product_tags'][0]['brand_ids']); exit;
+        if(isset($json2['data']['product_tags'][0]['brand_ids'][0])){
+
+            $sys_brand = new SYSTableFlat('brand');
+            $arr = array();
+
+            foreach($json2['data']['product_tags'][0]['brand_ids'] as $search_cat){
+
+               $brand =  $sys_brand->getDataByWhere('entity_id = '.$search_cat['id'].' AND (`status` = 1 AND deleted_at is null)');
+              //  echo "<pre>"; print_r($brand); exit;
+               if(isset($brand[0]->entity_id)){
+                    $arr[] = $search_cat;
+                }
+            }
+
+            unset( $json2['data']['product_tags'][0]['brand_ids']);
+            $json2['data']['product_tags'][0]['brand_ids'] = $arr;
+        }
+
+        if(isset($json2['data']['product_tags'][0]['searchable_tags'][0])){
+
+            $sys_brand = new SYSTableFlat('tags');
+            $arr = array();
+
+            foreach($json2['data']['product_tags'][0]['searchable_tags'] as $search_cat){
+
+                $brand =  $sys_brand->getDataByWhere('entity_id = '.$search_cat['id'].'  AND deleted_at is null');
+                //  echo "<pre>"; print_r($brand); exit;
+                if(isset($brand[0]->entity_id)){
+                    $arr[] = $search_cat;
+                }
+            }
+
+            unset( $json2['data']['product_tags'][0]['searchable_tags']);
+            $json2['data']['product_tags'][0]['searchable_tags'] = $arr;
+        }
+
+
+
+      //  echo "<pre>"; print_r($json2); exit;
 		$post_param = $request->all();
 		$request->request->remove('category_id');
 		$post_param = $request->all();
