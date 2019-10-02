@@ -22,11 +22,6 @@
             background: #f1f1f1;
         }
 
-        p,
-        ul{
-            color: #767475;
-            font: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
-        }
         /* What it does: Stops email clients resizing small text. */
         * {
             -ms-text-size-adjust: 100%;
@@ -59,9 +54,6 @@
         }
 
         /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
-        a {
-            text-decoration: none;
-        }
 
         /* What it does: A work-around for email clients meddling in triggered links. */
         *[x-apple-data-detectors],  /* iOS */
@@ -93,30 +85,6 @@
             display: none !important;
         }
 
-        ul.social{
-            padding: 0;
-            margin-bottom: 0px;
-        }
-        ul.social li{
-            display: inline-block;
-            margin-right: 10px;
-            /*border: 1px solid #74b49b;*/
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(0,0,0,.05);
-            margin-bottom: 0px;
-        }
-
-        ul.icons{
-            padding: 0;
-        }
-
-        ul.icons li{
-            display: inline-block;
-            /*border: 1px solid #74b49b;*/
-            padding: 10px;
-            padding-top: 0px;
-        }
         /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
         /* Create one of these media queries for each additional viewport size you'd like to fix */
 
@@ -166,24 +134,6 @@
             padding: 1em 2em;
         }
 
-        /*BUTTON*/
-        .btn{
-            padding: 13px 85px;
-        }
-        .btn.btn-primary{
-            border-radius: 30px;
-            background: #00728C;
-            color: #ffffff;
-
-        }
-
-
-
-        h1,h2,h3,h4,h5,h6{
-            font-family: 'Playfair Display', serif;
-            color: #000000;
-            margin-top: 0;
-        }
 
         body{
             font-family: 'Montserrat', sans-serif;
@@ -312,49 +262,6 @@
 
         }
 
-
-        /*VIDEO*/
-        .img{
-            width: 100%;
-            height: auto;
-            position: relative;
-        }
-        .img .icon{
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin-top: -25px;
-        }
-        .img .icon a{
-            display: block;
-            width: 60px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            margin-left: -25px;
-        }
-
-
-
-        /*COUNTER*/
-        .counter-text{
-            text-align: left;
-        }
-        .counter-text .num{
-            display: block;
-            color: #ffffff;
-            font-size: 34px;
-            font-weight: 700;
-        }
-        .counter-text .name{
-            display: block;
-            color: rgba(255,255,255,.9);
-            font-size: 13px;
-        }
-
-
         /*FOOTER*/
 
         .footer{
@@ -416,12 +323,12 @@
         </tr><!-- end tr -->
         <tr>
             <td>
-                <img src="{!! url('/').'/public/web/img/emails/iPaycardsLogo.png' !!}" alt="" style="width: 70px; padding: 20px 10px 20px 20px">
+                <img src="{!! url('/').'/public/web/img/emails' !!}/iPaycardsLogo.png" alt="" style="width: 70px; padding: 20px 10px 20px 20px">
             </td>
         </tr><!-- end tr -->
         <tr>
             <td>
-                <img src="{!! url('/').'/public/web/img/emails/MainBanner.jpg' !!}" alt="" style="width: 560px; padding: 0 20px">
+                <img src="{!! url('/').'/public/web/img/emails' !!}/MainBanner.jpg" alt="" style="width: 560px; padding: 0 20px">
             </td>
         </tr><!-- end tr -->
 
@@ -432,28 +339,28 @@
 
                     <tr>
                         <td class="email-section">
-                            <div class="heading-section" style="text-align:left; padding: 0 0px;">
-                                <p>Dear {!! $data['name'] !!}</p><p>Thanks for signing up to iPayCards – your gateway to fun and games.</p>
-                                <p>On iPayCards you can find all your <b>favorite U.S. and U.K. store entertainment, gaming, shopping and music cards</b> or even recharge your phone, Salik and other. You can also buy gift cards for your friends use on our App and Website.</p>
-                                <p>Here’s a preview of what’s in store for you – and remember, <b>its all digital so you can use your vouchers immediately!</b> </p>
-                               <?php echo $data['body']; ?>
+                            <div class="heading-section" style="text-align:left; padding: 0 20px;">
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px; padding-top:10px;">Dear {!! $data['name'] !!},</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">Thanks for signing up to iPayCards – your gateway to fun and games.</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">On iPayCards you can find all your <b>favorite U.S. and U.K. store entertainment, gaming, shopping and music cards</b> or even recharge your phone, Salik and other. You can also buy gift cards for your friends use on our App and Website.</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px;">Here’s a preview of what’s in store for you – and remember, <b>its all digital so you can use your vouchers immediately!</b> </p>
                         </td>
                     </tr><!-- end tr -->
 
                     <tr>
                         <td>
-                            <img src="{!! url('/').'/public/web/img/emails/Brands.jpg' !!}" alt="" style="width: 560px; padding: 0 20px">
+                            <img src="{!! url('/').'/public/web/img/emails' !!}/Brands.jpg" alt="" style="width: 560px; padding: 0 20px">
                         </td>
                     </tr><!-- end tr -->
                     <tr>
                         <td class="email-section">
-                            <div class="heading-section" style="text-align:left; padding: 0 0px;">
+                            <div class="heading-section" style="text-align:left; padding: 0 20px;">
 
-                                <p> To get started, head back to our App or Website and begin shopping.</p>
-                                <p>If you like what you see, you can also tell your friends and get rewards so you can shop more for less as long as you like.</p>
-                                <p>We’re always here to help and listen to your feedback. Let us know what you think by emailing us on <a href="mailto:help@iPayCards.com">help@iPayCards.com</a> or Chat with us directly on our App and Website.</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">To get started, head back to our App or Website and begin shopping.</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">If you like what you see, you can also tell your friends and get rewards so you can shop more for less as long as you like.</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:10px;">We’re always here to help and listen to your feedback. Let us know what you think by emailing us on <a href="mailto:help@iPayCards.com">help@iPayCards.com</a> or Chat with us directly on our App and Website.</p>
 
-                                <p>Have a great experience!<br>The iPayCards Team</p>
+                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:15px;">Have a great experience!<br>The iPayCards Team</p>
 
                         </td>
                     </tr>
@@ -462,15 +369,17 @@
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
             <td width="100%" style="text-align: center;">
-                <hr>
-                <p style="text-align: center; color: #00728C; font-weight: bold; margin-bottom: 0px">Download our App!</p>
-                <ul class="icons">
-                    <li><a href="#"><img src="{!! url('/').'/public/web/img/emails/AppStore.jpg' !!}" alt="" style="width: 160px; max-width: 600px; height: auto; display: block;"></a></li>
-                    <li><a href="#"><img src="{!! url('/').'/public/web/img/emails/GooglePlay.jpg' !!}" alt="" style="width: 160px; max-width: 600px; height: auto; display: block;"></a></li>
+                <hr style="border: .5px solid #F0F0F0; width: 95%;">
+                <p style="text-align: center; color: #00728C; font-weight: bold; margin-bottom: 0px; font-family: Arial, sans-serif; font-size:15px;">Download our App!</p>
+                <ul style="display:flex; display: inline-block; margin-right:40px;”>
+                		<li style="list-style: none; display: inline-block;"> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/AppStore.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
+                <li style="list-style: none; display: inline-block; "> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/GooglePlay.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
                 </ul>
-                <p><a href="#" class="btn btn-primary">VISIT iPAYCARDS.COM</a><br><br></p>
+                <p style="padding-bottom:20px; padding-top:2px;"><a href="{!! url('/') !!}" style="color:#ffffff; background: #00728C; border-radius: 30px; padding: 13px 85px; text-decoration: none; "> VISIT iPAYCARDS.COM</a></p>
 
-                <hr>
+
+                <hr style="border: .5px solid #F0F0F0; width: 95%;">
+
                 <p>Terms and Conditions</p></td>
             </td>
         </tr>
@@ -553,10 +462,10 @@
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" >
                 <tr>
                     <td width="100%" style="text-align: center;">
-                        <ul class="social">
-                            <li><a href="https://twitter.com/ipaycards"><img src="{!! url('/').'/public/web/img/emails/004-twitter-logo.png' !!}" alt="" style="width: 16px; max-width: 600px; height: auto; display: block;"></a></li>
-                            <li><a href="https://www.facebook.com/IPayCards-291199848093951"><img src="{!! url('/').'/public/web/img/emails/005-facebook.png' !!}" alt="" style="width: 16px; max-width: 600px; height: auto; display: block;"></a></li>
-                            <li><a href="https://www.instagram.com/ipaycards/"><img src="{!! url('/').'/public/web/img/emails/006-instagram-logo.png' !!}" alt="" style="width: 16px; max-width: 600px; height: auto; display: block;"></a></li>
+                        <ul style="display:flex; display: inline-block; margin-right:40px;”>
+                		<li style="list-style: none; display: inline-block;"><a href="https://twitter.com/ipaycards"><img src="{!! url('/').'/public/web/img/emails' !!}/004-twitter-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
+                        <li style="list-style: none; display: inline-block;"> <a href="https://www.facebook.com/IPayCards-291199848093951"><img src="{!! url('/').'/public/web/img/emails' !!}/005-facebook.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
+                        <li style="list-style: none; display: inline-block;"> <a href="https://www.instagram.com/ipaycards/"><img src="{!! url('/').'/public/web/img/emails' !!}/006-instagram-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
                         </ul>
 
                     </td>
