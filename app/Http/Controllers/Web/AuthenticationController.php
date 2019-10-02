@@ -88,15 +88,37 @@ class AuthenticationController extends WebController {
      * @param Request $request
      * @return array|mixed
      */
+
+	public function signout(Request $request) 
+	{			
+		 $request->session()->forget('users');
+		 
+		 if(isset($_SESSION['fbUserProfile']))
+		 {
+			if (session_status() == PHP_SESSION_NONE) 
+				session_start();
+
+			session_destroy();
+		 }
+		// $url = url('/');
+		// return redirect($url);
+        return array(
+          'error' => 0,
+          'message' => 'Success'
+        );
+      /*  Session::flash('Signed-out', true);*/
+
+    }
+
     public function signin(Request $request)
     {
         $rules  =  array(	'login_id' 	=>  'required|email',
             'password' 	=>  'required'
         );
 
-       $error_messages = array(
+        $error_messages = array(
             'login_id.required' => 'The Email field is required',
-           'login_id.email' => 'The Email must be a valid email address',
+            'login_id.email' => 'The Email must be a valid email address',
         );
 
         $validator = Validator::make($request->all(),$rules,$error_messages);
@@ -118,7 +140,7 @@ class AuthenticationController extends WebController {
             $cart_item = !empty($request->cart_item) ? json_decode($request->cart_item) : false;
 
 
-          //  echo "<pre>"; print_r( $cart_item); exit;
+            //  echo "<pre>"; print_r( $cart_item); exit;
 
             $url = $request->input('url');
             $json1 = $json;
@@ -143,7 +165,7 @@ class AuthenticationController extends WebController {
 
                 //Get customer cart
                 $order_cart_lib = new OrderCart();
-               return $order_cart_lib->mergeWebCart($json1['data']['entity_auth']['entity_id'],$cart_item);
+                return $order_cart_lib->mergeWebCart($json1['data']['entity_auth']['entity_id'],$cart_item);
 
             }
             else
@@ -156,30 +178,8 @@ class AuthenticationController extends WebController {
         }
 
     }
-	
-	public function signout(Request $request) 
-	{			
-		 $request->session()->forget('users');
-		 
-		 if(isset($_SESSION['fbUserProfile']))
-		 {
-			if (session_status() == PHP_SESSION_NONE) 
-				session_start();
 
-			session_destroy();
-		 }
-		// $url = url('/');
-		// return redirect($url);
-        return array(
-          'error' => 0,
-          'message' => 'Success'
-        );
-      /*  Session::flash('Signed-out', true);*/
-
-    }
-	
-	
-	public function signup(Request $request) 
+    public function signup(Request $request)
 	{
 		$rules  =  array(
 		    'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
@@ -189,9 +189,12 @@ class AuthenticationController extends WebController {
             'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
             );
 
-		$msgs = [
-		    'term_condition.required' => 'Please tick the checkbox if you want to proceed.'
-        ];
+		$msgs = array(
+
+		    'term_condition.required' => 'Please tick the checkbox if you want to proceed.',
+            'email.required' => 'The Email field is required',
+           'email.email' => 'The Email must be a valid email address',
+    );
 		$validator = Validator::make($request->all(),$rules,$msgs);
 		if($validator->fails())
 		{
@@ -227,7 +230,7 @@ class AuthenticationController extends WebController {
 			if(isset($json['error']) && $json['error'] == 1){
                 return array(
                     'error' =>1,
-                    'message'=>$json['message']);
+                    'message'=>$json['$msgs']);
             }else{
                 if(isset($json['data']['entity_auth']))
                 {

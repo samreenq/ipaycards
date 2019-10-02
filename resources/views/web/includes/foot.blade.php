@@ -57,8 +57,11 @@
     );
 
     $('.signupmodal').on('hide.bs.modal', function () {
-        console.log('HELLO');
-        $('.signupbtn').css("color", "black");
+        console.log('signupmodal');
+        $(this).css("color", "black");
+        $('#email').val("");
+        $('#password2').val("");
+
     });
 
     $(".signupbtn").hover(function () {
@@ -67,9 +70,12 @@
         $(this).css("color", "black");
     });
 
-    $('.signinmodal').on('hide.bs.modal', function () {
-        console.log('HELLO');
-        $('.signinbtn').css("color", "black");
+    $('#signinmodal').on('hide.bs.modal', function () {
+        console.log('signinmodal');
+        $(this).css("color", "black");
+        $('#login_id').val("");
+        $('#password').val("");
+
     });
 
     $(".signinbtn").hover(function () {
