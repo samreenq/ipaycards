@@ -86,41 +86,66 @@ class ProductController extends WebController
 		}
 		else 
 		{	
-							
-							
-			
+
 			$limit = $request->input('limit'); 
 			$product_detail_url = $request->input('product_detail_url');
-			
+
+
+            $and = '';
+			if(isset($request->category_id) && !empty($request->category_id)){
+
+                foreach(explode(',',$request->input('category_id')) as $cat_id){
+                    $and .= ($and == '') ? " " : " OR ";
+                    $and .= " FIND_IN_SET('".trim($cat_id)."',category_id)";
+                }
+            }
+
+            if(isset($request->brand_id) && !empty($request->brand_id)){
+                foreach(explode(',',$request->input('brand_id')) as $cat_id){
+                    $and .= ($and == '') ? " " : " OR ";
+                    $and .= " FIND_IN_SET('".trim($cat_id)."',brand_id)";
+                }
+            }
+
+            if(isset($request->searchable_tags) && !empty($request->searchable_tags)){
+                foreach(explode(',',$request->input('searchable_tags')) as $cat_id){
+                    $and .= ($and == '') ? " " : " OR ";
+                    $and .= " FIND_IN_SET('".trim($cat_id)."',searchable_tags)";
+                }
+            }
+
+            if(!empty($and)){
+                $and = ' AND ('.$and.')';
+            }
 			
 			$data = [
 								'entity_type_id'	=>	'product',
 								//'product_type'		=>	1,
-								'category_id'		=>	$request->input('category_id'),
+								//'category_id'		=>	$request->input('category_id'),
 								//'category_form'		=>	$request->input('category_form'),
-								'searchable_tags'	=>	$request->input('searchable_tags'),
-                                'brand_id'	=>	$request->input('brand_id'),
+								//'searchable_tags'	=>	$request->input('searchable_tags'),
+                               // 'brand_id'	=>	$request->input('brand_id'),
 								'range_fields'		=>	'price',
                                 'status'            => 1,
                                // 'availability' => 1,
 								'offset'			=>	$request->input('offset'),
 								'limit'				=>	$limit,
                                 'order_by'          => 'entity_id',
-                                'sorting'           => 'DESC'
+                                'sorting'           => 'DESC',
+                                'where_condition'         => $and
 							];
+
 
 
 
 			if(	($request->has('low_price') && $request->has('high_price')) && ($request->low_price > 0 &&  $request->high_price > 0)) {
                 $data['price'] = $request->input('low_price') . ',' . $request->input('high_price');
             }
-
-
 				
 			//print_r($data);
 			$json 	= 	json_decode(json_encode($this->_object_library_entity->apiList($data)),true);
-        //   echo "<pre>"; print_r($json); exit;
-		//	print_r($json); exit;
+         //  echo "<pre>"; print_r($json); exit;
+		//	 print_r($json); exit;
 			$data['products'] = isset($json["data"]["entity_listing"])? $json["data"]["entity_listing"] : null;
 			$data['currency'] = $this->_object_library_general_setting->getCurrency();
 			$data['product_detail_url'] = $product_detail_url;
@@ -136,6 +161,7 @@ class ProductController extends WebController
 						'products'	=> View::make('web/includes/product/product_list',$data)->__toString(),
 						'items'		=> isset($json['data']['page']['total_records']) ? ceil($json['data']['page']['total_records']/$limit) : null
 					];
+
 
             return $data;
 		}
