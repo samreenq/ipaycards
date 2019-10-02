@@ -9,14 +9,16 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
 ?>
 <div class="col-xs-12 col-sm-6 col-lg-3 d-flex">
     <div class="product-wrap whitebg">
+        <a href="{!! url('/').'/product?brand_id='.$brand['entity_id'] !!}" >
         <img width="268px" height="221px"    src='<?php echo $image; ?>' class="img-responsive" />
         <div class="product-detail">
             <h4>
-                <a href="{!! url('/').'/product?brand_id='.$brand['entity_id'] !!}" >
+
                     <?php echo $brand['attributes']['title'];?>
-                </a>
+
             </h4>
         </div>
+        </a>
     </div>
 </div>
 
