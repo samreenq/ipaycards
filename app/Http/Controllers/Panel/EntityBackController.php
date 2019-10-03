@@ -1590,7 +1590,10 @@ class EntityBackController extends EntityController
             $list['buying_price'] = $currency.'&nbsp;'.$entity_data->attributes->buying_price;
         }
 
-
+        if($this->_entity_controller->identifier == "order"){
+            if($entity_data->attributes->wallet > 0 && $entity_data->attributes->payment_method_type->option != 'cod')
+                $list['payment_method_type'] = $list['payment_method_type'].",".trans('system.ipay_wallet');
+        }
         return $list;
     }
 

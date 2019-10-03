@@ -1156,16 +1156,16 @@ Class EntityTrigger
 		$setting = $general_setting_lib->getSetting();
 		
 		if ( $request->item_type == 'deal' ) {
-			$return = [ 'price' => $request->buying_price ];
+			$return = [ 'price' => roundOfAmount($request->buying_price) ];
 		} else {
 			if ( isset($setting->selling_price_margin) && !empty($request->buying_price) ) {
 				
 				if ( !empty($setting->selling_price_margin) ) {
 					
 					$margin = $request->buying_price * ( $setting->selling_price_margin / 100 );
-					$return = [ 'price' => $request->buying_price + $margin ];
+					$return = [ 'price' => roundOfAmount($request->buying_price + $margin) ];
 				} else {
-					$return = [ 'price' => $request->buying_price ];
+					$return = [ 'price' => roundOfAmount($request->buying_price) ];
 				}
 			}
 		}

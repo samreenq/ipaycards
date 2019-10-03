@@ -414,9 +414,8 @@ Class DataScriptController extends Controller
                   'entity_type_id' => 'inventory',
                   'entity_id' => $row->entity_id,
                    'voucher_code' => $voucher_code,
-                  //'title' => 'INV'.$row->entity_id,
-
               );
+                  //'title' => 'INV'.$row->entity_id,);
               echo '<pre>';
               print_r($params);
               $data = $entity_lib->apiUpdate($params);
@@ -428,4 +427,42 @@ Class DataScriptController extends Controller
 
 
     }
+
+
+
+
+
+
+
+
+
+public function updateAmount()
+{
+    $product_model = new SYSTableFlat('product');
+    $data = $product_model->getDataByWhere();
+    $result = [];
+
+    if ($data) {
+
+        $entity_lib = new Entity();
+
+        foreach ($data as $row) {
+
+            $buying_price = roundOfAmount($row->buying_price);
+
+
+            $params = array(
+
+                'entity_type_id' => 'product',
+                'entity_id' => $row->entity_id,
+                'buying_price' => $buying_price,
+
+            );
+            echo '<pre>'; print_r($params);
+            $result = $entity_lib->apiUpdate($params); echo '<pre>'; print_r($result);
+        }
+
+
+    }
+}
 }

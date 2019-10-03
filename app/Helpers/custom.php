@@ -261,3 +261,11 @@ function check_val(&$var, $def_value = NULL)
 		(is_string($param) ? trim($param) : $param)
 		: $def_value;
 }
+
+function roundOfAmount($number)
+{
+    if ((strpos($number,".") !== false)) {
+        return number_format($number, 2, '.', '');
+    }
+    return $number;
+}
