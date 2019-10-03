@@ -1556,6 +1556,7 @@ function add_to_wishlist(Request_url1) {
 
 
         */
+        location.reload();
 
     });
 
