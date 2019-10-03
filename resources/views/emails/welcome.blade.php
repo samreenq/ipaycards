@@ -315,7 +315,7 @@
     </div>
     <div style="max-width: 600px; margin: 0 auto;" class="email-container " >
         <!-- BEGIN BODY -->
-        <table align="left" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" background-color: "#ffffff" style="background-color: #ffffff;">
+        <table align="left" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff;">
         <tr>
             <td valign="top" class="bg_light" style="height:40px;">
 
@@ -371,13 +371,13 @@
             <td width="100%" style="text-align: center;">
                 <hr style="border: .5px solid #F0F0F0; width: 95%;">
                 <p style="text-align: center; color: #00728C; font-weight: bold; margin-bottom: 0px; font-family: Arial, sans-serif; font-size:15px;">Download our App!</p>
-                <ul style="display:flex; display: inline-block; margin-right:40px;”>
-                		<li style="list-style: none; display: inline-block;"> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/AppStore.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
+                <ul style="display:flex; display: inline-block; margin-right:40px;">
+                	<li style="list-style: none; display: inline-block;"> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/AppStore.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
                 <li style="list-style: none; display: inline-block; "> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/GooglePlay.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
                 </ul>
-                <p style="padding-bottom:20px; padding-top:2px;"><a href="{!! url('/') !!}" style="color:#ffffff; background: #00728C; border-radius: 30px; padding: 13px 85px; text-decoration: none; "> VISIT iPAYCARDS.COM</a></p>
-
-
+                <p style="padding-bottom:20px; padding-top:2px;">
+                    <a href="{!! url('/') !!}" style="color:#ffffff; background: #00728C; border-radius: 30px; padding: 13px 85px; text-decoration: none; "> VISIT iPAYCARDS.COM</a></p>
+                
                 <hr style="border: .5px solid #F0F0F0; width: 95%;">
 
                 <p>Terms and Conditions</p></td>
@@ -462,7 +462,7 @@
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" >
                 <tr>
                     <td width="100%" style="text-align: center;">
-                        <ul style="display:flex; display: inline-block; margin-right:40px;”>
+                        <ul style="display:flex; display: inline-block; margin-right:40px;">
                 		<li style="list-style: none; display: inline-block;"><a href="https://twitter.com/ipaycards"><img src="{!! url('/').'/public/web/img/emails' !!}/004-twitter-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
                         <li style="list-style: none; display: inline-block;"> <a href="https://www.facebook.com/IPayCards-291199848093951"><img src="{!! url('/').'/public/web/img/emails' !!}/005-facebook.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
                         <li style="list-style: none; display: inline-block;"> <a href="https://www.instagram.com/ipaycards/"><img src="{!! url('/').'/public/web/img/emails' !!}/006-instagram-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
