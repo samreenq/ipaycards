@@ -448,14 +448,14 @@ public function updateAmount()
 
         foreach ($data as $row) {
 
-            $buying_price = roundOfAmount($row->buying_price);
+            $buying_price = roundOfAmount($row->price);
 
 
             $params = array(
 
                 'entity_type_id' => 'product',
                 'entity_id' => $row->entity_id,
-                'buying_price' => $buying_price,
+                'price' => $buying_price,
 
             );
             echo '<pre>'; print_r($params);

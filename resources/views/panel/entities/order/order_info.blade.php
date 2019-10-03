@@ -74,7 +74,7 @@
                     <table width="100%" class="orderPrevDetail">
                         <tr>
                             <td>Payment Method</td>
-                            <td><b><?php if($order->wallet > 0 && $order->payment_method_type->option != 'cod'){
+                            <td><b><?php if($order->wallet > 0 && $order->payment_method_type->value != 'cod'){
                                        echo $order->payment_method_type->option.",".trans('system.ipay_wallet');
 
                             }
