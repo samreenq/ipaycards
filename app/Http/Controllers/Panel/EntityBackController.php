@@ -1516,7 +1516,7 @@ class EntityBackController extends EntityController
      */
     private function _entityListColumns($entity_data,$list)
     {
-       // echo "<pre>"; print_r($entity_data); exit;
+      // echo "<pre>"; print_r($entity_data); exit;
         /* if entity type is user management then get few columns of auth*/
         if($this->_entity_controller->allow_auth == 1 || $this->_entity_controller->allow_backend_auth == 1){
 
@@ -1591,8 +1591,11 @@ class EntityBackController extends EntityController
         }
 
         if($this->_entity_controller->identifier == "order"){
-            if($entity_data->attributes->wallet > 0 && $entity_data->attributes->payment_method_type->option != 'cod')
+            //dd($entity_data->attributes->payment_method_type);
+            if($entity_data->attributes->wallet > 0 && trim($entity_data->attributes->payment_method_type->value) != 'cod'){
                 $list['payment_method_type'] = $list['payment_method_type'].",".trans('system.ipay_wallet');
+            }
+
         }
         return $list;
     }
