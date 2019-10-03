@@ -57,31 +57,21 @@
     );
 
     $('.signupmodal').on('hide.bs.modal', function () {
-        console.log('signupmodal');
-        $(this).css("color", "black");
+
+        $('.signupbtn').css("color","rgb(0, 0, 0) !important;");
+
         $('#email').val("");
         $('#password2').val("");
 
     });
 
-    $(".signupbtn").hover(function () {
-        $(this).css("color", "#007bff");
-    }, function () {
-        $(this).css("color", "black");
-    });
 
     $('#signinmodal').on('hide.bs.modal', function () {
         console.log('signinmodal');
-        $(this).css("color", "black");
+        $('.signinbtn').css("color","rgb(0, 0, 0) !important;");
         $('#login_id').val("");
         $('#password').val("");
 
-    });
-
-    $(".signinbtn").hover(function () {
-        $(this).css("color", "#007bff");
-    }, function () {
-        $(this).css("color", "black");
     });
 
 
