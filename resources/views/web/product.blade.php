@@ -1,5 +1,6 @@
 
 
+
 @extends("web.templates.template2")
 
 @section("head")

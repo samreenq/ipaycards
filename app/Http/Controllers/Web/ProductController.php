@@ -310,7 +310,7 @@ class ProductController extends WebController
 		}
 		else 
 		{	
-			$data = array("entity_type_id"=>14,"category_id"=>$request->input('category_id')); 
+			$data = array("entity_type_id"=>'product',"category_id"=>$request->input('category_id'));
 			$data['product_detail_url'] = $request->input('product_detail_url');
 			$response = json_encode(CustomHelper::internalCall($request,"api/system/entities/listing", 'GET',$data,false));
 			$json = json_decode($response,true); 
@@ -335,7 +335,7 @@ class ProductController extends WebController
 		}
 		else 
 		{	 
-			$data = array("entity_type_id"=>14,
+			$data = array("entity_type_id"=>'product',
                 "title"=>$request->input('title')
             );
 
@@ -359,7 +359,7 @@ class ProductController extends WebController
 
            // $limit = $request->input('limit');
             $params = [
-                'entity_type_id'=>14,
+                'entity_type_id'=>'product',
                 'title'=>$request->input('title'),
                 'status'                => 1,
               //  'availability'          => 1,
@@ -404,7 +404,7 @@ class ProductController extends WebController
 								'api/system/entities/listing', 
 								'GET',
 								[
-									'entity_type_id'=>14,
+									'entity_type_id'=>'product',
 									'product_code'=>$request->input('product_code')
 									
 								],
@@ -1587,7 +1587,7 @@ class ProductController extends WebController
         return View::make('web/includes/main/brands',$data)->__toString();
     }
 
-    public function getBrandProducts(Request $request)
+     public function getBrandProducts(Request $request)
     {
         $validator 	= 	Validator::make(
             $request->all(),
@@ -1738,7 +1738,7 @@ class ProductController extends WebController
             'entity_type_id'		=>		'brand',
             'status'                => 1,
             'offset'				=>		$request->input('offset')	,
-            'limit'					=>		1000,
+            'limit'					=>		$request->input('limit'),
             'order_by'          => 'entity_id',
             'sorting'           => 'DESC'
         ];
