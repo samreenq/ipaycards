@@ -48,7 +48,7 @@
             margin: 0 auto !important;
         }
 
-        /* What it does: Uses a better rendering method when resizing images in IE. */
+        /* What it does: Uses a better rendering method when resizing {!! url('/').'/public/web/img/emails' !!} in IE. */
         img {
             -ms-interpolation-mode:bicubic;
         }
@@ -69,7 +69,7 @@
             line-height: inherit !important;
         }
 
-        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
+        /* What it does: Prevents Gmail from displaying a download button on large, non-linked {!! url('/').'/public/web/img/emails' !!}. */
         .a6S {
             display: none !important;
             opacity: 0.01 !important;
@@ -315,72 +315,73 @@
     </div>
     <div style="max-width: 600px; margin: 0 auto;" class="email-container " >
         <!-- BEGIN BODY -->
-        <table align="left" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff;">
-        <tr>
-            <td valign="top" class="bg_light" style="height:40px;">
+        <table>
+            <tr>
+                <td valign="top" style="height:40px; background-color: #F0F0F0; ">
 
-            </td>
-        </tr><!-- end tr -->
-        <tr>
-            <td>
-                <img src="{!! url('/').'/public/web/img/emails' !!}/iPaycardsLogo.png" alt="" style="width: 70px; padding: 20px 10px 20px 20px">
-            </td>
-        </tr><!-- end tr -->
-        <tr>
-            <td>
-                <img src="{!! url('/').'/public/web/img/emails' !!}/MainBanner.jpg" alt="" style="width: 560px; padding: 0 20px">
-            </td>
-        </tr><!-- end tr -->
+                </td>
+            </tr><!-- end tr -->
 
-        <tr> </tr><!-- end tr -->
-        <tr>
-            <td class="bg_white">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        </table>
+        <table align="left" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border-style:none;">
 
-                    <tr>
-                        <td class="email-section">
-                            <div class="heading-section" style="text-align:left; padding: 0 20px;">
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px; padding-top:10px;">Dear {!! $data['name'] !!},</p>
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">Thanks for signing up to iPayCards – your gateway to fun and games.</p>
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">On iPayCards you can find all your <b>favorite U.S. and U.K. store entertainment, gaming, shopping and music cards</b> or even recharge your phone, Salik and other. You can also buy gift cards for your friends use on our App and Website.</p>
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px;">Here’s a preview of what’s in store for you – and remember, <b>its all digital so you can use your vouchers immediately!</b> </p>
-                        </td>
-                    </tr><!-- end tr -->
+            <tr>
+                <td>
+                    <img src="{!! url('/').'/public/web/img/emails' !!}/iPaycardsLogo.png" alt="" style="width: 70px; padding: 20px 10px 20px 20px">
+                </td>
+            </tr><!-- end tr -->
+            <tr>
+                <td>
+                    <img src="{!! url('/').'/public/web/img/emails' !!}/MainBanner.jpg" alt="" style="width: 560px; padding: 0 20px">
+                </td>
+            </tr><!-- end tr -->
 
-                    <tr>
-                        <td>
-                            <img src="{!! url('/').'/public/web/img/emails' !!}/Brands.jpg" alt="" style="width: 560px; padding: 0 20px">
-                        </td>
-                    </tr><!-- end tr -->
-                    <tr>
-                        <td class="email-section">
-                            <div class="heading-section" style="text-align:left; padding: 0 20px;">
+            <tr> </tr><!-- end tr -->
+            <tr>
+                <td class="bg_white">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">To get started, head back to our App or Website and begin shopping.</p>
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">If you like what you see, you can also tell your friends and get rewards so you can shop more for less as long as you like.</p>
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:10px;">We’re always here to help and listen to your feedback. Let us know what you think by emailing us on <a href="mailto:help@iPayCards.com">help@iPayCards.com</a> or Chat with us directly on our App and Website.</p>
+                        <tr>
+                            <td class="email-section">
+                                <div class="heading-section" style="text-align:left; padding: 0 20px;">
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px; padding-top:10px;">Dear {!! $data['name'] !!},</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">Thanks for signing up to iPayCards – your gateway to fun and games.</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">On iPayCards you can find all your <b>favorite U.S. and U.K. store entertainment, gaming, shopping and music cards</b> or even recharge your phone, Salik and other. You can also buy gift cards for your friends use on our App and Website.</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px;">Here's a preview of what's in store for you – and remember, <b>its all digital so you can use your vouchers immediately!</b> </p>
+                            </td>
+                        </tr><!-- end tr -->
 
-                                <p style="color: #767475; font-family: Arial, sans-serif; font-size:15px;">Have a great experience!<br>The iPayCards Team</p>
+                        <tr>
+                            <td>
+                                <img src="{!! url('/').'/public/web/img/emails' !!}/Brands.jpg" alt="" style="width: 560px; padding: 0 20px">
+                            </td>
+                        </tr><!-- end tr -->
+                        <tr>
+                            <td class="email-section">
+                                <div class="heading-section" style="text-align:left; padding: 0 20px;">
 
-                        </td>
-                    </tr>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">To get started, head back to our App or Website and begin shopping.</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:5px;">If you like what you see, you can also tell your friends and get rewards so you can shop more for less as long as you like.</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px; padding-bottom:10px;">We're always here to help and listen to your feedback. Let us know what you think by emailing us on <a href="mailto:help@iPayCards.com">help@iPayCards.com</a> or Chat with us directly on our App and Website.</p>
+                                    <p style="color: #767475; font-family: Arial, sans-serif; font-size:15px;">Have a great experience!<br>The iPayCards Team</p>
+
+                            </td>
+                        </tr>
 
     </div>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td width="100%" style="text-align: center;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff;">					<tr>
+            <td width="100%" style="text-align: center; ">
                 <hr style="border: .5px solid #F0F0F0; width: 95%;">
                 <p style="text-align: center; color: #00728C; font-weight: bold; margin-bottom: 0px; font-family: Arial, sans-serif; font-size:15px;">Download our App!</p>
-                <ul style="display:flex; display: inline-block; margin-right:40px;">
-                	<li style="list-style: none; display: inline-block;"> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/AppStore.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
-                <li style="list-style: none; display: inline-block; "> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/GooglePlay.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
+                <ul style="display:flex; display: inline-block; padding-inline-start: 0px;">
+                    <li style="list-style: none; display: inline-block;"> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/AppStore.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
+                    <li style="list-style: none; display: inline-block; "> <a href="#"><img src="{!! url('/').'/public/web/img/emails' !!}/GooglePlay.jpg" alt="" style="width: 160px; max-width: 600px; height: auto;"></a></li>
                 </ul>
-                <p style="padding-bottom:20px; padding-top:2px;">
-                    <a href="{!! url('/') !!}" style="color:#ffffff; background: #00728C; border-radius: 30px; padding: 13px 85px; text-decoration: none; "> VISIT iPAYCARDS.COM</a></p>
-                
+                <p style="padding-bottom:20px; padding-top:2px;"><a href="{!! url('/') !!}" style="color:#ffffff; background: #00728C; border-radius: 30px; padding: 13px 85px; text-decoration: none;  font-family: Arial"> VISIT iPAYCARDS.COM</a></p>
+
                 <hr style="border: .5px solid #F0F0F0; width: 95%;">
 
-                <p>Terms and Conditions</p></td>
+                <p style="color: #767475; font-family: Arial, sans-serif; font-size:14px;">Terms and Conditions</p></td>
             </td>
         </tr>
 
@@ -463,9 +464,9 @@
                 <tr>
                     <td width="100%" style="text-align: center;">
                         <ul style="display:flex; display: inline-block; margin-right:40px;">
-                		<li style="list-style: none; display: inline-block;"><a href="https://twitter.com/ipaycards"><img src="{!! url('/').'/public/web/img/emails' !!}/004-twitter-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
-                        <li style="list-style: none; display: inline-block;"> <a href="https://www.facebook.com/IPayCards-291199848093951"><img src="{!! url('/').'/public/web/img/emails' !!}/005-facebook.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
-                        <li style="list-style: none; display: inline-block;"> <a href="https://www.instagram.com/ipaycards/"><img src="{!! url('/').'/public/web/img/emails' !!}/006-instagram-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
+                            <li style="list-style: none; display: inline-block;"><a href="https://twitter.com/ipaycards"><img src="{!! url('/').'/public/web/img/emails' !!}/004-twitter-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
+                            <li style="list-style: none; display: inline-block;"> <a href="https://www.facebook.com/IPayCards-291199848093951"><img src="{!! url('/').'/public/web/img/emails' !!}/005-facebook.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
+                            <li style="list-style: none; display: inline-block;"> <a href="https://www.instagram.com/ipaycards/"><img src="{!! url('/').'/public/web/img/emails' !!}/006-instagram-logo.png" alt="" style="width: 16px; max-width: 600px; height: auto;"></a></li>
                         </ul>
 
                     </td>

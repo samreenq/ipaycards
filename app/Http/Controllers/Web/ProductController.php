@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Models\FlatTable;
 use App\Http\Models\SYSCategory;
+use App\Http\Models\SYSEntity;
 use App\Http\Models\SYSTableFlat;
 use App\Libraries\CustomHelper;
 use App\Libraries\Fields;
@@ -92,26 +93,45 @@ class ProductController extends WebController
 
 
             $and = '';
-			if(isset($request->category_id) && !empty($request->category_id)){
+            $sys_entity = new SYSEntity();
+            if(isset($request->category_id) && !empty($request->category_id)){
 
-                foreach(explode(',',$request->input('category_id')) as $cat_id){
-                    $and .= ($and == '') ? " " : " OR ";
-                    $and .= " FIND_IN_SET('".trim($cat_id)."',category_id)";
-                }
+                $field = new \StdClass();
+                $field->attribute_code = 'category_id';
+
+                $and .= ($and == '') ? " " : " OR ";
+                $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->category_id),$field,$request->all());
+
+                /* foreach(explode(',',$request->input('category_id')) as $cat_id){
+                     $and .= ($and == '') ? " " : " OR ";
+                     $and .= " FIND_IN_SET('".trim($cat_id)."',category_id)";
+                 }*/
             }
 
             if(isset($request->brand_id) && !empty($request->brand_id)){
-                foreach(explode(',',$request->input('brand_id')) as $cat_id){
-                    $and .= ($and == '') ? " " : " OR ";
-                    $and .= " FIND_IN_SET('".trim($cat_id)."',brand_id)";
-                }
+                $field = new \StdClass();
+                $field->attribute_code = 'brand_id';
+
+                $and .= ($and == '') ? " " : " OR ";
+                $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->brand_id),$field,$request->all());
+
+                /* foreach(explode(',',$request->input('brand_id')) as $cat_id){
+                     $and .= ($and == '') ? " " : " OR ";
+                     $and .= " FIND_IN_SET('".trim($cat_id)."',brand_id)";
+                 }*/
             }
 
             if(isset($request->searchable_tags) && !empty($request->searchable_tags)){
-                foreach(explode(',',$request->input('searchable_tags')) as $cat_id){
-                    $and .= ($and == '') ? " " : " OR ";
-                    $and .= " FIND_IN_SET('".trim($cat_id)."',searchable_tags)";
-                }
+                $field = new \StdClass();
+                $field->attribute_code = 'searchable_tags';
+
+                $and .= ($and == '') ? " " : " OR ";
+                $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->searchable_tags),$field,$request->all());
+
+                /* foreach(explode(',',$request->input('searchable_tags')) as $cat_id){
+                     $and .= ($and == '') ? " " : " OR ";
+                     $and .= " FIND_IN_SET('".trim($cat_id)."',searchable_tags)";
+                 }*/
             }
 
             if(!empty($and)){

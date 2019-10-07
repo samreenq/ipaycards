@@ -339,4 +339,104 @@ Class EntityApiController extends Controller
 
         return $this->__ApiResponse($request, $this->_apiData);
     }
+
+    /**
+     * Get Products by filters
+     * @param Request $request
+     * @return \App\Http\Controllers\Response
+     */
+    public function getByFilters(Request $request)
+    {
+
+        $this->_apiData['error'] = 0;
+        $this->_apiData['message'] = trans($this->_langIdentifier . ".success");
+        $limit = $request->input('limit');
+
+        $and = '';
+
+        $sys_entity = new SYSEntity();
+        if(isset($request->category_id) && !empty($request->category_id)){
+
+            $field = new \StdClass();
+            $field->attribute_code = 'category_id';
+
+            $and .= ($and == '') ? " " : " OR ";
+            $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->category_id),$field,$request->all());
+
+           /* foreach(explode(',',$request->input('category_id')) as $cat_id){
+                $and .= ($and == '') ? " " : " OR ";
+                $and .= " FIND_IN_SET('".trim($cat_id)."',category_id)";
+            }*/
+        }
+
+        if(isset($request->brand_id) && !empty($request->brand_id)){
+            $field = new \StdClass();
+            $field->attribute_code = 'brand_id';
+
+            $and .= ($and == '') ? " " : " OR ";
+            $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->brand_id),$field,$request->all());
+
+            /* foreach(explode(',',$request->input('brand_id')) as $cat_id){
+                 $and .= ($and == '') ? " " : " OR ";
+                 $and .= " FIND_IN_SET('".trim($cat_id)."',brand_id)";
+             }*/
+        }
+
+        if(isset($request->searchable_tags) && !empty($request->searchable_tags)){
+            $field = new \StdClass();
+            $field->attribute_code = 'searchable_tags';
+
+            $and .= ($and == '') ? " " : " OR ";
+            $and .= $sys_entity->getMultiSearchQuery('',explode(',',$request->searchable_tags),$field,$request->all());
+
+            /* foreach(explode(',',$request->input('searchable_tags')) as $cat_id){
+                 $and .= ($and == '') ? " " : " OR ";
+                 $and .= " FIND_IN_SET('".trim($cat_id)."',searchable_tags)";
+             }*/
+        }
+
+        if(!empty($and)){
+            $and = ' AND ('.$and.')';
+        }
+
+        $params = [
+            'entity_type_id'	=>	'product',
+          //  'range_fields'		=>	'price',
+            'status'            => 1,
+            'offset'			=>	isset($request->offset) && !empty($request->offset) ? $request->offset : 0,
+            'limit'				=>	$limit,
+            'order_by'          => 'entity_id',
+            'sorting'           => 'desc',
+            'where_condition'   => $and,
+            'mobile_json'       => 1,
+        ];
+
+        if(isset($request->price) && !empty($request->price)){
+            $params['price'] = $request->price;
+            $params['range_fields'] = 'price';
+        }
+
+        if(isset($request->in_detail) && !empty($request->in_detail)){
+            $params['in_detail'] = $request->in_detail;
+        }
+
+        if(isset($request->_request_parameter) && !empty($request->_request_parameter)){
+            $params['_request_parameter'] = $request->_request_parameter;
+        }
+
+        // $params = array_merge($params,$request->all());
+      //  echo '<pre>'; print_r($params);
+
+        $entity_lib = new Entity();
+        $data	= json_decode(json_encode($entity_lib->apiList($params)));
+
+        if($data->error == 1){
+            $this->_apiData['message'] = $data->message;
+        }
+        else{
+            $this->_apiData['data'] = $data->data;
+        }
+
+        return $this->__ApiResponse($request, $this->_apiData);
+    }
 }

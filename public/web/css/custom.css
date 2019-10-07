@@ -1730,8 +1730,7 @@ section.flyout-wrap {
     background-color: transparent;
     opacity: 1;
 }
-.navbar .navbar-nav>li>a:hover,
-.navbar .navbar-nav>li>a:focus{
+.navbar .navbar-nav>li>a:hover {
     color: #0f738d !important;
     background-color: transparent;
     opacity: 1;
@@ -7192,7 +7191,7 @@ input[type=number] {
 .steps ul li {padding-right: 30px;padding-left: 0px;position: relative;}
 .steps ul li:last-child {padding-right: 0;}
 .steps ul li:after {position: absolute;width: 1px;height: 30px;content: "";background: #ebebeb;right: 16px;top: 50%;transform: translateY(-50%);-moz-transform: translateY(-50%);-webkit-transform: translateY(-50%);-o-transform: translateY(-50%);-ms-transform: translateY(-50%);}
-.steps ul li a {color: #000000;text-decoration: none;font-weight: bold;}
+.steps ul li a {color: #000000;text-decoration: none;font-weight: bold;cursor: default;}
 .steps ul li:last-child:after {width: 0px;}
 .steps ul .current a {color: #0f738d;}
 .steps ul .current a .number {border: 2px solid #0f738d;}
@@ -7269,3 +7268,10 @@ select:-webkit-autofill:focus {
 }
 .termandcond-right-txt-bg ul {padding-left: 40px;}
 .termandcond-right-txt-bg li {list-style: disc;font-size: 15px;margin-bottom: 15px;font-weight: 300;}
+
+.demo.fluid-label input {
+    top: 0 !important;
+}
+.demo.fluid-label label {
+    display: none !important;
+}
