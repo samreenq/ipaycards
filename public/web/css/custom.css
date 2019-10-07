@@ -7268,3 +7268,10 @@ select:-webkit-autofill:focus {
 }
 .termandcond-right-txt-bg ul {padding-left: 40px;}
 .termandcond-right-txt-bg li {list-style: disc;font-size: 15px;margin-bottom: 15px;font-weight: 300;}
+
+.demo.fluid-label input {
+    top: 0 !important;
+}
+.demo.fluid-label label {
+    display: none !important;
+}

@@ -3269,8 +3269,16 @@ function referAFriend(referAFriendUrl) {
                 }
             }
         });
+
+        /* Focus issue after btn click */
+        $('.fluid-label').addClass('demo');
+
     });
 
+    /* Focus issue after btn click */
+    $(".fluid-label").keyup(function () {
+        $(this).removeClass('demo');
+    });
 }
 
 function sendCode(sendCodeUrl, socialPhoneVerficationUrl) {
