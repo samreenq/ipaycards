@@ -6067,6 +6067,7 @@ span.clancelItem a{
     }
     .navbar-nav.header-cart>li:first-child{
         margin-right:5px!important;
+        margin-left: 0 !important;
     }
     .navbar-nav.header-cart>li:last-child{
         margin-left:5px!important;
@@ -6484,15 +6485,15 @@ span.clancelItem a{
     .orderDetailListView .addItemRecipe {
         width: 54%;
     }
-    .logoIcon{
+    /*.logoIcon{
         display:none;
-    }
+    }*/
     .logoWoIcon {
         display:inline-block;
     }
-    .navbar .navbar-brand {
+    /*.navbar .navbar-brand {
         padding: 22px 15px;
-    }
+    }*/
 }
 @media only screen and (max-width: 445px) {
     .navbar .headerLeft {
