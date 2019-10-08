@@ -143,7 +143,7 @@
 
 													
 												<ul class="categories vegeListWrap pl15" id="accordion">
-													
+
 													<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageCategories" align="center" style="display: none">
 														<div class="floatingCirclesG">
 															<div class="f_circleG frotateG_01"></div>
@@ -294,7 +294,7 @@
 									
 								?>
 								<div id="brands"  class="row">
-									
+
 									<div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingImageProducts" align="center" style="display: none">
 										<div class="floatingCirclesG">
 											<div class="f_circleG frotateG_01"></div>
@@ -316,13 +316,13 @@
 					
 					
 				</div>
-				
+
 				<div class="container page_showcase" style="display:none">
 					<nav aria-label="Page navigation" class="clearfix">
 						<ul class="pagination cusPagination float-right" id="pagination"></ul>
 					</nav>
 				</div>
-				
+
 			</section>
 			
 		
@@ -391,125 +391,118 @@
 		<script>
 			
 
-			$(document).ready(function(){
+			$(document).ready(function() {
 
-                $("#LoadingImageProducts").show();
-                $.ajax ({
-                    url: "{{ route('all_brand') }}",
-                    type: 'get',
-                    data:   {
-                        offset				:	0,
-                        limit				:	1000
+				$("#LoadingImageProducts").show();
+				{{--$.ajax({--}}
+				{{--	url: "{{ route('all_brand') }}",--}}
+				{{--	type: 'get',--}}
+				{{--	data: {--}}
+				{{--		offset: 0,--}}
+				{{--		limit: 2--}}
 
-                    },
-                    dataType: 'json',
-                    success: function(data)
-                    {
-                        //$("#products").append(data);
-                        $("#LoadingImageProducts").hide();
-                        $("#brands").empty().append(data['products']);
-                        $('#pagination').pagination('updateItems', data['items']);
-                        $("#LoadingImageRecipes").hide();
-                        if(data['items'] > 0){
-                            $(".page_showcase").css({ 'display': "block" });
-                        }
-                    }
+				{{--	},--}}
+				{{--	dataType: 'json',--}}
+				{{--	success: function (data) {--}}
+				{{--		//$("#products").append(data);--}}
+				{{--		$("#LoadingImageProducts").hide();--}}
+				{{--		$("#brands").empty().append(data['products']);--}}
+				{{--		$('#pagination').pagination('updateItems', data['items']);--}}
+				{{--		$("#LoadingImageRecipes").hide();--}}
+				{{--		if (data['items'] > 0) {--}}
+				{{--			$(".page_showcase").css({'display': "block"});--}}
+				{{--		}--}}
+				{{--	}--}}
 
-                });
+				{{--});--}}
 
-               /* $('#pagination').pagination(
-                    {
-                        items: 5,
-                        itemOnPage: 20,
-                        currentPage: 1,
-                        cssStyle: '',
-                        prevText: '<span aria-hidden="true">&laquo;</span>',
-                        nextText: '<span aria-hidden="true">&raquo;</span>',
-                        onInit: function ()
-                        {
-                            // fire first page loading
-                            limit = 20;
-                            page = 1;
-                            offset = (page  * limit) -  limit;
+				$('#pagination').pagination(
+						{
+							items: 5,
+							itemOnPage: 2,
+							currentPage: 1,
+							cssStyle: '',
+							prevText: '<span aria-hidden="true">&laquo;</span>',
+							nextText: '<span aria-hidden="true">&raquo;</span>',
+							onInit: function () {
+								// fire first page loading
+								limit = 12;
+								page = 1;
+								offset = (page * limit) - limit;
 
 
+								$("#LoadingImageProducts").show();
+								$.ajax({
+									url: "{{ route('all_brand') }}",
+									type: 'get',
+									data: {
+										offset: offset,
+										limit: limit
 
-                            $("#LoadingImageProducts").show();
-                            $.ajax ({
-                                url: "{{ route('all_brand') }}",
-                                type: 'get',
-                                data:   {
-                                    offset				:	offset,
-                                    limit				:	limit
+									},
+									dataType: 'json',
+									success: function (data) {
+										//$("#products").append(data);
+										$("#LoadingImageProducts").hide();
+										$("#brands").empty().append(data['products']);
+										$('#pagination').pagination('updateItems', data['items']);
+										$("#LoadingImageRecipes").hide();
+										if (data['items'] > 0) {
+											$(".page_showcase").css({'display': "block"});
+										}
+									}
 
-                                },
-                                dataType: 'json',
-                                success: function(data)
-                                {
-                                    //$("#products").append(data);
-                                    $("#LoadingImageProducts").hide();
-                                    $("#brands").empty().append(data['products']);
-                                    $('#pagination').pagination('updateItems', data['items']);
-                                    $("#LoadingImageRecipes").hide();
-                                    if(data['items'] > 0){
-                                        $(".page_showcase").css({ 'display': "block" });
-                                    }
-                                }
-
-                            });
+								});
 
 
-                        },
-                        onPageClick: function (page, evt) {
-                            // some code
-                            limit = 12;
-                            offset = (page * limit) - limit;
+							},
+							onPageClick: function (page, evt) {
+								// some code
+								limit = 12;
+								offset = (page * limit) - limit;
 
-                            $("#LoadingImageProducts").show();
-                            $.ajax ({
-                                url: "{{ route('all_brand') }}",
-                                type: 'get',
-                                data:   {
-                                    offset				:	offset,
-                                    limit				:	limit
+								$("#LoadingImageProducts").show();
+								$.ajax({
+									url: "{{ route('all_brand') }}",
+									type: 'get',
+									data: {
+										offset: offset,
+										limit: limit
 
-                                },
-                                dataType: 'json',
-                                success: function(data)
-                                {
-                                    //$("#products").append(data);
-                                    $("#LoadingImageProducts").hide();
-                                    $("#brands").empty().append(data['products']);
-                                    $('#pagination').pagination('updateItems', data['items']);
-                                    $("#LoadingImageRecipes").hide();
-                                    if(data['items'] > 0){
-                                        $(".page_showcase").css({ 'display': "block" });
-                                    }
-                                }
+									},
+									dataType: 'json',
+									success: function (data) {
+										//$("#products").append(data);
+										$("#LoadingImageProducts").hide();
+										$("#brands").empty().append(data['products']);
+										$('#pagination').pagination('updateItems', data['items']);
+										$("#LoadingImageRecipes").hide();
+										if (data['items'] > 0) {
+											$(".page_showcase").css({'display': "block"});
+										}
+									}
 
-                            });
-                        }
+								});
+							}
 
-                    });*/
-			});
 
-        var category_id = "<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';?>";
-        menus("{{ route('menus') }}",category_id) ;
-		load_cart("{{ route('add_to_cart') }}","{{ route('total_price') }}");
-		total("{{ route('total_price') }}");			
-		add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
-		load_wishlist("{{ route('add_to_wishlist') }}");
-	
-		
-		
-		
-		signin("{{ route('signin') }}");
-		
-		
-		aboutBusiness("{{ route('aboutBusiness') }}")	;
-		referAFriend("{{ route('refer_a_friend') }}");
-		//topChefDeal("{{ route('top_chef_deals_list') }}");
-				
+						});
+
+				var category_id = "<?php if (isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';?>";
+				menus("{{ route('menus') }}", category_id);
+				load_cart("{{ route('add_to_cart') }}", "{{ route('total_price') }}");
+				total("{{ route('total_price') }}");
+				add_to_Cart("{{ route('total_price') }}", "{{ route('add_to_cart') }}");
+				load_wishlist("{{ route('add_to_wishlist') }}");
+
+
+				signin("{{ route('signin') }}");
+
+
+				aboutBusiness("{{ route('aboutBusiness') }}");
+				referAFriend("{{ route('refer_a_friend') }}");
+				//topChefDeal("{{ route('top_chef_deals_list') }}");
+
 				/*
 				$(document).ready(function() {
 				$(window).on('scroll',function(){
@@ -533,56 +526,48 @@
 
 				*/
 				// Auto Adjust Height
-				$(window).on('load', function() {
-					
+				$(window).on('load', function () {
+
 					//$('#flowers li').click(function(){
 					//	$('.collapse').collapse('hide');
 					//});
 					//$(document).click(function(){
 					//	$('.collapse').collapse('hide');
 					//});
-				
 
- 		
+
 					function resize(selector, footer) {
 						var totalheight = $(window).height();
-						if(footer){
+						if (footer) {
 							var lessheight = $('.cart-tabs .cartTabHeader').height() + $('.tab-content .cartTabFooter').height();
 							var docheight = totalheight - lessheight;
-						}else{
+						} else {
 							var lessheight = parseInt($('.cart-tabs .cartTabHeader').height());
 							var docheight = totalheight - lessheight - parseInt(25);
-						}			
-									
-						$('.tab-content ' + selector).css("height", docheight);		
+						}
+
+						$('.tab-content ' + selector).css("height", docheight);
 						$('.tab-content ' + selector).css("min-height", '556px'); // i have given minimum height
 					}
-					
-					$(document).ready(function() {
-						resize('.basketList',false); //basketList
-						resize('.wishList',false); //wishList
+
+					$(document).ready(function () {
+						resize('.basketList', false); //basketList
+						resize('.wishList', false); //wishList
 					});
-					
-					$(window).resize(function() {
-						resize('.basketList',false); //basketList
-						resize('.wishList',false); //wishList
+
+					$(window).resize(function () {
+						resize('.basketList', false); //basketList
+						resize('.wishList', false); //wishList
 					});
-					
-		
-					
-					
-					
-					
-						
+
+
 				});
 
 				// Modal Script
 				$('#myModal').on('shown.bs.modal', function () {
 					$('#myInput').focus()
 				});
-				
-				
-				
+
 
 				// All Small Script
 				$(document).ready(function () {
@@ -590,34 +575,33 @@
 					$(".js-example-basic-single").select2({
 						minimumResultsForSearch: Infinity
 					});
-					
+
 					//Sider Bar Fixed on Scroll
 					$('#sidebar').stickySidebar({
 						topSpacing: 20,
 						containerSelector: '.container',
 						innerWrapperSelector: '.sidebar__inner'
 					});
-					
 
-				 
+
 					// Field Style
-					$(".fluid-label").focusout(function(){
-						$(".focused").removeClass("focused");	
+					$(".fluid-label").focusout(function () {
+						$(".focused").removeClass("focused");
 					});
 					$('.fluid-label').fluidLabel({
 						focusClass: 'focused'
 					});
-					
+
 					//Navigation Menu Slider
-					$('#cartList, #cartList2').on('click',function(e){
+					$('#cartList, #cartList2').on('click', function (e) {
 						e.preventDefault();
 						$('body').toggleClass('nav-expanded');
 					});
-                    $('.overlay').on('click', function (e) {
-                        e.preventDefault();
-                        $('body').toggleClass('nav-expanded');
-                    });
-					$('#nav-close').on('click',function(e){
+					$('.overlay').on('click', function (e) {
+						e.preventDefault();
+						$('body').toggleClass('nav-expanded');
+					});
+					$('#nav-close').on('click', function (e) {
 						e.preventDefault();
 						$('body').removeClass('nav-expanded');
 					});
@@ -631,7 +615,7 @@
 						verticalTrackClass: 'track3',
 						verticalHandleClass: 'handle3'
 					});
-					
+
 					//Header Slider
 					$('.headerSlider').bxSlider({
 						mode: 'fade',
@@ -641,12 +625,10 @@
 						controls: false,
 						auto: true
 					});
-					
-
-					
-					
-					
 				});
+
+				});
+
 				/*
 				//Inc Dec Button----------------
 				$(".incr-btn").on("click", function (e) {

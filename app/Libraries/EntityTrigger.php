@@ -1054,10 +1054,12 @@ Class EntityTrigger
 		// by SK : fix for rating update
 		if ( !isset($request->item_type) )
 			return FALSE;
-		
+
 		$request = is_array($request) ? (object) $request : $request;
+
 		$return = $this->_setRetailPrice($request);
-		
+
+
 		if ( $request->item_type == 'gift_card' ) {
 			$return['category_id'] = $request->gift_category_id;
 		}
@@ -1151,12 +1153,14 @@ Class EntityTrigger
 	 */
 	private function _setRetailPrice($request)
 	{
-		$return = FALSE;
-		$general_setting_lib = new GeneralSetting();
+	    $return = FALSE;
+	    $general_setting_lib = new GeneralSetting();
 		$setting = $general_setting_lib->getSetting();
-		
+
+       //
+
 		if ( $request->item_type == 'deal' ) {
-			$return = [ 'price' => roundOfAmount($request->buying_price) ];
+			$return['price'] = [ 'price' => roundOfAmount($request->buying_price) ];
 		} else {
 			if ( isset($setting->selling_price_margin) && !empty($request->buying_price) ) {
 				
@@ -1165,11 +1169,14 @@ Class EntityTrigger
 					$margin = $request->buying_price * ( $setting->selling_price_margin / 100 );
 					$return = [ 'price' => roundOfAmount($request->buying_price + $margin) ];
 				} else {
-					$return = [ 'price' => roundOfAmount($request->buying_price) ];
+                    $return = [ 'price' => roundOfAmount($request->buying_price) ];
 				}
+				if(isset($request->buying_price) && !empty($request->buying_price)){
+				    $return['buying_price'] = roundOfAmount($request->buying_price);
+                }
 			}
 		}
-		
+
 		return $return;
 	}
 	
