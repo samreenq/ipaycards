@@ -1344,14 +1344,13 @@ class SYSEntity extends Base
                 $search_columns['where_condition'] = " AND start_date <= '$date' AND end_date >= '$date'";
 
             }
-        if($hook == 'deals'){
+        else if($hook == 'deals'){
             $search_columns['entity_type_id'] = $response_key = 'product';
             $search_columns['where_condition'] = " AND item_type = 'deal'";
             $search_columns['status'] = 1;
-
         }
 
-        if($hook == 'brand'){
+        else if($hook == 'brand'){
             $search_columns['entity_type_id'] = $response_key = $hook;
             $search_columns['order_by'] = "sorting_order";
             $search_columns['sorting'] = "ASC";
@@ -1382,6 +1381,8 @@ class SYSEntity extends Base
                 $search_columns['limit'] = 4;
                 $search_columns['mobile_json'] = 1;
                 $search_columns['inner_response'] = 1;
+
+               // echo "<pre>"; print_r( $search_columns);
                 $entity_lib = new Entity();
                 $hook_data = $entity_lib->apiList($search_columns);
                 $hook_data = json_decode(json_encode($hook_data));
