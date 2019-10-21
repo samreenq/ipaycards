@@ -87,7 +87,7 @@ return [
         'username' => 'merchant.TEST222204083001',
         'password' => 'ffa4f48c03844c346cccede2eb790ca5',
         'currency' => 'USD',
-        'mobile_gateway_url' =>'https://cubixsource.com/html/gateway-test-merchant-server/transaction.php'
+        'mobile_gateway_url' => '/gateway-test-merchant-server/transaction.php'
     ),
 
 ];

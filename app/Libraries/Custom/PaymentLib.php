@@ -153,7 +153,7 @@ Class PaymentLib
             //echo '<pre>'; print_r($params); exit;
 
             $call = $this->_client->put(
-                config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->lead_order_id",
+                url('/').config('service.MASTER_CARD.mobile_gateway_url')."?order=$request->lead_order_id&transaction=$request->lead_order_id",
                 [
                     'headers' => [
                         'Content-Type' => 'application/json'
