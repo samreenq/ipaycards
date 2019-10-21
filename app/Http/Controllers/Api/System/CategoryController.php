@@ -535,10 +535,15 @@ class CategoryController extends Controller
                            // echo "<pre>"; print_r($category_ids); exit;
                             if (!empty($category_ids)) {
                                 $and = '';
-                                foreach(explode(',',$category_ids) as $cat_id){
+                               /* foreach(explode(',',$category_ids) as $cat_id){
                                     $and .= ($and == '') ? " AND ( " : " OR ";
                                     $and .= " FIND_IN_SET('".$cat_id."',category_id)";
-                                }
+                                }*/
+
+                                $field = new \StdClass();
+                                $field->attribute_code = 'category_id';
+                               // $and .= ($and == '') ? " " : " OR ";
+                                $and .= $exModel->getMultiSearchQuery('',explode(',',$category_ids),$field,$request->all());
 
                                 $params = [
                                     'entity_type_id' => 'product',
@@ -548,9 +553,10 @@ class CategoryController extends Controller
                                 ];
 
                                 if(!empty($and)){
-                                    $params['where_condition'] = $and.")";
+                                   // $params['where_condition'] = $and.")";
+                                    $params['where_condition'] = ' AND '.$and;
                                 }
-                               // echo "<pre>"; print_r($params); exit;
+                              //  echo "<pre>"; print_r($params);
                                 $products_list = $entity_lib->apiList($params);
                                 $products_list = json_decode(json_encode($products_list));
 
