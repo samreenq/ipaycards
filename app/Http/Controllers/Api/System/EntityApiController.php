@@ -16,6 +16,7 @@ use App\Libraries\ItemLib;
 use App\Libraries\OrderCart;
 use App\Libraries\OrderHelper;
 use App\Libraries\OrderStatus;
+use App\Libraries\ProductHelper;
 use App\Libraries\System\Entity;
 use App\Libraries\Truck;
 use App\Libraries\WalletTransaction;
@@ -439,4 +440,22 @@ Class EntityApiController extends Controller
 
         return $this->__ApiResponse($request, $this->_apiData);
     }
+
+    /**
+     * @param Request $request
+     * @return \App\Http\Controllers\Response
+     */
+    public function getProductFilters(Request $request)
+    {
+        $this->_apiData['error'] = 0;
+        $this->_apiData['message'] = trans($this->_langIdentifier . ".success");
+
+        $product_helper = new ProductHelper();
+        $this->_apiData = $product_helper->getFilters($request->all());
+
+        return $this->__ApiResponse($request, $this->_apiData);
+    }
+
+
+
 }

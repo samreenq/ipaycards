@@ -5,7 +5,9 @@
  */
 namespace App\Libraries;
 use App\Http\Models\FlatTable;
+use App\Http\Models\SYSCategory;
 use App\Http\Models\SYSTableFlat;
+use App\Libraries\System\Entity;
 
 Class ProductHelper
 {
@@ -150,6 +152,89 @@ Class ProductHelper
         $where_condition = " product_promotion_id = $promotion_id";
         $return = $this->_SYSTableFlatModel->getColumnByWhere($where_condition,'COUNT(entity_id) as total_count');
         return $return->total_count;
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function getFilters($request)
+    {
+        $entity_lib = new Entity();
+
+        $product_tags = json_decode(
+            json_encode(
+                $entity_lib->apiList(
+                    [
+                        'entity_type_id'=> 'product_tags',
+                        'mobile_json'=>1,
+                        'limit'=>10,
+                    ]
+                )
+            ),
+            true
+        );
+
+        // echo "<pre>"; print_r($product_tags); exit;
+        if(isset($product_tags['data']['product_tags'][0]['category_id'][0])){
+
+            $sys_category = new SYSCategory();
+            $arr = [];
+
+            foreach($product_tags['data']['product_tags'][0]['category_id'] as $search_cat){
+
+                // echo "<pre>"; print_r($search_cat);
+                $cat_count = $sys_category->where('category_id',$search_cat['category_id'])->where('status',1)
+                    ->where('deleted_at',null)
+                    ->first();
+                // echo "<pre>"; print_r($cat_count);
+                if(isset($cat_count->category_id)){
+                    $arr[] = $search_cat;
+                }
+            }
+
+            unset( $product_tags['data']['product_tags'][0]['category_id']);
+            $product_tags['data']['product_tags'][0]['category_id'] = $arr;
+        }
+        // echo "<pre>"; print_r($product_tags['data']['product_tags'][0]['brand_ids']); exit;
+        if(isset($product_tags['data']['product_tags'][0]['brand_ids'][0])){
+
+            $sys_brand = new SYSTableFlat('brand');
+            $arr = array();
+
+            foreach($product_tags['data']['product_tags'][0]['brand_ids'] as $search_cat){
+
+                $brand =  $sys_brand->getDataByWhere('entity_id = '.$search_cat['id'].' AND (`status` = 1 AND deleted_at is null)');
+                //  echo "<pre>"; print_r($brand); exit;
+                if(isset($brand[0]->entity_id)){
+                    $arr[] = $search_cat;
+                }
+            }
+
+            unset( $product_tags['data']['product_tags'][0]['brand_ids']);
+            $product_tags['data']['product_tags'][0]['brand_ids'] = $arr;
+        }
+
+        if(isset($product_tags['data']['product_tags'][0]['searchable_tags'][0])){
+
+            $sys_brand = new SYSTableFlat('tags');
+            $arr = array();
+
+            foreach($product_tags['data']['product_tags'][0]['searchable_tags'] as $search_cat){
+
+                $brand =  $sys_brand->getDataByWhere('entity_id = '.$search_cat['id'].'  AND deleted_at is null');
+                //  echo "<pre>"; print_r($brand); exit;
+                if(isset($brand[0]->entity_id)){
+                    $arr[] = $search_cat;
+                }
+            }
+
+            unset( $product_tags['data']['product_tags'][0]['searchable_tags']);
+            $product_tags['data']['product_tags'][0]['searchable_tags'] = $arr;
+        }
+
+        return $product_tags;
+
     }
 
 
