@@ -2438,15 +2438,6 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
 
 
         if (typeof (localStorage.products) !== "undefined") {
-            if (typeof (localStorage.day) != "undefined")
-                var Day = localStorage["day"];
-            else
-                var Day = "";
-
-            if (typeof (localStorage.day) != "undefined")
-                var Time = localStorage["time"];
-            else
-                var Time = "";
 
             var auth_platform_type = '';
             if ($('#auth_platform_type').length > 0) {
@@ -2458,13 +2449,6 @@ function process_order(Request_url1, payment_session_url, csrf_token) {
                 checkout_mobile = $('#checkout_mobile').val();
             }
 
-
-             /*if ($('#recipient_message').val() == ""){
-
-                        $('.error-message').append('<div class="alert alert-danger">Recipient message is required to process order.</div>');
-                        return false;
-                    }
-*/
 
              $.ajax({
 

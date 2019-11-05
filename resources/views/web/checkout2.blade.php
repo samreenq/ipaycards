@@ -99,7 +99,7 @@
 										</div>
 										<div class="col-md-12 addAddressWrap">
 												{{--<input  type="button" name="" role="button" data-toggle="collapse" href="#paymentinfo" aria-expanded="false" aria-controls="collapseExample" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
-											<input  type="button" id="checknext" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />
+											{{--<input  type="button" id="checknext" name="" role="button" value="Next" class="d-flex ml-auto process_order" style="cursor:pointer;background-color: #0f738d; color: #fff; border: none; padding: 10px 33px; text-transform: uppercase;" />--}}
 										</div>
 										
 									</div>
@@ -248,7 +248,7 @@
 										{{ csrf_field() }}
 
 
-										<button  type="button" disabled="disabled" class="add-to-cart"  style="width: 100%;border: none;margin: 20px 0 15px ;background-color:#8080808f;" >Process Order</button>
+										<button  type="button" class="add-to-cart"  style="width: 100%;border: none;margin: 20px 0 15px ;background-color:#0f738d" >Process Order</button>
 									</form>
 
 
@@ -397,9 +397,9 @@
 
         var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
 
-        $('.add-to-cart').on('click',function(){
-
-        	var conversion_rate = "{{ $currency_conversion }}";
+        function checkoutPayment()
+		{
+            var conversion_rate = "{{ $currency_conversion }}";
             if($('#paid_amount').val() > 0) {
 
                 var amt = $("#paid_amount").val()*conversion_rate;
@@ -451,15 +451,105 @@
 
                     },
                     error: function (xhr, statusText, err) {
+                        $(".add-to-cart").removeAttr("disabled");
                         //alert("Error:" + xhr.status);
                         console.log("Error:" + xhr.getAllResponseHeaders());
                     }
                 });
             }
             else{
+                $(".add-to-cart").removeAttr("disabled");
                 localStorage.setItem('charge_type','cod');
                 window.location.href = "{!! url('/').'/checkout3' !!}"
-			}
+            }
+		}
+
+        $('.add-to-cart').on('click',function(){
+
+
+        if ($('#checkout_mobile_number').length > 0) {
+
+            if ($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() == '') {
+
+                //$('.add-to-cart').attr('disabled','disabled');
+                $('.error-message').html('');
+                $('.error-message').append('<div class="alert alert-danger">The contact number is required to process order.</div>');
+                return false;
+            }
+
+            if ($('#auth_platform_type').val() == 'facebook' && $('#checkout_mobile_number').val() != '') {
+                $('#checkout_mobile').val($('#checkout_mobile_number').val());
+            }
+
+        }
+
+
+        if (typeof (localStorage.products) !== "undefined") {
+
+            var auth_platform_type = '';
+            if ($('#auth_platform_type').length > 0) {
+                auth_platform_type = $('#auth_platform_type').val();
+            }
+
+            var checkout_mobile = '';
+            if ($('#checkout_mobile').length > 0) {
+                checkout_mobile = $('#checkout_mobile').val();
+            }
+
+            $('.add-to-cart').attr('disabled','disabled');
+            $.ajax({
+
+                url: "{{ route('saveorder') }}",
+                type: 'get',
+                data: {
+                    data: JSON.parse(localStorage.products),
+                    coupon_code: localStorage.coupon_code,
+                    order_notes: $("#order_notes").val(),
+                    recipient_name: $('#recipient_name').val(),
+                    recipient_email: $('#recipient_email').val(),
+                    recipient_message: $('#recipient_message').val(),
+                    is_gift_card: localStorage.is_gift_card,
+                    auth_platform_type: auth_platform_type,
+                    checkout_mobile: checkout_mobile,
+                },
+
+                dataType: 'json',
+                success: function (data) {
+
+                    $('.error-message').html('');
+                    if (data.error == 0) {
+
+                        var lead_order = data.data;
+
+                        localStorage.setItem("lead_order_id", lead_order['entity_id']);
+
+                        $("#txn_ref").val(lead_order['txn_ref']);
+                        $("#entity_id").val(lead_order['entity_id']);
+                        $("#amount").val(lead_order['amount']);
+
+
+                       // $(".add-to-cart").css("background-color", "#0f738d");
+
+
+                        //Payment method work
+
+                        checkoutPayment();
+
+                    } else {
+                        $(".add-to-cart").removeAttr("disabled");
+                       // $('.add-to-cart').attr('disabled', 'disabled');
+                        $('.error-message').html('');
+                        $('.error-message').append('<div class="alert alert-danger">' + data.message + '</div>');
+                    }
+
+                    //localStorage.removeItem('products');
+                    //window.location = Request_url2 ;
+                }
+            });
+
+
+        }
+
         });
   
       $(function(){
@@ -477,18 +567,7 @@
 			$(".deliveryInstructions").toggleClass("activeArrow");
 		});*/
 
-		$("input.process_order").click(function(){
-			//$(".paymentInfo").toggleClass("activeArrow");
-		});
 
-
-
-		  function testOrder(test)
-		  {
-		      console.log("Payment Complete",test);
-		      return;
-		  }
-		  
 		  function processFinalOrder()
 		  {
               console.log($('#paid_amount').val() );
@@ -642,7 +721,7 @@
 				show_cart("{{ route('show_cart') }}","{{ route('total_price') }}");
 				total("{{ route('total_price') }}");			
 				add_to_Cart("{{ route('total_price') }}","{{ route('add_to_cart') }}");
-				process_order("{{ route('saveorder') }}","{{ route('get_session') }}","{{ csrf_token() }}");
+			//	process_order("{{ route('saveorder') }}","{{ route('get_session') }}","{{ csrf_token() }}");
 				
 				signin("{{ route('signin') }}");
 				//signup("{{ route('signup') }}");
