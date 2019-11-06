@@ -176,7 +176,7 @@
                             recharge_type = $('#recharge_type').val();
                         }
 
-                        $.ajax({
+                       /* $.ajax({
                             url: "{{ route('topup_session') }}",
                             type: 'POST',
                             data: {
@@ -245,7 +245,7 @@
                                 $('.alert3').show();
                                 move = false;
                             }
-                        });
+                        });*/
 
 
                     }
