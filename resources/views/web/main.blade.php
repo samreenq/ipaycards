@@ -97,7 +97,8 @@
             <div class="page-nav-second">
                 <div class="d-flex container align-items-center">
                     <a class="navbar-brand logo" href="javascript:void(0)">
-                        <h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">{!! APP_NAME !!}</h4>
+                        {{--<h4 style="font-family: 'Roboto', sans-serif;font-weight: 400;line-height: 1.5;color: #212529;margin-right:10px;">{!! APP_NAME !!}</h4>--}}
+                        <img class="logoIcon" width="74" src="<?php echo url('/').'/public/web/img/logo.png'; ?>" />
                        <!-- <img src="<?php // echo url('/') . '/public/web/img/logo.png';?>" width="172"/> -->
                     </a>
                     <div class="greedy-nav-second">

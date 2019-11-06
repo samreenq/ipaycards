@@ -179,7 +179,7 @@
                                     <div id="credit">
                                         <h5>Master Card</h5>
                                         <p>Please wait while payment process is starting</p><br>
-                                        <img src="{!! url('/').'/public/web/img/payment.png' !!}" />
+                                        <img class="set-image-size" src="{!! url('/').'/public/web/img/payment.png' !!}" />
                                       {{--  <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>

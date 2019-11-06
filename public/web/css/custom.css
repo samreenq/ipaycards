@@ -7276,3 +7276,9 @@ select:-webkit-autofill:focus {
 .demo.fluid-label label {
     display: none !important;
 }
+
+.set-image-size {
+    width: 370px;
+    height: auto;
+    object-fit: cover;
+}
