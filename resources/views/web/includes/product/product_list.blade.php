@@ -262,12 +262,12 @@
 					
 					<div class="error404Wrap ml-auto mr-auto mt70 mb70">
 										<div class="error404img mt50 mb50">
-											<!--<img class="img-responsive" src="{{ url('/') }}/public/web/img/error404.png" alt="error404" width="309">-->
+											-<img class="img-responsive" src="{{ url('/') }}/public/web/img/product-not-found.png" alt="error404" width="309">
 										</div>
-										<div class="error404content text-center">
+										{{--<div class="error404content text-center">
 											<h2>No Product Found</h2>
 											<p>The product you are looking for doesn't exist. Try another keyword or return to <a href="{{url('/')}}">home</a></p>
-										</div>
+										</div>--}}
 					</div>
 
 <?php		
