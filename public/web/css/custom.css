@@ -1533,7 +1533,7 @@ section.flyout-wrap {
 }
 .page-nav-second .second-cartbtn #cartList2 span.orderNotification {
     font-size: 13px;
-    background-color: #0f738d;
+    background-color: #fa8072;
     width: 21px;
     height: 21px;
     border-radius: 50px;
@@ -1782,7 +1782,7 @@ body.nav-expanded .overlay {
 }
 #cartList span.orderNotification {
     font-size: 13px;
-    background-color: #0f738d;
+    background-color: #fa8072;
     width: 21px;
     height: 21px;
     border-radius: 50px;
@@ -1814,7 +1814,7 @@ body.nav-expanded .overlay {
 }
 #scrollNav #cartList span.orderNotification {
     font-size: 13px;
-    background-color: #0f738d;
+    background-color: #fa8072;
     width: 21px;
     height: 21px;
     border-radius: 50px;
