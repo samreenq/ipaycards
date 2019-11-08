@@ -41,7 +41,10 @@
 				<div class="row clearfix recipeFixed">
 					<div class="col-md-12 col-lg-8 deliveryInfoWrap ">
 
-						
+						<input type="hidden" name="currency_conversion" id="currency_conversion" value="" />
+						<input type="hidden" name="paid_amount" id="paid_amount" value="" />
+						<input type="hidden" name="payment_method"  id="payment_method" value="cod" >
+
 						<div class="deliveryInfo deliveryInstructions whitebg activeArrow">
 							<div class="address-Header clearfix">
 								<h4 class="pull-left collapsed"   role="button" href="#deliveryInstructions" aria-expanded="false" aria-controls="collapseExample">Delivery Instructions</h4>
@@ -73,20 +76,20 @@
 
                                         <div class="col-md-6 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
-                                                <input type="text" id="recipient_name" name="recipient_name" value="{!! isset($login_customer->auth->name) ? $login_customer->auth->name : "" !!}"  placeholder="Recipient Name" />
+                                                <input type="text" id="recipient_name" name="recipient_name" value="{!! isset($login_customer->auth->name) ? $login_customer->auth->name : "" !!}"  placeholder="Recipient's Name" />
                                                 {{--  <label>Add Note*</label>--}}
                                             </div>
                                         </div>
 										<div class="col-md-6 cuspad recipient" style="display: none;">
 											<div class="fluid-label">
-												<input type="text" id="recipient_email" name="recipient_email" value="{!! isset($login_customer->auth->email) ? $login_customer->auth->email : "" !!}"  placeholder="Recipient Email" />
+												<input type="text" id="recipient_email" name="recipient_email" value="{!! isset($login_customer->auth->email) ? $login_customer->auth->email : "" !!}"  placeholder="Recipient's Email Address" />
 												{{--  <label>Add Note*</label>--}}
 											</div>
 										</div>
 
                                         <div class="col-md-12 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
-                                                <textarea id="recipient_message" name="recipient_message" placeholder="Recipient Message*" ></textarea>
+                                                <textarea id="recipient_message" name="recipient_message" placeholder="A Message to the Recipient*" ></textarea>
                                                 {{--  <label>Add Note*</label>--}}
                                             </div>
                                         </div>
@@ -118,11 +121,10 @@
 								<div class="paymentInfoForm">
 									<div class="payment-method">
 
-										<input type="hidden" name="currency_conversion" id="currency_conversion" value="" />
-										<input type="hidden" name="paid_amount" id="paid_amount" value="" />
+
 										<div class="big-radio webpay cryptoCurrencyWrap noselect">
 											<img src="<?php echo url('/').'/public/web/img/isw_logo_new_combined.png'?>" alt="bitcoin-logo" width="200"/>
-										<input type="hidden" name="payment_method"  id="payment_method" value="cod" >
+
 											<label for="crypto-currency">
 												Master Card
 											</label>
