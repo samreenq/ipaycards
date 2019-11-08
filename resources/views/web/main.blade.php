@@ -245,7 +245,7 @@
     <section class="greybg popCate">
         <div class="container">
             <div class="row align-items-baseline no-gutters mb30 stitle-wrap">
-                <h2 class="mr-auto align-items-start">Browse By Categories</h2>
+                <h2 class="mr-auto align-items-start">Card Categories</h2>
             </div>
             <div class="row" id="mainCategory">
                 <div style="position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);" id="LoadingPopularCategoriesImage" align="center" style="display: none">
