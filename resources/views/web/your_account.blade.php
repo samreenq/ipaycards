@@ -59,7 +59,7 @@
 					@include("web/includes/account/account_nav")
 					<div class="col-md-12 col-lg-9 col-xl-10">
 						<div class="d-sm-flex align-items-center dashboard-header">
-							<h4 class="mr-auto align-items-start">Your Account</h4>
+							<h4 class="mr-auto align-items-start">Account</h4>
 						</div>
 						<div class="dashboard-content panelled whitebg">
 							<div class="editSec">
