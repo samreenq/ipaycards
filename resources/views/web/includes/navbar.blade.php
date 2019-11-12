@@ -80,7 +80,7 @@
                 ?>
 
 
-                <!--<li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>-->
+                <li><a href="{{route('faq')}}">@lang('web.navbar_menu_name_4')</a></li>
 
 
                 </ul>
