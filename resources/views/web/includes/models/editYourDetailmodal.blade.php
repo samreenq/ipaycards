@@ -9,8 +9,9 @@
           <span aria-hidden="true" class="icon-tt-close-icon"></span>
         </button>
 		  <div class="modal-body">
-			<h3>Account Details</h3>	
+			<h3>Account Details</h3>
 			<form>
+				<input type="hidden" name="platform_type" id="platform_type" value="{!! isset($user['auth']['platform_type']) ? $user['auth']['platform_type'] : "" !!}" />
 				<div class="alert-message" id="account_response">
 				</div>
 				
@@ -27,14 +28,14 @@
 						  <label>Last Name</label>
 						</div>
 					</div>
-					<!--
+
 					<div class="col-md-12">
 						<div class="fluid-label">
-						  <input id="account_mobile_no" name="account_mobile_no" type="text" required="required" class="form-control" placeholder="Mobile Number" />
+						  <input id="account_mobile_no" name="account_mobile_no" type="text" value="{!! isset($user['auth']['mobile_no']) ? $user['auth']['mobile_no'] : "" !!}" required="required" class="form-control" placeholder="Mobile Number" />
 						  <label>Mobile Number</label>
 						</div>
 					</div>
-					-->
+
 				</div>
 				<!--<div class="clearfix forgotWrap">
 					<div class="checkbox">
