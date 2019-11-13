@@ -3058,6 +3058,8 @@ function changeYourAccountDetail(changeYourAccountDetailUrl) {
             data: {
                 first_name: $("#account_first_name").val(),
                 last_name: $("#account_last_name").val(),
+                platform_type: $("#platform_type").val(),
+                account_mobile_no: $("#account_mobile_no").val(),
             },
             type: 'get',
             dataType: 'json',
@@ -3073,13 +3075,11 @@ function changeYourAccountDetail(changeYourAccountDetailUrl) {
                     timerA = setInterval(function () {
                         $('.editYourDetailmodal').modal('hide');
                         clearInterval(timerA);
+                        window.location.href = site_url + '/your_account';
                     }, 2000);
 
-                    location.reload();
-                    /*$("#account_response").css("color", "white");
-                    $("#account_response").css("background-color",'#d4edda');
-                    $("#account_response").css("border-color",'#d4edda');*/
-                    //$("#account_response").empty().append("Data Has been changed successfully!");
+
+
                 } else {
                     // showAlert(data['message']);
                     $("#account_response").addClass('alert alert-danger');

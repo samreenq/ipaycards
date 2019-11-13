@@ -1917,6 +1917,10 @@ class EntityAuthController extends Controller
                     } else {
                         $entity["name"] = $request->input("name", "");
                     }
+
+                    if($request->input("mobile_no", "")){
+                        $entity["mobile_no"] = $request->input("mobile_no", "");
+                    }
                     // required params
                     //$entity['email'] = $request->input("email");
                     //$entity['password'] = $request->input("password");

@@ -26,6 +26,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 
 use App\Http\Models\Setting;
+use App\Http\Models\SYSEntityAuth;
 use App\Libraries\OrderHelper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Input;
@@ -389,19 +390,40 @@ class AccountController extends WebController {
      *
      */ 
 	public function changeAccountDetail(Request $request) 
-	{		
- 
+	{
+            $messages = array(
+                'account_mobile_no.required_if' => 'The mobile number field is required.'
+            );
+
+            $sys_entity_auth = new SYSEntityAuth();
+
 			$validator = Validator::make(
 							$request->all(),
 							[
-								'first_name'	=>	'required'		,
-								'last_name'		=>	'required'		
-							]
-						);		
-			if($validator->fails())
+								'first_name'	=>	'required',
+								'last_name'		=>	'required',
+                                 'account_mobile_no' => 'required_if:platform_type,custom|mobile|unique:' .$sys_entity_auth->table . ',mobile_no,'.$this->_customer['entity_auth_id'].','. $sys_entity_auth->primaryKey .',deleted_at,NULL'
+							],$messages
+						);
+
+            if($validator->fails())
 			{
 				$errors = $validator->errors();
-				$data['message'] = $errors->first('first_name')."<br> ".$errors->first('last_name');
+                $data['message'] = '';
+				if(!empty($errors->first('first_name'))){
+                    $data['message'] .= $errors->first('first_name')."<br> ";
+                }
+
+                if(!empty($errors->first('last_name'))){
+                    $data['message'] .= $errors->first('last_name')."<br> ";
+                }
+
+                if(!empty($errors->first('account_mobile_no'))){
+                    $data['message'] .= $errors->first('account_mobile_no')."<br> ";
+                }
+
+
+				//$data['message'] = $errors->first('first_name')."<br> ".$errors->first('last_name')."<br> ".$errors->first('account_mobile_no');
 				return $data;
 			}
 			else 
@@ -422,6 +444,7 @@ class AccountController extends WebController {
 										'first_name'		=>	$first_name,
 										'last_name'			=>	$last_name,
                                         'login_entity_id'   => $this->_customerId,
+                                        'mobile_no'         => $request->input('account_mobile_no')
 									],
 									true
 								)
@@ -432,6 +455,7 @@ class AccountController extends WebController {
 
                 $this->_customer['attributes']['first_name'] = 	$first_name;
                 $this->_customer['attributes']['last_name']	 =	$last_name;
+                $this->_customer['auth']['mobile_no']	 =	$request->input('account_mobile_no');
 
 				if ($request->session()->has('users')) 
 				{

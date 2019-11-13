@@ -24,11 +24,11 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('MASTER_DB_HOST', 'localhost');
     define('MASTER_DB_USER', 'root');
     define('MASTER_DB_PASS', '');
-    define('MASTER_DB_NAME', 'ipaycards_db');
+    define('MASTER_DB_NAME', 'ipaycardsdb');
     define('MASTER_DB_PREFIX', '');
 
 
-} elseif (preg_match('/staging/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname"))) {
+} else {
     // app dir details
     define('APP_ALIAS', ''); // app dir name
     define('ADD_PATH', 'staging/ipaycards/'); // preceding path to app dir
@@ -39,20 +39,6 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     define('MASTER_DB_PASS', '6S*wy26c');
     define('MASTER_DB_NAME', 'db_ipaycards');
     define('MASTER_DB_PREFIX', '');
-}
-else {
-
-    // app dir details
-    define('APP_ALIAS', ''); // app dir name
-    define('ADD_PATH', 'project/ipaycards/'); // preceding path to app dir
-    define('APP_DOMAIN', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : exec("hostname")); //  for saving cookies
-    // db details
-    define('MASTER_DB_HOST', 'sandbox4.cubix.co');
-    define('MASTER_DB_USER', 'ucl_ipay');
-    define('MASTER_DB_PASS', 'i7k4Zm1~');
-    define('MASTER_DB_NAME', 'cl_ipay');
-    define('MASTER_DB_PREFIX', '');
-
 }
 
 define('APP_FULL_URL',APP_URL.ADD_PATH);
