@@ -7328,3 +7328,9 @@ select:-webkit-autofill:focus {
     height: auto;
     object-fit: cover;
 }
+
+.faq_title {
+    color: #000;
+    font-size: 26px;
+    margin: -50px 0 14px 0;
+}
