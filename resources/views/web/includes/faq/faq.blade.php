@@ -63,6 +63,7 @@
 
                 <div role="tabpanel"
                      <?php if ($a == 1) echo 'class=" tab-pane active" aria-expanded="true"'; else echo 'class="tab-pane"';?>     id="a<?php echo $type_attributes->value; ?>">
+                    <h2 class="faq_title">FAQs</h2>
                     <div class="faq-right-header">
                         <h4><?php echo $type_attributes->option ?></h4>
                     </div>
