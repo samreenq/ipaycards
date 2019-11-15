@@ -31,6 +31,13 @@ if(isset($wishlist))
 												//	echo $wishlistItems["product_code"];
 											?>
 									{{--</td>--}}
+                                    <td>
+                                        <a href="javascript:void(0);" class="wishlist-cart" data-wishlist-id="{!! $wishlistItems["wishlist_entity_id"] !!}" data-id="{!! $wishlistItems["entity_id"] !!}">
+                                            <button class="addtocart wishListButton">
+                                                <span class="icon-tt-cart-Icon"></span>
+                                            </button>
+                                        </a>
+                                    </td>
 									<td class="addItemMore" align="center">
 										<a class="cross_wrap" href="#" >
 											<span style="font-size:75%;color:#000;margin-left: 50%;margin-bottom: 57%;" onclick="deleteWishlistProduct('{{ $wishlistItems['entity_id'] }}','{{ route('add_to_cart') }}','{{ route('show_cart') }}','{{route('total_price')}}','{{route('add_to_wishlist')}}','{{route('delete_to_wishlist')}}' )" > <!--class="clancelItem" -->
@@ -41,13 +48,6 @@ if(isset($wishlist))
 								</tr>
 								<tr>
 									<td class="addItemRate"><?php echo $currency; ?>  <?php if(isset( $wishlistItems["price"])) echo $wishlistItems["price"];   ?></td>
-									<td>
-										<a href="javascript:void(0);" class="wishlist-cart" data-wishlist-id="{!! $wishlistItems["wishlist_entity_id"] !!}" data-id="{!! $wishlistItems["entity_id"] !!}">
-											<button class="addtocart wishListButton">
-												<span class="icon-tt-cart-Icon"></span>
-											</button>
-										</a>
-									</td>
 								</tr>
 								
 						</table>

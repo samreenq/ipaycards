@@ -7345,6 +7345,23 @@ select:-webkit-autofill:focus {
     padding: 1rem 1rem 25px;
     justify-content: center;
 }
+.sign-out-popup .modal-footer button:first-of-type {
+    color: #333;
+    border-color: #eaeaea;
+    background-color: #eaeaea;
+}
+.sign-out-popup .modal-footer button:last-of-type {
+    color: #fff;
+    border-color: #0f738d;
+    background-color: #0f738d;
+}
+.sign-out-popup .modal-footer button:first-of-type:focus {
+    color: #333;
+    background: #eaeaea !important;
+}
+.sign-out-popup .modal-footer button:last-of-type:focus {
+    background: #0f738d !important;
+}
 .sign-out-popup .modal-header .close {
     top: 22px;
     padding: 0;
@@ -7354,7 +7371,7 @@ select:-webkit-autofill:focus {
     font-size: 32px;
 }
 .sign-out-popup .modal-body {
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     padding: 0 20px 15px;
 }
