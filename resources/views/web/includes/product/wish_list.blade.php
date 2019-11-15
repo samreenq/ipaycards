@@ -41,7 +41,13 @@ if(isset($wishlist))
 								</tr>
 								<tr>
 									<td class="addItemRate"><?php echo $currency; ?>  <?php if(isset( $wishlistItems["price"])) echo $wishlistItems["price"];   ?></td>
-									<td><a href="javascript:void(0);" class="wishlist-cart" data-wishlist-id="{!! $wishlistItems["wishlist_entity_id"] !!}" data-id="{!! $wishlistItems["entity_id"] !!}">Add to Cart</a></td>
+									<td>
+										<a href="javascript:void(0);" class="wishlist-cart" data-wishlist-id="{!! $wishlistItems["wishlist_entity_id"] !!}" data-id="{!! $wishlistItems["entity_id"] !!}">
+											<button class="addtocart wishListButton">
+												<span class="icon-tt-cart-Icon"></span>
+											</button>
+										</a>
+									</td>
 								</tr>
 								
 						</table>
