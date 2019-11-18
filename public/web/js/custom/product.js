@@ -1399,9 +1399,6 @@ function add_to_wishlist(Request_url1) {
         var thumb = $button.parents(wrap_class).find('.thumb').val();
         var price = $button.parents(wrap_class).find('.price').val();
         var item_type = $button.parents(wrap_class).find('.item_type').val();
-        /*	var weight  = $button.parent().find('.weight').val();
-            var unit_option  = $button.parent().find('.unit_option').val();
-            var unit_value  = $button.parent().find('.unit_value').val(); */
 
 
         $.ajax({
@@ -1413,9 +1410,7 @@ function add_to_wishlist(Request_url1) {
             dataType: 'json',
             success: function (data) {
 
-
                 if (typeof (localStorage.wishlist) == "undefined") {
-
 
                     var string = '[{"wishlist_entity_id":' + data[0]["wishlist_entity_id"] + ',"entity_id":' + data[0]["entity_id"] + ',"product_code":"' + data[0]["product_code"] + '","title":"' + data[0]["title"] + '","thumb":"' + data[0]["thumb"] + '","price":"' + data[0]["price"] + '"}]';
 
@@ -1500,63 +1495,6 @@ function add_to_wishlist(Request_url1) {
 
         });
 
-
-        /*
-
-
-
-        if(typeof(localStorage.wishlist)=="undefined")
-        {
-            var string =  '[{"product_code":"'+product_code+'","title":"'+title+'","thumb":"'+thumb+'","price":"'+price+'","weight":"'+weight+'","unit_option":"'+unit_option+'","unit_value":"'+unit_value+'"}]';
-            localStorage["wishlist"] =string;
-        }
-
-        if(typeof(localStorage.wishlist)!=="undefined")
-        {
-            var wishlist = JSON.parse(localStorage.wishlist);
-            n = 0 ;
-            for (var i = 0; i <wishlist.length; i++)
-            {
-                if(product_code === wishlist[i].product_code)
-                {
-                    n=0;
-                   break;
-                }
-                else
-                {
-                    n=1;
-                }
-            }
-            if ( n==1 )
-            {
-
-                var string = {
-                                "entity_id":entity_id,
-                                "product_code":product_code ,
-                                "title":title,
-                                "thumb":thumb,
-                                "price":price,
-                                "weight":weight,
-                                "unit_option":unit_option,
-                                "unit_value":unit_value
-                             };
-
-
-                wishlist.push(string);
-            }
-            localStorage.setItem("wishlist", JSON.stringify(wishlist));
-
-
-        }
-
-        load_wishlist(Request_url1);
-
-
-
-
-
-        */
-       // location.reload();
 
     });
 
