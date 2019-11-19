@@ -2464,6 +2464,7 @@ function menus(Request_url, Category_id) {
         success: function (data) {
             $(".menus").empty().append(data);
             $("#LoadingImageMenu").hide();
+            $("ul#accordion1").empty().append(data);
 
 
             // Nav Greedy First

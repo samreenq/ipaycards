@@ -64,8 +64,7 @@
 			<div class="container">
 				<button class="dropdown-toggle" data-toggle="dropdown">Collection <span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
 				<div id="productCateSideWrap" class="dropdown-menu mega-dropdown-menu">
-
-					<ul class=" vegeListWrap sidebar__inner p20" id="accordion1">
+					<ul class="vegeListWrap sidebar__inner p20" id="accordion1">
 
 					</ul>
 				</div>
