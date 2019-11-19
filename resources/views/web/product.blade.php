@@ -62,7 +62,7 @@
 
 		<div class="fly-nav-inner">
 			<div class="container">
-				<button class="dropdown-toggle" data-toggle="dropdown">Collection <span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
+				<button class="dropdown-toggle" data-toggle="dropdown">More <span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
 				<div id="productCateSideWrap" class="dropdown-menu mega-dropdown-menu">
 					<ul class="vegeListWrap sidebar__inner p20" id="accordion1">
 

@@ -151,6 +151,7 @@
             captions: true,
             autoDelay: 1500
         });
+
         $(".bx-prev").html("");
         $(".bx-next").html("");
 
