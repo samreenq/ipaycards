@@ -1,6 +1,6 @@
 @section('navbar')
     <!-- Static navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-faded">
+    <nav class="navbar navbar-expand-lg navbar-light bg-faded mobile-view-position">
         <div class="container">
 
             <a class="navbar-brand" href="{{ route('main') }}">
@@ -33,7 +33,7 @@
             <div class="collapse search-collapse" id="searchCollapse">
                 <div class="col-12 bg-search">
                     <div class="toolbar-search mobile-search">
-                        <input class="search-bar" name="search" placeholder="Search healthy food and more" type="search" value="">
+                        <input class="search-bar" name="search" placeholder="Search" type="search" value="">
                         <button class="search-btn" name="button" type="submit"><span class="icon-tt-right-arrow"></span></button>
                     </div>
                 </div>

@@ -7393,4 +7393,39 @@ select:-webkit-autofill:focus {
 .wishListButton span {
     color: white;
 }
+.added-space-radio input {
+    margin-left: 15px;
+}
+.fixed-width {
+    width: 300px !important;
+}
+
+@media(min-width: 320px) and (max-width: 767px) {
+    .faq_title {
+        margin: 0 0 19px 0;
+    }
+    .detail_img {
+        border-radius: 15px;
+    }
+    .checkout-step-1 .item .item-block.ib-info img.product-img {
+        height: 55px;
+    }
+    .checkout-step-2 form .calculateDiscount {
+        margin-bottom: 15px;
+    }
+    .orderHistory table {
+        overflow-x: auto;
+    }
+}
+@media(min-width: 768px) and (max-width: 991px) {
+    .faq_title {
+        margin: 0 0 19px 0;
+    }
+    .detail_img {
+        border-radius: 15px;
+    }
+    .checkout-step-1 .item .item-block.ib-info img.product-img {
+        height: 55px;
+    }
+}
 /*//// sign out popup styling end here ////*/
