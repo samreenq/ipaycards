@@ -7437,6 +7437,15 @@ select:-webkit-autofill:focus {
     .checkout-step-2 {
         padding-top: 120px;
     }
+    .faq-Section {
+        margin-top: 80px;
+    }
+    .termandcond-Section {
+        margin-top: 90px;
+    }
+    .mobileApp {
+        margin-top: 80px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
@@ -7469,6 +7478,15 @@ select:-webkit-autofill:focus {
     }
     .checkout-step-2 {
         padding-top: 120px;
+    }
+    .faq-Section {
+        margin-top: 80px;
+    }
+    .termandcond-Section {
+        margin-top: 90px;
+    }
+    .mobileApp {
+        margin-top: 80px;
     }
 }
 /*//// sign out popup styling end here ////*/
