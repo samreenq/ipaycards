@@ -98,6 +98,11 @@
 
     $(document).ready(function () {
         referAFriend("{{ route('refer_a_friend') }}");
+
+        $(document).on("click", ".cart-list .check_out", function (e) {
+            $('body').removeClass('nav-expanded');
+        });
+
     });
 
 
@@ -150,6 +155,21 @@
             slideMargin: 10,
             captions: true,
             autoDelay: 1500
+        });
+
+        $(window).resize(function() {
+            //do something
+            var width = $(document).width();
+            if (width < 991) {
+                $('.smBannerSlider').bxSlider({
+                    maxSlides: 1,
+                    slideWidth: 500
+                });
+            } else {
+                $('.smBannerSlider').bxSlider({
+                    maxSlides: 3
+                });
+            }
         });
 
         $(".bx-prev").html("");

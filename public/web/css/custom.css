@@ -7416,6 +7416,27 @@ select:-webkit-autofill:focus {
     .orderHistory table {
         overflow-x: auto;
     }
+    .mobile-view-position {
+        top: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+    }
+    #header {
+        margin-top: 80px;
+    }
+    section.product-Section {
+        margin-top: 80px;
+    }
+    .product-detail-Section {
+        padding-top: 80px;
+    }
+    .checkout-step-1 {
+        padding-top: 120px;
+    }
+    .checkout-step-2 {
+        padding-top: 120px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
@@ -7426,6 +7447,28 @@ select:-webkit-autofill:focus {
     }
     .checkout-step-1 .item .item-block.ib-info img.product-img {
         height: 55px;
+    }
+    .mobile-view-position {
+        top: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+    }
+    #header {
+        margin-top: 80px;
+    }
+    section.product-Section {
+        margin-top: 80px;
+    }
+    .product-detail-Section {
+        margin-top: 80px;
+        padding-top: 80px;
+    }
+    .checkout-step-1 {
+        padding-top: 120px;
+    }
+    .checkout-step-2 {
+        padding-top: 120px;
     }
 }
 /*//// sign out popup styling end here ////*/
