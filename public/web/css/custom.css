@@ -7446,6 +7446,12 @@ select:-webkit-autofill:focus {
     .mobileApp {
         margin-top: 80px;
     }
+    .three-sm-banner-wrap .bx-wrapper {
+        width: 325px !important;
+    }
+    .main-banner h1 {
+        font-size: 26px !important;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
@@ -7487,6 +7493,9 @@ select:-webkit-autofill:focus {
     }
     .mobileApp {
         margin-top: 80px;
+    }
+    .three-sm-banner-wrap .bx-wrapper {
+        width: 365px !important;
     }
 }
 /*//// sign out popup styling end here ////*/
