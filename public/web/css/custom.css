@@ -6079,9 +6079,9 @@ span.clancelItem a{
         display:block;
         margin-bottom:30px;
     }
-    .prod-left-bar{
-        display:none;
-    }
+    /*.prod-left-bar{*/
+        /*display:none;*/
+    /*}*/
     section.product-Section{
         padding-top:0;
     }
@@ -7500,6 +7500,15 @@ select:-webkit-autofill:focus {
     }
     .three-sm-banner-wrap .bx-wrapper {
         width: 365px !important;
+    }
+    .prod-left-bar {
+        margin-bottom: 25px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .prod-left-bar {
+        margin-bottom: 25px;
     }
 }
 /*//// sign out popup styling end here ////*/
