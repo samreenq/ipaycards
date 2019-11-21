@@ -89,7 +89,7 @@
 
                                         <div class="col-md-12 cuspad recipient" style="display: none;">
                                             <div class="fluid-label">
-                                                <textarea id="recipient_message" name="recipient_message" placeholder="A Message to the Recipient*" ></textarea>
+                                                <textarea id="recipient_message" name="recipient_message" placeholder="Message to Recipient" ></textarea>
                                                 {{--  <label>Add Note*</label>--}}
                                             </div>
                                         </div>
