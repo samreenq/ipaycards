@@ -32,10 +32,12 @@
             <!-- mobile search start -->
             <div class="collapse search-collapse" id="searchCollapse">
                 <div class="col-12 bg-search">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/product') }}">
                     <div class="toolbar-search mobile-search">
-                        <input class="search-bar" name="search" placeholder="Search" type="search" value="">
+                        <input class="search-bar" name="title" placeholder="Search" type="search" value="">
                         <button class="search-btn" name="button" type="submit"><span class="icon-tt-right-arrow"></span></button>
                     </div>
+                    </form>
                 </div>
             </div>
             <!-- mobile search end -->
