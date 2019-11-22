@@ -34,7 +34,7 @@
         <div class="flyout-overlay"></div>
         <div class="fly-nav-inner">
             <div class="container">
-                <button class="dropdown-toggle dropdownActivePage" data-toggle="dropdown">Collection <span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
+                <button class="dropdown-toggle dropdownActivePage" data-toggle="dropdown">More <span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
                 <div class="dropdown-menu mega-dropdown-menu">
                     <ul class="row">
                         <li class="col-sm-12">
