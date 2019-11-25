@@ -791,7 +791,7 @@
                     console.log('sam', localStorage.products);
                 }
 
-                if (typeof (localStorage.products) !== "undefined") {
+                else if (typeof (localStorage.products) !== "undefined") {
                     var products = JSON.parse(localStorage.products);
                     var products1 = [];
                     n = 0;
