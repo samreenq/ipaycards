@@ -48,7 +48,7 @@ foreach ( $products  as $productItemsList )
 												<input class="price_tmp" type="hidden" name="code" value="@if( isset($productItemsList['price']) && isset($productItemsList['product_quantity']) ) {{ $productItemsList['price'] * $productItemsList['product_quantity'] }} @endif"/>
 												
 												<input class="price_id" type="hidden" name="code" value="{{ $n }}"/>
-												<input class="quantity{{ $n }}" type="number" name="quantity" value="@if(isset($productItemsList['product_quantity'])){{$productItemsList['product_quantity']}}@endif"/>
+												<input class="quantity{{ $n }}" type="number" readonly name="quantity" value="@if(isset($productItemsList['product_quantity'])){{$productItemsList['product_quantity']}}@endif"/>
 											
 											
 											

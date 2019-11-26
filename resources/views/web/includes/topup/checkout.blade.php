@@ -265,7 +265,7 @@
 				
 				// Add Cart Btn Animation
 				$('.addtocart').click(function(){
-					$(this).hide();
+					//$(this).hide();
 					var abc = $(this).parent().find('.pro-inc-wrap').toggle( "slide");
 				});
 

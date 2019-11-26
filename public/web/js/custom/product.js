@@ -309,6 +309,7 @@ function todayTodayEssentials(Entity_type_id, Featured_type, Request_url1, Produ
                             total(Request_url4);
                         }
                     }
+                    loadProductQty();
                     load_cart(Request_url3, Request_url4);
                     e.preventDefault();
                 }
@@ -520,6 +521,7 @@ function topCategoryProducts(Entity_type_id, Featured_type, Request_url1, Produc
                             total(Request_url4);
                         }
                     }
+                    loadProductQty();
                     load_cart(Request_url3, Request_url4);
                     e.preventDefault();
                 }
@@ -2125,6 +2127,7 @@ function save(Product_code, Product_quantity, item_type, Request_url) {
 
         localStorage.setItem("products", JSON.stringify(products));
     }
+    loadProductQty();
 }
 
 function total(Request_url) {
@@ -2169,7 +2172,7 @@ function add_to_Cart(Request_url1, Request_url2) {
 
         var entity_id = $("input[name=entity_id]").val();
         var product_quantity = $("input[name=product_quantity]").val();
-        $("input[name=product_quantity]").val("1");
+      //  $("input[name=product_quantity]").val("1");
         var product_code = $("input[name=product_code]").val();
         var title = $("input[name=title]").val();
         var thumb = $("input[name=thumb]").val();
@@ -2195,7 +2198,8 @@ function add_to_Cart(Request_url1, Request_url2) {
                     if (products.length == 1)
                         products[i].product_quantity = parseInt(product_quantity);
                     else
-                        products[i].product_quantity = parseInt(products[i].product_quantity) + parseInt(product_quantity);
+                        products[i].product_quantity = parseInt(product_quantity);
+                      //  products[i].product_quantity = parseInt(products[i].product_quantity) + parseInt(product_quantity);
 
                     n = 0;
                     break;
@@ -2690,7 +2694,6 @@ function deleteCartProduct(Product_code, Request_url1, Request_url2, Request_url
 
     //$("#show_list").empty();
     //$("#cart").empty();
-
     load_cart(Request_url1, Request_url3);
     show_cart(Request_url2, Request_url3);
 
@@ -3328,6 +3331,7 @@ function sendCode(sendCodeUrl, socialPhoneVerficationUrl) {
 }
 
 function addCartProcess(Request_url2, Request_url3, Request_url4, Request_url5) {
+    loadProductQty();
     add_to_wishlist(Request_url5);
 
     // Add Cart Btn Animation
@@ -3526,6 +3530,7 @@ function addCartProcess(Request_url2, Request_url3, Request_url4, Request_url5) 
         load_cart(Request_url3, Request_url2);
         e.preventDefault();
     });
+
 }
 
 function showAlert(msg) {
@@ -3568,6 +3573,29 @@ function addSuccessMsg(message) {
 }
 
 
+function loadProductQty()
+{
+    //alert('Yes I am');
+    if (typeof (localStorage.products) !== "undefined") {
+
+        $('.addCartWrap, .cartShareWrap').each(function(i) {
+            var entity_id = $(this).find('.entity_id').val();
+           // alert(entity_id);
+
+            var prod = JSON.parse(localStorage.products);
+
+            for (var i = 0; i < prod.length; i++) {
+              // alert(entity_id+'--'+products[i].entity_id);
+                if (entity_id == prod[i].entity_id) {
+                    $(this).find('input[name="product_quantity"]').val(prod[i].product_quantity);
+                }
+
+            }
+
+        });
+
+    }
+}
 
 
 $('.custom-close').on('click', function () {

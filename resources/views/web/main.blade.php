@@ -502,6 +502,7 @@
             e.preventDefault();
         });
 
+        setTimeout(function() { loadProductQty() }, 2000);
 
         //$('#cartList').on('click', function () {
         //	$("body").toggleClass('stop_scroll');
