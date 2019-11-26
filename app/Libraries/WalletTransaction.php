@@ -1,5 +1,7 @@
 <?php
 namespace App\Libraries;
+use App\Http\Models\SYSTableFlat;
+
 /**
  * Class WalletTransaction
  * @package App\Libraries
@@ -19,6 +21,7 @@ Class WalletTransaction
         $this->_table = 'wallet_transaction';
         $this->_SYSTableFlatModel = $this->_modelPath . "SYSTableFlat";
         $this->_SYSTableFlatModel = new $this->_SYSTableFlatModel($this->_table);
+
     }
 
     /**
@@ -66,6 +69,46 @@ Class WalletTransaction
 
         return $balance;
 
+    }
+    
+    public function checkWalletAmount($customer_id = false,$amount)
+    {
+        $wallet = "0.00";
+        $paid_amount = "0.00";
+
+        if(isset($customer_id)){
+            // User Verification
+
+            $customer_balance =  $this->getCurrentBalance($customer_id);
+
+            $flat_table = new SYSTableFlat('customer');
+            $customer_raw = $flat_table->getDataByWhere(' entity_id = '.$customer_id,array('default_wallet_payment','wallet'));
+
+            $default_wallet_payment = isset($customer_raw[0]->default_wallet_payment) ? $customer_raw[0]->default_wallet_payment : 2;
+
+            if($default_wallet_payment == 1){
+
+                $customer_balance = ($customer_balance) ? $customer_balance : 0.00;
+
+                if($customer_balance > $amount){
+                    $wallet = $amount;
+                }
+                else{
+                    $wallet =  $customer_balance;
+                }
+            }
+
+            $paid_amount = roundOfAmount($amount - $wallet,2);
+
+        }
+        else{
+            $paid_amount = $amount;
+        }
+
+        return array(
+            'wallet' =>  $wallet,
+            'paid_amount' => $paid_amount
+        );
     }
 
 

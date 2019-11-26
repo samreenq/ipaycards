@@ -168,20 +168,51 @@
                     }else{
                         move = true;
 
+                        //Get Customer Wallet
+                        $.ajax({
+                            url: "<?php echo url('get_wallet'); ?>",
+                            type: "GET",
+                            async: false,
+                            dataType: "json",
+                            data: {"amount":$('#amount').val()},
+                            beforeSend: function () {
+                            }
+                        }).done(function (data) {
 
-                        var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
+                            $('#wallet').val(data.wallet);
+                            $('#paid_amount').val(data.paid_amount);
 
-                        var recharge_type = '';
-                        if(service_type == 'du'){
-                            recharge_type = $('#recharge_type').val();
-                        }
+                            $('#pay_wallet').text(data.wallet);
+                            $('#pay_paid_amount').text(data.paid_amount);
 
-                      $.ajax({
+                        });
+
+                    }
+                    console.log('step2-',move);
+                    // return move;
+                });
+            }
+            if (currentIndex == 2) {
+
+                $('.alert3').hide();
+                move = false;
+                var conversion_rate = "{{ $currency_conversion }}";
+                var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
+
+                var recharge_type = '';
+                if(service_type == 'du'){
+                    recharge_type = $('#recharge_type').val();
+                }
+
+                var topup_redirect = '/topup/checkout';
+
+                        $.ajax({
                             url: "{{ route('topup_session') }}",
                             type: 'POST',
                             data: {
                                 _token: "{!! csrf_token() !!}",
                                 "amount": parseFloat($('#amount').val()*conversion_rate).toFixed(2),
+                                "user_id" : "{!! $customerId !!}",
                                 "data" :{
                                     "service_type": $('#service_type').val(),
                                     "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
@@ -197,34 +228,43 @@
 
                                     localStorage.setItem('lead_topup_id',data.lead_topup_id);
 
+                                    if(data.paid_amount > 0){
 
-                                    Checkout.configure({
-                                        merchant: payment_merchant,
-                                        order: {
-                                            amount: parseFloat($('#amount').val()*conversion_rate).toFixed(2),
-                                            currency: "{!! config('service.MASTER_CARD.currency') !!}",
-                                            description: 'Recharge '+$('#service_type').val(),
-                                            id: data.lead_topup_id
-                                        },
-                                        session: {
-                                            id: data.data.session.id
-                                        },
-                                        interaction: {
-                                            merchant: {
-                                                name: 'iPayCards - Transaction Order ID: '+data.lead_topup_id,
+                                        Checkout.configure({
+                                            merchant: payment_merchant,
+                                            order: {
+                                                // amount: parseFloat($('#amount').val()*conversion_rate).toFixed(2),
+                                                amount: data.converted_paid_amount,
+                                                currency: "{!! config('service.MASTER_CARD.currency') !!}",
+                                                description: 'Recharge '+$('#service_type').val(),
+                                                id: data.lead_topup_id
                                             },
-                                            displayControl: {
-                                                billingAddress  : 'HIDE',
-                                                shipping        : 'HIDE'
+                                            session: {
+                                                id: data.data.session.id
+                                            },
+                                            interaction: {
+                                                merchant: {
+                                                    name: 'iPayCards - Transaction Order ID: '+data.lead_topup_id,
+                                                },
+                                                displayControl: {
+                                                    billingAddress  : 'HIDE',
+                                                    shipping        : 'HIDE'
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 
-                                    setTimeout(
-                                        function () {
-                                            Checkout.showLightbox();
-                                        }, 500
-                                    )
+                                        setTimeout(
+                                            function () {
+                                                Checkout.showLightbox();
+                                            }, 500
+                                        )
+
+
+                                    }
+                                    else{
+                                        window.location.href = "{!! url('/') !!}"+topup_redirect;
+                                    }
+
                                 }
                                 else{
                                     $('.alert3').text('');
@@ -247,52 +287,6 @@
                             }
                         });
 
-                    }
-                    console.log('step2-',move);
-                    // return move;
-                });
-            }
-            if (currentIndex == 2) {
-
-                $('.alert3').hide();
-
-                /*var recharge_type = '';
-                if(service_type == 'du'){
-                    recharge_type = $('#recharge_type').val();
-                }
-
-                $.ajax({
-                    url: "<?php // echo url('topup/send'); ?>",
-                    type: "POST",
-                    async: false,
-                    dataType: "json",
-                    data: {
-                        "_token": "{!! csrf_token() !!}",
-                        "service_type": $('#service_type').val(),
-                        "customer_no":$('#dial_code').val()+$('#mobileNumber').val(),
-                        "recharge_type":recharge_type,
-                        "amount": $('#amount').val(),
-                        "card_number":$('#card_number').val(),
-                        "expiry_date":$('#expiry_date').val(),
-                        "cvc":$('#cvc').val(),
-                        "source": "web",
-                    },
-                    beforeSend: function () {
-                    }
-                }).done(function (data) {
-
-                    if(data.error == 1){
-                        move = false;
-                        $('.alert3').text('');
-                        $('.alert3').text(data.message);
-                        $('.alert3').show();
-
-                    }else{
-                        move = true;
-                    }
-                    console.log('step3-',move);
-                    // return move;
-                });*/
 
 
             }
@@ -373,7 +367,7 @@
 
     function cancelPayment()
     {
-        window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
+        //window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
     }
 
     function errorPayment(error)

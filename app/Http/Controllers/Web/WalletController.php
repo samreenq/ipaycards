@@ -293,6 +293,25 @@ class WalletController extends WebController
             }
         }
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getWallet(Request $request)
+    {
+        try {
+          return $this->_customer_wallet->checkWalletAmount($this->_customerId,$request->amount);
+
+        }catch ( \Exception $e ) {
+            return array(
+                'error' =>1,
+                'message'=> $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            );
+         }
+
+    }
 	
 
 }

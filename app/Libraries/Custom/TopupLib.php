@@ -236,34 +236,43 @@ Class TopupLib
 
                 $topup_order_raw = $topup_order[0];
                 $data = json_decode($topup_order_raw->order_detail,true);
+                $transaction_id = $request->lead_topup_id;
 
-                //Get Payment Status/////////////////
-                $payment_lib = new PaymentLib();
-                $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->lead_topup_id,'service_type'=>$data['service_type']],'topup');
+                if($data['paid_amount'] > 0){
 
-                // echo '<pre>'; print_r($payment_response); exit;
+                    //Get Payment Status/////////////////
+                    $payment_lib = new PaymentLib();
+                    $payment_response =  $payment_lib->getPaymentStatus(['order_id'=>$request->lead_topup_id,'service_type'=>$data['service_type']],'topup');
 
-                if(!isset($payment_response->result)){
-                    return array(
-                        'error' => 1,
-                        'message' => "Unable to process request, Please contact to support team"
-                    );
+                    // echo '<pre>'; print_r($payment_response); exit;
+
+                    if(!isset($payment_response->result)){
+                        return array(
+                            'error' => 1,
+                            'message' => "Unable to process request, Please contact to support team"
+                        );
+                    }
+
+                    if(strtolower($payment_response->result) == 'error'){
+                        return array(
+                            'error' => 1,
+                            'message' => "Unable to get payment status, Please contact to support team",
+                            /* 'debug'  => $response->error->explanation*/
+                        );
+                    }
+
+
+                    $card = $payment_response->sourceOfFunds->provided->card;
+                    $transaction_id = $payment_response->transaction[0]->authorizationResponse->transactionIdentifier;
                 }
 
-                if(strtolower($payment_response->result) == 'error'){
-                    return array(
-                        'error' => 1,
-                        'message' => "Unable to get payment status, Please contact to support team",
-                        /* 'debug'  => $response->error->explanation*/
-                    );
-                }
 
 
                 //Send Topup/////////////////////
                 //$params = $data;
                 // $data['customer_no'] = "+".$data['customer_no'];
                 $data['reference_id'] = ($data['source'] == 'web') ? '' : '';
-                // echo "<pre>"; print_r($data); exit;
+              //  echo "<pre>"; print_r($data); exit;
 
                 if(in_array($data['service_type'],array('du','etisalat'))){
                     $send_topup =  $this->mobileTopup($data);
@@ -286,15 +295,16 @@ Class TopupLib
                 $t_response = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
                 $data['topup_response'] = "$t_response";
 
-                $card = $payment_response->sourceOfFunds->provided->card;
 
                 // $data['transaction_response'] = json_encode($payment_response);
                 $data['reference_id'] = isset($request->reference_id) ? $request->reference_id : '127.0.0.1';
                 $data['lead_order_id'] = $request->lead_topup_id;
-                $data['card_id'] = $card->nameOnCard;
-                $data['card_type'] = $card->scheme;
-                $data['card_last_digit'] = substr($card->number,-4);
-                $data['transaction_id'] = $payment_response->transaction[0]->authorizationResponse->transactionIdentifier;
+                $data['card_id'] = isset($card->nameOnCard) ? $card->nameOnCard : '';
+                $data['card_type'] = isset($card->scheme) ? $card->scheme :'';
+                $data['card_last_digit'] = isset($card->number) ? substr($card->number,-4) : '';
+                $data['transaction_id'] = $transaction_id;
+                $data['wallet'] = (string) $data['wallet'];
+                $data['paid_amount'] = (string) $data['paid_amount'];
 
 
                 $entity_lib = new Entity();
