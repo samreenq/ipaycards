@@ -87,7 +87,7 @@
             if (currentIndex == 1) {
 
                 $('.alert2').hide();
-                var conversion_rate = "{{ $currency_conversion }}";
+
 
                 if ($('#amount').val() == '' || $('#customer_no').val() == '' || $('#request_key').val() == '' || $('#service_type').val() == '') {
                     move = false;
@@ -96,38 +96,72 @@
                     $('.alert2').show();
                 } else {
                     move = true;
-                    //Intialize payment
 
-                    var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
-
+                    //Get Customer Wallet
                     $.ajax({
-                        url: "{{ route('topup_session') }}",
-                        type: 'POST',
-                        data: {
-                            _token: "{!! csrf_token() !!}",
-                            "amount": parseFloat($('#amount').val()*conversion_rate).toFixed(2),
-                            "data" :{
-                                "service_type": $('#service_type').val(),
-                                "customer_no": $('#customer_no').val(),
-                                "request_key": $('#request_key').val(),
-                                "amount": $('#amount').val(),
-                                "source" : "web"
-                            }
-                        },
-                        dataType: 'json',
-                        success: function (data) {
+                        url: "<?php echo url('get_wallet'); ?>",
+                        type: "GET",
+                        async: false,
+                        dataType: "json",
+                        data: {"amount":$('#amount').val()},
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
 
-                            if(data.error == 0){
+                        $('#wallet').val(data.wallet);
+                        $('#paid_amount').val(data.paid_amount);
 
-                                localStorage.setItem('lead_topup_id',data.lead_topup_id);
-                                console.log('currency',"{!! config('service.MASTER_CARD.currency') !!}");
+                        $('#pay_wallet').text(data.wallet);
+                        $('#pay_paid_amount').text(data.paid_amount);
 
+                    });
+
+
+
+                }
+            }
+            if (currentIndex == 2) {
+
+                $('.alert3').hide();
+                move = false;
+
+                //Intialize payment
+                var conversion_rate = "{{ $currency_conversion }}";
+                var payment_merchant = "{!! config('service.MASTER_CARD.merchant_id') !!}";
+
+                $.ajax({
+                    url: "{{ route('topup_session') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                        "amount": parseFloat($('#amount').val()*conversion_rate).toFixed(2),
+                        "user_id" : "{!! $customerId !!}",
+                        "data" :{
+                            "service_type": $('#service_type').val(),
+                            "customer_no": $('#customer_no').val(),
+                            "request_key": $('#request_key').val(),
+                            "amount": $('#amount').val(),
+                            "source" : "web"
+                        }
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if(data.error == 0){
+
+                            localStorage.setItem('lead_topup_id',data.lead_topup_id);
+                            console.log('currency',"{!! config('service.MASTER_CARD.currency') !!}");
+                            var topup_redirect = '/topup/checkout';
+
+
+                            if(data.paid_amount > 0){
+                                alert(data.paid_amount);
                                 Checkout.configure({
                                     merchant: payment_merchant,
                                     order: {
                                         amount: parseFloat($('#amount').val()*conversion_rate).toFixed(2),
                                         currency: "{!! config('service.MASTER_CARD.currency') !!}",
-                                        description: 'Recharge '+$('#service_type').val(),
+                                        description: 'Recharge '+slugToTitle($('#service_type').val()),
                                         id: data.lead_topup_id
                                     },
                                     session: {
@@ -145,73 +179,33 @@
                                 });
 
                                 Checkout.showLightbox();
-
-                                /*setTimeout(
-                                    function () {
-                                        Checkout.showLightbox();
-                                    }, 1000
-                                )*/
                             }
                             else{
-                                $('.alert3').text('');
-                                $('.alert3').text(data.message);
-                                $('.alert3').show();
-                                move = false;
-
+                                window.location.href = "{!! url('/') !!}"+topup_redirect;
                             }
 
-
-                        },
-                        error: function (xhr, statusText, err) {
-                            //alert("Error:" + xhr.status);
-                            console.log("Error:" + xhr.getAllResponseHeaders());
-
+                        }
+                        else{
                             $('.alert3').text('');
-                            $('.alert3').text(statusText);
+                            $('.alert3').text(data.message);
                             $('.alert3').show();
                             move = false;
+
                         }
-                    });
 
 
-                }
-            }
-            if (currentIndex == 2) {
-
-                $('.alert3').hide();
-
-              /*  $.ajax({
-                    url: "<?php // echo url('service_topup/send'); ?>",
-                    type: "POST",
-                    async: false,
-                    dataType: "json",
-                    data: {
-                        "_token": "{!! csrf_token() !!}",
-                        "service_type": $('#service_type').val(),
-                        "customer_no": $('#customer_no').val(),
-                        "request_key": $('#request_key').val(),
-                        "amount": $('#amount').val(),
-                        "card_number": $('#card_number').val(),
-                        "expiry_date": $('#expiry_date').val(),
-                        "cvc": $('#cvc').val(),
-                        "source" : "web"
                     },
-                    beforeSend: function () {
-                    }
-                }).done(function (data) {
+                    error: function (xhr, statusText, err) {
+                        //alert("Error:" + xhr.status);
+                        console.log("Error:" + xhr.getAllResponseHeaders());
 
-                    if (data.error == 1) {
-                        move = false;
                         $('.alert3').text('');
-                        $('.alert3').text(data.message);
+                        $('.alert3').text(statusText);
                         $('.alert3').show();
-
-                    } else {
-                        move = true;
+                        move = false;
                     }
-                    console.log('step3-', move);
-                    // return move;
-                });*/
+                });
+
             }
 
             return move;
@@ -222,6 +216,8 @@
 
         saveState: true
     });
+
+
 
     function cancelPayment()
     {
