@@ -60,30 +60,24 @@ Class PayController extends Controller
     public function getTopupSession(Request $request)
     {
         try{
-           // echo "<pre>"; print_r($request->all()); exit;
+           //echo "<pre>"; print_r($request->all()); exit;
             $this->_apiData['error'] = 0;
-            $customer_id = isset($request->user_id) ? $request->user_id : '';
+            $customer_id = isset($request->user_id) ? $request->user_id : false;
             $lead_order_data = $request->data;
 
-
-            $customer_wallet = new WalletTransaction();
-            $wallet_data = $customer_wallet->checkWalletAmount($customer_id,$request->data['amount']);
-
+             $customer_wallet = new WalletTransaction();
+             $wallet_data = $customer_wallet->checkWalletAmount($customer_id,$request->data['amount']);
 
             $wallet = $lead_order_data['wallet'] = $wallet_data['wallet'];
             $paid_amount = $lead_order_data['paid_amount'] = $wallet_data['paid_amount'];
-            $lead_order_data['customer_id'] = $customer_id;
-
+            $lead_order_data['customer_id'] = ($customer_id) ? $customer_id : '';
 
             $params = array(
                 'entity_type_id' => 'lead_topup',
                 'order_detail' => json_encode($lead_order_data),
-
             );
 
             $entity_lib = new Entity();
-
-           // echo "<pre>"; print_r($params);
            $lead_order =  $entity_lib->apiPost($params);
             $lead_order = json_decode(json_encode($lead_order));
 

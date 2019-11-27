@@ -76,7 +76,7 @@ Class WalletTransaction
         $wallet = "0.00";
         $paid_amount = "0.00";
 
-        if(isset($customer_id)){
+        if($customer_id){
             // User Verification
 
             $customer_balance =  $this->getCurrentBalance($customer_id);

@@ -367,7 +367,7 @@
 
     function cancelPayment()
     {
-        //window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
+        window.location.href = "{!! url('/').'/topup/' !!}"+$('#service_type').val();
     }
 
     function errorPayment(error)

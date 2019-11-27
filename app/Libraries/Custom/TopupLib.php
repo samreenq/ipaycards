@@ -321,6 +321,25 @@ Class TopupLib
 
                     $entity_lib->apiUpdate($param);
 
+                    //Update Wallet
+                    if($data['wallet'] > 0 && $data['customer_id'] > 0){
+                        $wallet = $data['wallet'];
+
+                        $pos_arr = [];
+                        $pos_arr['entity_type_id'] = 'wallet_transaction';
+                        $pos_arr['credit'] = "0";
+                        $pos_arr['debit'] = "$wallet";
+                        $pos_arr['balance'] = '';
+                        $pos_arr['customer_id'] = $data['customer_id'];
+                        $pos_arr['transaction_type'] = 'debit';
+                        $pos_arr['wallet_source'] = 'topup';
+                        $pos_arr['topup_id'] = $topup_response->data->entity->entity_id;
+                        $pos_arr['mobile_json'] = isset($request->mobile_json) ? $request->mobile_json : 0;
+                        $pos_arr['login_entity_id'] = $data['customer_id'];
+                         $entity_lib->doPost($pos_arr);
+                    }
+
+
                     $this->_apiData['error'] = 0;
                     $this->_apiData['message'] = 'Success';
                     $this->_apiData['data'] = array('order_id' => 'T'.$topup_response->data->entity->entity_id);
