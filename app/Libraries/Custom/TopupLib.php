@@ -382,6 +382,7 @@ Class TopupLib
             }
 
             //Create Lead Order
+            $request['customer_id'] = isset($request['user_id']) ? $request['user_id'] : "";
             $lead_order = $this->createLead($request);
             if($lead_order->error == 1){
                 return $lead_order;
@@ -389,18 +390,25 @@ Class TopupLib
 
             $lead_order_id = $lead_order->data->entity->entity_id;
 
-            //Payment
-            $payment_request = $request['payment'];
-            $payment_request['lead_order_id'] = $lead_order_id;
-            $payment_request['service_type'] = $request['service_type'];
-
             try{
-                $payment_lib = new OrderLib();
-                $payment_response = $payment_lib->payment($payment_request,'topup');
-                $payment_response = (object)($payment_response);
-                // echo '<pre>'; print_r($payment_response); exit;
-                if(isset($payment_response->error)){
-                    return $payment_response;
+
+                if($request['paid_amount'] > 0){
+
+                    //Payment
+                    $payment_request = $request['payment'];
+                    $payment_request['lead_order_id'] = $lead_order_id;
+                    $payment_request['service_type'] = $request['service_type'];
+
+                    $payment_lib = new OrderLib();
+                    $payment_response = $payment_lib->payment($payment_request,'topup');
+                    $payment_response = (object)($payment_response);
+                    // echo '<pre>'; print_r($payment_response); exit;
+                    if(isset($payment_response->error)){
+                        return $payment_response;
+                    }
+                }
+                else{
+                    $payment_response = false;
                 }
 
                 // Topup
@@ -468,7 +476,7 @@ Class TopupLib
      * @param $payment_response
      * @return array|mixed
      */
-    public function saveTopup($lead_order,$send_topup,$payment_response)
+    public function saveTopup($lead_order,$send_topup,$payment_response = false)
     {
         try{
 
@@ -480,25 +488,33 @@ Class TopupLib
             $params['entity_type_id'] = 'topup';
             $params['mobile_json'] = 1;
 
+            if($params['paid_amount'] > 0){
 
-            $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
-            //
-            // $data['transaction_response'] = json_encode($payment_response);
-            $params['card_id'] = $card->nameOnCard;
-            $params['card_type'] = $card->scheme;
-            $params['card_last_digit'] = substr($card->number,-4);
-            $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+                if(isset($payment_response->gatewayResponse->sourceOfFunds->provided->card)){
+
+                    $card = $payment_response->gatewayResponse->sourceOfFunds->provided->card;
+                    //
+                    // $data['transaction_response'] = json_encode($payment_response);
+                    $params['card_id'] = $card->nameOnCard;
+                    $params['card_type'] = $card->scheme;
+                    $params['card_last_digit'] = substr($card->number,-4);
+                    $params['transaction_id'] = $payment_response->gatewayResponse->transaction->id;
+                    unset($params['payment']);
+                }
+            }else{
+                $params['transaction_id'] = "$lead_order_id";
+            }
+
             $params['lead_order_id'] = "$lead_order_id";
             $params['topup_response'] = isset($send_topup['data']) ? json_encode($send_topup['data']) : '';
 
-            unset($params['payment']);
             // echo '<pre>'; print_r($params); exit;
 
             $entity_lib = new Entity();
             $topup_response = $entity_lib->apiPost($params);
             $topup_response = json_decode(json_encode($topup_response));
 
-           //  echo "<pre>"; print_r($topup_response);
+             //echo "<pre>"; print_r($topup_response);
             if (isset($topup_response->data->topup->entity_id)) {
                 $param = array(
                     'entity_type_id' => 'topup',
@@ -508,13 +524,28 @@ Class TopupLib
                 );
               //  echo "<pre>"; print_r($param);
                $ret =  $entity_lib->apiUpdate($param);
+
+                //Update Wallet
+                if($params['wallet'] > 0 && $params['customer_id'] > 0){
+                    $wallet = $params['wallet'];
+
+                    $pos_arr = [];
+                    $pos_arr['entity_type_id'] = 'wallet_transaction';
+                    $pos_arr['credit'] = "0";
+                    $pos_arr['debit'] = "$wallet";
+                    $pos_arr['balance'] = '';
+                    $pos_arr['customer_id'] = $params['customer_id'];
+                    $pos_arr['transaction_type'] = 'debit';
+                    $pos_arr['wallet_source'] = 'topup';
+                    $pos_arr['topup_id'] = $topup_response->data->topup->entity_id;
+                    $pos_arr['mobile_json'] = 1;
+                    $pos_arr['login_entity_id'] = $params['customer_id'];
+                    $entity_lib->doPost($pos_arr);
+
+                }
                return $ret = json_decode(json_encode($ret));
-
-              //  echo "<pre>"; print_r($ret); exit;
             }
-
             return $topup_response;
-
         }
         catch ( \Exception $ee ) {
             $this->_assignData['error'] = 1;
