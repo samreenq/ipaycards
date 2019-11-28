@@ -225,6 +225,7 @@ Route::get('/product/feature', "Web\ProductController@getAllFeatureProducts")->n
     Route::any('/service_topup/send', "Web\TopupsController@sendServiceTopup")->name('send_service_topup');
 
     Route::any('/topup_order_web', 'Api\System\PayController@createTopupOrder')->name('topup_order_web');
+    Route::get('/get_wallet', "Web\WalletController@getWallet")->name('get_wallet');
 
 Route::get('/recipe/list', "Web\RecipeController@getAllRecipes")->name('recipe_all_list');
 Route::get('/recipe', "Web\RecipeController@showAllRecipe")->name('recipe');

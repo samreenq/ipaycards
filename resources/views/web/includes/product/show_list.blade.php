@@ -47,7 +47,7 @@
 							
 							
 							<input class="price_id" type="hidden" name="price_id" value="{{ $n }}"/>
-							<input class="quantity{{ $n }}" type="number" name="quantity" value="@if(isset($productItems['product_quantity'])){{$productItems['product_quantity']}}@endif"/>
+							<input class="quantity{{ $n }}" readonly type="number" name="quantity" value="@if(isset($productItems['product_quantity'])){{$productItems['product_quantity']}}@endif"/>
 						
 							<a class="incr-btn incr-btn2" data-action="increase" >
 								<span class="icon-tt-plus-icon"></span>

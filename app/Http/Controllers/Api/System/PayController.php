@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Libraries\Custom\OrderLib;
 use App\Libraries\Custom\PaymentLib;
 use App\Libraries\Custom\TopupLib;
+use App\Libraries\GeneralSetting;
 use App\Libraries\System\Entity;
+use App\Libraries\WalletTransaction;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -58,18 +60,24 @@ Class PayController extends Controller
     public function getTopupSession(Request $request)
     {
         try{
-           // echo "<pre>"; print_r($request->all()); exit;
+           //echo "<pre>"; print_r($request->all()); exit;
             $this->_apiData['error'] = 0;
+            $customer_id = isset($request->user_id) ? $request->user_id : false;
+            $lead_order_data = $request->data;
+
+             $customer_wallet = new WalletTransaction();
+             $wallet_data = $customer_wallet->checkWalletAmount($customer_id,$request->data['amount']);
+
+            $wallet = $lead_order_data['wallet'] = $wallet_data['wallet'];
+            $paid_amount = $lead_order_data['paid_amount'] = $wallet_data['paid_amount'];
+            $lead_order_data['customer_id'] = ($customer_id) ? $customer_id : '';
 
             $params = array(
                 'entity_type_id' => 'lead_topup',
-                'order_detail' => json_encode($request->data),
-
+                'order_detail' => json_encode($lead_order_data),
             );
 
             $entity_lib = new Entity();
-
-           // echo "<pre>"; print_r($params);
            $lead_order =  $entity_lib->apiPost($params);
             $lead_order = json_decode(json_encode($lead_order));
 
@@ -79,11 +87,20 @@ Class PayController extends Controller
                 if (isset($lead_order->data->entity->entity_id)) {
 
                     $lead_order_id = $lead_order->data->entity->entity_id;
-                    $request_param = ['lead_order_id'=>$lead_order_id,'amount' => $request->amount,'service_type'=>$request->data['service_type']];
+
+                    $general_setting = new GeneralSetting();
+                   $currency_conversion = $general_setting->getColumn('currency_conversion');
+
+                    $converted_paid_amount = round($paid_amount*$currency_conversion,2);
+                    $request_param = ['lead_order_id'=>$lead_order_id,'amount' => $converted_paid_amount,'service_type'=>$request->data['service_type']];
 
                     $payment_lib = new PaymentLib();
                     $this->_apiData['data'] = $payment_lib->getSessionID($request_param,'topup');
                     $this->_apiData['lead_topup_id'] = $lead_order_id;
+                    $this->_apiData['wallet'] = $wallet;
+                    $this->_apiData['paid_amount'] = $paid_amount;
+                    $this->_apiData['converted_paid_amount'] = $converted_paid_amount;
+
                 }
             }
             else{

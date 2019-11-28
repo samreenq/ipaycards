@@ -40,6 +40,9 @@
                             <input type="hidden" name="customer_no" id="customer_no" value="" />
                             <input type="hidden" name="request_key" id="request_key" value="" />
                             <input type="hidden" name="amount" id="amount" value="" />
+                            <input type="hidden" name="order_id" id="order_id" value="" />
+                            <input type="hidden" name="wallet" id="wallet" value="0" />
+                            <input type="hidden" name="paid_amount" id="paid_amount" value="0" />
                             <h3>
                                 <span class="title_text">Information</span>
                             </h3>
@@ -147,11 +150,30 @@
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
+                                    <div class="alert alert-success success-msg3" style="display: none;"></div>
+
+                                    @if(isset($login_customer))
+                                    <div id="walletWrap">
+                                        <h5>Gift Card</h5>
+                                        <p>iPay allows you to accept payments via gift card, you can use your wallet to recharge</p><br>
+                                     </div>
+                                    @endif
+
                                     <div id="credit">
                                         <h5>Master Card</h5>
-                                        <p>Please wait while payment process is starting</p><br>
-                                        <img class="set-image-size" src="{!! url('/').'/public/web/img/payment.png' !!}" />
-                                        {{--<div class="form-group row align-items-center">
+                                        <p>iPay allows you to accept payments with Mastercard, Please wait while payment process is starting</p><br>
+                                        <img class="set-image-size" src="{!! url('/').'/public/web/img/payment.png' !!}" /></p><br>
+                                    </div>
+
+                                    <div id="finalAmount">
+                                        @if(isset($login_customer))
+                                        <p>Pay via iPay Credit: {!! $general_setting_raw->currency !!}&nbsp;<span id="pay_wallet">{!! isset($login_customer->attributes->wallet) ? $login_customer->attributes->wallet : 0.00 !!}</span></p>
+                                        @endif
+                                         <p>Pay via Mastercard: {!! $general_setting_raw->currency !!}&nbsp;<span id="pay_paid_amount">0.00</span>
+
+                                    </div>
+                                   {{-- <div id="credit">
+                                        <div class="form-group row align-items-center">
                                             <div class="col-sm-4">
                                                 <label for="credit_card" class="form-label m-0"><b>Card number:</b></label>
                                             </div>
@@ -176,7 +198,6 @@
                                             </div>
                                         </div>--}}
                                     </div>
-                                </div>
 
                                 <div class="fieldset-footer">
                                     <span>Step 3 of 4</span>
@@ -342,12 +363,6 @@
                 resize('.basketList',false); //basketList
                 resize('.wishList',false); //wishList
             });
-
-
-
-
-
-
 
 
 
