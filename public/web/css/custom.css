@@ -7428,6 +7428,24 @@ select:-webkit-autofill:focus {
         overflow-x: auto;
         white-space: nowrap;
     }
+    .table-responsive2::-webkit-scrollbar {
+        width: 10px;
+        height: 12px;
+    }
+    /* Track */
+    .table-responsive2::-webkit-scrollbar-track {
+        border-radius: 15px;
+        background: #cecece;
+    }
+    /* Handle */
+    .table-responsive2::-webkit-scrollbar-thumb {
+        border-radius: 15px;
+        background: #afadad;
+    }
+    /* Handle on hover */
+    .table-responsive2::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
     .payment-method {
         margin-top: 15px;
     }
