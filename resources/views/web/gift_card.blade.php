@@ -186,7 +186,7 @@
         }
         ?>
 
-        changeYourAccountDetail("{{ route('change_your_account_detail')  }}");
+        changeYourAccountDetail("{{ route('change_your_account_detail')  }}","{{ route('phoneVerification') }}","{{ route('change_number') }}");
         changeAccountPassword("{{ route('change_your_account_password')  }}");
 
         var category_id = "<?php if( isset($_REQUEST['category_id'])) echo $_REQUEST['category_id']; else echo '0';?>";

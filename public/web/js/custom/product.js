@@ -2988,15 +2988,16 @@ function topChefDeal(Request_url1) {
 
 
 }
-
-function changeYourAccountDetail(changeYourAccountDetailUrl) {
+function changeYourAccountDetail(changeYourAccountDetailUrl,verifyPhoneUrl,changeIDRequest) {
 
     $("#save_your_account").click(function () {
-        //	if($("#term_and_condition").prop('checked') == true)
-        //	{
+
+        var first_name = $("#account_first_name").val();
+        var last_name = $("#account_last_name").val();
+        var platform_type = $("#platform_type").val();
 
         $.ajax({
-            url: changeYourAccountDetailUrl,
+            url: changeIDRequest,
             data: {
                 first_name: $("#account_first_name").val(),
                 last_name: $("#account_last_name").val(),
@@ -3006,23 +3007,135 @@ function changeYourAccountDetail(changeYourAccountDetailUrl) {
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                if (data['message'] == "Success") {
-                    $("#account_response").empty().append('Your account is updated successfully');
-                    if ($("#account_response").hasClass('alert')) {
-                        $("#account_response").removeClass('alert-danger');
+
+
+                if (data['error'] == 0) {
+
+                    if(data['same_mobile_no'] == 0) {
+
+                        $('.editYourDetailmodal').modal('hide');
+                        $('.pVerfymodal').modal('toggle');
+
+                        var phone_number = $('#account_mobile_no').val();
+                        $(".phone_number").empty().append(phone_number);
+                        $("#phone_number").val(phone_number);
+
+                        $("#entity_id").val(data['customer']['entity_id']);
+
+                        if ($("#error_msg_phone_verification").hasClass('alert')) {
+                            $("#error_msg_phone_verification").removeClass('alert-danger');
+                        }
+
+                        $("#error_msg_phone_verification").addClass('alert alert-success');
+                        $("#error_msg_phone_verification").empty().append(data['message']);
+
+
+
+                        $(".phone_verfication").on("click", function (e) {
+                            var code = $('#tel1').val() + $('#tel2').val() + $('#tel3').val() + $('#tel4').val();
+                            if ($('#tel1').val() == '' || $('#tel2').val() == '' || $('#tel3').val() == '' || $('#tel4').val() == '') {
+                                $("#error_msg_phone_verification").addClass('alert alert-danger');
+                                //$("#error_msg_phone_verification").css("color", "red");
+                                //$("#error_msg_phone_verification").css("background-color",'#f8d7da');
+                                //$("#error_msg_phone_verification").css("border-color",'#f5c6cb');
+                                $("#error_msg_phone_verification").empty().append('Please enter verification code');
+
+                            } else {
+                                $.ajax
+                                ({
+                                    url: verifyPhoneUrl,
+                                    type: 'post',
+                                    data: {
+                                        mobile_no: $('#account_mobile_no').val(),
+                                        verification_token: data['customer']['auth']['verification_token'],
+                                        verification_mode: 'change_mobile_no',
+                                        entity_type_id: 11,
+                                        authy_code: code,
+                                        _token: crsf_token,
+                                        mobile_json: 1
+                                    },
+                                    dataType: 'json',
+                                    success: function (data) {
+
+                                        if (data['error'] == 1) {
+                                            alert(1);
+                                            $("#error_msg_phone_verification").addClass('alert alert-danger');
+                                            //$("#error_msg_phone_verification").css("color", "red");
+                                            $("#error_msg_phone_verification").empty().append(data['message']);
+                                            //$('.signupmodal').modal('hide');
+                                            //$('.pVerfymodal').modal('hide');
+                                        } else {
+
+                                            //  $("#error_msg_phone_verification").addClass('alert alert-success');
+                                            //	$("#error_msg_phone_verification").css("color", "white");
+                                            //  $("#error_msg_phone_verification").empty().append(data['message']);
+
+
+                                            $.ajax({
+                                                url: changeYourAccountDetailUrl,
+                                                data: {
+                                                    first_name: first_name,
+                                                    last_name: last_name,
+                                                    platform_type: platform_type,
+                                                    // account_mobile_no: $("#account_mobile_no").val(),
+                                                },
+                                                type: 'get',
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    if (data['error'] == 0) {
+
+                                                        if ($("#error_msg_phone_verification").hasClass('alert')) {
+                                                            $("#error_msg_phone_verification").removeClass('alert-danger');
+                                                        }
+
+                                                        $("#error_msg_phone_verification").addClass('alert alert-success');
+                                                        $("#error_msg_phone_verification").empty().append(data['message']);
+
+                                                        timePasses = setInterval(function () {
+                                                            $('.pVerfymodal').modal('hide');
+                                                            clearInterval(timePasses);
+                                                        },1500),
+
+                                                        window.location.href = site_url + '/your_account';
+
+
+                                                    } else {
+                                                        // showAlert(data['message']);
+                                                        $("#error_msg_phone_verification").addClass('alert alert-danger');
+                                                        /*	$("#account_response").css("color", "red");
+                                                            $("#account_response").css("background-color",'#f8d7da');
+                                                            $("#account_response").css("border-color",'#f5c6cb');*/
+                                                        $("#error_msg_phone_verification").empty().append(data['message']);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    else{
+
+                        if ($("#account_response").hasClass('alert')) {
+                            $("#account_response").removeClass('alert-danger');
+                        }
+
+                        $("#account_response").addClass('alert alert-success');
+                        $("#account_response").empty().append(data['message']);
+
+                        timePasses = setInterval(function () {
+                            $('.editYourDetailmodal').modal('hide');
+                            clearInterval(timePasses);
+                        },1500),
+
+
+                        window.location.href = site_url + '/your_account';
                     }
 
-                    $("#account_response").addClass('alert alert-success');
-                    // showSuccessAlert('Your profile updated successfully');
-                    timerA = setInterval(function () {
-                        $('.editYourDetailmodal').modal('hide');
-                        clearInterval(timerA);
-                        window.location.href = site_url + '/your_account';
-                    }, 2000);
 
-
-
-                } else {
+                }
+                else {
                     // showAlert(data['message']);
                     $("#account_response").addClass('alert alert-danger');
                     /*	$("#account_response").css("color", "red");
@@ -3031,21 +3144,13 @@ function changeYourAccountDetail(changeYourAccountDetailUrl) {
                     $("#account_response").empty().append(data['message']);
                 }
             }
+
         });
-
-        //}
-        //else
-        //{
-        // showAlert('Please agree with terms and conditions!');
-        //$("#account_response").addClass('alert alert-danger');
-        /*		$("#account_response").css("color", "red");
-                $("#account_response").css("background-color",'#f8d7da');
-                $("#account_response").css("border-color",'#f5c6cb');*/
-        //$("#account_response").empty().append('Please agree with terms and conditions!');
-        //}
-
     });
+
+
 }
+
 
 function changeAccountPassword(changeAccountPasswordUrl) {
     $("#change_your_account_password").click(function () {

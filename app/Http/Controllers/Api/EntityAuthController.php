@@ -1888,6 +1888,7 @@ class EntityAuthController extends Controller
           // print_r($ret); exit;
             if (isset($ret)) {
                 if ($ret->error == "1") {
+                    $this->_apiData['error'] = 1;
                     $this->_apiData['message'] = $ret->message;
                 } else {
                     // success response
@@ -1918,9 +1919,9 @@ class EntityAuthController extends Controller
                         $entity["name"] = $request->input("name", "");
                     }
 
-                    if($request->input("mobile_no", "")){
+                   /* if($request->input("mobile_no", "")){
                         $entity["mobile_no"] = $request->input("mobile_no", "");
-                    }
+                    }*/
                     // required params
                     //$entity['email'] = $request->input("email");
                     //$entity['password'] = $request->input("password");
@@ -1970,7 +1971,7 @@ class EntityAuthController extends Controller
                     $data[$this->_objectIdentifier] = $this->_targetEntityModel->getData($entity_id,$request->all());
 
                     $this->_apiData['message'] = trans($this->_langIdentifier.'.success');
-
+                    $this->_apiData['error'] = 0;
                     // assign to output
                     $this->_apiData['data'] = $data;
                 }
@@ -2534,11 +2535,22 @@ class EntityAuthController extends Controller
             // if "@" sign not found
             if (config($this->_config_dir . '.SMS_SIGNUP_ENABLED') && !preg_match("/@/", $identity)) {
 
-                $do_exists = $this->_model->where("mobile_no", "=", $identity)
-                    ->where("is_verified", "=", 1)
-//                ->where("type", "=", $request->type)
-                    ->whereNull("deleted_at")
-                    ->count();
+                if(isset($request->mobile_exist)){
+                    $do_exists = $this->_model->where("mobile_no", "=", $identity)
+                        ->where("entity_auth_id",'<>',$request->entity_auth_id)
+                        ->where("is_verified", "=", 1)
+                        //  ->where("type", "=", $request->type)
+                        ->whereNull("deleted_at")
+                        ->count();
+
+                }else{
+                    $do_exists = $this->_model->where("mobile_no", "=", $identity)
+                        ->where("is_verified", "=", 1)
+                        //  ->where("type", "=", $request->type)
+                        ->whereNull("deleted_at")
+                        ->count();
+                }
+
 
                 // id type
                 $id_type = "mobile_no";
@@ -2572,7 +2584,7 @@ class EntityAuthController extends Controller
                 // message
                 $this->_apiData['message'] = trans('system.your_account_is_baned_removed');
             } elseif ($do_exists > 0) {
-                $this->_apiData['message'] = trans('system.entity_already_exists', array("entity" => (preg_match("/@/", $identity) ? "Email" : "Mobile no")));
+                $this->_apiData['message'] = trans('system.entity_already_exists', array("entity" => (preg_match("/@/", $identity) ? "Email" : "Mobile no0")));
             } elseif ($id_type == "mobile_no" && !preg_match(MOBILE_NO_PATTREN, $identity)) {
                 $this->_apiData['message'] = trans('system.invalid_entity_request', array("entity" => "login ID"));
             } else {

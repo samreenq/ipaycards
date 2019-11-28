@@ -301,6 +301,7 @@ Route::group(['middleware' => ['web.auth']], function () {
     Route::get('/payment', "Web\AccountController@getPaymentDetail")->name('payment');
     Route::post('/address/save', "Web\AccountController@saveAddress")->name('save_address');
     Route::get('/account/wallet_default', "Web\AccountController@updateWalletDefault")->name('wallet_default');
+    Route::get('/account/change_number', "Web\AccountController@changeIDRequest")->name('change_number');
 
     Route::get('/refer', "Web\ReferAFriendController@referAFriend")->name('refer_a_friend');
 
