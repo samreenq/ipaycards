@@ -391,23 +391,19 @@ class AccountController extends WebController {
      */ 
 	public function changeAccountDetail(Request $request) 
 	{
-            $messages = array(
-                'account_mobile_no.required_if' => 'The mobile number field is required.'
-            );
-
-            $sys_entity_auth = new SYSEntityAuth();
-
 			$validator = Validator::make(
-							$request->all(),
+					$request->all(),
 							[
 								'first_name'	=>	'required',
 								'last_name'		=>	'required',
-                                 'account_mobile_no' => 'required_if:platform_type,custom|mobile|unique:' .$sys_entity_auth->table . ',mobile_no,'.$this->_customer['entity_auth_id'].','. $sys_entity_auth->primaryKey .',deleted_at,NULL'
-							],$messages
+                                // 'account_mobile_no' => 'required_if:platform_type,custom|mobile|unique:' .$sys_entity_auth->table . ',mobile_no,'.$this->_customer['entity_auth_id'].','. $sys_entity_auth->primaryKey .',deleted_at,NULL'
+							]
 						);
 
             if($validator->fails())
 			{
+                $data['error'] = 1;
+
 				$errors = $validator->errors();
                 $data['message'] = '';
 				if(!empty($errors->first('first_name'))){
@@ -418,25 +414,28 @@ class AccountController extends WebController {
                     $data['message'] .= $errors->first('last_name')."<br> ";
                 }
 
-                if(!empty($errors->first('account_mobile_no'))){
+               /* if(!empty($errors->first('account_mobile_no'))){
                     $data['message'] .= $errors->first('account_mobile_no')."<br> ";
-                }
+                }*/
 
 
-				//$data['message'] = $errors->first('first_name')."<br> ".$errors->first('last_name')."<br> ".$errors->first('account_mobile_no');
-				return $data;
+               return $data;
 			}
 			else 
 			{
 				$first_name = $request->input('first_name');
 				$last_name  = $request->input('last_name');
-							
+				$full_name = $first_name;
+				if(!empty($last_name)){
+                    $full_name .= " ".$last_name;
+                }
+
 				$json = json_decode(
 							json_encode(
 								CustomHelper::internalCall(
 									$request,
-									'api/entity_auth/edit_profile', 
-									'POST', 
+									'api/entity_auth/edit_profile',
+									'POST',
 									[
 										'entity_type_id'	=>	11,
 										'entity_id'			=>	$this->_customerId,
@@ -444,7 +443,7 @@ class AccountController extends WebController {
 										'first_name'		=>	$first_name,
 										'last_name'			=>	$last_name,
                                         'login_entity_id'   => $this->_customerId,
-                                        'mobile_no'         => $request->input('account_mobile_no')
+                                         'full_name'        =>    $full_name
 									],
 									true
 								)
@@ -452,23 +451,162 @@ class AccountController extends WebController {
 							true
 						);
 
+                $data = [];
+                $data['error'] = $json['error'];
+                $data['message']  = isset($json['message']) ?  $json['message'] : null ;
+
+                if($json['error'] == 0){
+                    $data['message'] = "Your account is updated successfully";
+                }
+                $data['customer'] = isset($json['data']['customer']) ?  $json['data']['customer'] : null ;
+
 
                 $this->_customer['attributes']['first_name'] = 	$first_name;
                 $this->_customer['attributes']['last_name']	 =	$last_name;
-                $this->_customer['auth']['mobile_no']	 =	$request->input('account_mobile_no');
+               // $this->_customer['auth']['mobile_no']	 =	$request->input('account_mobile_no');
 
-				if ($request->session()->has('users')) 
+				if ($request->session()->has('users'))
 				{
 					 $request->session()->forget('users');
 					 $request->session()->push('users',$this->_customer);
 				}
-				$data = [];
-				$data['customer'] = isset($json['data']['customer']) ?  $json['data']['customer'] : null ;
-				$data['message']  = isset($json['message']) ?  $json['message'] : null ;
-
+                //echo '<pre>'; print_r($data); exit;
 				return $data;
 			}
 		
+    }
+
+    public function changeIDRequest(Request $request)
+    {
+        $messages = array(
+            'account_mobile_no.required_if' => 'The mobile number field is required.'
+        );
+
+        $sys_entity_auth = new SYSEntityAuth();
+        $params =$request->all();
+        $params['account_mobile_no']  = trim(str_replace(array(" ", "+"), "", strip_tags($request->account_mobile_no)));
+        $data = [];
+       // echo '<pre>'; print_r($this->_customer['entity_auth_id']); exit;
+        $validator = Validator::make(
+            $params,
+            [
+                'first_name'	=>	'required',
+                'last_name'		=>	'required',
+                'account_mobile_no' => 'required_if:platform_type,custom|mobile|unique:' .$sys_entity_auth->table . ',mobile_no,'.$this->_customer['entity_auth_id'].','. $sys_entity_auth->primaryKey .',deleted_at,NULL'
+            ],$messages
+        );
+
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            $data['message'] = '';
+            if(!empty($errors->first('first_name'))){
+                $data['message'] .= $errors->first('first_name')."<br> ";
+            }
+
+            if(!empty($errors->first('last_name'))){
+                $data['message'] .= $errors->first('last_name')."<br> ";
+            }
+
+            if(!empty($errors->first('account_mobile_no'))){
+                $data['message'] .= $errors->first('account_mobile_no')."<br> ";
+            }
+
+
+            //$data['message'] = $errors->first('first_name')."<br> ".$errors->first('last_name')."<br> ".$errors->first('account_mobile_no');
+            return $data;
+        }
+        else
+        {
+            $first_name = $request->input('first_name');
+            $last_name  = $request->input('last_name');
+
+            //Check if mobile number is different
+            $sys_entity_auth = new SYSEntityAuth();
+           $same_mobile_no =  $sys_entity_auth->where('entity_auth_id',$this->_customer['entity_auth_id'])
+                ->where('mobile_no',$params['account_mobile_no'])->count();
+            $data['same_mobile_no'] = $same_mobile_no;
+
+            if($same_mobile_no == 0 && !empty($request->account_mobile_no)) {
+
+                $json1 = json_decode(
+                    json_encode(
+                        CustomHelper::internalCall(
+                            $request,
+                            'api/entity_auth/change_id_request',
+                            'POST',
+                            [
+                                'entity_type_id' => 11,
+                                'entity_id' => $this->_customerId,
+                                'entity_auth_id' => $this->_customer['auth']['entity_auth_id'],
+                                'mobile_json' => 1,
+                                'login_entity_id' => $this->_customerId,
+                                'new_login_id' => $request->input('account_mobile_no'),
+                                'mobile_exist' => 1
+                            ],
+                            true
+                        )
+                    ),
+                    true
+                );
+
+
+                $data['customer'] = isset($json1['data']['customer']) ? $json1['data']['customer'] : null;
+                $data['message'] = isset($json1['message']) ? $json1['message'] : null;
+                $data['error'] = $json1['error'];
+            }
+            else{
+
+                $full_name = $first_name;
+                if(!empty($last_name)){
+                    $full_name .= " ".$last_name;
+                }
+
+
+                $json = json_decode(
+                    json_encode(
+                        CustomHelper::internalCall(
+                            $request,
+                            'api/entity_auth/edit_profile',
+                            'POST',
+                            [
+                                'entity_type_id'	=>	11,
+                                'entity_id'			=>	$this->_customerId,
+                                'mobile_json'		=>	1,
+                                'first_name'		=>	$first_name,
+                                'last_name'			=>	$last_name,
+                                'login_entity_id'   => $this->_customerId,
+                                'full_name'        =>    $full_name
+                            ],
+                            true
+                        )
+                    ),
+                    true
+                );
+
+
+                $data['error'] = $json['error'];
+                $data['message']  = isset($json['message']) ?  $json['message'] : null ;
+
+                if($json['error'] == 0){
+                    $data['message'] = "Your account is updated successfully";
+                }
+                $data['customer'] = isset($json['data']['customer']) ?  $json['data']['customer'] : null ;
+
+                $this->_customer['attributes']['first_name'] = 	$first_name;
+                $this->_customer['attributes']['last_name']	 =	$last_name;
+                // $this->_customer['auth']['mobile_no']	 =	$request->input('account_mobile_no');
+
+                if ($request->session()->has('users'))
+                {
+                    $request->session()->forget('users');
+                    $request->session()->push('users',$this->_customer);
+                }
+
+            }
+
+            return $data;
+        }
     }
 	
 	
