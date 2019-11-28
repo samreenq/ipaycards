@@ -7507,6 +7507,9 @@ select:-webkit-autofill:focus {
     .cart-list .cart-tabs .basketList .addItemMore .count-input .incr-btn {
         width: 18px;
     }
+    .orderPopupBody {
+        height: 400px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
