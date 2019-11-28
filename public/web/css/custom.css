@@ -7336,6 +7336,9 @@ select:-webkit-autofill:focus {
 }
 
 /*//// sign out popup styling start here ////*/
+.detail_img {
+    border-radius: 15px;
+}
 .sign-out-popup .modal-header {
     border: 0;
     justify-content: center;
@@ -7478,7 +7481,7 @@ select:-webkit-autofill:focus {
         min-height: calc(100vh - 30vh) !important;
     }
     .cart-list .cart-tabs .basketList img {
-        height: 62px;
+        height: 45px;
     }
     .cart-list .cart-tabs .basketList .count-input input {
         width: 32px;
@@ -7542,7 +7545,7 @@ select:-webkit-autofill:focus {
         min-height: calc(100vh - 30vh) !important;
     }
     .cart-list .cart-tabs .basketList img {
-        height: 62px;
+        height: 45px;
     }
 }
 
