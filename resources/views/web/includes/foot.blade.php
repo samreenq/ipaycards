@@ -103,6 +103,25 @@
             $('body').removeClass('nav-expanded');
         });
 
+        /* Verification */
+        $("#verifyForm .verify-code").keyup(function (e) {
+            if(e.keyCode == 8){
+                var $prev = $(this).prev('.verify-code');
+                if ($prev.length)
+                {
+                    $(this).prev('.verify-code').focus();
+                }
+                return true;
+            }
+            if (this.value.length == this.maxLength) {
+                var $next = $(this).next('.verify-code');
+                if ($next.length)
+                    $(this).next('.verify-code').focus();
+                else
+                    $(this).blur();
+            }
+        });
+
     });
 
 

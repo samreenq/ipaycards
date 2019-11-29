@@ -7402,6 +7402,16 @@ select:-webkit-autofill:focus {
 .fixed-width {
     width: 300px !important;
 }
+#verifyForm {
+    display: flex;
+    justify-content: space-between;
+}
+#verifyForm input {
+    width: 90px;
+    height: 65px;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+}
 
 @media(min-width: 320px) and (max-width: 767px) {
     .faq_title {

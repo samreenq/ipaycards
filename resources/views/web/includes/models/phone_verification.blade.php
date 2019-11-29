@@ -18,19 +18,11 @@
 			 <div id="error_msg_phone_verification" class="help-block text-left animated fadeInDown" ></div>
 			<div class="verifyCode">
 				<div class="col-12">
-					<div class="row">
-						<div class="fluid-label-inline col-3">
-						  <input id="tel1" name="tel1"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
-						</div>
-						<div class="fluid-label-inline col-3">
-						  <input id="tel2" name="tel2"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
-						</div>
-						<div class="fluid-label-inline col-3">
-						  <input id="tel3" name="tel3"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
-						</div>
-						<div class="fluid-label-inline col-3">
-						  <input id="tel4" name="tel4"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
-						</div>
+					<div class="row" id="verifyForm">
+						<input id="tel1" class="verify-code fluid-label-inline" name="tel1"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
+						<input id="tel2" name="tel2" class="verify-code fluid-label-inline"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
+						<input id="tel3" name="tel3" class="verify-code fluid-label-inline"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
+						<input id="tel4" name="tel4" class="verify-code fluid-label-inline"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
 					</div>
 				</div>
 				<div class="forgotWrap">
