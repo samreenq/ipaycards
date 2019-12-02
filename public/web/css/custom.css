@@ -5465,8 +5465,8 @@ ul.multiselect-container.dropdown-menu li.active a{
     opacity: .2;
     position: absolute;
     z-index: 10;
-    right: 15px;
-    top: 20px;
+    right: 5px;
+    top: -2px;
 }
 .order-popup-nav {
     background-color: #eceef2;
