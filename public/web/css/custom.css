@@ -7625,4 +7625,9 @@ select:-webkit-autofill:focus {
         margin-bottom: 25px;
     }
 }
+@media (min-width: 320px) and (max-width: 480px) {
+    .product-wrap .img-responsive {
+        object-fit: fill;
+    }
+}
 /*//// sign out popup styling end here ////*/
