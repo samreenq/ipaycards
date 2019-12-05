@@ -7520,6 +7520,37 @@ select:-webkit-autofill:focus {
     .orderPopupBody {
         height: 400px;
     }
+    .basketList td.addItemRecipe, .wishList td.addItemRecipe {
+        vertical-align: bottom;
+    }
+    .basketList td.addItemRate, .wishList td.addItemRate {
+        vertical-align: baseline;
+    }
+    .basketList td.addItemRate .left, .wishList td.addItemRate .left {
+        margin: 1px 4px 1px 0;
+    }
+    .basketList span {
+        top: -4px;
+        position: relative;
+    }
+    .basketList .count-input .incr-btn .icon-tt-minus-icon:before {
+        top: 5px;
+        position: relative;
+    }
+    .basketList .count-input .incr-btn .icon-tt-plus-icon:before {
+        top: 4px;
+        position: relative;
+    }
+    .cross_wrap .icon-tt-close-icon:before {
+        top: 10px;
+        position: relative;
+    }
+    .payment-method .added-space-radio {
+        font-size: 13px;
+    }
+    .payment-method .added-space-radio input {
+        margin-left: 10px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
