@@ -7551,6 +7551,12 @@ select:-webkit-autofill:focus {
     .payment-method .added-space-radio input {
         margin-left: 10px;
     }
+    .product-detail .addCartWrap {
+        top: 32px;
+    }
+    .product-detail h4, .product-detail a {
+        padding-right: 50px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
