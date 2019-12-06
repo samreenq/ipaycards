@@ -167,7 +167,7 @@
 
                                     <div id="finalAmount">
                                         @if(isset($login_customer))
-                                        <p>Pay via iPay Credit: {!! $general_setting_raw->currency !!}&nbsp;<span id="pay_wallet">{!! isset($login_customer->attributes->wallet) ? $login_customer->attributes->wallet : 0.00 !!}</span></p>
+                                        <p>Pay via iPay Wallet: {!! $general_setting_raw->currency !!}&nbsp;<span id="pay_wallet">{!! isset($login_customer->attributes->wallet) ? $login_customer->attributes->wallet : 0.00 !!}</span></p>
                                         @endif
                                          <p>Pay via Mastercard: {!! $general_setting_raw->currency !!}&nbsp;<span id="pay_paid_amount">0.00</span>
 
