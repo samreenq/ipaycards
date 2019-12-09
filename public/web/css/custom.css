@@ -7511,6 +7511,16 @@ select:-webkit-autofill:focus {
     .cart-list .cart-tabs .basketList img {
         height: 45px;
     }
+    .wishList img {
+        height: 45px;
+    }
+    .wishList td.addItemRecipe {
+        vertical-align: baseline !important;
+    }
+    .wishList .addItemMore .icon-tt-close-icon {
+        top: -9px;
+        position: relative;
+    }
     .cart-list .cart-tabs .basketList .count-input input {
         width: 32px;
     }
