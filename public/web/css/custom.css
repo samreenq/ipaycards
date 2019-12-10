@@ -2121,7 +2121,7 @@ table tr.borderB td div{
 .wishList img {
     border-radius: 5px;
     width: 62px;
-    height: 36px;
+    height: 45px;
     object-fit: cover;
 }
 .basketList {
@@ -7531,6 +7531,10 @@ select:-webkit-autofill:focus {
         height: 400px;
     }
     .basketList td.addItemRecipe, .wishList td.addItemRecipe {
+        overflow: hidden;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         vertical-align: bottom;
     }
     .basketList td.addItemRate, .wishList td.addItemRate {
@@ -7569,6 +7573,9 @@ select:-webkit-autofill:focus {
     }
     .prod-right-bar .product-detail .addCartWrap {
         top: 15px;
+    }
+    .setWidthRow {
+        width: 55% !important;
     }
 }
 @media(min-width: 768px) and (max-width: 991px) {
@@ -7641,3 +7648,70 @@ select:-webkit-autofill:focus {
     }
 }
 /*//// sign out popup styling end here ////*/
+
+
+.addItemRecipeTitle{
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 122px;
+}
+.addItemRateAed{
+    display: flex;
+    font-size: 13px;
+    line-height: 11px;
+    margin-top: 3px;
+}
+.addItemRateAed .left {
+    margin-left: 0;
+}
+.aedEach{
+    font-weight: 400;
+    color: #c2c5d1;
+    font-size: 11px;
+}
+.reciptClose span span.icon-tt-close-icon {
+    top: -10px;
+}
+.ipayCountInput{
+    padding: 0 5px;
+}
+.basketListImage {
+    margin-right: 3px;
+}
+
+/*/// wishList ///*/
+.addItemRecipeWishList {
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 122px;
+}
+.addItemRateWishList {
+    font-size: 13px;
+    line-height: 11px;
+    margin-top: 3px;
+}
+.wishListButtons {
+    display: flex;
+    align-items: center;
+}
+.wishListButtons .wishListCrossIcon .icon-tt-close-icon:before {
+    top: 8px;
+    left: 1px;
+    position: relative;
+}
+.wishListCartIcon {
+    top: 7px;
+    position: relative;
+}
+.setWidthRow {
+    width: 60%;
+}
+/*/// wishList ///*/
