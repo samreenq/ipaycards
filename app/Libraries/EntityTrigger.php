@@ -11,6 +11,7 @@ use App\Http\Models\SYSTableFlat;
 use App\Libraries\System\Entity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Validator;
 
 /**
  * Class CustomHelper
@@ -1314,10 +1315,31 @@ Class EntityTrigger
 				$response['message'] = trans('system.field_required', array( 'field' => 'Category' ));
 				return $response;
 			}
-			
+
 		}
 		
 	}
+
+    public function productUpdateVerifyTrigger($request)
+    {
+        $request = is_array($request) ? (object)$request : $request;
+        $response['error'] = 0;
+
+        //echo '<pre>'; print_r($request); exit;
+        if ( isset($request->product_code) ) {
+            $rules = array(
+                'product_code' => 'unique:product_flat'. ',product_code,' . $request->entity_id . ',entity_id,deleted_at,NULL'
+            );
+
+            $validator = Validator::make((array)$request, $rules);
+            if ($validator->fails()) {
+                $response['error'] = TRUE;
+                $response['message'] = $validator->errors()->first();
+                return $response;
+            }
+        }
+
+    }
 	
 	/**
 	 * Wallet Transaction Before Post
