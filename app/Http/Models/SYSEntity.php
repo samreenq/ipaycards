@@ -1152,7 +1152,7 @@ class SYSEntity extends Base
      * @return bool
      */
     public function deleteAttribute($entity_id,$attribute_id,$table){
-        DB::statement("CALL delete_entity_attribute_values($entity_id, $attribute_id,'".$table."')");
+        DB::statement("CALL delete_entity_attribute_values($entity_id, $attribute_id,'en','".$table."')");
     }
 
     /**
