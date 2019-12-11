@@ -38,7 +38,7 @@
 						<div class="col-md-2 col-sm-3">
 							<aside>
 								<ul class="sidebar__inner" role="tablist">
-									<li class="li-active"><a href="{{ route('your_account') }}">Your Account</a></li>
+									<li class="li-active"><a href="{{ route('your_account') }}">Account</a></li>
 									<!--<li class="li-active active"><a href="{{ route('payment') }}">Payment</a></li>-->
 									<li class="li-active"><a href="{{ route('order_history') }}">Order History</a></li>
 									<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>
@@ -49,7 +49,7 @@
 											{
 									?>
 												
-												<li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Logout</a></li>
+												<li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Sign Out</a></li>
 									
 									<?php
 											}

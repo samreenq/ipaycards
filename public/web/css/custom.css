@@ -7617,6 +7617,10 @@ select:-webkit-autofill:focus {
     #credit .set-image-size {
         width: 330px;
     }
+    .fixed_position_menu {
+        top: 60px !important;
+        position: fixed !important;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
@@ -7685,6 +7689,9 @@ select:-webkit-autofill:focus {
 @media (min-width: 320px) and (max-width: 480px) {
     .product-wrap .img-responsive {
         object-fit: fill;
+    }
+    .fly-nav-inner .dropdown-menu {
+        box-shadow: 0 0 10px 0 #cecece;
     }
 }
 /*//// sign out popup styling end here ////*/

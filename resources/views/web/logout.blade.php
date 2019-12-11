@@ -40,12 +40,12 @@
 							<li class="col-sm-12">
 								<ul class="sidebar__inner">
 								
-									<li class="li-active"><a href="{{ route('account_detail') }}">Your Account</a></li>
+									<li class="li-active"><a href="{{ route('account_detail') }}">Account</a></li>
 									<li class="li-active "><a href="{{ route('payment') }}">Payment</a></li>
 									<li class="li-active "><a href="{{ route('order_history') }}">Order History</a></li>
 									<li class="li-active"><a href="{{ route('address_book') }}">Address Book</a></li>
 									<li class="li-active"><a href="{{ route('customer_wallet') }}">Wallet</a></li>
-									<li class="li-active active"><a href="{{ route('logout') }}">Logout</a></li>
+									<li class="li-active active"><a href="{{ route('logout') }}">Sign Out</a></li>
 						
 								
 								</ul>
@@ -59,7 +59,7 @@
 					<div class="dashboardLeftBar col-md-12 col-lg-3 col-xl-2">
 						<aside>
 							<ul class="sidebar__inner">
-								<li class="active"><a href="{{ route('account_detail') }}">Your Account</a></li>
+								<li class="active"><a href="{{ route('account_detail') }}">Account</a></li>
 								<li ><a href="{{ route('payment') }}">Payment</a></li>
 								<li ><a href="{{ route('order_history') }}">Order History</a></li>
 								<li ><a href="{{ route('address_book') }}">Address Book</a></li>
@@ -74,7 +74,7 @@
 										{
 								?>
 											
-											<li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Logout</a></li>
+											<li ><a href="<?php echo $_SESSION['logoutURL']; ?>">Sign Out</a></li>
 								
 								<?php
 										}
