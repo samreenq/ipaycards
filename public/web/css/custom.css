@@ -7581,6 +7581,9 @@ select:-webkit-autofill:focus {
         width: 25%;
         text-align: center;
     }
+    .cart_empty img, .wishlist_empty img {
+        height: auto !important;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
