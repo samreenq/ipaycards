@@ -7574,6 +7574,13 @@ select:-webkit-autofill:focus {
     .setWidthRow {
         width: 55% !important;
     }
+    .order-popup-nav .odrdetail-steps {
+        margin-right: 0 !important;
+    }
+    .order-popup-nav .odrdetail-steps li {
+        width: 25%;
+        text-align: center;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
