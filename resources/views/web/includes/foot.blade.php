@@ -122,6 +122,21 @@
             }
         });
 
+        //// navbar fixed mobile view code ////
+        $(function() {
+            $(window).scroll(function(event) {
+                if ($(window).scrollTop() > 150) {
+                    console.log('$(window).scrollTop()', $(window).scrollTop());
+                    $('.mobile-view-position').addClass('scrolled-down');
+                    $('.fly-nav-inner').addClass('moreButtonFixed');
+                } else {
+                    $('.mobile-view-position').removeClass('scrolled-down');
+                    $('.fly-nav-inner').removeClass('moreButtonFixed');
+                }
+            });
+        });
+        //// navbar fixed mobile view code ////
+
     });
 
 
