@@ -35,8 +35,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
-                    <div class="dashboard-content panelled whitebg">
-                        <form role="form" method="post" id="topup-form" class="signup-form">
+                    <div class="dashboard-content etisalat_dashboard panelled whitebg">
+                        <form role="form" method="post" id="topup-form" class="signup-form etisalat_form">
                             <input type="hidden" name="service_type" id="service_type" value="du" />
                             <input type="hidden" name="dial_code" id="dial_code" value="" />
                             <input type="hidden" name="number" id="number" value="" />
@@ -47,7 +47,7 @@
                             <h3>
                                 <span class="title_text">Information</span>
                             </h3>
-                            <fieldset>
+                            <fieldset class="add_content_padding">
                                 <h2 class="mt-4">Enter Your Personal details</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert1 alert-danger" style="display: none;"></div>
@@ -102,7 +102,7 @@
                             <h3>
                                 <span class="title_text">Verification</span>
                             </h3>
-                            <fieldset>
+                            <fieldset class="add_content_padding">
 
                                 <h2 class="mt-4">Verify Your Phone Number</h2>
                                 <div class="fieldset-content">
@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="form">
-                                                <div class="d-flex" id="form">
+                                                <div class="d-flex align-items-center" id="form">
                                                     <input class="form-control ml-0"  name="otp[]" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
                                                     <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
                                                     <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
@@ -163,7 +163,7 @@
                             <h3>
                                 <span class="title_text">Payment</span>
                             </h3>
-                            <fieldset>
+                            <fieldset class="add_content_padding">
                                 <h2 class="mt-4">Payment Detail</h2>
                                 <div class="fieldset-content">
                                     <div class="alert alert3 alert-danger" style="display: none;"></div>
@@ -224,7 +224,7 @@
                             <h3>
                                 <span class="title_text">Confirmation</span>
                             </h3>
-                            <fieldset>
+                            <fieldset class="add_content_padding">
                                  <div class="fieldset-content">
                                      <div class="alert alert4 alert-danger" style="display: none;"></div>
                                      <div class="row">

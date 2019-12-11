@@ -7584,6 +7584,39 @@ select:-webkit-autofill:focus {
     .cart_empty img, .wishlist_empty img {
         height: auto !important;
     }
+    .etisalat_form .steps {
+        padding: 12px 0;
+    }
+    .etisalat_form .steps ul li {
+        padding-right: 10px;
+    }
+    .etisalat_form .steps ul li:after {
+        display: none;
+    }
+    .etisalat_form .steps ul {
+        width: 100%;
+        padding-left: 8px;
+        justify-content: space-between;
+    }
+    .etisalat_form .steps ul li .title {
+        flex-direction: column;
+    }
+    .etisalat_form .steps ul li .title .number {
+        margin: 0;
+    }
+    .etisalat_form .steps ul li .title .title_text {
+        font-size: 12px;
+    }
+    .etisalat_dashboard {
+        padding: 20px 0;
+        margin-top: 20px;
+    }
+    .add_content_padding {
+        padding: 0 20px;
+    }
+    #credit .set-image-size {
+        width: 330px;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
