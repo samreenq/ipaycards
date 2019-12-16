@@ -141,56 +141,76 @@
             }
             if (currentIndex == 1) {
 
+
                 $('.alert2').hide();
-                var conversion_rate = "{{ $currency_conversion }}";
-                var otp = '';
-                $('input[name^="otp"]').each(function() {
-                    // alert($(this).val());
-                    otp += $(this).val();
-                    console.log(otp);
-                });
-
-                $.ajax({
-                    url: "<?php echo url('api/service/otp/verify'); ?>",
-                    type: "GET",
-                    async: false,
-                    dataType: "json",
-                    data: {"vendor": "authy","country_code":$('#dial_code').val(),"phone_number":$('#mobileNumber').val(),"verification_code":otp},
-                    beforeSend: function () {
-                    }
-                }).done(function (data) {
-
-                    if(data.error == 1){
-                        move = false;
-                        $('.alert2').text('');
-                        $('.alert2').text(data.message);
+                $( ".optField" ).each(function( index ) {
+                  //  console.log( index + ": " + $( this ).val() );
+                    if(!(/^\d*$/.test($( this ).val()))){
                         $('.alert2').show();
-                    }else{
-                        move = true;
-
-                        //Get Customer Wallet
-                        $.ajax({
-                            url: "<?php echo url('get_wallet'); ?>",
-                            type: "GET",
-                            async: false,
-                            dataType: "json",
-                            data: {"amount":$('#amount').val()},
-                            beforeSend: function () {
-                            }
-                        }).done(function (data) {
-
-                            $('#wallet').val(data.wallet);
-                            $('#paid_amount').val(data.paid_amount);
-
-                            $('#pay_wallet').text(data.wallet);
-                            $('#pay_paid_amount').text(data.paid_amount);
-
-                        });
-
+                        $('.alert2').text('');
+                        $('.alert2').text('Please enter integer values for OTP');
+                        move = false;
+                        return false;
                     }
-                    console.log('step2-',move);
-                    // return move;
                 });
+
+
+                if(move) {
+                    var conversion_rate = "{{ $currency_conversion }}";
+                    var otp = '';
+                    $('input[name^="otp"]').each(function () {
+                        // alert($(this).val());
+                        otp += $(this).val();
+                        console.log(otp);
+                    });
+
+                    $.ajax({
+                        url: "<?php echo url('api/service/otp/verify'); ?>",
+                        type: "GET",
+                        async: false,
+                        dataType: "json",
+                        data: {
+                            "vendor": "authy",
+                            "country_code": $('#dial_code').val(),
+                            "phone_number": $('#mobileNumber').val(),
+                            "verification_code": otp
+                        },
+                        beforeSend: function () {
+                        }
+                    }).done(function (data) {
+
+                        if (data.error == 1) {
+                            move = false;
+                            $('.alert2').text('');
+                            $('.alert2').text(data.message);
+                            $('.alert2').show();
+                        } else {
+                            move = true;
+
+                            //Get Customer Wallet
+                            $.ajax({
+                                url: "<?php echo url('get_wallet'); ?>",
+                                type: "GET",
+                                async: false,
+                                dataType: "json",
+                                data: {"amount": $('#amount').val()},
+                                beforeSend: function () {
+                                }
+                            }).done(function (data) {
+
+                                $('#wallet').val(data.wallet);
+                                $('#paid_amount').val(data.paid_amount);
+
+                                $('#pay_wallet').text(data.wallet);
+                                $('#pay_paid_amount').text(data.paid_amount);
+
+                            });
+
+                        }
+                        console.log('step2-', move);
+                        // return move;
+                    });
+                }
             }
             if (currentIndex == 2) {
 

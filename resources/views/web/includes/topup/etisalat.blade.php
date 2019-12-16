@@ -28,7 +28,9 @@
 @endsection
 
 @section("faq")
-
+<style>
+   label.error{ margin-top:10px;}
+</style>
     <section class="dashboard-Section lightgreybg">
         <div class="flyout-overlay"></div>
 
@@ -106,10 +108,10 @@
                                         <div class="col-sm-8">
                                             <div id="form">
                                                 <div class="d-flex align-items-center" id="form">
-                                                    <input class="form-control ml-0"  name="otp[]" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                                                    <input class="form-control" type="text"  name="otp[]" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                                                    <input class="form-control ml-0 optField"  name="otp[]" type="text" maxLength="1" size="1" />
+                                                    <input class="form-control optField" type="text"  name="otp[]" maxLength="1" size="1"  />
+                                                    <input class="form-control optField" type="text" name="otp[]" maxLength="1" size="1"  />
+                                                    <input class="form-control optField" type="text"  name="otp[]" maxLength="1" size="1"  />
                                                 </div>
                                                 <span>Enter OTP you recieved on the above number. <a href="javascript:void(0);" id="resend_otp">Resend OTP</a></span>
                                                 <span id="time" style="display: none;"></span>
