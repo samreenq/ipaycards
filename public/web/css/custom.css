@@ -7420,6 +7420,10 @@ select:-webkit-autofill:focus {
     .faq_title {
         margin: 0 0 19px 0;
     }
+    .setMobileView input {
+        width: 50px !important;
+        height: 50px !important;
+    }
     .detail_img {
         border-radius: 15px;
     }

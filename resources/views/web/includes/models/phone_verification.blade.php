@@ -18,7 +18,7 @@
 			 <div id="error_msg_phone_verification" class="help-block text-left animated fadeInDown" ></div>
 			<div class="verifyCode">
 				<div class="col-12">
-					<div class="row" id="verifyForm">
+					<div class="row setMobileView" id="verifyForm">
 						<input id="tel1" class="verify-code fluid-label-inline" name="tel1"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
 						<input id="tel2" name="tel2" class="verify-code fluid-label-inline"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
 						<input id="tel3" name="tel3" class="verify-code fluid-label-inline"  required="required" type="tel"  maxlength="1" pattern="([0-9]|[0-9]|[0-9])"/>
