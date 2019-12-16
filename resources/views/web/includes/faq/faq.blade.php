@@ -9,15 +9,18 @@
                     <ul class="nav sidebar__inner" role="tablist">
 
                         <?php
-
+                        $a = 1;
                         foreach($type as $attributes)
                         {
                         ?>
-                        <li class="li-active" role="presentation"><a href="#general" class="active"
+                        <li class="li-active" role="presentation"><a
+                                <?php if ($a == 1){ echo 'class="active" aria-expanded="true"'; }else{ echo ' aria-expanded="false"'; } ?>
+                                    href="#a<?php echo $attributes->value; ?>"
                                                                      data-toggle="tab"><?php echo $attributes->option; ?></a>
                         </li>
 
                         <?php
+                            $a++;
                         }
                         ?>
                     </ul>
