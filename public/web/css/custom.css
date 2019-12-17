@@ -7632,7 +7632,7 @@ select:-webkit-autofill:focus {
         height: 48px !important;
     }
     .added_top_space {
-        top: 60px !important;
+        top: 0 !important;
     }
     .moreButtonFixed .added_top_space {
         top: 0 !important;
