@@ -142,7 +142,7 @@
 						</div>-->
 					</div>
 					<div class="col-md-12 col-lg-4">
-						<div id="sidebarCheckout">
+						<div id="sidebarCheckout" class="height_mobile_view">
 							<div class="whitebg checkOrderWrap sidebar__inner">
 								<h4>Summary</h4>
 								

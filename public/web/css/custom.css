@@ -7642,6 +7642,9 @@ select:-webkit-autofill:focus {
         position: relative;
         transition: all 0.2s ease;
     }
+    .height_mobile_view {
+        height: auto !important;
+    }
 }
 @media(min-width: 768px) and (max-width: 991px) {
     .faq_title {
