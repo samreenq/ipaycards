@@ -3,7 +3,7 @@
     <div class="container">
         <button class="dropdown-toggle" data-toggle="dropdown">More <span
                     class="glyphicon glyphicon-chevron-down pull-right"></span></button>
-        <div class="dropdown-menu mega-dropdown-menu">
+        <div class="dropdown-menu mega-dropdown-menu added_top_space">
             <ul class="row">
                 <li class="col-sm-12">
                     <ul class="nav sidebar__inner" role="tablist">

@@ -25,7 +25,7 @@
 	
 	@section("checkout1")
 			
-		<section class="checkout-step-1 lightgreybg">
+		<section class="checkout-step-1 lightgreybg checkout_image_responsive">
 			<div class="container">
 				<div class="checkout-header">
 					<ul class="checkout-steps">
