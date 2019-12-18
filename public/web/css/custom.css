@@ -7629,7 +7629,7 @@ select:-webkit-autofill:focus {
         position: fixed !important;
     }
     .checkout_image_responsive .item .item-block .product-img {
-        height: 48px !important;
+        height: 42px !important;
     }
     .added_top_space {
         top: 0 !important;
@@ -7644,6 +7644,12 @@ select:-webkit-autofill:focus {
     }
     .height_mobile_view {
         height: auto !important;
+    }
+    .set_alignment_mobile {
+        justify-content: end !important;
+    }
+    .set_alignment_mobile span {
+        margin-left: 10px;
     }
 }
 @media(min-width: 768px) and (max-width: 991px) {

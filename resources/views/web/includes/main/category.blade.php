@@ -21,7 +21,7 @@
                             </a>
                             <div class="product-detail br_p_d">
                                 <h4>
-                                    <a href="{!! url('/').'/product?category_id='.$category->category_id !!}" >
+                                    <a class="set_alignment_mobile" href="{!! url('/').'/product?category_id='.$category->category_id !!}" >
                                         <?php echo $category->title; ?>
                                         <span class="lnr lnr-arrow-right"></span>
                                     </a>

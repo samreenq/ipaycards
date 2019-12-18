@@ -17,7 +17,7 @@ $image = \App\Libraries\Fields::getGalleryImage($gallery,'product','compressed_f
         </a>
         <div class="product-detail br_p_d">
             <h4>
-                <a href="{!! url('/').'/product?brand_id='.$brand['entity_id'] !!}" >
+                <a class="set_alignment_mobile" href="{!! url('/').'/product?brand_id='.$brand['entity_id'] !!}" >
                     <?php echo $brand['attributes']['title'] ;?>
                     <span class="lnr lnr-arrow-right"></span>
                 </a>
