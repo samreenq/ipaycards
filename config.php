@@ -23,7 +23,7 @@ if (preg_match('/localhost/', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST
     // db details
     define('MASTER_DB_HOST', 'localhost');
     define('MASTER_DB_USER', 'root');
-    define('MASTER_DB_PASS', '');
+    define('MASTER_DB_PASS', 'root');
     define('MASTER_DB_NAME', 'ipaycardsdb');
     define('MASTER_DB_PREFIX', '');
 
